@@ -1,0 +1,213 @@
+{
+  "title": "Glide enter",
+  "frames": [
+    1,
+    13
+  ],
+  "loop": false,
+  "markers": {
+    "Push off": 3,
+    "Airborne": 5
+  },
+  "ik_miss_m": 6e-05,
+  "max_leg_extension": 0.9878,
+  "max_leg_extension_at": "L11",
+  "ik_miss_at": "L5",
+  "ik_miss_frames": {},
+  "kind": "locomotion",
+  "speed_mps": 6.0,
+  "run_frame_start": 10,
+  "orient_roll_max_deg": {
+    "R": 96.7,
+    "L": 75.7
+  },
+  "orient_infeasible": 0,
+  "halo_max_offset_m": 0.035,
+  "body_pitch_max_deg": 14.92,
+  "body_pitch_mean_deg": 10.54,
+  "vfx_peak": {
+    "hs_glow": 1.0,
+    "hs_jet": 1.662,
+    "hs_spark_L": 0.0,
+    "hs_spark_R": 0.274,
+    "hs_jet_dir": 58.0
+  },
+  "bake_error_m": 3e-06,
+  "bake_error_deg": 0.0,
+  "module": "glide",
+  "action": "HS_anim | Glide enter",
+  "planted_frame_pairs": 2,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.0109,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0651,
+      "frame": 3,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        96,
+        70,
+        65,
+        68,
+        70,
+        96,
+        105,
+        109,
+        110,
+        111,
+        111,
+        113,
+        114
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0487,
+      "frame": 3,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        94,
+        71,
+        49,
+        53,
+        74,
+        85,
+        95,
+        108,
+        122,
+        123,
+        125,
+        128,
+        130
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0487,
+  "arm_clear_ok": true,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.6,
+    "finger_pops_deg_f2": [
+      [
+        2.45,
+        "R little.2",
+        9
+      ],
+      [
+        2.35,
+        "L little.2",
+        2
+      ],
+      [
+        2.25,
+        "R ring.2",
+        9
+      ],
+      [
+        2.17,
+        "R little.2",
+        10
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": 2.6,
+        "hand_twist_frame": 13,
+        "hand_bend_max_deg": 10.4,
+        "forearm_roll_deg": 56.2,
+        "forearm_roll_frame": 3
+      },
+      "R": {
+        "hand_twist_deg": -3.7,
+        "hand_twist_frame": 13,
+        "hand_bend_max_deg": 14.8,
+        "forearm_roll_deg": 29.1,
+        "forearm_roll_frame": 1
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 11.6,
+        "thumb_max": 22.0,
+        "finger_min": 20.8,
+        "finger_max": 74.2
+      },
+      "R": {
+        "thumb_min": 9.2,
+        "thumb_max": 22.0,
+        "finger_min": 13.3,
+        "finger_max": 74.2
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 2.45,
+    "worst_pop": "R little.2 f9",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.6
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "hand_orient": {
+    "L": {
+      "gated_frames": 9,
+      "fail_frames": "",
+      "wrong_handed_frames": "",
+      "swept_back_frames": "",
+      "worst_thumb_up": 0.2,
+      "worst_thumb_up_f": 10,
+      "worst_palm_fwd": -0.04,
+      "worst_palm_fwd_f": 5,
+      "thumb_up_at_worst_palm": 0.37
+    },
+    "R": {
+      "gated_frames": 11,
+      "fail_frames": "",
+      "wrong_handed_frames": "",
+      "swept_back_frames": "",
+      "worst_thumb_up": 0.21,
+      "worst_thumb_up_f": 1,
+      "worst_palm_fwd": -0.04,
+      "worst_palm_fwd_f": 5,
+      "thumb_up_at_worst_palm": 0.3
+    }
+  },
+  "hand_orient_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front",
+    "chase"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ]
+}

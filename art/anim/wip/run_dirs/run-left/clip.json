@@ -1,0 +1,191 @@
+{
+  "title": "Run left",
+  "frames": [
+    1,
+    17
+  ],
+  "loop": true,
+  "markers": {
+    "L contact": 1,
+    "R contact": 9
+  },
+  "ik_miss_m": 8e-05,
+  "max_leg_extension": 0.9195,
+  "max_leg_extension_at": "R12",
+  "ik_miss_at": "R1",
+  "ik_miss_frames": {},
+  "direction": "left",
+  "speed_mps": 4.5,
+  "meters_per_cycle": 3.0,
+  "stance": 0.15,
+  "kind": "locomotion",
+  "direction_slide_m_per_frame": 1e-05,
+  "direction_slide_pairs": 4,
+  "min_ball_gap_x_m": 0.2935,
+  "min_ankle_gap_x_m": 0.202,
+  "min_knee_gap_x_m": 0.4378,
+  "halo_max_offset_m": 0.0229,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "module": "run_dirs",
+  "action": "HS_anim | Run left",
+  "planted_frame_pairs": 4,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0282,
+      "frame": 12,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        30,
+        47,
+        51,
+        45,
+        42,
+        50,
+        50,
+        50,
+        45,
+        37,
+        31,
+        28,
+        32,
+        33,
+        43,
+        51,
+        30
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0348,
+      "frame": 14,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        85,
+        85,
+        80,
+        63,
+        47,
+        37,
+        38,
+        41,
+        45,
+        45,
+        42,
+        38,
+        35,
+        35,
+        48,
+        73,
+        85
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0282,
+  "arm_clear_ok": true,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.0,
+    "finger_pops_deg_f2": [
+      [
+        0.0,
+        "R thumb.3",
+        16
+      ],
+      [
+        0.0,
+        "R thumb.3",
+        15
+      ],
+      [
+        0.0,
+        "R thumb.3",
+        14
+      ],
+      [
+        0.0,
+        "R thumb.3",
+        13
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": 1.2,
+        "hand_twist_frame": 3,
+        "hand_bend_max_deg": 4.8,
+        "forearm_roll_deg": 55.0,
+        "forearm_roll_frame": 15
+      },
+      "R": {
+        "hand_twist_deg": -1.2,
+        "hand_twist_frame": 11,
+        "hand_bend_max_deg": 4.8,
+        "forearm_roll_deg": -55.0,
+        "forearm_roll_frame": 14
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 22.0,
+        "thumb_max": 22.0,
+        "finger_min": 38.7,
+        "finger_max": 74.2
+      },
+      "R": {
+        "thumb_min": 22.0,
+        "thumb_max": 22.0,
+        "finger_min": 38.7,
+        "finger_max": 74.2
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 0.0,
+    "worst_pop": "R thumb.3 f16",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.0
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ]
+}

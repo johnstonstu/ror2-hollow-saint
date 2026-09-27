@@ -1,0 +1,32 @@
+{
+  "topology": [
+    {
+      "object": "geometry_0",
+      "coincident_vertex_weld_tolerance_source_units": 1e-06,
+      "welded_vertices": 4048,
+      "components_after_weld": 1,
+      "component_vertex_counts": [
+        4048
+      ],
+      "boundary_edges_after_weld": 0,
+      "nonmanifold_edges_after_weld": 0,
+      "note": "Welding performed on temporary analysis BMesh only; GLB unchanged."
+    }
+  ],
+  "materials": [
+    {
+      "name": "Material_0",
+      "base_color_texture_linked": true,
+      "emission_color": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emission_color_linked": false,
+      "emission_strength": 0.0,
+      "metallic": 1.0,
+      "roughness": 1.0
+    }
+  ]
+}

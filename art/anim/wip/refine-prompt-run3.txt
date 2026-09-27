@@ -1,0 +1,22 @@
+Hollow Saint refinement pass, run 3 (launched Sep 26 ~11:45 PM PT). Take your time; quality over speed.
+
+Project: C:\Users\stuwj\Documents\Coding\ror2-lightning
+Current checkpoint: art/anim/hollow-saint-anim-v15.blend (11:29 PM PT; v14 = 9c hands, v15 = item 8).
+READ FIRST, in full: art/anim/REFINEMENT-PLAN.md (especially 9c, 9d, 9e and "10 EXPANDED"), tools/blender/anim/README.md, art/anim/STATUS.md.
+
+DO IN THIS ORDER:
+a) Anything unfinished from 9c (STATUS says 9c done in v14; verify against the 9c section and fix any gaps).
+b) 9d MERGED WITH 9e, done together:
+   - Heel thrusters: move the lightning jet emitters from the toes/soles to the heel/Achilles base of each foot. Jets stream along the line of travel (exhaust trails backward behind the heels, thrust pushes forward) and angle with the movement direction. Applies to run push-off sparks, the glide-enter lift-off ignition burst, glide-loop steady jets, and the glide-exit cut. Feet must NOT point the toes at the ground like nozzles; pose the feet to support heel emission.
+   - Foot/thrust progression walk -> run -> sprint/glide enter -> glide loop -> glide exit per 9d (deliberate foot orientation, no floppy ankles, zero contact slide).
+   - Hands: re-check every clip against 9c; render close-up hand GIFs under art/anim/wip/hands/ and self-review them frame by frame before calling it done. Note findings in STATUS.md.
+   - Render the stitched walk -> run -> glide enter -> glide loop -> glide exit preview (hero, side, chase) under art/anim/wip/transitions/.
+c) Item 8 (cleanup): STATUS says done in v15; verify it still passes after b) and fix any regressions.
+d) 10 EXPANDED (gameplay transitions), LAST: inventory clips and gameplay state changes, match pose/velocity/momentum at handoffs, no secondary-motion pops (tabard, hands, jets, halo), blend-friendly start/end poses and short transition clips where needed, upper-body layering over locomotion if supported. Stitched preview GIFs for every pair in art/anim/wip/transitions/ and a transition matrix markdown (pair, pass/fail, notes).
+
+AFTER EACH ITEM: save a NEW numbered .blend (v16, v17, ... ; build_anim.py refuses to overwrite - never overwrite any .blend), run QA to PASS, update STATUS.md honestly, refresh review.html, and render preview GIFs for the item into art/anim/wip/ subfolders. Append short timestamped progress lines to art/anim/wip/refine-run-log.txt.
+
+HARD RULES:
+- Background Blender only (--background --factory-startup). Do NOT use the blender-mcp server or any MCP tool that connects to Blender. Never connect to, control, save into, or kill any running Blender; Stuart's interactive Blender (PID 4500) has unsaved work - leave every existing blender.exe alone.
+- Follow tools/blender/anim/README.md (one owner per clip file, background only, new numbered .blend only).
+- No git operations, never push. Never delete anything (move stale files aside instead). Never read .env.

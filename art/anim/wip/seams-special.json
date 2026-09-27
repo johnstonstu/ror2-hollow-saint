@@ -1,0 +1,27 @@
+[
+  {
+    "seam": "Charge loop wrap",
+    "max_mm": 0.0,
+    "bone": "R middle.2"
+  },
+  {
+    "seam": "Charge full wrap",
+    "max_mm": 0.0,
+    "bone": "L thumb.3"
+  },
+  {
+    "seam": "Open Circuit to Open Circuit hold f1",
+    "max_mm": 0.0,
+    "bone": "R middle.3"
+  },
+  {
+    "seam": "Open Circuit hold wrap",
+    "max_mm": 0.0,
+    "bone": "L middle.3"
+  },
+  {
+    "seam": "Open Circuit end from Open Circuit hold f1",
+    "max_mm": 0.0,
+    "bone": "tabard front.3"
+  }
+]

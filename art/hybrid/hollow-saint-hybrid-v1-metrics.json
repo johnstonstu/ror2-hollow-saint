@@ -1,0 +1,20 @@
+{
+  "source": "output/higgsfield-hollow-saint/hollow-saint-sam3d.glb",
+  "deleted_source_faces": {
+    "halo": 268,
+    "hands": 1897
+  },
+  "cut_caps": 11,
+  "posterior_reassigned_faces": 432,
+  "status": "Hybrid visual study; unrigged, untested in game",
+  "texture": "Original packed 1024px HF texture retained on preserved body faces",
+  "halo_center_x": -0.0375,
+  "halo_center_z": 1.79,
+  "halo_outer_radius": 0.433,
+  "fingers_per_hand": 5,
+  "parts": 65,
+  "meshes": 52,
+  "curves": 13,
+  "base_vertices": 5186,
+  "base_polygons": 8164
+}

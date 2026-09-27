@@ -1,0 +1,17 @@
+﻿TASK: Set up git in this project folder and push it to the public GitHub repo https://github.com/johnstonstu/ror2-hollow-saint (currently empty). Stuart explicitly approved this push on Sep 27 2026 (1:50 AM PT) and wants AS MUCH AS POSSIBLE in the cloud so he can work fully remotely, EXCEPT secrets.
+
+HARD RULES
+- NEVER read, print, stage, or commit .env (or .env.*, *.key, *.pem, credentials, tokens). Put them in .gitignore FIRST, before any git add.
+- Before committing, scan staged text files for secret-looking strings (api_key, token, secret, password, sk-, ghp_, AKIA, Bearer, private key headers). Exclude any file that has a real secret and list it in the result (path only, never the value).
+- Large binaries: use Git LFS (git lfs install; track *.blend, *.fbx, *.psd, *.exr, *.zip, *.wav and any other binary over 20 MB). Commit numbered .blend checkpoints and all assets through LFS. Only exclude a file if it is over 2 GB. If the LFS push is rejected for quota, push the rest without the rejected LFS files, then list them.
+- Ignore only junk: *.log, *.blend1, *.blend@, __pycache__/, node_modules/, .venv*/, thumbnail caches, Unity Library/Temp/Obj/Logs/UserSettings if present. Keep art/anim/wip docs, audits and preview renders.
+- Do NOT use blender-mcp or connect to any running Blender. Do not launch Blender. Do not touch Blender PID 4500 or any other process.
+- Do NOT edit, move, or delete existing project files other than creating .gitignore and .gitattributes. Another agent (run4) is actively editing clip files, so just snapshot what is on disk.
+- No force-push, no history rewriting, no other remotes or repos.
+
+STEPS
+1. git --version and git lfs version. If git is missing, stop and write the result file. If LFS is missing, try winget install GitHub.GitLFS (or report).
+2. Write .gitignore and .gitattributes. git init -b main. git lfs install. git add . then confirm .env is NOT staged (git ls-files | findstr /i env) and the secret scan passes.
+3. Commit: "Hollow Saint snapshot: anim v18, VFX hs-vfx-v07, plans and audits".
+4. git remote add origin https://github.com/johnstonstu/ror2-hollow-saint.git and git push -u origin main. If the push needs auth that is not available, do not hang: stop and record it.
+5. Write art/GIT-SETUP-RESULT.md: success or failure, commit hash, file count, total size, LFS size, .gitignore contents, excluded files and why, and any error text.

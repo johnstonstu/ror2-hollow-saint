@@ -1,0 +1,22 @@
+[
+  {
+    "seam": "Run forward wrap",
+    "max_mm": 0.0,
+    "bone": "R ring.3"
+  },
+  {
+    "seam": "Glide enter from Run forward f10",
+    "max_mm": 0.0,
+    "bone": "L middle.3"
+  },
+  {
+    "seam": "Glide loop wrap",
+    "max_mm": 0.0,
+    "bone": "R muzzle"
+  },
+  {
+    "seam": "Glide exit to Run forward f1",
+    "max_mm": 0.0,
+    "bone": "R middle.3"
+  }
+]

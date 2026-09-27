@@ -1,0 +1,152 @@
+[
+  {
+    "seam": "Run forward wrap",
+    "max_mm": 0.0,
+    "bone": "R middle.2"
+  },
+  {
+    "seam": "Walk forward wrap",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Glide enter from Run forward f10",
+    "max_mm": 0.0,
+    "bone": "L middle.3"
+  },
+  {
+    "seam": "Glide loop wrap",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Glide exit to Run forward f1",
+    "max_mm": 0.0,
+    "bone": "R middle.3"
+  },
+  {
+    "seam": "Jump to Ascend f1",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Ascend wrap",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Descend wrap",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Land from Descend f1",
+    "max_mm": 0.0,
+    "bone": "tabard front.3"
+  },
+  {
+    "seam": "Run backward wrap",
+    "max_mm": 0.0,
+    "bone": "L heel socket"
+  },
+  {
+    "seam": "Run left wrap",
+    "max_mm": 0.0,
+    "bone": "L ring.2"
+  },
+  {
+    "seam": "Run right wrap",
+    "max_mm": 0.0,
+    "bone": "R thumb.3"
+  },
+  {
+    "seam": "Arc Step start from Arc Step end f16",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Arc Step start to Arc Step loop f1",
+    "max_mm": 0.0,
+    "bone": "R little.3"
+  },
+  {
+    "seam": "Arc Step loop wrap",
+    "max_mm": 0.0,
+    "bone": "R little.3"
+  },
+  {
+    "seam": "Arc Step end from Arc Step loop f1",
+    "max_mm": 0.0,
+    "bone": "tabard front.3"
+  },
+  {
+    "seam": "Arc Step end to Arc Step start f1",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Charge loop wrap",
+    "max_mm": 0.0,
+    "bone": "R ring.3"
+  },
+  {
+    "seam": "Charge full wrap",
+    "max_mm": 0.0,
+    "bone": "R thumb.3"
+  },
+  {
+    "seam": "Open Circuit to Open Circuit hold f1",
+    "max_mm": 0.0,
+    "bone": "L ring.3"
+  },
+  {
+    "seam": "Open Circuit hold wrap",
+    "max_mm": 0.0,
+    "bone": "R muzzle"
+  },
+  {
+    "seam": "Open Circuit end from Open Circuit hold f1",
+    "max_mm": 0.0,
+    "bone": "tabard front.3"
+  },
+  {
+    "seam": "Idle wrap",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Idle from Land f15",
+    "max_mm": 0.0,
+    "bone": "R heel socket"
+  },
+  {
+    "seam": "Idle to Jump f1",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Idle combat wrap",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Spawn to Idle f1",
+    "max_mm": 0.0,
+    "bone": "R little.2"
+  },
+  {
+    "seam": "Select idle wrap",
+    "max_mm": 0.0,
+    "bone": "L thumb.3"
+  },
+  {
+    "seam": "Select intro from Select idle f1",
+    "max_mm": 0.0,
+    "bone": "tabard front.3"
+  },
+  {
+    "seam": "Select intro to Select idle f1",
+    "max_mm": 0.0,
+    "bone": "L middle.2"
+  }
+]

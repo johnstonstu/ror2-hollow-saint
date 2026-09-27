@@ -1,0 +1,52 @@
+[
+  {
+    "seam": "Arc Step start from Arc Step end f16",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Arc Step start to Arc Step loop f1",
+    "max_mm": 0.0,
+    "bone": "R little.3"
+  },
+  {
+    "seam": "Arc Step loop wrap",
+    "max_mm": 0.0,
+    "bone": "R little.3"
+  },
+  {
+    "seam": "Arc Step end from Arc Step loop f1",
+    "max_mm": 0.0,
+    "bone": "tabard front.3"
+  },
+  {
+    "seam": "Arc Step end to Arc Step start f1",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Charge loop wrap",
+    "max_mm": 0.0,
+    "bone": "R ring.3"
+  },
+  {
+    "seam": "Charge full wrap",
+    "max_mm": 0.0,
+    "bone": "R thumb.3"
+  },
+  {
+    "seam": "Open Circuit to Open Circuit hold f1",
+    "max_mm": 0.0,
+    "bone": "L ring.3"
+  },
+  {
+    "seam": "Open Circuit hold wrap",
+    "max_mm": 0.0,
+    "bone": "R muzzle"
+  },
+  {
+    "seam": "Open Circuit end from Open Circuit hold f1",
+    "max_mm": 0.0,
+    "bone": "tabard front.3"
+  }
+]

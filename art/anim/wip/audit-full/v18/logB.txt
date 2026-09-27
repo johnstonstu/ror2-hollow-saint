@@ -1,0 +1,23 @@
+00:01.250  blend            | Read blend: "C:\Users\stuwj\Documents\Coding\ror2-lightning\art\anim\wip\audit-full\v18\audit-full-v18-copy.blend"
+CLIP Spawn 72 27.8
+CLIP Idle combat 49 47.1
+CLIP Select intro 44 63.7
+CLIP Discharge 28 74.0
+CLIP Open Circuit 30 84.7
+CLIP Open Circuit hold 25 93.9
+CLIP Open Circuit end 22 102.3
+CLIP Charge full 25 111.8
+CLIP Arc Step start 7 115.3
+CLIP Arc Step loop 11 120.8
+CLIP Arc Step end 16 127.5
+CLIP Run left 17 134.8
+CLIP Run right 17 142.2
+CLIP Glide enter 13 148.4
+CLIP Glide exit 14 155.4
+CLIP Jump 11 160.4
+CLIP Land 15 165.4
+CLIP Descend 21 172.1
+DONE anim B
+Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
+
+Blender quit

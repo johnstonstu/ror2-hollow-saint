@@ -1,0 +1,465 @@
+[
+ {
+  "name": "full-audit-01-collar-head-weights-arcstep-start-f5",
+  "clip": "Arc Step start",
+  "frame": 5,
+  "target": "bone:neck",
+  "dir": [
+   0.55,
+   1,
+   0.45
+  ],
+  "dist": 0.8,
+  "highlight": {
+   "body:head": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:neck": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "L scapula shell": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "R scapula shell": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "neck cables": [
+    1,
+    0.9,
+    0.1,
+    1
+   ],
+   "back conductors": [
+    0.9,
+    0.2,
+    0.9,
+    1
+   ],
+   "body:chest": [
+    0.7,
+    0.7,
+    0.72,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-02-collar-stretch-aim-right-f1",
+  "clip": "Aim right",
+  "frame": 1,
+  "target": "bone:neck",
+  "dir": [
+   -0.5,
+   -1,
+   0.35
+  ],
+  "dist": 0.75,
+  "highlight": {
+   "body:head": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:neck": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "chest core": [
+    1,
+    0.9,
+    0.1,
+    1
+   ],
+   "chest plate L": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "chest plate R": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "neck cables": [
+    0.9,
+    0.2,
+    0.9,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-03-chest-core-deform-arcstep-loop-f3",
+  "clip": "Arc Step loop",
+  "frame": 3,
+  "target": "bone:chest",
+  "along": 1.0,
+  "dir": [
+   0.25,
+   -1,
+   0.25
+  ],
+  "dist": 0.6,
+  "highlight": {
+   "chest core": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "chest plate L": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "chest plate R": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "neck cables": [
+    1,
+    0.9,
+    0.1,
+    1
+   ],
+   "body:head": [
+    1,
+    0.6,
+    0.6,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-04-halo-arcs-in-shoulders-idle-combat-f33",
+  "clip": "Idle combat",
+  "frame": 33,
+  "target": "bone:chest",
+  "along": 1.0,
+  "offset": [
+   0,
+   0.1,
+   0.2
+  ],
+  "dir": [
+   0.25,
+   1,
+   0.55
+  ],
+  "dist": 1.2,
+  "highlight": {
+   "halo arc 1": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "halo arc 2": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "halo arc 3": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "halo arc 4": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "L pauldron": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "R pauldron": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "yoke": [
+    1,
+    0.9,
+    0.1,
+    1
+   ],
+   "L scapula shell": [
+    0.2,
+    0.35,
+    1,
+    1
+   ],
+   "R scapula shell": [
+    0.2,
+    0.35,
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-05-L-arm-thigh-open-circuit-end-f7",
+  "clip": "Open Circuit end",
+  "frame": 7,
+  "target": "bone:L forearm",
+  "along": 0.5,
+  "dir": [
+   1,
+   -0.35,
+   0.1
+  ],
+  "dist": 0.9,
+  "highlight": {
+   "body:L forearm": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:L upperarm": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "body:L thigh": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "L hand parts": [
+    1,
+    0.9,
+    0.1,
+    1
+   ],
+   "L forearm conductor": [
+    0.9,
+    0.2,
+    0.9,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-05b-L-arm-thigh-discharge-f4",
+  "clip": "Discharge",
+  "frame": 4,
+  "target": "bone:L forearm",
+  "along": 0.5,
+  "dir": [
+   1,
+   -0.35,
+   0.1
+  ],
+  "dist": 0.9,
+  "highlight": {
+   "body:L forearm": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:L upperarm": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "body:L thigh": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "L hand parts": [
+    1,
+    0.9,
+    0.1,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-06-shins-cross-arcstep-loop-f7",
+  "clip": "Arc Step loop",
+  "frame": 7,
+  "target": "bone:L shin",
+  "along": 0.6,
+  "dir": [
+   0.25,
+   -1,
+   0.15
+  ],
+  "dist": 1.1,
+  "highlight": {
+   "body:L shin": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "body:R shin": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:L foot": [
+    0.2,
+    0.35,
+    1,
+    1
+   ],
+   "body:R foot": [
+    1,
+    0.55,
+    0.1,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-07-R-hip-seam-run-forward-f3",
+  "clip": "Run forward",
+  "frame": 3,
+  "target": "bone:R thigh",
+  "along": 0.15,
+  "dir": [
+   -0.8,
+   -1,
+   0.15
+  ],
+  "dist": 0.75,
+  "highlight": {
+   "body:R thigh": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:pelvis": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "body:spine": [
+    0.2,
+    0.35,
+    1,
+    1
+   ],
+   "body:L thigh": [
+    1,
+    0.55,
+    0.1,
+    1
+   ]
+  },
+  "hide": [
+   "tabard front",
+   "tabard back"
+  ]
+ },
+ {
+  "name": "full-audit-09-L-forearm-twist-open-circuit-f9",
+  "clip": "Open Circuit",
+  "frame": 9,
+  "target": "bone:L forearm",
+  "along": 0.1,
+  "dir": [
+   0.3,
+   -1,
+   0.35
+  ],
+  "dist": 0.6,
+  "highlight": {
+   "body:L upperarm": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "body:L forearm": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "L forearm conductor": [
+    1,
+    0.9,
+    0.1,
+    1
+   ],
+   "L hand parts": [
+    0.1,
+    0.8,
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-10-abdomen-sigil-deform-spawn-f1",
+  "clip": "Spawn",
+  "frame": 1,
+  "target": "bone:pelvis",
+  "along": 0.5,
+  "dir": [
+   0.2,
+   -1,
+   0.2
+  ],
+  "dist": 0.8,
+  "highlight": {
+   "abdomen plates": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "tabard front": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "body:pelvis": [
+    0.75,
+    0.75,
+    0.8,
+    1
+   ]
+  }
+ }
+]

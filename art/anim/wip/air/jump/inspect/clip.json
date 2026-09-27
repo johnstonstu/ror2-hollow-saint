@@ -1,0 +1,39 @@
+{
+  "title": "Jump",
+  "frames": [
+    1,
+    11
+  ],
+  "loop": false,
+  "markers": {
+    "Crouch": 3,
+    "Takeoff": 6
+  },
+  "ik_miss_m": 7e-05,
+  "max_leg_extension": 0.934,
+  "ik_miss_frames": {},
+  "kind": "air",
+  "ends_in": "Ascend",
+  "halo_max_offset_m": 0.03,
+  "bake_error_m": 1e-06,
+  "module": "air",
+  "action": "HS_anim | Jump",
+  "planted_frame_pairs": 8,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": -0.0057,
+  "min_toe_tip_z": 0.0021,
+  "finite": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front"
+  ],
+  "rendered_frames": [
+    1,
+    3,
+    5,
+    8
+  ]
+}

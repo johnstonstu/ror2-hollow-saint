@@ -1,0 +1,2504 @@
+{
+ "objects": [
+  {
+   "name": "Warm studio softbox",
+   "type": "LIGHT",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    -3.0,
+    -4.0,
+    5.0
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Neutral fill",
+   "type": "LIGHT",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    3.0,
+    -2.0,
+    2.7
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Soft rim",
+   "type": "LIGHT",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    1.0,
+    3.0,
+    4.0
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Front orthographic",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    0.0,
+    -8.0,
+    1.38
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Hero three quarter",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    3.0,
+    -7.0,
+    3.33
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Side orthographic",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    8.0,
+    0.0,
+    1.38
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Back orthographic",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    0.0,
+    8.0,
+    1.38
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Simulated gameplay distance",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    -3.9,
+    7.0,
+    4.63
+   ],
+   "dims": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Hollow Saint | v8 rig",
+   "type": "ARMATURE",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    1.208,
+    0.349,
+    2.187
+   ]
+  },
+  {
+   "name": "HALO | HF-style cyan shoulder band L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 2",
+   "materials": [
+    "HYBRID cyan conductor"
+   ],
+   "loc": [
+    0.0,
+    0.012,
+    0.0
+   ],
+   "dims": [
+    0.118,
+    0.016,
+    0.06
+   ],
+   "verts": 8,
+   "modifiers": []
+  },
+  {
+   "name": "HALO | HF-style cyan shoulder band R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 3",
+   "materials": [
+    "HYBRID cyan conductor"
+   ],
+   "loc": [
+    0.0,
+    0.012,
+    0.0
+   ],
+   "dims": [
+    0.118,
+    0.016,
+    0.06
+   ],
+   "verts": 8,
+   "modifiers": []
+  },
+  {
+   "name": "Warm gray studio ground",
+   "type": "MESH",
+   "parent": null,
+   "parent_bone": null,
+   "materials": [
+    "Studio gray"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.003
+   ],
+   "dims": [
+    200.0,
+    200.0,
+    0.0
+   ],
+   "verts": 4,
+   "modifiers": []
+  },
+  {
+   "name": "HF BODY | retained UV sculpt, corrected posterior",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": null,
+   "materials": [
+    "HYBRID source texture | ceramic graphite and cyan",
+    "HYBRID posterior graphite | retained texture seam blend",
+    "HYBRID warm ivory",
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    1.142,
+    0.527,
+    1.983
+   ],
+   "verts": 4758,
+   "modifiers": [
+    "ARMATURE"
+   ]
+  },
+  {
+   "name": "HALO | independent copper arc 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 1",
+   "materials": [
+    "HYBRID aged copper"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.345,
+    0.036,
+    0.314
+   ],
+   "verts": 100,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "HALO 1 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 1",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.323,
+    0.002,
+    0.276
+   ]
+  },
+  {
+   "name": "HALO 1 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 1",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.243,
+    0.002,
+    0.208
+   ]
+  },
+  {
+   "name": "HALO | independent copper arc 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 2",
+   "materials": [
+    "HYBRID aged copper"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.21,
+    0.036,
+    0.408
+   ],
+   "verts": 100,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "HALO 2 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 2",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.133,
+    0.002,
+    0.407
+   ]
+  },
+  {
+   "name": "HALO 2 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 2",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.1,
+    0.002,
+    0.306
+   ]
+  },
+  {
+   "name": "HALO | independent copper arc 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 3",
+   "materials": [
+    "HYBRID aged copper"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.21,
+    0.036,
+    0.408
+   ],
+   "verts": 100,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "HALO 3 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 3",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.133,
+    0.002,
+    0.407
+   ]
+  },
+  {
+   "name": "HALO 3 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 3",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.1,
+    0.002,
+    0.306
+   ]
+  },
+  {
+   "name": "HALO | independent copper arc 4",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 4",
+   "materials": [
+    "HYBRID aged copper"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.345,
+    0.036,
+    0.314
+   ],
+   "verts": 100,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "HALO 4 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 4",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.323,
+    0.002,
+    0.276
+   ]
+  },
+  {
+   "name": "HALO 4 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "halo 4",
+   "materials": [
+    "HYBRID copper edge"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.243,
+    0.002,
+    0.208
+   ]
+  },
+  {
+   "name": "L HAND | wrist cuff",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.095,
+    0.127,
+    0.11
+   ],
+   "verts": 48,
+   "modifiers": []
+  },
+  {
+   "name": "L HAND | tapered sculpted palm",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.109,
+    0.07,
+    0.098
+   ],
+   "verts": 48,
+   "modifiers": []
+  },
+  {
+   "name": "L HAND | index segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L index.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.032,
+    0.031,
+    0.074
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | index segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L index.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.026,
+    0.032,
+    0.068
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | index segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L index.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.02,
+    0.047,
+    0.031
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | index knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.488,
+    0.001,
+    0.855
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "L HAND | middle segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L middle.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.03,
+    0.03,
+    0.082
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | middle segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L middle.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.026,
+    0.034,
+    0.076
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | middle segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L middle.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.02,
+    0.055,
+    0.034
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | middle knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.504,
+    -0.017,
+    0.86
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "L HAND | ring segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L ring.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.034,
+    0.031,
+    0.079
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | ring segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L ring.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.028,
+    0.033,
+    0.072
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | ring segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L ring.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.02,
+    0.069,
+    0.033
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | ring knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.522,
+    -0.038,
+    0.865
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "L HAND | little segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L little.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.037,
+    0.031,
+    0.068
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | little segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L little.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.032,
+    0.033,
+    0.062
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | little segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L little.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.02,
+    0.086,
+    0.03
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | little knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.538,
+    -0.057,
+    0.869
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "L HAND | thumb segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L thumb.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.059,
+    0.043,
+    0.056
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | thumb segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L thumb.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.046,
+    0.039,
+    0.052
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | thumb segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L thumb.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    0.499,
+    0.399,
+    -0.038
+   ],
+   "dims": [
+    0.027,
+    0.047,
+    0.038
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "L HAND | small wrist conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L hand",
+   "materials": [
+    "HYBRID cyan conductor"
+   ],
+   "loc": [
+    0.439,
+    -0.052,
+    0.952
+   ],
+   "dims": [
+    0.017,
+    0.008,
+    0.032
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "R HAND | wrist cuff",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.095,
+    0.127,
+    0.11
+   ],
+   "verts": 48,
+   "modifiers": []
+  },
+  {
+   "name": "R HAND | tapered sculpted palm",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.109,
+    0.07,
+    0.098
+   ],
+   "verts": 48,
+   "modifiers": []
+  },
+  {
+   "name": "R HAND | index segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R index.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.032,
+    0.031,
+    0.074
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | index segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R index.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.026,
+    0.032,
+    0.068
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | index segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R index.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.02,
+    0.047,
+    0.031
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | index knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.535,
+    -0.049,
+    0.855
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "R HAND | middle segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R middle.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.03,
+    0.03,
+    0.082
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | middle segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R middle.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.026,
+    0.034,
+    0.076
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | middle segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R middle.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.02,
+    0.055,
+    0.034
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | middle knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.551,
+    -0.067,
+    0.86
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "R HAND | ring segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R ring.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.034,
+    0.031,
+    0.079
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | ring segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R ring.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.028,
+    0.033,
+    0.072
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | ring segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R ring.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.02,
+    0.069,
+    0.033
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | ring knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.569,
+    -0.088,
+    0.865
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "R HAND | little segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R little.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.037,
+    0.031,
+    0.068
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | little segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R little.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.032,
+    0.033,
+    0.062
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | little segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R little.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.02,
+    0.086,
+    0.03
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | little knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R hand",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.585,
+    -0.107,
+    0.869
+   ],
+   "dims": [
+    0.032,
+    0.034,
+    0.038
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "R HAND | thumb segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R thumb.1",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.059,
+    0.043,
+    0.056
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | thumb segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R thumb.2",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.046,
+    0.039,
+    0.052
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | thumb segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R thumb.3",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.52,
+    0.38,
+    -0.045
+   ],
+   "dims": [
+    0.027,
+    0.047,
+    0.038
+   ],
+   "verts": 32,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R HAND | small wrist conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R hand",
+   "materials": [
+    "HYBRID cyan conductor"
+   ],
+   "loc": [
+    -0.486,
+    -0.102,
+    0.952
+   ],
+   "dims": [
+    0.017,
+    0.008,
+    0.032
+   ],
+   "verts": 42,
+   "modifiers": []
+  },
+  {
+   "name": "L BACK | small scapula shell",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "L scapula",
+   "materials": [
+    "HYBRID warm ivory"
+   ],
+   "loc": [
+    -0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.122,
+    0.069,
+    0.145
+   ],
+   "verts": 40,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "R BACK | small scapula shell",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "R scapula",
+   "materials": [
+    "HYBRID warm ivory"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.122,
+    0.08,
+    0.145
+   ],
+   "verts": 40,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "BACK | small dark node housing",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "chest",
+   "materials": [
+    "HYBRID graphite"
+   ],
+   "loc": [
+    -0.038,
+    0.127,
+    1.55
+   ],
+   "dims": [
+    0.062,
+    0.062,
+    0.012
+   ],
+   "verts": 64,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "BACK | small recessed charge node",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "chest",
+   "materials": [
+    "HYBRID cyan conductor"
+   ],
+   "loc": [
+    -0.038,
+    0.136,
+    1.55
+   ],
+   "dims": [
+    0.044,
+    0.044,
+    0.005
+   ],
+   "verts": 64,
+   "modifiers": [
+    "BEVEL"
+   ]
+  },
+  {
+   "name": "BACK | seated spine conductor",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_bone": "chest",
+   "materials": [
+    "HYBRID cyan conductor"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dims": [
+    0.006,
+    0.015,
+    0.213
+   ]
+  }
+ ],
+ "bones": [
+  {
+   "name": "root",
+   "parent": null,
+   "head": [
+    0.0,
+    0.0,
+    0.02
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    0.95
+   ]
+  },
+  {
+   "name": "pelvis",
+   "parent": "root",
+   "head": [
+    0.0,
+    0.0,
+    0.88
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.08
+   ]
+  },
+  {
+   "name": "spine",
+   "parent": "pelvis",
+   "head": [
+    0.0,
+    0.0,
+    1.02
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.4
+   ]
+  },
+  {
+   "name": "chest",
+   "parent": "spine",
+   "head": [
+    0.0,
+    0.0,
+    1.36
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.52
+   ]
+  },
+  {
+   "name": "neck",
+   "parent": "chest",
+   "head": [
+    0.0,
+    0.0,
+    1.49
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.59
+   ]
+  },
+  {
+   "name": "head",
+   "parent": "neck",
+   "head": [
+    0.0,
+    0.0,
+    1.57
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.8
+   ]
+  },
+  {
+   "name": "L upperarm",
+   "parent": "chest",
+   "head": [
+    0.17,
+    0.0,
+    1.42
+   ],
+   "tail": [
+    0.34,
+    0.0,
+    1.2
+   ]
+  },
+  {
+   "name": "L forearm",
+   "parent": "L upperarm",
+   "head": [
+    0.34,
+    0.0,
+    1.2
+   ],
+   "tail": [
+    0.47,
+    0.0,
+    0.98
+   ]
+  },
+  {
+   "name": "L hand",
+   "parent": "L forearm",
+   "head": [
+    0.47,
+    0.0,
+    0.98
+   ],
+   "tail": [
+    0.5,
+    0.0,
+    0.86
+   ]
+  },
+  {
+   "name": "L index.1",
+   "parent": "L hand",
+   "head": [
+    0.488,
+    0.001,
+    0.855
+   ],
+   "tail": [
+    0.504,
+    0.007,
+    0.785
+   ]
+  },
+  {
+   "name": "L index.2",
+   "parent": "L index.1",
+   "head": [
+    0.504,
+    0.007,
+    0.785
+   ],
+   "tail": [
+    0.508,
+    0.003,
+    0.72
+   ]
+  },
+  {
+   "name": "L index.3",
+   "parent": "L index.2",
+   "head": [
+    0.508,
+    0.003,
+    0.72
+   ],
+   "tail": [
+    0.481,
+    -0.021,
+    0.69
+   ]
+  },
+  {
+   "name": "L middle.1",
+   "parent": "L hand",
+   "head": [
+    0.504,
+    -0.017,
+    0.86
+   ],
+   "tail": [
+    0.527,
+    -0.015,
+    0.781
+   ]
+  },
+  {
+   "name": "L middle.2",
+   "parent": "L middle.1",
+   "head": [
+    0.527,
+    -0.015,
+    0.781
+   ],
+   "tail": [
+    0.537,
+    -0.024,
+    0.709
+   ]
+  },
+  {
+   "name": "L middle.3",
+   "parent": "L middle.2",
+   "head": [
+    0.537,
+    -0.024,
+    0.709
+   ],
+   "tail": [
+    0.505,
+    -0.053,
+    0.674
+   ]
+  },
+  {
+   "name": "L ring.1",
+   "parent": "L hand",
+   "head": [
+    0.522,
+    -0.038,
+    0.865
+   ],
+   "tail": [
+    0.55,
+    -0.044,
+    0.794
+   ]
+  },
+  {
+   "name": "L ring.2",
+   "parent": "L ring.1",
+   "head": [
+    0.55,
+    -0.044,
+    0.794
+   ],
+   "tail": [
+    0.565,
+    -0.061,
+    0.728
+   ]
+  },
+  {
+   "name": "L ring.3",
+   "parent": "L ring.2",
+   "head": [
+    0.565,
+    -0.061,
+    0.728
+   ],
+   "tail": [
+    0.522,
+    -0.1,
+    0.691
+   ]
+  },
+  {
+   "name": "L little.1",
+   "parent": "L hand",
+   "head": [
+    0.538,
+    -0.057,
+    0.869
+   ],
+   "tail": [
+    0.566,
+    -0.067,
+    0.811
+   ]
+  },
+  {
+   "name": "L little.2",
+   "parent": "L little.1",
+   "head": [
+    0.566,
+    -0.067,
+    0.811
+   ],
+   "tail": [
+    0.581,
+    -0.087,
+    0.756
+   ]
+  },
+  {
+   "name": "L little.3",
+   "parent": "L little.2",
+   "head": [
+    0.581,
+    -0.087,
+    0.756
+   ],
+   "tail": [
+    0.524,
+    -0.139,
+    0.718
+   ]
+  },
+  {
+   "name": "L thumb.1",
+   "parent": "L hand",
+   "head": [
+    0.478,
+    0.004,
+    0.905
+   ],
+   "tail": [
+    0.452,
+    0.028,
+    0.862
+   ]
+  },
+  {
+   "name": "L thumb.2",
+   "parent": "L thumb.1",
+   "head": [
+    0.452,
+    0.028,
+    0.862
+   ],
+   "tail": [
+    0.435,
+    0.037,
+    0.819
+   ]
+  },
+  {
+   "name": "L thumb.3",
+   "parent": "L thumb.2",
+   "head": [
+    0.435,
+    0.037,
+    0.819
+   ],
+   "tail": [
+    0.422,
+    0.005,
+    0.788
+   ]
+  },
+  {
+   "name": "L scapula",
+   "parent": "chest",
+   "head": [
+    0.14,
+    0.0,
+    1.48
+   ],
+   "tail": [
+    0.22,
+    0.0,
+    1.42
+   ]
+  },
+  {
+   "name": "R upperarm",
+   "parent": "chest",
+   "head": [
+    -0.17,
+    0.0,
+    1.42
+   ],
+   "tail": [
+    -0.34,
+    0.0,
+    1.2
+   ]
+  },
+  {
+   "name": "R forearm",
+   "parent": "R upperarm",
+   "head": [
+    -0.34,
+    0.0,
+    1.2
+   ],
+   "tail": [
+    -0.47,
+    0.0,
+    0.98
+   ]
+  },
+  {
+   "name": "R hand",
+   "parent": "R forearm",
+   "head": [
+    -0.47,
+    0.0,
+    0.98
+   ],
+   "tail": [
+    -0.5,
+    0.0,
+    0.86
+   ]
+  },
+  {
+   "name": "R index.1",
+   "parent": "R hand",
+   "head": [
+    -0.535,
+    -0.049,
+    0.855
+   ],
+   "tail": [
+    -0.551,
+    -0.043,
+    0.785
+   ]
+  },
+  {
+   "name": "R index.2",
+   "parent": "R index.1",
+   "head": [
+    -0.551,
+    -0.043,
+    0.785
+   ],
+   "tail": [
+    -0.555,
+    -0.047,
+    0.72
+   ]
+  },
+  {
+   "name": "R index.3",
+   "parent": "R index.2",
+   "head": [
+    -0.555,
+    -0.047,
+    0.72
+   ],
+   "tail": [
+    -0.528,
+    -0.071,
+    0.69
+   ]
+  },
+  {
+   "name": "R middle.1",
+   "parent": "R hand",
+   "head": [
+    -0.551,
+    -0.067,
+    0.86
+   ],
+   "tail": [
+    -0.574,
+    -0.065,
+    0.781
+   ]
+  },
+  {
+   "name": "R middle.2",
+   "parent": "R middle.1",
+   "head": [
+    -0.574,
+    -0.065,
+    0.781
+   ],
+   "tail": [
+    -0.584,
+    -0.074,
+    0.709
+   ]
+  },
+  {
+   "name": "R middle.3",
+   "parent": "R middle.2",
+   "head": [
+    -0.584,
+    -0.074,
+    0.709
+   ],
+   "tail": [
+    -0.552,
+    -0.103,
+    0.674
+   ]
+  },
+  {
+   "name": "R ring.1",
+   "parent": "R hand",
+   "head": [
+    -0.569,
+    -0.088,
+    0.865
+   ],
+   "tail": [
+    -0.597,
+    -0.094,
+    0.794
+   ]
+  },
+  {
+   "name": "R ring.2",
+   "parent": "R ring.1",
+   "head": [
+    -0.597,
+    -0.094,
+    0.794
+   ],
+   "tail": [
+    -0.612,
+    -0.111,
+    0.728
+   ]
+  },
+  {
+   "name": "R ring.3",
+   "parent": "R ring.2",
+   "head": [
+    -0.612,
+    -0.111,
+    0.728
+   ],
+   "tail": [
+    -0.569,
+    -0.15,
+    0.691
+   ]
+  },
+  {
+   "name": "R little.1",
+   "parent": "R hand",
+   "head": [
+    -0.585,
+    -0.107,
+    0.869
+   ],
+   "tail": [
+    -0.613,
+    -0.117,
+    0.811
+   ]
+  },
+  {
+   "name": "R little.2",
+   "parent": "R little.1",
+   "head": [
+    -0.613,
+    -0.117,
+    0.811
+   ],
+   "tail": [
+    -0.628,
+    -0.137,
+    0.756
+   ]
+  },
+  {
+   "name": "R little.3",
+   "parent": "R little.2",
+   "head": [
+    -0.628,
+    -0.137,
+    0.756
+   ],
+   "tail": [
+    -0.571,
+    -0.189,
+    0.718
+   ]
+  },
+  {
+   "name": "R thumb.1",
+   "parent": "R hand",
+   "head": [
+    -0.525,
+    -0.046,
+    0.905
+   ],
+   "tail": [
+    -0.499,
+    -0.022,
+    0.862
+   ]
+  },
+  {
+   "name": "R thumb.2",
+   "parent": "R thumb.1",
+   "head": [
+    -0.499,
+    -0.022,
+    0.862
+   ],
+   "tail": [
+    -0.482,
+    -0.013,
+    0.819
+   ]
+  },
+  {
+   "name": "R thumb.3",
+   "parent": "R thumb.2",
+   "head": [
+    -0.482,
+    -0.013,
+    0.819
+   ],
+   "tail": [
+    -0.469,
+    -0.045,
+    0.788
+   ]
+  },
+  {
+   "name": "R scapula",
+   "parent": "chest",
+   "head": [
+    -0.14,
+    0.0,
+    1.48
+   ],
+   "tail": [
+    -0.22,
+    0.0,
+    1.42
+   ]
+  },
+  {
+   "name": "halo 1",
+   "parent": "chest",
+   "head": [
+    0.196,
+    0.15,
+    2.057
+   ],
+   "tail": [
+    0.196,
+    0.15,
+    2.207
+   ]
+  },
+  {
+   "name": "halo 2",
+   "parent": "chest",
+   "head": [
+    0.291,
+    0.15,
+    1.683
+   ],
+   "tail": [
+    0.291,
+    0.15,
+    1.833
+   ]
+  },
+  {
+   "name": "halo 3",
+   "parent": "chest",
+   "head": [
+    -0.366,
+    0.15,
+    1.683
+   ],
+   "tail": [
+    -0.366,
+    0.15,
+    1.833
+   ]
+  },
+  {
+   "name": "halo 4",
+   "parent": "chest",
+   "head": [
+    -0.271,
+    0.15,
+    2.057
+   ],
+   "tail": [
+    -0.271,
+    0.15,
+    2.207
+   ]
+  },
+  {
+   "name": "L thigh",
+   "parent": "pelvis",
+   "head": [
+    0.13,
+    0.0,
+    1.0
+   ],
+   "tail": [
+    0.16,
+    0.0,
+    0.58
+   ]
+  },
+  {
+   "name": "L shin",
+   "parent": "L thigh",
+   "head": [
+    0.16,
+    0.0,
+    0.58
+   ],
+   "tail": [
+    0.18,
+    0.0,
+    0.14
+   ]
+  },
+  {
+   "name": "L foot",
+   "parent": "L shin",
+   "head": [
+    0.18,
+    0.0,
+    0.14
+   ],
+   "tail": [
+    0.18,
+    0.16,
+    0.055
+   ]
+  },
+  {
+   "name": "R thigh",
+   "parent": "pelvis",
+   "head": [
+    -0.13,
+    0.0,
+    1.0
+   ],
+   "tail": [
+    -0.16,
+    0.0,
+    0.58
+   ]
+  },
+  {
+   "name": "R shin",
+   "parent": "R thigh",
+   "head": [
+    -0.16,
+    0.0,
+    0.58
+   ],
+   "tail": [
+    -0.18,
+    0.0,
+    0.14
+   ]
+  },
+  {
+   "name": "R foot",
+   "parent": "R shin",
+   "head": [
+    -0.18,
+    0.0,
+    0.14
+   ],
+   "tail": [
+    -0.18,
+    0.16,
+    0.055
+   ]
+  }
+ ],
+ "materials": {
+  "HYBRID aged copper": {
+   "users": 4,
+   "base": [
+    0.37,
+    0.16,
+    0.053
+   ],
+   "metal": 0.7,
+   "rough": 0.48,
+   "emit": 0.0,
+   "base_linked": true
+  },
+  "HYBRID copper edge": {
+   "users": 8,
+   "base": [
+    0.47,
+    0.225,
+    0.087
+   ],
+   "metal": 0.7,
+   "rough": 0.37,
+   "emit": 0.0,
+   "base_linked": false
+  },
+  "HYBRID cyan conductor": {
+   "users": 6,
+   "base": [
+    0.016,
+    0.68,
+    0.87
+   ],
+   "metal": 0.05,
+   "rough": 0.28,
+   "emit": 2.0,
+   "base_linked": false
+  },
+  "HYBRID graphite": {
+   "users": 44,
+   "base": [
+    0.014,
+    0.02,
+    0.024
+   ],
+   "metal": 0.78,
+   "rough": 0.83,
+   "emit": 0.0,
+   "base_linked": false
+  },
+  "HYBRID posterior graphite | retained texture seam blend": {
+   "users": 1,
+   "base": [
+    0.014,
+    0.02,
+    0.024
+   ],
+   "metal": 0.78,
+   "rough": 0.83,
+   "emit": 0.0,
+   "base_linked": true
+  },
+  "HYBRID source texture | ceramic graphite and cyan": {
+   "users": 1,
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "metal": 0.06,
+   "rough": 0.57,
+   "emit": 0.0,
+   "base_linked": true
+  },
+  "HYBRID warm ivory": {
+   "users": 3,
+   "base": [
+    0.72,
+    0.685,
+    0.575
+   ],
+   "metal": 0.05,
+   "rough": 0.52,
+   "emit": 0.0,
+   "base_linked": false
+  },
+  "Studio gray": {
+   "users": 1,
+   "base": [
+    0.27,
+    0.25,
+    0.225
+   ],
+   "metal": 0.0,
+   "rough": 0.9,
+   "emit": 0.0,
+   "base_linked": false
+  }
+ },
+ "actions": [
+  "HS_v10 | Arc Bolt - two finger snap",
+  "HS_v10 | Arc Step - in place dash",
+  "HS_v10 | Charge - gathering current",
+  "HS_v10 | Discharge - break the seal",
+  "HS_v10 | Idle - contained storm",
+  "HS_v10 | Open Circuit - unfolding crown",
+  "HS_v8 | Arc Bolt point and snap",
+  "HS_v8 | Idle contained storm | 2s loop",
+  "HS_v8 | Overcharge brace and release"
+ ],
+ "render": {
+  "engine": "BLENDER_EEVEE",
+  "view": "AgX",
+  "look": "None",
+  "samples": 40,
+  "res": [
+   640,
+   640
+  ],
+  "film_transparent": false,
+  "use_nodes": true
+ },
+ "world": "World",
+ "cameras": [
+  "Front orthographic",
+  "Hero three quarter",
+  "Side orthographic",
+  "Back orthographic",
+  "Simulated gameplay distance"
+ ],
+ "lights": [
+  {
+   "name": "Warm studio softbox",
+   "type": "AREA",
+   "energy": 650.0,
+   "loc": [
+    -3.0,
+    -4.0,
+    5.0
+   ]
+  },
+  {
+   "name": "Neutral fill",
+   "type": "AREA",
+   "energy": 250.0,
+   "loc": [
+    3.0,
+    -2.0,
+    2.7
+   ]
+  },
+  {
+   "name": "Soft rim",
+   "type": "AREA",
+   "energy": 700.0,
+   "loc": [
+    1.0,
+    3.0,
+    4.0
+   ]
+  }
+ ]
+}

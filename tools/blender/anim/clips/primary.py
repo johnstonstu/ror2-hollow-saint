@@ -1,0 +1,245 @@
+"""Primary: Arc Bolt gestures (right/left alternation) and additive aim poses.
+
+Gestures play on an upper-body layer, so pelvis, legs and tabard stay at rest (legs_ik=0, legs
+untouched); only spine/chest/neck/head, scapulae, arms, fingers and halo move. Each gesture starts
+and ends exactly at rest. Beats: the hand cocks up by the shoulder with index+middle pressed to the
+thumb (Anticipation), whips out as the two fingers flick straight along -Y (Bolt release), kicks up
+a few degrees (recoil) with a halo flare, holds briefly and eases back to rest (Recovered).
+
+The aimed arm is solved per side (the mesh hands are not mirror images): upper-arm swing/adduct
+and wrist bend put the fingertip muzzle at AIM_POINT pointing along -Y with the least wrist bend.
+Arm channels in KEYS are deltas on top of `wb` x that solved pose.
+
+Aim poses rotate only spine/chest/neck/head; they are 2-frame static clips meant to be used as
+additive poses against 'Aim neutral' (Unity: set the Additive Reference Pose to that clip).
+"""
+import math
+from mathutils import Euler, Quaternion, Vector
+from hs_anim import R, bake, ramp, sign
+import air
+
+N = 20
+ANTICIPATION = 3
+RELEASE = 5
+TARGET = Vector((0.0, -1.0, 0.0))
+# Muzzle x, z at release: in front of the shoulder, outside the torso so the arm reads from the
+# chase camera behind the character.
+AIM_POINT = {'R': Vector((-0.24, 0.0, 1.36)), 'L': Vector((0.24, 0.0, 1.36))}
+HALO_CENTRE = Vector((-0.038, 0.15, 1.98))
+FTWIST = 80.0   # forearm roll at release: + turns the palm inward so the thumb rides on top
+
+CHANNELS = ('wb', 'swing', 'adduct', 'elbow', 'ftwist', 'wx', 'wy', 'ic', 'ix', 'fist', 'thumb',
+            'spine', 'chest', 'pitch', 'roll', 'nod', 'kick', 'st')
+# 'st' (0..1) adds the Idle stand upper body (air.STAND_ARMS, spine/neck/head as air.stand_pose): the first and
+# last frames are the stand, so the upper-body layer fades in/out from Idle/locomotion without dipping to bind rest.
+# Off until the 10 EXPANDED layering pass: with STAND_LAYER False the gestures start/end on bind rest (v18 clips).
+STAND_LAYER = False
+STAND_UPPER = dict(spine=1.0, neck=-2.0, head=-1.0)
+ST_END = 1.0 if STAND_LAYER else 0.0
+
+
+def key(**kw):
+    return {c: kw.get(c, 0.0) for c in CHANNELS}
+
+
+# Right-hand convention; body yaw (spine/chest) is + toward the character's left, which brings the
+# right shoulder forward, and is mirrored for the left-hand shot. roll: + side-bends the torso toward
+# the off-hand side (weight comes across into the shot); - loads onto the casting side.
+AIMED = dict(wb=1.0, elbow=6, ftwist=FTWIST, ic=-4, ix=1.0, fist=80, thumb=28)
+REST_HAND = dict(ic=18.5, fist=23.0, thumb=12.0)   # ~ Poser.curl(21, 12), the relaxed Idle hand
+IDLE_CURL = (21.0, 12.0)                            # the off hand (Poser.curl fingers, thumb)
+KEYS = {
+    1: key(**REST_HAND, st=ST_END),
+    ANTICIPATION: key(swing=-42, adduct=14, elbow=112, ftwist=55, wx=-25, ic=4, ix=0.35, fist=40, thumb=18,
+                      spine=-4.5, chest=-10, pitch=-3.5, roll=-3.0),
+    RELEASE: key(**AIMED, spine=7, chest=14, pitch=3.5, roll=3.0, nod=4.0, kick=0.25),
+    6: key(**{**AIMED, 'elbow': 10, 'ic': -7}, swing=-6, wx=-8, spine=7.5, chest=15, pitch=0.5, roll=3.6, nod=5.0,
+           kick=1.0),
+    8: key(**{**AIMED, 'elbow': 8}, swing=-1, wx=-2, spine=7, chest=13.5, pitch=2.0, roll=2.8, nod=1.0, kick=-0.35),
+    11: key(**{**AIMED, 'elbow': 14, 'ix': 0.85, 'ic': 4, 'fist': 74}, swing=6, spine=5, chest=10, pitch=1.0, roll=1.6,
+            kick=0.1),
+    N: key(**REST_HAND, st=ST_END),
+}
+HEAD_LAG = 1.5   # frames the head's counter-turn trails the chest (settles exact by the end)
+
+
+def track(f, keys):
+    """Monotone cubic (PCHIP) through {frame: value}: no overshoot, flat at extrema and ends."""
+    ks = sorted(keys.items())
+    if f <= ks[0][0]:
+        return ks[0][1]
+    if f >= ks[-1][0]:
+        return ks[-1][1]
+    xs = [k for k, _ in ks]
+    ys = [v for _, v in ks]
+    d = [(ys[i+1]-ys[i])/(xs[i+1]-xs[i]) for i in range(len(ks)-1)]
+    m = [0.0]*len(ks)
+    for i in range(1, len(ks)-1):
+        if d[i-1]*d[i] > 0:
+            h0, h1 = xs[i]-xs[i-1], xs[i+1]-xs[i]
+            w1, w2 = 2*h1+h0, h1+2*h0
+            m[i] = (w1+w2)/(w1/d[i-1]+w2/d[i])
+    i = max(j for j in range(len(ks)-1) if xs[j] <= f)
+    h = xs[i+1]-xs[i]
+    u = (f-xs[i])/h
+    u2, u3 = u*u, u*u*u
+    return (2*u3-3*u2+1)*ys[i]+(u3-2*u2+u)*h*m[i]+(-2*u3+3*u2)*ys[i+1]+(u3-u2)*h*m[i+1]
+
+
+def channel(f, name):
+    return track(f, {k: v[name] for k, v in KEYS.items()})
+
+
+def curl_bone(p, bone, deg):
+    p.pb[bone].rotation_quaternion = Euler((math.radians(deg), 0, 0)).to_quaternion()
+
+
+def straighten(p, bone, parent, t):
+    """Local rotation (fraction t) that lines `bone` up with `parent`; the distal finger joints are
+    pre-bent sideways, out of the curl plane, so curling alone cannot straighten them."""
+    q = p.r3[bone].col[1].rotation_difference(p.r3[parent].col[1])
+    q = Quaternion().slerp(q, t)
+    r3 = p.r3[bone]
+    return (r3.inverted() @ q.to_matrix() @ r3).to_quaternion()
+
+
+def fingers(p, side, ic, ix, fist, thumb):
+    """ic curls index+middle uniformly, ix (0..1) straightens their distal joints for pointing,
+    fist curls ring+little, thumb folds the thumb over them."""
+    for digit, k in (('index', 1.0), ('middle', 1.1)):
+        for i in range(1, 4):
+            curl_bone(p, f'{side} {digit}.{i}', ic*k*(1.15 if i == 2 else 1.0))
+        b = p.pb[f'{side} {digit}.3']
+        b.rotation_quaternion = straighten(p, b.name, f'{side} {digit}.2', ix) @ b.rotation_quaternion
+    for digit, k in (('ring', 1.0), ('little', 1.1)):
+        for i in range(1, 4):
+            curl_bone(p, f'{side} {digit}.{i}', fist*k*(1.15 if i == 2 else 1.0))
+    for i in range(1, 4):
+        curl_bone(p, f'{side} thumb.{i}', thumb*(0.6 if i == 1 else 1.0))
+
+
+def gesture_pose(p, f, side, base):
+    c = {n: channel(f, n) for n in CHANNELS}
+    yaw = -sign(side)  # + for the right-hand shot
+    twist = c['spine']+c['chest']
+    late = channel(f-HEAD_LAG, 'spine')+channel(f-HEAD_LAG, 'chest')
+    head_twist = late+(twist-late)*ramp(f, N-6, N)
+    st, A, U = c['st'], air.STAND_ARMS, STAND_UPPER
+    p.rot('spine', R(x=0.3*c['pitch']+st*U['spine'], y=yaw*0.5*c['roll'], z=yaw*c['spine']))
+    p.rot('chest', R(x=0.7*c['pitch'], y=yaw*0.5*c['roll'], z=yaw*c['chest']))
+    p.rot('neck', R(x=-0.4*c['pitch']+0.4*c['nod']+st*U['neck'], y=-yaw*0.3*c['roll'], z=-yaw*0.35*head_twist))
+    p.rot('head', R(x=-0.6*c['pitch']+c['nod']+st*U['head'], y=-yaw*0.4*c['roll'], z=-yaw*0.55*head_twist))
+    wb = c['wb']
+    swing = wb*base['swing']+c['swing']+st*A['swing']
+    p.arm(side, swing=swing, adduct=wb*base['adduct']+c['adduct']+st*A['adduct'], elbow=c['elbow']+st*A['elbow'],
+          wrist=(wb*base['wx']+c['wx']+st*A['wrist'], wb*base['wy']+c['wy'], 0.0),
+          forearm_twist=c['ftwist']+st*A['twist'])
+    lift = min(0.0, swing)/90.0   # 0 at rest, -1 with the arm horizontal forward
+    p.rot(f'{side} scapula', R(x=28*lift, z=sign(side)*12*lift))
+    fingers(p, side, c['ic'], c['ix'], c['fist'], c['thumb'])
+    off = 'L' if side == 'R' else 'R'
+    if STAND_LAYER:
+        p.arm(off, swing=A['swing'], adduct=A['adduct'], elbow=A['elbow'], forearm_twist=A['twist'],
+              wrist=(A['wrist'], 0, 0))
+    p.curl(off, *IDLE_CURL)
+    halo(p, f, c['kick'], yaw)
+
+
+def halo(p, f, kick, yaw):
+    """Small pop up/back with a segment flare on release; yaw trails the chest by ~2 frames."""
+    fade = 1.0-ramp(f, N-5, N)
+    lag = (channel(f-2, 'spine')+channel(f-2, 'chest')-channel(f, 'spine')-channel(f, 'chest'))*0.6*fade
+    p.offset('halo root', (0, 0.016*kick, 0.02*kick))
+    p.rot('halo root', R(x=-6*kick, z=yaw*lag))
+    for i in range(1, 5):
+        n = f'halo {i}'
+        d = p.rest[n].translation-HALO_CENTRE
+        d.y = 0
+        p.offset(n, d.normalized()*0.022*max(kick, 0.0))
+
+
+def solve_arm(p, side):
+    """Swing/adduct/wrist bend so the muzzle sits at AIM_POINT (x, z) pointing along TARGET."""
+    goal = AIM_POINT[side]
+    if not hasattr(p, 'handpass'):
+        import handpass
+        p.handpass = handpass.HandPass(p)
+
+    def err(v):
+        base = dict(zip(('swing', 'adduct', 'wx', 'wy'), v))
+        p.reset()
+        p.ik(0.0, 0.0)
+        gesture_pose(p, RELEASE, side, base)
+        p.handpass.apply()   # bake applies it too, and it moves the fingertip muzzle
+        p.update()
+        m = p.world(f'{side} muzzle')
+        d = m.to_3x3().col[1].normalized()
+        miss = Vector((m.translation.x-goal.x, 0.0, m.translation.z-goal.z)).length
+        return math.degrees(d.angle(TARGET))+100.0*miss+0.08*math.hypot(v[2], v[3])
+    best = min(((sw, ad, 0.0, 0.0) for sw in range(-100, -59, 10) for ad in range(10, 61, 10)), key=err)
+    step = 8.0
+    while step > 0.1:
+        cand = [best]
+        for i in range(4):
+            for dv in (-step, step):
+                v = list(best)
+                v[i] += dv
+                cand.append(tuple(v))
+        nb = min(cand, key=err)
+        if nb == best:
+            step *= 0.5
+        best = nb
+    score = err(best)
+    p.reset()
+    return dict(zip(('swing', 'adduct', 'wx', 'wy'), best)), score
+
+
+def gesture_post(side):
+    def post(p, caps, frames):
+        m = caps[RELEASE][f'{side} muzzle']
+        d = m.to_3x3().col[1].normalized()
+        end = max((caps[frames[-1]][n].translation-p.rest[n].translation).length for n in p.fk)
+        start = max((caps[frames[0]][n].translation-p.rest[n].translation).length for n in p.fk)
+        return {'muzzle_release_pos': [round(v, 3) for v in m.translation],
+                'muzzle_release_dir': [round(v, 3) for v in d],
+                'muzzle_release_angle_to_-Y_deg': round(math.degrees(d.angle(TARGET)), 2),
+                'start_rest_err_m': round(start, 6), 'end_rest_err_m': round(end, 6)}
+    return post
+
+
+# ----------------------------------------------------------------------------- aim
+PITCH_SPLIT = {'pelvis': 6, 'spine': 8, 'chest': 10, 'neck': 18, 'head': 24}    # 66 deg
+YAW_SPLIT = {'spine': 8, 'chest': 12, 'neck': 20, 'head': 26}                   # 66 deg
+AIM_SCAPULA = 6.0   # shoulders rise into an up-aim and settle into a down-aim (deg at full pitch)
+AIMS = {'Aim neutral': (0, 0), 'Aim up': (-1, 0), 'Aim down': (1, 0), 'Aim left': (0, 1), 'Aim right': (0, -1)}
+
+
+def aim_pose(pitch, yaw):
+    def fn(p, f):
+        pp = pitch*PITCH_SPLIT['pelvis']
+        p.pelvis((0, 0, 0), R(x=pp))
+        for s in ('L', 'R'):
+            p.rot(f'{s} thigh', R(x=-pp))     # legs keep their world orientation under the pelvis pitch
+            p.rot(f'{s} scapula', R(y=sign(s)*pitch*AIM_SCAPULA))   # elevation, as presentation's `lift`
+            p.curl(s, *IDLE_CURL)                 # same in every aim, so the additive hand delta stays zero
+        for b in ('spine', 'chest', 'neck', 'head'):
+            p.rot(b, R(x=pitch*PITCH_SPLIT[b], z=yaw*YAW_SPLIT[b]))
+    return fn
+
+
+def build(p):
+    out = []
+    for side, title in (('R', 'Arc Bolt right'), ('L', 'Arc Bolt left')):
+        base, score = solve_arm(p, side)
+        print(f'PRIMARY arm {side} {base} score {score:.3f}', flush=True)
+        out.append(bake(p, title, list(range(1, N+1)), lambda q, f, s=side, b=base: gesture_pose(q, f, s, b), False,
+                        markers={'Anticipation': ANTICIPATION, 'Bolt release': RELEASE, 'Recovered': N},
+                        meta={'kind': 'gesture', 'hand': side, 'muzzle': f'{side} muzzle',
+                              'finger_accents': [ANTICIPATION, RELEASE],
+                              'arm_release': {k: round(v, 2) for k, v in base.items()}},
+                        post=gesture_post(side), legs_ik=0.0))
+    for title, (pitch, yaw) in AIMS.items():
+        total = {'pitch_up_deg': -pitch*sum(PITCH_SPLIT.values()), 'yaw_left_deg': yaw*sum(YAW_SPLIT.values())}
+        out.append(bake(p, title, [1, 2], aim_pose(pitch, yaw), False,
+                        meta={'kind': 'aim', 'additive_reference': 'Aim neutral', **total}, legs_ik=0.0))
+    return out

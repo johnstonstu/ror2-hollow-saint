@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hollow Saint — Higgsfield comparison</title>
+<style>
+:root{font:16px system-ui,sans-serif;color:#eff3ef;background:#171d21;color-scheme:dark}body{max-width:1500px;margin:auto;padding:26px}h1{font-size:27px;font-weight:600;margin-bottom:10px}p{max-width:1000px;line-height:1.6;color:#bccbce}strong{color:#eff3ef}a{color:#81d9e7}label{margin-right:20px}select{padding:9px;background:#26353b;color:white;border:1px solid #53636c;border-radius:6px;font:inherit}.controls{margin:22px 0}main{display:grid;grid-template-columns:1fr 1fr;gap:18px}figure{margin:0;background:#2c2d2b;border:1px solid #53605d;border-radius:10px;overflow:hidden}figcaption{padding:16px}img{width:100%;display:block;object-fit:contain}main img{height:76vh}figcaption small{display:block;color:#afc4c6;margin-top:5px}details{margin:24px 0;background:#253036;border-radius:8px;padding:16px}summary{cursor:pointer}details img{max-height:100vh;margin-top:16px}footer{font-size:13px;color:#a9bdc3;margin-top:24px}@media(max-width:800px){body{padding:14px}main{grid-template-columns:1fr}main img{height:auto}}
+</style>
+<h1>Hollow Saint / Which starting model?</h1>
+<p><strong>Recommendation: use the Higgsfield body as the visual starting point.</strong> Its armor contours, mask, feet and compact torso better match LEFT A. Adapt the local model's separate halo and articulated hands, and correct the generated rear torso. Neither asset is rigged or tested in game.</p>
+<div class="controls"><label>View <select id="view"><option value="hero">Three quarter</option><option value="front">Front</option><option value="side">Side</option><option value="back">Back</option><option value="gameplay-distance">Simulated gameplay distance</option></select></label><label><input id="clay" type="checkbox"> Inspect Higgsfield without texture</label></div>
+<main>
+<figure><figcaption>Higgsfield SAM3D starter<small>Closer shape • fused hands/halo • duplicated front on back</small></figcaption><a id="hfLink"><img id="hf" alt="Actual supplied Higgsfield mesh rendered in Blender"></a></figure>
+<figure><figcaption>Local Blender • pass 6<small>Separate editable parts • cleaner materials • less faithful contours</small></figcaption><a id="localLink"><img id="local" alt="Actual locally constructed Hollow Saint pass 6"></a></figure>
+</main>
+<details><summary>Selected concept — LEFT A / Cracked Icon</summary><img src="../concepts/hollow-saint-variations-v1.png" alt="Original selection sheet; left option A is selected"></details>
+<p><a href="comparison.md">Detailed findings</a> · <a href="higgsfield-sam3d-review.blend">Imported Higgsfield review scene</a> · <a href="../refinement/hollow-saint-refinement-v6.blend">Editable local pass 6</a> · <a href="../refinement/review.html">Earlier local passes</a></p>
+<footer>Actual mesh renders with the same studio and cameras; overall height normalized. Texture-free inspection uses the three-quarter camera. Distant views are simulated Blender cameras, not game screenshots. Original GLB remains unchanged.</footer>
+<script>
+const view=document.getElementById('view'),clay=document.getElementById('clay');
+function update(){
+  if(clay.checked)view.value='hero';
+  view.disabled=clay.checked;
+  const hf='higgsfield-sam3d-'+(clay.checked?'clay':view.value)+'.png';
+  const local='../refinement/hollow-saint-refinement-v6-'+view.value+'.png';
+  document.getElementById('hf').src=hf;document.getElementById('hfLink').href=hf;
+  document.getElementById('local').src=local;document.getElementById('localLink').href=local;
+}
+view.addEventListener('change',update);clay.addEventListener('change',update);update();
+</script></html>

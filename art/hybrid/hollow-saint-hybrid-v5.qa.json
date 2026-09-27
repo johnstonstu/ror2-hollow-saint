@@ -1,0 +1,356 @@
+{
+  "saved_scene": "C:\\Users\\stuwj\\Documents\\Coding\\ror2-lightning\\art\\hybrid\\hollow-saint-hybrid-v5.blend",
+  "result": "PASS",
+  "preserved_lower_leg_and_foot_unique_vertices": 1226,
+  "maximum_lower_vertex_displacement_m": 0.0,
+  "independent_halo_arcs": 4,
+  "fingers_per_hand": 5,
+  "unchanged_originals": [
+    "output/higgsfield-hollow-saint/hollow-saint-sam3d.glb",
+    "art/refinement/hollow-saint-refinement-v6.blend"
+  ],
+  "review_cameras": [
+    "Front orthographic",
+    "Hero three quarter",
+    "Side orthographic",
+    "Back orthographic",
+    "Simulated gameplay distance"
+  ],
+  "packed_textures": [
+    "Image_0"
+  ],
+  "parts": [
+    {
+      "name": "HF BODY | retained UV sculpt, corrected posterior",
+      "type": "MESH",
+      "evaluated_triangles": 9144
+    },
+    {
+      "name": "HALO | independent copper arc 1",
+      "type": "MESH",
+      "evaluated_triangles": 660
+    },
+    {
+      "name": "HALO 1 | outer lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO 1 | inner lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO | independent copper arc 2",
+      "type": "MESH",
+      "evaluated_triangles": 660
+    },
+    {
+      "name": "HALO 2 | outer lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO 2 | inner lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO | independent copper arc 3",
+      "type": "MESH",
+      "evaluated_triangles": 660
+    },
+    {
+      "name": "HALO 3 | outer lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO 3 | inner lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO | independent copper arc 4",
+      "type": "MESH",
+      "evaluated_triangles": 660
+    },
+    {
+      "name": "HALO 4 | outer lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO 4 | inner lip",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    },
+    {
+      "name": "HALO | geometric gap conductor 73.5",
+      "type": "CURVE",
+      "evaluated_triangles": 12
+    },
+    {
+      "name": "HALO | geometric gap conductor 286.5",
+      "type": "CURVE",
+      "evaluated_triangles": 12
+    },
+    {
+      "name": "YOKE | fitted branch -1",
+      "type": "CURVE",
+      "evaluated_triangles": 24
+    },
+    {
+      "name": "YOKE | fitted branch 1",
+      "type": "CURVE",
+      "evaluated_triangles": 24
+    },
+    {
+      "name": "L HAND | wrist cuff",
+      "type": "MESH",
+      "evaluated_triangles": 92
+    },
+    {
+      "name": "L HAND | tapered sculpted palm",
+      "type": "MESH",
+      "evaluated_triangles": 92
+    },
+    {
+      "name": "L HAND | index segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | index segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | index segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | index knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "L HAND | middle segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | middle segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | middle segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | middle knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "L HAND | ring segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | ring segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | ring segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | ring knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "L HAND | little segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | little segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | little segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | little knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "L HAND | thumb segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | thumb segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | thumb segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "L HAND | small wrist conductor",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "R HAND | wrist cuff",
+      "type": "MESH",
+      "evaluated_triangles": 92
+    },
+    {
+      "name": "R HAND | tapered sculpted palm",
+      "type": "MESH",
+      "evaluated_triangles": 92
+    },
+    {
+      "name": "R HAND | index segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | index segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | index segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | index knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "R HAND | middle segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | middle segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | middle segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | middle knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "R HAND | ring segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | ring segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | ring segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | ring knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "R HAND | little segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | little segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | little segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | little knuckle",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "R HAND | thumb segment 1",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | thumb segment 2",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | thumb segment 3",
+      "type": "MESH",
+      "evaluated_triangles": 316
+    },
+    {
+      "name": "R HAND | small wrist conductor",
+      "type": "MESH",
+      "evaluated_triangles": 80
+    },
+    {
+      "name": "L BACK | small scapula shell",
+      "type": "MESH",
+      "evaluated_triangles": 284
+    },
+    {
+      "name": "R BACK | small scapula shell",
+      "type": "MESH",
+      "evaluated_triangles": 284
+    },
+    {
+      "name": "BACK | small dark node housing",
+      "type": "MESH",
+      "evaluated_triangles": 380
+    },
+    {
+      "name": "BACK | small recessed charge node",
+      "type": "MESH",
+      "evaluated_triangles": 380
+    },
+    {
+      "name": "BACK | seated spine conductor",
+      "type": "CURVE",
+      "evaluated_triangles": 288
+    }
+  ],
+  "evaluated_triangles": 26424,
+  "scope": "Saved-scene integrity only; visual audit, rigging and game tests separate."
+}

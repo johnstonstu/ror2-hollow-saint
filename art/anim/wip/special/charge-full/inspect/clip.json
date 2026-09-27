@@ -1,0 +1,61 @@
+{
+  "title": "Charge full",
+  "frames": [
+    1,
+    25
+  ],
+  "loop": true,
+  "markers": {
+    "Pulse high": 7
+  },
+  "ik_miss_m": 0.0,
+  "max_leg_extension": 0.0,
+  "ik_miss_frames": {},
+  "kind": "gesture",
+  "layer": "upper body (mask excludes pelvis/legs)",
+  "max_arm_raise_deg": 54.6,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "max_ang_vel_deg_f": [
+    8.94,
+    "L hand",
+    10
+  ],
+  "max_ang_acc_deg_f2": [
+    17.63,
+    "L hand",
+    10
+  ],
+  "max_pos_acc_mm_f2": [
+    113.6,
+    "halo 4",
+    10
+  ],
+  "arc_signed_min_mm": -10.1,
+  "arc_signed_frame": 14,
+  "arc_signed_rest_mm": -9.7,
+  "arc_verts_inside_max": 64,
+  "arc_verts_inside_frame": 8,
+  "arc_verts_inside_rest": 23,
+  "hand_chest_min_mm": 221.9,
+  "hand_chest_frame": 15,
+  "pauldron_follow_err_deg": 10.97,
+  "module": "special",
+  "action": "HS_anim | Charge full",
+  "planted_frame_pairs": 48,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "chase",
+    "side"
+  ],
+  "rendered_frames": [
+    1,
+    11
+  ]
+}

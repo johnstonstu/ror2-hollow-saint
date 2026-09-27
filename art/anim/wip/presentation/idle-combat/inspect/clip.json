@@ -1,0 +1,41 @@
+{
+  "title": "Idle combat",
+  "frames": [
+    1,
+    49
+  ],
+  "loop": true,
+  "markers": {
+    "Inhale": 1
+  },
+  "ik_miss_m": 5e-05,
+  "max_leg_extension": 0.8712,
+  "ik_miss_frames": {},
+  "kind": "idle",
+  "speed_mps": 0.0,
+  "hand": "R",
+  "halo_max_offset_m": 0.0197,
+  "max_arm_raise_deg": 40.7,
+  "max_knee_out_m": 0.0761,
+  "bake_error_m": 1e-06,
+  "module": "presentation",
+  "action": "HS_anim | Idle combat",
+  "planted_frame_pairs": 96,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front"
+  ],
+  "rendered_frames": [
+    1,
+    15,
+    22,
+    27
+  ]
+}

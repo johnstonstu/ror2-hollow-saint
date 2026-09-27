@@ -1,0 +1,82 @@
+{
+  "version": "v17",
+  "new_objects": 83,
+  "skinned": 61,
+  "bone_parented": 22,
+  "actions": [
+    {
+      "name": "HS_v10 | Arc Bolt - two finger snap",
+      "frames": 8,
+      "max_surface_drift_m": 0.00502,
+      "worst_object": "R ARM | V15 outer forearm conductor",
+      "shell_max_drift_m": 0.07061,
+      "shell_worst": [
+        "R SHOULDER | V17 pauldron upper",
+        9
+      ]
+    },
+    {
+      "name": "HS_v10 | Arc Step - in place dash",
+      "frames": 8,
+      "max_surface_drift_m": 0.01161,
+      "worst_object": "ABDOMEN | V17 segment plate 2",
+      "shell_max_drift_m": 0.04463,
+      "shell_worst": [
+        "L SHOULDER | V17 pauldron upper",
+        9
+      ]
+    },
+    {
+      "name": "HS_v10 | Charge - gathering current",
+      "frames": 9,
+      "max_surface_drift_m": 0.004,
+      "worst_object": "ABDOMEN | V17 segment plate 2",
+      "shell_max_drift_m": 0.04934,
+      "shell_worst": [
+        "L SHOULDER | V17 pauldron upper",
+        13
+      ]
+    },
+    {
+      "name": "HS_v10 | Discharge - break the seal",
+      "frames": 11,
+      "max_surface_drift_m": 0.00425,
+      "worst_object": "R ARM | V15 outer forearm conductor",
+      "shell_max_drift_m": 0.0652,
+      "shell_worst": [
+        "L SHOULDER | V17 pauldron upper",
+        22
+      ]
+    },
+    {
+      "name": "HS_v10 | Idle - contained storm",
+      "frames": 9,
+      "max_surface_drift_m": 0.00192,
+      "worst_object": "CHEST | V17 rib plate L",
+      "shell_max_drift_m": 0.00375,
+      "shell_worst": [
+        "R SHOULDER | V17 pauldron upper",
+        13
+      ]
+    },
+    {
+      "name": "HS_v10 | Open Circuit - unfolding crown",
+      "frames": 15,
+      "max_surface_drift_m": 0.00698,
+      "worst_object": "R ARM | V15 outer forearm conductor",
+      "shell_max_drift_m": 0.04397,
+      "shell_worst": [
+        "L SHOULDER | V17 pauldron upper",
+        61
+      ]
+    }
+  ],
+  "errors": [],
+  "surface_drift_limit_m": 0.012,
+  "shells": [
+    "L SHOULDER | V17 pauldron upper",
+    "R SHOULDER | V17 pauldron upper"
+  ],
+  "shell_note": "Rigid shoulder shells are expected to move relative to skin; drift is informational and clipping is checked visually.",
+  "status": "PASS"
+}

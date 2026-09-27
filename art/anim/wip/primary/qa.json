@@ -1,0 +1,1142 @@
+[
+  {
+    "title": "Arc Bolt right",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "Anticipation": 3,
+      "Bolt release": 5,
+      "Recovered": 20
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "hand": "R",
+    "muzzle": "R muzzle",
+    "finger_accents": [
+      3,
+      5
+    ],
+    "arm_release": {
+      "swing": -71.88,
+      "adduct": 11.25,
+      "wx": 18.38,
+      "wy": -14.88
+    },
+    "orient_roll_max_deg": {
+      "L": 10.6,
+      "R": 34.8
+    },
+    "orient_infeasible": 0,
+    "muzzle_release_pos": [
+      -0.241,
+      -0.924,
+      1.359
+    ],
+    "muzzle_release_dir": [
+      -0.0,
+      -1.0,
+      0.001
+    ],
+    "muzzle_release_angle_to_-Y_deg": 0.06,
+    "start_rest_err_m": 0.09226,
+    "end_rest_err_m": 0.09226,
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Arc Bolt right",
+    "planted_frame_pairs": 38,
+    "max_planted_slide_m_per_frame": 0.0,
+    "min_body_z": 0.008,
+    "min_toe_tip_z": 0.02,
+    "finite": true,
+    "arm_clearance": {
+      "L": {
+        "min_m": 0.0464,
+        "frame": 6,
+        "part": "little segment 3",
+        "against": "L thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          87,
+          105,
+          111,
+          84,
+          55,
+          46,
+          49,
+          54,
+          57,
+          61,
+          66,
+          69,
+          69,
+          70,
+          72,
+          75,
+          79,
+          83,
+          86,
+          87
+        ],
+        "hits": {}
+      },
+      "R": {
+        "min_m": 0.101,
+        "frame": 18,
+        "part": "forearm",
+        "against": "spine",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          103,
+          107,
+          134,
+          209,
+          214,
+          198,
+          202,
+          209,
+          214,
+          218,
+          220,
+          224,
+          235,
+          185,
+          144,
+          124,
+          110,
+          101,
+          102,
+          103
+        ],
+        "hits": {}
+      }
+    },
+    "arm_clear_min_m": 0.0464,
+    "arm_clear_ok": null,
+    "hand_qa": {
+      "violations": {},
+      "penetration_mm": {},
+      "max_penetration_mm": 0.4,
+      "finger_pops_deg_f2": [
+        [
+          3.95,
+          "R little.2",
+          12
+        ],
+        [
+          3.2,
+          "R little.2",
+          19
+        ],
+        [
+          2.91,
+          "R ring.2",
+          19
+        ],
+        [
+          2.8,
+          "R little.1",
+          19
+        ]
+      ],
+      "accent_pops_deg_f2": [
+        [
+          19.5,
+          "R ring.2",
+          5
+        ],
+        [
+          18.72,
+          "R little.3",
+          5
+        ]
+      ],
+      "wrist": {
+        "L": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 2,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": -6.4,
+          "forearm_roll_frame": 5
+        },
+        "R": {
+          "hand_twist_deg": 6.2,
+          "hand_twist_frame": 3,
+          "hand_bend_max_deg": 24.2,
+          "forearm_roll_deg": -80.0,
+          "forearm_roll_frame": 6
+        }
+      },
+      "flex_range": {
+        "L": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        },
+        "R": {
+          "thumb_min": 7.2,
+          "thumb_max": 28.0,
+          "finger_min": -5.8,
+          "finger_max": 103.8
+        }
+      }
+    },
+    "hand_qa_summary": {
+      "ok": true,
+      "violations": 0,
+      "pen_over": 0,
+      "worst_pop_deg_f2": 3.95,
+      "worst_pop": "R little.2 f12",
+      "worst_accent_pop_deg_f2": 19.5,
+      "max_pen_mm": 0.4
+    },
+    "hand_contact": {},
+    "hand_contact_max_mm": 0.0,
+    "hand_contact_worst": " f0",
+    "hand_contact_ok": true,
+    "hand_orient": {
+      "L": {
+        "gated_frames": 20,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.14,
+        "worst_thumb_up_f": 6,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 11,
+        "thumb_up_at_worst_palm": 0.15
+      },
+      "R": {
+        "gated_frames": 19,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.16,
+        "worst_thumb_up_f": 3,
+        "worst_palm_fwd": -0.09,
+        "worst_palm_fwd_f": 9,
+        "thumb_up_at_worst_palm": 0.58
+      }
+    },
+    "hand_orient_ok": true,
+    "status": "PASS"
+  },
+  {
+    "title": "Arc Bolt left",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "Anticipation": 3,
+      "Bolt release": 5,
+      "Recovered": 20
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "hand": "L",
+    "muzzle": "L muzzle",
+    "finger_accents": [
+      3,
+      5
+    ],
+    "arm_release": {
+      "swing": -77.38,
+      "adduct": 5.25,
+      "wx": 14.25,
+      "wy": -17.25
+    },
+    "orient_roll_max_deg": {
+      "L": 31.4,
+      "R": 12.4
+    },
+    "orient_infeasible": 0,
+    "muzzle_release_pos": [
+      0.241,
+      -0.91,
+      1.361
+    ],
+    "muzzle_release_dir": [
+      -0.001,
+      -1.0,
+      -0.0
+    ],
+    "muzzle_release_angle_to_-Y_deg": 0.03,
+    "start_rest_err_m": 0.092165,
+    "end_rest_err_m": 0.092165,
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Arc Bolt left",
+    "planted_frame_pairs": 38,
+    "max_planted_slide_m_per_frame": 0.0,
+    "min_body_z": 0.008,
+    "min_toe_tip_z": 0.02,
+    "finite": true,
+    "arm_clearance": {
+      "L": {
+        "min_m": 0.0783,
+        "frame": 2,
+        "part": "forearm",
+        "against": "L thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          87,
+          78,
+          142,
+          267,
+          251,
+          238,
+          242,
+          248,
+          252,
+          255,
+          257,
+          261,
+          254,
+          208,
+          157,
+          116,
+          91,
+          95,
+          101,
+          87
+        ],
+        "hits": {}
+      },
+      "R": {
+        "min_m": 0.0479,
+        "frame": 6,
+        "part": "little segment 3",
+        "against": "R thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          103,
+          115,
+          128,
+          101,
+          55,
+          48,
+          50,
+          53,
+          56,
+          60,
+          66,
+          71,
+          75,
+          80,
+          87,
+          94,
+          99,
+          101,
+          102,
+          103
+        ],
+        "hits": {}
+      }
+    },
+    "arm_clear_min_m": 0.0479,
+    "arm_clear_ok": null,
+    "hand_qa": {
+      "violations": {},
+      "penetration_mm": {},
+      "max_penetration_mm": 0.4,
+      "finger_pops_deg_f2": [
+        [
+          3.95,
+          "L little.2",
+          12
+        ],
+        [
+          3.2,
+          "L little.2",
+          19
+        ],
+        [
+          2.91,
+          "L ring.2",
+          19
+        ],
+        [
+          2.8,
+          "L little.1",
+          19
+        ]
+      ],
+      "accent_pops_deg_f2": [
+        [
+          19.5,
+          "L ring.2",
+          5
+        ],
+        [
+          18.72,
+          "L little.3",
+          5
+        ]
+      ],
+      "wrist": {
+        "L": {
+          "hand_twist_deg": -6.2,
+          "hand_twist_frame": 3,
+          "hand_bend_max_deg": 24.2,
+          "forearm_roll_deg": 80.0,
+          "forearm_roll_frame": 6
+        },
+        "R": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 4,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": 7.5,
+          "forearm_roll_frame": 5
+        }
+      },
+      "flex_range": {
+        "L": {
+          "thumb_min": 7.2,
+          "thumb_max": 28.0,
+          "finger_min": -5.8,
+          "finger_max": 103.8
+        },
+        "R": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        }
+      }
+    },
+    "hand_qa_summary": {
+      "ok": true,
+      "violations": 0,
+      "pen_over": 0,
+      "worst_pop_deg_f2": 3.95,
+      "worst_pop": "L little.2 f12",
+      "worst_accent_pop_deg_f2": 19.5,
+      "max_pen_mm": 0.4
+    },
+    "hand_contact": {},
+    "hand_contact_max_mm": 0.0,
+    "hand_contact_worst": " f0",
+    "hand_contact_ok": true,
+    "hand_orient": {
+      "L": {
+        "gated_frames": 19,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.18,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": -0.08,
+        "worst_palm_fwd_f": 11,
+        "thumb_up_at_worst_palm": 0.63
+      },
+      "R": {
+        "gated_frames": 20,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.13,
+        "worst_thumb_up_f": 6,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 11,
+        "thumb_up_at_worst_palm": 0.14
+      }
+    },
+    "hand_orient_ok": true,
+    "status": "PASS"
+  },
+  {
+    "title": "Aim neutral",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": 0,
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim neutral",
+    "planted_frame_pairs": 2,
+    "max_planted_slide_m_per_frame": 0.0,
+    "min_body_z": 0.008,
+    "min_toe_tip_z": 0.02,
+    "finite": true,
+    "arm_clearance": {
+      "L": {
+        "min_m": 0.0868,
+        "frame": 2,
+        "part": "little segment 3",
+        "against": "L thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          87,
+          87
+        ],
+        "hits": {}
+      },
+      "R": {
+        "min_m": 0.1029,
+        "frame": 1,
+        "part": "forearm",
+        "against": "spine",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          103,
+          103
+        ],
+        "hits": {}
+      }
+    },
+    "arm_clear_min_m": 0.0868,
+    "arm_clear_ok": null,
+    "hand_qa": {
+      "violations": {},
+      "penetration_mm": {},
+      "max_penetration_mm": 0.4,
+      "finger_pops_deg_f2": [],
+      "accent_pops_deg_f2": [],
+      "wrist": {
+        "L": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": -2.9,
+          "forearm_roll_frame": 1
+        },
+        "R": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": 2.9,
+          "forearm_roll_frame": 1
+        }
+      },
+      "flex_range": {
+        "L": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        },
+        "R": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        }
+      }
+    },
+    "hand_qa_summary": {
+      "ok": true,
+      "violations": 0,
+      "pen_over": 0,
+      "worst_pop_deg_f2": 0.0,
+      "worst_pop": " f0",
+      "worst_accent_pop_deg_f2": 0.0,
+      "max_pen_mm": 0.4
+    },
+    "hand_contact": {},
+    "hand_contact_max_mm": 0.0,
+    "hand_contact_worst": " f0",
+    "hand_contact_ok": true,
+    "hand_orient": {
+      "L": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.18,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.18
+      },
+      "R": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.17,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.17
+      }
+    },
+    "hand_orient_ok": true,
+    "status": "PASS"
+  },
+  {
+    "title": "Aim up",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 66,
+    "yaw_left_deg": 0,
+    "orient_roll_max_deg": {
+      "L": 0.1,
+      "R": 0.1
+    },
+    "orient_infeasible": 0,
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim up",
+    "planted_frame_pairs": 2,
+    "max_planted_slide_m_per_frame": 0.0,
+    "min_body_z": 0.0073,
+    "min_toe_tip_z": 0.0193,
+    "finite": true,
+    "arm_clearance": {
+      "L": {
+        "min_m": 0.0937,
+        "frame": 2,
+        "part": "forearm",
+        "against": "L thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          94,
+          94
+        ],
+        "hits": {}
+      },
+      "R": {
+        "min_m": 0.1038,
+        "frame": 1,
+        "part": "forearm",
+        "against": "R thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          104,
+          104
+        ],
+        "hits": {}
+      }
+    },
+    "arm_clear_min_m": 0.0937,
+    "arm_clear_ok": null,
+    "hand_qa": {
+      "violations": {},
+      "penetration_mm": {},
+      "max_penetration_mm": 0.4,
+      "finger_pops_deg_f2": [],
+      "accent_pops_deg_f2": [],
+      "wrist": {
+        "L": {
+          "hand_twist_deg": -0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": -0.1,
+          "forearm_roll_frame": 1
+        },
+        "R": {
+          "hand_twist_deg": -0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": 0.0,
+          "forearm_roll_frame": 1
+        }
+      },
+      "flex_range": {
+        "L": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        },
+        "R": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        }
+      }
+    },
+    "hand_qa_summary": {
+      "ok": true,
+      "violations": 0,
+      "pen_over": 0,
+      "worst_pop_deg_f2": 0.0,
+      "worst_pop": " f0",
+      "worst_accent_pop_deg_f2": 0.0,
+      "max_pen_mm": 0.4
+    },
+    "hand_contact": {},
+    "hand_contact_max_mm": 0.0,
+    "hand_contact_worst": " f0",
+    "hand_contact_ok": true,
+    "hand_orient": {
+      "L": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.46,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": 0.01,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.46
+      },
+      "R": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.46,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": 0.01,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.46
+      }
+    },
+    "hand_orient_ok": true,
+    "status": "PASS"
+  },
+  {
+    "title": "Aim down",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": -66,
+    "yaw_left_deg": 0,
+    "orient_roll_max_deg": {
+      "L": 33.5,
+      "R": 41.0
+    },
+    "orient_infeasible": 0,
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim down",
+    "planted_frame_pairs": 2,
+    "max_planted_slide_m_per_frame": 0.0,
+    "min_body_z": 0.0073,
+    "min_toe_tip_z": 0.0193,
+    "finite": true,
+    "arm_clearance": {
+      "L": {
+        "min_m": 0.093,
+        "frame": 1,
+        "part": "forearm",
+        "against": "L thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          93,
+          93
+        ],
+        "hits": {}
+      },
+      "R": {
+        "min_m": 0.0846,
+        "frame": 1,
+        "part": "forearm",
+        "against": "spine",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          85,
+          85
+        ],
+        "hits": {}
+      }
+    },
+    "arm_clear_min_m": 0.0846,
+    "arm_clear_ok": null,
+    "hand_qa": {
+      "violations": {},
+      "penetration_mm": {},
+      "max_penetration_mm": 0.4,
+      "finger_pops_deg_f2": [],
+      "accent_pops_deg_f2": [],
+      "wrist": {
+        "L": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": -20.1,
+          "forearm_roll_frame": 1
+        },
+        "R": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": 24.9,
+          "forearm_roll_frame": 1
+        }
+      },
+      "flex_range": {
+        "L": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        },
+        "R": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        }
+      }
+    },
+    "hand_qa_summary": {
+      "ok": true,
+      "violations": 0,
+      "pen_over": 0,
+      "worst_pop_deg_f2": 0.0,
+      "worst_pop": " f0",
+      "worst_accent_pop_deg_f2": 0.0,
+      "max_pen_mm": 0.4
+    },
+    "hand_contact": {},
+    "hand_contact_max_mm": 0.0,
+    "hand_contact_worst": " f0",
+    "hand_contact_ok": true,
+    "hand_orient": {
+      "L": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.15,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": 0.32,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.15
+      },
+      "R": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.15,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": 0.45,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.15
+      }
+    },
+    "hand_orient_ok": true,
+    "status": "PASS"
+  },
+  {
+    "title": "Aim left",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": 66,
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim left",
+    "planted_frame_pairs": 2,
+    "max_planted_slide_m_per_frame": 0.0,
+    "min_body_z": 0.008,
+    "min_toe_tip_z": 0.02,
+    "finite": true,
+    "arm_clearance": {
+      "L": {
+        "min_m": 0.0774,
+        "frame": 2,
+        "part": "little segment 3",
+        "against": "L thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          77,
+          77
+        ],
+        "hits": {}
+      },
+      "R": {
+        "min_m": 0.1237,
+        "frame": 1,
+        "part": "forearm",
+        "against": "spine",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          124,
+          124
+        ],
+        "hits": {}
+      }
+    },
+    "arm_clear_min_m": 0.0774,
+    "arm_clear_ok": null,
+    "hand_qa": {
+      "violations": {},
+      "penetration_mm": {},
+      "max_penetration_mm": 0.4,
+      "finger_pops_deg_f2": [],
+      "accent_pops_deg_f2": [],
+      "wrist": {
+        "L": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": -2.9,
+          "forearm_roll_frame": 1
+        },
+        "R": {
+          "hand_twist_deg": 0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": 2.9,
+          "forearm_roll_frame": 1
+        }
+      },
+      "flex_range": {
+        "L": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        },
+        "R": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        }
+      }
+    },
+    "hand_qa_summary": {
+      "ok": true,
+      "violations": 0,
+      "pen_over": 0,
+      "worst_pop_deg_f2": 0.0,
+      "worst_pop": " f0",
+      "worst_accent_pop_deg_f2": 0.0,
+      "max_pen_mm": 0.4
+    },
+    "hand_contact": {},
+    "hand_contact_max_mm": 0.0,
+    "hand_contact_worst": " f0",
+    "hand_contact_ok": true,
+    "hand_orient": {
+      "L": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.18,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.18
+      },
+      "R": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.17,
+        "worst_thumb_up_f": 2,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 2,
+        "thumb_up_at_worst_palm": 0.17
+      }
+    },
+    "hand_orient_ok": true,
+    "status": "PASS"
+  },
+  {
+    "title": "Aim right",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": -66,
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim right",
+    "planted_frame_pairs": 2,
+    "max_planted_slide_m_per_frame": 0.0,
+    "min_body_z": 0.008,
+    "min_toe_tip_z": 0.02,
+    "finite": true,
+    "arm_clearance": {
+      "L": {
+        "min_m": 0.1101,
+        "frame": 1,
+        "part": "forearm",
+        "against": "L thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          110,
+          110
+        ],
+        "hits": {}
+      },
+      "R": {
+        "min_m": 0.078,
+        "frame": 1,
+        "part": "little segment 3",
+        "against": "R thigh",
+        "frames_under_min": 0,
+        "per_frame_mm": [
+          78,
+          78
+        ],
+        "hits": {}
+      }
+    },
+    "arm_clear_min_m": 0.078,
+    "arm_clear_ok": null,
+    "hand_qa": {
+      "violations": {},
+      "penetration_mm": {},
+      "max_penetration_mm": 0.4,
+      "finger_pops_deg_f2": [],
+      "accent_pops_deg_f2": [],
+      "wrist": {
+        "L": {
+          "hand_twist_deg": -0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": -2.9,
+          "forearm_roll_frame": 1
+        },
+        "R": {
+          "hand_twist_deg": -0.0,
+          "hand_twist_frame": 1,
+          "hand_bend_max_deg": 0.0,
+          "forearm_roll_deg": 2.9,
+          "forearm_roll_frame": 1
+        }
+      },
+      "flex_range": {
+        "L": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        },
+        "R": {
+          "thumb_min": 12.0,
+          "thumb_max": 12.0,
+          "finger_min": 18.5,
+          "finger_max": 60.9
+        }
+      }
+    },
+    "hand_qa_summary": {
+      "ok": true,
+      "violations": 0,
+      "pen_over": 0,
+      "worst_pop_deg_f2": 0.0,
+      "worst_pop": " f0",
+      "worst_accent_pop_deg_f2": 0.0,
+      "max_pen_mm": 0.4
+    },
+    "hand_contact": {},
+    "hand_contact_max_mm": 0.0,
+    "hand_contact_worst": " f0",
+    "hand_contact_ok": true,
+    "hand_orient": {
+      "L": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.18,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.18
+      },
+      "R": {
+        "gated_frames": 2,
+        "fail_frames": "",
+        "wrong_handed_frames": "",
+        "swept_back_frames": "",
+        "worst_thumb_up": 0.17,
+        "worst_thumb_up_f": 1,
+        "worst_palm_fwd": -0.02,
+        "worst_palm_fwd_f": 1,
+        "thumb_up_at_worst_palm": 0.17
+      }
+    },
+    "hand_orient_ok": true,
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,222 @@
+{
+  "title": "Run forward",
+  "frames": [
+    1,
+    17
+  ],
+  "loop": true,
+  "markers": {
+    "L contact": 1,
+    "R contact": 9
+  },
+  "ik_miss_m": 6e-05,
+  "max_leg_extension": 0.9548,
+  "max_leg_extension_at": "L16",
+  "ik_miss_at": "R3",
+  "ik_miss_frames": {},
+  "speed_mps": 6.0,
+  "meters_per_cycle": 4.0,
+  "stance": 0.21,
+  "kind": "locomotion",
+  "orient_roll_max_deg": {
+    "L": 87.5,
+    "R": 94.1
+  },
+  "orient_infeasible": 0,
+  "halo_max_offset_m": 0.0244,
+  "vfx_peak": {
+    "hs_glow": 0.0,
+    "hs_jet": 0.0,
+    "hs_spark_L": 0.445,
+    "hs_spark_R": 0.445,
+    "hs_jet_dir": 12.0
+  },
+  "bake_error_m": 2e-06,
+  "bake_error_deg": 0.0,
+  "module": "run",
+  "action": "HS_anim | Run forward",
+  "planted_frame_pairs": 6,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.0096,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0136,
+      "frame": 6,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        131,
+        129,
+        106,
+        65,
+        15,
+        14,
+        44,
+        109,
+        139,
+        96,
+        68,
+        59,
+        44,
+        57,
+        65,
+        103,
+        131
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0397,
+      "frame": 13,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        145,
+        119,
+        106,
+        100,
+        69,
+        57,
+        71,
+        83,
+        93,
+        94,
+        71,
+        52,
+        40,
+        50,
+        81,
+        125,
+        145
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0136,
+  "arm_clear_ok": true,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.0,
+    "finger_pops_deg_f2": [
+      [
+        0.0,
+        "R thumb.3",
+        16
+      ],
+      [
+        0.0,
+        "R thumb.3",
+        15
+      ],
+      [
+        0.0,
+        "R thumb.3",
+        14
+      ],
+      [
+        0.0,
+        "R thumb.3",
+        13
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": -1.9,
+        "hand_twist_frame": 11,
+        "hand_bend_max_deg": 7.7,
+        "forearm_roll_deg": 55.0,
+        "forearm_roll_frame": 13
+      },
+      "R": {
+        "hand_twist_deg": 1.9,
+        "hand_twist_frame": 3,
+        "hand_bend_max_deg": 7.7,
+        "forearm_roll_deg": -55.0,
+        "forearm_roll_frame": 6
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 22.0,
+        "thumb_max": 22.0,
+        "finger_min": 38.7,
+        "finger_max": 74.2
+      },
+      "R": {
+        "thumb_min": 22.0,
+        "thumb_max": 22.0,
+        "finger_min": 38.7,
+        "finger_max": 74.2
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 0.0,
+    "worst_pop": "R thumb.3 f16",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.0
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "hand_orient": {
+    "L": {
+      "gated_frames": 4,
+      "fail_frames": "",
+      "wrong_handed_frames": "",
+      "swept_back_frames": "",
+      "worst_thumb_up": 0.16,
+      "worst_thumb_up_f": 16,
+      "worst_palm_fwd": 0.11,
+      "worst_palm_fwd_f": 16,
+      "thumb_up_at_worst_palm": 0.16
+    },
+    "R": {
+      "gated_frames": 5,
+      "fail_frames": "",
+      "wrong_handed_frames": "",
+      "swept_back_frames": "",
+      "worst_thumb_up": 0.18,
+      "worst_thumb_up_f": 9,
+      "worst_palm_fwd": 0.2,
+      "worst_palm_fwd_f": 1,
+      "thumb_up_at_worst_palm": 0.96
+    }
+  },
+  "hand_orient_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "mesh_objects": 1,
+  "vertices": 6350,
+  "polygons": 8108,
+  "armatures": 0,
+  "dimensions": [
+    0.5213595032691956,
+    0.2397058606147766,
+    1.0000770092010498
+  ],
+  "objects": [
+    "geometry_0"
+  ],
+  "embedded_images": 1
+}

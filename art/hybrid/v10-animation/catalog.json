@@ -1,0 +1,76 @@
+[
+  {
+    "name": "HS_v10 | Idle - contained storm",
+    "title": "Idle - contained storm",
+    "end": 49,
+    "loop": true,
+    "events": {
+      "Inhale": 13,
+      "Exhale": 37
+    },
+    "preview": 13
+  },
+  {
+    "name": "HS_v10 | Arc Bolt - two finger snap",
+    "title": "Arc Bolt - two finger snap",
+    "end": 25,
+    "loop": false,
+    "events": {
+      "Anticipation": 5,
+      "Bolt release": 9,
+      "Recoil": 12,
+      "Recovered": 25
+    },
+    "preview": 9
+  },
+  {
+    "name": "HS_v10 | Charge - gathering current",
+    "title": "Charge - gathering current",
+    "end": 49,
+    "loop": true,
+    "events": {
+      "Pulse high": 13,
+      "Pulse low": 37
+    },
+    "preview": 13
+  },
+  {
+    "name": "HS_v10 | Discharge - break the seal",
+    "title": "Discharge - break the seal",
+    "end": 49,
+    "loop": false,
+    "events": {
+      "Gather": 13,
+      "Release": 22,
+      "Settle": 32,
+      "Recovered": 49
+    },
+    "preview": 22
+  },
+  {
+    "name": "HS_v10 | Arc Step - in place dash",
+    "title": "Arc Step - in place dash",
+    "end": 25,
+    "loop": false,
+    "events": {
+      "Compress": 6,
+      "Dash start": 9,
+      "Dash end": 15,
+      "Recovered": 25
+    },
+    "preview": 10
+  },
+  {
+    "name": "HS_v10 | Open Circuit - unfolding crown",
+    "title": "Open Circuit - unfolding crown",
+    "end": 73,
+    "loop": false,
+    "events": {
+      "Unfold": 18,
+      "Crown active": 30,
+      "Recall": 49,
+      "Recovered": 73
+    },
+    "preview": 30
+  }
+]

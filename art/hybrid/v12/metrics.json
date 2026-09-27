@@ -1,0 +1,26 @@
+{
+  "source": "art\\hybrid\\hollow-saint-hybrid-v11.blend",
+  "changes": [
+    "Broad faceted ivory pauldrons over the shoulder caps (flat top sloping outward, peaked outer corner, hanging outer face), chest-to-upperarm weight blend"
+  ],
+  "pauldron": {
+    "L": {
+      "radii_m": [
+        0.157,
+        0.106,
+        0.146
+      ],
+      "enclose_growth": 1.198
+    },
+    "R": {
+      "radii_m": [
+        0.146,
+        0.102,
+        0.141
+      ],
+      "enclose_growth": 1.158
+    }
+  },
+  "render_device": "OPTIX",
+  "status": "Visual fidelity study; renders are Blender studio evidence only, no game test"
+}

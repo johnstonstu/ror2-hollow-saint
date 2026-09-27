@@ -1,0 +1,321 @@
+{
+ "tag": "cbase",
+ "fix": false,
+ "region_verts": {
+  "L": 479,
+  "R": 449
+ },
+ "sweep": [],
+ "clips": [
+  {
+   "clip": "Discharge",
+   "frame": 5,
+   "L": {
+    "raise_deg": 72.1,
+    "arm_elevation_deg": -53.2,
+    "stretched_1.35": 41,
+    "stretched_2": 30,
+    "compressed_0.6": 0,
+    "max_stretch": 26.29,
+    "min_ratio": 0.78,
+    "collapsed_faces": 0,
+    "flipped_faces": 4
+   },
+   "R": {
+    "raise_deg": 46.4,
+    "arm_elevation_deg": -62.5,
+    "stretched_1.35": 56,
+    "stretched_2": 35,
+    "compressed_0.6": 3,
+    "max_stretch": 10.91,
+    "min_ratio": 0.2,
+    "collapsed_faces": 1,
+    "flipped_faces": 3
+   }
+  },
+  {
+   "clip": "Discharge",
+   "frame": 9,
+   "L": {
+    "raise_deg": 31.3,
+    "arm_elevation_deg": -21.3,
+    "stretched_1.35": 15,
+    "stretched_2": 5,
+    "compressed_0.6": 4,
+    "max_stretch": 11.15,
+    "min_ratio": 0.47,
+    "collapsed_faces": 0,
+    "flipped_faces": 10
+   },
+   "R": {
+    "raise_deg": 31.2,
+    "arm_elevation_deg": -21.4,
+    "stretched_1.35": 31,
+    "stretched_2": 5,
+    "compressed_0.6": 16,
+    "max_stretch": 5.07,
+    "min_ratio": 0.13,
+    "collapsed_faces": 6,
+    "flipped_faces": 4
+   }
+  },
+  {
+   "clip": "Discharge",
+   "frame": 11,
+   "L": {
+    "raise_deg": 28.6,
+    "arm_elevation_deg": -23.9,
+    "stretched_1.35": 15,
+    "stretched_2": 5,
+    "compressed_0.6": 4,
+    "max_stretch": 11.03,
+    "min_ratio": 0.42,
+    "collapsed_faces": 0,
+    "flipped_faces": 10
+   },
+   "R": {
+    "raise_deg": 28.5,
+    "arm_elevation_deg": -24.0,
+    "stretched_1.35": 31,
+    "stretched_2": 5,
+    "compressed_0.6": 15,
+    "max_stretch": 5.15,
+    "min_ratio": 0.13,
+    "collapsed_faces": 4,
+    "flipped_faces": 4
+   }
+  },
+  {
+   "clip": "Open Circuit",
+   "frame": 10,
+   "L": {
+    "raise_deg": 51.3,
+    "arm_elevation_deg": -64.2,
+    "stretched_1.35": 42,
+    "stretched_2": 30,
+    "compressed_0.6": 0,
+    "max_stretch": 25.51,
+    "min_ratio": 0.71,
+    "collapsed_faces": 0,
+    "flipped_faces": 1
+   },
+   "R": {
+    "raise_deg": 7.1,
+    "arm_elevation_deg": -48.5,
+    "stretched_1.35": 20,
+    "stretched_2": 3,
+    "compressed_0.6": 0,
+    "max_stretch": 4.06,
+    "min_ratio": 0.68,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "clip": "Open Circuit",
+   "frame": 16,
+   "L": {
+    "raise_deg": 18.1,
+    "arm_elevation_deg": -56.5,
+    "stretched_1.35": 26,
+    "stretched_2": 3,
+    "compressed_0.6": 1,
+    "max_stretch": 9.54,
+    "min_ratio": 0.53,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 16.8,
+    "arm_elevation_deg": -36.4,
+    "stretched_1.35": 10,
+    "stretched_2": 2,
+    "compressed_0.6": 1,
+    "max_stretch": 2.64,
+    "min_ratio": 0.48,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "clip": "Open Circuit",
+   "frame": 22,
+   "L": {
+    "raise_deg": 27.8,
+    "arm_elevation_deg": -24.7,
+    "stretched_1.35": 8,
+    "stretched_2": 2,
+    "compressed_0.6": 4,
+    "max_stretch": 9.16,
+    "min_ratio": 0.5,
+    "collapsed_faces": 1,
+    "flipped_faces": 6
+   },
+   "R": {
+    "raise_deg": 27.7,
+    "arm_elevation_deg": -24.8,
+    "stretched_1.35": 18,
+    "stretched_2": 4,
+    "compressed_0.6": 12,
+    "max_stretch": 3.83,
+    "min_ratio": 0.31,
+    "collapsed_faces": 1,
+    "flipped_faces": 3
+   }
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frame": 5,
+   "L": {
+    "raise_deg": 9.9,
+    "arm_elevation_deg": -52.2,
+    "stretched_1.35": 11,
+    "stretched_2": 3,
+    "compressed_0.6": 1,
+    "max_stretch": 3.33,
+    "min_ratio": 0.56,
+    "collapsed_faces": 0,
+    "flipped_faces": 4
+   },
+   "R": {
+    "raise_deg": 65.2,
+    "arm_elevation_deg": -16.4,
+    "stretched_1.35": 53,
+    "stretched_2": 25,
+    "compressed_0.6": 3,
+    "max_stretch": 10.78,
+    "min_ratio": 0.14,
+    "collapsed_faces": 2,
+    "flipped_faces": 2
+   }
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frame": 8,
+   "L": {
+    "raise_deg": 9.5,
+    "arm_elevation_deg": -52.3,
+    "stretched_1.35": 11,
+    "stretched_2": 3,
+    "compressed_0.6": 1,
+    "max_stretch": 3.38,
+    "min_ratio": 0.56,
+    "collapsed_faces": 0,
+    "flipped_faces": 4
+   },
+   "R": {
+    "raise_deg": 66.3,
+    "arm_elevation_deg": -15.1,
+    "stretched_1.35": 52,
+    "stretched_2": 25,
+    "compressed_0.6": 3,
+    "max_stretch": 10.94,
+    "min_ratio": 0.11,
+    "collapsed_faces": 1,
+    "flipped_faces": 2
+   }
+  },
+  {
+   "clip": "Arc Bolt left",
+   "frame": 5,
+   "L": {
+    "raise_deg": 71.8,
+    "arm_elevation_deg": -12.1,
+    "stretched_1.35": 52,
+    "stretched_2": 39,
+    "compressed_0.6": 1,
+    "max_stretch": 30.73,
+    "min_ratio": 0.56,
+    "collapsed_faces": 0,
+    "flipped_faces": 2
+   },
+   "R": {
+    "raise_deg": 9.9,
+    "arm_elevation_deg": -52.2,
+    "stretched_1.35": 22,
+    "stretched_2": 5,
+    "compressed_0.6": 4,
+    "max_stretch": 7.34,
+    "min_ratio": 0.22,
+    "collapsed_faces": 1,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "clip": "Select intro",
+   "frame": 11,
+   "L": {
+    "raise_deg": 9.5,
+    "arm_elevation_deg": -45.9,
+    "stretched_1.35": 25,
+    "stretched_2": 10,
+    "compressed_0.6": 0,
+    "max_stretch": 14.86,
+    "min_ratio": 0.83,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 28.3,
+    "arm_elevation_deg": -42.6,
+    "stretched_1.35": 40,
+    "stretched_2": 23,
+    "compressed_0.6": 1,
+    "max_stretch": 11.79,
+    "min_ratio": 0.46,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "clip": "Select intro",
+   "frame": 13,
+   "L": {
+    "raise_deg": 13.3,
+    "arm_elevation_deg": -44.5,
+    "stretched_1.35": 23,
+    "stretched_2": 10,
+    "compressed_0.6": 0,
+    "max_stretch": 14.86,
+    "min_ratio": 0.64,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 36.8,
+    "arm_elevation_deg": -35.2,
+    "stretched_1.35": 39,
+    "stretched_2": 22,
+    "compressed_0.6": 0,
+    "max_stretch": 12.28,
+    "min_ratio": 0.72,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  }
+ ],
+ "rest": {
+  "L": {
+   "raise_deg": 0.0,
+   "arm_elevation_deg": -52.3,
+   "stretched_1.35": 0,
+   "stretched_2": 0,
+   "compressed_0.6": 0,
+   "max_stretch": 1.0,
+   "min_ratio": 1.0,
+   "collapsed_faces": 0,
+   "flipped_faces": 0
+  },
+  "R": {
+   "raise_deg": 0.0,
+   "arm_elevation_deg": -52.3,
+   "stretched_1.35": 0,
+   "stretched_2": 0,
+   "compressed_0.6": 0,
+   "max_stretch": 1.0,
+   "min_ratio": 1.0,
+   "collapsed_faces": 0,
+   "flipped_faces": 0
+  }
+ }
+}

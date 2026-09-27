@@ -1,0 +1,13 @@
+{
+  "title": "Run forward",
+  "step": 8,
+  "rendered_frames": [
+    1,
+    9
+  ],
+  "markers": {
+    "L contact": 1,
+    "R contact": 9
+  },
+  "finger_accents": []
+}

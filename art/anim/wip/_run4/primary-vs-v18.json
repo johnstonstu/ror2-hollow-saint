@@ -1,0 +1,72 @@
+{
+ "HS_anim | Arc Bolt right": {
+  "frames": 20,
+  "ref_frames": 20,
+  "max_pos_mm": 0.0,
+  "pos_at": "",
+  "max_rot_deg": 0.0,
+  "rot_at": "",
+  "max_prop": 0.0,
+  "prop_at": ""
+ },
+ "HS_anim | Arc Bolt left": {
+  "frames": 20,
+  "ref_frames": 20,
+  "max_pos_mm": 0.0,
+  "pos_at": "",
+  "max_rot_deg": 0.0,
+  "rot_at": "",
+  "max_prop": 0.0,
+  "prop_at": ""
+ },
+ "HS_anim | Aim neutral": {
+  "frames": 2,
+  "ref_frames": 2,
+  "max_pos_mm": 0.0,
+  "pos_at": "",
+  "max_rot_deg": 0.0,
+  "rot_at": "",
+  "max_prop": 0.0,
+  "prop_at": ""
+ },
+ "HS_anim | Aim up": {
+  "frames": 2,
+  "ref_frames": 2,
+  "max_pos_mm": 0.0,
+  "pos_at": "",
+  "max_rot_deg": 0.0,
+  "rot_at": "",
+  "max_prop": 0.0,
+  "prop_at": ""
+ },
+ "HS_anim | Aim down": {
+  "frames": 2,
+  "ref_frames": 2,
+  "max_pos_mm": 0.0,
+  "pos_at": "",
+  "max_rot_deg": 0.0,
+  "rot_at": "",
+  "max_prop": 0.0,
+  "prop_at": ""
+ },
+ "HS_anim | Aim left": {
+  "frames": 2,
+  "ref_frames": 2,
+  "max_pos_mm": 0.0,
+  "pos_at": "",
+  "max_rot_deg": 0.0,
+  "rot_at": "",
+  "max_prop": 0.0,
+  "prop_at": ""
+ },
+ "HS_anim | Aim right": {
+  "frames": 2,
+  "ref_frames": 2,
+  "max_pos_mm": 0.0,
+  "pos_at": "",
+  "max_rot_deg": 0.0,
+  "rot_at": "",
+  "max_prop": 0.0,
+  "prop_at": ""
+ }
+}

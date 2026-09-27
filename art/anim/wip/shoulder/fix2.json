@@ -1,0 +1,295 @@
+{
+ "tag": "fix2",
+ "fix": true,
+ "region_verts": {
+  "L": 479,
+  "R": 449
+ },
+ "sweep": [
+  {
+   "kind": "forward",
+   "deg": 30,
+   "L": {
+    "raise_deg": 23.6,
+    "arm_elevation_deg": -43.3,
+    "stretched_1.35": 20,
+    "stretched_2": 5,
+    "compressed_0.6": 0,
+    "max_stretch": 3.15,
+    "min_ratio": 0.61,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 23.6,
+    "arm_elevation_deg": -43.3,
+    "stretched_1.35": 19,
+    "stretched_2": 4,
+    "compressed_0.6": 0,
+    "max_stretch": 3.25,
+    "min_ratio": 0.85,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "kind": "forward",
+   "deg": 50,
+   "L": {
+    "raise_deg": 39.1,
+    "arm_elevation_deg": -30.6,
+    "stretched_1.35": 42,
+    "stretched_2": 10,
+    "compressed_0.6": 0,
+    "max_stretch": 4.94,
+    "min_ratio": 0.66,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 39.1,
+    "arm_elevation_deg": -30.6,
+    "stretched_1.35": 32,
+    "stretched_2": 9,
+    "compressed_0.6": 0,
+    "max_stretch": 4.78,
+    "min_ratio": 0.79,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "kind": "forward",
+   "deg": 70,
+   "L": {
+    "raise_deg": 54.0,
+    "arm_elevation_deg": -15.7,
+    "stretched_1.35": 53,
+    "stretched_2": 17,
+    "compressed_0.6": 1,
+    "max_stretch": 6.73,
+    "min_ratio": 0.53,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 54.0,
+    "arm_elevation_deg": -15.7,
+    "stretched_1.35": 47,
+    "stretched_2": 13,
+    "compressed_0.6": 0,
+    "max_stretch": 6.23,
+    "min_ratio": 0.69,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "kind": "forward",
+   "deg": 90,
+   "L": {
+    "raise_deg": 68.0,
+    "arm_elevation_deg": 0.0,
+    "stretched_1.35": 68,
+    "stretched_2": 21,
+    "compressed_0.6": 1,
+    "max_stretch": 8.49,
+    "min_ratio": 0.44,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 68.0,
+    "arm_elevation_deg": 0.0,
+    "stretched_1.35": 56,
+    "stretched_2": 21,
+    "compressed_0.6": 0,
+    "max_stretch": 7.51,
+    "min_ratio": 0.61,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "kind": "forward",
+   "deg": 110,
+   "L": {
+    "raise_deg": 80.8,
+    "arm_elevation_deg": 15.7,
+    "stretched_1.35": 78,
+    "stretched_2": 26,
+    "compressed_0.6": 2,
+    "max_stretch": 10.18,
+    "min_ratio": 0.41,
+    "collapsed_faces": 1,
+    "flipped_faces": 0
+   },
+   "R": {
+    "raise_deg": 80.8,
+    "arm_elevation_deg": 15.7,
+    "stretched_1.35": 66,
+    "stretched_2": 26,
+    "compressed_0.6": 1,
+    "max_stretch": 8.58,
+    "min_ratio": 0.56,
+    "collapsed_faces": 0,
+    "flipped_faces": 0
+   }
+  },
+  {
+   "kind": "side",
+   "deg": 30,
+   "L": {
+    "raise_deg": 30.0,
+    "arm_elevation_deg": -22.3,
+    "stretched_1.35": 5,
+    "stretched_2": 0,
+    "compressed_0.6": 8,
+    "max_stretch": 1.67,
+    "min_ratio": 0.31,
+    "collapsed_faces": 4,
+    "flipped_faces": 10
+   },
+   "R": {
+    "raise_deg": 30.0,
+    "arm_elevation_deg": -22.3,
+    "stretched_1.35": 6,
+    "stretched_2": 1,
+    "compressed_0.6": 15,
+    "max_stretch": 2.78,
+    "min_ratio": 0.14,
+    "collapsed_faces": 3,
+    "flipped_faces": 11
+   }
+  },
+  {
+   "kind": "side",
+   "deg": 50,
+   "L": {
+    "raise_deg": 50.0,
+    "arm_elevation_deg": -2.3,
+    "stretched_1.35": 14,
+    "stretched_2": 4,
+    "compressed_0.6": 7,
+    "max_stretch": 2.82,
+    "min_ratio": 0.2,
+    "collapsed_faces": 8,
+    "flipped_faces": 14
+   },
+   "R": {
+    "raise_deg": 50.0,
+    "arm_elevation_deg": -2.3,
+    "stretched_1.35": 24,
+    "stretched_2": 4,
+    "compressed_0.6": 34,
+    "max_stretch": 4.58,
+    "min_ratio": 0.27,
+    "collapsed_faces": 7,
+    "flipped_faces": 22
+   }
+  },
+  {
+   "kind": "side",
+   "deg": 70,
+   "L": {
+    "raise_deg": 70.0,
+    "arm_elevation_deg": 17.7,
+    "stretched_1.35": 20,
+    "stretched_2": 10,
+    "compressed_0.6": 12,
+    "max_stretch": 4.06,
+    "min_ratio": 0.36,
+    "collapsed_faces": 6,
+    "flipped_faces": 28
+   },
+   "R": {
+    "raise_deg": 70.0,
+    "arm_elevation_deg": 17.7,
+    "stretched_1.35": 38,
+    "stretched_2": 19,
+    "compressed_0.6": 28,
+    "max_stretch": 6.31,
+    "min_ratio": 0.19,
+    "collapsed_faces": 17,
+    "flipped_faces": 29
+   }
+  },
+  {
+   "kind": "side",
+   "deg": 90,
+   "L": {
+    "raise_deg": 90.0,
+    "arm_elevation_deg": 37.7,
+    "stretched_1.35": 27,
+    "stretched_2": 13,
+    "compressed_0.6": 14,
+    "max_stretch": 5.28,
+    "min_ratio": 0.2,
+    "collapsed_faces": 7,
+    "flipped_faces": 31
+   },
+   "R": {
+    "raise_deg": 90.0,
+    "arm_elevation_deg": 37.7,
+    "stretched_1.35": 52,
+    "stretched_2": 23,
+    "compressed_0.6": 30,
+    "max_stretch": 7.88,
+    "min_ratio": 0.11,
+    "collapsed_faces": 20,
+    "flipped_faces": 40
+   }
+  },
+  {
+   "kind": "side",
+   "deg": 110,
+   "L": {
+    "raise_deg": 110.0,
+    "arm_elevation_deg": 57.7,
+    "stretched_1.35": 38,
+    "stretched_2": 17,
+    "compressed_0.6": 24,
+    "max_stretch": 6.48,
+    "min_ratio": 0.17,
+    "collapsed_faces": 14,
+    "flipped_faces": 32
+   },
+   "R": {
+    "raise_deg": 110.0,
+    "arm_elevation_deg": 57.7,
+    "stretched_1.35": 67,
+    "stretched_2": 31,
+    "compressed_0.6": 31,
+    "max_stretch": 9.22,
+    "min_ratio": 0.05,
+    "collapsed_faces": 20,
+    "flipped_faces": 46
+   }
+  }
+ ],
+ "clips": [],
+ "rest": {
+  "L": {
+   "raise_deg": 0.0,
+   "arm_elevation_deg": -52.3,
+   "stretched_1.35": 0,
+   "stretched_2": 0,
+   "compressed_0.6": 0,
+   "max_stretch": 1.0,
+   "min_ratio": 1.0,
+   "collapsed_faces": 0,
+   "flipped_faces": 0
+  },
+  "R": {
+   "raise_deg": 0.0,
+   "arm_elevation_deg": -52.3,
+   "stretched_1.35": 0,
+   "stretched_2": 0,
+   "compressed_0.6": 0,
+   "max_stretch": 1.0,
+   "min_ratio": 1.0,
+   "collapsed_faces": 0,
+   "flipped_faces": 0
+  }
+ }
+}

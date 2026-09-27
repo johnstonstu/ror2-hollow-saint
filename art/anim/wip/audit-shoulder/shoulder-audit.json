@@ -1,0 +1,888 @@
+{
+ "info": {
+  "L": {
+   "vgroups": [
+    "L pauldron"
+   ],
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "solidify_thk": [
+    0.019999999552965164
+   ],
+   "scapula_parent": "chest",
+   "scapula_cons": []
+  },
+  "R": {
+   "vgroups": [
+    "R pauldron"
+   ],
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "solidify_thk": [
+    0.019999999552965164
+   ],
+   "scapula_parent": "chest",
+   "scapula_cons": []
+  }
+ },
+ "rest": {
+  "L": {},
+  "R": {}
+ },
+ "table": [
+  {
+   "clip": "Aim left",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 2.1,
+   "excess_mm": 2.1,
+   "worst_frame": 2,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.2218,
+    -0.1445,
+    1.7372
+   ],
+   "pad_rot_vs_chest_deg": 0,
+   "arm_rot_vs_chest_deg": 0
+  },
+  {
+   "clip": "Aim right",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 1.8,
+   "excess_mm": 1.8,
+   "worst_frame": 1,
+   "frames_over_5mm": "-",
+   "point": [
+    0.1583,
+    -0.1178,
+    1.7325
+   ],
+   "pad_rot_vs_chest_deg": 0,
+   "arm_rot_vs_chest_deg": 0
+  },
+  {
+   "clip": "Arc Bolt left",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 38.3,
+   "excess_mm": 38.3,
+   "worst_frame": 4,
+   "frames_over_5mm": "3-16 (14f)",
+   "point": [
+    0.2545,
+    0.0164,
+    1.6218
+   ],
+   "pad_rot_vs_chest_deg": 58.2,
+   "arm_rot_vs_chest_deg": 80.4
+  },
+  {
+   "clip": "Arc Bolt left",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 12.1,
+   "excess_mm": 12.1,
+   "worst_frame": 16,
+   "frames_over_5mm": "16-16 (1f)",
+   "point": [
+    0.1031,
+    -0.062,
+    1.6279
+   ],
+   "pad_rot_vs_chest_deg": 58.2,
+   "arm_rot_vs_chest_deg": 80.4
+  },
+  {
+   "clip": "Arc Bolt right",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 41.5,
+   "excess_mm": 41.5,
+   "worst_frame": 11,
+   "frames_over_5mm": "4-15 (9f)",
+   "point": [
+    -0.1612,
+    -0.0389,
+    1.6387
+   ],
+   "pad_rot_vs_chest_deg": 53.1,
+   "arm_rot_vs_chest_deg": 73.8
+  },
+  {
+   "clip": "Arc Bolt right",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 46.3,
+   "excess_mm": 46.3,
+   "worst_frame": 12,
+   "frames_over_5mm": "3-15 (13f)",
+   "point": [
+    -0.2915,
+    -0.0461,
+    1.6405
+   ],
+   "pad_rot_vs_chest_deg": 53.1,
+   "arm_rot_vs_chest_deg": 73.8
+  },
+  {
+   "clip": "Arc Step end",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 20.2,
+   "excess_mm": 20.2,
+   "worst_frame": 2,
+   "frames_over_5mm": "1-7 (3f)",
+   "point": [
+    0.073,
+    -0.3861,
+    1.2885
+   ],
+   "pad_rot_vs_chest_deg": 16.7,
+   "arm_rot_vs_chest_deg": 38.6
+  },
+  {
+   "clip": "Arc Step end",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 16.6,
+   "excess_mm": 16.6,
+   "worst_frame": 3,
+   "frames_over_5mm": "1-8 (6f)",
+   "point": [
+    0.178,
+    -0.2025,
+    1.507
+   ],
+   "pad_rot_vs_chest_deg": 16.7,
+   "arm_rot_vs_chest_deg": 38.6
+  },
+  {
+   "clip": "Arc Step end",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 23.0,
+   "excess_mm": 23.0,
+   "worst_frame": 2,
+   "frames_over_5mm": "1-2 (2f)",
+   "point": [
+    -0.1894,
+    -0.4041,
+    1.283
+   ],
+   "pad_rot_vs_chest_deg": 15.2,
+   "arm_rot_vs_chest_deg": 38.9
+  },
+  {
+   "clip": "Arc Step end",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 22.0,
+   "excess_mm": 22.0,
+   "worst_frame": 2,
+   "frames_over_5mm": "2-7 (2f)",
+   "point": [
+    -0.191,
+    -0.4027,
+    1.2822
+   ],
+   "pad_rot_vs_chest_deg": 15.2,
+   "arm_rot_vs_chest_deg": 38.9
+  },
+  {
+   "clip": "Arc Step loop",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 11.5,
+   "excess_mm": 11.5,
+   "worst_frame": 2,
+   "frames_over_5mm": "1-11 (11f)",
+   "point": [
+    0.1061,
+    -0.4491,
+    1.2067
+   ],
+   "pad_rot_vs_chest_deg": 15.6,
+   "arm_rot_vs_chest_deg": 35.4
+  },
+  {
+   "clip": "Arc Step loop",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 5.9,
+   "excess_mm": 5.9,
+   "worst_frame": 2,
+   "frames_over_5mm": "1-11 (3f)",
+   "point": [
+    0.2407,
+    -0.5541,
+    1.1746
+   ],
+   "pad_rot_vs_chest_deg": 15.6,
+   "arm_rot_vs_chest_deg": 35.4
+  },
+  {
+   "clip": "Arc Step loop",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 18.7,
+   "excess_mm": 18.7,
+   "worst_frame": 7,
+   "frames_over_5mm": "1-11 (11f)",
+   "point": [
+    -0.1712,
+    -0.4354,
+    1.2086
+   ],
+   "pad_rot_vs_chest_deg": 14.2,
+   "arm_rot_vs_chest_deg": 35.2
+  },
+  {
+   "clip": "Arc Step loop",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 18.8,
+   "excess_mm": 18.8,
+   "worst_frame": 7,
+   "frames_over_5mm": "2-10 (9f)",
+   "point": [
+    -0.1708,
+    -0.4347,
+    1.2102
+   ],
+   "pad_rot_vs_chest_deg": 14.2,
+   "arm_rot_vs_chest_deg": 35.2
+  },
+  {
+   "clip": "Arc Step start",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 17.2,
+   "excess_mm": 17.2,
+   "worst_frame": 4,
+   "frames_over_5mm": "4-7 (4f)",
+   "point": [
+    0.0935,
+    -0.5201,
+    1.4006
+   ],
+   "pad_rot_vs_chest_deg": 28.3,
+   "arm_rot_vs_chest_deg": 41.4
+  },
+  {
+   "clip": "Arc Step start",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 35.3,
+   "excess_mm": 35.3,
+   "worst_frame": 4,
+   "frames_over_5mm": "4-7 (3f)",
+   "point": [
+    0.2187,
+    -0.5549,
+    1.3771
+   ],
+   "pad_rot_vs_chest_deg": 28.3,
+   "arm_rot_vs_chest_deg": 41.4
+  },
+  {
+   "clip": "Arc Step start",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 24.0,
+   "excess_mm": 24.0,
+   "worst_frame": 4,
+   "frames_over_5mm": "4-6 (3f)",
+   "point": [
+    -0.2717,
+    -0.5834,
+    1.3886
+   ],
+   "pad_rot_vs_chest_deg": 29.8,
+   "arm_rot_vs_chest_deg": 44.9
+  },
+  {
+   "clip": "Arc Step start",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 33.7,
+   "excess_mm": 33.7,
+   "worst_frame": 4,
+   "frames_over_5mm": "4-7 (4f)",
+   "point": [
+    -0.3,
+    -0.5687,
+    1.3739
+   ],
+   "pad_rot_vs_chest_deg": 29.8,
+   "arm_rot_vs_chest_deg": 44.9
+  },
+  {
+   "clip": "Charge full",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 0.7,
+   "excess_mm": 0.7,
+   "worst_frame": 10,
+   "frames_over_5mm": "-",
+   "point": [
+    0.1831,
+    0.1326,
+    1.7247
+   ],
+   "pad_rot_vs_chest_deg": 10.8,
+   "arm_rot_vs_chest_deg": 1.6
+  },
+  {
+   "clip": "Charge full",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 6.6,
+   "excess_mm": 6.6,
+   "worst_frame": 16,
+   "frames_over_5mm": "15-23 (7f)",
+   "point": [
+    -0.2674,
+    0.1073,
+    1.7348
+   ],
+   "pad_rot_vs_chest_deg": 12.1,
+   "arm_rot_vs_chest_deg": 17.8
+  },
+  {
+   "clip": "Discharge",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 6.8,
+   "excess_mm": 6.8,
+   "worst_frame": 10,
+   "frames_over_5mm": "9-12 (3f)",
+   "point": [
+    0.2024,
+    0.1639,
+    1.6895
+   ],
+   "pad_rot_vs_chest_deg": 14.5,
+   "arm_rot_vs_chest_deg": 44.3
+  },
+  {
+   "clip": "Discharge",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 1.5,
+   "excess_mm": 1.5,
+   "worst_frame": 11,
+   "frames_over_5mm": "-",
+   "point": [
+    0.1552,
+    0.2216,
+    1.6757
+   ],
+   "pad_rot_vs_chest_deg": 14.5,
+   "arm_rot_vs_chest_deg": 44.3
+  },
+  {
+   "clip": "Discharge",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 10.1,
+   "excess_mm": 10.1,
+   "worst_frame": 9,
+   "frames_over_5mm": "9-11 (3f)",
+   "point": [
+    -0.1786,
+    0.2478,
+    1.6976
+   ],
+   "pad_rot_vs_chest_deg": 14.5,
+   "arm_rot_vs_chest_deg": 30.9
+  },
+  {
+   "clip": "Discharge",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 11.4,
+   "excess_mm": 11.4,
+   "worst_frame": 10,
+   "frames_over_5mm": "9-11 (3f)",
+   "point": [
+    -0.1793,
+    0.2462,
+    1.6995
+   ],
+   "pad_rot_vs_chest_deg": 14.5,
+   "arm_rot_vs_chest_deg": 30.9
+  },
+  {
+   "clip": "Glide enter",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 3.1,
+   "excess_mm": 3.1,
+   "worst_frame": 1,
+   "frames_over_5mm": "-",
+   "point": [
+    0.2241,
+    -0.2702,
+    1.5463
+   ],
+   "pad_rot_vs_chest_deg": 19.9,
+   "arm_rot_vs_chest_deg": 52.5
+  },
+  {
+   "clip": "Glide enter",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 4.6,
+   "excess_mm": 4.6,
+   "worst_frame": 1,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.2285,
+    -0.1437,
+    1.6395
+   ],
+   "pad_rot_vs_chest_deg": 21.2,
+   "arm_rot_vs_chest_deg": 44.8
+  },
+  {
+   "clip": "Glide exit",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 5.4,
+   "excess_mm": 5.4,
+   "worst_frame": 14,
+   "frames_over_5mm": "14-14 (1f)",
+   "point": [
+    0.0873,
+    -0.1448,
+    1.6261
+   ],
+   "pad_rot_vs_chest_deg": 20.9,
+   "arm_rot_vs_chest_deg": 44.1
+  },
+  {
+   "clip": "Glide exit",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 5.8,
+   "excess_mm": 5.8,
+   "worst_frame": 14,
+   "frames_over_5mm": "14-14 (1f)",
+   "point": [
+    0.167,
+    -0.1815,
+    1.6417
+   ],
+   "pad_rot_vs_chest_deg": 20.9,
+   "arm_rot_vs_chest_deg": 44.1
+  },
+  {
+   "clip": "Glide exit",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 2.1,
+   "excess_mm": 2.1,
+   "worst_frame": 7,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.234,
+    -0.0623,
+    2.0173
+   ],
+   "pad_rot_vs_chest_deg": 19.5,
+   "arm_rot_vs_chest_deg": 51.7
+  },
+  {
+   "clip": "Glide exit",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 4.9,
+   "excess_mm": 4.9,
+   "worst_frame": 14,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.3586,
+    -0.2752,
+    1.4792
+   ],
+   "pad_rot_vs_chest_deg": 19.5,
+   "arm_rot_vs_chest_deg": 51.7
+  },
+  {
+   "clip": "Glide loop",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 3.6,
+   "excess_mm": 3.6,
+   "worst_frame": 11,
+   "frames_over_5mm": "-",
+   "point": [
+    0.2088,
+    -0.0539,
+    2.0502
+   ],
+   "pad_rot_vs_chest_deg": 7.2,
+   "arm_rot_vs_chest_deg": 18.0
+  },
+  {
+   "clip": "Idle combat",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 4.4,
+   "excess_mm": 4.4,
+   "worst_frame": 9,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.2732,
+    -0.2882,
+    1.4965
+   ],
+   "pad_rot_vs_chest_deg": 15.9,
+   "arm_rot_vs_chest_deg": 40.8
+  },
+  {
+   "clip": "Idle combat",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 2.5,
+   "excess_mm": 2.5,
+   "worst_frame": 30,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.27,
+    -0.2517,
+    1.588
+   ],
+   "pad_rot_vs_chest_deg": 15.9,
+   "arm_rot_vs_chest_deg": 40.8
+  },
+  {
+   "clip": "Jump",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 0.0,
+   "excess_mm": 0.0,
+   "worst_frame": 2,
+   "frames_over_5mm": "-",
+   "point": [
+    0.1946,
+    -0.0858,
+    1.5814
+   ],
+   "pad_rot_vs_chest_deg": 13.3,
+   "arm_rot_vs_chest_deg": 33.3
+  },
+  {
+   "clip": "Jump",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 1.6,
+   "excess_mm": 1.6,
+   "worst_frame": 3,
+   "frames_over_5mm": "-",
+   "point": [
+    0.2129,
+    -0.2068,
+    1.4712
+   ],
+   "pad_rot_vs_chest_deg": 13.3,
+   "arm_rot_vs_chest_deg": 33.3
+  },
+  {
+   "clip": "Jump",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 1.4,
+   "excess_mm": 1.4,
+   "worst_frame": 6,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.2731,
+    0.0986,
+    1.7606
+   ],
+   "pad_rot_vs_chest_deg": 13.1,
+   "arm_rot_vs_chest_deg": 32.9
+  },
+  {
+   "clip": "Open Circuit",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 1.8,
+   "excess_mm": 1.8,
+   "worst_frame": 21,
+   "frames_over_5mm": "-",
+   "point": [
+    0.1736,
+    0.0968,
+    1.7276
+   ],
+   "pad_rot_vs_chest_deg": 11.2,
+   "arm_rot_vs_chest_deg": 50.0
+  },
+  {
+   "clip": "Open Circuit",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 7.1,
+   "excess_mm": 7.1,
+   "worst_frame": 20,
+   "frames_over_5mm": "20-23 (4f)",
+   "point": [
+    0.2093,
+    0.0955,
+    1.7071
+   ],
+   "pad_rot_vs_chest_deg": 11.2,
+   "arm_rot_vs_chest_deg": 50.0
+  },
+  {
+   "clip": "Run backward",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 4.3,
+   "excess_mm": 4.3,
+   "worst_frame": 10,
+   "frames_over_5mm": "-",
+   "point": [
+    0.2376,
+    0.1159,
+    1.5784
+   ],
+   "pad_rot_vs_chest_deg": 16.9,
+   "arm_rot_vs_chest_deg": 37.7
+  },
+  {
+   "clip": "Run backward",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 4.8,
+   "excess_mm": 4.8,
+   "worst_frame": 10,
+   "frames_over_5mm": "-",
+   "point": [
+    0.2049,
+    0.1141,
+    1.6013
+   ],
+   "pad_rot_vs_chest_deg": 16.9,
+   "arm_rot_vs_chest_deg": 37.7
+  },
+  {
+   "clip": "Run forward",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 7.8,
+   "excess_mm": 7.8,
+   "worst_frame": 2,
+   "frames_over_5mm": "1-17 (3f)",
+   "point": [
+    0.0403,
+    -0.1078,
+    1.5464
+   ],
+   "pad_rot_vs_chest_deg": 21.2,
+   "arm_rot_vs_chest_deg": 52.5
+  },
+  {
+   "clip": "Run forward",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 5.9,
+   "excess_mm": 5.9,
+   "worst_frame": 2,
+   "frames_over_5mm": "1-17 (3f)",
+   "point": [
+    0.1674,
+    -0.1685,
+    1.6258
+   ],
+   "pad_rot_vs_chest_deg": 21.2,
+   "arm_rot_vs_chest_deg": 52.5
+  },
+  {
+   "clip": "Run forward",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 5.5,
+   "excess_mm": 5.5,
+   "worst_frame": 2,
+   "frames_over_5mm": "2-2 (1f)",
+   "point": [
+    -0.3584,
+    -0.2653,
+    1.4674
+   ],
+   "pad_rot_vs_chest_deg": 21.2,
+   "arm_rot_vs_chest_deg": 52.5
+  },
+  {
+   "clip": "Run forward",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 4.6,
+   "excess_mm": 4.6,
+   "worst_frame": 10,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.2285,
+    -0.1437,
+    1.6395
+   ],
+   "pad_rot_vs_chest_deg": 21.2,
+   "arm_rot_vs_chest_deg": 52.5
+  },
+  {
+   "clip": "Run right",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 0.1,
+   "excess_mm": 0.1,
+   "worst_frame": 2,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.5307,
+    -0.0564,
+    1.3063
+   ],
+   "pad_rot_vs_chest_deg": 14.3,
+   "arm_rot_vs_chest_deg": 38.8
+  },
+  {
+   "clip": "Select idle",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 6.1,
+   "excess_mm": 6.1,
+   "worst_frame": 91,
+   "frames_over_5mm": "1-97 (28f)",
+   "point": [
+    0.206,
+    -0.036,
+    1.6803
+   ],
+   "pad_rot_vs_chest_deg": 15.3,
+   "arm_rot_vs_chest_deg": 38.3
+  },
+  {
+   "clip": "Select idle",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 6.1,
+   "excess_mm": 6.1,
+   "worst_frame": 90,
+   "frames_over_5mm": "77-90 (14f)",
+   "point": [
+    0.2062,
+    -0.0364,
+    1.6799
+   ],
+   "pad_rot_vs_chest_deg": 15.3,
+   "arm_rot_vs_chest_deg": 38.3
+  },
+  {
+   "clip": "Select idle",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 1.5,
+   "excess_mm": 1.5,
+   "worst_frame": 35,
+   "frames_over_5mm": "-",
+   "point": [
+    -0.3527,
+    -0.0959,
+    1.5253
+   ],
+   "pad_rot_vs_chest_deg": 12.2,
+   "arm_rot_vs_chest_deg": 30.5
+  },
+  {
+   "clip": "Select intro",
+   "side": "L",
+   "obstacle": "head",
+   "worst_mm": 5.6,
+   "excess_mm": 5.6,
+   "worst_frame": 44,
+   "frames_over_5mm": "1-44 (10f)",
+   "point": [
+    0.2032,
+    -0.031,
+    1.6845
+   ],
+   "pad_rot_vs_chest_deg": 13.7,
+   "arm_rot_vs_chest_deg": 34.3
+  },
+  {
+   "clip": "Select intro",
+   "side": "L",
+   "obstacle": "torso",
+   "worst_mm": 2.0,
+   "excess_mm": 2.0,
+   "worst_frame": 44,
+   "frames_over_5mm": "-",
+   "point": [
+    0.2331,
+    -0.0282,
+    1.6654
+   ],
+   "pad_rot_vs_chest_deg": 13.7,
+   "arm_rot_vs_chest_deg": 34.3
+  },
+  {
+   "clip": "Select intro",
+   "side": "R",
+   "obstacle": "torso",
+   "worst_mm": 28.5,
+   "excess_mm": 28.5,
+   "worst_frame": 14,
+   "frames_over_5mm": "5-29 (25f)",
+   "point": [
+    -0.2482,
+    -0.0256,
+    1.6416
+   ],
+   "pad_rot_vs_chest_deg": 23.1,
+   "arm_rot_vs_chest_deg": 58.4
+  },
+  {
+   "clip": "Select intro",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 17.0,
+   "excess_mm": 17.0,
+   "worst_frame": 20,
+   "frames_over_5mm": "7-20 (12f)",
+   "point": [
+    -0.2233,
+    -0.0387,
+    1.6574
+   ],
+   "pad_rot_vs_chest_deg": 23.1,
+   "arm_rot_vs_chest_deg": 58.4
+  },
+  {
+   "clip": "Spawn",
+   "side": "R",
+   "obstacle": "head",
+   "worst_mm": 9.6,
+   "excess_mm": 9.6,
+   "worst_frame": 24,
+   "frames_over_5mm": "1-33 (33f)",
+   "point": [
+    -0.259,
+    -0.4608,
+    1.2447
+   ],
+   "pad_rot_vs_chest_deg": 7.9,
+   "arm_rot_vs_chest_deg": 16.5
+  }
+ ]
+}

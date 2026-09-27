@@ -1,0 +1,9 @@
+[
+ {"target": "run", "label": "add12"},
+ {"target": "run", "label": "add12", "arm": {"adduct": 12}},
+ {"target": "run", "label": "add14 tw-15", "arm": {"adduct": 14, "twist": -15}},
+ {"target": "run", "label": "add14 tw-25", "arm": {"adduct": 14, "twist": -25}},
+ {"target": "run", "label": "add16 tw-25 lag8", "arm": {"adduct": 16, "twist": -25, "elbow_lag": 8}},
+ {"target": "left", "label": "add18 tw-20", "arm": {"adduct": 18, "twist": -20}},
+ {"target": "back", "label": "add16 tw-20", "arm": {"adduct": 16, "twist": -20}}
+]

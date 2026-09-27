@@ -1,0 +1,51 @@
+{
+  "title": "Idle",
+  "frames": [
+    1,
+    97
+  ],
+  "loop": true,
+  "markers": {
+    "Inhale": 1,
+    "Twitch L": 30,
+    "Glance": 58,
+    "Twitch R": 78
+  },
+  "ik_miss_m": 4e-05,
+  "max_leg_extension": 0.9372,
+  "ik_miss_frames": {},
+  "kind": "idle",
+  "speed_mps": 0.0,
+  "seam_from": [
+    "Land",
+    15
+  ],
+  "seam_to": [
+    "Jump",
+    1
+  ],
+  "halo_max_offset_m": 0.0109,
+  "max_arm_raise_deg": 18.6,
+  "max_knee_out_m": 0.0252,
+  "bake_error_m": 1e-06,
+  "module": "presentation",
+  "action": "HS_anim | Idle",
+  "planted_frame_pairs": 192,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front"
+  ],
+  "rendered_frames": [
+    1,
+    15,
+    22,
+    27
+  ]
+}

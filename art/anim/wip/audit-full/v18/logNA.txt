@@ -1,0 +1,21 @@
+00:01.391  blend            | Read blend: "C:\Users\stuwj\Documents\Coding\ror2-lightning\art\anim\wip\audit-full\v18\audit-full-v18-copy.blend"
+SHRINKWRAP DISABLED
+CLIP Idle 97 37.3
+CLIP Select idle 97 75.4
+CLIP Charge loop 41 91.2
+CLIP Arc Bolt left 20 99.5
+CLIP Arc Bolt right 20 107.8
+CLIP Aim down 2 109.5
+CLIP Aim left 2 111.3
+CLIP Aim neutral 2 113.0
+CLIP Aim right 2 114.8
+CLIP Aim up 2 116.6
+CLIP Run forward 17 124.6
+CLIP Run backward 17 132.7
+CLIP Walk forward 27 144.6
+CLIP Glide loop 33 159.8
+CLIP Ascend 21 169.6
+DONE anim noshrinkA
+Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
+
+Blender quit

@@ -1,0 +1,42 @@
+{
+  "title": "Land",
+  "frames": [
+    1,
+    13
+  ],
+  "loop": false,
+  "markers": {
+    "Touch": 1,
+    "Compress": 5,
+    "Recovered": 13
+  },
+  "ik_miss_m": 6e-05,
+  "max_leg_extension": 0.934,
+  "ik_miss_frames": {},
+  "kind": "air",
+  "speed_mps": 0.0,
+  "starts_from": "Descend",
+  "ends_in": "Stand",
+  "halo_max_offset_m": 0.03,
+  "bake_error_m": 1e-06,
+  "module": "air",
+  "action": "HS_anim | Land",
+  "planted_frame_pairs": 20,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.0169,
+  "finite": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front"
+  ],
+  "rendered_frames": [
+    1,
+    3,
+    5,
+    8
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "status": "ORIGINAL MODEL REFINEMENT v4: no rig, animation, export, or gameplay validation",
+  "mesh_objects": 119,
+  "curve_objects": 45,
+  "vertices": 4978,
+  "polygons": 5292,
+  "halo_quadrants": 4,
+  "fingers_per_hand": 5,
+  "body_height_m": 2.001,
+  "tabard_bottom_m": 0.395,
+  "renders": [
+    "C:\\Users\\stuwj\\Documents\\Coding\\ror2-lightning\\art\\refinement\\hollow-saint-refinement-v4-front.png",
+    "C:\\Users\\stuwj\\Documents\\Coding\\ror2-lightning\\art\\refinement\\hollow-saint-refinement-v4-hero.png",
+    "C:\\Users\\stuwj\\Documents\\Coding\\ror2-lightning\\art\\refinement\\hollow-saint-refinement-v4-side.png",
+    "C:\\Users\\stuwj\\Documents\\Coding\\ror2-lightning\\art\\refinement\\hollow-saint-refinement-v4-back.png",
+    "C:\\Users\\stuwj\\Documents\\Coding\\ror2-lightning\\art\\refinement\\hollow-saint-refinement-v4-gameplay-distance.png"
+  ],
+  "gameplay_view_note": "Simulated Blender camera, not in-game."
+}

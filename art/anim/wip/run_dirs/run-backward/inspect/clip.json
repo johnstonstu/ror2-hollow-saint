@@ -1,0 +1,107 @@
+{
+  "title": "Run backward",
+  "frames": [
+    1,
+    17
+  ],
+  "loop": true,
+  "markers": {
+    "L contact": 1,
+    "R contact": 9
+  },
+  "ik_miss_m": 9e-05,
+  "max_leg_extension": 0.9349,
+  "ik_miss_frames": {},
+  "direction": "backward",
+  "speed_mps": 4.25,
+  "meters_per_cycle": 2.833,
+  "stance": 0.23,
+  "kind": "locomotion",
+  "direction_slide_m_per_frame": 1e-05,
+  "direction_slide_pairs": 6,
+  "min_ball_gap_x_m": 0.54,
+  "min_ankle_gap_x_m": 0.4593,
+  "min_knee_gap_x_m": 0.3582,
+  "halo_max_offset_m": 0.0142,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "module": "run_dirs",
+  "action": "HS_anim | Run backward",
+  "planted_frame_pairs": 6,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0157,
+      "frame": 14,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        74,
+        80,
+        62,
+        32,
+        23,
+        35,
+        50,
+        79,
+        101,
+        102,
+        89,
+        59,
+        33,
+        16,
+        25,
+        49,
+        74
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0198,
+      "frame": 13,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        74,
+        76,
+        62,
+        38,
+        30,
+        31,
+        46,
+        83,
+        93,
+        90,
+        76,
+        45,
+        20,
+        23,
+        33,
+        55,
+        74
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0157,
+  "arm_clear_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "front",
+    "side",
+    "back",
+    "hero"
+  ],
+  "rendered_frames": [
+    1,
+    5,
+    9,
+    13
+  ]
+}

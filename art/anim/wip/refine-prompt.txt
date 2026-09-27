@@ -1,0 +1,31 @@
+﻿Hollow Saint refinement pass — do items 9b, 9 (REVISED), and 9c in that order in THIS run. Do NOT start item 10. Item 8 (aim-pose / Arc Step IK / Land-Idle seam) may follow 9c in this same run if time remains; stop before item 10.
+
+Project: C:\Users\stuwj\Documents\Coding\ror2-lightning
+Current checkpoint: art/anim/hollow-saint-anim-v11.blend (33 clips, QA 33/33 PASS at ~21:46).
+Plan (READ THE FULL FILE, especially sections "9 (REVISED)", "9b", "9c", and "10"): art/anim/REFINEMENT-PLAN.md
+Status file to keep honest: art/anim/STATUS.md
+Preview page: art/anim/review.html
+Toolkit rules: tools/blender/anim/README.md
+
+CONTEXT — what is already done (do not redo from scratch):
+- Items 1–7 are DONE in v7–v10.
+- Item 9 FIRST DRAFT is in v11 (sole jets via tools/blender/anim/vfx.py, hs_glow/hs_jet props, glow ramp). BUT the side silhouette is still ~36–45+ deg chest-leading. Stuart's REVISED item 9 requires nearly UPRIGHT Iron Man glide (~10 deg pitch max). Treat the upright rework as unfinished.
+- Items 9b and 9c are NOT done (no arm-clearance QA, no art/anim/wip/hands/ close-ups). Idle still has the known finger pop ~21 deg/f^2 at f78.
+- Arc Step still has ik_miss ~1.71 mm and max_leg_extension > 1.0; Land/Idle/Jump shin seam still 1.233 mm (item 8).
+
+ORDER:
+1) 9b — Run arm clipping. Widen arm swing path so hands/forearms clear hips/torso/tabard every frame on Run forward (also check walk, strafes, backpedal). Add a clearance check to QA. Save a new numbered .blend.
+2) 9 (REVISED) — Iron Man sprint-to-glide. Body nearly upright (~10 deg max, NOT chest-leading). Enter lifts off from the run stride; sole lightning thrusters push forward; glow ramps enter → loop → fades exit. Keep seams to Run at 0.0 mm. New numbered .blend. Regenerate hero/side/chase GIFs.
+3) 9c — Hands/thumbs STANDING requirement across every clip (natural thumb tuck, cascading finger curl, no hyperextension/interpenetration, clean wrists, fix Idle finger pop). Add hand QA checks. Render close-up hand GIFs under art/anim/wip/hands/ for Run forward, Arc Bolt, Charge full, Discharge, Idle, Glide loop.
+4) Optional same-run: item 8 cleanup (aim pitch split, Arc Step IK/extension, Land/Idle/Jump seam). Then STOP. Do NOT start item 10 (transition polish).
+
+Hard rules:
+- Follow tools/blender/anim/README.md strictly.
+- Only one agent edits each clip file; edit only the modules you own for the current item.
+- Run Blender in --background / factory-startup only. NEVER touch or save into Stuart's open interactive Blender (a blender.exe may already be running from ~1:05 AM — leave that process alone).
+- Always save a NEW numbered .blend (v12+). Never overwrite an existing .blend.
+- Never push to git. Never delete anything. Never read .env.
+- Append short timestamped progress lines to art/anim/wip/refine-run-log.txt
+- After each item: update STATUS.md, refresh review.html / GIFs for changed clips, QA PASS.
+
+Success: new checkpoints covering 9b + upright Iron Man glide + hands (and optionally item 8), STATUS.md and review.html current, refine-run-log.txt updated, hand close-ups under art/anim/wip/hands/.

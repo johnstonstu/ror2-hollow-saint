@@ -1,0 +1,250 @@
+{
+  "title": "Open Circuit end",
+  "frames": [
+    1,
+    22
+  ],
+  "loop": false,
+  "markers": {
+    "Recall": 3,
+    "Recovered": 22
+  },
+  "ik_miss_m": 0.0,
+  "max_leg_extension": 0.0,
+  "max_leg_extension_at": "",
+  "ik_miss_at": "",
+  "ik_miss_frames": {},
+  "kind": "gesture",
+  "layer": "upper body (mask excludes pelvis/legs)",
+  "seam_from": [
+    "Open Circuit hold",
+    1
+  ],
+  "max_arm_raise_deg": 45.6,
+  "start_rest_err_m": 0.536092,
+  "end_rest_err_m": 0.098017,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "max_ang_vel_deg_f": [
+    25.84,
+    "R forearm",
+    4
+  ],
+  "max_ang_acc_deg_f2": [
+    9.73,
+    "R forearm",
+    7
+  ],
+  "max_pos_acc_mm_f2": [
+    57.92,
+    "halo 1",
+    8
+  ],
+  "arc_signed_min_mm": -10.0,
+  "arc_signed_frame": 21,
+  "arc_signed_rest_mm": -9.7,
+  "arc_verts_inside_max": 34,
+  "arc_verts_inside_frame": 13,
+  "arc_verts_inside_rest": 23,
+  "hand_chest_min_mm": 83.1,
+  "hand_chest_frame": 9,
+  "pauldron_follow_err_deg": 1.69,
+  "module": "special",
+  "action": "HS_anim | Open Circuit end",
+  "planted_frame_pairs": 42,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0001,
+      "frame": 6,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 9,
+      "per_frame_mm": [
+        116,
+        121,
+        107,
+        73,
+        19,
+        0,
+        1,
+        6,
+        8,
+        8,
+        8,
+        8,
+        5,
+        3,
+        12,
+        46,
+        70,
+        80,
+        90,
+        98,
+        102,
+        103
+      ],
+      "hits": {
+        "6": "forearm > L thigh",
+        "7": "forearm > L thigh",
+        "8": "forearm > spine",
+        "9": "forearm > spine",
+        "10": "forearm > spine",
+        "11": "forearm > spine",
+        "12": "forearm > spine",
+        "13": "forearm > spine",
+        "14": "forearm > L thigh"
+      }
+    },
+    "R": {
+      "min_m": 0.0099,
+      "frame": 9,
+      "part": "forearm",
+      "against": "R thigh",
+      "frames_under_min": 4,
+      "per_frame_mm": [
+        126,
+        133,
+        130,
+        111,
+        82,
+        48,
+        23,
+        12,
+        10,
+        10,
+        10,
+        10,
+        21,
+        48,
+        81,
+        109,
+        120,
+        118,
+        114,
+        110,
+        107,
+        106
+      ],
+      "hits": {
+        "9": "forearm > R thigh",
+        "10": "forearm > R thigh",
+        "11": "forearm > R thigh",
+        "12": "forearm > R thigh"
+      }
+    }
+  },
+  "arm_clear_min_m": 0.0001,
+  "arm_clear_ok": null,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.7,
+    "finger_pops_deg_f2": [
+      [
+        9.53,
+        "L little.2",
+        3
+      ],
+      [
+        8.72,
+        "L ring.2",
+        3
+      ],
+      [
+        8.29,
+        "L little.3",
+        3
+      ],
+      [
+        8.08,
+        "L middle.2",
+        3
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": 20.0,
+        "hand_twist_frame": 9,
+        "hand_bend_max_deg": 39.5,
+        "forearm_roll_deg": -49.2,
+        "forearm_roll_frame": 1
+      },
+      "R": {
+        "hand_twist_deg": 23.1,
+        "hand_twist_frame": 1,
+        "hand_bend_max_deg": 31.6,
+        "forearm_roll_deg": -50.6,
+        "forearm_roll_frame": 10
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 5.1,
+        "thumb_max": 28.0,
+        "finger_min": 2.6,
+        "finger_max": 65.5
+      },
+      "R": {
+        "thumb_min": 5.1,
+        "thumb_max": 28.0,
+        "finger_min": 2.9,
+        "finger_max": 65.5
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 9.53,
+    "worst_pop": "L little.2 f3",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.7
+  },
+  "hand_contact": {
+    "L hand > torso": [
+      2.9,
+      6
+    ]
+  },
+  "hand_contact_max_mm": 2.9,
+  "hand_contact_worst": "L hand > torso f6",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front",
+    "chase"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ]
+}

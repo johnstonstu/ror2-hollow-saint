@@ -1,0 +1,40 @@
+Hollow Saint VFX source-asset run "vfx-run1" (Phase F), launched Sun Sep 27 2026 ~12:50 AM PT. Take your time; quality over speed.
+
+Project: C:\Users\stuwj\Documents\Coding\ror2-lightning
+Stuart APPROVED art/MASTER-PLAN.md at 12:43 AM PT ("as-is, start phases A and F"). You own Phase F only.
+
+READ FIRST, in full:
+- art/MASTER-PLAN.md (especially "Phase F: VFX source assets" and the approved decisions in section (e))
+- art/vfx/VFX-ABILITY-PLAN.md (especially 5c "Custom lightning asset list", plus 2.9 Conduit Spear, 2.10 directional heel jets, 2.3a charge-meter VFX, 5b, and the palette)
+- You MAY read (read-only) tools/blender/anim/clips/vfx.py and the model/material docs (art/hybrid/, art/concepts/hollow-saint-art-pack.md) to match colours. Never modify them.
+
+GOAL: build the lightning VFX SOURCE ASSETS ONLY, all under art/vfx/assets/ (create the folders).
+- Blender sources: your own new numbered files art/vfx/assets/hs-vfx-v01.blend, hs-vfx-v02.blend, ... Save a NEW number for each meaningful step. Never overwrite any .blend (check the file does not exist before saving).
+- Assets (every item on the 5c list, at least):
+  1. procedural bolt/arc meshes or curves -> UV'd ribbon meshes: short arc (3 variants), long bolt (3 variants), branching bolt (2 variants), halo ring arc (segmented ring)
+  2. heel-jet exhaust cone + ribbon (with a scrolling-material note), usable for glide jets, run push-off and the Arc Step launch burst
+  3. spark sprite
+  4. glow / corona cards (soft, star, ring)
+  5. Discharge meter glow ramp (dark -> copper -> cyan -> white)
+  6. Conduit Spear lance mesh, its trail ribbon, and a materialize effect (filaments converging along the forearm into the lance, tail-to-tip fade-in; e.g. a mesh with a gradient/dissolve mask texture plus filament ribbons)
+  7. conductor mark (broken 4-segment cyan ring + centre diamond: PNG + mesh)
+  8. Arc Step afterimage + ground trail (ribbon + ghost material notes)
+  9. ground scorch / static ring decal PNG
+  plus anything else listed in 5c.
+- Rendered PNG textures WITH ALPHA in art/vfx/assets/textures/: bolt flipbook sprite sheet (4x4), spark sprite(s), glow/corona cards, the meter glow ramp, and a tileable noise/scroll texture (plus the mark and scorch decals). Power-of-two sizes.
+- FBX exports of every mesh asset in art/vfx/assets/fbx/ (Unity-friendly: apply transforms, sensible scale in metres, +Y up / -Z forward conversion noted, UVs present).
+- Preview GIFs/PNGs of EVERY asset in art/vfx/assets/previews/ (dark background, so the glow reads). Self-review each preview image before calling an asset done.
+- art/vfx/assets/README.md: for each asset, the file names, the intended Unity use (ParticleSystem / TrailRenderer / LineRenderer / mesh / decal / UI), and suggested settings (texture-sheet animation tiles and fps, blend mode additive vs alpha, HDR emission intensity, scroll speed, lifetimes, sizes, trail widths/time, which socket from VFX-ABILITY-PLAN it attaches to, which ability beat it serves).
+- Palette: cyan-white core (0.85, 0.97, 1.0), outer cyan (0.25, 0.8, 1.0), arc cyan (0.55, 0.9, 1.0), with COPPER accents matching the model's copper/halo (sample the value from the model docs or vfx.py; note it in the README).
+- Append short timestamped progress lines to art/vfx/assets/vfx-run1-progress.txt as you go.
+
+HOW: run Blender ONLY headless as a new process you start yourself: "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --factory-startup --python <your script>. Keep your scripts in art/vfx/assets/scripts/. Pillow/Python may be used for sheet assembly, GIFs and alpha checks.
+
+HARD RULES (non-negotiable):
+- Do NOT use the blender-mcp server or any MCP tool that connects to Blender. Never connect to, control, save into, or kill any running Blender. Stuart's interactive Blender (PID 4500) has unsaved work; leave every blender.exe you did not start alone. Other agents' background Blenders are also off limits.
+- Do NOT touch art/anim/ (any file), any anim .blend, the rig (art/hybrid/ .blend files), or tools/blender/anim/. Read-only references as listed above only. Another agent is working on the animation right now.
+- No Unity changes yet (no Unity project, no C#).
+- No git operations of any kind, never push. Never delete anything (move stale files into an _old/ subfolder inside art/vfx/assets/ instead). Never read .env.
+- Only write inside art/vfx/assets/.
+
+When finished, write a short summary at the top of art/vfx/assets/README.md (asset count, files, anything left undone) and stop.

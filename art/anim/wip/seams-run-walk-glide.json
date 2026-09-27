@@ -1,0 +1,27 @@
+[
+  {
+    "seam": "Run forward wrap",
+    "max_mm": 0.0,
+    "bone": "R middle.2"
+  },
+  {
+    "seam": "Walk forward wrap",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Glide enter from Run forward f10",
+    "max_mm": 0.0,
+    "bone": "L middle.3"
+  },
+  {
+    "seam": "Glide loop wrap",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Glide exit to Run forward f1",
+    "max_mm": 0.0,
+    "bone": "R middle.3"
+  }
+]

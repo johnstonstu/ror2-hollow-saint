@@ -1,0 +1,226 @@
+{
+ "body_verts": 4758,
+ "body_polys": 8260,
+ "dominant_group_counts": {
+  "chest": 1038,
+  "head": 683,
+  "spine": 453,
+  "L shin": 363,
+  "R shin": 324,
+  "pelvis": 278,
+  "L thigh": 257,
+  "L foot": 253,
+  "R foot": 180,
+  "R thigh": 168,
+  "L upperarm": 120,
+  "R upperarm": 112,
+  "L toe": 107,
+  "R toe": 103,
+  "R forearm": 75,
+  "L forearm": 57,
+  "neck": 32,
+  "L shoulder": 27,
+  "tabard front.3": 25,
+  "R shoulder": 23,
+  "tabard back.2": 21,
+  "tabard back.1": 18,
+  "tabard front.2": 17,
+  "tabard front.1": 16,
+  "R hand": 5,
+  "L hand": 3
+ },
+ "rest": {
+  "L": {
+   "palm_n_candidate": [
+    -0.723,
+    -0.666,
+    -0.181
+   ],
+   "thumb_tip": [
+    0.422,
+    0.005,
+    0.788
+   ],
+   "index_tip": [
+    0.481,
+    -0.021,
+    0.69
+   ]
+  },
+  "R": {
+   "palm_n_candidate": [
+    -0.723,
+    0.666,
+    0.181
+   ],
+   "thumb_tip": [
+    -0.469,
+    -0.045,
+    0.788
+   ],
+   "index_tip": [
+    -0.528,
+    -0.071,
+    0.69
+   ]
+  }
+ },
+ "tests": {
+  "L thumb X-30": {
+   "tip_to_index2_m": 0.1565,
+   "tip_to_middle_knuckle_m": 0.1571,
+   "tip": [
+    0.448,
+    0.127,
+    0.832
+   ]
+  },
+  "L thumb Z-30": {
+   "tip_to_index2_m": 0.1975,
+   "tip_to_middle_knuckle_m": 0.1462,
+   "tip": [
+    0.36,
+    -0.01,
+    0.884
+   ]
+  },
+  "L index X-30": {
+   "tip": [
+    0.465,
+    0.122,
+    0.741
+   ],
+   "tip_to_hand_head_m": 0.2689
+  },
+  "L thumb X+30": {
+   "tip_to_index2_m": 0.1372,
+   "tip_to_middle_knuckle_m": 0.0714,
+   "tip": [
+    0.455,
+    -0.069,
+    0.856
+   ]
+  },
+  "L thumb Z+30": {
+   "tip_to_index2_m": 0.0621,
+   "tip_to_middle_knuckle_m": 0.0618,
+   "tip": [
+    0.533,
+    -0.013,
+    0.805
+   ]
+  },
+  "L index X+30": {
+   "tip": [
+    0.478,
+    -0.121,
+    0.787
+   ],
+   "tip_to_hand_head_m": 0.2279
+  },
+  "L thumb X+60": {
+   "tip_to_index2_m": 0.1646,
+   "tip_to_middle_knuckle_m": 0.0595,
+   "tip": [
+    0.478,
+    -0.041,
+    0.908
+   ]
+  },
+  "L thumb Z+60": {
+   "tip_to_index2_m": 0.158,
+   "tip_to_middle_knuckle_m": 0.0649,
+   "tip": [
+    0.554,
+    -0.026,
+    0.9
+   ]
+  },
+  "L index X+60": {
+   "tip": [
+    0.482,
+    -0.089,
+    0.89
+   ],
+   "tip_to_hand_head_m": 0.1269
+  },
+  "R thumb X-30": {
+   "tip_to_index2_m": 0.1565,
+   "tip_to_middle_knuckle_m": 0.1571,
+   "tip": [
+    -0.495,
+    0.077,
+    0.832
+   ]
+  },
+  "R thumb Z-30": {
+   "tip_to_index2_m": 0.0621,
+   "tip_to_middle_knuckle_m": 0.0618,
+   "tip": [
+    -0.58,
+    -0.063,
+    0.805
+   ]
+  },
+  "R index X-30": {
+   "tip": [
+    -0.512,
+    0.072,
+    0.741
+   ],
+   "tip_to_hand_head_m": 0.2537
+  },
+  "R thumb X+30": {
+   "tip_to_index2_m": 0.1372,
+   "tip_to_middle_knuckle_m": 0.0714,
+   "tip": [
+    -0.502,
+    -0.119,
+    0.856
+   ]
+  },
+  "R thumb Z+30": {
+   "tip_to_index2_m": 0.1975,
+   "tip_to_middle_knuckle_m": 0.1462,
+   "tip": [
+    -0.407,
+    -0.06,
+    0.884
+   ]
+  },
+  "R index X+30": {
+   "tip": [
+    -0.525,
+    -0.171,
+    0.787
+   ],
+   "tip_to_hand_head_m": 0.2637
+  },
+  "R thumb X+60": {
+   "tip_to_index2_m": 0.1646,
+   "tip_to_middle_knuckle_m": 0.0595,
+   "tip": [
+    -0.525,
+    -0.091,
+    0.908
+   ]
+  },
+  "R thumb Z+60": {
+   "tip_to_index2_m": 0.2344,
+   "tip_to_middle_knuckle_m": 0.1381,
+   "tip": [
+    -0.463,
+    -0.08,
+    0.966
+   ]
+  },
+  "R index X+60": {
+   "tip": [
+    -0.529,
+    -0.139,
+    0.89
+   ],
+   "tip_to_hand_head_m": 0.1755
+  }
+ }
+}

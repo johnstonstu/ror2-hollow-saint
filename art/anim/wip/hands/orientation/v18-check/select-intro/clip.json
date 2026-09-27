@@ -1,0 +1,30 @@
+{
+ "title": "Select intro",
+ "tag": "v18-check",
+ "rendered_frames": [
+  25
+ ],
+ "rows": [
+  {
+   "f": 25,
+   "L": {
+    "thumb_up": -0.287,
+    "palm_fwd": -0.321,
+    "hand": 0.824,
+    "raise": 46.664,
+    "elbow_open": 123.787,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": -0.968,
+    "palm_fwd": 0.077,
+    "hand": -0.913,
+    "raise": 45.8,
+    "elbow_open": 98.722,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

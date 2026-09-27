@@ -1,0 +1,124 @@
+[
+ {
+  "name": "full-audit-08-tabard-back-into-pelvis-NOSHRINK-run-forward-f6",
+  "clip": "Run forward",
+  "frame": 6,
+  "target": "bone:pelvis",
+  "dir": [
+   0.35,
+   1,
+   0.05
+  ],
+  "dist": 1.0,
+  "highlight": {
+   "tabard back": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "tabard front": [
+    1,
+    0.55,
+    0.1,
+    1
+   ],
+   "body:pelvis": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "body:L thigh": [
+    0.2,
+    0.35,
+    1,
+    1
+   ],
+   "body:R thigh": [
+    0.2,
+    0.35,
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-08b-tabard-front-into-thigh-NOSHRINK-walk-f8",
+  "clip": "Walk forward",
+  "frame": 8,
+  "target": "bone:R thigh",
+  "along": 0.6,
+  "dir": [
+   -0.5,
+   -1,
+   0.1
+  ],
+  "dist": 1.0,
+  "highlight": {
+   "tabard front": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:R thigh": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "body:L thigh": [
+    0.2,
+    0.35,
+    1,
+    1
+   ],
+   "body:pelvis": [
+    0.55,
+    0.55,
+    0.9,
+    1
+   ]
+  }
+ },
+ {
+  "name": "full-audit-08c-tabard-front-into-shin-NOSHRINK-glide-loop-f28",
+  "clip": "Glide loop",
+  "frame": 28,
+  "target": "bone:L shin",
+  "along": 0.2,
+  "dir": [
+   0.6,
+   -1,
+   0.1
+  ],
+  "dist": 1.0,
+  "highlight": {
+   "tabard front": [
+    1,
+    0.15,
+    0.15,
+    1
+   ],
+   "body:L shin": [
+    0.1,
+    0.8,
+    1,
+    1
+   ],
+   "body:L thigh": [
+    0.2,
+    0.35,
+    1,
+    1
+   ],
+   "body:R thigh": [
+    0.2,
+    0.35,
+    1,
+    1
+   ]
+  }
+ }
+]

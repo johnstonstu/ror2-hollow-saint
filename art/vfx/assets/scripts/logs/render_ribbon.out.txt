@@ -1,0 +1,5 @@
+00:01.218  blend            | Read blend: "C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\hs-vfx-v06.blend"
+00:01.906  render           | Saved: 'C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\previews\frames\jet_ribbon\jet_ribbon_024.png'
+Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
+
+Blender quit

@@ -1,0 +1,191 @@
+{
+  "title": "Ascend",
+  "frames": [
+    1,
+    21
+  ],
+  "loop": true,
+  "markers": {},
+  "ik_miss_m": 8e-05,
+  "max_leg_extension": 0.9067,
+  "max_leg_extension_at": "R8",
+  "ik_miss_at": "L20",
+  "ik_miss_frames": {},
+  "kind": "air",
+  "halo_max_offset_m": 0.0121,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "module": "air",
+  "action": "HS_anim | Ascend",
+  "planted_frame_pairs": 0,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.0101,
+  "min_toe_tip_z": 0.0217,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0725,
+      "frame": 16,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        97,
+        105,
+        111,
+        117,
+        120,
+        121,
+        119,
+        115,
+        110,
+        103,
+        96,
+        89,
+        83,
+        77,
+        74,
+        73,
+        73,
+        77,
+        82,
+        89,
+        97
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0788,
+      "frame": 14,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        119,
+        125,
+        130,
+        132,
+        131,
+        128,
+        123,
+        116,
+        108,
+        99,
+        91,
+        85,
+        81,
+        79,
+        80,
+        83,
+        88,
+        96,
+        103,
+        112,
+        119
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0725,
+  "arm_clear_ok": null,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.0,
+    "finger_pops_deg_f2": [
+      [
+        0.54,
+        "R little.2",
+        17
+      ],
+      [
+        0.54,
+        "R little.2",
+        7
+      ],
+      [
+        0.53,
+        "L little.2",
+        17
+      ],
+      [
+        0.53,
+        "L little.2",
+        7
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": -2.7,
+        "hand_twist_frame": 16,
+        "hand_bend_max_deg": 10.6,
+        "forearm_roll_deg": 30.0,
+        "forearm_roll_frame": 10
+      },
+      "R": {
+        "hand_twist_deg": 2.7,
+        "hand_twist_frame": 16,
+        "hand_bend_max_deg": 10.6,
+        "forearm_roll_deg": -30.0,
+        "forearm_roll_frame": 10
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 10.0,
+        "thumb_max": 10.1,
+        "finger_min": 14.1,
+        "finger_max": 62.3
+      },
+      "R": {
+        "thumb_min": 10.0,
+        "thumb_max": 10.1,
+        "finger_min": 14.1,
+        "finger_max": 62.3
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 0.54,
+    "worst_pop": "R little.2 f17",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.0
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ]
+}

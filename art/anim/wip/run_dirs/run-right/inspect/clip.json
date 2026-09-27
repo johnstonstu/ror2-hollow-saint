@@ -1,0 +1,107 @@
+{
+  "title": "Run right",
+  "frames": [
+    1,
+    17
+  ],
+  "loop": true,
+  "markers": {
+    "L contact": 1,
+    "R contact": 9
+  },
+  "ik_miss_m": 8e-05,
+  "max_leg_extension": 0.9252,
+  "ik_miss_frames": {},
+  "direction": "right",
+  "speed_mps": 4.5,
+  "meters_per_cycle": 3.0,
+  "stance": 0.15,
+  "kind": "locomotion",
+  "direction_slide_m_per_frame": 2e-05,
+  "direction_slide_pairs": 4,
+  "min_ball_gap_x_m": 0.2935,
+  "min_ankle_gap_x_m": 0.2062,
+  "min_knee_gap_x_m": 0.4355,
+  "halo_max_offset_m": 0.0224,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "module": "run_dirs",
+  "action": "HS_anim | Run right",
+  "planted_frame_pairs": 4,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0434,
+      "frame": 4,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        67,
+        63,
+        54,
+        43,
+        46,
+        47,
+        58,
+        80,
+        95,
+        100,
+        95,
+        71,
+        58,
+        51,
+        55,
+        63,
+        67
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0297,
+      "frame": 12,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        56,
+        49,
+        47,
+        47,
+        42,
+        38,
+        39,
+        40,
+        41,
+        38,
+        31,
+        30,
+        34,
+        44,
+        59,
+        63,
+        56
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0297,
+  "arm_clear_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "front",
+    "side",
+    "back",
+    "hero"
+  ],
+  "rendered_frames": [
+    1,
+    5,
+    9,
+    13
+  ]
+}

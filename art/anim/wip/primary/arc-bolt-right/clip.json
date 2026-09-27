@@ -1,0 +1,229 @@
+{
+  "title": "Arc Bolt right",
+  "frames": [
+    1,
+    20
+  ],
+  "loop": false,
+  "markers": {
+    "Anticipation": 3,
+    "Bolt release": 5,
+    "Recovered": 20
+  },
+  "ik_miss_m": 0.0,
+  "max_leg_extension": 0.0,
+  "max_leg_extension_at": "",
+  "ik_miss_at": "",
+  "ik_miss_frames": {},
+  "kind": "gesture",
+  "hand": "R",
+  "muzzle": "R muzzle",
+  "finger_accents": [
+    3,
+    5
+  ],
+  "arm_release": {
+    "swing": -67.75,
+    "adduct": -3.5,
+    "wx": -20.62,
+    "wy": -52.25
+  },
+  "muzzle_release_pos": [
+    -0.237,
+    -0.845,
+    1.363
+  ],
+  "muzzle_release_dir": [
+    -0.0,
+    -1.0,
+    -0.001
+  ],
+  "muzzle_release_angle_to_-Y_deg": 0.06,
+  "start_rest_err_m": 0.096141,
+  "end_rest_err_m": 0.096141,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "module": "primary",
+  "action": "HS_anim | Arc Bolt right",
+  "planted_frame_pairs": 38,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0836,
+      "frame": 6,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        103,
+        108,
+        113,
+        100,
+        88,
+        84,
+        85,
+        87,
+        88,
+        88,
+        88,
+        88,
+        89,
+        90,
+        92,
+        96,
+        99,
+        101,
+        103,
+        103
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0489,
+      "frame": 3,
+      "part": "little segment 3",
+      "against": "chest",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        106,
+        103,
+        49,
+        176,
+        184,
+        167,
+        172,
+        180,
+        184,
+        187,
+        189,
+        192,
+        202,
+        216,
+        198,
+        163,
+        133,
+        117,
+        109,
+        106
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0489,
+  "arm_clear_ok": null,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.4,
+    "finger_pops_deg_f2": [
+      [
+        3.95,
+        "R little.2",
+        12
+      ],
+      [
+        3.2,
+        "R little.2",
+        19
+      ],
+      [
+        2.91,
+        "R ring.2",
+        19
+      ],
+      [
+        2.8,
+        "R little.1",
+        19
+      ]
+    ],
+    "accent_pops_deg_f2": [
+      [
+        19.5,
+        "R ring.2",
+        5
+      ],
+      [
+        18.72,
+        "R little.3",
+        5
+      ]
+    ],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": -0.0,
+        "hand_twist_frame": 3,
+        "hand_bend_max_deg": 0.0,
+        "forearm_roll_deg": -0.0,
+        "forearm_roll_frame": 10
+      },
+      "R": {
+        "hand_twist_deg": -6.8,
+        "hand_twist_frame": 6,
+        "hand_bend_max_deg": 58.3,
+        "forearm_roll_deg": -80.0,
+        "forearm_roll_frame": 11
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 12.0,
+        "thumb_max": 12.0,
+        "finger_min": 18.5,
+        "finger_max": 60.9
+      },
+      "R": {
+        "thumb_min": 7.2,
+        "thumb_max": 28.0,
+        "finger_min": -5.8,
+        "finger_max": 103.8
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 3.95,
+    "worst_pop": "R little.2 f12",
+    "worst_accent_pop_deg_f2": 19.5,
+    "max_pen_mm": 0.4
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front",
+    "gameplay"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ]
+}

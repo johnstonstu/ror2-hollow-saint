@@ -1,0 +1,30 @@
+{
+ "title": "Open Circuit",
+ "tag": "v18-check",
+ "rendered_frames": [
+  17
+ ],
+ "rows": [
+  {
+   "f": 17,
+   "L": {
+    "thumb_up": -0.899,
+    "palm_fwd": -0.052,
+    "hand": 0.793,
+    "raise": 42.245,
+    "elbow_open": 114.583,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": -0.939,
+    "palm_fwd": 0.511,
+    "hand": -0.793,
+    "raise": 57.224,
+    "elbow_open": 115.467,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

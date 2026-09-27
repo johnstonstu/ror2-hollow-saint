@@ -1,0 +1,10 @@
+C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\render_previews.py:46: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  w.use_nodes = True
+Traceback (most recent call last):
+  File "C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\render_previews.py", line 252, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\render_previews.py", line 205, in main
+    ring.material_slots[0].material = bpy.data.materials['HS_M_static_ring']
+                                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'bpy_prop_collection[key]: key "HS_M_static_ring" not found'

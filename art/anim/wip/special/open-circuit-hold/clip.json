@@ -1,0 +1,231 @@
+{
+  "title": "Open Circuit hold",
+  "frames": [
+    1,
+    25
+  ],
+  "loop": true,
+  "markers": {
+    "Pulse": 1
+  },
+  "ik_miss_m": 0.0,
+  "max_leg_extension": 0.0,
+  "max_leg_extension_at": "",
+  "ik_miss_at": "",
+  "ik_miss_frames": {},
+  "kind": "gesture",
+  "layer": "upper body (mask excludes pelvis/legs)",
+  "max_arm_raise_deg": 48.6,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "max_ang_vel_deg_f": [
+    2.63,
+    "R hand",
+    20
+  ],
+  "max_ang_acc_deg_f2": [
+    3.11,
+    "L hand",
+    22
+  ],
+  "max_pos_acc_mm_f2": [
+    7.47,
+    "halo 3",
+    18
+  ],
+  "arc_signed_min_mm": 9000.0,
+  "arc_signed_frame": 0,
+  "arc_signed_rest_mm": -9.7,
+  "arc_verts_inside_max": 0,
+  "arc_verts_inside_frame": 0,
+  "arc_verts_inside_rest": 23,
+  "hand_chest_min_mm": 382.0,
+  "hand_chest_frame": 20,
+  "pauldron_follow_err_deg": 2.5,
+  "module": "special",
+  "action": "HS_anim | Open Circuit hold",
+  "planted_frame_pairs": 48,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0973,
+      "frame": 21,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        116,
+        124,
+        131,
+        136,
+        139,
+        139,
+        137,
+        134,
+        131,
+        128,
+        125,
+        124,
+        122,
+        121,
+        118,
+        115,
+        111,
+        106,
+        102,
+        99,
+        97,
+        99,
+        103,
+        109,
+        116
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.1001,
+      "frame": 20,
+      "part": "forearm",
+      "against": "R thigh",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        126,
+        134,
+        142,
+        147,
+        149,
+        148,
+        144,
+        140,
+        134,
+        129,
+        126,
+        123,
+        121,
+        119,
+        117,
+        114,
+        110,
+        106,
+        102,
+        100,
+        100,
+        103,
+        109,
+        117,
+        126
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0973,
+  "arm_clear_ok": null,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.0,
+    "finger_pops_deg_f2": [
+      [
+        10.31,
+        "R little.2",
+        15
+      ],
+      [
+        9.44,
+        "R ring.2",
+        15
+      ],
+      [
+        8.97,
+        "R little.3",
+        15
+      ],
+      [
+        8.86,
+        "L little.2",
+        11
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": -18.1,
+        "hand_twist_frame": 6,
+        "hand_bend_max_deg": 31.5,
+        "forearm_roll_deg": -49.2,
+        "forearm_roll_frame": 1
+      },
+      "R": {
+        "hand_twist_deg": 23.4,
+        "hand_twist_frame": 5,
+        "hand_bend_max_deg": 32.9,
+        "forearm_roll_deg": 49.6,
+        "forearm_roll_frame": 12
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 4.7,
+        "thumb_max": 10.1,
+        "finger_min": -1.8,
+        "finger_max": 59.2
+      },
+      "R": {
+        "thumb_min": 4.7,
+        "thumb_max": 10.1,
+        "finger_min": -2.7,
+        "finger_max": 58.5
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 10.31,
+    "worst_pop": "R little.2 f15",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.0
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front",
+    "chase"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ]
+}

@@ -1,0 +1,5511 @@
+{
+ "rig": "Hollow Saint | v8 rig",
+ "rig_matrix": [
+  [
+   1.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   1.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "fps": 24,
+ "engine": "CYCLES",
+ "res": [
+  1100,
+  1400
+ ],
+ "body_z": [
+  0.008,
+  2.1008
+ ],
+ "pose_position": "POSE",
+ "active_action": "HS_v10 | Idle - contained storm",
+ "bones": {
+  "root": {
+   "parent": null,
+   "deform": false,
+   "head": [
+    0.0,
+    0.0,
+    0.02
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    0.95
+   ],
+   "length": 0.93,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "pelvis": {
+   "parent": "root",
+   "deform": true,
+   "head": [
+    0.0,
+    0.0,
+    0.88
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.08
+   ],
+   "length": 0.2,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "spine": {
+   "parent": "pelvis",
+   "deform": true,
+   "head": [
+    0.0,
+    0.0,
+    1.02
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.4
+   ],
+   "length": 0.38,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "chest": {
+   "parent": "spine",
+   "deform": true,
+   "head": [
+    0.0,
+    0.0,
+    1.36
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.52
+   ],
+   "length": 0.16,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "neck": {
+   "parent": "chest",
+   "deform": true,
+   "head": [
+    0.0,
+    0.0,
+    1.49
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.7
+   ],
+   "length": 0.21,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "head": {
+   "parent": "neck",
+   "deform": true,
+   "head": [
+    0.0,
+    0.0,
+    1.68
+   ],
+   "tail": [
+    0.0,
+    0.0,
+    1.91
+   ],
+   "length": 0.23,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "head socket": {
+   "parent": "head",
+   "deform": false,
+   "head": [
+    0.0,
+    -0.02,
+    1.95
+   ],
+   "tail": [
+    0.0,
+    -0.02,
+    2.03
+   ],
+   "length": 0.08,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Sockets"
+   ]
+  },
+  "L upperarm": {
+   "parent": "chest",
+   "deform": true,
+   "head": [
+    0.17,
+    0.0,
+    1.42
+   ],
+   "tail": [
+    0.34,
+    0.0,
+    1.2
+   ],
+   "length": 0.278,
+   "x": [
+    0.6261,
+    -0.6114,
+    0.4838
+   ],
+   "y": [
+    0.6114,
+    -0.0,
+    -0.7913
+   ],
+   "z": [
+    0.4838,
+    0.7913,
+    0.3739
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L forearm": {
+   "parent": "L upperarm",
+   "deform": true,
+   "head": [
+    0.34,
+    0.0,
+    1.2
+   ],
+   "tail": [
+    0.47,
+    0.0,
+    0.98
+   ],
+   "length": 0.2555,
+   "x": [
+    0.7412,
+    -0.5087,
+    0.438
+   ],
+   "y": [
+    0.5087,
+    0.0,
+    -0.8609
+   ],
+   "z": [
+    0.438,
+    0.8609,
+    0.2588
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "IK",
+     "name": "IK (enable for IK posing)",
+     "influence": 0.0,
+     "subtarget": "L hand IK",
+     "pole": "L elbow pole",
+     "pole_angle": 2.1904
+    }
+   ],
+   "collections": []
+  },
+  "L hand": {
+   "parent": "L forearm",
+   "deform": true,
+   "head": [
+    0.47,
+    0.0,
+    0.98
+   ],
+   "tail": [
+    0.5,
+    0.0,
+    0.86
+   ],
+   "length": 0.1237,
+   "x": [
+    0.9412,
+    -0.2425,
+    0.2353
+   ],
+   "y": [
+    0.2425,
+    0.0,
+    -0.9701
+   ],
+   "z": [
+    0.2353,
+    0.9701,
+    0.0588
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "COPY_ROTATION",
+     "name": "IK rotation (enable with IK)",
+     "influence": 0.0,
+     "subtarget": "L hand IK",
+     "pole": "",
+     "pole_angle": 0
+    }
+   ],
+   "collections": []
+  },
+  "L index.1": {
+   "parent": "L hand",
+   "deform": true,
+   "head": [
+    0.4875,
+    0.0014,
+    0.8551
+   ],
+   "tail": [
+    0.5042,
+    0.0074,
+    0.7852
+   ],
+   "length": 0.0721,
+   "x": [
+    -0.9728,
+    0.0,
+    -0.2318
+   ],
+   "y": [
+    0.231,
+    0.0828,
+    -0.9694
+   ],
+   "z": [
+    0.0192,
+    -0.9966,
+    -0.0806
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L index.2": {
+   "parent": "L index.1",
+   "deform": true,
+   "head": [
+    0.5042,
+    0.0074,
+    0.7852
+   ],
+   "tail": [
+    0.5078,
+    0.0032,
+    0.7197
+   ],
+   "length": 0.0658,
+   "x": [
+    -0.9985,
+    0.0,
+    -0.0543
+   ],
+   "y": [
+    0.0542,
+    -0.0642,
+    -0.9965
+   ],
+   "z": [
+    -0.0035,
+    -0.9979,
+    0.0642
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L index.3": {
+   "parent": "L index.2",
+   "deform": true,
+   "head": [
+    0.5078,
+    0.0032,
+    0.7197
+   ],
+   "tail": [
+    0.4809,
+    -0.0206,
+    0.6896
+   ],
+   "length": 0.0468,
+   "x": [
+    -0.7459,
+    0.0,
+    0.6661
+   ],
+   "y": [
+    -0.574,
+    -0.5074,
+    -0.6428
+   ],
+   "z": [
+    0.3379,
+    -0.8617,
+    0.3784
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L muzzle": {
+   "parent": "L index.3",
+   "deform": false,
+   "head": [
+    0.4809,
+    -0.0206,
+    0.6896
+   ],
+   "tail": [
+    0.4579,
+    -0.0408,
+    0.6639
+   ],
+   "length": 0.04,
+   "x": [
+    0.3313,
+    0.574,
+    -0.7489
+   ],
+   "y": [
+    -0.574,
+    -0.5074,
+    -0.6428
+   ],
+   "z": [
+    -0.7489,
+    0.6428,
+    0.1613
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Sockets"
+   ]
+  },
+  "L middle.1": {
+   "parent": "L hand",
+   "deform": true,
+   "head": [
+    0.5036,
+    -0.0172,
+    0.8597
+   ],
+   "tail": [
+    0.527,
+    -0.0154,
+    0.7814
+   ],
+   "length": 0.0817,
+   "x": [
+    -0.9578,
+    0.0,
+    -0.2874
+   ],
+   "y": [
+    0.2873,
+    0.0214,
+    -0.9576
+   ],
+   "z": [
+    0.0061,
+    -0.9998,
+    -0.0205
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L middle.2": {
+   "parent": "L middle.1",
+   "deform": true,
+   "head": [
+    0.527,
+    -0.0154,
+    0.7814
+   ],
+   "tail": [
+    0.5371,
+    -0.0239,
+    0.7086
+   ],
+   "length": 0.074,
+   "x": [
+    -0.9906,
+    0.0,
+    -0.1365
+   ],
+   "y": [
+    0.1356,
+    -0.1147,
+    -0.9841
+   ],
+   "z": [
+    -0.0157,
+    -0.9934,
+    0.1136
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L middle.3": {
+   "parent": "L middle.2",
+   "deform": true,
+   "head": [
+    0.5371,
+    -0.0239,
+    0.7086
+   ],
+   "tail": [
+    0.5054,
+    -0.0529,
+    0.674
+   ],
+   "length": 0.0552,
+   "x": [
+    -0.7378,
+    -0.0,
+    0.675
+   ],
+   "y": [
+    -0.5742,
+    -0.5257,
+    -0.6276
+   ],
+   "z": [
+    0.3548,
+    -0.8507,
+    0.3878
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L ring.1": {
+   "parent": "L hand",
+   "deform": true,
+   "head": [
+    0.5215,
+    -0.0381,
+    0.8648
+   ],
+   "tail": [
+    0.55,
+    -0.0443,
+    0.7938
+   ],
+   "length": 0.0768,
+   "x": [
+    -0.9279,
+    0.0,
+    -0.3729
+   ],
+   "y": [
+    0.3716,
+    -0.081,
+    -0.9248
+   ],
+   "z": [
+    -0.0302,
+    -0.9967,
+    0.0752
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L ring.2": {
+   "parent": "L ring.1",
+   "deform": true,
+   "head": [
+    0.55,
+    -0.0443,
+    0.7938
+   ],
+   "tail": [
+    0.5653,
+    -0.0607,
+    0.7276
+   ],
+   "length": 0.0699,
+   "x": [
+    -0.9743,
+    0.0,
+    -0.2251
+   ],
+   "y": [
+    0.2187,
+    -0.2352,
+    -0.947
+   ],
+   "z": [
+    -0.0529,
+    -0.9719,
+    0.2292
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L ring.3": {
+   "parent": "L ring.2",
+   "deform": true,
+   "head": [
+    0.5653,
+    -0.0607,
+    0.7276
+   ],
+   "tail": [
+    0.5219,
+    -0.1004,
+    0.6906
+   ],
+   "length": 0.0695,
+   "x": [
+    -0.6481,
+    -0.0,
+    0.7616
+   ],
+   "y": [
+    -0.6252,
+    -0.5711,
+    -0.532
+   ],
+   "z": [
+    0.435,
+    -0.8209,
+    0.3701
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L little.1": {
+   "parent": "L hand",
+   "deform": true,
+   "head": [
+    0.5375,
+    -0.0567,
+    0.8693
+   ],
+   "tail": [
+    0.5655,
+    -0.067,
+    0.8111
+   ],
+   "length": 0.0654,
+   "x": [
+    -0.9012,
+    -0.0,
+    -0.4335
+   ],
+   "y": [
+    0.4281,
+    -0.1569,
+    -0.89
+   ],
+   "z": [
+    -0.068,
+    -0.9876,
+    0.1414
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L little.2": {
+   "parent": "L little.1",
+   "deform": true,
+   "head": [
+    0.5655,
+    -0.067,
+    0.8111
+   ],
+   "tail": [
+    0.5807,
+    -0.0874,
+    0.7564
+   ],
+   "length": 0.0604,
+   "x": [
+    -0.9636,
+    0.0,
+    -0.2673
+   ],
+   "y": [
+    0.2515,
+    -0.3385,
+    -0.9067
+   ],
+   "z": [
+    -0.0905,
+    -0.941,
+    0.3262
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L little.3": {
+   "parent": "L little.2",
+   "deform": true,
+   "head": [
+    0.5807,
+    -0.0874,
+    0.7564
+   ],
+   "tail": [
+    0.5235,
+    -0.1392,
+    0.7184
+   ],
+   "length": 0.086,
+   "x": [
+    -0.553,
+    -0.0,
+    0.8332
+   ],
+   "y": [
+    -0.6653,
+    -0.6021,
+    -0.4415
+   ],
+   "z": [
+    0.5016,
+    -0.7985,
+    0.3329
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L thumb.1": {
+   "parent": "L hand",
+   "deform": true,
+   "head": [
+    0.4781,
+    0.0041,
+    0.9047
+   ],
+   "tail": [
+    0.4519,
+    0.0276,
+    0.8624
+   ],
+   "length": 0.055,
+   "x": [
+    -0.8496,
+    -0.0,
+    0.5274
+   ],
+   "y": [
+    -0.4769,
+    0.427,
+    -0.7683
+   ],
+   "z": [
+    -0.2252,
+    -0.9042,
+    -0.3628
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L thumb.2": {
+   "parent": "L thumb.1",
+   "deform": true,
+   "head": [
+    0.4519,
+    0.0276,
+    0.8624
+   ],
+   "tail": [
+    0.435,
+    0.0372,
+    0.8186
+   ],
+   "length": 0.048,
+   "x": [
+    -0.9333,
+    0.0,
+    0.3592
+   ],
+   "y": [
+    -0.3518,
+    0.2012,
+    -0.9142
+   ],
+   "z": [
+    -0.0723,
+    -0.9796,
+    -0.1877
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L thumb.3": {
+   "parent": "L thumb.2",
+   "deform": true,
+   "head": [
+    0.435,
+    0.0372,
+    0.8186
+   ],
+   "tail": [
+    0.4218,
+    0.0051,
+    0.7884
+   ],
+   "length": 0.046,
+   "x": [
+    -0.9158,
+    -0.0,
+    0.4017
+   ],
+   "y": [
+    -0.2874,
+    -0.6986,
+    -0.6553
+   ],
+   "z": [
+    0.2806,
+    -0.7155,
+    0.6398
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L scapula": {
+   "parent": "chest",
+   "deform": false,
+   "head": [
+    0.14,
+    0.0,
+    1.48
+   ],
+   "tail": [
+    0.22,
+    0.0,
+    1.42
+   ],
+   "length": 0.1,
+   "x": [
+    0.36,
+    -0.8,
+    0.48
+   ],
+   "y": [
+    0.8,
+    0.0,
+    -0.6
+   ],
+   "z": [
+    0.48,
+    0.6,
+    0.64
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L pauldron": {
+   "parent": "L scapula",
+   "deform": true,
+   "head": [
+    0.17,
+    0.0,
+    1.42
+   ],
+   "tail": [
+    0.2434,
+    0.0,
+    1.325
+   ],
+   "length": 0.12,
+   "x": [
+    0.6261,
+    -0.6114,
+    0.4838
+   ],
+   "y": [
+    0.6114,
+    0.0,
+    -0.7913
+   ],
+   "z": [
+    0.4838,
+    0.7913,
+    0.3739
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "COPY_ROTATION",
+     "name": "Follow upper arm 40%",
+     "influence": 0.4000000059604645,
+     "subtarget": "L upperarm",
+     "pole": "",
+     "pole_angle": 0
+    }
+   ],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "R upperarm": {
+   "parent": "chest",
+   "deform": true,
+   "head": [
+    -0.17,
+    0.0,
+    1.42
+   ],
+   "tail": [
+    -0.34,
+    0.0,
+    1.2
+   ],
+   "length": 0.278,
+   "x": [
+    0.6261,
+    0.6114,
+    -0.4838
+   ],
+   "y": [
+    -0.6114,
+    -0.0,
+    -0.7913
+   ],
+   "z": [
+    -0.4838,
+    0.7913,
+    0.3739
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R forearm": {
+   "parent": "R upperarm",
+   "deform": true,
+   "head": [
+    -0.34,
+    0.0,
+    1.2
+   ],
+   "tail": [
+    -0.47,
+    0.0,
+    0.98
+   ],
+   "length": 0.2555,
+   "x": [
+    0.7412,
+    0.5087,
+    -0.438
+   ],
+   "y": [
+    -0.5087,
+    0.0,
+    -0.8609
+   ],
+   "z": [
+    -0.438,
+    0.8609,
+    0.2588
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "IK",
+     "name": "IK (enable for IK posing)",
+     "influence": 0.0,
+     "subtarget": "R hand IK",
+     "pole": "R elbow pole",
+     "pole_angle": 0.9512
+    }
+   ],
+   "collections": []
+  },
+  "R hand": {
+   "parent": "R forearm",
+   "deform": true,
+   "head": [
+    -0.47,
+    0.0,
+    0.98
+   ],
+   "tail": [
+    -0.5,
+    0.0,
+    0.86
+   ],
+   "length": 0.1237,
+   "x": [
+    0.9412,
+    0.2425,
+    -0.2353
+   ],
+   "y": [
+    -0.2425,
+    0.0,
+    -0.9701
+   ],
+   "z": [
+    -0.2353,
+    0.9701,
+    0.0588
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "COPY_ROTATION",
+     "name": "IK rotation (enable with IK)",
+     "influence": 0.0,
+     "subtarget": "R hand IK",
+     "pole": "",
+     "pole_angle": 0
+    }
+   ],
+   "collections": []
+  },
+  "R index.1": {
+   "parent": "R hand",
+   "deform": true,
+   "head": [
+    -0.5345,
+    -0.0486,
+    0.8551
+   ],
+   "tail": [
+    -0.5512,
+    -0.0426,
+    0.7852
+   ],
+   "length": 0.0721,
+   "x": [
+    -0.9728,
+    -0.0,
+    0.2318
+   ],
+   "y": [
+    -0.231,
+    0.0828,
+    -0.9694
+   ],
+   "z": [
+    -0.0192,
+    -0.9966,
+    -0.0806
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R index.2": {
+   "parent": "R index.1",
+   "deform": true,
+   "head": [
+    -0.5512,
+    -0.0426,
+    0.7852
+   ],
+   "tail": [
+    -0.5548,
+    -0.0468,
+    0.7197
+   ],
+   "length": 0.0658,
+   "x": [
+    -0.9985,
+    -0.0,
+    0.0543
+   ],
+   "y": [
+    -0.0542,
+    -0.0642,
+    -0.9965
+   ],
+   "z": [
+    0.0035,
+    -0.9979,
+    0.0642
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R index.3": {
+   "parent": "R index.2",
+   "deform": true,
+   "head": [
+    -0.5548,
+    -0.0468,
+    0.7197
+   ],
+   "tail": [
+    -0.5279,
+    -0.0706,
+    0.6896
+   ],
+   "length": 0.0468,
+   "x": [
+    -0.7459,
+    0.0,
+    -0.6661
+   ],
+   "y": [
+    0.574,
+    -0.5074,
+    -0.6428
+   ],
+   "z": [
+    -0.3379,
+    -0.8617,
+    0.3784
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R muzzle": {
+   "parent": "R index.3",
+   "deform": false,
+   "head": [
+    -0.5279,
+    -0.0706,
+    0.6896
+   ],
+   "tail": [
+    -0.5049,
+    -0.0908,
+    0.6639
+   ],
+   "length": 0.04,
+   "x": [
+    0.3313,
+    -0.574,
+    0.7489
+   ],
+   "y": [
+    0.574,
+    -0.5074,
+    -0.6428
+   ],
+   "z": [
+    0.7489,
+    0.6428,
+    0.1613
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Sockets"
+   ]
+  },
+  "R middle.1": {
+   "parent": "R hand",
+   "deform": true,
+   "head": [
+    -0.5506,
+    -0.0672,
+    0.8597
+   ],
+   "tail": [
+    -0.574,
+    -0.0654,
+    0.7814
+   ],
+   "length": 0.0817,
+   "x": [
+    -0.9578,
+    -0.0,
+    0.2874
+   ],
+   "y": [
+    -0.2873,
+    0.0214,
+    -0.9576
+   ],
+   "z": [
+    -0.0061,
+    -0.9998,
+    -0.0205
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R middle.2": {
+   "parent": "R middle.1",
+   "deform": true,
+   "head": [
+    -0.574,
+    -0.0654,
+    0.7814
+   ],
+   "tail": [
+    -0.5841,
+    -0.0739,
+    0.7086
+   ],
+   "length": 0.074,
+   "x": [
+    -0.9906,
+    -0.0,
+    0.1365
+   ],
+   "y": [
+    -0.1356,
+    -0.1147,
+    -0.9841
+   ],
+   "z": [
+    0.0157,
+    -0.9934,
+    0.1136
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R middle.3": {
+   "parent": "R middle.2",
+   "deform": true,
+   "head": [
+    -0.5841,
+    -0.0739,
+    0.7086
+   ],
+   "tail": [
+    -0.5524,
+    -0.1029,
+    0.674
+   ],
+   "length": 0.0552,
+   "x": [
+    -0.7378,
+    0.0,
+    -0.675
+   ],
+   "y": [
+    0.5742,
+    -0.5257,
+    -0.6276
+   ],
+   "z": [
+    -0.3548,
+    -0.8507,
+    0.3878
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R ring.1": {
+   "parent": "R hand",
+   "deform": true,
+   "head": [
+    -0.5685,
+    -0.0881,
+    0.8648
+   ],
+   "tail": [
+    -0.597,
+    -0.0943,
+    0.7938
+   ],
+   "length": 0.0768,
+   "x": [
+    -0.9279,
+    -0.0,
+    0.3729
+   ],
+   "y": [
+    -0.3716,
+    -0.081,
+    -0.9248
+   ],
+   "z": [
+    0.0302,
+    -0.9967,
+    0.0752
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R ring.2": {
+   "parent": "R ring.1",
+   "deform": true,
+   "head": [
+    -0.597,
+    -0.0943,
+    0.7938
+   ],
+   "tail": [
+    -0.6123,
+    -0.1107,
+    0.7276
+   ],
+   "length": 0.0699,
+   "x": [
+    -0.9743,
+    -0.0,
+    0.2251
+   ],
+   "y": [
+    -0.2187,
+    -0.2352,
+    -0.947
+   ],
+   "z": [
+    0.0529,
+    -0.9719,
+    0.2292
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R ring.3": {
+   "parent": "R ring.2",
+   "deform": true,
+   "head": [
+    -0.6123,
+    -0.1107,
+    0.7276
+   ],
+   "tail": [
+    -0.5689,
+    -0.1504,
+    0.6906
+   ],
+   "length": 0.0695,
+   "x": [
+    -0.6481,
+    -0.0,
+    -0.7616
+   ],
+   "y": [
+    0.6252,
+    -0.5711,
+    -0.532
+   ],
+   "z": [
+    -0.435,
+    -0.8209,
+    0.3701
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R little.1": {
+   "parent": "R hand",
+   "deform": true,
+   "head": [
+    -0.5845,
+    -0.1067,
+    0.8693
+   ],
+   "tail": [
+    -0.6125,
+    -0.117,
+    0.8111
+   ],
+   "length": 0.0654,
+   "x": [
+    -0.9012,
+    -0.0,
+    0.4335
+   ],
+   "y": [
+    -0.4281,
+    -0.1569,
+    -0.89
+   ],
+   "z": [
+    0.068,
+    -0.9876,
+    0.1414
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R little.2": {
+   "parent": "R little.1",
+   "deform": true,
+   "head": [
+    -0.6125,
+    -0.117,
+    0.8111
+   ],
+   "tail": [
+    -0.6277,
+    -0.1374,
+    0.7564
+   ],
+   "length": 0.0604,
+   "x": [
+    -0.9636,
+    -0.0,
+    0.2673
+   ],
+   "y": [
+    -0.2515,
+    -0.3385,
+    -0.9067
+   ],
+   "z": [
+    0.0905,
+    -0.941,
+    0.3262
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R little.3": {
+   "parent": "R little.2",
+   "deform": true,
+   "head": [
+    -0.6277,
+    -0.1374,
+    0.7564
+   ],
+   "tail": [
+    -0.5705,
+    -0.1892,
+    0.7184
+   ],
+   "length": 0.086,
+   "x": [
+    -0.553,
+    0.0,
+    -0.8332
+   ],
+   "y": [
+    0.6653,
+    -0.6021,
+    -0.4415
+   ],
+   "z": [
+    -0.5016,
+    -0.7985,
+    0.3329
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R thumb.1": {
+   "parent": "R hand",
+   "deform": true,
+   "head": [
+    -0.5251,
+    -0.0459,
+    0.9047
+   ],
+   "tail": [
+    -0.4989,
+    -0.0224,
+    0.8624
+   ],
+   "length": 0.055,
+   "x": [
+    -0.8496,
+    -0.0,
+    -0.5274
+   ],
+   "y": [
+    0.4769,
+    0.427,
+    -0.7683
+   ],
+   "z": [
+    0.2252,
+    -0.9042,
+    -0.3628
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R thumb.2": {
+   "parent": "R thumb.1",
+   "deform": true,
+   "head": [
+    -0.4989,
+    -0.0224,
+    0.8624
+   ],
+   "tail": [
+    -0.482,
+    -0.0128,
+    0.8186
+   ],
+   "length": 0.048,
+   "x": [
+    -0.9333,
+    -0.0,
+    -0.3592
+   ],
+   "y": [
+    0.3518,
+    0.2012,
+    -0.9142
+   ],
+   "z": [
+    0.0723,
+    -0.9796,
+    -0.1877
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R thumb.3": {
+   "parent": "R thumb.2",
+   "deform": true,
+   "head": [
+    -0.482,
+    -0.0128,
+    0.8186
+   ],
+   "tail": [
+    -0.4688,
+    -0.0449,
+    0.7884
+   ],
+   "length": 0.046,
+   "x": [
+    -0.9158,
+    -0.0,
+    -0.4017
+   ],
+   "y": [
+    0.2874,
+    -0.6986,
+    -0.6553
+   ],
+   "z": [
+    -0.2806,
+    -0.7155,
+    0.6398
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R scapula": {
+   "parent": "chest",
+   "deform": false,
+   "head": [
+    -0.14,
+    0.0,
+    1.48
+   ],
+   "tail": [
+    -0.22,
+    0.0,
+    1.42
+   ],
+   "length": 0.1,
+   "x": [
+    0.36,
+    0.8,
+    -0.48
+   ],
+   "y": [
+    -0.8,
+    0.0,
+    -0.6
+   ],
+   "z": [
+    -0.48,
+    0.6,
+    0.64
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R pauldron": {
+   "parent": "R scapula",
+   "deform": true,
+   "head": [
+    -0.17,
+    0.0,
+    1.42
+   ],
+   "tail": [
+    -0.2434,
+    0.0,
+    1.325
+   ],
+   "length": 0.12,
+   "x": [
+    0.6261,
+    0.6114,
+    -0.4838
+   ],
+   "y": [
+    -0.6114,
+    0.0,
+    -0.7913
+   ],
+   "z": [
+    -0.4838,
+    0.7913,
+    0.3739
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "COPY_ROTATION",
+     "name": "Follow upper arm 40%",
+     "influence": 0.4000000059604645,
+     "subtarget": "R upperarm",
+     "pole": "",
+     "pole_angle": 0
+    }
+   ],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "halo root": {
+   "parent": "chest",
+   "deform": false,
+   "head": [
+    -0.0375,
+    0.15,
+    1.9
+   ],
+   "tail": [
+    -0.0375,
+    0.15,
+    2.02
+   ],
+   "length": 0.12,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "halo 1": {
+   "parent": "halo root",
+   "deform": false,
+   "head": [
+    0.1963,
+    0.15,
+    2.1674
+   ],
+   "tail": [
+    0.1963,
+    0.15,
+    2.3174
+   ],
+   "length": 0.15,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "halo 2": {
+   "parent": "halo root",
+   "deform": false,
+   "head": [
+    0.2905,
+    0.15,
+    1.7932
+   ],
+   "tail": [
+    0.2905,
+    0.15,
+    1.9432
+   ],
+   "length": 0.15,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "halo 3": {
+   "parent": "halo root",
+   "deform": false,
+   "head": [
+    -0.3655,
+    0.15,
+    1.7932
+   ],
+   "tail": [
+    -0.3655,
+    0.15,
+    1.9432
+   ],
+   "length": 0.15,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "halo 4": {
+   "parent": "halo root",
+   "deform": false,
+   "head": [
+    -0.2713,
+    0.15,
+    2.1674
+   ],
+   "tail": [
+    -0.2713,
+    0.15,
+    2.3174
+   ],
+   "length": 0.15,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "z": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "halo socket": {
+   "parent": "halo root",
+   "deform": false,
+   "head": [
+    -0.0375,
+    0.15,
+    1.9
+   ],
+   "tail": [
+    -0.0375,
+    0.23,
+    1.9
+   ],
+   "length": 0.08,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "z": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Sockets",
+    "Secondary"
+   ]
+  },
+  "core socket": {
+   "parent": "chest",
+   "deform": false,
+   "head": [
+    -0.04,
+    -0.115,
+    1.51
+   ],
+   "tail": [
+    -0.04,
+    -0.195,
+    1.51
+   ],
+   "length": 0.08,
+   "x": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "z": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Sockets"
+   ]
+  },
+  "L thigh": {
+   "parent": "pelvis",
+   "deform": true,
+   "head": [
+    0.13,
+    0.0,
+    1.0
+   ],
+   "tail": [
+    0.2429,
+    0.0268,
+    0.7
+   ],
+   "length": 0.3217,
+   "x": [
+    0.8863,
+    -0.351,
+    0.3022
+   ],
+   "y": [
+    0.351,
+    0.0833,
+    -0.9327
+   ],
+   "z": [
+    0.3022,
+    0.9327,
+    0.197
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L shin": {
+   "parent": "L thigh",
+   "deform": true,
+   "head": [
+    0.2429,
+    0.0268,
+    0.7
+   ],
+   "tail": [
+    0.3589,
+    0.1157,
+    0.16
+   ],
+   "length": 0.5594,
+   "x": [
+    0.9629,
+    -0.2073,
+    0.1727
+   ],
+   "y": [
+    0.2073,
+    0.1588,
+    -0.9653
+   ],
+   "z": [
+    0.1727,
+    0.9653,
+    0.1959
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "IK",
+     "name": "IK (enable for IK posing)",
+     "influence": 0.0,
+     "subtarget": "L foot IK",
+     "pole": "L knee pole",
+     "pole_angle": -1.1519
+    }
+   ],
+   "collections": []
+  },
+  "L foot": {
+   "parent": "L shin",
+   "deform": true,
+   "head": [
+    0.3589,
+    0.1157,
+    0.16
+   ],
+   "tail": [
+    0.4124,
+    -0.03,
+    0.055
+   ],
+   "length": 0.1874,
+   "x": [
+    0.6337,
+    -0.2855,
+    0.7189
+   ],
+   "y": [
+    0.2855,
+    -0.7774,
+    -0.5604
+   ],
+   "z": [
+    0.7189,
+    0.5604,
+    -0.4111
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "COPY_ROTATION",
+     "name": "IK rotation (enable with IK)",
+     "influence": 0.0,
+     "subtarget": "L foot IK",
+     "pole": "",
+     "pole_angle": 0
+    }
+   ],
+   "collections": []
+  },
+  "L toe": {
+   "parent": "L foot",
+   "deform": true,
+   "head": [
+    0.4124,
+    -0.03,
+    0.055
+   ],
+   "tail": [
+    0.4737,
+    -0.1959,
+    0.02
+   ],
+   "length": 0.1803,
+   "x": [
+    -0.4486,
+    -0.3403,
+    0.8264
+   ],
+   "y": [
+    0.3403,
+    -0.9201,
+    -0.1941
+   ],
+   "z": [
+    0.8264,
+    0.1941,
+    0.5285
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "L heel socket": {
+   "parent": "L foot",
+   "deform": false,
+   "head": [
+    0.3589,
+    0.1157,
+    0.16
+   ],
+   "tail": [
+    0.3419,
+    0.2537,
+    0.04
+   ],
+   "length": 0.1837,
+   "x": [
+    0.9951,
+    0.0923,
+    -0.0344
+   ],
+   "y": [
+    -0.0923,
+    0.7514,
+    -0.6534
+   ],
+   "z": [
+    -0.0344,
+    0.6534,
+    0.7563
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Sockets"
+   ]
+  },
+  "R thigh": {
+   "parent": "pelvis",
+   "deform": true,
+   "head": [
+    -0.13,
+    0.0,
+    1.0
+   ],
+   "tail": [
+    -0.2885,
+    0.0335,
+    0.7
+   ],
+   "length": 0.341,
+   "x": [
+    0.8032,
+    0.4649,
+    -0.3725
+   ],
+   "y": [
+    -0.4649,
+    0.0983,
+    -0.8799
+   ],
+   "z": [
+    -0.3725,
+    0.8799,
+    0.2951
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R shin": {
+   "parent": "R thigh",
+   "deform": true,
+   "head": [
+    -0.2885,
+    0.0335,
+    0.7
+   ],
+   "tail": [
+    -0.4168,
+    0.0982,
+    0.16
+   ],
+   "length": 0.5588,
+   "x": [
+    0.9528,
+    0.2295,
+    -0.1988
+   ],
+   "y": [
+    -0.2295,
+    0.1157,
+    -0.9664
+   ],
+   "z": [
+    -0.1988,
+    0.9664,
+    0.1629
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "IK",
+     "name": "IK (enable for IK posing)",
+     "influence": 0.0,
+     "subtarget": "R foot IK",
+     "pole": "R knee pole",
+     "pole_angle": -2.1598
+    }
+   ],
+   "collections": []
+  },
+  "R foot": {
+   "parent": "R shin",
+   "deform": true,
+   "head": [
+    -0.4168,
+    0.0982,
+    0.16
+   ],
+   "tail": [
+    -0.444,
+    -0.03,
+    0.055
+   ],
+   "length": 0.1679,
+   "x": [
+    0.8887,
+    0.1623,
+    -0.4288
+   ],
+   "y": [
+    -0.1623,
+    -0.7633,
+    -0.6254
+   ],
+   "z": [
+    -0.4288,
+    0.6254,
+    -0.6519
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [
+    {
+     "type": "COPY_ROTATION",
+     "name": "IK rotation (enable with IK)",
+     "influence": 0.0,
+     "subtarget": "R foot IK",
+     "pole": "",
+     "pole_angle": 0
+    }
+   ],
+   "collections": []
+  },
+  "R toe": {
+   "parent": "R foot",
+   "deform": true,
+   "head": [
+    -0.444,
+    -0.03,
+    0.055
+   ],
+   "tail": [
+    -0.4637,
+    -0.2537,
+    0.02
+   ],
+   "length": 0.2272,
+   "x": [
+    0.5251,
+    0.0864,
+    -0.8466
+   ],
+   "y": [
+    -0.0864,
+    -0.9843,
+    -0.154
+   ],
+   "z": [
+    -0.8466,
+    0.154,
+    -0.5094
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": []
+  },
+  "R heel socket": {
+   "parent": "R foot",
+   "deform": false,
+   "head": [
+    -0.4168,
+    0.0982,
+    0.16
+   ],
+   "tail": [
+    -0.4136,
+    0.2194,
+    0.04
+   ],
+   "length": 0.1706,
+   "x": [
+    0.9998,
+    -0.0186,
+    0.0076
+   ],
+   "y": [
+    0.0186,
+    0.7107,
+    -0.7033
+   ],
+   "z": [
+    0.0076,
+    0.7033,
+    0.7109
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Sockets"
+   ]
+  },
+  "tabard front.1": {
+   "parent": "pelvis",
+   "deform": true,
+   "head": [
+    -0.021,
+    -0.095,
+    1.12
+   ],
+   "tail": [
+    -0.021,
+    -0.095,
+    0.86
+   ],
+   "length": 0.26,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "z": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "tabard front.2": {
+   "parent": "tabard front.1",
+   "deform": true,
+   "head": [
+    -0.021,
+    -0.095,
+    0.86
+   ],
+   "tail": [
+    -0.021,
+    -0.095,
+    0.6
+   ],
+   "length": 0.26,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "z": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "tabard front.3": {
+   "parent": "tabard front.2",
+   "deform": true,
+   "head": [
+    -0.021,
+    -0.095,
+    0.6
+   ],
+   "tail": [
+    -0.021,
+    -0.095,
+    0.31
+   ],
+   "length": 0.29,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "z": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "tabard back.1": {
+   "parent": "pelvis",
+   "deform": true,
+   "head": [
+    -0.038,
+    0.2,
+    1.12
+   ],
+   "tail": [
+    -0.038,
+    0.2,
+    0.84
+   ],
+   "length": 0.28,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "z": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "tabard back.2": {
+   "parent": "tabard back.1",
+   "deform": true,
+   "head": [
+    -0.038,
+    0.2,
+    0.84
+   ],
+   "tail": [
+    -0.038,
+    0.2,
+    0.44
+   ],
+   "length": 0.4,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "z": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "Secondary"
+   ]
+  },
+  "L foot IK": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    0.3589,
+    0.1157,
+    0.16
+   ],
+   "tail": [
+    0.4124,
+    -0.03,
+    0.055
+   ],
+   "length": 0.1874,
+   "x": [
+    0.6337,
+    -0.2855,
+    0.7189
+   ],
+   "y": [
+    0.2855,
+    -0.7774,
+    -0.5604
+   ],
+   "z": [
+    0.7189,
+    0.5604,
+    -0.4111
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  },
+  "L knee pole": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    0.2429,
+    -0.4232,
+    0.7
+   ],
+   "tail": [
+    0.2429,
+    -0.5232,
+    0.7
+   ],
+   "length": 0.1,
+   "x": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "z": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  },
+  "L hand IK": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    0.47,
+    0.0,
+    0.98
+   ],
+   "tail": [
+    0.5,
+    0.0,
+    0.86
+   ],
+   "length": 0.1237,
+   "x": [
+    0.9412,
+    -0.2425,
+    0.2353
+   ],
+   "y": [
+    0.2425,
+    0.0,
+    -0.9701
+   ],
+   "z": [
+    0.2353,
+    0.9701,
+    0.0588
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  },
+  "L elbow pole": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    0.34,
+    0.45,
+    1.2
+   ],
+   "tail": [
+    0.34,
+    0.55,
+    1.2
+   ],
+   "length": 0.1,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "z": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  },
+  "R foot IK": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    -0.4168,
+    0.0982,
+    0.16
+   ],
+   "tail": [
+    -0.444,
+    -0.03,
+    0.055
+   ],
+   "length": 0.1679,
+   "x": [
+    0.8887,
+    0.1623,
+    -0.4288
+   ],
+   "y": [
+    -0.1623,
+    -0.7633,
+    -0.6254
+   ],
+   "z": [
+    -0.4288,
+    0.6254,
+    -0.6519
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  },
+  "R knee pole": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    -0.2885,
+    -0.4165,
+    0.7
+   ],
+   "tail": [
+    -0.2885,
+    -0.5165,
+    0.7
+   ],
+   "length": 0.1,
+   "x": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "z": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  },
+  "R hand IK": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    -0.47,
+    0.0,
+    0.98
+   ],
+   "tail": [
+    -0.5,
+    0.0,
+    0.86
+   ],
+   "length": 0.1237,
+   "x": [
+    0.9412,
+    0.2425,
+    -0.2353
+   ],
+   "y": [
+    -0.2425,
+    0.0,
+    -0.9701
+   ],
+   "z": [
+    -0.2353,
+    0.9701,
+    0.0588
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  },
+  "R elbow pole": {
+   "parent": "root",
+   "deform": false,
+   "head": [
+    -0.34,
+    0.45,
+    1.2
+   ],
+   "tail": [
+    -0.34,
+    0.55,
+    1.2
+   ],
+   "length": 0.1,
+   "x": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "z": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "rotation_mode": "QUATERNION",
+   "constraints": [],
+   "collections": [
+    "IK controls"
+   ]
+  }
+ },
+ "cameras": {
+  "Front orthographic": {
+   "loc": [
+    0.0,
+    -8.0,
+    1.38
+   ],
+   "rot": [
+    1.5708,
+    -0.0,
+    0.0044
+   ],
+   "type": "ORTHO",
+   "ortho": 2.75,
+   "lens": 50.0
+  },
+  "Hero three quarter": {
+   "loc": [
+    3.0,
+    -7.0,
+    3.33
+   ],
+   "rot": [
+    1.3206,
+    -0.0,
+    0.4091
+   ],
+   "type": "ORTHO",
+   "ortho": 2.75,
+   "lens": 50.0
+  },
+  "Side orthographic": {
+   "loc": [
+    8.0,
+    0.0,
+    1.38
+   ],
+   "rot": [
+    1.5708,
+    -0.0,
+    1.5708
+   ],
+   "type": "ORTHO",
+   "ortho": 2.75,
+   "lens": 50.0
+  },
+  "Back orthographic": {
+   "loc": [
+    0.0,
+    8.0,
+    1.38
+   ],
+   "rot": [
+    1.5708,
+    -0.0,
+    3.1372
+   ],
+   "type": "ORTHO",
+   "ortho": 2.75,
+   "lens": 50.0
+  },
+  "Simulated gameplay distance": {
+   "loc": [
+    -3.9,
+    7.0,
+    4.63
+   ],
+   "rot": [
+    1.1847,
+    -0.0,
+    -2.6371
+   ],
+   "type": "ORTHO",
+   "ortho": 7.5,
+   "lens": 50.0
+  },
+  "V11 bust detail": {
+   "loc": [
+    1.25,
+    -2.9,
+    1.95
+   ],
+   "rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "type": "PERSP",
+   "ortho": 6.0,
+   "lens": 85.0
+  }
+ },
+ "actions": [
+  {
+   "name": "HS_v10 | Arc Bolt - two finger snap",
+   "range": [
+    1.0,
+    25.0
+   ],
+   "cyclic": false,
+   "markers": {
+    "Anticipation": 5,
+    "Bolt release": 9,
+    "Recoil": 12,
+    "Recovered": 25
+   },
+   "users": 1,
+   "fake": true
+  },
+  {
+   "name": "HS_v10 | Arc Step - in place dash",
+   "range": [
+    1.0,
+    25.0
+   ],
+   "cyclic": false,
+   "markers": {
+    "Compress": 6,
+    "Dash start": 9,
+    "Dash end": 15,
+    "Recovered": 25
+   },
+   "users": 1,
+   "fake": true
+  },
+  {
+   "name": "HS_v10 | Charge - gathering current",
+   "range": [
+    1.0,
+    49.0
+   ],
+   "cyclic": true,
+   "markers": {
+    "Pulse high": 13,
+    "Pulse low": 37
+   },
+   "users": 1,
+   "fake": true
+  },
+  {
+   "name": "HS_v10 | Discharge - break the seal",
+   "range": [
+    1.0,
+    49.0
+   ],
+   "cyclic": false,
+   "markers": {
+    "Gather": 13,
+    "Release": 22,
+    "Settle": 32,
+    "Recovered": 49
+   },
+   "users": 1,
+   "fake": true
+  },
+  {
+   "name": "HS_v10 | Idle - contained storm",
+   "range": [
+    1.0,
+    49.0
+   ],
+   "cyclic": true,
+   "markers": {
+    "Inhale": 13,
+    "Exhale": 37
+   },
+   "users": 2,
+   "fake": true
+  },
+  {
+   "name": "HS_v10 | Open Circuit - unfolding crown",
+   "range": [
+    1.0,
+    73.0
+   ],
+   "cyclic": false,
+   "markers": {
+    "Unfold": 18,
+    "Crown active": 30,
+    "Recall": 49,
+    "Recovered": 73
+   },
+   "users": 1,
+   "fake": true
+  },
+  {
+   "name": "HS_v8 | Arc Bolt point and snap",
+   "range": [
+    1.0,
+    32.0
+   ],
+   "cyclic": false,
+   "markers": {},
+   "users": 1,
+   "fake": true
+  },
+  {
+   "name": "HS_v8 | Idle contained storm | 2s loop",
+   "range": [
+    1.0,
+    49.0
+   ],
+   "cyclic": true,
+   "markers": {},
+   "users": 1,
+   "fake": true
+  },
+  {
+   "name": "HS_v8 | Overcharge brace and release",
+   "range": [
+    1.0,
+    48.0
+   ],
+   "cyclic": false,
+   "markers": {},
+   "users": 1,
+   "fake": true
+  }
+ ],
+ "objects": [
+  {
+   "name": "Warm studio softbox",
+   "type": "LIGHT",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    -3.0,
+    -4.0,
+    5.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Neutral fill",
+   "type": "LIGHT",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    3.0,
+    -2.0,
+    2.7
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Soft rim",
+   "type": "LIGHT",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    1.0,
+    3.0,
+    4.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Front orthographic",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    0.0,
+    -8.0,
+    1.38
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Hero three quarter",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    3.0,
+    -7.0,
+    3.33
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Side orthographic",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    8.0,
+    0.0,
+    1.38
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Back orthographic",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    0.0,
+    8.0,
+    1.38
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Simulated gameplay distance",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    -3.9,
+    7.0,
+    4.63
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Hollow Saint | v8 rig",
+   "type": "ARMATURE",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V11 gap light right",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 2",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V11 gap light left",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 3",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V11 gap light top",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 1",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V11 shoulder inlay band L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 2",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V11 shoulder inlay band R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 3",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "MASK | V11 cyan centre stripe",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "MASK | V11 temple node L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "MASK | V11 temple node R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V11 core hot centre",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V11 core ring",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "NECK | V11 centre conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "NECK | V11 conductor L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "NECK | V11 conductor R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "BACK | V11 upper spine conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "BACK | V11 lower spine conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front cloth",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front lower tab",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front trim top",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front trim bottom",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front trim left",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front trim right",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front lower tab trim top",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front lower tab trim bottom",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front lower tab trim left",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front lower tab trim right",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front sigil ring",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front sigil stem upper",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front sigil stem lower",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back cloth",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back trim top",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back trim bottom",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back trim left",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back trim right",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back sigil ring",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back sigil stem upper",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back sigil stem lower",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 lower tab rear cloth",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front edge L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front edge R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front lower tab edge L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 front lower tab edge R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back edge L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "TABARD | V11 back edge R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "SHRINKWRAP"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | V11 thumb tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L thumb.3",
+   "mods": [],
+   "loc": [
+    0.4235,
+    0.0093,
+    0.7923
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | V11 index tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L index.3",
+   "mods": [],
+   "loc": [
+    0.4843,
+    -0.0175,
+    0.6935
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | V11 middle tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L middle.3",
+   "mods": [],
+   "loc": [
+    0.5088,
+    -0.0498,
+    0.6778
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | V11 ring tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L ring.3",
+   "mods": [],
+   "loc": [
+    0.5256,
+    -0.097,
+    0.6938
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | V11 little tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L little.3",
+   "mods": [],
+   "loc": [
+    0.5275,
+    -0.1356,
+    0.7211
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | V11 thumb tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R thumb.3",
+   "mods": [],
+   "loc": [
+    -0.4705,
+    -0.0407,
+    0.7923
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | V11 index tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R index.3",
+   "mods": [],
+   "loc": [
+    -0.5313,
+    -0.0675,
+    0.6935
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | V11 middle tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R middle.3",
+   "mods": [],
+   "loc": [
+    -0.5558,
+    -0.0998,
+    0.6778
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | V11 ring tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R ring.3",
+   "mods": [],
+   "loc": [
+    -0.5726,
+    -0.147,
+    0.6938
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | V11 little tip light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R little.3",
+   "mods": [],
+   "loc": [
+    -0.5745,
+    -0.1856,
+    0.7211
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "V11 bust target",
+   "type": "EMPTY",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    -0.04,
+    0.0,
+    1.64
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "V11 bust detail",
+   "type": "CAMERA",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    1.25,
+    -2.9,
+    1.95
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "V11 bust backdrop",
+   "type": "MESH",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    -1.0108,
+    2.1825,
+    1.4067
+   ],
+   "hide_render": true
+  },
+  {
+   "name": "L ARM | V15 outer forearm conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R ARM | V15 outer forearm conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "NECK | V17 cable +35",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "NECK | V17 cable -35",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "NECK | V17 cable +145",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "NECK | V17 cable -145",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "MASK | V17 ear socket L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "head",
+   "mods": [
+    "SOLIDIFY"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "MASK | V17 ear socket light L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "head",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "MASK | V17 ear socket R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "head",
+   "mods": [
+    "SOLIDIFY"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "MASK | V17 ear socket light R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "head",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V17 core housing rim",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V17 upper chest plate L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V17 rib plate L",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V17 upper chest plate R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V17 rib plate R",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 segment plate 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 segment slit 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 segment plate 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 segment slit 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 segment plate 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 segment slit 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "CHEST | V17 core drop slit",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 side slit L1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 side slit L2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 side slit R1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "ABDOMEN | V17 side slit R2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L SHOULDER | V17 pauldron upper",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R SHOULDER | V17 pauldron upper",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "SOLIDIFY",
+    "BEVEL",
+    "ARMATURE"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V17 yoke bar",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "chest",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V17 yoke strut",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "chest",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | V17 yoke light",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "chest",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "Warm gray studio ground",
+   "type": "MESH",
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.003
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HF BODY | retained UV sculpt, corrected posterior",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mods": [
+    "ARMATURE",
+    "NODES"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | independent copper arc 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 1 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 1",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 1 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 1",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | independent copper arc 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 2 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 2",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 2 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 2",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | independent copper arc 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 3 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 3",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 3 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 3",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO | independent copper arc 4",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 4",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 4 | outer lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 4",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "HALO 4 | inner lip",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "halo 4",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | wrist cuff",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L hand",
+   "mods": [],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | tapered sculpted palm",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L hand",
+   "mods": [],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | index segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L index.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | index segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L index.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | index segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L index.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | index knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L hand",
+   "mods": [],
+   "loc": [
+    0.4875,
+    0.0014,
+    0.8551
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | middle segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L middle.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | middle segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L middle.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | middle segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L middle.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | middle knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L hand",
+   "mods": [],
+   "loc": [
+    0.5036,
+    -0.0172,
+    0.8597
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | ring segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L ring.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | ring segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L ring.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | ring segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L ring.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | ring knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L hand",
+   "mods": [],
+   "loc": [
+    0.5215,
+    -0.0381,
+    0.8648
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | little segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L little.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | little segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L little.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | little segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L little.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | little knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L hand",
+   "mods": [],
+   "loc": [
+    0.5375,
+    -0.0567,
+    0.8693
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | thumb segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L thumb.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | thumb segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L thumb.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | thumb segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L thumb.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.4988,
+    0.3993,
+    -0.038
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L HAND | small wrist conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L hand",
+   "mods": [],
+   "loc": [
+    0.4386,
+    -0.0519,
+    0.9516
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | wrist cuff",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R hand",
+   "mods": [],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | tapered sculpted palm",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R hand",
+   "mods": [],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | index segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R index.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | index segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R index.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | index segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R index.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | index knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R hand",
+   "mods": [],
+   "loc": [
+    -0.5345,
+    -0.0486,
+    0.8551
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | middle segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R middle.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | middle segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R middle.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | middle segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R middle.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | middle knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R hand",
+   "mods": [],
+   "loc": [
+    -0.5506,
+    -0.0672,
+    0.8597
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | ring segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R ring.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | ring segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R ring.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | ring segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R ring.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | ring knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R hand",
+   "mods": [],
+   "loc": [
+    -0.5685,
+    -0.0881,
+    0.8648
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | little segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R little.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | little segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R little.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | little segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R little.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | little knuckle",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R hand",
+   "mods": [],
+   "loc": [
+    -0.5845,
+    -0.1067,
+    0.8693
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | thumb segment 1",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R thumb.1",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | thumb segment 2",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R thumb.2",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | thumb segment 3",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R thumb.3",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.5195,
+    0.3799,
+    -0.0454
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R HAND | small wrist conductor",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R hand",
+   "mods": [],
+   "loc": [
+    -0.4856,
+    -0.1019,
+    0.9516
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "L BACK | small scapula shell",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "L scapula",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "R BACK | small scapula shell",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "R scapula",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "BACK | small dark node housing",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "chest",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.0375,
+    0.127,
+    1.55
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "BACK | small recessed charge node",
+   "type": "MESH",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "chest",
+   "mods": [
+    "BEVEL"
+   ],
+   "loc": [
+    -0.0375,
+    0.136,
+    1.55
+   ],
+   "hide_render": false
+  },
+  {
+   "name": "BACK | seated spine conductor",
+   "type": "CURVE",
+   "parent": "Hollow Saint | v8 rig",
+   "parent_type": "BONE",
+   "parent_bone": "chest",
+   "mods": [],
+   "loc": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hide_render": false
+  }
+ ],
+ "scene_keys": {
+  "status": "HF-based hybrid v7; original HF texture and stronger body retained",
+  "reference": "Selected LEFT A / Cracked Icon. Generated hands, halo and rear chest corrected provisionally.",
+  "animation_review": "v10: six custom actions; see v10-animation/review.html",
+  "rig_status": "Animation study; no Unity/export/game validation",
+  "rear_refinement": "v9 removes two dark fitted yoke branches and replaces hairline side gap wires with broad pale-cyan halo seam bridges, inspired by the original Higgsfield rear.",
+  "v11_fidelity": "Existing cyan conductor emission 2 -> 5; Halo depth x2.1 (0.036 -> 0.076 m), aged copper block shader with seams, darker lips; Thin emissive cyan seams centred in the side gaps, dim top seam (LEFT A d",
+  "v12_fidelity": "Broad faceted ivory pauldrons over the shoulder caps (flat top sloping outward, peaked outer corner, hanging outer face), chest-to-upperarm weight blend",
+  "v13_fidelity": "Pauldrons rebuilt: thicker (26 mm) faceted upper plate plus a stacked under-plate, 18/30 deg outward tilt; Core hot centre emission 14 -> 7 and tinted cyan (quiet glow); Halo copper browner and less s",
+  "v14_fidelity": "Warm bone-ivory tint on body texture, warm ivory parts and pauldron plates; Halo copper deepened to concept red-brown, lower metallic, rougher; Core hot centre emission 7 -> 4 with deeper cyan, relyin",
+  "v15_fidelity": "2 outer forearm cyan conductors; Pauldron ceramic toned down about 7% to sit with the tinted body ivory",
+  "v16_rig": "Leg chain refit to the digitigrade mesh (knee/ankle measured from cross-sections), toe bones, heel sockets; Leg/arm IK with solved pole angles, IK rotation copies (all influence 0), pauldron follows 4",
+  "v18_fidelity": "Head raised 11 cm on a thinner neck; waist slimmed up to 18% (1123 body verts, 17 overlays follow); Head, head socket and halo bones raised to match (halo stays centred on the helmet); 4 dark neck cab"
+ }
+}

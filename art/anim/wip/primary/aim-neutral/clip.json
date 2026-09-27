@@ -1,0 +1,117 @@
+{
+  "title": "Aim neutral",
+  "frames": [
+    1,
+    2
+  ],
+  "loop": false,
+  "markers": {},
+  "ik_miss_m": 0.0,
+  "max_leg_extension": 0.0,
+  "max_leg_extension_at": "",
+  "ik_miss_at": "",
+  "ik_miss_frames": {},
+  "kind": "aim",
+  "additive_reference": "Aim neutral",
+  "pitch_up_deg": 0,
+  "yaw_left_deg": 0,
+  "bake_error_m": 0.0,
+  "bake_error_deg": 0.0,
+  "module": "primary",
+  "action": "HS_anim | Aim neutral",
+  "planted_frame_pairs": 2,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.1033,
+      "frame": 1,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        103,
+        103
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.1061,
+      "frame": 1,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        106,
+        106
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.1033,
+  "arm_clear_ok": null,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.4,
+    "finger_pops_deg_f2": [],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": 0.0,
+        "hand_twist_frame": 1,
+        "hand_bend_max_deg": 0.0,
+        "forearm_roll_deg": -0.0,
+        "forearm_roll_frame": 1
+      },
+      "R": {
+        "hand_twist_deg": -0.0,
+        "hand_twist_frame": 1,
+        "hand_bend_max_deg": 0.0,
+        "forearm_roll_deg": 0.0,
+        "forearm_roll_frame": 1
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 12.0,
+        "thumb_max": 12.0,
+        "finger_min": 18.5,
+        "finger_max": 60.9
+      },
+      "R": {
+        "thumb_min": 12.0,
+        "thumb_max": 12.0,
+        "finger_min": 18.5,
+        "finger_max": 60.9
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 0.0,
+    "worst_pop": " f0",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.4
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front",
+    "gameplay"
+  ],
+  "rendered_frames": [
+    1,
+    2
+  ]
+}

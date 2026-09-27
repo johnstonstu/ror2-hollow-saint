@@ -1,0 +1,27 @@
+hs-vfx-v02.blend
+  HS_arc_short_A: 132 verts, 64 faces
+  HS_arc_short_B: 132 verts, 64 faces
+  HS_arc_short_C: 200 verts, 96 faces
+  HS_bolt_branch_A: 1248 verts, 608 faces
+  HS_bolt_branch_B: 1312 verts, 640 faces
+  HS_bolt_long_A: 1028 verts, 512 faces
+  HS_bolt_long_B: 1028 verts, 512 faces
+  HS_bolt_long_C: 1028 verts, 512 faces
+  HS_card_quad_1m: 4 verts, 1 faces
+  HS_decal_quad_1m: 4 verts, 1 faces
+  HS_halo_gap_arcs: 272 verts, 128 faces
+  HS_halo_ring_segments: 328 verts, 160 faces
+  HS_jet_arcs: 108 verts, 48 faces
+  HS_jet_burst: 273 verts, 240 faces
+  HS_jet_cone_core: 221 verts, 192 faces
+  HS_jet_cone_outer: 221 verts, 192 faces
+  HS_jet_ribbon: 68 verts, 32 faces
+  HS_mark_diamond: 4 verts, 1 faces
+  HS_mark_quad: 4 verts, 1 faces
+  HS_mark_ring_segments: 248 verts, 120 faces
+  HS_spear_filaments: 1176 verts, 576 faces
+  HS_spear_lance_core: 427 verts, 360 faces
+  HS_spear_lance_shell: 671 verts, 600 faces
+  HS_spear_trail: 100 verts, 48 faces
+  HS_step_ground_trail: 138 verts, 68 faces
+  PREVIEW_afterimage_proxy: 2610 verts, 2706 faces

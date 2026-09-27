@@ -1,0 +1,293 @@
+{
+  "title": "Select intro",
+  "frames": [
+    1,
+    44
+  ],
+  "loop": false,
+  "markers": {
+    "Snap": 13,
+    "Halo flare": 15,
+    "Settled": 44
+  },
+  "ik_miss_m": 4e-05,
+  "max_leg_extension": 0.9106,
+  "max_leg_extension_at": "L1",
+  "ik_miss_at": "L1",
+  "ik_miss_frames": {},
+  "kind": "presentation",
+  "speed_mps": 0.0,
+  "seam_from": [
+    "Select idle",
+    1
+  ],
+  "seam_to": [
+    "Select idle",
+    1
+  ],
+  "finger_accents": [
+    10,
+    13
+  ],
+  "halo_max_offset_m": 0.0206,
+  "halo_capped_frames": 0,
+  "max_arm_raise_deg": 54.7,
+  "max_knee_out_m": 0.0265,
+  "pop_body_deg_f2": [
+    [
+      12.57,
+      "R hand",
+      10
+    ],
+    [
+      11.13,
+      "R hand",
+      13
+    ],
+    [
+      9.58,
+      "R forearm",
+      10
+    ]
+  ],
+  "pop_finger_deg_f2": [
+    13.88,
+    "R middle.2",
+    10
+  ],
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "module": "presentation",
+  "action": "HS_anim | Select intro",
+  "planted_frame_pairs": 86,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.009,
+  "min_toe_tip_z": 0.021,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0923,
+      "frame": 10,
+      "part": "forearm",
+      "against": "spine",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        117,
+        116,
+        113,
+        109,
+        105,
+        101,
+        98,
+        96,
+        93,
+        92,
+        96,
+        103,
+        107,
+        106,
+        106,
+        105,
+        104,
+        104,
+        104,
+        104,
+        105,
+        106,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        111,
+        112,
+        112,
+        113,
+        113,
+        114,
+        114,
+        115,
+        115,
+        115,
+        116,
+        116,
+        116,
+        117,
+        117,
+        117
+      ],
+      "hits": {}
+    },
+    "R": {
+      "min_m": 0.0636,
+      "frame": 10,
+      "part": "wrist cuff",
+      "against": "chest",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        71,
+        76,
+        92,
+        114,
+        136,
+        152,
+        131,
+        103,
+        75,
+        64,
+        81,
+        108,
+        124,
+        122,
+        118,
+        113,
+        111,
+        113,
+        117,
+        123,
+        132,
+        144,
+        161,
+        164,
+        156,
+        149,
+        141,
+        135,
+        129,
+        123,
+        117,
+        111,
+        105,
+        99,
+        94,
+        89,
+        85,
+        81,
+        78,
+        75,
+        73,
+        72,
+        71,
+        71
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0636,
+  "arm_clear_ok": null,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.8,
+    "finger_pops_deg_f2": [
+      [
+        4.31,
+        "R thumb.1",
+        3
+      ],
+      [
+        4.25,
+        "R little.2",
+        2
+      ],
+      [
+        3.72,
+        "R little.1",
+        2
+      ],
+      [
+        3.7,
+        "R little.3",
+        2
+      ]
+    ],
+    "accent_pops_deg_f2": [
+      [
+        13.88,
+        "R middle.2",
+        10
+      ],
+      [
+        13.39,
+        "R index.2",
+        10
+      ]
+    ],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": -10.3,
+        "hand_twist_frame": 34,
+        "hand_bend_max_deg": 17.6,
+        "forearm_roll_deg": -35.0,
+        "forearm_roll_frame": 7
+      },
+      "R": {
+        "hand_twist_deg": 6.8,
+        "hand_twist_frame": 10,
+        "hand_bend_max_deg": 25.2,
+        "forearm_roll_deg": -80.0,
+        "forearm_roll_frame": 14
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 9.2,
+        "thumb_max": 9.6,
+        "finger_min": 6.3,
+        "finger_max": 58.1
+      },
+      "R": {
+        "thumb_min": 8.8,
+        "thumb_max": 46.0,
+        "finger_min": -4.8,
+        "finger_max": 104.0
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 4.31,
+    "worst_pop": "R thumb.1 f3",
+    "worst_accent_pop_deg_f2": 13.88,
+    "max_pen_mm": 0.8
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 2,
+  "views": [
+    "hero",
+    "side",
+    "front",
+    "chase"
+  ],
+  "rendered_frames": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
+    21,
+    23,
+    25,
+    27,
+    29,
+    31,
+    33,
+    35,
+    37,
+    39,
+    41,
+    43
+  ]
+}

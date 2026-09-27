@@ -1,0 +1,1795 @@
+{
+  "version": "v16",
+  "rig": "Hollow Saint | v8 rig",
+  "bone_count": 79,
+  "deform_count": 56,
+  "roots": [
+    "root"
+  ],
+  "max_depth": 10,
+  "scale": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "rig_location": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "coverage": {
+    "root": [
+      "root",
+      "halo root"
+    ],
+    "pelvis": [
+      "pelvis"
+    ],
+    "spine": [
+      "spine",
+      "chest"
+    ],
+    "head": [
+      "neck",
+      "head",
+      "head socket"
+    ],
+    "arm": [
+      "L upperarm",
+      "L forearm",
+      "L hand",
+      "R upperarm",
+      "R forearm",
+      "R hand",
+      "L hand IK",
+      "R hand IK"
+    ],
+    "leg": [
+      "L thigh",
+      "L shin",
+      "L foot",
+      "L toe",
+      "R thigh",
+      "R shin",
+      "R foot",
+      "R toe",
+      "L foot IK",
+      "R foot IK"
+    ],
+    "finger": [
+      "L index.1",
+      "L index.2",
+      "L index.3",
+      "L middle.1",
+      "L middle.2",
+      "L middle.3",
+      "L ring.1",
+      "L ring.2",
+      "L ring.3",
+      "L thumb.1",
+      "L thumb.2",
+      "L thumb.3",
+      "R index.1",
+      "R index.2",
+      "R index.3",
+      "R middle.1",
+      "R middle.2",
+      "R middle.3",
+      "R ring.1",
+      "R ring.2",
+      "R ring.3",
+      "R thumb.1",
+      "R thumb.2",
+      "R thumb.3"
+    ],
+    "halo": [
+      "halo root",
+      "halo 1",
+      "halo 2",
+      "halo 3",
+      "halo 4",
+      "halo socket"
+    ],
+    "tabard": [
+      "tabard front.1",
+      "tabard front.2",
+      "tabard front.3",
+      "tabard back.1",
+      "tabard back.2"
+    ]
+  },
+  "bones_without_skin": [],
+  "bone_parented_objects": {
+    "chest": [
+      "BACK | seated spine conductor",
+      "BACK | small dark node housing",
+      "BACK | small recessed charge node"
+    ],
+    "halo 1": [
+      "HALO 1 | inner lip",
+      "HALO 1 | outer lip",
+      "HALO | independent copper arc 1",
+      "HALO | V11 gap light top"
+    ],
+    "halo 2": [
+      "HALO 2 | inner lip",
+      "HALO 2 | outer lip",
+      "HALO | independent copper arc 2",
+      "HALO | V11 gap light right",
+      "HALO | V11 shoulder inlay band L"
+    ],
+    "halo 3": [
+      "HALO 3 | inner lip",
+      "HALO 3 | outer lip",
+      "HALO | independent copper arc 3",
+      "HALO | V11 gap light left",
+      "HALO | V11 shoulder inlay band R"
+    ],
+    "halo 4": [
+      "HALO 4 | inner lip",
+      "HALO 4 | outer lip",
+      "HALO | independent copper arc 4"
+    ],
+    "L scapula": [
+      "L BACK | small scapula shell"
+    ],
+    "L hand": [
+      "L HAND | index knuckle",
+      "L HAND | little knuckle",
+      "L HAND | middle knuckle",
+      "L HAND | ring knuckle",
+      "L HAND | small wrist conductor",
+      "L HAND | tapered sculpted palm",
+      "L HAND | wrist cuff"
+    ],
+    "L index.1": [
+      "L HAND | index segment 1"
+    ],
+    "L index.2": [
+      "L HAND | index segment 2"
+    ],
+    "L index.3": [
+      "L HAND | index segment 3",
+      "L HAND | V11 index tip light"
+    ],
+    "L little.1": [
+      "L HAND | little segment 1"
+    ],
+    "L little.2": [
+      "L HAND | little segment 2"
+    ],
+    "L little.3": [
+      "L HAND | little segment 3",
+      "L HAND | V11 little tip light"
+    ],
+    "L middle.1": [
+      "L HAND | middle segment 1"
+    ],
+    "L middle.2": [
+      "L HAND | middle segment 2"
+    ],
+    "L middle.3": [
+      "L HAND | middle segment 3",
+      "L HAND | V11 middle tip light"
+    ],
+    "L ring.1": [
+      "L HAND | ring segment 1"
+    ],
+    "L ring.2": [
+      "L HAND | ring segment 2"
+    ],
+    "L ring.3": [
+      "L HAND | ring segment 3",
+      "L HAND | V11 ring tip light"
+    ],
+    "L thumb.1": [
+      "L HAND | thumb segment 1"
+    ],
+    "L thumb.2": [
+      "L HAND | thumb segment 2"
+    ],
+    "L thumb.3": [
+      "L HAND | thumb segment 3",
+      "L HAND | V11 thumb tip light"
+    ],
+    "R scapula": [
+      "R BACK | small scapula shell"
+    ],
+    "R hand": [
+      "R HAND | index knuckle",
+      "R HAND | little knuckle",
+      "R HAND | middle knuckle",
+      "R HAND | ring knuckle",
+      "R HAND | small wrist conductor",
+      "R HAND | tapered sculpted palm",
+      "R HAND | wrist cuff"
+    ],
+    "R index.1": [
+      "R HAND | index segment 1"
+    ],
+    "R index.2": [
+      "R HAND | index segment 2"
+    ],
+    "R index.3": [
+      "R HAND | index segment 3",
+      "R HAND | V11 index tip light"
+    ],
+    "R little.1": [
+      "R HAND | little segment 1"
+    ],
+    "R little.2": [
+      "R HAND | little segment 2"
+    ],
+    "R little.3": [
+      "R HAND | little segment 3",
+      "R HAND | V11 little tip light"
+    ],
+    "R middle.1": [
+      "R HAND | middle segment 1"
+    ],
+    "R middle.2": [
+      "R HAND | middle segment 2"
+    ],
+    "R middle.3": [
+      "R HAND | middle segment 3",
+      "R HAND | V11 middle tip light"
+    ],
+    "R ring.1": [
+      "R HAND | ring segment 1"
+    ],
+    "R ring.2": [
+      "R HAND | ring segment 2"
+    ],
+    "R ring.3": [
+      "R HAND | ring segment 3",
+      "R HAND | V11 ring tip light"
+    ],
+    "R thumb.1": [
+      "R HAND | thumb segment 1"
+    ],
+    "R thumb.2": [
+      "R HAND | thumb segment 2"
+    ],
+    "R thumb.3": [
+      "R HAND | thumb segment 3",
+      "R HAND | V11 thumb tip light"
+    ]
+  },
+  "constraints": {
+    "L forearm": [
+      "IK"
+    ],
+    "L hand": [
+      "COPY_ROTATION"
+    ],
+    "L pauldron": [
+      "COPY_ROTATION"
+    ],
+    "R forearm": [
+      "IK"
+    ],
+    "R hand": [
+      "COPY_ROTATION"
+    ],
+    "R pauldron": [
+      "COPY_ROTATION"
+    ],
+    "L shin": [
+      "IK"
+    ],
+    "L foot": [
+      "COPY_ROTATION"
+    ],
+    "R shin": [
+      "IK"
+    ],
+    "R foot": [
+      "COPY_ROTATION"
+    ]
+  },
+  "actions": [
+    {
+      "name": "HS_v10 | Arc Bolt - two finger snap",
+      "frames": [
+        1,
+        25
+      ],
+      "markers": [
+        [
+          "Anticipation",
+          5
+        ],
+        [
+          "Bolt release",
+          9
+        ],
+        [
+          "Recoil",
+          12
+        ],
+        [
+          "Recovered",
+          25
+        ]
+      ]
+    },
+    {
+      "name": "HS_v10 | Arc Step - in place dash",
+      "frames": [
+        1,
+        25
+      ],
+      "markers": [
+        [
+          "Compress",
+          6
+        ],
+        [
+          "Dash start",
+          9
+        ],
+        [
+          "Dash end",
+          15
+        ],
+        [
+          "Recovered",
+          25
+        ]
+      ]
+    },
+    {
+      "name": "HS_v10 | Charge - gathering current",
+      "frames": [
+        1,
+        49
+      ],
+      "markers": [
+        [
+          "Pulse high",
+          13
+        ],
+        [
+          "Pulse low",
+          37
+        ]
+      ]
+    },
+    {
+      "name": "HS_v10 | Discharge - break the seal",
+      "frames": [
+        1,
+        49
+      ],
+      "markers": [
+        [
+          "Gather",
+          13
+        ],
+        [
+          "Release",
+          22
+        ],
+        [
+          "Settle",
+          32
+        ],
+        [
+          "Recovered",
+          49
+        ]
+      ]
+    },
+    {
+      "name": "HS_v10 | Idle - contained storm",
+      "frames": [
+        1,
+        49
+      ],
+      "markers": [
+        [
+          "Inhale",
+          13
+        ],
+        [
+          "Exhale",
+          37
+        ]
+      ]
+    },
+    {
+      "name": "HS_v10 | Open Circuit - unfolding crown",
+      "frames": [
+        1,
+        73
+      ],
+      "markers": [
+        [
+          "Unfold",
+          18
+        ],
+        [
+          "Crown active",
+          30
+        ],
+        [
+          "Recall",
+          49
+        ],
+        [
+          "Recovered",
+          73
+        ]
+      ]
+    },
+    {
+      "name": "HS_v8 | Arc Bolt point and snap",
+      "frames": [
+        1,
+        32
+      ],
+      "markers": []
+    },
+    {
+      "name": "HS_v8 | Idle contained storm | 2s loop",
+      "frames": [
+        1,
+        49
+      ],
+      "markers": []
+    },
+    {
+      "name": "HS_v8 | Overcharge brace and release",
+      "frames": [
+        1,
+        48
+      ],
+      "markers": []
+    }
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "deform": false,
+      "depth": 0,
+      "head": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.95
+      ],
+      "length": 0.93
+    },
+    {
+      "name": "pelvis",
+      "parent": "root",
+      "deform": true,
+      "depth": 1,
+      "head": [
+        0.0,
+        0.0,
+        0.88
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.08
+      ],
+      "length": 0.2
+    },
+    {
+      "name": "spine",
+      "parent": "pelvis",
+      "deform": true,
+      "depth": 2,
+      "head": [
+        0.0,
+        0.0,
+        1.02
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.4
+      ],
+      "length": 0.38
+    },
+    {
+      "name": "chest",
+      "parent": "spine",
+      "deform": true,
+      "depth": 3,
+      "head": [
+        0.0,
+        0.0,
+        1.36
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.52
+      ],
+      "length": 0.16
+    },
+    {
+      "name": "neck",
+      "parent": "chest",
+      "deform": true,
+      "depth": 4,
+      "head": [
+        0.0,
+        0.0,
+        1.49
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.59
+      ],
+      "length": 0.1
+    },
+    {
+      "name": "head",
+      "parent": "neck",
+      "deform": true,
+      "depth": 5,
+      "head": [
+        0.0,
+        0.0,
+        1.57
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.8
+      ],
+      "length": 0.23
+    },
+    {
+      "name": "head socket",
+      "parent": "head",
+      "deform": false,
+      "depth": 6,
+      "head": [
+        0.0,
+        -0.02,
+        1.84
+      ],
+      "tail": [
+        0.0,
+        -0.02,
+        1.92
+      ],
+      "length": 0.08
+    },
+    {
+      "name": "L upperarm",
+      "parent": "chest",
+      "deform": true,
+      "depth": 4,
+      "head": [
+        0.17,
+        0.0,
+        1.42
+      ],
+      "tail": [
+        0.34,
+        0.0,
+        1.2
+      ],
+      "length": 0.278
+    },
+    {
+      "name": "L forearm",
+      "parent": "L upperarm",
+      "deform": true,
+      "depth": 5,
+      "head": [
+        0.34,
+        0.0,
+        1.2
+      ],
+      "tail": [
+        0.47,
+        0.0,
+        0.98
+      ],
+      "length": 0.256
+    },
+    {
+      "name": "L hand",
+      "parent": "L forearm",
+      "deform": true,
+      "depth": 6,
+      "head": [
+        0.47,
+        0.0,
+        0.98
+      ],
+      "tail": [
+        0.5,
+        0.0,
+        0.86
+      ],
+      "length": 0.124
+    },
+    {
+      "name": "L index.1",
+      "parent": "L hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        0.488,
+        0.001,
+        0.855
+      ],
+      "tail": [
+        0.504,
+        0.007,
+        0.785
+      ],
+      "length": 0.072
+    },
+    {
+      "name": "L index.2",
+      "parent": "L index.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        0.504,
+        0.007,
+        0.785
+      ],
+      "tail": [
+        0.508,
+        0.003,
+        0.72
+      ],
+      "length": 0.066
+    },
+    {
+      "name": "L index.3",
+      "parent": "L index.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        0.508,
+        0.003,
+        0.72
+      ],
+      "tail": [
+        0.481,
+        -0.021,
+        0.69
+      ],
+      "length": 0.047
+    },
+    {
+      "name": "L muzzle",
+      "parent": "L index.3",
+      "deform": false,
+      "depth": 10,
+      "head": [
+        0.481,
+        -0.021,
+        0.69
+      ],
+      "tail": [
+        0.458,
+        -0.041,
+        0.664
+      ],
+      "length": 0.04
+    },
+    {
+      "name": "L middle.1",
+      "parent": "L hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        0.504,
+        -0.017,
+        0.86
+      ],
+      "tail": [
+        0.527,
+        -0.015,
+        0.781
+      ],
+      "length": 0.082
+    },
+    {
+      "name": "L middle.2",
+      "parent": "L middle.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        0.527,
+        -0.015,
+        0.781
+      ],
+      "tail": [
+        0.537,
+        -0.024,
+        0.709
+      ],
+      "length": 0.074
+    },
+    {
+      "name": "L middle.3",
+      "parent": "L middle.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        0.537,
+        -0.024,
+        0.709
+      ],
+      "tail": [
+        0.505,
+        -0.053,
+        0.674
+      ],
+      "length": 0.055
+    },
+    {
+      "name": "L ring.1",
+      "parent": "L hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        0.522,
+        -0.038,
+        0.865
+      ],
+      "tail": [
+        0.55,
+        -0.044,
+        0.794
+      ],
+      "length": 0.077
+    },
+    {
+      "name": "L ring.2",
+      "parent": "L ring.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        0.55,
+        -0.044,
+        0.794
+      ],
+      "tail": [
+        0.565,
+        -0.061,
+        0.728
+      ],
+      "length": 0.07
+    },
+    {
+      "name": "L ring.3",
+      "parent": "L ring.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        0.565,
+        -0.061,
+        0.728
+      ],
+      "tail": [
+        0.522,
+        -0.1,
+        0.691
+      ],
+      "length": 0.07
+    },
+    {
+      "name": "L little.1",
+      "parent": "L hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        0.538,
+        -0.057,
+        0.869
+      ],
+      "tail": [
+        0.566,
+        -0.067,
+        0.811
+      ],
+      "length": 0.065
+    },
+    {
+      "name": "L little.2",
+      "parent": "L little.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        0.566,
+        -0.067,
+        0.811
+      ],
+      "tail": [
+        0.581,
+        -0.087,
+        0.756
+      ],
+      "length": 0.06
+    },
+    {
+      "name": "L little.3",
+      "parent": "L little.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        0.581,
+        -0.087,
+        0.756
+      ],
+      "tail": [
+        0.524,
+        -0.139,
+        0.718
+      ],
+      "length": 0.086
+    },
+    {
+      "name": "L thumb.1",
+      "parent": "L hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        0.478,
+        0.004,
+        0.905
+      ],
+      "tail": [
+        0.452,
+        0.028,
+        0.862
+      ],
+      "length": 0.055
+    },
+    {
+      "name": "L thumb.2",
+      "parent": "L thumb.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        0.452,
+        0.028,
+        0.862
+      ],
+      "tail": [
+        0.435,
+        0.037,
+        0.819
+      ],
+      "length": 0.048
+    },
+    {
+      "name": "L thumb.3",
+      "parent": "L thumb.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        0.435,
+        0.037,
+        0.819
+      ],
+      "tail": [
+        0.422,
+        0.005,
+        0.788
+      ],
+      "length": 0.046
+    },
+    {
+      "name": "L scapula",
+      "parent": "chest",
+      "deform": false,
+      "depth": 4,
+      "head": [
+        0.14,
+        0.0,
+        1.48
+      ],
+      "tail": [
+        0.22,
+        0.0,
+        1.42
+      ],
+      "length": 0.1
+    },
+    {
+      "name": "L pauldron",
+      "parent": "L scapula",
+      "deform": true,
+      "depth": 5,
+      "head": [
+        0.17,
+        0.0,
+        1.42
+      ],
+      "tail": [
+        0.243,
+        0.0,
+        1.325
+      ],
+      "length": 0.12
+    },
+    {
+      "name": "R upperarm",
+      "parent": "chest",
+      "deform": true,
+      "depth": 4,
+      "head": [
+        -0.17,
+        0.0,
+        1.42
+      ],
+      "tail": [
+        -0.34,
+        0.0,
+        1.2
+      ],
+      "length": 0.278
+    },
+    {
+      "name": "R forearm",
+      "parent": "R upperarm",
+      "deform": true,
+      "depth": 5,
+      "head": [
+        -0.34,
+        0.0,
+        1.2
+      ],
+      "tail": [
+        -0.47,
+        0.0,
+        0.98
+      ],
+      "length": 0.256
+    },
+    {
+      "name": "R hand",
+      "parent": "R forearm",
+      "deform": true,
+      "depth": 6,
+      "head": [
+        -0.47,
+        0.0,
+        0.98
+      ],
+      "tail": [
+        -0.5,
+        0.0,
+        0.86
+      ],
+      "length": 0.124
+    },
+    {
+      "name": "R index.1",
+      "parent": "R hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        -0.535,
+        -0.049,
+        0.855
+      ],
+      "tail": [
+        -0.551,
+        -0.043,
+        0.785
+      ],
+      "length": 0.072
+    },
+    {
+      "name": "R index.2",
+      "parent": "R index.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        -0.551,
+        -0.043,
+        0.785
+      ],
+      "tail": [
+        -0.555,
+        -0.047,
+        0.72
+      ],
+      "length": 0.066
+    },
+    {
+      "name": "R index.3",
+      "parent": "R index.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        -0.555,
+        -0.047,
+        0.72
+      ],
+      "tail": [
+        -0.528,
+        -0.071,
+        0.69
+      ],
+      "length": 0.047
+    },
+    {
+      "name": "R muzzle",
+      "parent": "R index.3",
+      "deform": false,
+      "depth": 10,
+      "head": [
+        -0.528,
+        -0.071,
+        0.69
+      ],
+      "tail": [
+        -0.505,
+        -0.091,
+        0.664
+      ],
+      "length": 0.04
+    },
+    {
+      "name": "R middle.1",
+      "parent": "R hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        -0.551,
+        -0.067,
+        0.86
+      ],
+      "tail": [
+        -0.574,
+        -0.065,
+        0.781
+      ],
+      "length": 0.082
+    },
+    {
+      "name": "R middle.2",
+      "parent": "R middle.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        -0.574,
+        -0.065,
+        0.781
+      ],
+      "tail": [
+        -0.584,
+        -0.074,
+        0.709
+      ],
+      "length": 0.074
+    },
+    {
+      "name": "R middle.3",
+      "parent": "R middle.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        -0.584,
+        -0.074,
+        0.709
+      ],
+      "tail": [
+        -0.552,
+        -0.103,
+        0.674
+      ],
+      "length": 0.055
+    },
+    {
+      "name": "R ring.1",
+      "parent": "R hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        -0.569,
+        -0.088,
+        0.865
+      ],
+      "tail": [
+        -0.597,
+        -0.094,
+        0.794
+      ],
+      "length": 0.077
+    },
+    {
+      "name": "R ring.2",
+      "parent": "R ring.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        -0.597,
+        -0.094,
+        0.794
+      ],
+      "tail": [
+        -0.612,
+        -0.111,
+        0.728
+      ],
+      "length": 0.07
+    },
+    {
+      "name": "R ring.3",
+      "parent": "R ring.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        -0.612,
+        -0.111,
+        0.728
+      ],
+      "tail": [
+        -0.569,
+        -0.15,
+        0.691
+      ],
+      "length": 0.07
+    },
+    {
+      "name": "R little.1",
+      "parent": "R hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        -0.585,
+        -0.107,
+        0.869
+      ],
+      "tail": [
+        -0.613,
+        -0.117,
+        0.811
+      ],
+      "length": 0.065
+    },
+    {
+      "name": "R little.2",
+      "parent": "R little.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        -0.613,
+        -0.117,
+        0.811
+      ],
+      "tail": [
+        -0.628,
+        -0.137,
+        0.756
+      ],
+      "length": 0.06
+    },
+    {
+      "name": "R little.3",
+      "parent": "R little.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        -0.628,
+        -0.137,
+        0.756
+      ],
+      "tail": [
+        -0.571,
+        -0.189,
+        0.718
+      ],
+      "length": 0.086
+    },
+    {
+      "name": "R thumb.1",
+      "parent": "R hand",
+      "deform": true,
+      "depth": 7,
+      "head": [
+        -0.525,
+        -0.046,
+        0.905
+      ],
+      "tail": [
+        -0.499,
+        -0.022,
+        0.862
+      ],
+      "length": 0.055
+    },
+    {
+      "name": "R thumb.2",
+      "parent": "R thumb.1",
+      "deform": true,
+      "depth": 8,
+      "head": [
+        -0.499,
+        -0.022,
+        0.862
+      ],
+      "tail": [
+        -0.482,
+        -0.013,
+        0.819
+      ],
+      "length": 0.048
+    },
+    {
+      "name": "R thumb.3",
+      "parent": "R thumb.2",
+      "deform": true,
+      "depth": 9,
+      "head": [
+        -0.482,
+        -0.013,
+        0.819
+      ],
+      "tail": [
+        -0.469,
+        -0.045,
+        0.788
+      ],
+      "length": 0.046
+    },
+    {
+      "name": "R scapula",
+      "parent": "chest",
+      "deform": false,
+      "depth": 4,
+      "head": [
+        -0.14,
+        0.0,
+        1.48
+      ],
+      "tail": [
+        -0.22,
+        0.0,
+        1.42
+      ],
+      "length": 0.1
+    },
+    {
+      "name": "R pauldron",
+      "parent": "R scapula",
+      "deform": true,
+      "depth": 5,
+      "head": [
+        -0.17,
+        0.0,
+        1.42
+      ],
+      "tail": [
+        -0.243,
+        0.0,
+        1.325
+      ],
+      "length": 0.12
+    },
+    {
+      "name": "halo root",
+      "parent": "chest",
+      "deform": false,
+      "depth": 4,
+      "head": [
+        -0.038,
+        0.15,
+        1.79
+      ],
+      "tail": [
+        -0.038,
+        0.15,
+        1.91
+      ],
+      "length": 0.12
+    },
+    {
+      "name": "halo 1",
+      "parent": "halo root",
+      "deform": false,
+      "depth": 5,
+      "head": [
+        0.196,
+        0.15,
+        2.057
+      ],
+      "tail": [
+        0.196,
+        0.15,
+        2.207
+      ],
+      "length": 0.15
+    },
+    {
+      "name": "halo 2",
+      "parent": "halo root",
+      "deform": false,
+      "depth": 5,
+      "head": [
+        0.291,
+        0.15,
+        1.683
+      ],
+      "tail": [
+        0.291,
+        0.15,
+        1.833
+      ],
+      "length": 0.15
+    },
+    {
+      "name": "halo 3",
+      "parent": "halo root",
+      "deform": false,
+      "depth": 5,
+      "head": [
+        -0.366,
+        0.15,
+        1.683
+      ],
+      "tail": [
+        -0.366,
+        0.15,
+        1.833
+      ],
+      "length": 0.15
+    },
+    {
+      "name": "halo 4",
+      "parent": "halo root",
+      "deform": false,
+      "depth": 5,
+      "head": [
+        -0.271,
+        0.15,
+        2.057
+      ],
+      "tail": [
+        -0.271,
+        0.15,
+        2.207
+      ],
+      "length": 0.15
+    },
+    {
+      "name": "halo socket",
+      "parent": "halo root",
+      "deform": false,
+      "depth": 5,
+      "head": [
+        -0.038,
+        0.15,
+        1.79
+      ],
+      "tail": [
+        -0.038,
+        0.23,
+        1.79
+      ],
+      "length": 0.08
+    },
+    {
+      "name": "core socket",
+      "parent": "chest",
+      "deform": false,
+      "depth": 4,
+      "head": [
+        -0.04,
+        -0.115,
+        1.51
+      ],
+      "tail": [
+        -0.04,
+        -0.195,
+        1.51
+      ],
+      "length": 0.08
+    },
+    {
+      "name": "L thigh",
+      "parent": "pelvis",
+      "deform": true,
+      "depth": 2,
+      "head": [
+        0.13,
+        0.0,
+        1.0
+      ],
+      "tail": [
+        0.243,
+        0.027,
+        0.7
+      ],
+      "length": 0.322
+    },
+    {
+      "name": "L shin",
+      "parent": "L thigh",
+      "deform": true,
+      "depth": 3,
+      "head": [
+        0.243,
+        0.027,
+        0.7
+      ],
+      "tail": [
+        0.359,
+        0.116,
+        0.16
+      ],
+      "length": 0.559
+    },
+    {
+      "name": "L foot",
+      "parent": "L shin",
+      "deform": true,
+      "depth": 4,
+      "head": [
+        0.359,
+        0.116,
+        0.16
+      ],
+      "tail": [
+        0.412,
+        -0.03,
+        0.055
+      ],
+      "length": 0.187
+    },
+    {
+      "name": "L toe",
+      "parent": "L foot",
+      "deform": true,
+      "depth": 5,
+      "head": [
+        0.412,
+        -0.03,
+        0.055
+      ],
+      "tail": [
+        0.474,
+        -0.196,
+        0.02
+      ],
+      "length": 0.18
+    },
+    {
+      "name": "L heel socket",
+      "parent": "L foot",
+      "deform": false,
+      "depth": 5,
+      "head": [
+        0.359,
+        0.116,
+        0.16
+      ],
+      "tail": [
+        0.342,
+        0.254,
+        0.04
+      ],
+      "length": 0.184
+    },
+    {
+      "name": "R thigh",
+      "parent": "pelvis",
+      "deform": true,
+      "depth": 2,
+      "head": [
+        -0.13,
+        0.0,
+        1.0
+      ],
+      "tail": [
+        -0.289,
+        0.034,
+        0.7
+      ],
+      "length": 0.341
+    },
+    {
+      "name": "R shin",
+      "parent": "R thigh",
+      "deform": true,
+      "depth": 3,
+      "head": [
+        -0.289,
+        0.034,
+        0.7
+      ],
+      "tail": [
+        -0.417,
+        0.098,
+        0.16
+      ],
+      "length": 0.559
+    },
+    {
+      "name": "R foot",
+      "parent": "R shin",
+      "deform": true,
+      "depth": 4,
+      "head": [
+        -0.417,
+        0.098,
+        0.16
+      ],
+      "tail": [
+        -0.444,
+        -0.03,
+        0.055
+      ],
+      "length": 0.168
+    },
+    {
+      "name": "R toe",
+      "parent": "R foot",
+      "deform": true,
+      "depth": 5,
+      "head": [
+        -0.444,
+        -0.03,
+        0.055
+      ],
+      "tail": [
+        -0.464,
+        -0.254,
+        0.02
+      ],
+      "length": 0.227
+    },
+    {
+      "name": "R heel socket",
+      "parent": "R foot",
+      "deform": false,
+      "depth": 5,
+      "head": [
+        -0.417,
+        0.098,
+        0.16
+      ],
+      "tail": [
+        -0.414,
+        0.219,
+        0.04
+      ],
+      "length": 0.171
+    },
+    {
+      "name": "tabard front.1",
+      "parent": "pelvis",
+      "deform": true,
+      "depth": 2,
+      "head": [
+        -0.021,
+        -0.095,
+        1.12
+      ],
+      "tail": [
+        -0.021,
+        -0.095,
+        0.86
+      ],
+      "length": 0.26
+    },
+    {
+      "name": "tabard front.2",
+      "parent": "tabard front.1",
+      "deform": true,
+      "depth": 3,
+      "head": [
+        -0.021,
+        -0.095,
+        0.86
+      ],
+      "tail": [
+        -0.021,
+        -0.095,
+        0.6
+      ],
+      "length": 0.26
+    },
+    {
+      "name": "tabard front.3",
+      "parent": "tabard front.2",
+      "deform": true,
+      "depth": 4,
+      "head": [
+        -0.021,
+        -0.095,
+        0.6
+      ],
+      "tail": [
+        -0.021,
+        -0.095,
+        0.31
+      ],
+      "length": 0.29
+    },
+    {
+      "name": "tabard back.1",
+      "parent": "pelvis",
+      "deform": true,
+      "depth": 2,
+      "head": [
+        -0.038,
+        0.2,
+        1.12
+      ],
+      "tail": [
+        -0.038,
+        0.2,
+        0.84
+      ],
+      "length": 0.28
+    },
+    {
+      "name": "tabard back.2",
+      "parent": "tabard back.1",
+      "deform": true,
+      "depth": 3,
+      "head": [
+        -0.038,
+        0.2,
+        0.84
+      ],
+      "tail": [
+        -0.038,
+        0.2,
+        0.44
+      ],
+      "length": 0.4
+    },
+    {
+      "name": "L foot IK",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        0.359,
+        0.116,
+        0.16
+      ],
+      "tail": [
+        0.412,
+        -0.03,
+        0.055
+      ],
+      "length": 0.187
+    },
+    {
+      "name": "L knee pole",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        0.243,
+        -0.423,
+        0.7
+      ],
+      "tail": [
+        0.243,
+        -0.523,
+        0.7
+      ],
+      "length": 0.1
+    },
+    {
+      "name": "L hand IK",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        0.47,
+        0.0,
+        0.98
+      ],
+      "tail": [
+        0.5,
+        0.0,
+        0.86
+      ],
+      "length": 0.124
+    },
+    {
+      "name": "L elbow pole",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        0.34,
+        0.45,
+        1.2
+      ],
+      "tail": [
+        0.34,
+        0.55,
+        1.2
+      ],
+      "length": 0.1
+    },
+    {
+      "name": "R foot IK",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        -0.417,
+        0.098,
+        0.16
+      ],
+      "tail": [
+        -0.444,
+        -0.03,
+        0.055
+      ],
+      "length": 0.168
+    },
+    {
+      "name": "R knee pole",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        -0.289,
+        -0.416,
+        0.7
+      ],
+      "tail": [
+        -0.289,
+        -0.516,
+        0.7
+      ],
+      "length": 0.1
+    },
+    {
+      "name": "R hand IK",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        -0.47,
+        0.0,
+        0.98
+      ],
+      "tail": [
+        -0.5,
+        0.0,
+        0.86
+      ],
+      "length": 0.124
+    },
+    {
+      "name": "R elbow pole",
+      "parent": "root",
+      "deform": false,
+      "depth": 1,
+      "head": [
+        -0.34,
+        0.45,
+        1.2
+      ],
+      "tail": [
+        -0.34,
+        0.55,
+        1.2
+      ],
+      "length": 0.1
+    }
+  ]
+}

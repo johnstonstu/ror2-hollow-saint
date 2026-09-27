@@ -1,0 +1,328 @@
+# Hollow Saint animation: live status
+
+Updated 2026-09-27 01:45 (v17) by the coordinator agent (refinement pass, `REFINEMENT-PLAN.md`). For remote check-ins: this page and
+`art/anim/review.html` (GIFs of every clip) are the current state. **Nothing needs the user.**
+
+## Checkpoints
+
+- `art/anim/hollow-saint-anim-v1.blend`: Run forward, Walk forward, Glide enter / loop / exit
+  on v18 (plus the six older HS_v10 studies). v18 unchanged.
+- `art/anim/hollow-saint-anim-v2.blend` (12 clips): v1 + Jump, Ascend, Descend, Land,
+  Run backward, Run left, Run right. All loop wraps and hand-offs measured 0.0 mm.
+- `art/anim/hollow-saint-anim-v3.blend` (22 clips): v2 + Arc Bolt L/R, 5 aim poses,
+  Arc Step start/loop/end.
+- `art/anim/hollow-saint-anim-v4.blend` (latest, 28 clips): v3 + Charge loop, Charge full,
+  Discharge, Open Circuit, Open Circuit hold, Open Circuit end. Pauldron fix applied to all clips.
+- `art/anim/hollow-saint-anim-v18.blend` (**latest**, 33 clips): run 3 item c, the item 8 re-check after 9d/9e.
+  Nothing regressed, so no clip code changed and this is a rebuild of v17 (QA as `art/anim/v17/qa-summary.json`).
+  - Aim up/down/left/right: ±66 deg, PASS.
+  - Arc Step: IK miss 0.07/0.08 mm and dash legs 0.985. The 0.997 reading is the straight-legged rest pose on
+    its first and last frames.
+  - Land -> Idle -> Jump: 0.0 mm.
+  GIFs copied to `art/anim/wip/item8-check/`.
+- `art/anim/hollow-saint-anim-v17.blend` (33 clips): v16 + items 9d and 9e together (run 3, item b):
+  heel thrusters, the walk -> run -> glide foot/thrust progression, and a hand re-check of every clip. QA: 33/33
+  PASS; **all 30 seams 0.0 mm**. Summary in `art/anim/v17/qa-summary.json`; details under "Refinement items
+  9d + 9e" below.
+- `art/anim/hollow-saint-anim-v16.blend` (33 clips): v15 + the remaining 9c work (run 3, item a).
+  The new `contact.py` QA checks for hands and forearms sinking into the body, and every contact it found is
+  fixed. QA: 33/33 PASS including hand QA and contact; **all 30 seams 0.0 mm**. Summary in
+  `art/anim/v16/qa-summary.json`; details under "Refinement item 9c follow-up" below.
+- `art/anim/hollow-saint-anim-v15.blend` (33 clips): v14 + item 8 (aim pitch through pelvis and
+  shoulders, Arc Step leg reach, Land/Idle/Jump seam). QA: 33/33 PASS including hand QA; **all 30 seams 0.0 mm**.
+  Summary in `art/anim/v15/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v14.blend` (33 clips): v13 + item 9c (natural hands: hand pass
+  on every clip plus per-frame hand QA). QA: 33/33 PASS including hand QA; seams as v13 (all 0.0 mm except
+  Land/Idle/Jump 1.233 mm). Summary in `art/anim/v14/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v13.blend` (33 clips): v12 + item 9 revised (upright Iron Man
+  glide). QA: 33/33 PASS, seams as v12 (Run <-> Glide 0.0 mm). Summary in `art/anim/v13/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v12.blend` (33 clips): v11 + item 9b (locomotion arms clear the
+  hips/torso/tabard; new arm clearance QA). QA: 33/33 PASS, 30 seams, all 0.0 mm except Land/Idle/Jump 1.233 mm.
+  Summary in `art/anim/v12/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v11.blend` (33 clips): v10 + item 9 first draft (glide rework: hover
+  pose, thruster feet, sole jets, glow ramp). QA: 33/33 PASS, 30 seams, all 0.0 mm except
+  Land/Idle/Jump 1.233 mm. Summary in `art/anim/v11/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v10.blend` (33 clips): v9 + items 6-7 (weight, Arc Bolt body)
+  and a locomotion arm fix. QA: 33/33 PASS, 30 seams, all 0.0 mm except Land/Idle/Jump 1.233 mm.
+  Summary in `art/anim/v10/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v9.blend` (33 clips): v8 + items 4-5 (upper body in locomotion, tabard
+  follow-through). QA: 33/33 PASS, seams as v8. Summary in `art/anim/v9/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v8.blend` (33 clips): v7 + refinement item 3 (secondary
+  motion on the near-static loops). QA: 33/33 PASS, 30 seams, all 0.0 mm except the known
+  Land/Idle/Jump 1.233 mm pair. Summary in `art/anim/v8/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v7.blend` (33 clips): v6 + refinement items 1-2
+  (shoulder helper bones, Charge rework). QA: 33/33 PASS, 30 seams, all 0.0 mm except the known
+  Land/Idle/Jump 1.233 mm pair. Summary in `art/anim/v7/qa-summary.json`.
+- `art/anim/hollow-saint-anim-v6.blend` (33 clips): v5 after the full polish pass
+  (special, presentation, Arc Step, locomotion). Every seam 0.0 mm except Land/Jump <-> Idle 1.2 mm.
+- `art/anim/hollow-saint-anim-v5.blend` (33 clips, full planned set): v4 + Idle,
+  Idle combat, Spawn, Select idle, Select intro. Land -> Idle and Idle -> Jump fixed (136 mm -> 1 mm).
+
+## Done (QA PASS, seams measured 0.0 mm)
+
+- Toolkit `tools/blender/anim/` (README there). Knee pole angles re-solved (v16 values flared knees).
+- **Run forward**: 16 frames, 6 m/s, flight phase, ~14 deg lean, fists, reactive tabard, halo lag.
+- **Walk forward**: 26 frames, 1.5 m/s, upright and calm (agent-built, reviewed).
+- **Glide set** (sprint): enter from run frame 10 (push-off, lift-off), 32-frame glide loop, exit landing
+  exactly on run frame 1. Since v13 it's an upright Iron Man thruster hover; see refinement item 9.
+
+- **Air set**: Jump (11 f) hands off to Ascend (20 f loop); Descend (20 f loop) hands off to
+  Land (15 f, soft claw-first touch, ends standing). Agent-built, reviewed.
+- **Run backward / left / right**: same 16-frame phase as the forward run (L contact f1, R f9)
+  for the blend tree; backpedal 4.25 m/s, side-skips 4.5 m/s, no leg crossing, no foot slide.
+  I lowered the backpedal arms (they jutted forward).
+
+- **Arc Bolt right / left** (20 f gesture, release f5, fingertip muzzle within 0.06 deg of
+  straight ahead, starts/ends exactly at rest) + **Aim up/down/left/right/neutral** (66 deg,
+  additive; Unity reference pose = 'Aim neutral'). Agent-built, reviewed; in v3.
+- **Arc Step** start (7 f crouch-and-lean) / loop (10 f arrow-like dash, arms swept back, halo
+  trailing) / end (14 f brake, claw-first brace, back to rest). Agent-built, reviewed; in v3.
+- Preview now has a RoR2-like `chase` camera (behind/above).
+- Toolkit: `foot(..., rest_match=w)` makes leg IK reproduce the rest knee (was ~7 cm off).
+- **Special set** (upper-body gestures, legs free for locomotion): Charge loop (40 f, cupped orb,
+  tremor, halo pulse), Charge full (24 f, clawed, braced), Discharge (28 f, gather then 2-frame
+  burst, halo arcs blast out), Open Circuit (30 f, halo lifts/tilts into a flared crown above the
+  head) -> hold (24 f loop, crown sways) -> end (22 f, crown folds back). Agent-built, reviewed.
+- **Pauldron fix (all clips):** the 40% follow constraint was applied twice on playback (~64%, pads
+  winged out) and Unity would have dropped it entirely. `bake` now keys the full effect and mutes
+  the constraint; the bake check also verifies rotations now (all clips 0.0 deg).
+
+- **Presentation set**: Idle (96 f loop: two breaths, weight shift, glance, finger crackles),
+  Idle combat (48 f, lowered, casting hand ready, halo opened), Spawn (72 f: half-kneel with halo
+  folded -> awaken jolt -> rises -> halo unfolds arc by arc -> ends on Idle f1), Select idle
+  (96 f, palms-up hover, halo sway), Select intro (44 f, finger snap, halo flare). Agent-built.
+
+All previews re-rendered after the pauldron fix (all 33 PASS); `review.html` is current.
+
+## Polish pass (complete, in v6)
+- Special: DONE. Discharge reads from the chase camera (deeper gather, wider fling, 2-frame
+  hit-stop, bigger halo burst), release palms face forward (miss 68 -> 3-10 deg), Open Circuit
+  framing hands on target (52 -> 5 mm), finger splay stays in the palm plane, Open Circuit
+  forearm pop eased (accel 24 -> 13.5 deg/frame^2).
+- Presentation: DONE. Spawn halo now folds into a closed collar (hides the chest yoke bar, no arc
+  overlap, lag well under its cap) and the top arcs sweep up into the ring; tabard drapes over the
+  thigh in the kneel. Idle is ~1.4x livelier (still calm), Select intro snap spread over 3 frames.
+  All flicks/springs ease in; seams 0.0 mm.
+- Arc Step: DONE. End clip is now 16 f with the leg swap spread over 4 frames; worst pops cut
+  25-75%; seams 0.0 mm.
+- Locomotion (coordinator, from the Arc Step agent's review): DONE. Feet land already moving
+  back instead of stopping dead (run contact pop 141 -> ~90 mm, walk 47 -> 36 mm), softer run
+  push-off, run halo no longer pinned at its lag limit (peak 2.7 cm vs 3.5 cm cap), jump takeoff
+  arms/toes eased, glide-enter arm and leg ramps widened. All PASS, zero foot slide, seams 0.0 mm.
+
+## Refinement pass (`REFINEMENT-PLAN.md`)
+
+- **1. Shoulder crumple: DONE (v7).** v18 had a hard chest/upper-arm weight ring (0.9 -> 0 over one
+  4-15 cm edge loop). `tools/blender/anim/rigfix.py` (applied on load by `hs_anim.open_start`, v18
+  file untouched) adds `L/R shoulder` deform helpers at the upper-arm head that follow the upper
+  arm at 50% (baked and muted like the pauldron), and re-spreads the weights chest -> helper ->
+  upper arm with a smooth falloff over 24 cm (surface meshes copy the body split). Worst edge
+  stretch in the shoulder region dropped 2-4x: Arc Bolt L f5 30.7 -> 7.6, Discharge f5 26 -> 5.5,
+  Open Circuit f10 25.5 -> 5.7, Select intro 14.9 -> 3.6. Some extra compression on downward flings
+  (Discharge f9/f11, Open Circuit f22) sits under the pauldron. A small back shard remains at extreme
+  raises. Diagnostic: `shoulder_diag.py` (metrics and upper-body renders in `art/anim/wip/shoulder/`).
+- **2. Charge rework: DONE (v7).** The orb is now held higher and further out (loop 1.13 m, full
+  1.21 m), with hands wide enough to show past the torso from the chase camera. Charge full is clearly
+  bigger: chest up and back, elbows flared, clawed fingers, halo flared, 3-beat heartbeat surge with
+  stronger tremor. Loop has a 2-beat pulse. Crop: `art/anim/wip/special/charge-v7-chase-crop.png`.
+- **3. Secondary motion: DONE (v8).** All terms are integer harmonics of each loop, and the
+  enter/exit/intro clips derive from the same pose functions, so seams stay 0.0 mm. Measured with
+  `motion_range.py` (v7 -> v8 bounding-box travel / peak rotation):
+  - Glide loop: bigger bob with a second lift, torso roll with head counter-roll, alternating arm
+    and finger drift, leg scissor and knee flex, stronger tabard flutter. Head 81 -> 146 mm,
+    tabard tip 102 -> 166 mm, halo 90 -> 166 mm.
+  - Arc Step loop: roll rippling up spine -> chest -> head, asymmetric arm pump, halo arc flicker and
+    pulse, bigger tabard ripple. Head 30 -> 70 mm, halo arcs 31 -> 100 mm.
+  - Select idle: buoyant knee-soft rise on the breath (never above stand height), slow head tilt,
+    chest counter-roll, two finger-crackle flicks with an arc twitch. Head tilt 2.1 -> 4.8 deg.
+  - Open Circuit hold: arms float out on the inhale plus a 2-per-loop surge through elbows, wrists
+    and fingers in step with the crown pulse; light spine/head drift. Hands 11 -> 90 mm.
+  - Ascend: slow drift in both legs' tuck (phase-offset), arms, chest and head; hover base raised
+    12 mm so the feet stay clear of the floor. Hands +40%, tabard +50%.
+  - Arc Step IK miss is 1.7 mm (was 1.2), still far under the 1 cm limit; fixed in item 8.
+- **4. Upper body in locomotion: DONE (v9, arm fix in v10).** Run: hips and chest counter-rotate
+  ~15 deg apart at contact (neck/head cancel it, gaze steady), scapulae ride forward with the arm,
+  forearm trails the upper arm, chest side-bends on contact, bigger fore/aft swing. Walk: more
+  counter-rotation, bigger swing, scapula motion. Backpedal: torso leans back ~6 deg into the travel,
+  looser arm pump. Strafes: ~16 deg lean into the travel (head mostly upright), more counter-rotation,
+  lead arm lifts out, trail arm tucks. v10: the forward fist no longer crosses the midline.
+- **5. Tabard follow-through: DONE (v9).** New `hs_anim.tabard_follow`: each tabard link's world angle
+  trails the pelvis yaw/roll by a growing phase delay (a whip down the chain). It's a pure function
+  of loop phase, so Glide enter/exit, Jump/Land and Arc Step start/end keep exact seams. Used in
+  Run, Walk, Backpedal, strafes, Glide, Ascend, Descend and Arc Step (faded in/out via a channel).
+- **6. Weight: DONE (v10).** Jump crouch 165 -> 210 mm with more fold, arms load back then drive
+  forward-up, halo dips at takeoff. Land squash 155 -> 195 mm, held ~2 frames, slower rise that still
+  ends exactly on the stand. Run: `gait` gained `release_match` (foot keeps sliding back briefly at
+  toe-off) and the run lands at 70% of the slide speed: worst foot pop 91 -> 71 mm, contact 87 -> 68 mm,
+  max leg extension 0.975. Glide exit: torso overshoots upright and the body sinks into the stride
+  (zero on the last frame). Arc Step end: sink, then torso and arms settle just past rest.
+- **7. Arc Bolt body: DONE (v10).** Bigger chest wind-up/follow-through (spine+chest -14.5 -> +22.5
+  deg), torso loads onto the casting side then shifts across (new roll channel), forward lean into
+  the shot, head nod on release, and the head's counter-turn trails the chest by 1.5 frames (exact
+  rest at both ends). The release still re-solves the arm: muzzle within 0.08 deg of straight ahead.
+- **9. Sprint-to-glide rework: DONE (v11).** Body pitch cut to 36 deg with the head and spine lifted
+  so it reads as a hovering glide, not a dive (loop hover body z 0.097 m, all Glide clips PASS). Feet
+  point down/back like thrusters, toes together, with a light scissor. New `tools/blender/anim/vfx.py`
+  (applied on load like rigfix, v18 untouched): per foot a hot core cone, an outer cone and three
+  spinning zigzag arcs fire from the claw tips, parented to the toe bones, plus emission drivers on
+  the cyan veins, core and halo gap lights. Both run off two root-bone properties keyed into every
+  clip by `bake(props=...)`: `hs_glow` (emission x(1+1.6g)) and `hs_jet` (jet scale, 0 = hidden;
+  0 in every non-glide clip). Enter ramps glow then jets in, the loop holds them with a flicker
+  (integer harmonics, seamless), exit fades jets fast and glow slower, both 0 at the Run hand-off.
+  Seams to Run 0.0 mm. Glide previews now include the chase camera. Unity drops the drivers; its VFX
+  should read the keyed `hs_glow`/`hs_jet` curves. Crops: `art/anim/wip/glide/glide-v11-*.png`.
+- **9b. Run arm clipping: DONE (v12).** New `tools/blender/anim/clearance.py`, run by `preview.py` on every
+  frame of every clip: closest distance from each forearm (body verts) and hand mesh to the torso (pelvis/
+  spine/chest/thigh faces + abdomen/rib plates) and the tabard. QA fields `arm_clearance` (per side: min,
+  worst frame, part, what it hit, per-frame mm) and `arm_clear_min_m`; locomotion clips must stay >= 10 mm
+  or they go CHECK. v11 failed it everywhere: Run forward touched the tabard/thighs on 14 of 17 frames, and walk,
+  backpedal and strafes had forearms at 0 mm. Fix: less adduction plus upper-arm twist (elbow in, forearm
+  out), swing amplitude unchanged. Run 27 -> 15 deg adduct / twist -25, walk 22 -> 10, backpedal 25 -> 15 /
+  -25, strafes 27 -> 14 / lead 5 / -25 with forearms carried higher (elbow 58 -> 85) because the lead thigh
+  swings out under the arm. Min clearance now: run 15.4 mm, walk 16.4, backpedal 15.7, strafes 28-30, glide
+  enter/exit 50+. `arm_tune.py` scores arm variants against the check without baking. Arm params now sit in
+  `ARM` dicts at the top of `run.py`, `walk.py` and `run_dirs.py`.
+- **9 revised. Iron Man glide: DONE (v13).** Supersedes the v11 draft (36 deg, chest-leading). The body now
+  hovers upright: pelvis 5 + spine 2 + chest 1 deg, so the pelvis-to-neck line leans 6.7 deg on average and 7.8 max
+  in the loop (new QA field `body_pitch_max_deg` / `_mean_deg` on the glide clips). Pelvis hovers +33 cm with
+  the legs nearly straight (9 deg behind the hips, soft knee), ankles 24 cm apart, feet pointed down and back
+  (toes 36 deg past vertical) so the sole jets angle back as forward thrust and mostly clear the floor. Arms
+  hang relaxed, slightly back and flared, palms turned in. The back tabard streams in a curve instead of a rigid
+  board. Loop keeps its bob/roll plus a small 5th/9th-harmonic thrust buzz, so the wrap stays exact. Enter
+  keeps the push-off from run frame 10: the feet leave the ground and fold together under the body while the
+  glow, then the jets, ramp up. Exit: the feet flatten before they come down (separate location weights in
+  `apply_blend`, which fixed a 6 cm toe dip through the floor), knees tuck, then the torso dips into the run
+  lean while jets cut out fast and glow fades slower. Both hs_* props are 0 at the Run hand-offs. Jet cones are
+  longer (`vfx.JET_LEN` 0.36 -> 0.50 m). Seams: Glide enter from Run f10, Glide exit to Run f1 and the loop
+  wrap are all 0.0 mm. Hero/side/front/chase GIFs are in review.html.
+- **9c. Natural hands: DONE (v14).** `handpass.py` runs inside `hs_anim.bake` after every pose function
+  (`bake(..., hands=True)`). It depends only on the current frame's rotations, so seams stay exact, and its
+  soft limits leave natural poses alone:
+  - thumb joints always keep a slight curl (never bent back or straight out), and the thumb base tucks
+    along the index when the hand is open; the tuck fades out as the fingers close so the thumb wraps the fist
+  - finger base knuckles are limited relative to rest; middle and tip joints are limited on their true bend
+    relative to the parent segment (the rig's tip bones are modelled pre-bent)
+  - adjacent fingers curled by very different amounts, or both curled tightly, fan slightly apart so they
+    don't intersect
+  - hand roll, hand bend and forearm roll are soft-limited (no candy-wrapper wrists)
+
+  New per-frame hand QA (`handqa.py`, now part of each clip's PASS status) checks joint limits,
+  finger-to-finger and thumb-to-palm interpenetration against the mesh (over 2 mm beyond rest fails), and
+  finger pops (angular acceleration, max 12 deg/f²; 24 on frames a clip declares in `finger_accents`, such
+  as the Arc Bolt anticipation/release, Discharge release, Arc Step launch and Select intro snap).
+  Per-clip fixes:
+  - Idle and Select idle: finger twitches are slower (the Idle f78 pop dropped from 21 to 9.9 deg/f²)
+  - Spawn: the awaken kick is softer
+  - Arc Bolt: the anticipation no longer curls then snaps open the index, and the fist and thumb close
+    evenly. The arm solve now aims with the hand pass applied, so the fingertip muzzle stays within
+    0.06/0.07 deg of straight ahead
+  - Discharge: the fingers clench evenly to 34 deg and burst open under constant acceleration into the
+    hit-stop; the frame-to-frame finger jitter is gone
+  - Charge full: finger tremor 7 -> 2.5
+  - Arc Step start: the pre-curl before the launch is smaller
+
+  Worst results after the fixes: pops 11.5 deg/f² (accent 20.5), interpenetration 1.3 mm. Hand close-up GIFs
+  (back-of-hand and palm views of both hands, framed in the hand's own space) are in
+  `art/anim/wip/hands/<clip>/hands.gif` (+ `hands-sheet.jpg`) for Run forward, Arc Bolt right, Charge full,
+  Discharge, Idle and Glide loop, and on the matching review.html cards. The tools are `hand_closeup.py`
+  (background Blender) and `hand_sheet.py`.
+- **8. Aim poses and IK: DONE (v15).**
+  - Aim up/down: the ±66 deg pitch is now pelvis 6 + spine 8 + chest 10 + neck 18 + head 24. The thighs
+    counter-rotate so the legs don't move, and the shoulders rise 6 deg into an up-aim and settle into a
+    down-aim. Aim up leans back from the hips instead of pushing them forward; aim down folds from the
+    pelvis instead of dropping the head into the chest.
+  - Arc Step: airborne ankles are clamped to 98.5% of each leg's real length. The IK miss drops from 1.7 to
+    0.07 mm and the dash legs sit at 0.985.
+  - Leg extension is now measured per side, because the v18 right leg is 2 cm longer than the old single
+    `LEG_LENGTH`. The old 1.01 figure was just the rig's straight-legged rest pose on Arc Step's first and
+    last frames, which now reads 0.997.
+  - `bake` also reports `max_leg_extension_at` / `ik_miss_at`.
+  - Land/Idle/Jump seam: Jump and Land plant the feet with the claw tip on the ground, 1 mm higher than
+    the stand used by `air.stand_pose` and Idle. Both stands now use that claw-safe height (Spawn's step is
+    now an offset from it), so the seam is 0.0 mm.
+- **Refinement item 9c follow-up: DONE (v16, run 3 item a).** Checking against 9c turned up one gap: nothing
+  tested whether the hands or forearms sink into the body. The hand QA only measured the fingers against
+  each other, and `clearance.py` only measured the forearm clearance to the torso and tabard. The new
+  `tools/blender/anim/contact.py` (README) runs in `preview.py`, and `hand_contact_ok` is now part of PASS.
+  On v15 it found real clipping, confirmed in unclipped renders:
+  - Idle, Jump f1, Land end and Spawn: the claws hung 4-6 cm inside the thighs.
+  - Discharge gather: the left elbow sat 56-64 mm inside the ribs (the arm solve was pinned at its adduct
+    limit).
+  - Open Circuit end recall: 53 mm into the torso.
+  - Arc Bolt right anticipation: the little finger sat 33 mm inside the chest.
+  - Spawn crouch: 25-30 mm into the knees.
+  - Run backward: 12 mm into the right shin.
+
+  Fixes:
+  - Stand arms (`air.STAND_ARMS`): adduct 22 -> 9. Jump's first key now reads `STAND_ARMS`, so Idle -> Jump
+    stays 0.0 mm, and its crouch arms stay wide.
+  - Combat-idle left arm: adduct 24 -> 11.
+  - `special.solve(avoid=True)` adds a torso-ellipse penalty on the elbow, mid-forearm and wrist, with a
+    wider gather target and recall pose. The Open Circuit end relax opens by 12 deg adduct.
+  - Arc Bolt anticipation: swing -42, adduct 14, elbow 112.
+  - Spawn crouch arms: adduct 30 -> 12 (right arm 4).
+  - Run backward arm tuck on the back swing: -10.
+
+  Worst results now: Spawn 3.9 mm (a left knee brush during the rise), Open Circuit end 2.9 mm, Land 0.9 mm;
+  everything else 0.0. Hands QA stays OK (worst pop 11.5 deg/f², Jump 7.6). Stills of the fixed poses
+  (front, outside and back views around each hand, body unclipped) are in `art/anim/wip/contact/v16/`.
+- **Refinement items 9d + 9e (heel thrusters, feet/thrust progression, hands): DONE (v17, run 3 item b).**
+  - Heel thrusters (`vfx.py`): the jets now come from the heel spur / Achilles base (the `heel socket` bone
+    tail) instead of the toe claws. They keep the character's axes, so the exhaust always trails back along
+    the travel line. Its downward tilt is keyed per clip in the new root property `hs_jet_dir`: run 12 deg,
+    lift-off 58, glide 28. The new per-foot `hs_spark_L` / `hs_spark_R` properties drive the run sparks.
+  - Walk: heel-toe and grounded, with no thrust. The heel spur strikes first with the toes 10 deg up, pivoting
+    on the heel via the new `gait.heel_pivot`. The foot rolls flat by a quarter of stance, then peels off onto
+    the toes. Lowest body point 7.6 mm (the heel resting on the ground), zero slide.
+  - Run: stronger toe push-off (pushoff 38 -> 46 deg). A small heel spark (0.45 scale, about 4 frames) flashes
+    on each toe-off, per foot, and it wraps exactly with the loop.
+  - Glide enter: the right foot's last push-off becomes the lift-off. Its spark hands over to both heel jets
+    igniting in a burst (hs_jet peaks at 1.66), with the exhaust swinging down to 58 deg for lift and then
+    easing back to 28. The push-off sink/pop is softer.
+  - Glide loop: steady flickering jets at 28 deg. The feet are no longer toe-down nozzles (foot pitch 106 -> 28,
+    toe 126 -> 14): a slight point that turns the heels back along the travel line.
+  - Glide exit: the jets cut within 3 frames as the legs swing down, and the feet plant into run frame 1 with
+    no spark.
+  - Handoff check (new `stitch.py`, `art/anim/wip/transitions/walk-run-glide/`): the halo cross-fade in Glide
+    enter/exit now tracks the run's halo offsets frame by frame instead of freezing one; the frozen offset had
+    put a 7 cm/f² halo kick into the lift-off. Lift-off peaks are now pelvis 35, tabard 35 and halo 55 mm/f²,
+    against the run's own ~17-30. That is the intended take-off accent, not a seam pop. At the hard cut itself
+    the worst bone is 1.1x its in-clip maximum.
+  - Stitched preview: walk -> run (8-frame phase-aligned cross-fade) -> glide enter -> glide loop -> glide
+    exit -> run, as hero, side and chase GIFs in `art/anim/wip/transitions/walk-run-glide/`, also on
+    review.html.
+  - Hands (9c re-check): I rendered close-ups of all 33 clips (`art/anim/wip/hands/<clip>/hands.gif`) with a
+    new unclipped context view (`hand_closeup.py --context`) and reviewed them frame by frame (every third
+    frame on the long idle loops, which QA also checks every frame).
+    Found and fixed: Arc Bolt L/R, Discharge, Open Circuit, Open Circuit end and Arc Step started and ended on
+    the bind rest with flat paddle fingers, and the Arc Bolt off-hand and the aim poses stayed flat throughout.
+    They now use the relaxed Idle hand (curl 21, thumb 12; `special.rest_state`, `primary.REST_HAND`, Arc Step
+    `REST`).
+    Looked right: run and walk fists and relaxed hands, the glide hover hands, the Jump/Land swing, the Charge
+    claw cradle, the Discharge clench and burst, the Open Circuit splay and recall, the Select intro point, and
+    the Idle/Spawn rest hands. No thumb hyperextension, no thumb through the palm, no pops above the limit
+    (worst 11.7 deg/f², Arc Step end). The v15 close-ups moved to `art/anim/wip/hands/_v15/`.
+- **Item 10** (expanded gameplay transitions) is not started yet (last).
+- Tooling: `refresh.py vN` reruns every preview (QA and renders), seams, sheets/GIFs, review.html
+  and writes `art/anim/vN/qa-summary.json`. `preview.py` no longer deletes frames; stale frames
+  move to `<clip>/stale/`.
+  `motion_range.py -- a.blend b.blend --clips ...` compares how far key bones travel per clip;
+  `qa_diff.py` diffs QA fields; `crop_frames.py` tiles full-size frame crops. `probe.py` prints bone
+  directions (`^bone`) and object axes (`@object`); `jet_probe.py` prints world jet vs foot positions.
+
+## Plan for the night
+
+1. Merge finished modules into anim v2, v3...
+2. Abilities: Charge loop / full-charge hold / Discharge, Arc Step dash (start/loop/end),
+   Open Circuit crown unfold (rebuilt from the v10 studies as layered gestures).
+3. Presentation: idle polish, spawn/intro, character-select idle. Death is ragdoll (no clip).
+4. Smoothness pass across all clips; shoulder correctives where poses show crumpling.
+5. Later (user): VFX / SFX.
+
+## Open issues
+
+- Shoulder crumple in high arm raises: much reduced in v7 (helper bones), small back shard left.
+- No export or in-game test yet.
+- Crown hold sways +-9 deg; a continuous spin would be done in Unity on `halo root`.
+- Arm bones sit 3.75 cm off the mesh centreline, so L/R arm poses don't mirror exactly.
+- For Unity: halo bones on their own avatar-mask layer would let the crown hold play under Arc Bolt.

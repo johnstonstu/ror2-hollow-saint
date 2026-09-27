@@ -1,0 +1,11 @@
+# Keep credentials out of Docker build contexts, including nested folders.
+.env*
+**/.env*
+*.env
+**/*.env
+*.env.*
+**/*.env.*
+*.env~
+**/*.env~
+.git
+**/.git

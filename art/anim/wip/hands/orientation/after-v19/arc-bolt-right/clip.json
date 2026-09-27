@@ -1,0 +1,228 @@
+{
+ "title": "Arc Bolt right",
+ "tag": "after-v19",
+ "rendered_frames": [
+  1,
+  3,
+  5,
+  7,
+  9,
+  11,
+  13,
+  15,
+  17,
+  19
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.178,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.17,
+    "palm_fwd": -0.022,
+    "hand": 0.748,
+    "raise": 39.255,
+    "elbow_open": 166.266,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 3,
+   "L": {
+    "thumb_up": 0.248,
+    "palm_fwd": -0.02,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.157,
+    "palm_fwd": 0.781,
+    "hand": 0.748,
+    "raise": 51.389,
+    "elbow_open": 65.83,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 5,
+   "L": {
+    "thumb_up": 0.139,
+    "palm_fwd": 0.059,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.692,
+    "palm_fwd": -0.082,
+    "hand": 0.748,
+    "raise": 78.045,
+    "elbow_open": 163.935,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 7,
+   "L": {
+    "thumb_up": 0.138,
+    "palm_fwd": 0.012,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.597,
+    "palm_fwd": 0.012,
+    "hand": 0.748,
+    "raise": 81.661,
+    "elbow_open": 162.131,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 9,
+   "L": {
+    "thumb_up": 0.14,
+    "palm_fwd": 0.001,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.578,
+    "palm_fwd": -0.092,
+    "hand": 0.748,
+    "raise": 76.384,
+    "elbow_open": 161.764,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 11,
+   "L": {
+    "thumb_up": 0.148,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.551,
+    "palm_fwd": -0.089,
+    "hand": 0.748,
+    "raise": 72.786,
+    "elbow_open": 158.539,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 13,
+   "L": {
+    "thumb_up": 0.158,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.813,
+    "palm_fwd": -0.058,
+    "hand": 0.748,
+    "raise": 65.977,
+    "elbow_open": 159.874,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 15,
+   "L": {
+    "thumb_up": 0.167,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.693,
+    "palm_fwd": -0.043,
+    "hand": 0.748,
+    "raise": 52.037,
+    "elbow_open": 162.668,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 17,
+   "L": {
+    "thumb_up": 0.174,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.403,
+    "palm_fwd": -0.039,
+    "hand": 0.748,
+    "raise": 41.493,
+    "elbow_open": 165.094,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 19,
+   "L": {
+    "thumb_up": 0.177,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.199,
+    "palm_fwd": -0.027,
+    "hand": 0.748,
+    "raise": 39.18,
+    "elbow_open": 166.159,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

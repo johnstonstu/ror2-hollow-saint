@@ -1,0 +1,30 @@
+{
+ "title": "Discharge",
+ "tag": "v18-check",
+ "rendered_frames": [
+  15
+ ],
+ "rows": [
+  {
+   "f": 15,
+   "L": {
+    "thumb_up": -0.744,
+    "palm_fwd": 0.677,
+    "hand": 0.805,
+    "raise": 55.106,
+    "elbow_open": 144.802,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": -0.533,
+    "palm_fwd": 0.614,
+    "hand": -0.805,
+    "raise": 54.995,
+    "elbow_open": 144.843,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

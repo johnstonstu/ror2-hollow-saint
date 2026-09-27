@@ -1,0 +1,4 @@
+C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\probe_world.py:4: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  out = {'world': w.name if w else None, 'has_use_nodes': hasattr(w, 'use_nodes'),
+C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\probe_world.py:5: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  'use_nodes': getattr(w, 'use_nodes', None), 'node_tree': bool(w.node_tree),

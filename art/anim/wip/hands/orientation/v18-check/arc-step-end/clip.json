@@ -1,0 +1,30 @@
+{
+ "title": "Arc Step end",
+ "tag": "v18-check",
+ "rendered_frames": [
+  5
+ ],
+ "rows": [
+  {
+   "f": 5,
+   "L": {
+    "thumb_up": -0.751,
+    "palm_fwd": 0.816,
+    "hand": 0.771,
+    "raise": 65.045,
+    "elbow_open": 153.11,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": -0.813,
+    "palm_fwd": 0.761,
+    "hand": -0.771,
+    "raise": 62.524,
+    "elbow_open": 153.11,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

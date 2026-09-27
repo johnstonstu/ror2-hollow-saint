@@ -1,0 +1,30 @@
+{
+ "title": "REST",
+ "tag": "v18-check",
+ "rendered_frames": [
+  1
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": -0.18,
+    "palm_fwd": 1.0,
+    "hand": 0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": -0.18,
+    "palm_fwd": 1.0,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

@@ -1,0 +1,257 @@
+{
+  "title": "Open Circuit",
+  "frames": [
+    1,
+    30
+  ],
+  "loop": false,
+  "markers": {
+    "Unfold": 6,
+    "Crown active": 22
+  },
+  "ik_miss_m": 0.0,
+  "max_leg_extension": 0.0,
+  "max_leg_extension_at": "",
+  "ik_miss_at": "",
+  "ik_miss_frames": {},
+  "kind": "gesture",
+  "layer": "upper body (mask excludes pelvis/legs)",
+  "seam_to": [
+    "Open Circuit hold",
+    1
+  ],
+  "max_arm_raise_deg": 64.9,
+  "start_rest_err_m": 0.098017,
+  "end_rest_err_m": 0.536092,
+  "bake_error_m": 1e-06,
+  "bake_error_deg": 0.0,
+  "max_ang_vel_deg_f": [
+    34.48,
+    "L forearm",
+    15
+  ],
+  "max_ang_acc_deg_f2": [
+    20.68,
+    "L forearm",
+    14
+  ],
+  "max_pos_acc_mm_f2": [
+    67.67,
+    "L hand",
+    2
+  ],
+  "arc_signed_min_mm": -10.2,
+  "arc_signed_frame": 4,
+  "arc_signed_rest_mm": -9.7,
+  "arc_verts_inside_max": 29,
+  "arc_verts_inside_frame": 5,
+  "arc_verts_inside_rest": 23,
+  "hand_chest_min_mm": 101.3,
+  "hand_chest_frame": 12,
+  "pauldron_follow_err_deg": 2.83,
+  "module": "special",
+  "action": "HS_anim | Open Circuit",
+  "planted_frame_pairs": 58,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "arm_clearance": {
+    "L": {
+      "min_m": 0.0019,
+      "frame": 5,
+      "part": "forearm",
+      "against": "L thigh",
+      "frames_under_min": 2,
+      "per_frame_mm": [
+        103,
+        91,
+        59,
+        16,
+        2,
+        4,
+        17,
+        34,
+        34,
+        35,
+        37,
+        39,
+        49,
+        57,
+        72,
+        91,
+        131,
+        178,
+        211,
+        224,
+        224,
+        224,
+        222,
+        212,
+        191,
+        162,
+        134,
+        115,
+        111,
+        116
+      ],
+      "hits": {
+        "5": "forearm > L thigh",
+        "6": "forearm > L thigh"
+      }
+    },
+    "R": {
+      "min_m": 0.0824,
+      "frame": 12,
+      "part": "forearm",
+      "against": "chest",
+      "frames_under_min": 0,
+      "per_frame_mm": [
+        106,
+        108,
+        112,
+        119,
+        128,
+        128,
+        127,
+        98,
+        83,
+        83,
+        83,
+        82,
+        92,
+        111,
+        149,
+        171,
+        191,
+        198,
+        199,
+        198,
+        198,
+        198,
+        200,
+        202,
+        203,
+        171,
+        141,
+        123,
+        119,
+        126
+      ],
+      "hits": {}
+    }
+  },
+  "arm_clear_min_m": 0.0019,
+  "arm_clear_ok": null,
+  "hand_qa": {
+    "violations": {},
+    "penetration_mm": {},
+    "max_penetration_mm": 0.3,
+    "finger_pops_deg_f2": [
+      [
+        6.27,
+        "R little.2",
+        28
+      ],
+      [
+        5.74,
+        "R ring.2",
+        28
+      ],
+      [
+        5.45,
+        "R little.2",
+        29
+      ],
+      [
+        5.45,
+        "R little.3",
+        28
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "wrist": {
+      "L": {
+        "hand_twist_deg": 20.0,
+        "hand_twist_frame": 11,
+        "hand_bend_max_deg": 37.9,
+        "forearm_roll_deg": 89.9,
+        "forearm_roll_frame": 9
+      },
+      "R": {
+        "hand_twist_deg": 23.1,
+        "hand_twist_frame": 30,
+        "hand_bend_max_deg": 34.8,
+        "forearm_roll_deg": -89.3,
+        "forearm_roll_frame": 11
+      }
+    },
+    "flex_range": {
+      "L": {
+        "thumb_min": 3.7,
+        "thumb_max": 22.0,
+        "finger_min": -6.6,
+        "finger_max": 60.8
+      },
+      "R": {
+        "thumb_min": 3.7,
+        "thumb_max": 22.0,
+        "finger_min": -6.6,
+        "finger_max": 60.8
+      }
+    }
+  },
+  "hand_qa_summary": {
+    "ok": true,
+    "violations": 0,
+    "pen_over": 0,
+    "worst_pop_deg_f2": 6.27,
+    "worst_pop": "R little.2 f28",
+    "worst_accent_pop_deg_f2": 0.0,
+    "max_pen_mm": 0.3
+  },
+  "hand_contact": {},
+  "hand_contact_max_mm": 0.0,
+  "hand_contact_worst": " f0",
+  "hand_contact_ok": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "hero",
+    "side",
+    "front",
+    "chase"
+  ],
+  "rendered_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ]
+}

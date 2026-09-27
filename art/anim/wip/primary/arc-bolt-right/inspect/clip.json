@@ -1,0 +1,54 @@
+{
+  "title": "Arc Bolt right",
+  "frames": [
+    1,
+    20
+  ],
+  "loop": false,
+  "markers": {
+    "Anticipation": 3,
+    "Bolt release": 5,
+    "Recovered": 20
+  },
+  "ik_miss_m": 0.0,
+  "max_leg_extension": 0.0,
+  "ik_miss_frames": {},
+  "kind": "gesture",
+  "hand": "R",
+  "muzzle": "R muzzle",
+  "arm_release": {
+    "swing": -71.38,
+    "adduct": 4.75,
+    "wx": -20.25,
+    "wy": -39.88
+  },
+  "muzzle_release_pos": [
+    -0.233,
+    -0.845,
+    1.367
+  ],
+  "muzzle_release_dir": [
+    -0.0,
+    -1.0,
+    -0.001
+  ],
+  "muzzle_release_angle_to_-Y_deg": 0.05,
+  "start_rest_err_m": 0.0,
+  "end_rest_err_m": 0.0,
+  "bake_error_m": 1e-06,
+  "module": "primary",
+  "action": "HS_anim | Arc Bolt right",
+  "planted_frame_pairs": 38,
+  "max_planted_slide_m_per_frame": 0.0,
+  "min_body_z": 0.008,
+  "min_toe_tip_z": 0.02,
+  "finite": true,
+  "status": "PASS",
+  "step": 1,
+  "views": [
+    "chase"
+  ],
+  "rendered_frames": [
+    6
+  ]
+}
