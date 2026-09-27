@@ -13,7 +13,8 @@ already look right are untouched and no new pops appear.
 - Orientation (item 9f): on raised arms the forearm (plus a share of upper-arm twist on a straight arm) rolls
   so the thumb edge stays within ORIENT_BAND of a target that turns from thumb-forward (arm low) to thumb-up /
   palm-forward (arm raised); swept-back arms are left alone. It is a soft band, so hands already inside it are
-  untouched, and it depends only on the frame's pose (seams stay exact). Needs a depsgraph update per frame.
+  untouched. When several roll ranges qualify it takes the one nearest the previous frame's roll (bake resets
+  `prev` per clip), so the forearm doesn't flip between solutions. Needs a depsgraph update per frame.
 """
 import math
 from mathutils import Quaternion, Vector
@@ -36,6 +37,7 @@ ORIENT_THUMB_UP, ORIENT_PALM_FWD = 0.10, -0.12   # targets, inside the QA limits
 ORIENT_RELAXED = (0.03, -0.21)                    # fallback targets when the pose can't reach both
 ORIENT_SAFE, ORIENT_KNEE = 3.0, 6.0              # deg kept clear of the allowed arc's edges; soft knee
 UA_SHARE = 0.4                                   # upper-arm twist share of the roll on a straight arm
+ORIENT_QA_PAD = 0.07                             # HandPass.finish keeps gated frames this far inside the QA limits
 X, Y, Z = Vector((1, 0, 0)), Vector((0, 1, 0)), Vector((0, 0, 1))
 
 
@@ -66,11 +68,56 @@ def about(axis, deg):
     return Quaternion(axis, math.radians(deg))
 
 
+TWIST_SHARE = 0.5
+ROLL_R = 3                                    # frames: orientation-roll blur radius (two box passes)
+ROLL_ITERS = 10                               # blur + band-clamp rounds in HandPass.finish
+
+
+def blur_anchored(vals, n, pins=()):
+    """Two box blurs over +-ROLL_R, then a correction that decays smoothly over 2*ROLL_R frames so the anchors
+    (a one-shot's first/last frame, a loop's `pins`) keep exactly their raw value. Unlike padpass.smooth_series,
+    frames next to an anchor stay blurred instead of easing back to the raw curve (a blip there stays smoothed).
+    The first n values are the period when n < len(vals) (loop; the closing frame repeats frame 0)."""
+    m = len(vals)
+    loop = n < m
+
+    def at(v, i):
+        return v[i % n] if loop else v[min(max(i, 0), m-1)]
+    r = range(-ROLL_R, ROLL_R+1)
+    e = [sum(at(vals, i+j) for j in r)/len(r) for i in range(m)]
+    b = [sum(at(e, i+j) for j in r)/len(r) for i in range(m)]
+    span = 2*ROLL_R
+    if loop:
+        anchors = sorted({q % n for q in pins})
+        dist = lambda i, q: min(abs(i-q) % n, n-abs(i-q) % n)
+    else:
+        anchors = [0, m-1]
+        dist = lambda i, q: abs(i-q)
+    offs = [(q, vals[q]-b[q]) for q in anchors]
+    for i in range(n if loop else m):
+        b[i] += sum(o*(1.0-smooth(dist(i, q)/span)) for q, o in offs)
+    for q in anchors:
+        b[q] = vals[q]
+    if loop:
+        b[n:] = b[:m-n]
+    return b
+
+
+def set_twist(poser):
+    """Counter-roll each `<s> forearm twist` bone (bodyfix.forearm_twist) by TWIST_SHARE of its forearm's roll.
+    bake runs this on every frame after the other passes, so the bone is captured and keyed like any other."""
+    for s in ('L', 'R'):
+        tb = poser.pb.get(f'{s} forearm twist')
+        if tb is not None:
+            tb.rotation_quaternion = about(Y, -TWIST_SHARE*twist(poser.pb[f'{s} forearm'].rotation_quaternion, 1))
+
+
 class HandPass:
     def __init__(self, poser):
         self.p = poser
         self.max_roll = {}
         self.last_roll = {}
+        self.prev = {}
         self.infeasible = 0
         r3 = poser.r3
         self.rest_rel = {}
@@ -172,16 +219,18 @@ class HandPass:
         return math.atan2(c, b), math.acos(k)
 
     @staticmethod
-    def roll_needed(arcs):
+    def roll_needed(arcs, ref=None, band=False):
         """Smallest-magnitude roll (deg) into the intersection of the arcs, softly kept off the edges; 0 when the
-        hand already sits well inside."""
+        hand already sits well inside. ref (the previous frame's roll): when the intersection has several
+        pieces, take the piece nearest ref, so the solution doesn't jump branch between frames.
+        band=True returns (roll, (lo, hi)): the chosen piece minus the ORIENT_SAFE margins (deg)."""
         lo, hi = -math.pi, math.pi
         pieces = [(lo, hi)]
         for c, h in arcs:
             if h >= math.pi:
                 continue
             if h < 0:
-                return None
+                return (None, None) if band else None
             nxt = []
             for shift in (-2*math.pi, 0.0, 2*math.pi):
                 a, b = c-h+shift, c+h+shift
@@ -191,20 +240,22 @@ class HandPass:
                         nxt.append((x0, x1))
             pieces = nxt
             if not pieces:
-                return None
-        best = None
+                return (None, None) if band else None
+        best = best_key = best_band = None
         for p0, p1 in pieces:
             p0d, p1d = math.degrees(p0), math.degrees(p1)
             lo_e, hi_e = p0d+ORIENT_SAFE, p1d-ORIENT_SAFE
             if p0d <= -179.99 and p1d >= 179.99:
-                cand = 0.0
+                cand, rng = 0.0, (-math.inf, math.inf)
             elif hi_e-lo_e > 2*ORIENT_KNEE:
-                cand = soft_band(0.0, lo_e, hi_e, ORIENT_KNEE)
+                cand, rng = soft_band(0.0, lo_e, hi_e, ORIENT_KNEE), (lo_e, hi_e)
             else:
                 cand = 0.5*(p0d+p1d)
-            if best is None or abs(cand) < abs(best):
-                best = cand
-        return best
+                rng = (lo_e, hi_e) if hi_e > lo_e else (cand, cand)
+            key = abs(cand) if ref is None else max(p0d-ref, ref-p1d, 0.0)+1e-3*abs(cand)
+            if best is None or key < best_key:
+                best, best_key, best_band = cand, key, rng
+        return (best, best_band) if band else best
 
     @staticmethod
     def roll_compromise(f, terms):
@@ -238,29 +289,101 @@ class HandPass:
                     continue
                 d, n, r = handorient.hand_axes(rig, s)
                 f = st['fa']
+                ref = self.prev.get(s) if it == 0 else None
+                ref = None if ref is None else ref/max(w, 1e-3)
                 terms = ((r, Z, ORIENT_THUMB_UP), (n, fw, ORIENT_PALM_FWD))
-                need = self.roll_needed([self.allowed_arc(f, *t) for t in terms])
+                need, rng = self.roll_needed([self.allowed_arc(f, *t) for t in terms], ref, band=True)
                 if need is None:
                     self.infeasible += 1
                     relaxed = ((r, Z, ORIENT_RELAXED[0]), (n, fw, ORIENT_RELAXED[1]))
-                    need = self.roll_needed([self.allowed_arc(f, *t) for t in relaxed])
+                    need, rng = self.roll_needed([self.allowed_arc(f, *t) for t in relaxed], ref, band=True)
                     if need is None:
                         need = self.roll_compromise(f, terms)
+                        rng = (need, need)
+                u = UA_SHARE*smooth((st['elbow_open']-120.0)/50.0)
+                if w > 0.999:
+                    # finish() may move the roll anywhere inside the QA limits (a little inside), not just the targets
+                    qa = ((r, Z, handorient.THUMB_UP_MIN+ORIENT_QA_PAD), (n, fw, handorient.PALM_FWD_MIN+ORIENT_QA_PAD))
+                    _, wide = self.roll_needed([self.allowed_arc(f, *t) for t in qa], need, band=True)
+                    lo, hi = wide if wide is not None and wide[0] <= need <= wide[1] else rng
+                    prior = done.get(s, 0.0)
+                    self.frame_roll[f'{s} band'] = (prior+lo, prior+hi)
+                self.frame_roll[f'{s} share'] = u
                 corr = w*need
                 if abs(corr) < 1e-4:
                     continue
-                u = UA_SHARE*smooth((st['elbow_open']-120.0)/50.0)
                 for bone, share in ((f'{s} forearm', 1.0-u), (f'{s} upperarm', u)):
                     if share > 0:
                         b = p.pb[bone]
                         b.rotation_quaternion = b.rotation_quaternion @ about(Y, corr*share)
+                        self.frame_roll[bone] = self.frame_roll.get(bone, 0.0)+corr*share
                 done[s] = done.get(s, 0.0)+corr
         self.last_roll = done
+        self.prev = {s: done.get(s, 0.0) for s in ('L', 'R')}
         for s, v in done.items():
             self.max_roll[s] = max(self.max_roll.get(s, 0.0), abs(v))
 
     def apply(self):
+        self.frame_roll = {}
         for s in ('L', 'R'):
             self.side(s)
         if ORIENT:
             self.orient()
+
+    def finish(self, caps, frames, loop, pins=()):
+        """Smooth each side's orientation roll over time and rewrite the arm chains in caps: the roll fades in and
+        out with the raise gate within a few frames, which read as forearm pops. Alternates blur_anchored with a
+        clamp into each gated frame's allowed band (so every frame handorient gates stays inside it; seams stay
+        the raw solve), then splits the change between forearm and upper arm by that frame's share.
+        `hist`: bake appends frame_roll per frame."""
+        if len(self.hist) != len(frames):
+            return {}
+        m = len(frames)
+        n = m-1 if loop and m > 2 else m
+        delta = {}
+        for s in ('L', 'R'):
+            fa, ua = f'{s} forearm', f'{s} upperarm'
+            raw = [h.get(fa, 0.0)+h.get(ua, 0.0) for h in self.hist]
+            if not any(abs(v) > 1e-4 for v in raw):
+                continue
+            bands = [h.get(f'{s} band') for h in self.hist]
+            x = list(raw)
+            for _ in range(ROLL_ITERS):
+                x = blur_anchored(x, n, pins)
+                for i, bd in enumerate(bands[:n]):
+                    if bd is not None:
+                        x[i] = min(max(x[i], bd[0]), bd[1])
+                if n < m:
+                    x[n:] = x[:m-n]
+            d = [a-b for a, b in zip(x, raw)]
+            share = [h.get(f'{s} share', 0.0) for h in self.hist]
+            delta[fa] = [di*(1.0-u) for di, u in zip(d, share)]
+            delta[ua] = [di*u for di, u in zip(d, share)]
+            if f'{s} forearm twist' in caps[frames[0]]:
+                delta[f'{s} forearm twist'] = [-TWIST_SHARE*v for v in delta[fa]]
+        if not delta:
+            return {}
+        bones = self.p.bones
+
+        def depth(b):
+            k, x = 0, bones[b].parent
+            while x is not None:
+                k, x = k+1, x.parent
+            return k
+        order = sorted((b for b in caps[frames[0]] if bones[b].parent is not None), key=depth)
+        under = set(delta)
+        for b in order:
+            if bones[b].parent.name in under:
+                under.add(b)
+        for i, f in enumerate(frames):
+            old = {b: caps[f][b].copy() for b in under}
+            for b in order:
+                if b not in under:
+                    continue
+                par = bones[b].parent.name
+                rel = self.p.rest[par].inverted() @ self.p.rest[b]
+                local = rel.inverted() @ old.get(par, caps[f][par]).inverted() @ old[b]
+                if b in delta:
+                    local = local @ about(Y, delta[b][i]).to_matrix().to_4x4()
+                caps[f][b] = caps[f][par] @ rel @ local
+        return {'orient_smooth_max_deg': round(max(abs(d) for v in delta.values() for d in v[:n]), 1)}

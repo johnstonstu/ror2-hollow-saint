@@ -25,7 +25,8 @@ TARGET = Vector((0.0, -1.0, 0.0))
 # Muzzle x, z at release: in front of the shoulder, outside the torso so the arm reads from the
 # chase camera behind the character.
 AIM_POINT = {'R': Vector((-0.24, 0.0, 1.36)), 'L': Vector((0.24, 0.0, 1.36))}
-HALO_CENTRE = Vector((-0.038, 0.15, 1.98))
+from padfix import HALO_SHIFT, halo_pose
+HALO_CENTRE = Vector((-0.038, 0.15, 1.98))+HALO_SHIFT
 FTWIST = 80.0   # forearm roll at release: + turns the palm inward so the thumb rides on top
 
 CHANNELS = ('wb', 'swing', 'adduct', 'elbow', 'ftwist', 'wx', 'wy', 'ic', 'ix', 'fist', 'thumb',
@@ -61,6 +62,7 @@ KEYS = {
     N: key(**REST_HAND, st=ST_END),
 }
 HEAD_LAG = 1.5   # frames the head's counter-turn trails the chest (settles exact by the end)
+HALO_YAW_MAX = 5.0   # deg, soft limit of the halo's yaw trail
 
 
 def track(f, keys):
@@ -86,8 +88,17 @@ def track(f, keys):
     return (2*u3-3*u2+1)*ys[i]+(u3-2*u2+u)*h*m[i]+(-2*u3+3*u2)*ys[i+1]+(u3-u2)*h*m[i+1]
 
 
+# Per-frame elbow/forearm-roll through the whip (override KEYS): the cock peaks lower and eases in over two frames
+# so the snap stays inside the accent pop limit (fullqa ACCENT_POP_MAX) instead of a 112 deg cock reversing in one
+# frame (FULL-AUDIT S7: 108 deg/f2 at f3).
+WHIP = {'elbow': {1: 0.0, 2: 48.0, 3: 78.0, 4: 54.0, RELEASE: AIMED['elbow'], 6: 10.0},
+        'ftwist': {1: 0.0, 2: 24.0, 3: 46.0, 4: 66.0, RELEASE: FTWIST, 6: FTWIST}}
+
+
 def channel(f, name):
-    return track(f, {k: v[name] for k, v in KEYS.items()})
+    keys = {k: v[name] for k, v in KEYS.items()}
+    keys.update(WHIP.get(name, {}))
+    return track(f, keys)
 
 
 def curl_bone(p, bone, deg):
@@ -146,11 +157,12 @@ def gesture_pose(p, f, side, base):
 
 
 def halo(p, f, kick, yaw):
-    """Small pop up/back with a segment flare on release; yaw trails the chest by ~2 frames."""
+    """Small pop up/back with a segment flare on release; yaw trails the chest by ~2 frames, soft-limited to
+    HALO_YAW_MAX (a ring yaw swings the lower arcs fore/aft into the pads: 21 deg at release before 9g)."""
     fade = 1.0-ramp(f, N-5, N)
-    lag = (channel(f-2, 'spine')+channel(f-2, 'chest')-channel(f, 'spine')-channel(f, 'chest'))*0.6*fade
-    p.offset('halo root', (0, 0.016*kick, 0.02*kick))
-    p.rot('halo root', R(x=-6*kick, z=yaw*lag))
+    lag = (channel(f-2, 'spine')+channel(f-2, 'chest')-channel(f, 'spine')-channel(f, 'chest'))*0.3*fade
+    lag = HALO_YAW_MAX*math.tanh(lag/HALO_YAW_MAX)
+    halo_pose(p, (0, 0.016*kick, 0.02*kick), R(x=-6*kick, z=yaw*lag))
     for i in range(1, 5):
         n = f'halo {i}'
         d = p.rest[n].translation-HALO_CENTRE
@@ -208,9 +220,13 @@ def gesture_post(side):
 
 
 # ----------------------------------------------------------------------------- aim
-PITCH_SPLIT = {'pelvis': 6, 'spine': 8, 'chest': 10, 'neck': 18, 'head': 24}    # 66 deg
-YAW_SPLIT = {'spine': 8, 'chest': 12, 'neck': 20, 'head': 26}                   # 66 deg
-AIM_SCAPULA = 6.0   # shoulders rise into an up-aim and settle into a down-aim (deg at full pitch)
+# Most of the aim rides the chest: neck+head over ~26 deg of pitch or ~32 of yaw relative to the chest drives the
+# chin into the chest plates / core and the nape into the scapula shells (FULL-AUDIT M2), and spine bend folds the
+# belly skin over the rigid abdomen plates.
+# At 24 deg of neck+head the chin still met the neck cables (down) and the nape the back conductors (up).
+PITCH_SPLIT = {'pelvis': 13, 'spine': 8, 'chest': 27, 'neck': 8, 'head': 10}   # 66 deg
+YAW_SPLIT = {'spine': 12, 'chest': 28, 'neck': 12, 'head': 14}                  # 66 deg
+AIM_SCAPULA = 2.0   # shoulders rise into an up-aim and settle into a down-aim (deg at full pitch)
 AIMS = {'Aim neutral': (0, 0), 'Aim up': (-1, 0), 'Aim down': (1, 0), 'Aim left': (0, 1), 'Aim right': (0, -1)}
 
 
@@ -235,7 +251,7 @@ def build(p):
         out.append(bake(p, title, list(range(1, N+1)), lambda q, f, s=side, b=base: gesture_pose(q, f, s, b), False,
                         markers={'Anticipation': ANTICIPATION, 'Bolt release': RELEASE, 'Recovered': N},
                         meta={'kind': 'gesture', 'hand': side, 'muzzle': f'{side} muzzle',
-                              'finger_accents': [ANTICIPATION, RELEASE],
+                              'finger_accents': [ANTICIPATION, RELEASE], 'accents': [ANTICIPATION, RELEASE],
                               'arm_release': {k: round(v, 2) for k, v in base.items()}},
                         post=gesture_post(side), legs_ik=0.0))
     for title, (pitch, yaw) in AIMS.items():

@@ -45,10 +45,19 @@ for m in mods:
                      'arm_clear_ok': c.get('arm_clear_ok'), 'roll': c.get('orient_roll_max_deg'),
                      'wrist': {s: (c['hand_qa']['wrist'][s]['forearm_roll_deg'], c['hand_qa']['wrist'][s]['hand_twist_deg'])
                                for s in 'LR'}, 'viol': c['hand_qa']['violations'],
-                     'contact_worst': c.get('hand_contact_worst'), 'clear_min': c.get('arm_clear_min_m')})
+                     'contact_worst': c.get('hand_contact_worst'), 'clear_min': c.get('arm_clear_min_m'),
+                     'pad_ok': c.get('pad_contact_ok'), 'pad_mm': c.get('pad_contact_max_mm'),
+                     'pad_worst': c.get('pad_contact_worst'), 'pad_follow': c.get('pad_follow_max'),
+                     'halo_clear': c.get('halo_clear_push_max_mm'), 'pad_pop': c.get('pad_pop_mm_f2'),
+                     'halo_pop': c.get('halo_pop_mm_f2'), 'seam': {k: c.get(k) for k in ('seam_from', 'seam_to')},
+                     'rest_err': {k: c.get(k) for k in ('start_rest_err_m', 'end_rest_err_m') if k in c},
+                     'pad_top': sorted(((k, v['mm']) for k, v in (c.get('pad_contact') or {}).items()),
+                                       key=lambda kv: -kv[1])[:4]})
 out = ROOT/'art/anim/wip/_run4'/f'qa-{tag}.json'
 out.write_text(json.dumps(rows, indent=1), encoding='utf-8')
 for r in rows:
     print(f"{r['title']:<18} {r['status']:<5} orient={r['orient_ok']!s:<5} hand={r['hand_ok']!s:<5} pop={r['hand_pop']:<5} "
           f"pen={r['pen']:<4} contact={r['contact_mm']:<4} clr={r['clear_min']} roll={r['roll']} wrist={r['wrist']}"
-          f"\n    L={r['L']} R={r['R']} viol={r['viol'] or ''} {r['contact_worst'] if r['contact_mm'] > 4 else ''}")
+          f"\n    L={r['L']} R={r['R']} viol={r['viol'] or ''} {r['contact_worst'] if r['contact_mm'] > 4 else ''}"
+          f"\n    pad_ok={r['pad_ok']} pad={r['pad_mm']} {r['pad_top']} follow={r['pad_follow']}"
+          f"\n    halo_clear={r['halo_clear']} pad_pop={r['pad_pop']} halo_pop={r['halo_pop']} {r['rest_err'] or ''}")

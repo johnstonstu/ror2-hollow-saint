@@ -48,6 +48,25 @@ python tools/blender/anim/sheet.py art/anim/wip/run/run-forward --cols 4
   cuff and conductor) are reflected across the plane through the knuckles normal to the index-little axis.
   Reflected bones keep +X curl, but local-Z (splay/fan) reverses, so code that splays by sign multiplies
   by `handfix.ZSIGN`.
+- `padfix.py` (applied by `open_start` after `armfit`): 9g placement fix. `R scapula` / `R pauldron` become the
+  mirror of the L bones about `MID_X`; the whole halo assembly (halo bones, yoke bar/light, sheared strut) moves
+  `HALO_SHIFT` back and up so the lower arcs and yoke clear the pads at rest; the yoke bar's ends are trimmed
+  `YOKE_TRIM` so they stop at the lower-arc docks; the pauldron Copy Rotation is muted for good. `halo_pose(p, off,
+  m3)` rotates/offsets the halo root pivoting on the lower-arc dock, so tilts swing the top of the ring instead of
+  driving the lower arcs into the pads. Clips that hard-code the ring centre add `HALO_SHIFT`.
+- `padpass.py` (run by `bake` on every frame after the hand pass): drives the pauldrons. Each pad rotates by a
+  share of the upper arm's swing relative to the chest (`SHARE_X/Y/Z`) about a hinge on its collar-side edge,
+  lifts up/out as the arm rises, yields some of that follow if it would meet the halo's lower arc, then lifts off
+  any collar/neck/upper-arm skin still inside it. `finish` smooths the follow and push over time (envelope + blur,
+  loop-aware, exact first/last frames for seams); `halo_clear` nudges the whole halo up/back on the few frames
+  where a lower arc would still come within 4 mm of a pad. `bake` reports `pad_follow_max`,
+  `halo_clear_push_max_mm`, `pad_pop_mm_f2` and `halo_pop_mm_f2`.
+- `contact.PadContact` (`pad_contact`, `pad_contact_max_mm`, `pad_contact_ok`, part of PASS): pads vs torso,
+  neck/collar and upper arm (beyond rest) and vs the halo lower arcs and yoke bar (absolute), limit 5 mm.
+- `pad_closeup.py -- (--blend b | --module m) --tag T --clips "Title:1,5;Title:all/2"`: colour-coded Workbench
+  shoulder close-ups (pads orange, halo cyan, yoke yellow, scapula shells green) from front/back/top/outL/outR,
+  framed on the chest, written to `art/anim/wip/shoulders/<tag>/`. `pad_sheet.py <folder> [--compare other]
+  [--out dir]` builds `pads.gif` / `pads-sheet.jpg` (before on top).
 - `handorient.py`: the 9f orientation check. `OrientQA` in `preview.py` (`hand_orient`, `hand_orient_ok`, part of
   PASS): on frames where the upper arm is raised > 45 deg (or the elbow is open > 140 deg with > 30 deg raise),
   relative to the chest and not swept back, thumb-up (world Z) >= 0 and palm-forward >= -0.25. It reports
@@ -98,6 +117,71 @@ python tools/blender/anim/sheet.py art/anim/wip/run/run-forward --cols 4
   shell. The rest-pose depth is subtracted and anything deeper than 4 mm fails. Contacts a clip means to have
   (a hand resting on a knee) go in meta `hand_contacts` as `"L hand > L thigh"` keys.
 - Status also requires `arm_clear_ok` (locomotion), `hand_qa_summary.ok` and `hand_contact_ok`.
+
+### Added in 9i (run 5)
+- `bodyfix.py` (applied by `open_start` after `handfix`): full-body rig fixes (FULL-AUDIT M1-M3, S3-S6, S8). It
+  removes every Shrinkwrap, makes the TABARD follow the body flap under it, gives the collar a chest -> neck ->
+  head weight gradient, moves the scapula shells and back node out of the skin, makes hard parts rigid blocks
+  (`BLOCKS`), fades thigh weights into the pelvis, re-rolls the shins so X is the knee hinge, and adds forearm
+  twist bones. Its docstring lists each fix. It prints `BODYFIX {...}` on load.
+- `tabardpass.py` (run by `bake` after the pad pass): swings the body's loincloth flap chains just far enough
+  that leg/torso skin stays `MARGIN` off their inner surface, within per-bone `BEND_LIMIT`s. Past those limits,
+  skinning bends the flap through the TABARD cloth. `finish` envelopes and blurs over time, with seams pinned.
+  `bake` reports `tabard_swing_max_deg` / `tabard_swing_frames`.
+- `fullqa.py` (`FullQA` in `preview.py`: `full_qa`, `full_qa_ok`, `full_contact_max_mm`, `full_pop_max_deg_f2`,
+  part of PASS). It covers the 8 permanent checks:
+  - All-pairs contact beyond rest (5 mm), run with Shrinkwrap off.
+  - Rigid-part edge change (5%).
+  - Joint sanity.
+  - Pops: 20 deg/f², or 60 on frames in meta `accents` ±1.
+  - Soles and knee direction.
+  - Rig symmetry (`FULLQA SYMMETRY`, reported, not gated).
+
+  Crease pairs (thigh > pelvis/spine, upperarm > chest) are reported but never fail, and
+  `full_contact_max_mm` includes them. Contacts a clip means to have go in meta `contact_exempt`.
+  `full_qa.pops_deg_f2` lists the top 6 plain pops, but `fails` names only the worst.
+- `fullqa_audit.py -- <blend> <out.json> ["Title;Title"]`: runs FullQA over a saved checkpoint's actions.
+- `handpass.finish` (constrained roll smoothing): after the bake, each side's total orient roll (forearm plus
+  upper arm) is blurred `ROLL_ITERS` times with `blur_anchored`. That blur takes two ±`ROLL_R` box passes, keeps
+  the first/last frames and loop seam pins exactly on the raw solve, and fades the correction in over
+  2*`ROLL_R`. After each pass the roll is clamped into every gated frame's band: the roll range that still
+  passes `handorient` with `ORIENT_QA_PAD` to spare. `bake` reports `orient_smooth_max_deg`. If handpass has to
+  add a large fast roll, author a forearm twist in the clip instead (Run's `ROLL_UP`). It adds about the same
+  axis.
+- `gait` `angle_blur` (frames, sigma): Gaussian time blur of foot pitch and toe that leaves the ball path
+  unchanged. Run and the backward/strafe runs use 1.0. `run_dirs.track` with `contact_match` matches the
+  touch-down velocity to that fraction of the stance slide speed (Hermite term after the rush).
+- `special.solve(avoid=...)`: `True` keeps `ARM_MARGIN` around the torso/hip ellipse; a number sets a per-pose
+  margin (`WAIST_MARGIN` for the gather/frame poses, 0.11 for recall).
+- Scratch probes used for 9i live in `art/anim/wip/_run5/` (`qa_all.py`, `fq_mods.py`, `mod_pops.py`,
+  `gates.py`, `roll_probe.py`, `limb_probe.py`, `body_render.py`, `mesh_sym.py`, `compare_v21.py`).
+
+### Added in 9h (run 5)
+- Travel/turn channels: `bake` keys `hs_move_x` / `hs_move_y` in every clip (from meta via
+  `hs_anim.move_vector`: unit travel direction relative to facing, +x = character right, +y = forward; clips can
+  pass them in `props` when travel changes). Turn clips key `hs_turn` (0..1 of meta `turn_deg`, + = left). The
+  `vfx.py` jets and sparks trail back along `hs_move`.
+- `clips/run_dirs.py`: every direction uses `TIMING` (Run forward's cycle, stance and contact timing), so the
+  contacts match across the blend space. The strafes run at 3.4 m/s (`GS`) with `WIDTH_S`/`STAGGER`,
+  `L_OUT` (L foot offset) and `KNEE_OUT` (pole shift) keeping the legs from crossing.
+- `clips/loco8.py`: the run diagonals (the neighbouring cardinal upper bodies blended 50/50, with the feet solved
+  along the diagonal; `DIAG_WIDEN`, `DIAG_DROP`, `DIAG_ARM_W`, `DIAG_L_ABDUCT`) and the walk directions on Walk
+  forward's timing.
+- `clips/turns.py`: Run lean left/right, Run pivot 180 left/right and Plant turn 90 left/right. A `Path` (velocity
+  plus yaw) drives `Foot` key lists (planted / free), and the upper body blends between Run forward frames. Each
+  turn starts on Run forward f1 and ends on f9 (Run forward lists 9 in `seam_anchors`).
+- `clips/arcstep_dirs.py`: Arc Step back/left/right start/loop/end, derived from `arcstep`'s per-frame channels.
+  They are weighted by the dash pitch, so the rest frames and seams are untouched. Loops carry meta `air_ok`.
+- meta `halo_clear_dir` (chest-space vector): forces `padpass.halo_clear`'s nudge direction. A one-shot clip that
+  starts or ends on a frame of another clip which needs a nudge must use that clip's direction, or the seam
+  opens by the difference.
+- `blend_qa.py -- <out.json> <modules> [--sets run,walk] [--pairs "A|B"] [--w 0.5]`: neighbour pairs mixed as a
+  blend tree would. It reports planted-foot slide, contact phase, sink and leg-crossing gap (docstring).
+- `stitch.py` spec keys: `out` (folder under `art/anim/wip/`, default `transitions/<name>`) and `root_motion`
+  (integrates each clip's `speed_mps` x `hs_move` and `turn_deg` x `hs_turn` so the rig travels over a checker
+  floor with follow cameras). `stitch.json` then includes `root_path`. `package_review.py` lists stitches from
+  any `wip/*/<name>/stitch.json` and keeps them out of the clip cards.
+- `refresh.py` covers `loco8`, `turns` and `arcstep_dirs` (chase views for the last two).
 
 ## Ownership (parallel agents)
 

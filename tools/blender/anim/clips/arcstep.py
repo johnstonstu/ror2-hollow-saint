@@ -22,12 +22,15 @@ T_LEN, S_LEN = 0.322, 0.559
 AIR_REACH = 0.985     # max airborne hip-to-ankle distance, fraction of that leg's thigh+shin
 REST_SHIN_BACK = 9.4
 BALL = {'L': Vector((0.412, -0.03, 0.055)), 'R': Vector((-0.444, -0.03, 0.055))}
-HALO_CENTRE = Vector((-0.038, 0.15, 1.98))
+from padfix import HALO_SHIFT, halo_pose
+HALO_CENTRE = Vector((-0.038, 0.15, 1.98))+HALO_SHIFT
 DIGITS = ('index', 'middle', 'ring', 'little')
 FAN = {'index': -1.0, 'middle': -0.3, 'ring': 0.45, 'little': 1.0}
 SPREAD_SIGN = {'L': 1.0, 'R': 1.0}   # re-solved in build (finger roll differs per hand)
 REST_POLE_SHIFT = {'L': Vector(), 'R': Vector()}   # set in build: pole shift that reproduces the rest knee
-USE_REST_MATCH = False   # hs_anim rest_match shifts the pole in X only (4.4 mm rest residual here vs 0.5 mm)
+# hs_anim rest_match (x/y pole search) reproduces the rest knee exactly; the geometric REST_POLE_SHIFT predates the
+# pole re-calibration and now twists the rest thighs 56-75 deg (knee 32-65 mm off rest, start/end 10.5 cm off rest).
+USE_REST_MATCH = True
 
 
 def s1(t, phase=0.0, h=1):
@@ -73,6 +76,9 @@ REST = {'px': 0.0, 'py': 0.0, 'pz': 0.0, 'pp': 0.0, 'pr': 0.0, 'pyaw': 0.0,
         **legs_rest('L'), **legs_rest('R')}
 
 PITCH = 50.0          # pelvis pitch in the dash (spine+chest add ~9 deg)
+# Neck/head pitch-back scale: the full counter-pitch (keyed nk+hd ~ -54 deg) bends the collar skin up into the
+# pauldrons and the lower halo arcs (FULL-AUDIT M2), so the head tucks into the dash instead of looking level.
+NECK_K, HEAD_K = 0.4, 0.8
 DASH_LEG = {'th': -63.0, 'sh': 71.0, 'spl': -0.062, 'pl': 48.0, 'at': 22.0}
 
 
@@ -196,8 +202,8 @@ def apply(p, c, tt=0.0):
     p.pelvis((c['px'], c['py'], c['pz']), R(x=c['pp'], y=c['pr'], z=c['pyaw']))
     p.rot('spine', R(x=c['sp'], y=c['spr']))
     p.rot('chest', R(x=c['ch'], y=c['chr'], z=c['chz']))
-    p.rot('neck', R(x=c['nk']))
-    p.rot('head', R(x=c['hd'], y=c['hdr']))
+    p.rot('neck', R(x=NECK_K*c['nk']))
+    p.rot('head', R(x=HEAD_K*c['hd'], y=c['hdr']))
     for s in ('L', 'R'):
         k = sign(s)
         p.rot(f'{s} scapula', R(x=c['scap']))
@@ -214,13 +220,14 @@ def apply(p, c, tt=0.0):
     p.update()
     # Halo: world-space trail behind the head, partly counter-pitched against the chest.
     d = parent_delta(p, 'halo root')
-    p.offset('halo root', d.inverted() @ Vector((0.0, c['hy'], c['hz'])))
-    p.rot('halo root', R(x=c['hr']))
+    halo_pose(p, d.inverted() @ Vector((0.0, c['hy'], c['hz'])), R(x=c['hr']))
     for i in range(1, 5):
         n = f'halo {i}'
         r = p.rest[n].translation-HALO_CENTRE
         r.y = 0
         low = r.z < 0
+        if low:
+            r.z = 0.0   # lower arcs flare sideways only: radially they'd drop onto the pads
         jit = c['hj']*0.003*s1(tt, 0.23*i, 3+(i % 2))
         p.offset(n, r.normalized()*(0.018*c['hs']+jit)+Vector((0, (0.035 if low else 0.018)*c['hst']+jit, 0)))
     for s in ('L', 'R'):
@@ -238,16 +245,16 @@ def start_keys():
     gl = lambda s, **kw: {s+k: v for k, v in kw.items()}
     return {
         1: dict(REST),
-        3: dict(px=0.0, py=0.03, pz=-0.17, pp=17.0, sp=9.0, ch=5.0, nk=-9.0, hd=-9.0, scap=6.0,
+        3: dict(px=0.0, py=0.03, pz=-0.17, pp=17.0, sp=9.0, ch=5.0, nk=-9.0, hd=-9.0, scap=3.0,
                 sw=26.0, ad=-13.0, el=26.0, wr=10.0, ft=12.0, cu=2.0, cu2=7.0, spd=6.0, thb=0.0, tr=0.0,
                 f1=-8.0, f2=4.0, f3=2.0, b1=4.0, b2=2.0, hy=0.012, hz=-0.02, hr=-2.0, hs=0.1, hst=0.0,
-                **gl('L', gw=1.0, rk=0.6, gy=BALL['L'].y, gz=BALL['L'].z, gp=8.0),
-                **gl('R', gw=1.0, rk=0.6, gy=BALL['R'].y, gz=BALL['R'].z, gp=8.0)),
-        4: dict(py=-0.05, pz=-0.10, pp=34.0, sp=9.0, ch=4.0, nk=-20.0, hd=-16.0, scap=12.0,
+                **gl('L', gw=1.0, rk=0.0, gy=BALL['L'].y, gz=BALL['L'].z, gp=8.0, gt=0.0),
+                **gl('R', gw=1.0, rk=0.0, gy=BALL['R'].y, gz=BALL['R'].z, gp=8.0, gt=0.0)),
+        4: dict(py=-0.05, pz=-0.10, pp=34.0, sp=9.0, ch=4.0, nk=-20.0, hd=-16.0, scap=4.5,
                 sw=42.0, ad=-10.0, el=14.0, wr=24.0, ft=22.0, cu=-8.0, cu2=4.0, spd=12.0, thb=-10.0, tr=0.5,
                 f1=-6.0, f2=10.0, f3=10.0, b1=14.0, b2=8.0, hy=0.07, hz=-0.035, hr=-18.0, hs=0.7, hst=0.8,
-                **gl('L', gw=1.0, rk=0.0, gy=0.0, gz=0.075, gp=50.0, gt=6.0),
-                **gl('R', gw=1.0, rk=0.0, gy=-0.01, gz=0.068, gp=44.0, gt=5.0)),
+                **gl('L', gw=1.0, rk=0.0, gy=0.0, gz=0.095, gp=38.0, gt=16.0),
+                **gl('R', gw=1.0, rk=0.0, gy=-0.01, gz=0.100, gp=35.0, gt=12.0)),
         5: dict(py=0.02, pz=-0.18, pp=44.0, sp=7.0, ch=3.0, nk=-27.0, hd=-22.0,
                 sw=38.0, ad=-7.0, el=8.0, tr=1.0, hy=0.09, hr=-26.0, hs=1.1, hst=1.2,
                 f1=0.0, f2=16.0, f3=16.0, b1=26.0, b2=18.0,
@@ -267,12 +274,12 @@ def end_keys():
         2: dict(pp=44.0, pz=-0.18, py=0.09, sp=5.0, ch=2.0, nk=-25.0, hd=-19.0,
                 sw=34.0, ad=-14.0, el=8.0, wr=20.0, tr=0.8, hy=0.07, hr=-28.0,
                 b1=18.0, b2=10.0,
-                **gl('L', gw=0.0, th=-12.0, sh=76.0, spl=0.02, pl=26.0, at=10.0),
+                **gl('L', gw=0.0, th=-20.0, sh=76.0, spl=0.02, pl=26.0, at=10.0),
                 **gl('R', gw=0.0, th=-60.0, sh=74.0)),
-        3: dict(pp=24.0, pz=-0.15, py=0.10, sp=1.0, ch=0.0, nk=-14.0, hd=-9.0,
+        3: dict(pp=24.0, pz=-0.115, py=0.10, sp=1.0, ch=0.0, nk=-14.0, hd=-9.0,
                 sw=20.0, ad=-22.0, el=14.0, wr=8.0, tr=0.5, hy=0.02, hr=-10.0,
                 f1=-6.0, f2=2.0, f3=0.0, b1=16.0, b2=10.0,
-                **gl('L', gw=0.0, th=32.0, sh=64.0, spl=0.16, pl=-14.0, at=-8.0),
+                **gl('L', gw=0.0, th=24.0, sh=66.0, spl=0.16, pl=-6.0, at=-4.0),
                 **gl('R', gw=0.0, th=-50.0, sh=74.0, pl=36.0)),
         4: dict(pp=6.0, pz=-0.09, py=0.12, sp=-2.0, ch=-1.0, nk=-7.0, hd=-4.0, hy=-0.01, hr=2.0,
                 **gl('L', gw=1.0, rk=0.0, gx=0.37, gy=-0.01, gz=0.10, gp=30.0, gt=16.0),
@@ -283,7 +290,7 @@ def end_keys():
                      hy=-0.03, hz=0.01, hr=10.0, hs=0.6, hst=0.2,
                      **gl('L', gw=1.0, gx=BALL['L'].x, gy=BALL['L'].y, gz=BALL['L'].z, gp=8.0, gt=0.0),
                      **gl('R', gw=0.0, rk=0.0, th=-32.0, sh=72.0, spl=0.04, pl=14.0, at=4.0)),
-        6: dict(pp=2.0, **gl('R', gw=0.0, th=10.0, sh=80.0, spl=0.14, pl=0.0, at=0.0)),
+        6: dict(pp=2.0, **gl('R', gw=0.0, th=4.0, sh=80.0, spl=0.12, pl=2.0, at=0.0)),
         7: dict(px=0.035, py=0.07, pz=-0.21, pp=8.0, pr=-5.0, pyaw=-5.0, sp=6.0, ch=3.0, chz=5.0, nk=-12.0, hd=-8.0,
                 sw=6.0, asw=5.0, ad=-36.0, el=34.0, wr=-10.0, tr=0.0, f1=-14.0, f2=8.0, f3=8.0, b1=6.0, b2=6.0,
                 hy=-0.035, hz=-0.02, hr=8.0, hs=0.3, hst=0.0,
@@ -293,9 +300,9 @@ def end_keys():
                 sw=0.0, asw=2.0, ad=-24.0, el=26.0, wr=-4.0, hy=0.008, hz=0.006, hr=-2.0,
                 f1=2.0, f2=-2.0, f3=-2.0, b1=-2.0, b2=-2.0, **gl('L', gp=0.0)),
         10: dict(**gl('R', gx=-0.35, gy=0.36, gz=BALL['R'].z, gp=46.0, gt=-8.0)),
-        11: dict(**gl('R', gw=1.0, gx=-0.38, gy=0.25, gz=0.13, gp=32.0, gt=12.0)),
+        11: dict(**gl('R', gw=1.0, gx=-0.38, gy=0.25, gz=0.13, gp=32.0, gt=-2.0)),
         12: dict(pz=-0.06, pp=2.5, sp=2.0, ch=0.8, nk=-1.5, hd=-1.0, sw=2.0, el=10.0,
-                 **gl('R', gx=-0.43, gy=0.08, gz=0.12, gp=16.0, gt=4.0)),
+                 **gl('R', gx=-0.43, gy=0.08, gz=0.12, gp=16.0, gt=1.0)),
         13: dict(**gl('R', gx=BALL['R'].x, gy=BALL['R'].y, gz=BALL['R'].z, gp=4.0, gt=0.0)),
         # Settle: the torso rises a touch past upright and the arms swing just past rest before stopping.
         RECOVERED: dict(px=0.0, py=0.005, pz=-0.008, pp=-0.8, pr=0.0, pyaw=0.0, sp=-0.8, ch=-0.5, nk=0.4, hd=0.8,
@@ -440,12 +447,13 @@ def build(p):
         bake(p, 'Arc Step start', list(range(1, N_S+1)), start_pose, False,
              markers={'Dash start': N_S},
              meta={**meta, 'speed_mps': 0.0, 'seam_from': ['Arc Step end', N_E], 'seam_to': ['Arc Step loop', 1],
-                   'finger_accents': [4]},
+                   'finger_accents': [4], 'accents': [3, 4]},   # crouch load and launch
              post=post_start),
         bake(p, 'Arc Step loop', list(range(1, N_L+2)), loop_pose, True,
              meta={**meta, 'dash_distance_m': [8, 12]}, post=post_loop),
         bake(p, 'Arc Step end', list(range(1, N_E+1)), end_pose, False,
              markers={'Arrive': ARRIVE, 'Recovered': RECOVERED},
-             meta={**meta, 'speed_mps': 0.0, 'seam_from': ['Arc Step loop', 1], 'seam_to': ['Arc Step start', 1]},
+             meta={**meta, 'speed_mps': 0.0, 'seam_from': ['Arc Step loop', 1], 'seam_to': ['Arc Step start', 1],
+                   'accents': [4, 7]},   # L foot lands (Arrive follows), R foot braces
              post=post_end),
     ]

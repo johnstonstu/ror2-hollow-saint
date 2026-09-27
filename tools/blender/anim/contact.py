@@ -117,6 +117,105 @@ class Contact:
         return self.rest
 
 
+PAD_MAX = 0.005           # m: pauldron penetration limit (9g), body beyond rest and hard parts absolute
+PAD_MESH = '{} SHOULDER | V17 pauldron upper'
+PAD_HARD = {'halo arc 2': 'HALO | independent copper arc 2', 'halo arc 3': 'HALO | independent copper arc 3',
+            'yoke': 'HALO | V17 yoke bar'}
+
+
+def pad_obstacle(group):
+    if group in ('head', 'neck'):
+        return 'neck/collar'
+    if group.endswith(('upperarm', 'shoulder')):
+        return f'{group[0]} upper arm'
+    if group.endswith(('forearm', 'hand')):
+        return f'{group[0]} forearm'
+    return 'torso' if group in ('chest', 'spine', 'pelvis') else (group or 'body')
+
+
+class PadContact:
+    """Pauldron penetration (9g): every evaluated pad vertex (Solidify/Bevel included) against the whole body
+    (ray parity, depth = distance to the nearest face, named by its dominant group: torso, neck/collar, upper arm),
+    and pad vs the halo lower arcs and yoke bar both ways (vertices of one inside the other). The body depth is
+    reported beyond rest; the hard parts are absolute, because their rest overlap was the bug."""
+
+    def __init__(self):
+        self.body = bpy.data.objects[H.BODY]
+        dom = dominant_groups(self.body)
+        self.n_body = len(dom)
+        self.polys = [tuple(p.vertices) for p in self.body.data.polygons]
+        self.poly_group = [pad_obstacle(dom[q[0]]) for q in self.polys]
+        self.pads = {s: bpy.data.objects.get(PAD_MESH.format(s)) for s in H.SIDES}
+        self.hard = {k: bpy.data.objects[v] for k, v in PAD_HARD.items() if v in bpy.data.objects}
+        self.enabled = all(self.pads.values())
+        self.rest = None
+
+    def frame(self):
+        if not self.enabled:
+            return {s: {} for s in H.SIDES}
+        dg = bpy.context.evaluated_depsgraph_get()
+        bv, _ = Contact._mesh(self.body, dg)
+        if len(bv) != self.n_body:
+            raise RuntimeError('body topology changed under evaluation')
+        solid = BVHTree.FromPolygons(bv, self.polys)
+        hard = {}
+        for k, o in self.hard.items():
+            v, p = Contact._mesh(o, dg)
+            hard[k] = (v, BVHTree.FromPolygons(v, p))
+        out = {}
+        for s, pad in self.pads.items():
+            pv, pp = Contact._mesh(pad, dg)
+            ptree = BVHTree.FromPolygons(pv, pp)
+            d = {}
+            for q in pv:
+                loc, _, idx, dist = solid.find_nearest(q, 0.1)
+                if loc is not None and dist > 0.0005 and Contact._inside(solid, q):
+                    g = self.poly_group[idx]
+                    d[g] = max(d.get(g, 0.0), dist)
+            for k, (hv, htree) in hard.items():
+                if not ptree.overlap(htree):
+                    continue
+                m = 0.0
+                for q in hv:
+                    loc, _, _, dist = ptree.find_nearest(q, 0.05)
+                    if loc is not None and Contact._inside(ptree, q):
+                        m = max(m, dist)
+                for q in pv:
+                    loc, _, _, dist = htree.find_nearest(q, 0.05)
+                    if loc is not None and Contact._inside(htree, q):
+                        m = max(m, dist)
+                d[k] = max(m, 0.0005)
+            out[s] = {k: round(v, 5) for k, v in d.items()}
+        return out
+
+    def calibrate_rest(self):
+        self.rest = self.frame()
+        return self.rest
+
+
+def summarize_pads(rows, rest):
+    """rows: [(frame, PadContact.frame())] -> QA fields."""
+    worst = (0.0, '', 0)
+    per = {}
+    for f, r in rows:
+        for s in H.SIDES:
+            for g, v in r[s].items():
+                base = 0.0 if g in PAD_HARD else (rest or {}).get(s, {}).get(g, 0.0)
+                ex = v-base
+                key = f'{s} pad > {g}'
+                if ex > per.get(key, (0.0, 0, 0))[0]:
+                    per[key] = (ex, f, per.get(key, (0, 0, 0))[2])
+                if ex > PAD_MAX:
+                    e, fr, n = per[key]
+                    per[key] = (e, fr, n+1)
+                if ex > worst[0]:
+                    worst = (ex, key, f)
+    return {'pad_contact': {k: {'mm': round(v*1000, 1), 'f': f, 'frames_over': n}
+                            for k, (v, f, n) in sorted(per.items()) if v > 0.0005},
+            'pad_contact_max_mm': round(worst[0]*1000, 1), 'pad_contact_worst': f'{worst[1]} f{worst[2]}',
+            'pad_contact_rest': rest, 'pad_contact_ok': worst[0] <= PAD_MAX}
+
+
 def summarize(rows, rest, exempt=()):
     """rows: [(frame, Contact.frame())] -> QA fields (depth beyond the rest pose).
     exempt: frames a clip declares as deliberate contact (meta 'hand_contacts', e.g. a hand pushing on a knee);

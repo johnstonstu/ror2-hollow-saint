@@ -1,0 +1,32 @@
+﻿Hollow Saint refinement pass, run 5 = finish 9g then continue Phase A (launched after run4 stopped on RAM exhaustion from hung Cursor git/LFS diffs). Take your time; quality over speed.
+
+Project: C:\Users\stuwj\Documents\Coding\ror2-lightning
+Stuart APPROVED art/MASTER-PLAN.md. Approved order: 9d+9e (done) -> 9f (DONE in v19) -> 9g (IN PROGRESS, finish this) -> 9i -> 9h -> 11 -> 10 EXPANDED LAST.
+
+Current checkpoint: art/anim/hollow-saint-anim-v19.blend (9f + M6 armfit; QA 33/33 PASS). STATUS.md updated 02:05 PT for v19/9f.
+
+READ FIRST, in full: art/MASTER-PLAN.md, art/anim/REFINEMENT-PLAN.md, art/anim/wip/NEXT-RUN-NOTES.md, art/anim/STATUS.md, tools/blender/anim/README.md, and the end of art/anim/wip/agent-run4-20260927-0122.log (the final assistant result describes exactly where 9g left off).
+BEFORE EACH ITEM: re-read those plan/status docs. Stuart appends feedback while you run.
+
+RUN4 HANDOFF (do not redo 9f):
+- v19 is complete for 9f (hand mirror fix + forearm/upper-arm roll + orientation QA). Hand close-ups are in art/anim/wip/hands/orientation/.
+- 9g work is PARTIALLY landed in the toolkit (padpass.py, padfix, contact pad checks, some halo source fixes in Arc Bolt / presentation / Arc Step / glide / hs_anim) but NO v20 checkpoint was saved. Last completed 9g QA before the crash: all 33 clips passed pad contact within 5 mm (hand/orientation/contact still passing). Untested later halo/source edits may still need a QA pass. STATUS.md was NOT updated for 9g (run4 stopped writing to avoid feeding Cursor git diffs).
+- Finish 9g: re-run full QA, check pad pops in GIFs, render before/after into art/anim/wip/shoulders/, save NEW hollow-saint-anim-v20.blend, refresh.py, update STATUS.md and refine-run-log.txt.
+- Then 9i, then 9h, then 11, then 10 EXPANDED last. Same acceptance criteria as run4 prompt.
+
+DO IN THIS ORDER:
+1) Finish 9g - Shoulder pads (MUST FIX). Pads never clip into chest/collar/neck/upper arm; clear halo lower arcs and yoke. Pad contact QA <= 5 mm PASS. Before/after GIFs in art/anim/wip/shoulders/. Save v20.
+2) 9i - Full-body audit fixes from art/anim/wip/audit-full/FULL-AUDIT.md (every MUST-FIX and SHOULD-FIX) plus permanent QA checks it lists. Before/after in art/anim/wip/audit-full/fixes/.
+3) 9h - Eight-direction locomotion per REFINEMENT-PLAN 9h.
+4) 11 - Conduit Spear + Discharge snap overlay; Charge clips as meter-full flourish.
+5) 10 EXPANDED LAST - every transition; smoothness top priority.
+
+AFTER EACH ITEM: new numbered .blend (never overwrite), QA PASS including 9f orientation + 9g pads + 9i checks, update STATUS.md, refresh review.html, preview GIFs, append refine-run-log.txt.
+
+HARD RULES:
+- Background Blender only ("C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --factory-startup). Do NOT use blender-mcp or connect to any running Blender. Never touch Stuart's interactive Blender (PID 4500). Leave every blender.exe you did not start alone.
+- Follow tools/blender/anim/README.md (one owner per clip file, background only, new numbered .blend only).
+- Do not touch art/vfx/. No Unity changes.
+- No git operations, never push. Never delete anything. Never read .env.
+- If free RAM drops under ~4 GB or many git.exe/git-lfs.exe processes pile up again, STOP writing files, note it in refine-run-log.txt if safe, and end the run cleanly with a short status. Do not thrash.
+- A workspace .vscode/settings.json now disables git SCM for this folder so Cursor stops spawning LFS filter storms. Do not re-enable git in settings.

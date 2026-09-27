@@ -1,0 +1,14 @@
+{
+ "title": "Run forward",
+ "tag": "neck-v21",
+ "rendered_frames": [
+  2
+ ],
+ "views": [
+  "front",
+  "back",
+  "top",
+  "outL",
+  "outR"
+ ]
+}

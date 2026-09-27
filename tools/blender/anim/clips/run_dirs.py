@@ -8,12 +8,19 @@ import math
 from hs_anim import R, FPS, bake, halo_lag, sign, smooth, tabard_follow
 import gait
 from run import N, FOOT_MID, TWIST, thigh_forward
+import run
+
+# Every run direction (loco8 diagonals too) shares Run forward's foot timing and swing path, so a 2D blend between
+# neighbours plants and lifts both feet on the same frames and the planted foot moves at the blended velocity
+# (blend_qa.py). Per direction only speed, heights, angles and footprint differ.
+TIMING = {k: run.G[k] for k in ('cycle', 'stance', 'swing_delay', 'release_match', 'contact_match')}
 
 
 def track(phase, g, travel, base):
     """gait.foot_cycle re-aimed along `travel` (unit XY). Returns ((x, y), lift, pitch, toe, s)
     where s is the forward-cycle offset (+ = behind along the travel direction).
-    g['swing_rush'] > 1 finishes the swing travel early, so the foot reaches and then sets down."""
+    g['swing_rush'] > 1 finishes the swing travel early, so the foot reaches and then sets down, already
+    drifting back at contact_match x the stance slide speed (no velocity step at touch-down)."""
     s, lift, pitch, toe = gait.foot_cycle(phase, g)
     rush = g.get('swing_rush', 1.0)
     u = ((phase % 1.0)-g['stance'])/(1-g['stance'])
@@ -21,6 +28,10 @@ def track(phase, g, travel, base):
         L = gait.contact_length(g)
         front = g['y_offset']-g['front_bias']*L
         s = front+L*(1-smooth(u*rush))
+        u0 = min(1.0/rush, g.get('match_from', 1.0))
+        if u > u0:
+            x = (u-u0)/(1-u0)
+            s += g['contact_match']*L/g['stance']*(1-g['stance'])*(1-u0)*(x**3-x**2)
     return (base[0]-travel[0]*s, base[1]-travel[1]*s), lift, pitch, toe, s
 
 
@@ -53,9 +64,8 @@ def make_post(travel, speed):
 
 
 # ----------------------------------------------------------------------------- backward
-GB = gait.params(speed=4.25, cycle=N, stance=0.23, lift=0.18, lift_peak=0.55, front_bias=0.6,
-                 swing_delay=0.0, swing_rush=1.4, pushoff=14.0, heel_off=0.55, swing_pitch=26.0, contact_pitch=20.0,
-                 toe_trail=10.0, toe_reach=5.0)
+GB = gait.params(speed=4.25, lift=0.18, lift_peak=0.55, front_bias=0.5, pushoff=14.0, heel_off=0.55,
+                 swing_pitch=26.0, contact_pitch=20.0, toe_trail=10.0, toe_reach=5.0, angle_blur=1.0, **TIMING)
 BACK = (0.0, 1.0)
 WIDTH_B = 0.27
 BACK_Y = -0.05
@@ -101,18 +111,26 @@ def pose_back(p, f):
 
 
 # ----------------------------------------------------------------------------- strafe
-GS = gait.params(speed=4.5, cycle=N, stance=0.15, lift=0.14, lift_peak=0.45, front_bias=0.5,
-                 swing_delay=0.0, swing_rush=1.25, pushoff=30.0, heel_off=0.4, swing_pitch=22.0, contact_pitch=8.0,
-                 toe_trail=16.0, toe_reach=6.0)
-WIDTH_S = 0.35
-FOOT_YAW = 14.0                                  # lead foot toes toward travel
+GS = gait.params(speed=3.4, lift=0.14, lift_peak=0.45, front_bias=0.5, pushoff=30.0, heel_off=0.4,
+                 swing_pitch=22.0, contact_pitch=8.0, toe_trail=16.0, toe_reach=6.0, angle_blur=1.0, lift_ease=1.3,
+                 **TIMING)
+# With the shared stance (0.21 of the cycle) the stride along X is speed x 0.14 s. At 4.5 m/s (0.63 m) the feet had
+# to cross over or over-reach, so the strafe is authored at 3.4 m/s (Unity scales playback by speed_mps):
+# a side shuffle, feet apart, lead foot STAGGER behind and trail foot in front, pelvis a little low (PELVIS_Z_S).
+WIDTH_S = 0.38
+STAGGER = 0.09
+PELVIS_Z_S = -0.12
+FOOT_YAW = 9.0                                   # lead foot toes toward travel
 FOOT_YAW_TRAIL = 4.0                             # more on the trailing foot knocks its knee inward
-KNEE_OUT = 0.12                                  # pole shift outward, keeps the knees apart
+# The body mesh is not mirror-symmetric (mid x -0.0375 vs the rig's -0.016; S9 report): the L foot/shin skin
+# meets the R leg ~25 mm sooner at the pass, so the L foot sits a little wider.
+L_OUT = 0.04
+KNEE_OUT = 0.06                                  # pole shift outward: keeps the shins apart at the pass
 HIP_YAW = 16.0
 LEAN_S = 8.0
 # adduct = adduct - lead*j*k (lead arm lifts out, trail arm tucks) + fwd*max(-sw, 0) + back*max(sw, 0).
 # The lead thigh swings far out under the arm at contact, so the forearms ride high (elbow 85) above it.
-ARM_S = dict(base=2.0, swing=20.0, adduct=11.0, lead=5.0, fwd=0.0, back=0.0, elbow=85.0, elbow_lag=11.0, twist=-25.0,
+ARM_S = dict(base=2.0, swing=20.0, adduct=11.0, lead=7.0, fwd=0.0, back=0.0, elbow=85.0, elbow_lag=11.0, twist=-25.0,
              wrist=5.0, curl=44.0, thumb=22.0)
 
 
@@ -123,7 +141,7 @@ def make_strafe(k):
     def pose(p, f):
         t = ((f-1) % N)/N
         for s, ph in (('L', 0.0), ('R', 0.5)):
-            base = (FOOT_MID+sign(s)*WIDTH_S, sign(s)*k*0.03)
+            base = (FOOT_MID+sign(s)*WIDTH_S+(L_OUT if s == 'L' else 0.0), sign(s)*k*STAGGER)
             (x, y), lift, pitch, toe, _ = track(t-ph, GS, travel, base)
             lead = sign(s) == k
             p.foot(s, (x, y, gait.BALL_Z+lift), pitch, toe, yaw=k*(FOOT_YAW if lead else FOOT_YAW_TRAIL),
@@ -133,7 +151,7 @@ def make_strafe(k):
         step = math.cos(2*math.pi*t)
         roll = math.cos(2*math.pi*(t-low))
         # Leans ~16 deg into the travel through pelvis/spine/chest; neck/head take most of it back out.
-        p.pelvis((0, -0.01, -0.095+0.028*bob),
+        p.pelvis((0, -0.01, PELVIS_Z_S+0.028*bob),
                  R(x=LEAN_S*0.6, y=k*6.5-2.5*roll, z=k*HIP_YAW-4.5*step))
         p.rot('spine', R(x=LEAN_S*0.3+1.5*bob, y=k*5.0+1.0*roll, z=-k*HIP_YAW*0.45+3.5*step))
         p.rot('chest', R(x=LEAN_S*0.2+0.8*bob, y=k*4.0, z=-k*HIP_YAW*0.35+4.5*math.cos(2*math.pi*(t-0.03))))
@@ -170,12 +188,12 @@ def build(p):
                 meta={'direction': 'backward', 'speed_mps': GB['speed'],
                       'meters_per_cycle': round(GB['speed']*N/FPS, 3), 'stance': GB['stance'],
                       'kind': 'locomotion'},
-                post=make_post(BACK, GB['speed']))]
+                post=make_post(BACK, GB['speed']), props=run.props())]
     for title, k, direction in (('Run left', 1, 'left'), ('Run right', -1, 'right')):
         pose, travel = make_strafe(k)
         out.append(bake(p, title, frames, pose, True, markers=markers,
                         meta={'direction': direction, 'speed_mps': GS['speed'],
                               'meters_per_cycle': round(GS['speed']*N/FPS, 3), 'stance': GS['stance'],
                               'kind': 'locomotion'},
-                        post=make_post(travel, GS['speed'])))
+                        post=make_post(travel, GS['speed']), props=run.props()))
     return out

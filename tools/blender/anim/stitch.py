@@ -15,7 +15,14 @@ spec.json:
   mask    "upper": the segment only drives the upper body (spine up, arms, hands, halo; `UPPER` below)
           over the previous lower-body segment, like a Unity avatar-mask layer. "lower_from": title of the
           locomotion clip to keep playing underneath (with its own start/sync rules via "lower_start").
-Writes art/anim/wip/transitions/<name>/<view>-NNN.png, clip.json (labels for sheet.py) and stitch.json:
+Optional spec keys:
+  out          output folder under art/anim/wip (default "transitions/<name>").
+  root_motion  true: the rig travels and turns as the game would move it: velocity = the weighted sum over the
+               playing clips of meta speed_mps x hs_move (character space), turned by the model yaw, which
+               integrates each clip's hs_turn x meta turn_deg (+ = left). Cameras follow the character (the
+               chase camera also its yaw, eased), the ground gets a checker so the travel reads, and the backdrop
+               is hidden. Handoff metrics stay in place (root motion is applied after them).
+Writes art/anim/wip/<out>/<view>-NNN.png, clip.json (labels for sheet.py) and stitch.json:
 per-frame sources/weights, and per handoff the worst world-space jumps of key bones: position step
 (m/frame) and acceleration (m/frame^2) within +-2 frames of the handoff vs the worst inside the clips.
 """
@@ -24,7 +31,7 @@ import json
 import math
 import sys
 from pathlib import Path
-from mathutils import Vector
+from mathutils import Matrix, Vector
 
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parent/'clips'))
@@ -213,11 +220,99 @@ for n in bounds:
     handoffs.append({'frame': n+1, 'from': f"{e0['clip']} f{e0['f']}", 'to': f"{e1['clip']} f{e1['f']}",
                      'blend': spec['segments'][e1['seg']].get('blend', 0), 'worst_bone': worst[0], **worst[1],
                      'bones': rows})
-out = H.ROOT/'art/anim/wip/transitions'/spec['name']
+out = H.ROOT/'art/anim/wip'/spec.get('out', f"transitions/{spec['name']}")
 out.mkdir(parents=True, exist_ok=True)
+
+
+def layers(e):
+    """(title, clip frame, weight) of the clips driving travel at timeline entry e."""
+    main = e['lower'] if 'lower' in e else (e['clip'], e['f'])
+    if 'from' not in e:
+        return [(*main, 1.0)]
+    title, f, w = e['from']
+    src = e.get('from_lower', (title, f))
+    return [(*main, w), (*src, 1.0-w)]
+
+
+def root_path():
+    """Per timeline frame (position xy, yaw rad) of the rig, integrated as the game's mover would."""
+    x = y = yaw = 0.0
+    path = []
+    for e in timeline:
+        vx = vy = dyaw = 0.0
+        for title, f, w in layers(e):
+            _, info = clips[title]
+            props = sample(title, f)[1]
+            speed = info.get('speed_mps') or 0.0
+            # hs_move: +x = character right (Blender -X), +y = forward (Blender -Y)
+            vx -= w*speed*props['hs_move_x']
+            vy -= w*speed*props['hs_move_y']
+            a = clip_len(title)[1]
+            if f > a and info.get('turn_deg'):
+                dyaw += w*math.radians(info['turn_deg'])*(props['hs_turn']-sample(title, f-1)[1]['hs_turn'])
+        yaw += dyaw
+        c, s = math.cos(yaw), math.sin(yaw)
+        x += (c*vx-s*vy)/H.FPS
+        y += (s*vx+c*vy)/H.FPS
+        path.append((x, y, yaw))
+    return path
+
+
+def setup_follow():
+    """Cameras parented to follow empties; checker ground; backdrop hidden. Returns (follow, chase follow)."""
+    fol = bpy.data.objects.new('Stitch follow', None)
+    chase = bpy.data.objects.new('Stitch chase follow', None)
+    for o in (fol, chase):
+        scene.collection.objects.link(o)
+    for name in VIEWS.values():
+        cam = bpy.data.objects.get(name)
+        if cam:
+            cam.parent = chase if name == VIEWS['chase'] else fol
+    ground = bpy.data.objects.get('Warm gray studio ground')
+    if ground:
+        mat = bpy.data.materials.new('Stitch ground checker')
+        mat.use_nodes = True
+        nt = mat.node_tree
+        bsdf = nt.nodes['Principled BSDF']
+        chk = nt.nodes.new('ShaderNodeTexChecker')
+        chk.inputs['Scale'].default_value = 0.5
+        chk.inputs['Color1'].default_value = (0.30, 0.29, 0.27, 1)
+        chk.inputs['Color2'].default_value = (0.22, 0.215, 0.20, 1)
+        tc = nt.nodes.new('ShaderNodeTexCoord')
+        nt.links.new(tc.outputs['Object'], chk.inputs['Vector'])
+        nt.links.new(chk.outputs['Color'], bsdf.inputs['Base Color'])
+        bsdf.inputs['Roughness'].default_value = 0.8
+        ground.data.materials.clear()
+        ground.data.materials.append(mat)
+    backdrop = bpy.data.objects.get('V11 bust backdrop')
+    if backdrop:
+        backdrop.hide_render = True
+    return fol, chase
+
+
+CHASE_EASE = 0.15   # per-frame share of the yaw error the chase camera closes
+rig_m0 = rig.matrix_world.copy()
+path = root_path() if spec.get('root_motion') else None
+if path:
+    follow, chase_follow = setup_follow()
+    cyaw, chase_yaw = path[0][2], []
+    for _, _, yaw in path:
+        cyaw += CHASE_EASE*(yaw-cyaw)
+        chase_yaw.append(cyaw)
+
+
+def place(n):
+    if not path:
+        return
+    x, y, yaw = path[n]
+    rig.matrix_world = Matrix.Translation((x, y, 0.0)) @ Matrix.Rotation(yaw, 4, 'Z') @ rig_m0
+    follow.location = (x, y, 0.0)
+    chase_follow.location = (x, y, 0.0)
+    chase_follow.rotation_euler = (0.0, 0.0, chase_yaw[n])
 labels = [f"{n+1} {e['clip']} f{e['f']}"+(f" <{e['from'][0]} {e['from'][2]:.2f}" if 'from' in e else '')
           for n, e in enumerate(timeline)]
 summary = {'name': spec['name'], 'frames': len(timeline), 'handoffs': handoffs,
+           'root_path': [[round(v, 4) for v in q] for q in path] if path else None,
            'acc_series_mm': {b: [round(1000*acc(n, b), 1) for n in range(len(pos))] for b in pos[0]},
            'timeline': [{k: v for k, v in e.items()} for e in timeline]}
 (out/'stitch.json').write_text(json.dumps(summary, indent=1, default=str), encoding='utf-8')
@@ -235,6 +330,7 @@ if '--no-render' not in args:
     for view in views:
         for n, pose in enumerate(poses):
             apply(pose)
+            place(n)
             scene.frame_set(n+1)
             p.update()
             H.render_still(scene, VIEWS[view], out/f'{view}-{n:03}.png', res)

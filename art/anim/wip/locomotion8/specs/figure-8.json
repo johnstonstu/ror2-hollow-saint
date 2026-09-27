@@ -1,0 +1,25 @@
+{
+  "name": "figure-8",
+  "out": "locomotion8/figure-8",
+  "root_motion": true,
+  "modules": ["walk", "loco8"],
+  "segments": [
+    {"clip": "Walk forward", "start": 1, "frames": 10},
+    {"clip": "Walk forward left", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk left", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk backward left", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk backward", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk backward right", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk right", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk forward right", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk forward", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk forward right", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk right", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk backward right", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk backward", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk backward left", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk left", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk forward left", "frames": 10, "blend": 10, "sync": true},
+    {"clip": "Walk forward", "frames": 10, "blend": 10, "sync": true}
+  ]
+}

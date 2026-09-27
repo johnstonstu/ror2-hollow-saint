@@ -1,0 +1,375 @@
+{
+ "plant_z": 0.06,
+ "slide_max_mm": 10.0,
+ "pairs": [
+  {
+   "a": "Run forward",
+   "b": "Run forward right",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 30.4,
+   "step_err_mm": 12.3,
+   "sink_mm": 11.4,
+   "gap_mm": {
+    "toe": 283.6,
+    "foot": 203.3,
+    "shin": 310.9
+   },
+   "phase": {
+    "Run forward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run forward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run forward right",
+   "b": "Run right",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 18.3,
+   "step_err_mm": 7.8,
+   "sink_mm": 8.1,
+   "gap_mm": {
+    "toe": 53.7,
+    "foot": -25.4,
+    "shin": 171.8
+   },
+   "phase": {
+    "Run forward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run right",
+   "b": "Run backward right",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 10.9,
+   "step_err_mm": 5.9,
+   "sink_mm": 10.1,
+   "gap_mm": {
+    "toe": 132.5,
+    "foot": 47.6,
+    "shin": 196.8
+   },
+   "phase": {
+    "Run right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run backward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run backward right",
+   "b": "Run backward",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 11.9,
+   "step_err_mm": 7.7,
+   "sink_mm": 15.0,
+   "gap_mm": {
+    "toe": 346.2,
+    "foot": 263.5,
+    "shin": 293.0
+   },
+   "phase": {
+    "Run backward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run backward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run backward",
+   "b": "Run backward left",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 11.8,
+   "step_err_mm": 7.7,
+   "sink_mm": 14.0,
+   "gap_mm": {
+    "toe": 346.7,
+    "foot": 262.6,
+    "shin": 317.3
+   },
+   "phase": {
+    "Run backward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run backward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run backward left",
+   "b": "Run left",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 10.9,
+   "step_err_mm": 6.2,
+   "sink_mm": 10.4,
+   "gap_mm": {
+    "toe": 132.1,
+    "foot": 44.7,
+    "shin": 204.6
+   },
+   "phase": {
+    "Run backward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run left",
+   "b": "Run forward left",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 18.7,
+   "step_err_mm": 7.9,
+   "sink_mm": 8.3,
+   "gap_mm": {
+    "toe": 54.7,
+    "foot": -27.2,
+    "shin": 157.2
+   },
+   "phase": {
+    "Run left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run forward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run forward left",
+   "b": "Run forward",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 29.3,
+   "step_err_mm": 11.6,
+   "sink_mm": 11.5,
+   "gap_mm": {
+    "toe": 285.7,
+    "foot": 204.2,
+    "shin": 279.0
+   },
+   "phase": {
+    "Run forward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run forward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run forward",
+   "b": "Run forward",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 560.0,
+    "foot": 479.3,
+    "shin": 340.9
+   },
+   "phase": {
+    "Run forward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run forward right",
+   "b": "Run forward right",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 50.5,
+    "foot": -29.9,
+    "shin": 175.5
+   },
+   "phase": {
+    "Run forward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run right",
+   "b": "Run right",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 94.7,
+    "foot": 12.3,
+    "shin": 185.4
+   },
+   "phase": {
+    "Run right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run backward right",
+   "b": "Run backward right",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 148.0,
+    "foot": 64.9,
+    "shin": 197.6
+   },
+   "phase": {
+    "Run backward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run backward",
+   "b": "Run backward",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 540.0,
+    "foot": 459.3,
+    "shin": 356.6
+   },
+   "phase": {
+    "Run backward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run backward left",
+   "b": "Run backward left",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 148.0,
+    "foot": 63.1,
+    "shin": 215.4
+   },
+   "phase": {
+    "Run backward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run left",
+   "b": "Run left",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 94.7,
+    "foot": 8.9,
+    "shin": 182.6
+   },
+   "phase": {
+    "Run left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run forward left",
+   "b": "Run forward left",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "sink_mm": 0.0,
+   "gap_mm": {
+    "toe": 50.5,
+    "foot": -31.5,
+    "shin": 150.0
+   },
+   "phase": {
+    "Run forward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  }
+ ],
+ "ok": false
+}

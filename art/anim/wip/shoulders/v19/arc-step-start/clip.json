@@ -1,0 +1,20 @@
+{
+ "title": "Arc Step start",
+ "tag": "v19",
+ "rendered_frames": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "views": [
+  "front",
+  "back",
+  "top",
+  "outL",
+  "outR"
+ ]
+}

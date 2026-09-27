@@ -1,0 +1,1194 @@
+{
+ "rest": {
+  "L": {
+   "arc2": 0.013402462936937809,
+   "arc2_tris": 74,
+   "yoke": 0.007517719641327858,
+   "yoke_tris": 50
+  },
+  "R": {
+   "arc3": 0.009718489833176136,
+   "arc3_tris": 74,
+   "yoke": 0.009223440662026405,
+   "yoke_tris": 52
+  }
+ },
+ "clips": {
+  "Aim down": {
+   "R > arc3": {
+    "mm": 22.7,
+    "f": 1,
+    "frames_over_5": 1,
+    "tris": 74
+   },
+   "L > arc2": {
+    "mm": 10.0,
+    "f": 1,
+    "frames_over_5": 1,
+    "tris": 74
+   },
+   "L > yoke": {
+    "mm": 2.3,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 46
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 42
+   }
+  },
+  "Aim left": {
+   "L > yoke": {
+    "mm": 1.9,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "R > neck": {
+    "mm": 1.1,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > arc3": {
+    "mm": 0.2,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 78
+   },
+   "L > arc2": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 78
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Aim neutral": {
+   "L > yoke": {
+    "mm": 1.9,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "R > arc3": {
+    "mm": 0.2,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 78
+   },
+   "L > arc2": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 78
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Aim right": {
+   "L > neck": {
+    "mm": 2.4,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 1.9,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "R > arc3": {
+    "mm": 0.2,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 78
+   },
+   "L > arc2": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 78
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Aim up": {
+   "R > arc3": {
+    "mm": 9.7,
+    "f": 1,
+    "frames_over_5": 1,
+    "tris": 70
+   },
+   "L > arc2": {
+    "mm": 2.4,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 68
+   },
+   "L > yoke": {
+    "mm": 2.3,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 46
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 53
+   }
+  },
+  "Arc Bolt left": {
+   "L > torso": {
+    "mm": 34.3,
+    "f": 3,
+    "frames_over_5": 7,
+    "tris": 0
+   },
+   "R > arc3": {
+    "mm": 27.2,
+    "f": 5,
+    "frames_over_5": 1,
+    "tris": 78
+   },
+   "L > neck": {
+    "mm": 24.9,
+    "f": 15,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "L > arc2": {
+    "mm": 24.3,
+    "f": 13,
+    "frames_over_5": 4,
+    "tris": 84
+   },
+   "L > yoke": {
+    "mm": 1.9,
+    "f": 19,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "R > yoke": {
+    "mm": 0.4,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Arc Bolt right": {
+   "R > torso": {
+    "mm": 40.5,
+    "f": 11,
+    "frames_over_5": 7,
+    "tris": 0
+   },
+   "R > arc3": {
+    "mm": 25.4,
+    "f": 7,
+    "frames_over_5": 7,
+    "tris": 82
+   },
+   "L > arc2": {
+    "mm": 23.6,
+    "f": 5,
+    "frames_over_5": 1,
+    "tris": 78
+   },
+   "R > neck": {
+    "mm": 17.5,
+    "f": 15,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.3,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 52
+   },
+   "R > yoke": {
+    "mm": 0.2,
+    "f": 19,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Arc Step end": {
+   "R > arc3": {
+    "mm": 24.5,
+    "f": 7,
+    "frames_over_5": 7,
+    "tris": 112
+   },
+   "R > torso": {
+    "mm": 23.4,
+    "f": 1,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "L > arc2": {
+    "mm": 19.4,
+    "f": 11,
+    "frames_over_5": 7,
+    "tris": 122
+   },
+   "R > neck": {
+    "mm": 13.3,
+    "f": 7,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "L > neck": {
+    "mm": 12.6,
+    "f": 1,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 6.2,
+    "f": 7,
+    "frames_over_5": 3,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.4,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 52
+   },
+   "R > yoke": {
+    "mm": 0.8,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 66
+   }
+  },
+  "Arc Step loop": {
+   "L > torso": {
+    "mm": 25.6,
+    "f": 3,
+    "frames_over_5": 3,
+    "tris": 0
+   },
+   "R > arc3": {
+    "mm": 25.1,
+    "f": 7,
+    "frames_over_5": 6,
+    "tris": 116
+   },
+   "R > torso": {
+    "mm": 24.6,
+    "f": 7,
+    "frames_over_5": 6,
+    "tris": 0
+   },
+   "L > arc2": {
+    "mm": 22.8,
+    "f": 7,
+    "frames_over_5": 4,
+    "tris": 122
+   },
+   "L > neck": {
+    "mm": 21.6,
+    "f": 3,
+    "frames_over_5": 5,
+    "tris": 0
+   },
+   "R > neck": {
+    "mm": 6.8,
+    "f": 3,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.2,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 34
+   },
+   "R > yoke": {
+    "mm": 1.6,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 73
+   }
+  },
+  "Arc Step start": {
+   "R > neck": {
+    "mm": 37.6,
+    "f": 5,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "L > neck": {
+    "mm": 34.8,
+    "f": 5,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "R > torso": {
+    "mm": 23.4,
+    "f": 7,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "L > arc2": {
+    "mm": 18.4,
+    "f": 7,
+    "frames_over_5": 1,
+    "tris": 122
+   },
+   "R > arc3": {
+    "mm": 16.5,
+    "f": 7,
+    "frames_over_5": 1,
+    "tris": 112
+   },
+   "L > torso": {
+    "mm": 11.4,
+    "f": 5,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 1.9,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 66
+   }
+  },
+  "Ascend": {
+   "R > arc3": {
+    "mm": 14.1,
+    "f": 17,
+    "frames_over_5": 6,
+    "tris": 96
+   },
+   "L > arc2": {
+    "mm": 10.2,
+    "f": 3,
+    "frames_over_5": 4,
+    "tris": 90
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 13,
+    "frames_over_5": 0,
+    "tris": 62
+   },
+   "R > yoke": {
+    "mm": 1.4,
+    "f": 15,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Charge full": {
+   "L > arc2": {
+    "mm": 23.1,
+    "f": 11,
+    "frames_over_5": 13,
+    "tris": 75
+   },
+   "R > arc3": {
+    "mm": 6.1,
+    "f": 21,
+    "frames_over_5": 2,
+    "tris": 64
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 44
+   },
+   "R > neck": {
+    "mm": 1.8,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 0.7,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 26
+   }
+  },
+  "Charge loop": {
+   "L > arc2": {
+    "mm": 20.3,
+    "f": 9,
+    "frames_over_5": 15,
+    "tris": 72
+   },
+   "R > arc3": {
+    "mm": 9.0,
+    "f": 25,
+    "frames_over_5": 12,
+    "tris": 48
+   },
+   "L > yoke": {
+    "mm": 5.0,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 27
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 3,
+    "frames_over_5": 0,
+    "tris": 6
+   }
+  },
+  "Descend": {
+   "R > arc3": {
+    "mm": 26.3,
+    "f": 11,
+    "frames_over_5": 8,
+    "tris": 70
+   },
+   "L > arc2": {
+    "mm": 24.2,
+    "f": 11,
+    "frames_over_5": 7,
+    "tris": 70
+   },
+   "L > yoke": {
+    "mm": 2.7,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 46
+   },
+   "R > yoke": {
+    "mm": 0.8,
+    "f": 15,
+    "frames_over_5": 0,
+    "tris": 44
+   }
+  },
+  "Discharge": {
+   "L > arc2": {
+    "mm": 22.4,
+    "f": 7,
+    "frames_over_5": 2,
+    "tris": 94
+   },
+   "R > arc3": {
+    "mm": 19.9,
+    "f": 7,
+    "frames_over_5": 6,
+    "tris": 94
+   },
+   "R > neck": {
+    "mm": 17.9,
+    "f": 9,
+    "frames_over_5": 3,
+    "tris": 0
+   },
+   "R > torso": {
+    "mm": 12.5,
+    "f": 13,
+    "frames_over_5": 4,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 6.6,
+    "f": 9,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.3,
+    "f": 23,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "L > neck": {
+    "mm": 1.4,
+    "f": 11,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 0.8,
+    "f": 21,
+    "frames_over_5": 0,
+    "tris": 55
+   }
+  },
+  "Glide enter": {
+   "R > arc3": {
+    "mm": 27.9,
+    "f": 5,
+    "frames_over_5": 7,
+    "tris": 92
+   },
+   "L > arc2": {
+    "mm": 24.4,
+    "f": 13,
+    "frames_over_5": 6,
+    "tris": 93
+   },
+   "L > neck": {
+    "mm": 7.1,
+    "f": 13,
+    "frames_over_5": 3,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 6.0,
+    "f": 13,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "R > torso": {
+    "mm": 5.1,
+    "f": 11,
+    "frames_over_5": 1,
+    "tris": 0
+   },
+   "R > neck": {
+    "mm": 4.5,
+    "f": 13,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.1,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 66
+   },
+   "R > yoke": {
+    "mm": 0.7,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 57
+   }
+  },
+  "Glide exit": {
+   "L > arc2": {
+    "mm": 24.4,
+    "f": 1,
+    "frames_over_5": 5,
+    "tris": 102
+   },
+   "R > arc3": {
+    "mm": 23.6,
+    "f": 1,
+    "frames_over_5": 6,
+    "tris": 92
+   },
+   "L > neck": {
+    "mm": 7.7,
+    "f": 3,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 7.3,
+    "f": 3,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "R > neck": {
+    "mm": 4.9,
+    "f": 3,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > torso": {
+    "mm": 4.6,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 2.7,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 57
+   },
+   "L > yoke": {
+    "mm": 2.2,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 68
+   }
+  },
+  "Glide loop": {
+   "R > arc3": {
+    "mm": 28.0,
+    "f": 17,
+    "frames_over_5": 17,
+    "tris": 97
+   },
+   "L > arc2": {
+    "mm": 24.4,
+    "f": 1,
+    "frames_over_5": 16,
+    "tris": 92
+   },
+   "L > neck": {
+    "mm": 8.2,
+    "f": 7,
+    "frames_over_5": 8,
+    "tris": 0
+   },
+   "R > torso": {
+    "mm": 7.8,
+    "f": 19,
+    "frames_over_5": 12,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 7.3,
+    "f": 3,
+    "frames_over_5": 4,
+    "tris": 0
+   },
+   "R > neck": {
+    "mm": 4.9,
+    "f": 3,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 4.0,
+    "f": 25,
+    "frames_over_5": 0,
+    "tris": 68
+   },
+   "R > yoke": {
+    "mm": 0.7,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 48
+   }
+  },
+  "Idle": {
+   "R > arc3": {
+    "mm": 19.9,
+    "f": 47,
+    "frames_over_5": 43,
+    "tris": 96
+   },
+   "L > arc2": {
+    "mm": 9.6,
+    "f": 33,
+    "frames_over_5": 25,
+    "tris": 92
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 61,
+    "frames_over_5": 0,
+    "tris": 62
+   },
+   "R > yoke": {
+    "mm": 2.0,
+    "f": 79,
+    "frames_over_5": 0,
+    "tris": 44
+   }
+  },
+  "Idle combat": {
+   "L > arc2": {
+    "mm": 17.5,
+    "f": 15,
+    "frames_over_5": 14,
+    "tris": 76
+   },
+   "R > arc3": {
+    "mm": 15.6,
+    "f": 25,
+    "frames_over_5": 25,
+    "tris": 61
+   },
+   "R > torso": {
+    "mm": 6.3,
+    "f": 9,
+    "frames_over_5": 23,
+    "tris": 0
+   },
+   "R > neck": {
+    "mm": 3.1,
+    "f": 37,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.9,
+    "f": 31,
+    "frames_over_5": 0,
+    "tris": 40
+   }
+  },
+  "Jump": {
+   "R > arc3": {
+    "mm": 27.5,
+    "f": 3,
+    "frames_over_5": 5,
+    "tris": 100
+   },
+   "L > arc2": {
+    "mm": 20.5,
+    "f": 7,
+    "frames_over_5": 6,
+    "tris": 102
+   },
+   "L > yoke": {
+    "mm": 2.1,
+    "f": 3,
+    "frames_over_5": 0,
+    "tris": 58
+   },
+   "R > yoke": {
+    "mm": 1.9,
+    "f": 9,
+    "frames_over_5": 0,
+    "tris": 60
+   },
+   "R > neck": {
+    "mm": 0.8,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 0
+   }
+  },
+  "Land": {
+   "R > arc3": {
+    "mm": 27.0,
+    "f": 7,
+    "frames_over_5": 6,
+    "tris": 82
+   },
+   "L > arc2": {
+    "mm": 23.7,
+    "f": 13,
+    "frames_over_5": 6,
+    "tris": 86
+   },
+   "L > yoke": {
+    "mm": 2.7,
+    "f": 11,
+    "frames_over_5": 0,
+    "tris": 58
+   },
+   "R > yoke": {
+    "mm": 1.5,
+    "f": 15,
+    "frames_over_5": 0,
+    "tris": 46
+   }
+  },
+  "Open Circuit": {
+   "R > neck": {
+    "mm": 25.8,
+    "f": 9,
+    "frames_over_5": 10,
+    "tris": 0
+   },
+   "L > arc2": {
+    "mm": 20.7,
+    "f": 7,
+    "frames_over_5": 2,
+    "tris": 94
+   },
+   "R > torso": {
+    "mm": 14.2,
+    "f": 19,
+    "frames_over_5": 6,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 7.1,
+    "f": 21,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "R > arc3": {
+    "mm": 6.9,
+    "f": 5,
+    "frames_over_5": 1,
+    "tris": 78
+   },
+   "L > yoke": {
+    "mm": 3.3,
+    "f": 15,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "L > neck": {
+    "mm": 1.9,
+    "f": 21,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 0.7,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Open Circuit end": {
+   "R > arc3": {
+    "mm": 10.3,
+    "f": 19,
+    "frames_over_5": 1,
+    "tris": 86
+   },
+   "L > arc2": {
+    "mm": 6.4,
+    "f": 19,
+    "frames_over_5": 2,
+    "tris": 90
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 50
+   },
+   "R > yoke": {
+    "mm": 0.8,
+    "f": 19,
+    "frames_over_5": 0,
+    "tris": 54
+   }
+  },
+  "Open Circuit hold": {
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 56
+   },
+   "R > yoke": {
+    "mm": 0.7,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 31
+   }
+  },
+  "Run backward": {
+   "R > arc3": {
+    "mm": 26.7,
+    "f": 7,
+    "frames_over_5": 6,
+    "tris": 82
+   },
+   "L > arc2": {
+    "mm": 21.6,
+    "f": 17,
+    "frames_over_5": 5,
+    "tris": 78
+   },
+   "L > yoke": {
+    "mm": 2.1,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 52
+   },
+   "R > yoke": {
+    "mm": 0.7,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 61
+   }
+  },
+  "Run forward": {
+   "R > arc3": {
+    "mm": 27.9,
+    "f": 15,
+    "frames_over_5": 7,
+    "tris": 90
+   },
+   "L > arc2": {
+    "mm": 24.4,
+    "f": 7,
+    "frames_over_5": 4,
+    "tris": 80
+   },
+   "R > torso": {
+    "mm": 7.0,
+    "f": 1,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 6.0,
+    "f": 1,
+    "frames_over_5": 2,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 5,
+    "frames_over_5": 0,
+    "tris": 36
+   },
+   "L > neck": {
+    "mm": 2.2,
+    "f": 17,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 0.9,
+    "f": 13,
+    "frames_over_5": 0,
+    "tris": 61
+   },
+   "R > neck": {
+    "mm": 0.7,
+    "f": 3,
+    "frames_over_5": 0,
+    "tris": 0
+   }
+  },
+  "Run left": {
+   "R > arc3": {
+    "mm": 27.7,
+    "f": 9,
+    "frames_over_5": 9,
+    "tris": 92
+   },
+   "L > arc2": {
+    "mm": 20.2,
+    "f": 7,
+    "frames_over_5": 3,
+    "tris": 98
+   },
+   "L > yoke": {
+    "mm": 2.6,
+    "f": 17,
+    "frames_over_5": 0,
+    "tris": 58
+   },
+   "R > yoke": {
+    "mm": 0.9,
+    "f": 11,
+    "frames_over_5": 0,
+    "tris": 55
+   }
+  },
+  "Run right": {
+   "R > arc3": {
+    "mm": 26.6,
+    "f": 15,
+    "frames_over_5": 7,
+    "tris": 88
+   },
+   "L > arc2": {
+    "mm": 24.4,
+    "f": 7,
+    "frames_over_5": 4,
+    "tris": 107
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 13,
+    "frames_over_5": 0,
+    "tris": 65
+   },
+   "R > torso": {
+    "mm": 2.2,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > neck": {
+    "mm": 1.1,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 0.6,
+    "f": 7,
+    "frames_over_5": 0,
+    "tris": 63
+   }
+  },
+  "Select idle": {
+   "R > arc3": {
+    "mm": 28.0,
+    "f": 85,
+    "frames_over_5": 31,
+    "tris": 98
+   },
+   "L > arc2": {
+    "mm": 24.4,
+    "f": 15,
+    "frames_over_5": 28,
+    "tris": 94
+   },
+   "L > neck": {
+    "mm": 6.1,
+    "f": 91,
+    "frames_over_5": 14,
+    "tris": 0
+   },
+   "L > torso": {
+    "mm": 6.1,
+    "f": 89,
+    "frames_over_5": 7,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 25,
+    "frames_over_5": 0,
+    "tris": 10
+   },
+   "R > torso": {
+    "mm": 1.9,
+    "f": 35,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 0.8,
+    "f": 85,
+    "frames_over_5": 0,
+    "tris": 14
+   }
+  },
+  "Select intro": {
+   "R > torso": {
+    "mm": 30.7,
+    "f": 13,
+    "frames_over_5": 13,
+    "tris": 0
+   },
+   "R > arc3": {
+    "mm": 26.3,
+    "f": 11,
+    "frames_over_5": 19,
+    "tris": 86
+   },
+   "L > arc2": {
+    "mm": 24.3,
+    "f": 21,
+    "frames_over_5": 22,
+    "tris": 90
+   },
+   "R > neck": {
+    "mm": 9.0,
+    "f": 15,
+    "frames_over_5": 8,
+    "tris": 0
+   },
+   "L > neck": {
+    "mm": 5.6,
+    "f": 1,
+    "frames_over_5": 5,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.4,
+    "f": 39,
+    "frames_over_5": 0,
+    "tris": 12
+   },
+   "L > torso": {
+    "mm": 2.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 0
+   },
+   "R > yoke": {
+    "mm": 0.0,
+    "f": 1,
+    "frames_over_5": 0,
+    "tris": 10
+   }
+  },
+  "Spawn": {
+   "R > arc3": {
+    "mm": 27.8,
+    "f": 39,
+    "frames_over_5": 36,
+    "tris": 90
+   },
+   "L > arc2": {
+    "mm": 24.4,
+    "f": 39,
+    "frames_over_5": 36,
+    "tris": 96
+   },
+   "R > neck": {
+    "mm": 10.4,
+    "f": 31,
+    "frames_over_5": 18,
+    "tris": 0
+   },
+   "L > yoke": {
+    "mm": 2.5,
+    "f": 17,
+    "frames_over_5": 0,
+    "tris": 58
+   },
+   "R > yoke": {
+    "mm": 1.8,
+    "f": 31,
+    "frames_over_5": 0,
+    "tris": 42
+   }
+  },
+  "Walk forward": {
+   "R > arc3": {
+    "mm": 23.6,
+    "f": 3,
+    "frames_over_5": 8,
+    "tris": 90
+   },
+   "L > arc2": {
+    "mm": 22.1,
+    "f": 13,
+    "frames_over_5": 7,
+    "tris": 92
+   },
+   "L > yoke": {
+    "mm": 2.9,
+    "f": 23,
+    "frames_over_5": 0,
+    "tris": 55
+   },
+   "R > yoke": {
+    "mm": 2.5,
+    "f": 11,
+    "frames_over_5": 0,
+    "tris": 71
+   }
+  }
+ }
+}

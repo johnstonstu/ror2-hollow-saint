@@ -1,0 +1,13 @@
+{
+  "name": "reversal-180",
+  "out": "locomotion8/reversal-180",
+  "root_motion": true,
+  "modules": ["run", "turns"],
+  "segments": [
+    {"clip": "Run forward", "start": 1, "frames": 16},
+    {"clip": "Run pivot 180 left", "start": 1, "frames": 20},
+    {"clip": "Run forward", "start": 10, "frames": 23},
+    {"clip": "Run pivot 180 right", "start": 1, "frames": 20},
+    {"clip": "Run forward", "start": 10, "frames": 15}
+  ]
+}

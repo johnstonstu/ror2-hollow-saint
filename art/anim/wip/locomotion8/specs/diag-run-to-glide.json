@@ -1,0 +1,11 @@
+{
+  "name": "diag-run-to-glide",
+  "out": "locomotion8/diag-run-to-glide",
+  "root_motion": true,
+  "modules": ["run", "loco8", "glide"],
+  "segments": [
+    {"clip": "Run forward right", "start": 1, "frames": 24},
+    {"clip": "Glide enter", "start": 1, "frames": 13, "blend": 6},
+    {"clip": "Glide loop", "start": 2, "frames": 31}
+  ]
+}

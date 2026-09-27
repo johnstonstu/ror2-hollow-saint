@@ -1,0 +1,16 @@
+{
+ "title": "Arc Step end",
+ "tag": "r5b",
+ "rendered_frames": [
+  2,
+  4,
+  6
+ ],
+ "views": [
+  "front",
+  "back",
+  "top",
+  "outL",
+  "outR"
+ ]
+}

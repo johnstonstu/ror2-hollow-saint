@@ -1,0 +1,359 @@
+{
+ "plant_z": 0.06,
+ "slide_max_mm": 10.0,
+ "pairs": [
+  {
+   "a": "Run forward",
+   "b": "Run forward right",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 106.9,
+   "step_err_mm": 106.9,
+   "gap_mm": {
+    "toe": 272.5,
+    "foot": 189.7,
+    "shin": 344.2
+   },
+   "phase": {
+    "Run forward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run forward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run forward right",
+   "b": "Run right",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 91.3,
+   "step_err_mm": 91.3,
+   "gap_mm": {
+    "toe": -38.2,
+    "foot": -121.2,
+    "shin": 250.0
+   },
+   "phase": {
+    "Run forward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run right",
+   "b": "Run backward right",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 80.9,
+   "step_err_mm": 67.3,
+   "gap_mm": {
+    "toe": 43.9,
+    "foot": -45.8,
+    "shin": 267.9
+   },
+   "phase": {
+    "Run right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run backward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run backward right",
+   "b": "Run backward",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 116.5,
+   "step_err_mm": 94.0,
+   "gap_mm": {
+    "toe": 328.4,
+    "foot": 243.8,
+    "shin": 321.2
+   },
+   "phase": {
+    "Run backward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run backward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run backward",
+   "b": "Run backward left",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 115.8,
+   "step_err_mm": 94.0,
+   "gap_mm": {
+    "toe": 328.3,
+    "foot": 241.9,
+    "shin": 346.5
+   },
+   "phase": {
+    "Run backward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run backward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run backward left",
+   "b": "Run left",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 19.8,
+   "step_err_mm": 10.9,
+   "gap_mm": {
+    "toe": 43.8,
+    "foot": -49.1,
+    "shin": 277.5
+   },
+   "phase": {
+    "Run backward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run left",
+   "b": "Run forward left",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 93.3,
+   "step_err_mm": 92.2,
+   "gap_mm": {
+    "toe": -36.3,
+    "foot": -123.0,
+    "shin": 235.6
+   },
+   "phase": {
+    "Run left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run forward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run forward left",
+   "b": "Run forward",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 106.6,
+   "step_err_mm": 106.0,
+   "gap_mm": {
+    "toe": 275.6,
+    "foot": 191.0,
+    "shin": 312.6
+   },
+   "phase": {
+    "Run forward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run forward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run forward",
+   "b": "Run forward",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": 560.0,
+    "foot": 479.3,
+    "shin": 340.9
+   },
+   "phase": {
+    "Run forward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run forward right",
+   "b": "Run forward right",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": 5.2,
+    "foot": -77.1,
+    "shin": 245.7
+   },
+   "phase": {
+    "Run forward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run right",
+   "b": "Run right",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": -41.6,
+    "foot": -129.2,
+    "shin": 272.5
+   },
+   "phase": {
+    "Run right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run backward right",
+   "b": "Run backward right",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": 102.7,
+    "foot": 16.4,
+    "shin": 251.2
+   },
+   "phase": {
+    "Run backward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run backward",
+   "b": "Run backward",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": 540.0,
+    "foot": 459.3,
+    "shin": 365.3
+   },
+   "phase": {
+    "Run backward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run backward left",
+   "b": "Run backward left",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": 102.7,
+    "foot": 14.0,
+    "shin": 270.4
+   },
+   "phase": {
+    "Run backward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": true
+  },
+  {
+   "a": "Run left",
+   "b": "Run left",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": -41.6,
+    "foot": -133.5,
+    "shin": 271.2
+   },
+   "phase": {
+    "Run left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  },
+  {
+   "a": "Run forward left",
+   "b": "Run forward left",
+   "w": 0.0,
+   "contacts": 2,
+   "contact_slide_mm": 0.0,
+   "step_err_mm": 0.0,
+   "gap_mm": {
+    "toe": 5.2,
+    "foot": -79.3,
+    "shin": 217.9
+   },
+   "phase": {
+    "Run forward left": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  }
+ ],
+ "ok": false
+}

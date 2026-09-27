@@ -46,18 +46,24 @@ import clearance
 import contact
 import handorient
 import handqa
+import fullqa
 clr = clearance.Clearance()
 con = contact.Contact()
+pad = contact.PadContact()
 hq = handqa.HandQA(p)
 oq = handorient.OrientQA(p.rig)
+fq = fullqa.FullQA(p)
 p.reset()
 p.update()
+print('FULLQA REST', json.dumps(fq.calibrate_rest()), flush=True)
+print('FULLQA SYMMETRY', json.dumps(fullqa.symmetry(p.rig)), flush=True)
 print('HANDQA REST', json.dumps(hq.calibrate_rest()), flush=True)
 rest_hand = oq.calibrate_rest()
 print('HAND ORIENT REST handedness', json.dumps(rest_hand), flush=True)
 if not (rest_hand['L'] < 0 < rest_hand['R']):
     raise RuntimeError(f'hands are mirror-handed at rest: {rest_hand}')
 print('CONTACT REST', json.dumps(con.calibrate_rest()), flush=True)
+print('PAD CONTACT REST', json.dumps(pad.calibrate_rest()), flush=True)
 scene = bpy.context.scene
 if 'chase' in views:
     # RoR2-like third-person view: behind and above, looking past the character.
@@ -89,8 +95,10 @@ for act, info in built:
     finite = True
     arm_frames = []
     contact_frames = []
+    pad_frames = []
     hq.reset()
     oq.reset()
+    fq.reset()
     for f in frames:
         scene.frame_set(f)
         p.update()
@@ -107,8 +115,10 @@ for act, info in built:
         ev.to_mesh_clear()
         arm_frames.append((f, clr.frame()))
         contact_frames.append((f, con.frame()))
+        pad_frames.append((f, pad.frame()))
         hq.frame(f)
         oq.frame(f)
+        fq.frame(f)
     speed = info.get('speed_mps')
     # Travel direction in world XY (character faces -Y; its left is +X). Planted feet move opposite.
     travel = {'forward': (0, -1), 'backward': (0, 1), 'left': (1, 0), 'right': (-1, 0)}.get(
@@ -131,10 +141,13 @@ for act, info in built:
     info.update(hq.summarize(info['loop'], info.get('finger_accents', ())))
     info.update(contact.summarize(contact_frames, con.rest, info.get('hand_contacts', ())))
     info.update(oq.summarize(info['loop']))
+    info.update(contact.summarize_pads(pad_frames, pad.rest))
+    info.update(fq.summarize(info['loop'], info.get('accents', ()), info.get('contact_exempt', ())))
     info['status'] = 'PASS' if (finite and info['bake_error_m'] < 1e-3 and info['ik_miss_m'] < 0.01
                                 and min_body_z > H.GROUND_Z-0.012 and info['arm_clear_ok'] is not False
                                 and info['hand_qa_summary']['ok'] and info['hand_contact_ok']
-                                and info['hand_orient_ok']) else 'CHECK'
+                                and info['hand_orient_ok'] and info['pad_contact_ok']
+                                and info['full_qa_ok']) else 'CHECK'
     report.append(info)
     print('QA', json.dumps(info), flush=True)
 

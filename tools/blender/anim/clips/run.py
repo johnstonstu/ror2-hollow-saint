@@ -5,7 +5,7 @@ import gait
 
 N = 16
 G = gait.params(speed=6.0, cycle=N, stance=0.21, lift=0.32, front_bias=0.52, pushoff=46.0, heel_off=0.15,
-                lift_ease=1.5, contact_match=0.7, release_match=0.5, swing_delay=0.0)
+                lift_ease=1.5, contact_match=0.7, release_match=0.5, swing_delay=0.0, angle_blur=1.0)
 HALO = dict(gain=0.35)   # glide.run_offsets must evaluate the run halo with the same settings
 SPARK = 0.45             # heel spark (vfx hs_spark_*) flashed by each toe-off
 JET_DIR = 12.0           # spark exhaust tilt below horizontal (glide.JET_DIR['run'])
@@ -13,6 +13,9 @@ FOOT_MID = -0.016
 WIDTH = 0.28
 LEAN = 18.0
 TWIST = 55.0  # forearm roll: + turns the palm inward (thumb up) when the elbow is flexed
+# Around each arm's high point (its own f2 / f10) the orientation pass (handpass) wanted up to ~84 deg less roll in
+# 4 frames; authoring most of it here leaves the pass a small, smooth top-up.
+ROLL_UP, ROLL_AT = 72.0, 0.0625
 # Arm swing path. adduct = adduct + fwd*max(-sw, 0) + back*max(sw, 0) (sw: +1 arm back, -1 forward).
 # adduct 15 / twist -25 (elbow in, forearm out) keeps hands and forearms >= 15 mm off the hips, thighs and
 # tabard on every frame (clearance.py); the v9 path (27 / 0) brushed them on most frames.
@@ -46,9 +49,11 @@ def pose(p, f):
         sw = math.cos(2*math.pi*(t-0.04))*k      # + = this arm back
         lag = math.cos(2*math.pi*(t-0.10))*k     # forearm trails the upper arm
         p.rot(f'{s} scapula', R(z=k*5.0*sw))    # shoulder rides forward with the arm
+        up = (0.5+0.5*math.cos(2*math.pi*(t-ROLL_AT-(0.0 if s == 'L' else 0.5))))**2.5
         a = ARM
         p.arm(s, swing=a['base']+a['swing']*sw, adduct=a['adduct']+a['fwd']*max(-sw, 0.0)+a['back']*max(sw, 0.0),
-              elbow=a['elbow']-a['elbow_lag']*lag, twist=a['twist'], wrist=(a['wrist']*lag, 0, 0), forearm_twist=TWIST)
+              elbow=a['elbow']-a['elbow_lag']*lag, twist=a['twist'], wrist=(a['wrist']*lag, 0, 0),
+              forearm_twist=TWIST-ROLL_UP*up)
         p.curl(s, a['curl'], a['thumb'])
     fwd = max(thigh_forward(ys['L']), thigh_forward(ys['R']), 0)
     lag = tabard_follow(lambda u: -9.0*math.cos(2*math.pi*u), lambda u: -3.5*math.cos(2*math.pi*(u-low)), t)
@@ -80,5 +85,5 @@ def build(p):
     return [bake(p, 'Run forward', frames, pose, True,
                  markers={'L contact': 1, 'R contact': 1+N//2},
                  meta={'speed_mps': G['speed'], 'meters_per_cycle': round(G['speed']*N/24, 3),
-                       'stance': G['stance'], 'kind': 'locomotion'},
+                       'stance': G['stance'], 'kind': 'locomotion', 'seam_anchors': [1, 9, 10]},   # Glide exit and the turns start on f1, turns end on f9, enter starts on f10
                  post=post, props=props())]

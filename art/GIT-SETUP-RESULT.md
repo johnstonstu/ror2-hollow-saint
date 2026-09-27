@@ -1,0 +1,106 @@
+# Git setup result (Sep 27 2026)
+
+**Result: SUCCESS.** Pushed to https://github.com/johnstonstu/ror2-hollow-saint, branch `main`.
+
+| Item | Value |
+|---|---|
+| Snapshot commit | `06f582c` "Hollow Saint snapshot: anim v18, VFX hs-vfx-v07, plans and audits" |
+| Pushed head (`origin/main`) | `063b665` (merge of the snapshot with GitHub's placeholder initial commit) |
+| Tracked files | 12,724 |
+| Total snapshot size | ~3.5 GB (about 134 MB of regular git content plus LFS) |
+| LFS | 12,057 files, 11,791 unique objects, ~3.4 GB uploaded (no quota rejection) |
+| Tools | git 2.53.0.windows.2, git-lfs 3.7.1 |
+
+## Push notes
+- The repo was not empty when the push landed. While the LFS upload was running (about 15 minutes), a commit `d2d0f37` "Initial commit" (author "Cursor Agent", 02:01 PT) was pushed to `main`, containing only a one-line `README.md` (`# ror2-hollow-saint`). The first push was rejected with `! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': reference already exists)`.
+- Resolved without force-pushing or rewriting history: `git merge -s ours --allow-unrelated-histories origin/main`. That kept the local tree exactly as it was (the project `README.md` wins, and the placeholder README remains in history), and then a normal `git push -u origin main` succeeded.
+- GitHub warning (informational): "GH010: Your push referenced at least 11791 Git LFS objects, but we only validated a random sample of 10000."
+
+## Secrets
+- `.env` is ignored. It was never read, staged, or committed; `git ls-tree -r HEAD | findstr /i env` returns nothing.
+- Secret scan of the staged text files (api_key, token, secret, password, sk-, gh*_, AKIA, Bearer, private key headers, HIGGSFIELD_API_KEY assignments) found no real secrets. The hits were only code that reads the variable name (`tools/higgsfield/Test-ApiAccess.ps1`), docs and ignore-file comments, this task prompt, and token-usage counters in `art/anim/wip/refine-run-log.txt`. No files were excluded for secrets.
+
+## Excluded files and why
+- `.env`: secret.
+- `*.log` (~380 files), `*.err` (~106), and the folders `art/anim/wip/logs/`, `art/anim/wip/_run3/logs/`, `art/anim/wip/_run4/logs/`, `art/anim/wip/_run3/contact/` (logs/err only): run logs.
+- 453 interrupted-write temp copies with a PID suffix (e.g. `arc_short_024.png.48204`), which covers all of `art/vfx/assets/_old/previews/frames/`: junk.
+- `*.blend1` (2 files): Blender backups.
+- `__pycache__/` (4 folders): Python cache.
+- Empty Blender `.thumbnails` cache folders at the repo root (`@` and several garbled-name folders): empty, so git would not track them anyway.
+- No file was over 2 GB; nothing was excluded for size. The largest files (the hands GIFs, 22 to 31 MB) went to LFS.
+- Kept: timestamped backups (`*.fbx.20260927-*`, `*.gif.20260927-*`, etc., via LFS), and `art/vfx/assets/scripts/logs/` (.txt/.json, re-included).
+
+## Not in the snapshot
+The other agent (run4) kept editing while this ran. After the commit, `git status` showed 2,294 modified and 16 new files, mostly re-rendered frames under `art/anim/wip/{presentation,special,primary,air,run_dirs,arcstep,glide}`. These were not committed. To save them later: `git add . && git commit -m "..." && git push`.
+
+## Files created
+- `.gitattributes` (new): `* text=auto`; LFS for `*.blend *.fbx *.glb *.psd *.exr *.png *.jpg *.gif *.wav *.zip` plus timestamped backups `*.fbx.* *.blend.* *.png.* *.gif.* *.jpg.* *.glb.*`.
+- `.gitignore`: this already existed. I appended the "Other secrets" section and everything below it. Local repo config: `core.longpaths=true`, `core.quotepath=false`.
+
+## .gitignore contents
+```
+# Secrets and machine-specific settings
+.env
+.env.*
+# Include alternate names and editor/backup copies of environment files.
+.env*
+*.env
+*.env.*
+*.env~
+*.user
+*.suo
+.vs/
+*.local.props
+local.settings.json
+
+# C# build outputs
+**/bin/
+**/obj/
+TestResults/
+artifacts/
+dist/
+
+# Unity caches and generated files; retain Assets and their .meta files
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Bb]uilds/
+**/MemoryCaptures/
+
+# Local game references and extracted game assets
+references/game/
+references/extracted/
+
+# Blender backups
+*.blend1
+*.blend2
+
+# Local OS files
+Thumbs.db
+.DS_Store
+
+# Other secrets
+*.key
+*.pem
+*credentials*
+
+# Logs and run output
+*.log
+*.err
+!art/vfx/assets/scripts/logs/
+
+# Blender autosave/temp and thumbnail caches
+*.blend@
+.thumbnails/
+
+# Interrupted-write temp copies (PID suffix, e.g. frame.png.48204)
+*.[0-9][0-9][0-9][0-9][0-9]
+
+# Python / Node
+__pycache__/
+*.pyc
+node_modules/
+.venv*/
+```

@@ -11,7 +11,8 @@ WIP = ROOT/'art/anim/wip'
 cards = []
 for info_path in sorted(WIP.glob('*/*/clip.json')):
     d = info_path.parent
-    if d.parent.name in ('hands', 'transitions'):   # hand close-ups join their clip's card; stitches get their own section
+    # hand close-ups join their clip's card; stitches (transitions/, locomotion8/, ...) get their own section
+    if d.parent.name in ('hands', 'transitions') or (d/'stitch.json').exists():
         continue
     info = json.loads(info_path.read_text())
     gifs = sorted(d.glob('*.gif'))+sorted((WIP/'hands'/d.name).glob('hands.gif'))
@@ -29,7 +30,7 @@ for info_path in sorted(WIP.glob('*/*/clip.json')):
 <div class="media">{media}</div></section>''')
 
 stitches = []
-for sj in sorted((WIP/'transitions').glob('*/stitch.json')):
+for sj in sorted(WIP.glob('*/*/stitch.json'), key=lambda q: (q.parent.parent.name != 'transitions', q.as_posix())):
     d = sj.parent
     s = json.loads(sj.read_text())
     rel = lambda p: p.relative_to(ROOT/'art/anim').as_posix()

@@ -1,0 +1,616 @@
+{
+ "HALO | independent copper arc 1": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 1",
+  "groups": [],
+  "mods": [
+   "BEVEL"
+  ],
+  "bbox": [
+   [
+    0.0247,
+    0.1122,
+    2.0112
+   ],
+   [
+    0.3675,
+    0.1878,
+    2.3238
+   ]
+  ],
+  "n": 464
+ },
+ "HALO | independent copper arc 2": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 2",
+  "groups": [],
+  "mods": [
+   "BEVEL"
+  ],
+  "bbox": [
+   [
+    0.1874,
+    0.1122,
+    1.5912
+   ],
+   [
+    0.3955,
+    0.1878,
+    1.9961
+   ]
+  ],
+  "n": 464
+ },
+ "HALO | independent copper arc 3": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 3",
+  "groups": [],
+  "mods": [
+   "BEVEL"
+  ],
+  "bbox": [
+   [
+    -0.4705,
+    0.1122,
+    1.5912
+   ],
+   [
+    -0.2624,
+    0.1878,
+    1.9961
+   ]
+  ],
+  "n": 464
+ },
+ "HALO | independent copper arc 4": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 4",
+  "groups": [],
+  "mods": [
+   "BEVEL"
+  ],
+  "bbox": [
+   [
+    -0.4425,
+    0.1122,
+    2.0112
+   ],
+   [
+    -0.0997,
+    0.1878,
+    2.3238
+   ]
+  ],
+  "n": 464
+ },
+ "HALO | V11 gap light left": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 3",
+  "groups": [],
+  "mods": [],
+  "bbox": [
+   [
+    -0.4419,
+    0.1235,
+    1.9874
+   ],
+   [
+    -0.3555,
+    0.1765,
+    2.0283
+   ]
+  ],
+  "n": 20
+ },
+ "HALO | V11 gap light right": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 2",
+  "groups": [],
+  "mods": [],
+  "bbox": [
+   [
+    0.2805,
+    0.1235,
+    1.9874
+   ],
+   [
+    0.3669,
+    0.1765,
+    2.0283
+   ]
+  ],
+  "n": 20
+ },
+ "HALO | V11 gap light top": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 1",
+  "groups": [],
+  "mods": [],
+  "bbox": [
+   [
+    -0.0552,
+    0.133,
+    2.2337
+   ],
+   [
+    -0.0198,
+    0.167,
+    2.319
+   ]
+  ],
+  "n": 20
+ },
+ "HALO | V11 shoulder inlay band L": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 2",
+  "groups": [],
+  "mods": [],
+  "bbox": [
+   [
+    0.2772,
+    0.1099,
+    1.7888
+   ],
+   [
+    0.3787,
+    0.1901,
+    1.8272
+   ]
+  ],
+  "n": 20
+ },
+ "HALO | V11 shoulder inlay band R": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "halo 3",
+  "groups": [],
+  "mods": [],
+  "bbox": [
+   [
+    -0.4537,
+    0.1099,
+    1.7888
+   ],
+   [
+    -0.3522,
+    0.1901,
+    1.8272
+   ]
+  ],
+  "n": 20
+ },
+ "HALO | V17 yoke bar": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "chest",
+  "groups": [],
+  "mods": [
+   "BEVEL"
+  ],
+  "bbox": [
+   [
+    -0.3404,
+    0.1377,
+    1.5938
+   ],
+   [
+    0.2653,
+    0.2027,
+    1.6313
+   ]
+  ],
+  "n": 112
+ },
+ "HALO | V17 yoke light": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "chest",
+  "groups": [],
+  "mods": [],
+  "bbox": [
+   [
+    -0.051,
+    0.197,
+    1.6075
+   ],
+   [
+    -0.029,
+    0.197,
+    1.6295
+   ]
+  ],
+  "n": 25
+ },
+ "HALO | V17 yoke strut": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "chest",
+  "groups": [],
+  "mods": [],
+  "bbox": [
+   [
+    -0.051,
+    0.1255,
+    1.5458
+   ],
+   [
+    -0.0272,
+    0.1866,
+    1.6254
+   ]
+  ],
+  "n": 12
+ },
+ "L BACK | small scapula shell": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "L scapula",
+  "groups": [],
+  "mods": [
+   "BEVEL"
+  ],
+  "bbox": [
+   [
+    0.0005,
+    0.0622,
+    1.523
+   ],
+   [
+    0.123,
+    0.131,
+    1.668
+   ]
+  ],
+  "n": 144
+ },
+ "L SHOULDER | V17 pauldron upper": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "OBJECT",
+  "pbone": "",
+  "groups": [
+   "L pauldron"
+  ],
+  "mods": [
+   "SOLIDIFY",
+   "BEVEL",
+   "ARMATURE"
+  ],
+  "bbox": [
+   [
+    0.1128,
+    -0.132,
+    1.5197
+   ],
+   [
+    0.4241,
+    0.18,
+    1.7675
+   ]
+  ],
+  "n": 410
+ },
+ "R BACK | small scapula shell": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "BONE",
+  "pbone": "R scapula",
+  "groups": [],
+  "mods": [
+   "BEVEL"
+  ],
+  "bbox": [
+   [
+    -0.198,
+    0.055,
+    1.523
+   ],
+   [
+    -0.0755,
+    0.1345,
+    1.668
+   ]
+  ],
+  "n": 144
+ },
+ "R SHOULDER | V17 pauldron upper": {
+  "parent": "Hollow Saint | v8 rig",
+  "ptype": "OBJECT",
+  "pbone": "",
+  "groups": [
+   "R pauldron"
+  ],
+  "mods": [
+   "SOLIDIFY",
+   "BEVEL",
+   "ARMATURE"
+  ],
+  "bbox": [
+   [
+    -0.485,
+    -0.1376,
+    1.5218
+   ],
+   [
+    -0.1784,
+    0.1856,
+    1.7726
+   ]
+  ],
+  "n": 410
+ },
+ "BONE halo root": {
+  "head": [
+   -0.0375,
+   0.15,
+   1.9
+  ],
+  "tail": [
+   -0.0375,
+   0.15,
+   2.02
+  ],
+  "parent": "chest",
+  "cons": []
+ },
+ "BONE halo 1": {
+  "head": [
+   0.1963,
+   0.15,
+   2.1674
+  ],
+  "tail": [
+   0.1963,
+   0.15,
+   2.3174
+  ],
+  "parent": "halo root",
+  "cons": []
+ },
+ "BONE halo 2": {
+  "head": [
+   0.2905,
+   0.15,
+   1.7932
+  ],
+  "tail": [
+   0.2905,
+   0.15,
+   1.9432
+  ],
+  "parent": "halo root",
+  "cons": []
+ },
+ "BONE halo 3": {
+  "head": [
+   -0.3655,
+   0.15,
+   1.7932
+  ],
+  "tail": [
+   -0.3655,
+   0.15,
+   1.9432
+  ],
+  "parent": "halo root",
+  "cons": []
+ },
+ "BONE halo 4": {
+  "head": [
+   -0.2713,
+   0.15,
+   2.1674
+  ],
+  "tail": [
+   -0.2713,
+   0.15,
+   2.3174
+  ],
+  "parent": "halo root",
+  "cons": []
+ },
+ "BONE L pauldron": {
+  "head": [
+   0.17,
+   0.0,
+   1.42
+  ],
+  "tail": [
+   0.2434,
+   0.0,
+   1.325
+  ],
+  "parent": "L scapula",
+  "cons": [
+   [
+    "COPY_ROTATION",
+    "Follow upper arm 40%",
+    0.4,
+    true
+   ]
+  ]
+ },
+ "BONE R pauldron": {
+  "head": [
+   -0.17,
+   0.0,
+   1.42
+  ],
+  "tail": [
+   -0.2434,
+   0.0,
+   1.325
+  ],
+  "parent": "R scapula",
+  "cons": [
+   [
+    "COPY_ROTATION",
+    "Follow upper arm 40%",
+    0.4,
+    true
+   ]
+  ]
+ },
+ "BONE L scapula": {
+  "head": [
+   0.14,
+   0.0,
+   1.48
+  ],
+  "tail": [
+   0.22,
+   0.0,
+   1.42
+  ],
+  "parent": "chest",
+  "cons": []
+ },
+ "BONE R scapula": {
+  "head": [
+   -0.14,
+   0.0,
+   1.48
+  ],
+  "tail": [
+   -0.22,
+   0.0,
+   1.42
+  ],
+  "parent": "chest",
+  "cons": []
+ },
+ "BONE chest": {
+  "head": [
+   0.0,
+   0.0,
+   1.36
+  ],
+  "tail": [
+   0.0,
+   0.0,
+   1.52
+  ],
+  "parent": "spine",
+  "cons": []
+ },
+ "BONE L shoulder": {
+  "head": [
+   0.17,
+   0.0,
+   1.42
+  ],
+  "tail": [
+   0.2465,
+   0.0,
+   1.321
+  ],
+  "parent": "chest",
+  "cons": [
+   [
+    "COPY_ROTATION",
+    "HS shoulder half follow",
+    0.5,
+    true
+   ]
+  ]
+ },
+ "BONE R shoulder": {
+  "head": [
+   -0.2436,
+   -0.0099,
+   1.4082
+  ],
+  "tail": [
+   -0.3122,
+   -0.0177,
+   1.3237
+  ],
+  "parent": "chest",
+  "cons": [
+   [
+    "COPY_ROTATION",
+    "HS shoulder half follow",
+    0.5,
+    true
+   ]
+  ]
+ },
+ "BONE L upperarm": {
+  "head": [
+   0.17,
+   0.0,
+   1.42
+  ],
+  "tail": [
+   0.34,
+   0.0,
+   1.2
+  ],
+  "parent": "chest",
+  "cons": []
+ },
+ "BONE R upperarm": {
+  "head": [
+   -0.2436,
+   -0.0099,
+   1.4082
+  ],
+  "tail": [
+   -0.3961,
+   -0.0271,
+   1.2204
+  ],
+  "parent": "chest",
+  "cons": []
+ },
+ "yoke in L pad bbox": [
+  28,
+  [
+   [
+    0.1599,
+    0.1377,
+    1.5938
+   ],
+   [
+    0.2653,
+    0.1779,
+    1.6233
+   ]
+  ]
+ ],
+ "arc2 lowest": [
+  0.2648,
+  0.1182,
+  1.5912
+ ],
+ "arc2 min dist to L pad": 0.0021,
+ "arc3 lowest": [
+  -0.3398,
+  0.1182,
+  1.5912
+ ],
+ "arc3 min dist to L pad": 0.3827,
+ "yoke in R pad bbox": [
+  36,
+  [
+   [
+    -0.3404,
+    0.1377,
+    1.5938
+   ],
+   [
+    -0.187,
+    0.1851,
+    1.6253
+   ]
+  ]
+ ],
+ "arc2 min dist to R pad": 0.3736,
+ "arc3 min dist to R pad": 0.0096
+}

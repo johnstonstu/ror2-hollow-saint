@@ -1,0 +1,2672 @@
+[
+  {
+    "title": "Run forward",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.9548,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "R3",
+    "ik_miss_frames": {},
+    "speed_mps": 6.0,
+    "meters_per_cycle": 4.0,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "seam_anchors": [
+      1,
+      10
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.7,
+        "lift": 0.04,
+        "push_mm": 7.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 87.5,
+      "R": 94.1
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0259,
+    "halo_clear_push_max_mm": 1.5,
+    "halo_clear_frames": 13,
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 6.8,
+      "R": 8.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.4
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "run",
+    "action": "HS_anim | Run forward"
+  },
+  {
+    "title": "Walk forward",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.9761,
+    "max_leg_extension_at": "L17",
+    "ik_miss_at": "L23",
+    "ik_miss_frames": {},
+    "speed_mps": 1.5,
+    "meters_per_cycle": 1.625,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.3,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 5.4,
+        "lift": 0.0,
+        "push_mm": 1.1,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 39.4,
+      "R": 66.4
+    },
+    "orient_infeasible": 4,
+    "halo_max_offset_m": 0.0141,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 1.1,
+      "R": 1.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.7
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "walk",
+    "action": "HS_anim | Walk forward"
+  },
+  {
+    "title": "Glide enter",
+    "frames": [
+      1,
+      13
+    ],
+    "loop": false,
+    "markers": {
+      "Push off": 3,
+      "Airborne": 5
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.9878,
+    "max_leg_extension_at": "L11",
+    "ik_miss_at": "L5",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 6.0,
+    "run_frame_start": 10,
+    "pad_follow_max": {
+      "L": {
+        "deg": 7.5,
+        "lift": 0.03,
+        "push_mm": 1.0,
+        "yield_min_k": 0.54,
+        "yield_frames": 11
+      },
+      "R": {
+        "deg": 10.7,
+        "lift": 0.04,
+        "push_mm": 4.6,
+        "yield_min_k": 0.19,
+        "yield_frames": 11
+      }
+    },
+    "orient_roll_max_deg": {
+      "R": 96.7,
+      "L": 75.7
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0308,
+    "body_pitch_max_deg": 14.92,
+    "body_pitch_mean_deg": 10.54,
+    "halo_clear_push_max_mm": 13.7,
+    "halo_clear_frames": 11,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 5.8,
+      "R": 6.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 30.3
+    },
+    "vfx_peak": {
+      "hs_glow": 1.0,
+      "hs_jet": 1.662,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.274,
+      "hs_jet_dir": 58.0
+    },
+    "bake_error_m": 3e-06,
+    "bake_error_deg": 0.0,
+    "module": "glide",
+    "action": "HS_anim | Glide enter"
+  },
+  {
+    "title": "Glide loop",
+    "frames": [
+      1,
+      33
+    ],
+    "loop": true,
+    "markers": {
+      "Hover high": 1,
+      "Hover low": 17
+    },
+    "ik_miss_m": 3e-05,
+    "max_leg_extension": 0.9784,
+    "max_leg_extension_at": "L3",
+    "ik_miss_at": "R7",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 8.7,
+    "meters_per_cycle": 11.6,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.6,
+        "lift": 0.04,
+        "push_mm": 1.3,
+        "yield_min_k": 0.0,
+        "yield_frames": 32
+      },
+      "R": {
+        "deg": 2.5,
+        "lift": 0.01,
+        "push_mm": 1.8,
+        "yield_min_k": 0.0,
+        "yield_frames": 32
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 102.4,
+      "R": 100.1
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0343,
+    "body_pitch_max_deg": 7.75,
+    "body_pitch_mean_deg": 6.73,
+    "halo_clear_push_max_mm": 34.9,
+    "halo_clear_frames": 25,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 1.1,
+      "R": 1.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 4.3
+    },
+    "vfx_peak": {
+      "hs_glow": 1.0,
+      "hs_jet": 1.19,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 28.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "glide",
+    "action": "HS_anim | Glide loop"
+  },
+  {
+    "title": "Glide exit",
+    "frames": [
+      1,
+      14
+    ],
+    "loop": false,
+    "markers": {
+      "Legs down": 5,
+      "L contact": 14
+    },
+    "ik_miss_m": 4e-05,
+    "max_leg_extension": 0.9784,
+    "max_leg_extension_at": "L3",
+    "ik_miss_at": "R11",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 8.7,
+    "run_frame_end": 1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.4,
+        "lift": 0.07,
+        "push_mm": 0.0,
+        "yield_min_k": 0.71,
+        "yield_frames": 9
+      },
+      "R": {
+        "deg": 7.0,
+        "lift": 0.02,
+        "push_mm": 7.9,
+        "yield_min_k": 0.41,
+        "yield_frames": 11
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 83.5,
+      "R": 99.3
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "body_pitch_max_deg": 19.43,
+    "body_pitch_mean_deg": 11.73,
+    "halo_clear_push_max_mm": 1.5,
+    "halo_clear_frames": 7,
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 6.8,
+      "R": 8.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 14.9
+    },
+    "vfx_peak": {
+      "hs_glow": 1.0,
+      "hs_jet": 1.072,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 28.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "glide",
+    "action": "HS_anim | Glide exit"
+  },
+  {
+    "title": "Jump",
+    "frames": [
+      1,
+      11
+    ],
+    "loop": false,
+    "markers": {
+      "Crouch": 3,
+      "Takeoff": 6
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.919,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R8",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "ends_in": "Ascend",
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.5,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      },
+      "R": {
+        "deg": 4.6,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 98.9,
+      "R": 109.6
+    },
+    "orient_infeasible": 2,
+    "halo_max_offset_m": 0.0259,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 14.8,
+      "R": 13.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 58.5
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Jump"
+  },
+  {
+    "title": "Ascend",
+    "frames": [
+      1,
+      21
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9067,
+    "max_leg_extension_at": "R8",
+    "ik_miss_at": "L20",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "pad_follow_max": {
+      "L": {
+        "deg": 2.3,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 2.0,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 38.7,
+      "R": 35.6
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0116,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.8,
+      "R": 0.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 1.4
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Ascend"
+  },
+  {
+    "title": "Descend",
+    "frames": [
+      1,
+      21
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.795,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "R9",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "pad_follow_max": {
+      "L": {
+        "deg": 2.9,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 2.6,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 40.1,
+      "R": 37.5
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0161,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.5,
+      "R": 0.5
+    },
+    "halo_pop_mm_f2": {
+      "ring": 2.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Descend"
+  },
+  {
+    "title": "Land",
+    "frames": [
+      1,
+      15
+    ],
+    "loop": false,
+    "markers": {
+      "L touch": 2,
+      "R touch": 4,
+      "Compress": 6,
+      "Recovered": 15
+    },
+    "ik_miss_m": 9e-05,
+    "max_leg_extension": 0.919,
+    "max_leg_extension_at": "L15",
+    "ik_miss_at": "R7",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "speed_mps": 0.0,
+    "starts_from": "Descend",
+    "ends_in": "Stand",
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.5,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 13
+      },
+      "R": {
+        "deg": 4.6,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 13
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 52.8,
+      "R": 58.6
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 5.0,
+    "halo_clear_frames": 11,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 9.1,
+      "R": 9.5
+    },
+    "halo_pop_mm_f2": {
+      "ring": 26.1
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Land"
+  },
+  {
+    "title": "Run backward",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 9e-05,
+    "max_leg_extension": 0.93,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R2",
+    "ik_miss_frames": {},
+    "direction": "backward",
+    "speed_mps": 4.25,
+    "meters_per_cycle": 2.833,
+    "stance": 0.23,
+    "kind": "locomotion",
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.2,
+        "lift": 0.11,
+        "push_mm": 0.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 8.6,
+        "lift": 0.07,
+        "push_mm": 1.7,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 61.4,
+      "R": 57.6
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.54,
+    "min_ankle_gap_x_m": 0.4593,
+    "min_knee_gap_x_m": 0.3582,
+    "halo_max_offset_m": 0.0136,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 7.5,
+      "R": 7.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 7.5
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "run_dirs",
+    "action": "HS_anim | Run backward"
+  },
+  {
+    "title": "Run left",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9195,
+    "max_leg_extension_at": "R12",
+    "ik_miss_at": "R1",
+    "ik_miss_frames": {},
+    "direction": "left",
+    "speed_mps": 4.5,
+    "meters_per_cycle": 3.0,
+    "stance": 0.15,
+    "kind": "locomotion",
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.7,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 8.8,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 42.6
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 4,
+    "min_ball_gap_x_m": 0.2935,
+    "min_ankle_gap_x_m": 0.202,
+    "min_knee_gap_x_m": 0.4378,
+    "halo_max_offset_m": 0.0205,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 2.2,
+      "R": 2.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.2
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "run_dirs",
+    "action": "HS_anim | Run left"
+  },
+  {
+    "title": "Run right",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.906,
+    "max_leg_extension_at": "R9",
+    "ik_miss_at": "R1",
+    "ik_miss_frames": {},
+    "direction": "right",
+    "speed_mps": 4.5,
+    "meters_per_cycle": 3.0,
+    "stance": 0.15,
+    "kind": "locomotion",
+    "pad_follow_max": {
+      "L": {
+        "deg": 8.4,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 4.9,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 0.2,
+      "R": 27.4
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 2e-05,
+    "direction_slide_pairs": 4,
+    "min_ball_gap_x_m": 0.2935,
+    "min_ankle_gap_x_m": 0.2062,
+    "min_knee_gap_x_m": 0.4355,
+    "halo_max_offset_m": 0.0201,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 2.3,
+      "R": 2.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "run_dirs",
+    "action": "HS_anim | Run right"
+  },
+  {
+    "title": "Arc Bolt right",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "Anticipation": 3,
+      "Bolt release": 5,
+      "Recovered": 20
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "hand": "R",
+    "muzzle": "R muzzle",
+    "finger_accents": [
+      3,
+      5
+    ],
+    "arm_release": {
+      "swing": -71.88,
+      "adduct": 11.25,
+      "wx": 18.38,
+      "wy": -14.88
+    },
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 6.6,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 15.9,
+        "lift": 0.45,
+        "push_mm": 14.1,
+        "yield_min_k": 0.85,
+        "yield_frames": 8
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 10.6,
+      "R": 34.8
+    },
+    "orient_infeasible": 0,
+    "muzzle_release_pos": [
+      -0.241,
+      -0.924,
+      1.359
+    ],
+    "muzzle_release_dir": [
+      -0.0,
+      -1.0,
+      0.001
+    ],
+    "muzzle_release_angle_to_-Y_deg": 0.06,
+    "start_rest_err_m": 0.09226,
+    "end_rest_err_m": 0.09226,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 2.0,
+      "R": 14.5
+    },
+    "halo_pop_mm_f2": {
+      "ring": 46.8
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Arc Bolt right"
+  },
+  {
+    "title": "Arc Bolt left",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "Anticipation": 3,
+      "Bolt release": 5,
+      "Recovered": 20
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "hand": "L",
+    "muzzle": "L muzzle",
+    "finger_accents": [
+      3,
+      5
+    ],
+    "arm_release": {
+      "swing": -77.38,
+      "adduct": 5.25,
+      "wx": 14.25,
+      "wy": -17.25
+    },
+    "pad_follow_max": {
+      "L": {
+        "deg": 19.3,
+        "lift": 0.53,
+        "push_mm": 1.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 11.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 31.4,
+      "R": 12.4
+    },
+    "orient_infeasible": 0,
+    "muzzle_release_pos": [
+      0.241,
+      -0.91,
+      1.361
+    ],
+    "muzzle_release_dir": [
+      -0.001,
+      -1.0,
+      -0.0
+    ],
+    "muzzle_release_angle_to_-Y_deg": 0.03,
+    "start_rest_err_m": 0.092165,
+    "end_rest_err_m": 0.092165,
+    "halo_clear_push_max_mm": 1.0,
+    "halo_clear_frames": 10,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 25.8,
+      "R": 3.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 46.7
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Arc Bolt left"
+  },
+  {
+    "title": "Aim neutral",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": 0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim neutral"
+  },
+  {
+    "title": "Aim up",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 66,
+    "yaw_left_deg": 0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 15.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 16.7,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 0.1,
+      "R": 0.1
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim up"
+  },
+  {
+    "title": "Aim down",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": -66,
+    "yaw_left_deg": 0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 21.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 21.6,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 33.5,
+      "R": 41.0
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim down"
+  },
+  {
+    "title": "Aim left",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": 66,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim left"
+  },
+  {
+    "title": "Aim right",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": -66,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim right"
+  },
+  {
+    "title": "Arc Step start",
+    "frames": [
+      1,
+      7
+    ],
+    "loop": false,
+    "markers": {
+      "Dash start": 7
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "L4",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step end",
+      16
+    ],
+    "seam_to": [
+      "Arc Step loop",
+      1
+    ],
+    "finger_accents": [
+      4
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 6.6,
+        "lift": 0.09,
+        "push_mm": 1.1,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      },
+      "R": {
+        "deg": 6.3,
+        "lift": 0.06,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 103.9,
+      "R": 111.1
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "start_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 62.4,
+    "halo_clear_frames": 6,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 24.5,
+      "R": 29.4
+    },
+    "halo_pop_mm_f2": {
+      "ring": 77.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep",
+    "action": "HS_anim | Arc Step start"
+  },
+  {
+    "title": "Arc Step loop",
+    "frames": [
+      1,
+      11
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.985,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "L7",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "dash_distance_m": [
+      8,
+      12
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 4.5,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 1.4,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 104.7,
+      "R": 112.4
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 87.7,
+    "halo_clear_frames": 10,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 1.6,
+      "R": 1.2
+    },
+    "halo_pop_mm_f2": {
+      "ring": 35.2
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep",
+    "action": "HS_anim | Arc Step loop"
+  },
+  {
+    "title": "Arc Step end",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "Arrive": 5,
+      "Recovered": 14
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "R7",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step loop",
+      1
+    ],
+    "seam_to": [
+      "Arc Step start",
+      1
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.3,
+        "lift": 0.14,
+        "push_mm": 1.1,
+        "yield_min_k": 0.0,
+        "yield_frames": 14
+      },
+      "R": {
+        "deg": 7.9,
+        "lift": 0.1,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 13
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 102.6,
+      "R": 108.1
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0214,
+    "end_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 62.4,
+    "halo_clear_frames": 14,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 45.4,
+      "R": 38.2
+    },
+    "halo_pop_mm_f2": {
+      "ring": 48.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep",
+    "action": "HS_anim | Arc Step end"
+  },
+  {
+    "title": "Charge loop",
+    "frames": [
+      1,
+      41
+    ],
+    "loop": true,
+    "markers": {
+      "Pulse high": 11,
+      "Pulse low": 31
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.4,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 9.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "R": 6.2
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 32.6,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 1.1,
+      "R": 1.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      3.28,
+      "R hand",
+      1
+    ],
+    "max_ang_acc_deg_f2": [
+      3.05,
+      "R hand",
+      8
+    ],
+    "max_pos_acc_mm_f2": [
+      20.06,
+      "halo 4",
+      23
+    ],
+    "arc_signed_min_mm": 17.4,
+    "arc_signed_frame": 31,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 214.5,
+    "hand_chest_frame": 28,
+    "pauldron_follow_err_deg": 8.42,
+    "arm_solves": {
+      "charge": {
+        "arms": {
+          "L": {
+            "swing": 12.0,
+            "adduct": 20.62,
+            "elbow": 86.0,
+            "ftwist": 27.75,
+            "wx": -24.5,
+            "wy": -12.38,
+            "wz": -12.88,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 24.0,
+            "adduct": 16.38,
+            "elbow": 85.88,
+            "ftwist": 10.62,
+            "wx": -32.12,
+            "wy": 1.0,
+            "wz": -25.38,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.1,
+            "wrist_mm": 8.6,
+            "palm_deg": 28.7,
+            "score": 3.721
+          },
+          "R": {
+            "miss_mm": 0.0,
+            "wrist_mm": 5.7,
+            "palm_deg": 29.6,
+            "score": 3.42
+          }
+        }
+      },
+      "charge_wide": {
+        "arms": {
+          "L": {
+            "swing": 12.88,
+            "adduct": 15.12,
+            "elbow": 89.88,
+            "ftwist": 28.38,
+            "wx": -18.12,
+            "wy": -11.0,
+            "wz": -5.0,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 24.25,
+            "adduct": 10.75,
+            "elbow": 87.0,
+            "ftwist": 19.0,
+            "wx": -26.94,
+            "wy": -11.0,
+            "wz": -18.25,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.3,
+            "wrist_mm": 7.2,
+            "palm_deg": 23.0,
+            "score": 2.783
+          },
+          "R": {
+            "miss_mm": 0.1,
+            "wrist_mm": 12.6,
+            "palm_deg": 21.0,
+            "score": 3.126
+          }
+        }
+      },
+      "charge_full": {
+        "arms": {
+          "L": {
+            "swing": -0.38,
+            "adduct": 3.19,
+            "elbow": 94.88,
+            "ftwist": 8.56,
+            "wx": -6.56,
+            "wy": -7.94,
+            "wz": -20.69,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 16.62,
+            "adduct": -7.62,
+            "elbow": 97.25,
+            "ftwist": 9.5,
+            "wx": -17.88,
+            "wy": -9.38,
+            "wz": -9.38,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.1,
+            "wrist_mm": 8.7,
+            "palm_deg": 45.8,
+            "score": 5.735
+          },
+          "R": {
+            "miss_mm": 0.3,
+            "wrist_mm": 17.8,
+            "palm_deg": 39.7,
+            "score": 5.137
+          }
+        }
+      },
+      "charge_full_wide": {
+        "arms": {
+          "L": {
+            "swing": -1.31,
+            "adduct": -4.62,
+            "elbow": 92.19,
+            "ftwist": 6.94,
+            "wx": -3.62,
+            "wy": -11.06,
+            "wz": -19.38,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 13.94,
+            "adduct": -17.19,
+            "elbow": 88.25,
+            "ftwist": 10.88,
+            "wx": -20.94,
+            "wy": -21.12,
+            "wz": -13.94,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.3,
+            "wrist_mm": 0.3,
+            "palm_deg": 41.8,
+            "score": 4.268
+          },
+          "R": {
+            "miss_mm": 0.1,
+            "wrist_mm": 4.8,
+            "palm_deg": 40.0,
+            "score": 4.204
+          }
+        }
+      },
+      "gather": {
+        "arms": {
+          "L": {
+            "swing": -16.38,
+            "adduct": 46.0,
+            "elbow": 100.62,
+            "ftwist": 47.94,
+            "wx": -39.31,
+            "wy": -3.75,
+            "wz": -33.94,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": -14.25,
+            "adduct": 50.0,
+            "elbow": 86.19,
+            "ftwist": 53.38,
+            "wx": -58.88,
+            "wy": -31.62,
+            "wz": -42.94,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 19.4,
+            "wrist_mm": 48.0,
+            "palm_deg": 41.3,
+            "score": 14.035
+          },
+          "R": {
+            "miss_mm": 9.1,
+            "wrist_mm": 71.6,
+            "palm_deg": 41.8,
+            "score": 16.847
+          }
+        }
+      },
+      "release": {
+        "arms": {
+          "L": {
+            "swing": 6.75,
+            "adduct": -30.38,
+            "elbow": 35.0,
+            "ftwist": -44.19,
+            "wx": 23.56,
+            "wy": -46.0,
+            "wz": 34.56,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 21.12,
+            "adduct": -36.94,
+            "elbow": 31.62,
+            "ftwist": -55.88,
+            "wx": 9.69,
+            "wy": -33.88,
+            "wz": 33.19,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.3,
+            "wrist_mm": 2.7,
+            "palm_deg": 6.8,
+            "score": 4.316,
+            "palm_raw_deg": 6.8,
+            "finger_deg": 0.9
+          },
+          "R": {
+            "miss_mm": 1.9,
+            "wrist_mm": 3.5,
+            "palm_deg": 7.8,
+            "score": 3.522,
+            "palm_raw_deg": 7.8,
+            "finger_deg": 1.0
+          }
+        }
+      },
+      "frame": {
+        "arms": {
+          "L": {
+            "swing": -19.44,
+            "adduct": 43.31,
+            "elbow": 130.0,
+            "ftwist": 106.31,
+            "wx": -11.44,
+            "wy": -18.0,
+            "wz": -19.5,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 12.12,
+            "adduct": -55.44,
+            "elbow": 131.0,
+            "ftwist": 73.31,
+            "wx": 33.62,
+            "wy": -14.62,
+            "wz": -9.88,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.0,
+            "wrist_mm": 5.7,
+            "palm_deg": 26.8,
+            "score": 5.155,
+            "palm_raw_deg": 48.7,
+            "finger_deg": 2.5
+          },
+          "R": {
+            "miss_mm": 0.3,
+            "wrist_mm": 58.2,
+            "palm_deg": 17.3,
+            "score": 9.769,
+            "palm_raw_deg": 56.6,
+            "finger_deg": 24.9
+          }
+        }
+      },
+      "spread": {
+        "arms": {
+          "L": {
+            "swing": -0.69,
+            "adduct": -27.19,
+            "elbow": 35.69,
+            "ftwist": -51.0,
+            "wx": -6.5,
+            "wy": -24.19,
+            "wz": 11.12,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 12.62,
+            "adduct": -33.31,
+            "elbow": 32.81,
+            "ftwist": -57.75,
+            "wx": -22.44,
+            "wy": -16.75,
+            "wz": 8.69,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.1,
+            "wrist_mm": 1.6,
+            "palm_deg": 26.2,
+            "score": 3.612
+          },
+          "R": {
+            "miss_mm": 1.5,
+            "wrist_mm": 1.8,
+            "palm_deg": 26.4,
+            "score": 3.674
+          }
+        }
+      },
+      "hold": {
+        "arms": {
+          "L": {
+            "swing": 3.62,
+            "adduct": -6.75,
+            "elbow": 42.44,
+            "ftwist": -48.88,
+            "wx": 13.81,
+            "wy": -19.19,
+            "wz": 24.31,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 12.06,
+            "adduct": -10.75,
+            "elbow": 39.56,
+            "ftwist": -52.81,
+            "wx": 1.44,
+            "wy": -9.0,
+            "wz": 18.88,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.4,
+            "wrist_mm": 1.5,
+            "palm_deg": 19.9,
+            "score": 3.86
+          },
+          "R": {
+            "miss_mm": 1.9,
+            "wrist_mm": 1.9,
+            "palm_deg": 19.9,
+            "score": 3.344
+          }
+        }
+      },
+      "recall": {
+        "arms": {
+          "L": {
+            "swing": -5.56,
+            "adduct": 39.25,
+            "elbow": 99.25,
+            "ftwist": 43.38,
+            "wx": -28.12,
+            "wy": 0.75,
+            "wz": -28.0,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 1.31,
+            "adduct": 40.0,
+            "elbow": 92.19,
+            "ftwist": 51.38,
+            "wx": -46.06,
+            "wy": -10.19,
+            "wz": -35.94,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 20.0,
+            "wrist_mm": 26.7,
+            "palm_deg": 35.1,
+            "score": 10.206
+          },
+          "R": {
+            "miss_mm": 20.3,
+            "wrist_mm": 32.1,
+            "palm_deg": 36.0,
+            "score": 11.641
+          }
+        }
+      }
+    },
+    "module": "special",
+    "action": "HS_anim | Charge loop"
+  },
+  {
+    "title": "Charge full",
+    "frames": [
+      1,
+      25
+    ],
+    "loop": true,
+    "markers": {
+      "Pulse high": 7
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "seam_anchors": [],
+    "pad_follow_max": {
+      "L": {
+        "deg": 1.2,
+        "lift": 0.0,
+        "push_mm": 3.6,
+        "yield_min_k": 0.0,
+        "yield_frames": 22
+      },
+      "R": {
+        "deg": 4.8,
+        "lift": 0.04,
+        "push_mm": 5.2,
+        "yield_min_k": 0.0,
+        "yield_frames": 24
+      }
+    },
+    "orient_roll_max_deg": {},
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 54.6,
+    "halo_clear_push_max_mm": 10.9,
+    "halo_clear_frames": 24,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 5.1,
+      "R": 3.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.6
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      6.63,
+      "R hand",
+      9
+    ],
+    "max_ang_acc_deg_f2": [
+      12.78,
+      "R forearm",
+      3
+    ],
+    "max_pos_acc_mm_f2": [
+      116.91,
+      "halo 4",
+      10
+    ],
+    "arc_signed_min_mm": 4.0,
+    "arc_signed_frame": 8,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 260.0,
+    "hand_chest_frame": 15,
+    "pauldron_follow_err_deg": 7.7,
+    "module": "special",
+    "action": "HS_anim | Charge full"
+  },
+  {
+    "title": "Discharge",
+    "frames": [
+      1,
+      28
+    ],
+    "loop": false,
+    "markers": {
+      "Gather": 5,
+      "Release": 9,
+      "Recovered": 28
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "socket_release": [
+      "L muzzle",
+      "R muzzle",
+      "core socket"
+    ],
+    "finger_accents": [
+      9
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 22.9,
+        "lift": 0.27,
+        "push_mm": 17.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 24.4,
+        "lift": 0.36,
+        "push_mm": 10.7,
+        "yield_min_k": 0.0,
+        "yield_frames": 14
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 19.3,
+      "R": 17.7
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 75.5,
+    "start_rest_err_m": 0.094162,
+    "end_rest_err_m": 0.094162,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 70.5,
+      "R": 90.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 41.5
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      61.32,
+      "R forearm",
+      8
+    ],
+    "max_ang_acc_deg_f2": [
+      62.31,
+      "L hand",
+      7
+    ],
+    "max_pos_acc_mm_f2": [
+      489.23,
+      "halo 1",
+      9
+    ],
+    "arc_signed_min_mm": 7.9,
+    "arc_signed_frame": 16,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 148.4,
+    "hand_chest_frame": 7,
+    "pauldron_follow_err_deg": 19.44,
+    "module": "special",
+    "action": "HS_anim | Discharge"
+  },
+  {
+    "title": "Open Circuit",
+    "frames": [
+      1,
+      30
+    ],
+    "loop": false,
+    "markers": {
+      "Unfold": 6,
+      "Crown active": 22
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "seam_to": [
+      "Open Circuit hold",
+      1
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 21.5,
+        "lift": 0.22,
+        "push_mm": 13.3,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 27.1,
+        "lift": 0.65,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 25.9,
+      "R": 59.9
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 93.6,
+    "start_rest_err_m": 0.094162,
+    "end_rest_err_m": 0.530544,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 9.0,
+      "R": 9.5
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.4
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      69.89,
+      "R forearm",
+      5
+    ],
+    "max_ang_acc_deg_f2": [
+      80.16,
+      "R forearm",
+      5
+    ],
+    "max_pos_acc_mm_f2": [
+      71.54,
+      "R hand",
+      2
+    ],
+    "arc_signed_min_mm": 19.3,
+    "arc_signed_frame": 5,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 109.4,
+    "hand_chest_frame": 12,
+    "pauldron_follow_err_deg": 17.11,
+    "module": "special",
+    "action": "HS_anim | Open Circuit"
+  },
+  {
+    "title": "Open Circuit hold",
+    "frames": [
+      1,
+      25
+    ],
+    "loop": true,
+    "markers": {
+      "Pulse": 1
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.4,
+        "lift": 0.04,
+        "push_mm": 2.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 7.5,
+        "lift": 0.07,
+        "push_mm": 2.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 2.8,
+      "R": 0.2
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 53.9,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 1.3,
+      "R": 1.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      2.68,
+      "R hand",
+      20
+    ],
+    "max_ang_acc_deg_f2": [
+      3.1,
+      "L hand",
+      22
+    ],
+    "max_pos_acc_mm_f2": [
+      7.52,
+      "halo 3",
+      18
+    ],
+    "arc_signed_min_mm": 9000.0,
+    "arc_signed_frame": 0,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 382.6,
+    "hand_chest_frame": 19,
+    "pauldron_follow_err_deg": 4.19,
+    "module": "special",
+    "action": "HS_anim | Open Circuit hold"
+  },
+  {
+    "title": "Open Circuit end",
+    "frames": [
+      1,
+      22
+    ],
+    "loop": false,
+    "markers": {
+      "Recall": 3,
+      "Recovered": 22
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "seam_from": [
+      "Open Circuit hold",
+      1
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 19.6,
+        "lift": 0.02,
+        "push_mm": 5.8,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 19.9,
+        "lift": 0.04,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 36.3,
+      "R": 34.1
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 50.6,
+    "start_rest_err_m": 0.530544,
+    "end_rest_err_m": 0.094162,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 8.4,
+      "R": 9.2
+    },
+    "halo_pop_mm_f2": {
+      "ring": 6.2
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      27.47,
+      "L forearm",
+      16
+    ],
+    "max_ang_acc_deg_f2": [
+      23.99,
+      "R forearm",
+      18
+    ],
+    "max_pos_acc_mm_f2": [
+      59.03,
+      "halo 1",
+      8
+    ],
+    "arc_signed_min_mm": 18.1,
+    "arc_signed_frame": 18,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 180.6,
+    "hand_chest_frame": 10,
+    "pauldron_follow_err_deg": 15.93,
+    "module": "special",
+    "action": "HS_anim | Open Circuit end"
+  },
+  {
+    "title": "Idle",
+    "frames": [
+      1,
+      97
+    ],
+    "loop": true,
+    "markers": {
+      "Inhale": 1,
+      "Twitch L": 30,
+      "Glance": 58,
+      "Twitch R": 78
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9193,
+    "max_leg_extension_at": "L4",
+    "ik_miss_at": "R71",
+    "ik_miss_frames": {},
+    "kind": "idle",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Land",
+      15
+    ],
+    "seam_to": [
+      "Jump",
+      1
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.3,
+        "lift": 0.0,
+        "push_mm": 0.9,
+        "yield_min_k": 0.88,
+        "yield_frames": 14
+      },
+      "R": {
+        "deg": 5.1,
+        "lift": 0.0,
+        "push_mm": 1.9,
+        "yield_min_k": 0.0,
+        "yield_frames": 24
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 53.5,
+      "R": 55.8
+    },
+    "orient_infeasible": 22,
+    "halo_max_offset_m": 0.0145,
+    "max_arm_raise_deg": 33.6,
+    "max_knee_out_m": 0.0273,
+    "pop_body_deg_f2": [
+      [
+        7.6,
+        "R forearm",
+        33
+      ],
+      [
+        7.51,
+        "R forearm",
+        44
+      ],
+      [
+        4.25,
+        "R forearm",
+        34
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      9.89,
+      "R little.2",
+      75
+    ],
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.3,
+      "R": 2.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.2
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Idle"
+  },
+  {
+    "title": "Idle combat",
+    "frames": [
+      1,
+      49
+    ],
+    "loop": true,
+    "markers": {
+      "Inhale": 1
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.852,
+    "max_leg_extension_at": "R31",
+    "ik_miss_at": "R18",
+    "ik_miss_frames": {},
+    "kind": "idle",
+    "speed_mps": 0.0,
+    "hand": "R",
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 48
+      },
+      "R": {
+        "deg": 6.7,
+        "lift": 0.01,
+        "push_mm": 25.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 65.6
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0176,
+    "max_arm_raise_deg": 44.7,
+    "max_knee_out_m": 0.0763,
+    "pop_body_deg_f2": [
+      [
+        1.86,
+        "halo 3",
+        3
+      ],
+      [
+        1.76,
+        "halo 1",
+        7
+      ],
+      [
+        1.73,
+        "halo 3",
+        16
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      4.51,
+      "R middle.2",
+      7
+    ],
+    "halo_clear_push_max_mm": 21.5,
+    "halo_clear_frames": 48,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.9
+    },
+    "halo_pop_mm_f2": {
+      "ring": 1.8
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Idle combat"
+  },
+  {
+    "title": "Spawn",
+    "frames": [
+      1,
+      72
+    ],
+    "loop": false,
+    "markers": {
+      "Awaken": 13,
+      "Halo lit": 38,
+      "Ready": 60
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.919,
+    "max_leg_extension_at": "L40",
+    "ik_miss_at": "R27",
+    "ik_miss_frames": {},
+    "kind": "presentation",
+    "speed_mps": 0.0,
+    "seam_to": [
+      "Idle",
+      1
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.0,
+        "lift": 0.0,
+        "push_mm": 9.5,
+        "yield_min_k": 0.0,
+        "yield_frames": 15
+      },
+      "R": {
+        "deg": 4.6,
+        "lift": 0.0,
+        "push_mm": 25.7,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "L": 87.8,
+      "R": 83.4
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0107,
+    "halo_capped_frames": 0,
+    "max_arm_raise_deg": 41.1,
+    "max_knee_out_m": 0.0284,
+    "pop_body_deg_f2": [
+      [
+        7.12,
+        "halo 1",
+        41
+      ],
+      [
+        6.74,
+        "halo 1",
+        45
+      ],
+      [
+        6.71,
+        "halo 4",
+        47
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      6.72,
+      "L little.2",
+      17
+    ],
+    "halo_clear_push_max_mm": 9.1,
+    "halo_clear_frames": 34,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 2.3,
+      "R": 0.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 6.9
+    },
+    "bake_error_m": 3e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Spawn"
+  },
+  {
+    "title": "Select idle",
+    "frames": [
+      1,
+      97
+    ],
+    "loop": true,
+    "markers": {
+      "Inhale": 1
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9174,
+    "max_leg_extension_at": "L62",
+    "ik_miss_at": "R69",
+    "ik_miss_frames": {},
+    "kind": "presentation",
+    "speed_mps": 0.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.7,
+        "lift": 0.04,
+        "push_mm": 9.5,
+        "yield_min_k": 0.0,
+        "yield_frames": 48
+      },
+      "R": {
+        "deg": 3.5,
+        "lift": 0.01,
+        "push_mm": 1.6,
+        "yield_min_k": 0.0,
+        "yield_frames": 50
+      }
+    },
+    "orient_roll_max_deg": {},
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0086,
+    "max_arm_raise_deg": 48.4,
+    "max_knee_out_m": 0.0277,
+    "pop_body_deg_f2": [
+      [
+        1.19,
+        "R hand",
+        65
+      ],
+      [
+        1.16,
+        "L hand",
+        19
+      ],
+      [
+        1.11,
+        "halo 3",
+        68
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      10.42,
+      "R little.1",
+      67
+    ],
+    "halo_clear_push_max_mm": 8.9,
+    "halo_clear_frames": 94,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 2.3,
+      "R": 3.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.7
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Select idle"
+  },
+  {
+    "title": "Select intro",
+    "frames": [
+      1,
+      44
+    ],
+    "loop": false,
+    "markers": {
+      "Snap": 13,
+      "Halo flare": 15,
+      "Settled": 44
+    },
+    "ik_miss_m": 4e-05,
+    "max_leg_extension": 0.9106,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "L1",
+    "ik_miss_frames": {},
+    "kind": "presentation",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Select idle",
+      1
+    ],
+    "seam_to": [
+      "Select idle",
+      1
+    ],
+    "finger_accents": [
+      10,
+      13
+    ],
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.4,
+        "lift": 0.04,
+        "push_mm": 8.8,
+        "yield_min_k": 0.0,
+        "yield_frames": 18
+      },
+      "R": {
+        "deg": 9.0,
+        "lift": 0.12,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "orient_roll_max_deg": {
+      "R": 16.3
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0096,
+    "halo_capped_frames": 0,
+    "max_arm_raise_deg": 58.9,
+    "max_knee_out_m": 0.0265,
+    "pop_body_deg_f2": [
+      [
+        30.26,
+        "R forearm",
+        10
+      ],
+      [
+        21.48,
+        "R forearm",
+        9
+      ],
+      [
+        17.02,
+        "R forearm",
+        11
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      13.88,
+      "R middle.2",
+      10
+    ],
+    "halo_clear_push_max_mm": 25.2,
+    "halo_clear_frames": 17,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 2.4,
+      "R": 1.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.6
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Select intro"
+  }
+]

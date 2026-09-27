@@ -1,0 +1,354 @@
+[
+ {
+  "title": "Arc Step start",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.09,
+   "worst_palm_fwd": -0.12
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.06,
+   "worst_palm_fwd": -0.09
+  },
+  "hand_ok": true,
+  "hand_pop": 5.33,
+  "pen": 0.1,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {
+   "L": 103.9,
+   "R": 111.1
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0802,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 6.6,
+    "lift": 0.09,
+    "push_mm": 1.1,
+    "yield_min_k": 0.0,
+    "yield_frames": 6
+   },
+   "R": {
+    "deg": 6.3,
+    "lift": 0.06,
+    "push_mm": 0.0,
+    "yield_min_k": 0.0,
+    "yield_frames": 6
+   }
+  },
+  "halo_clear": 62.4,
+  "pad_pop": {
+   "L": 24.5,
+   "R": 29.4
+  },
+  "halo_pop": {
+   "ring": 77.0
+  },
+  "seam": {
+   "seam_from": [
+    "Arc Step end",
+    16
+   ],
+   "seam_to": [
+    "Arc Step loop",
+    1
+   ]
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Arc Step loop",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.11,
+   "worst_palm_fwd": 0.1
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.11,
+   "worst_palm_fwd": 0.19
+  },
+  "hand_ok": true,
+  "hand_pop": 5.63,
+  "pen": 0.0,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {
+   "L": 110.4,
+   "R": 112.4
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.1925,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 0.0,
+    "lift": 0.0,
+    "push_mm": 4.5,
+    "yield_min_k": 0.0,
+    "yield_frames": 10
+   },
+   "R": {
+    "deg": 0.0,
+    "lift": 0.0,
+    "push_mm": 1.4,
+    "yield_min_k": 0.0,
+    "yield_frames": 10
+   }
+  },
+  "halo_clear": 87.7,
+  "pad_pop": {
+   "L": 1.6,
+   "R": 1.2
+  },
+  "halo_pop": {
+   "ring": 35.2
+  },
+  "seam": {
+   "seam_from": null,
+   "seam_to": null
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Arc Step end",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.17,
+   "worst_palm_fwd": -0.02
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.12,
+   "worst_palm_fwd": -0.02
+  },
+  "hand_ok": true,
+  "hand_pop": 11.67,
+  "pen": 0.1,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {
+   "L": 102.6,
+   "R": 108.1
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0802,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 9.3,
+    "lift": 0.14,
+    "push_mm": 1.1,
+    "yield_min_k": 0.0,
+    "yield_frames": 14
+   },
+   "R": {
+    "deg": 7.9,
+    "lift": 0.1,
+    "push_mm": 0.0,
+    "yield_min_k": 0.0,
+    "yield_frames": 13
+   }
+  },
+  "halo_clear": 62.4,
+  "pad_pop": {
+   "L": 45.4,
+   "R": 38.2
+  },
+  "halo_pop": {
+   "ring": 48.0
+  },
+  "seam": {
+   "seam_from": [
+    "Arc Step loop",
+    1
+   ],
+   "seam_to": [
+    "Arc Step start",
+    1
+   ]
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Run backward",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.19,
+   "worst_palm_fwd": -0.14
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.24,
+   "worst_palm_fwd": -0.05
+  },
+  "hand_ok": true,
+  "hand_pop": 0.0,
+  "pen": 0.0,
+  "contact_mm": 0.0,
+  "arm_clear_ok": true,
+  "roll": {
+   "L": 61.4,
+   "R": 57.6
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.1506,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 9.2,
+    "lift": 0.11,
+    "push_mm": 0.9,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   },
+   "R": {
+    "deg": 8.6,
+    "lift": 0.07,
+    "push_mm": 1.7,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   }
+  },
+  "halo_clear": 0.0,
+  "pad_pop": {
+   "L": 7.5,
+   "R": 7.6
+  },
+  "halo_pop": {
+   "ring": 7.5
+  },
+  "seam": {
+   "seam_from": null,
+   "seam_to": null
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Run left",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": null,
+   "worst_palm_fwd": null
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": null,
+   "worst_palm_fwd": null
+  },
+  "hand_ok": true,
+  "hand_pop": 0.0,
+  "pen": 0.0,
+  "contact_mm": 0.0,
+  "arm_clear_ok": true,
+  "roll": {
+   "L": 50.6
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0274,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 4.3,
+    "lift": 0.0,
+    "push_mm": 0.0,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   },
+   "R": {
+    "deg": 9.7,
+    "lift": 0.0,
+    "push_mm": 0.0,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   }
+  },
+  "halo_clear": 0.0,
+  "pad_pop": {
+   "L": 2.1,
+   "R": 2.3
+  },
+  "halo_pop": {
+   "ring": 10.2
+  },
+  "seam": {
+   "seam_from": null,
+   "seam_to": null
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Run right",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": null,
+   "worst_palm_fwd": null
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": null,
+   "worst_palm_fwd": null
+  },
+  "hand_ok": true,
+  "hand_pop": 0.0,
+  "pen": 0.0,
+  "contact_mm": 0.0,
+  "arm_clear_ok": true,
+  "roll": {
+   "R": 35.7
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0856,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 9.3,
+    "lift": 0.0,
+    "push_mm": 0.0,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   },
+   "R": {
+    "deg": 4.4,
+    "lift": 0.0,
+    "push_mm": 0.0,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   }
+  },
+  "halo_clear": 0.0,
+  "pad_pop": {
+   "L": 2.3,
+   "R": 2.1
+  },
+  "halo_pop": {
+   "ring": 10.0
+  },
+  "seam": {
+   "seam_from": null,
+   "seam_to": null
+  },
+  "pad_top": []
+ }
+]

@@ -26,7 +26,25 @@ def contact_length(g):
 
 
 def foot_cycle(phase, g):
-    """Return (y, lift, pitch, toe) for one foot. See defaults in `DEFAULT` for parameters."""
+    """Return (y, lift, pitch, toe) for one foot. See defaults in `DEFAULT` for parameters.
+    g['angle_blur'] > 0 blurs pitch and toe over neighbouring frames (Gaussian sigma in frames, periodic);
+    the ball path is untouched, so a planted foot still pivots on the same contact point."""
+    sigma = g.get('angle_blur', 0.0)
+    y, lift, pitch, toe = _foot_cycle(phase, g)
+    if sigma <= 0.0:
+        return y, lift, pitch, toe
+    n = int(math.ceil(2.5*sigma))
+    wsum = ps = ts = 0.0
+    for k in range(-n, n+1):
+        w = math.exp(-0.5*(k/sigma)**2)
+        _, _, pk, tk = _foot_cycle(phase+k/g['cycle'], g)
+        wsum += w
+        ps += w*pk
+        ts += w*tk
+    return y, lift, ps/wsum, ts/wsum
+
+
+def _foot_cycle(phase, g):
     phase %= 1.0
     L = contact_length(g)
     y_front = g['y_offset']-g['front_bias']*L

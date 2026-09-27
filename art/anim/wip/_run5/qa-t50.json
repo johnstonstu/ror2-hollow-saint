@@ -1,0 +1,297 @@
+[
+ {
+  "title": "Idle",
+  "status": "PASS",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.22,
+   "worst_palm_fwd": -0.05
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.19,
+   "worst_palm_fwd": -0.05
+  },
+  "hand_ok": true,
+  "hand_pop": 9.89,
+  "pen": 0.9,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {
+   "L": 53.5,
+   "R": 55.8
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0416,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 5.3,
+    "lift": 0.0,
+    "push_mm": 0.9,
+    "yield_min_k": 0.88,
+    "yield_frames": 14
+   },
+   "R": {
+    "deg": 5.1,
+    "lift": 0.0,
+    "push_mm": 1.9,
+    "yield_min_k": 0.0,
+    "yield_frames": 24
+   }
+  },
+  "halo_clear": 0.0,
+  "pad_pop": {
+   "L": 0.3,
+   "R": 2.1
+  },
+  "halo_pop": {
+   "ring": 0.2
+  },
+  "seam": {
+   "seam_from": [
+    "Land",
+    15
+   ],
+   "seam_to": [
+    "Jump",
+    1
+   ]
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Idle combat",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": null,
+   "worst_palm_fwd": null
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": null,
+   "worst_palm_fwd": null
+  },
+  "hand_ok": true,
+  "hand_pop": 4.51,
+  "pen": 0.4,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {
+   "L": 65.6
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0722,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 0.0,
+    "lift": 0.0,
+    "push_mm": 0.0,
+    "yield_min_k": 0.0,
+    "yield_frames": 48
+   },
+   "R": {
+    "deg": 6.7,
+    "lift": 0.01,
+    "push_mm": 25.2,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   }
+  },
+  "halo_clear": 21.5,
+  "pad_pop": {
+   "L": 0.0,
+   "R": 0.9
+  },
+  "halo_pop": {
+   "ring": 1.8
+  },
+  "seam": {
+   "seam_from": null,
+   "seam_to": null
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Spawn",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.27,
+   "worst_palm_fwd": -0.01
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.24,
+   "worst_palm_fwd": -0.05
+  },
+  "hand_ok": true,
+  "hand_pop": 6.72,
+  "pen": 0.4,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {
+   "L": 87.8,
+   "R": 83.4
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0522,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 5.0,
+    "lift": 0.0,
+    "push_mm": 0.0,
+    "yield_min_k": 0.0,
+    "yield_frames": 15
+   },
+   "R": {
+    "deg": 4.6,
+    "lift": 0.0,
+    "push_mm": 15.3,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   }
+  },
+  "halo_clear": 4.0,
+  "pad_pop": {
+   "L": 2.3,
+   "R": 0.6
+  },
+  "halo_pop": {
+   "ring": 6.8
+  },
+  "seam": {
+   "seam_from": null,
+   "seam_to": [
+    "Idle",
+    1
+   ]
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Select idle",
+  "status": "CHECK",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.46,
+   "worst_palm_fwd": 0.07
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": null,
+   "worst_palm_fwd": null
+  },
+  "hand_ok": true,
+  "hand_pop": 10.42,
+  "pen": 1.2,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {},
+  "contact_worst": " f0",
+  "clear_min": 0.2406,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 5.7,
+    "lift": 0.04,
+    "push_mm": 9.5,
+    "yield_min_k": 0.0,
+    "yield_frames": 48
+   },
+   "R": {
+    "deg": 3.5,
+    "lift": 0.01,
+    "push_mm": 1.6,
+    "yield_min_k": 0.0,
+    "yield_frames": 50
+   }
+  },
+  "halo_clear": 8.9,
+  "pad_pop": {
+   "L": 2.3,
+   "R": 3.8
+  },
+  "halo_pop": {
+   "ring": 0.7
+  },
+  "seam": {
+   "seam_from": null,
+   "seam_to": null
+  },
+  "pad_top": []
+ },
+ {
+  "title": "Select intro",
+  "status": "PASS",
+  "orient_ok": true,
+  "L": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.54,
+   "worst_palm_fwd": 0.2
+  },
+  "R": {
+   "fail_frames": "",
+   "worst_thumb_up": 0.08,
+   "worst_palm_fwd": 0.22
+  },
+  "hand_ok": true,
+  "hand_pop": 4.31,
+  "pen": 0.8,
+  "contact_mm": 0.0,
+  "arm_clear_ok": null,
+  "roll": {
+   "R": 16.3
+  },
+  "contact_worst": " f0",
+  "clear_min": 0.0992,
+  "pad_ok": true,
+  "pad_mm": 0.0,
+  "pad_follow": {
+   "L": {
+    "deg": 5.4,
+    "lift": 0.04,
+    "push_mm": 8.8,
+    "yield_min_k": 0.0,
+    "yield_frames": 18
+   },
+   "R": {
+    "deg": 9.0,
+    "lift": 0.12,
+    "push_mm": 0.0,
+    "yield_min_k": 1.0,
+    "yield_frames": 0
+   }
+  },
+  "halo_clear": 25.2,
+  "pad_pop": {
+   "L": 2.4,
+   "R": 1.7
+  },
+  "halo_pop": {
+   "ring": 10.6
+  },
+  "seam": {
+   "seam_from": [
+    "Select idle",
+    1
+   ],
+   "seam_to": [
+    "Select idle",
+    1
+   ]
+  },
+  "pad_top": []
+ }
+]

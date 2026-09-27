@@ -1,0 +1,230 @@
+"""Pauldron drive (9g), run by hs_anim.bake on every frame after the hand pass.
+
+The pads ride on the shoulder instead of copying 40% of the full upper-arm rotation about the shoulder joint
+(which drove their inner edge into the collar on big raises and their underside into the deltoid).
+Per side, from the upper arm's swing relative to the chest (twist ignored), in rest armature axes:
+  - the pad rotates by a share of that swing per axis: raise sideways (about Y) SHARE_Y, forward/back (about X)
+    SHARE_X, horizontal (about Z) SHARE_Z
+  - about a hinge on its inner (collar-side) edge, so the outer edge lifts with the arm while the inner edge
+    stays on the collar
+  - plus a lift up and out as the arm rises above its rest angle.
+Then two clearance steps, each a pure function of the frame:
+  - body: where the collar, neck or upper-arm skin still ends up inside a pad (the neck bends onto it in the
+    aims, Arc Step, Spawn), the pad lifts up and out just far enough (`apply`, before capture)
+  - halo: after the clip's own halo follow-through (bake `post`), the whole ring is pushed up and back just far
+    enough that the lower arcs clear the pads by HALO_CLEAR (`halo_clear`, on the captured matrices).
+It depends only on the current frame's pose, so seams stay exact. The pads are keyed by bake like any FK bone.
+"""
+import math
+
+import bpy
+from mathutils import Matrix, Quaternion, Vector
+from mathutils.bvhtree import BVHTree
+
+import hs_anim as H
+
+SHARE_X, SHARE_Y, SHARE_Z = 0.25, 0.5, 0.2
+LIFT, OUT = 0.015, 0.008          # m at full lift
+LIFT_RANGE = 90.0                 # deg above the rest raise for full lift
+HINGE_FRACTION = 0.2              # inner fraction of the pad's width averaged into the hinge point
+PAD_MESH = '{} SHOULDER | V17 pauldron upper'
+BODY_NEAR = 0.08                  # body verts within this of a rest pad are tested every frame
+BODY_TOL = 0.0015                 # m of skin inside a pad (beyond rest) left alone
+PUSH_DIR = (0.35, 0.0, 1.0)       # pad push-off direction (x mirrored per side), normalised
+HALO_ARC = {'L': 'halo 2', 'R': 'halo 3'}
+HALO_ARC_MESH = {'L': 'HALO | independent copper arc 2', 'R': 'HALO | independent copper arc 3'}
+HALO_BONES = ('halo root', 'halo 1', 'halo 2', 'halo 3', 'halo 4')
+HALO_CLEAR = 0.004                # m kept between the lower arcs and the pads
+HALO_DIR = Vector((0.0, 0.45, 1.0)).normalized()   # up and back
+DIRS = [Vector(d).normalized() for d in ((1, 0.2, 0.1), (-0.3, 1, 0.2), (0.1, -0.2, 1), (-1, -0.4, -0.3),
+                                         (0.2, 0.3, -1))]
+
+
+def inside(tree, q):
+    votes = 0
+    for k, d in enumerate(DIRS):
+        n, o = 0, q
+        for _ in range(16):
+            hit = tree.ray_cast(o, d)
+            if hit[0] is None:
+                break
+            n += 1
+            o = hit[0]+d*1e-5
+        votes += n % 2
+        if votes >= 3 or votes+(len(DIRS)-1-k) < 3:
+            break
+    return votes >= 3
+
+
+def eval_mesh(o, inv, dg):
+    ev = o.evaluated_get(dg)
+    me = ev.to_mesh()
+    v = [inv @ (o.matrix_world @ x.co) for x in me.vertices]
+    p = [tuple(x.vertices) for x in me.polygons]
+    ev.to_mesh_clear()
+    return v, p
+
+
+def smooth(t):
+    t = max(0.0, min(1.0, t))
+    return t*t*(3-2*t)
+
+
+class PadPass:
+    def __init__(self, poser):
+        self.p = poser
+        rig = poser.rig
+        self.enabled = all(f'{s} pauldron' in poser.pb for s in H.SIDES)
+        if not self.enabled:
+            return
+        inv = self.inv = rig.matrix_world.inverted()
+        self.hinge, self.pad_rest, self.arc_rest = {}, {}, {}
+        saved = rig.data.pose_position
+        rig.data.pose_position = 'REST'
+        bpy.context.view_layer.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        self.body = bpy.data.objects[H.BODY]
+        bv, _ = eval_mesh(self.body, inv, dg)
+        near = set()
+        for s in H.SIDES:
+            pts, polys = eval_mesh(bpy.data.objects[PAD_MESH.format(s)], inv, dg)
+            self.pad_rest[s] = (pts, polys)
+            d = [abs(q.x-H.MID_X) for q in pts]
+            lo, hi = min(d), max(d)
+            inner = [q for q, di in zip(pts, d) if di <= lo+HINGE_FRACTION*(hi-lo)]
+            self.hinge[s] = sum(inner, Vector())/len(inner)
+            tree = BVHTree.FromPolygons(pts, polys)
+            near |= {i for i, q in enumerate(bv) if tree.find_nearest(q, BODY_NEAR)[0] is not None}
+            arc = bpy.data.objects.get(HALO_ARC_MESH[s])
+            if arc is not None:
+                self.arc_rest[s] = eval_mesh(arc, inv, dg)
+        self.near = sorted(near)
+        rig.data.pose_position = saved
+        bpy.context.view_layer.update()
+        self.body_rest = {s: self.body_depth(s, [bv[i] for i in self.near], Matrix.Identity(4)) for s in H.SIDES}
+        self.push = {s: Vector((PUSH_DIR[0]*(1 if s == 'L' else -1), PUSH_DIR[1], PUSH_DIR[2])).normalized()
+                     for s in H.SIDES}
+        self.rest_ch = poser.rest['chest']
+        self.rest_ua = {s: poser.rest[f'{s} upperarm'] for s in H.SIDES}
+        self.rest_pad = {s: poser.rest[f'{s} pauldron'] for s in H.SIDES}
+        down = Vector((0, 0, -1))
+        self.a0 = {s: (self.rest_ua[s].to_3x3() @ Vector((0, 1, 0))).normalized() for s in H.SIDES}
+        self.raise0 = {s: self.a0[s].angle(down) for s in H.SIDES}
+
+    def target(self, s):
+        pb = self.p.pb
+        m_ch = pb['chest'].matrix
+        r_c = m_ch.to_3x3() @ self.rest_ch.to_3x3().inverted()
+        delta = r_c.inverted() @ pb[f'{s} upperarm'].matrix.to_3x3() @ self.rest_ua[s].to_3x3().inverted()
+        a0 = self.a0[s]
+        a1 = (delta @ a0).normalized()
+        q = a0.rotation_difference(a1)
+        ang = q.angle
+        if ang > math.pi:
+            ang -= 2*math.pi
+        w = Vector(q.axis)*ang if abs(ang) > 1e-9 else Vector()
+        w = Vector((w.x*SHARE_X, w.y*SHARE_Y, w.z*SHARE_Z))
+        rp = Quaternion(w.normalized(), w.length) if w.length > 1e-9 else Quaternion()
+        up = smooth(math.degrees(a1.angle(Vector((0, 0, -1)))-self.raise0[s])/LIFT_RANGE)
+        hinge = self.hinge[s]
+        t = hinge-rp @ hinge+Vector((math.copysign(OUT, hinge.x-H.MID_X)*up, 0.0, LIFT*up))
+        local = Matrix.Translation(t) @ rp.to_matrix().to_4x4()
+        return m_ch @ self.rest_ch.inverted() @ local @ self.rest_pad[s], math.degrees(w.length), up
+
+    def body_depth(self, s, pts, delta):
+        """Deepest body point inside the pad moved by `delta` (armature space, relative to its rest)."""
+        rv, polys = self.pad_rest[s]
+        tree = BVHTree.FromPolygons([delta @ v for v in rv], polys)
+        worst = 0.0
+        for q in pts:
+            loc, _, _, d = tree.find_nearest(q, 0.05)
+            if loc is not None and d > worst and inside(tree, q):
+                worst = d
+        return worst
+
+    def apply(self):
+        if not self.enabled:
+            return {}
+        self.p.update()
+        out, mats = {}, {}
+        for s in H.SIDES:
+            m, deg, up = self.target(s)
+            self.p.pb[f'{s} pauldron'].matrix = m
+            mats[s] = m
+            out[s] = [deg, up, 0.0]
+        self.p.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        ev = self.body.evaluated_get(dg)
+        me = ev.to_mesh()
+        mw = self.inv @ self.body.matrix_world
+        pts = [mw @ me.vertices[i].co for i in self.near]
+        ev.to_mesh_clear()
+        moved = False
+        r_c = self.p.pb['chest'].matrix.to_3x3() @ self.rest_ch.to_3x3().inverted()
+        for s in H.SIDES:
+            rest_pad = self.rest_pad[s]
+            push = r_c @ self.push[s]
+            t = 0.0
+            for _ in range(8):
+                delta = Matrix.Translation(push*t) @ mats[s] @ rest_pad.inverted()
+                d = self.body_depth(s, pts, delta)-self.body_rest[s]
+                if d <= BODY_TOL:
+                    break
+                t += d-BODY_TOL*0.5
+            if t > 0:
+                self.p.pb[f'{s} pauldron'].matrix = Matrix.Translation(push*t) @ mats[s]
+                out[s][2] = t
+                moved = True
+        if moved:
+            self.p.update()
+        return {s: tuple(v) for s, v in out.items()}
+
+    def halo_clear(self, caps, frames):
+        """Push the halo ring up/back on captured frames where a lower arc comes within HALO_CLEAR of its pad."""
+        if not self.enabled or len(self.arc_rest) < 2:
+            return {}
+        rest = self.p.rest
+        worst = 0.0
+        pushed = 0
+        for f in frames:
+            m = caps[f]
+            need = 0.0
+            for s in H.SIDES:
+                av, ap = self.arc_rest[s]
+                arc = [m[HALO_ARC[s]] @ rest[HALO_ARC[s]].inverted() @ v for v in av]
+                pv, pp = self.pad_rest[s]
+                pad_m = m[f'{s} pauldron'] @ self.rest_pad[s].inverted()
+                pad = [pad_m @ v for v in pv]
+                ptree = BVHTree.FromPolygons(pad, pp)
+
+                def clearance(t):
+                    off = HALO_DIR*t
+                    c = 9.0
+                    for q in arc:
+                        loc, _, _, d = ptree.find_nearest(q+off, HALO_CLEAR*3)
+                        if loc is not None:
+                            c = min(c, -d if inside(ptree, q+off) else d)
+                    if c < HALO_CLEAR*3:
+                        atree = BVHTree.FromPolygons([q+off for q in arc], ap)
+                        for q in pad:
+                            loc, _, _, d = atree.find_nearest(q, 0.05)
+                            if loc is not None and inside(atree, q):
+                                c = min(c, -d)
+                    return c
+                if clearance(0.0) >= HALO_CLEAR:
+                    continue
+                lo, hi = 0.0, 0.03
+                while clearance(hi) < HALO_CLEAR and hi < 0.24:
+                    lo, hi = hi, hi*2
+                for _ in range(10):
+                    mid = 0.5*(lo+hi)
+                    lo, hi = (mid, hi) if clearance(mid) < HALO_CLEAR else (lo, mid)
+                need = max(need, hi)
+            if need > 0:
+                T = Matrix.Translation(HALO_DIR*need)
+                for n in HALO_BONES:
+                    if n in m:
+                        m[n] = T @ m[n]
+                worst = max(worst, need)
+                pushed += 1
+        return {'halo_clear_push_max_mm': round(worst*1000, 1), 'halo_clear_frames': pushed}

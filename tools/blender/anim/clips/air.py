@@ -9,6 +9,7 @@ import math
 from mathutils import Matrix, Vector
 from hs_anim import R, bake, lerp, ramp, sign, wave, apply_world_delta, axis_rot, halo_lag, halo_offsets, tabard_follow
 import gait
+from padfix import halo_pose
 
 N_JUMP = 11
 N_ASC = 20
@@ -104,8 +105,7 @@ def tabard(p, lean, f1, f2, f3, b1, b2, lag=None):
 
 def halo(p, lean, lift, keep=0.55):
     """Halo floats: lifts/drops by `lift` and only partly follows the torso's forward lean."""
-    p.offset('halo root', (0, 0.004, lift))
-    p.rot('halo root', R(x=-keep*lean))
+    halo_pose(p, (0, 0.004, lift), R(x=-keep*lean))
 
 
 def arms(p, a):
@@ -238,7 +238,7 @@ def jump_ground(p, f):
     sp = track(f, {1: 1, 3: 7, 5: -4, 6: -4})
     ch = track(f, {1: 0, 3: 4, 5: -3, 6: -3})
     p.pelvis((0, track(f, {1: 0, 3: 0.065, 5: -0.005, 6: -0.005}),
-              track(f, {1: STAND_Z, 2: -0.15, 3: -0.21, 4: -0.10, 5: 0.03, 6: 0.035})), R(x=pp))
+              track(f, {1: STAND_Z, 2: -0.14, 3: -0.20, 4: -0.11, 5: 0.02, 6: 0.05})), R(x=pp))
     p.rot('spine', R(x=sp))
     p.rot('chest', R(x=ch))
     p.rot('neck', R(x=track(f, {1: -2, 3: -9, 5: 2, 6: 2})))
@@ -247,7 +247,7 @@ def jump_ground(p, f):
     for s in ('L', 'R'):
         x, y = ball_xy(s)
         toe = track(ff, {1: 0, 4: 0, 5: 4, 6: 24, 7: 40, 8: 50})
-        z = ball_z_for_tip(toe, track(ff, {1: 0, 5: 0, 6: 0.04, 7: 0.13, 9: 0.22, 11: 0.25}))
+        z = ball_z_for_tip(toe, track(ff, {1: 0, 5: 0, 6: 0.02, 7: 0.08, 9: 0.2, 11: 0.25}))
         p.foot(s, (x, y, z), track(ff, {1: 0, 3: 0, 4: 18, 5: 46, 6: 64, 8: 78}), toe, yaw=sign(s)*STAND_YAW)
     # Arms load back in the crouch and drive forward-up through the takeoff.
     a = STAND_ARMS
@@ -402,10 +402,12 @@ def build(p):
     meta = {'kind': 'air'}
     return [
         bake(p, 'Jump', list(range(1, N_JUMP+1)), jump_pose, False,
-             markers={'Crouch': 3, 'Takeoff': 6}, meta={**meta, 'ends_in': 'Ascend'}, post=post_jump),
+             markers={'Crouch': 3, 'Takeoff': 6}, meta={**meta, 'ends_in': 'Ascend', 'accents': [3, 5]},   # crouch load and launch
+             post=post_jump),
         bake(p, 'Ascend', list(range(1, N_ASC+2)), asc_loop, True, meta=meta, post=post_loop),
         bake(p, 'Descend', list(range(1, N_DESC+2)), desc_loop, True, meta=meta, post=post_loop),
         bake(p, 'Land', list(range(1, N_LAND+1)), land_pose, False,
              markers={'L touch': 2, 'R touch': 4, 'Compress': 6, 'Recovered': N_LAND},
-             meta={**meta, 'speed_mps': 0.0, 'starts_from': 'Descend', 'ends_in': 'Stand'}, post=post_land),
+             meta={**meta, 'speed_mps': 0.0, 'starts_from': 'Descend', 'ends_in': 'Stand', 'accents': [2]},   # L claws strike
+             post=post_land),
     ]

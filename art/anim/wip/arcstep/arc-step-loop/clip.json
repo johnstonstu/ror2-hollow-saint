@@ -6,18 +6,72 @@
   ],
   "loop": true,
   "markers": {},
-  "ik_miss_m": 0.0,
+  "ik_miss_m": 1e-05,
   "max_leg_extension": 0.985,
-  "max_leg_extension_at": "L1",
-  "ik_miss_at": "L7",
+  "max_leg_extension_at": "L7",
+  "ik_miss_at": "R2",
   "ik_miss_frames": {},
   "kind": "utility",
   "dash_distance_m": [
     8,
     12
   ],
+  "orient_smooth_max_deg": 3.1,
+  "pad_follow_max": {
+    "L": {
+      "deg": 0.0,
+      "lift": 0.0,
+      "push_mm": 4.5,
+      "yield_min_k": 0.0,
+      "yield_frames": 10
+    },
+    "R": {
+      "deg": 0.0,
+      "lift": 0.0,
+      "push_mm": 1.4,
+      "yield_min_k": 0.0,
+      "yield_frames": 10
+    }
+  },
+  "tabard_swing_max_deg": {
+    "tabard front.1": 5.0,
+    "tabard front.2": 3.9,
+    "tabard front.3": 2.2,
+    "tabard back.1": 0.0,
+    "tabard back.2": 0.0
+  },
+  "tabard_swing_frames": 10,
+  "orient_roll_max_deg": {
+    "L": 110.4,
+    "R": 112.4
+  },
+  "orient_infeasible": 0,
   "halo_max_offset_m": 0.035,
-  "bake_error_m": 2e-06,
+  "halo_clear_push_max_mm": 87.7,
+  "halo_clear_frames": 10,
+  "halo_clear_dir": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "pad_pop_mm_f2": {
+    "L": 1.6,
+    "R": 1.2
+  },
+  "halo_pop_mm_f2": {
+    "ring": 35.2
+  },
+  "vfx_peak": {
+    "hs_glow": 0.0,
+    "hs_jet": 0.0,
+    "hs_spark_L": 0.0,
+    "hs_spark_R": 0.0,
+    "hs_jet_dir": 0.0,
+    "hs_move_x": 0.0,
+    "hs_move_y": 0.0,
+    "hs_turn": 0.0
+  },
+  "bake_error_m": 1e-06,
   "bake_error_deg": 0.0,
   "module": "arcstep",
   "action": "HS_anim | Arc Step loop",
@@ -28,49 +82,49 @@
   "finite": true,
   "arm_clearance": {
     "L": {
-      "min_m": 0.165,
-      "frame": 11,
+      "min_m": 0.1927,
+      "frame": 10,
       "part": "forearm",
-      "against": "spine",
+      "against": "pelvis",
       "frames_under_min": 0,
       "per_frame_mm": [
-        165,
-        168,
-        176,
-        183,
-        186,
-        186,
-        181,
-        175,
-        169,
-        165,
-        165
+        198,
+        203,
+        212,
+        217,
+        219,
+        216,
+        209,
+        202,
+        194,
+        193,
+        198
       ],
       "hits": {}
     },
     "R": {
-      "min_m": 0.1435,
-      "frame": 8,
+      "min_m": 0.1922,
+      "frame": 9,
       "part": "forearm",
-      "against": "spine",
+      "against": "pelvis",
       "frames_under_min": 0,
       "per_frame_mm": [
-        148,
-        152,
-        153,
-        150,
-        148,
-        146,
-        144,
-        144,
-        144,
-        145,
-        148
+        195,
+        198,
+        201,
+        205,
+        205,
+        202,
+        200,
+        195,
+        192,
+        196,
+        195
       ],
       "hits": {}
     }
   },
-  "arm_clear_min_m": 0.1435,
+  "arm_clear_min_m": 0.1922,
   "arm_clear_ok": null,
   "hand_qa": {
     "violations": {},
@@ -104,15 +158,15 @@
         "hand_twist_deg": 6.4,
         "hand_twist_frame": 1,
         "hand_bend_max_deg": 24.5,
-        "forearm_roll_deg": 26.1,
-        "forearm_roll_frame": 1
+        "forearm_roll_deg": -38.7,
+        "forearm_roll_frame": 5
       },
       "R": {
         "hand_twist_deg": -6.5,
         "hand_twist_frame": 7,
         "hand_bend_max_deg": 24.8,
-        "forearm_roll_deg": -26.3,
-        "forearm_roll_frame": 7
+        "forearm_roll_deg": 43.3,
+        "forearm_roll_frame": 6
       }
     },
     "flex_range": {
@@ -143,7 +197,325 @@
   "hand_contact_max_mm": 0.0,
   "hand_contact_worst": " f0",
   "hand_contact_ok": true,
-  "status": "PASS",
+  "hand_orient": {
+    "L": {
+      "gated_frames": 10,
+      "fail_frames": "",
+      "wrong_handed_frames": "",
+      "swept_back_frames": "",
+      "worst_thumb_up": 0.11,
+      "worst_thumb_up_f": 6,
+      "worst_palm_fwd": 0.1,
+      "worst_palm_fwd_f": 3,
+      "thumb_up_at_worst_palm": 0.11
+    },
+    "R": {
+      "gated_frames": 10,
+      "fail_frames": "",
+      "wrong_handed_frames": "",
+      "swept_back_frames": "",
+      "worst_thumb_up": 0.11,
+      "worst_thumb_up_f": 10,
+      "worst_palm_fwd": 0.19,
+      "worst_palm_fwd_f": 3,
+      "thumb_up_at_worst_palm": 0.2
+    }
+  },
+  "hand_orient_ok": true,
+  "pad_contact": {},
+  "pad_contact_max_mm": 0.0,
+  "pad_contact_worst": " f0",
+  "pad_contact_rest": {
+    "L": {},
+    "R": {}
+  },
+  "pad_contact_ok": true,
+  "full_qa": {
+    "contact_mm": {
+      "R foot > L shin": [
+        11.7,
+        2,
+        4,
+        [
+          -0.018,
+          0.811,
+          0.511
+        ]
+      ],
+      "L foot > R foot": [
+        11.2,
+        6,
+        4,
+        [
+          0.022,
+          0.91,
+          0.494
+        ]
+      ],
+      "R foot > L foot": [
+        10.3,
+        1,
+        9,
+        [
+          -0.022,
+          0.812,
+          0.502
+        ]
+      ],
+      "back conductors > neck": [
+        9.7,
+        8,
+        10,
+        [
+          -0.064,
+          -0.486,
+          1.23
+        ]
+      ],
+      "neck cables > head": [
+        6.0,
+        3,
+        10,
+        [
+          -0.086,
+          -0.514,
+          1.242
+        ]
+      ],
+      "R shin > pelvis": [
+        4.2,
+        9,
+        0,
+        [
+          -0.122,
+          0.357,
+          0.462
+        ]
+      ],
+      "abdomen plates > spine": [
+        3.8,
+        8,
+        0,
+        [
+          -0.055,
+          -0.24,
+          0.883
+        ]
+      ],
+      "yoke > halo arc 3": [
+        3.5,
+        10,
+        0,
+        [
+          -0.27,
+          -0.386,
+          1.284
+        ]
+      ],
+      "yoke > halo arc 2": [
+        3.3,
+        3,
+        0,
+        [
+          0.229,
+          -0.402,
+          1.286
+        ]
+      ],
+      "R scapula shell > neck": [
+        3.0,
+        8,
+        0,
+        [
+          -0.204,
+          -0.432,
+          1.162
+        ]
+      ]
+    },
+    "rigid_pct": {
+      "CHEST | V17 upper chest plate L": [
+        0.2,
+        8
+      ],
+      "ABDOMEN | V17 segment slit 2": [
+        0.2,
+        8
+      ],
+      "ABDOMEN | V17 segment plate 2": [
+        0.2,
+        8
+      ],
+      "ABDOMEN | V17 side slit L2": [
+        0.2,
+        8
+      ],
+      "ABDOMEN | V17 side slit R2": [
+        0.2,
+        9
+      ],
+      "TABARD | V11 back sigil ring": [
+        0.1,
+        3
+      ],
+      "CHEST | V17 core housing rim": [
+        0.1,
+        8
+      ],
+      "CHEST | V11 core ring": [
+        0.1,
+        8
+      ],
+      "CHEST | V17 core drop slit": [
+        0.1,
+        8
+      ],
+      "CHEST | V11 core hot centre": [
+        0.1,
+        8
+      ],
+      "CHEST | V17 upper chest plate R": [
+        0.1,
+        8
+      ],
+      "CHEST | V17 rib plate L": [
+        0.1,
+        4
+      ],
+      "ABDOMEN | V17 segment plate 1": [
+        0.1,
+        4
+      ],
+      "ABDOMEN | V17 side slit R1": [
+        0.1,
+        4
+      ],
+      "ABDOMEN | V17 side slit L1": [
+        0.1,
+        4
+      ],
+      "CHEST | V17 rib plate R": [
+        0.1,
+        4
+      ],
+      "ABDOMEN | V17 segment slit 1": [
+        0.1,
+        4
+      ],
+      "ABDOMEN | V17 segment plate 3": [
+        0.0,
+        8
+      ],
+      "ABDOMEN | V17 segment slit 3": [
+        0.0,
+        9
+      ],
+      "TABARD | V11 front sigil ring": [
+        0.0,
+        9
+      ]
+    },
+    "joints": {
+      "L elbow bend": [
+        2.6,
+        7.4
+      ],
+      "L forearm twist": [
+        -19.4,
+        -17.8
+      ],
+      "L hand twist": [
+        5.3,
+        6.4
+      ],
+      "L knee bend": [
+        19.0,
+        19.0
+      ],
+      "R elbow bend": [
+        5.5,
+        10.3
+      ],
+      "R forearm twist": [
+        20.3,
+        21.6
+      ],
+      "R hand twist": [
+        -6.5,
+        -5.4
+      ],
+      "R knee bend": [
+        18.2,
+        21.7
+      ],
+      "R knee off-axis": [
+        0.0,
+        0.0
+      ],
+      "head pitch back": [
+        30.6,
+        31.8
+      ],
+      "head yaw": [
+        -0.2,
+        0.2
+      ]
+    },
+    "pops_deg_f2": [
+      [
+        15.5,
+        "tabard back.2",
+        3
+      ],
+      [
+        12.9,
+        "tabard back.2",
+        1
+      ],
+      [
+        12.2,
+        "tabard back.2",
+        5
+      ],
+      [
+        11.1,
+        "tabard front.3",
+        5
+      ],
+      [
+        10.2,
+        "tabard back.2",
+        8
+      ],
+      [
+        10.0,
+        "tabard back.2",
+        6
+      ]
+    ],
+    "accent_pops_deg_f2": [],
+    "feet": {
+      "L sole": [
+        0.1786,
+        10
+      ],
+      "R sole": [
+        0.1384,
+        7
+      ]
+    },
+    "fails": [
+      "contact L foot > R foot 11.2mm f6",
+      "contact R foot > L foot 10.3mm f1",
+      "contact R foot > L shin 11.7mm f2",
+      "contact back conductors > neck 9.7mm f8",
+      "contact neck cables > head 6.0mm f3"
+    ]
+  },
+  "full_qa_ok": false,
+  "full_contact_max_mm": 11.7,
+  "full_pop_max_deg_f2": 15.5,
+  "status": "CHECK",
   "step": 1,
   "views": [
     "hero",

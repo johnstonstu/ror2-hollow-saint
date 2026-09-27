@@ -1,0 +1,7 @@
+﻿{
+  "git.enabled": false,
+  "git.autorefresh": false,
+  "git.autofetch": false,
+  "git.autoRepositoryDetection": false,
+  "scm.autoReveal": false
+}

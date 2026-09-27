@@ -10,8 +10,9 @@ so the first/last frames are exact run poses.
 import math
 from mathutils import Matrix, Vector
 from hs_anim import (R, bake, lerp, ramp, sign, wave, spring_follow, apply_world_delta, axis_rot, halo_offsets,
-                     tabard_follow, MID_X, FPS)
+                     halo_tether, tabard_follow, MID_X, FPS)
 import run
+from padfix import halo_pose
 
 SPEED = 8.7
 PREVIEW_ORTHO = 3.4
@@ -73,7 +74,7 @@ def glide_pose(p, t):
     p.rot('chest', R(x=CHEST_X+0.6*wave(t, 0.2), y=-0.9*s1(t, 0.2), z=-0.7*s1(t, 0.05)))
     p.rot('neck', R(x=-3.0, y=-0.4*roll, z=-0.4*sway))
     p.rot('head', R(x=-2.5+1.0*wave(t, 0.1), y=-0.6*roll, z=0.5*s1(t, 0.3)))
-    p.rot('halo root', R(x=-8.0+1.5*wave(t, 0.15)))
+    halo_pose(p, (0, 0, 0), R(x=-8.0+1.5*wave(t, 0.15)))
     for s in ('L', 'R'):
         k = sign(s)
         drift = s1(t, 0.2+0.25*(k < 0))
@@ -215,7 +216,7 @@ HALO_TILT = 70.0
 
 
 def clamp_len(o, m=HALO_MAX):
-    return o*(m/o.length) if o.length > m else o
+    return halo_tether(o*(m/o.length) if o.length > m else o)
 
 
 def spring_periodic(pts, stiffness, damping, substeps=4, passes=6):

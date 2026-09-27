@@ -31,7 +31,10 @@ import gait
 import air
 from handfix import ZSIGN
 
-RING_C = Vector((-0.0375, 0.15, 1.957))
+from padfix import HALO_SHIFT, halo_pose
+RING_C = Vector((-0.0375, 0.15, 1.957))+HALO_SHIFT
+# the lower arcs (2, 3) sit just above/behind the pads: in the flared states they keep their radius and ride back
+LOW_ARCS_CLEAR = dict(a2_spread=-0.02, a3_spread=-0.02, a2_dy=0.012, a3_dy=0.012)
 ARC_OBJ = 'HALO | independent copper arc {}'
 GEO = {}
 TAU = 2*math.pi
@@ -195,8 +198,7 @@ def fingers(p, side, s):
 
 def halo(p, s):
     lean = s['px']+s['sp_x']+s['ch_x']
-    p.offset('halo root', (s['h_ox'], 0.004+s['h_oy'], s['h_oz']))
-    p.rot('halo root', R(-0.55*lean+s['h_rx'], s['h_ry'], s['h_rz']))
+    halo_pose(p, (s['h_ox'], 0.004+s['h_oy'], s['h_oz']), R(-0.55*lean+s['h_rx'], s['h_ry'], s['h_rz']))
     for i in range(1, 5):
         g, u, t = GEO[i]['g'], GEO[i]['u'], GEO[i]['t']
         spin = s['spin']+s[f'a{i}_spin']
@@ -303,7 +305,8 @@ def combat_base():
              R_curl=62, R_idx=-56, R_mid=-50, R_ring=4, R_lit=6, R_thumb=34, R_splay=7)
     s.update(L_swing=-8, L_adduct=11, L_elbow=38, L_ftwist=48, L_wx=6, L_curl=34, L_thumb=20, L_lift=1.0)
     s = addv(s, tf1=-8.0, tf2=5.0, tf3=2.0, tb1=6.0, tb2=2.0)
-    s = addv(s, spread=0.02, fold=-7.0, h_rx=-6.0, spin=7.0, h_oz=0.012, h_oy=0.006)
+    s = addv(s, spread=0.02, fold=-7.0, h_rx=-6.0, spin=3.0, h_oz=0.012, h_oy=0.006)
+    s = addv(s, **LOW_ARCS_CLEAR)
     return s
 
 
@@ -344,7 +347,7 @@ def crouch_state():
     """Low half-kneel: right foot a step back on its toes, torso folded over the left knee."""
     s = dict(STAND)
     s = addv(s, oz=-0.36, oy=0.08, ox=0.02, px=20.0, py=-3.0, pz=4.0, sp_x=20.0, ch_x=14.0,
-             nk_x=16.0, hd_x=24.0, hd_y=3.0, hd_z=4.0)
+             nk_x=11.0, hd_x=17.0, hd_y=3.0, hd_z=4.0)
     s = addv(s, L_pitch=12.0, R_fy=R_BACK, R_pitch=48.0, R_toe=-4.0, R_kx=0.3)
     s.update(both(swing=-16, adduct=12, elbow=58, wx=12, ftwist=60, curl=56, thumb=30, lift=-3.0))
     s = addv(s, L_swing=-8, L_elbow=12, L_adduct=-6, R_adduct=-8, R_elbow=10)
@@ -515,6 +518,8 @@ def intro_state(f):
     fl = kick(x+0.5, freq=1.5, decay=5.0)*end
     s = addv(s, spread=0.09*fl, fold=-22*fl, h_oz=0.022*fl, h_oy=-0.01*fl, h_rx=-6*fl,
              spin=12*kick(x, freq=0.9, decay=7.0)*end)
+    lf = max(fl, 0.0)
+    s = addv(s, a2_spread=-0.07*lf, a3_spread=-0.07*lf, a2_dy=0.02*lf, a3_dy=0.02*lf)
     for i in range(1, 5):
         s[f'a{i}_fold'] += 4*kick(x-0.7*i, freq=2.4, decay=3.5)*end*(1 if i % 2 else -1)
         s[f'a{i}_spread'] += 0.012*kick(x-0.6*i, freq=2.0, decay=3.5)*end

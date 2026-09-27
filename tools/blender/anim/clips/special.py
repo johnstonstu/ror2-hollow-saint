@@ -31,7 +31,8 @@ from mathutils.bvhtree import BVHTree
 from hs_anim import R, axis_rot, bake, lerp, ramp, sign, smoother
 
 # ----------------------------------------------------------------------------- geometry
-RING_C = Vector((-0.0375, 0.15, 1.957))   # centre of the arc meshes (rest)
+from padfix import HALO_SHIFT, halo_pose
+RING_C = Vector((-0.0375, 0.15, 1.957))+HALO_SHIFT   # centre of the arc meshes (rest)
 RING_N = Vector((0.0, 1.0, 0.0))          # rest ring normal (the halo stands in the XZ plane)
 CORE = Vector((-0.04, -0.115, 1.51))
 ORB = Vector((-0.04, -0.27, 1.38))        # the held "orb" of current in front of the core
@@ -192,8 +193,7 @@ def fingers(p, side, curl, thumb, splay):
 
 
 def halo(p, s):
-    p.offset('halo root', (s['h_ox'], s['h_oy'], s['h_oz']))
-    p.rot('halo root', R(s['h_rx'], s['h_ry'], s['h_rz']))
+    halo_pose(p, (s['h_ox'], s['h_oy'], s['h_oz']), R(s['h_rx'], s['h_ry'], s['h_rz']))
     for i in range(1, 5):
         g, u, t = GEO[i]['g'], GEO[i]['u'], GEO[i]['t']
         lag = s[f'a{i}_lag']   # 0..1 per-arc stagger: fraction of the crown this arc still lacks
@@ -255,7 +255,7 @@ def fk_hand(p, side):
     hd = fa @ rest[f'{side} forearm'].inverted() @ rest[f'{side} hand'] @ p.pb[f'{side} hand'].matrix_basis
     loc = hd @ rest[f'{side} hand'].inverted()
     pt = lambda n: loc @ rest[n].translation
-    return {'elbow': fa.translation, 'wrist': hd.translation, 'knuckle': pt(f'{side} middle.1'),
+    return {'shoulder': ua.translation, 'elbow': fa.translation, 'wrist': hd.translation, 'knuckle': pt(f'{side} middle.1'),
             'index': pt(f'{side} index.1'), 'little': pt(f'{side} little.1')}
 
 
@@ -299,14 +299,16 @@ def mirror(v, x0=CORE.x):
 TORSO_C = Vector((-0.0375, 0.045))   # rest torso cross-section at elbow height (z 1.1-1.4): centre, half-axes
 TORSO_R = (0.17, 0.15)
 TORSO_MARGIN = 0.045
+ARM_MARGIN = 0.09     # upper arm / elbow: the arm mesh is ~6 cm in radius there (M5)
+WAIST_MARGIN = 0.13   # the same for elbows low at the waist, where the flank flares past TORSO_R (solve avoid=)
 
 
-def torso_depth(q):
-    """How far a point sits inside the torso ellipse grown by TORSO_MARGIN (0 outside; z 0.95-1.6 only)."""
+def torso_depth(q, margin=TORSO_MARGIN):
+    """How far a point sits inside the torso ellipse grown by `margin` (0 outside; z 0.95-1.6 only)."""
     if not 0.95 < q.z < 1.6:
         return 0.0
-    dx = (q.x-TORSO_C.x)/(TORSO_R[0]+TORSO_MARGIN)
-    dy = (q.y-TORSO_C.y)/(TORSO_R[1]+TORSO_MARGIN)
+    dx = (q.x-TORSO_C.x)/(TORSO_R[0]+margin)
+    dy = (q.y-TORSO_C.y)/(TORSO_R[1]+margin)
     return max(0.0, 1.0-math.hypot(dx, dy))
 
 
@@ -314,7 +316,7 @@ def solve(p, side, knuckle, direction, normal, elbow=None, straight=False, init=
     """Arm channels placing the knuckle (middle.1 head) at `knuckle`, fingers along `direction`,
     palm normal toward `normal`; optional soft elbow position. `ortho` makes the palm target
     perpendicular to the fingers (the palm can't face along its own fingers). `avoid` keeps the elbow
-    and forearm out of the torso (poses whose hands meet in front of the chest)."""
+    and forearm out of the torso (poses whose hands meet in front of the chest); True, or the elbow margin (m)."""
     k_t = Vector(knuckle)
     d_t = Vector(direction).normalized()
     n_t = n_raw = Vector(normal).normalized()
@@ -337,8 +339,10 @@ def solve(p, side, knuckle, direction, normal, elbow=None, straight=False, init=
         e += 0.00015*a['ftwist']**2+0.0006*(a['wx']**2+a['wy']**2+a['wz']**2)
         e += 0.003*max(0.0, a['adduct']-40)**2   # the upper arm would cross the chest
         if avoid:
-            for q in (j['elbow'], j['elbow'].lerp(j['wrist'], 0.5), j['wrist']):
-                e += 300*torso_depth(q)
+            am = ARM_MARGIN if avoid is True else avoid
+            for q, m in ((j['shoulder'].lerp(j['elbow'], 0.6), am), (j['elbow'], am),
+                         (j['elbow'].lerp(j['wrist'], 0.5), TORSO_MARGIN), (j['wrist'], TORSO_MARGIN)):
+                e += 300*torso_depth(q, m)
         for k, (lo, hi) in LIMITS.items():
             if a[k] < lo or a[k] > hi:
                 e += 10*(max(lo-a[k], a[k]-hi))
@@ -424,8 +428,10 @@ def solve_poses(p):
     POSES['charge_full_wide'] = solve_pair(p, 'charge_full_wide', ORB_FULL+Vector((0.34, -0.01, 0.07)),
                                            (-0.35, -0.75, 0.35), (-1, -0.36, 0.05), elbow_L=(0.47, 0.03, 1.29))
     # avoid: without it the left solve hit the adduct limit and sank the elbow ~5 cm into the ribs (contact.py).
-    POSES['gather'] = solve_pair(p, 'gather', ORB+Vector((0.07, -0.04, -0.02)), (-0.6, -0.3, 0.7), (-1, 0.3, 0),
-                                 elbow_L=(0.27, -0.12, 1.18), avoid=True)
+    # Elbows forward and out (M5): with the elbow at the flank the solve crossed the upper arm over the belly
+    # (adduct ~48) and the arm skin sank 45-58 mm into the flank and hip.
+    POSES['gather'] = solve_pair(p, 'gather', ORB+Vector((0.13, -0.09, -0.02)), (-0.4, -0.45, 0.7), (-1, 0.3, 0),
+                                 elbow_L=(0.31, -0.22, 1.20), avoid=WAIST_MARGIN)
     # Release: a wide lateral fling, palms pushed forward/out, wrists extended ~30 deg (fingers tip back).
     r = Vector(RELEASE_DIR).normalized()
     n = Vector((0.3, -0.95, 0.1))
@@ -435,11 +441,11 @@ def solve_poses(p):
     n = n*math.cos(ext)+r*math.sin(ext)
     POSES['release'] = solve_reach(p, 'release', RELEASE_DIR, d, n, ortho=True)
     POSES['frame'] = solve_pair(p, 'frame', CORE+Vector((0.15, -0.17, -0.04)), (-0.5, -0.45, 0.75), (-0.3, -1, 0.1),
-                                elbow_L=(0.31, -0.05, 1.20), ortho=True)
+                                elbow_L=(0.31, -0.05, 1.20), ortho=True, avoid=WAIST_MARGIN)
     POSES['spread'] = solve_reach(p, 'spread', (0.85, -0.3, -0.45), (0.85, -0.42, -0.08), (0.1, -0.9, 0.45))
     POSES['hold'] = solve_reach(p, 'hold', (0.62, -0.30, -0.72), (0.5, -0.4, -0.75), (0.2, -0.95, 0.2), reach=0.93)
-    POSES['recall'] = solve_pair(p, 'recall', Vector((CORE.x+0.10, -0.33, 1.29)), (-0.6, -0.45, 0.6), (-1, 0.2, 0),
-                                 elbow_L=(0.27, -0.12, 1.14), avoid=True)
+    POSES['recall'] = solve_pair(p, 'recall', Vector((CORE.x+0.15, -0.38, 1.29)), (-0.45, -0.5, 0.6), (-1, 0.2, 0),
+                                 elbow_L=(0.31, -0.22, 1.16), avoid=0.11)
 
 
 # ----------------------------------------------------------------------------- clips
@@ -628,7 +634,7 @@ def oc_keys():
     full = arms(st(spine_x=1, chest_x=1, head_x=3), POSES['frame'], **both(curl=10, thumb=10))
     rise = mix(rest, full, 0.35)
     for side in 'LR':
-        for k, w in (('elbow', 0.68), ('ftwist', 0.6), ('adduct', 0.75)):   # tuck the forearm in as it flexes, not out
+        for k, w in (('elbow', 0.68), ('ftwist', 0.6), ('adduct', 0.55)):   # tuck the forearm in as it flexes, not out
             rise[f'{side}_{k}'] = w*full[f'{side}_{k}']
         rise[f'{side}_swing'] -= 5   # lifts forward off the hip on the way up (contact.py)
     frame = arms(st(spine_x=-1, chest_x=-2, neck_x=1, head_x=4), POSES['frame'], **both(curl=18, thumb=22, splay=6))
@@ -678,6 +684,7 @@ def end_keys():
     for side in 'LR':   # hands come down in front of and outside the thighs, not through them
         relax[f'{side}_adduct'] -= 12
         relax[f'{side}_swing'] -= 6
+        relax[f'{side}_ftwist'] -= 40   # the opening arm enters the orientation gate thumb-up (handpass rolled ~50 in 2 f)
     return {9: recall, 12: recall, 17: relax, END_N: rest}
 
 
@@ -961,10 +968,11 @@ def build(p):
         ('Charge loop', list(range(1, CHARGE_N+2)), charge_pose(False), True,
          {'Pulse high': 1+CHARGE_N//4, 'Pulse low': 1+3*CHARGE_N//4}, {}),
         ('Charge full', list(range(1, FULL_N+2)), charge_pose(True), True,
-         {'Pulse high': 1+FULL_N//4}, {}),
+         {'Pulse high': 1+FULL_N//4}, {'seam_anchors': []}),
         ('Discharge', list(range(1, DIS_N+1)), discharge_pose, False,
          {'Gather': GATHER, 'Release': RELEASE, 'Recovered': DIS_N}, {'socket_release': ['L muzzle', 'R muzzle', 'core socket'],
-                                                              'finger_accents': [RELEASE]}),
+                                                              'finger_accents': [RELEASE],
+                                                              'accents': [7, RELEASE]}),   # fling out of the tense, release
         ('Open Circuit', list(range(1, OC_N+1)), oc_pose, False,
          {'Unfold': UNFOLD, 'Crown active': CROWN_ACTIVE}, {'seam_to': ['Open Circuit hold', 1]}),
         ('Open Circuit hold', list(range(1, HOLD_N+2)), hold_pose, True, {'Pulse': 1}, {}),

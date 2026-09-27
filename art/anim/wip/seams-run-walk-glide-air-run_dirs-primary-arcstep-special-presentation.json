@@ -2,7 +2,7 @@
   {
     "seam": "Run forward wrap",
     "max_mm": 0.0,
-    "bone": "R middle.2"
+    "bone": "R index.2"
   },
   {
     "seam": "Walk forward wrap",
@@ -17,27 +17,27 @@
   {
     "seam": "Glide loop wrap",
     "max_mm": 0.0,
-    "bone": "L toe"
+    "bone": "R toe"
   },
   {
     "seam": "Glide exit to Run forward f1",
     "max_mm": 0.0,
-    "bone": "R middle.3"
+    "bone": "L toe"
   },
   {
     "seam": "Jump to Ascend f1",
     "max_mm": 0.0,
-    "bone": "R toe"
+    "bone": "L toe"
   },
   {
     "seam": "Ascend wrap",
     "max_mm": 0.0,
-    "bone": "R toe"
+    "bone": "L muzzle"
   },
   {
     "seam": "Descend wrap",
     "max_mm": 0.0,
-    "bone": "R toe"
+    "bone": "L toe"
   },
   {
     "seam": "Land from Descend f1",
@@ -47,32 +47,32 @@
   {
     "seam": "Run backward wrap",
     "max_mm": 0.0,
-    "bone": "L heel socket"
+    "bone": "L middle.3"
   },
   {
     "seam": "Run left wrap",
     "max_mm": 0.0,
-    "bone": "L ring.2"
+    "bone": "halo 1"
   },
   {
     "seam": "Run right wrap",
     "max_mm": 0.0,
-    "bone": "R thumb.3"
+    "bone": "L heel socket"
   },
   {
     "seam": "Arc Step start from Arc Step end f16",
     "max_mm": 0.0,
-    "bone": "R toe"
+    "bone": "L muzzle"
   },
   {
     "seam": "Arc Step start to Arc Step loop f1",
     "max_mm": 0.0,
-    "bone": "R little.3"
+    "bone": "R muzzle"
   },
   {
     "seam": "Arc Step loop wrap",
     "max_mm": 0.0,
-    "bone": "R little.3"
+    "bone": "L toe"
   },
   {
     "seam": "Arc Step end from Arc Step loop f1",
@@ -82,27 +82,27 @@
   {
     "seam": "Arc Step end to Arc Step start f1",
     "max_mm": 0.0,
-    "bone": "R toe"
+    "bone": "L muzzle"
   },
   {
     "seam": "Charge loop wrap",
     "max_mm": 0.0,
-    "bone": "R ring.3"
+    "bone": "R thumb.1"
   },
   {
     "seam": "Charge full wrap",
     "max_mm": 0.0,
-    "bone": "R thumb.3"
+    "bone": "L middle.3"
   },
   {
     "seam": "Open Circuit to Open Circuit hold f1",
     "max_mm": 0.0,
-    "bone": "L ring.3"
+    "bone": "L middle.3"
   },
   {
     "seam": "Open Circuit hold wrap",
     "max_mm": 0.0,
-    "bone": "R muzzle"
+    "bone": "L ring.3"
   },
   {
     "seam": "Open Circuit end from Open Circuit hold f1",
@@ -112,41 +112,41 @@
   {
     "seam": "Idle wrap",
     "max_mm": 0.0,
-    "bone": "L toe"
+    "bone": "R little.3"
   },
   {
     "seam": "Idle from Land f15",
     "max_mm": 0.0,
-    "bone": "R heel socket"
+    "bone": "R pauldron"
   },
   {
     "seam": "Idle to Jump f1",
     "max_mm": 0.0,
-    "bone": "L toe"
+    "bone": "R little.3"
   },
   {
     "seam": "Idle combat wrap",
     "max_mm": 0.0,
-    "bone": "L toe"
+    "bone": "R thumb.3"
   },
   {
     "seam": "Spawn to Idle f1",
     "max_mm": 0.0,
-    "bone": "R little.2"
+    "bone": "L muzzle"
   },
   {
     "seam": "Select idle wrap",
     "max_mm": 0.0,
-    "bone": "L thumb.3"
+    "bone": "L ring.2"
   },
   {
     "seam": "Select intro from Select idle f1",
-    "max_mm": 0.0,
-    "bone": "tabard front.3"
+    "max_mm": 0.001,
+    "bone": "R muzzle"
   },
   {
     "seam": "Select intro to Select idle f1",
-    "max_mm": 0.0,
-    "bone": "L middle.2"
+    "max_mm": 0.001,
+    "bone": "R muzzle"
   }
 ]

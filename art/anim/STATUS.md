@@ -1,9 +1,36 @@
 # Hollow Saint animation: live status
 
-Updated 2026-09-27 01:45 (v17) by the coordinator agent (refinement pass, `REFINEMENT-PLAN.md`). For remote check-ins: this page and
+Updated 2026-09-27 08:55 PT (v23, run 5) by the coordinator agent (refinement pass, `REFINEMENT-PLAN.md`). For remote check-ins: this page and
 `art/anim/review.html` (GIFs of every clip) are the current state. **Nothing needs the user.**
 
 ## Checkpoints
+
+- `art/anim/hollow-saint-anim-v23.blend` (**latest**, 59 clips): run 5, item 9h (eight-direction locomotion).
+  - 26 new clips: 4 run diagonals, 7 walk directions, 2 run leans, 2 pivot 180s, 2 plant turn 90s, and Arc Step
+    back/left/right (start/loop/end each).
+  - Full QA (`full_qa_ok`): **11/59 PASS** (v22: 10/33; the new one is Walk backward). No v22 clip lost PASS.
+  - Earlier gates: every clip passes, except the hand-contact check on Arc Step left start and Arc Step right
+    start (a hand brushes the crouched knee on f4; see 9h below).
+  - **All 66 seams exact** (worst 0.001 mm). Summary in `art/anim/v23/qa-summary.json`. Details under
+    "Refinement item 9h" below.
+- `art/anim/hollow-saint-anim-v22.blend` (33 clips, superseded by v23): run 5, item 9i (full-body audit fixes).
+  - PASS now includes the 9i full-body QA (`full_qa_ok`), which is much stricter than before.
+  - Result: **10/33 clips PASS**. v21 would score 0/33 on the same gate (every clip then had 6–62 mm contacts or
+    pops up to 125 deg/f²).
+  - Every earlier gate still passes on 33/33: bake, IK, hand QA, hand contact, hand orientation, arm clearance
+    and pads.
+  - **All 30 seams exact** (worst 0.001 mm, Select intro). Summary in `art/anim/v22/qa-summary.json`.
+  - Before/after in `art/anim/wip/audit-full/fixes/9i-before-after.md`. Details under "Refinement item 9i" below.
+- `art/anim/hollow-saint-anim-v21.blend` (33 clips, superseded by v22): run 5, item 9g (shoulder pads / pauldrons).
+  QA: 33/33 PASS including the new pad contact check (worst 2.3 mm, limit 5) and the 9c/9f hand checks;
+  **all 30 seams 0.0 mm**. Summary in `art/anim/v21/qa-summary.json`; details under "Refinement item 9g" below.
+- `art/anim/hollow-saint-anim-v20.blend` (33 clips, **superseded by v21, don't use**): the first 9g save. Its pad and
+  halo smoothing left 7 seams inexact (Arc Step start/end <-> loop 23.9 mm on the halo, four pad seams 1-3 mm).
+  v21 fixes that; the clips are otherwise the same.
+- `art/anim/hollow-saint-anim-v19.blend` (33 clips): run 4, item 9f (hand orientation) plus FULL-AUDIT
+  M6 (R arm skeleton refit), which the plan requires before the 9f roll work. QA: 33/33 PASS, now including the
+  new orientation check; **all 30 seams 0.0 mm**. Summary in `art/anim/v19/qa-summary.json`; details under
+  "Refinement item 9f" below.
 
 - `art/anim/hollow-saint-anim-v1.blend`: Run forward, Walk forward, Glide enter / loop / exit
   on v18 (plus the six older HS_v10 studies). v18 unchanged.
@@ -13,7 +40,7 @@ Updated 2026-09-27 01:45 (v17) by the coordinator agent (refinement pass, `REFIN
   Arc Step start/loop/end.
 - `art/anim/hollow-saint-anim-v4.blend` (latest, 28 clips): v3 + Charge loop, Charge full,
   Discharge, Open Circuit, Open Circuit hold, Open Circuit end. Pauldron fix applied to all clips.
-- `art/anim/hollow-saint-anim-v18.blend` (**latest**, 33 clips): run 3 item c, the item 8 re-check after 9d/9e.
+- `art/anim/hollow-saint-anim-v18.blend` (33 clips): run 3 item c, the item 8 re-check after 9d/9e.
   Nothing regressed, so no clip code changed and this is a rebuild of v17 (QA as `art/anim/v17/qa-summary.json`).
   - Aim up/down/left/right: ±66 deg, PASS.
   - Arc Step: IK miss 0.07/0.08 mm and dash legs 0.985. The 0.997 reading is the straight-legged rest pose on
@@ -302,6 +329,187 @@ All previews re-rendered after the pauldron fix (all 33 PASS); `review.html` is 
     claw cradle, the Discharge clench and burst, the Open Circuit splay and recall, the Select intro point, and
     the Idle/Spawn rest hands. No thumb hyperextension, no thumb through the palm, no pops above the limit
     (worst 11.7 deg/f², Arc Step end). The v15 close-ups moved to `art/anim/wip/hands/_v15/`.
+- **Refinement item 9f (hand orientation) + FULL-AUDIT M6: DONE (v19, run 4).**
+  - **Finding: the v18 hands were mirrored.** Confirmed by eye in colour-coded close-ups (thumb red, index green,
+    little purple; `art/anim/wip/hands/orientation/v18-check/`) and by geometry: each hand had the other hand's
+    handedness (L +0.75, R -0.75). At rest the palm faced forward-medial with the thumb and index on the back edge,
+    so any forearm roll that turned the thumb up also turned the palm backward. Forearm roll alone could not
+    satisfy the rule.
+  - **Rig fix (`handfix.py`, applied on load):** each hand's finger bones and hand meshes (except the wrist cuff and
+    conductor) are reflected across the plane through the knuckles normal to the index-little axis. The fingers
+    still curl toward the palm, and handedness is now L -0.75 / R +0.75. Splay/fan code (`handpass`,
+    `presentation`) takes `handfix.ZSIGN`. `special.py` and Arc Step calibrate their signs from the geometry.
+  - **M6 (`armfit.py`, applied on load before `rigfix`):** the body mesh is centred on x = -0.0375, but v18's arm
+    bones were mirrored about x = 0. That put the R shoulder, elbow and wrist pivots 75, 66 and 72 mm off the R arm
+    mesh. They now sit on the R mesh seams (using the L side's bone-to-seam offset). The R finger bones and hand
+    meshes already fitted each other and are unchanged. The R arm mesh itself is not a mirror of the L (its
+    forearm is modelled about 4 cm further forward), so the R upper arm is now 243 mm against 278 on the L. That
+    comes from the mesh, not the fit. Arc Bolt muzzle aim after the refit: 0.07 deg (R) / 0.03 deg (L).
+  - **Roll (supination, not wrist kinks):** a new orient step in `handpass` runs after the finger/wrist limits.
+    On raised or extended arms, it finds the smallest forearm roll (plus up to 40% upper-arm twist on straight arms)
+    that puts the thumb up and the palm off backward, weighted by the same gate as the QA so it fades in
+    smoothly. The wrist is not bent for this. Charge full's orb cradle couldn't reach both targets, so its palm
+    target now tips about 20 deg forward and no roll is needed there.
+  - **New QA (`handorient.py`, part of PASS):** on frames where the upper arm is raised more than 45 deg, or the
+    elbow is open more than 140 deg with more than 30 deg of raise (both relative to the chest, swept-back arms
+    excluded), thumb-up must be >= 0 and palm-forward >= -0.25. `qa.json` has per-hand failing frame ranges and
+    the worst values. v18 failed it on all 33 clips (`hands/orientation/audit-v18.json`). The check also flags
+    wrong-handed hands, and on top of that the thumbs pointed fully down (-0.8 to -1.0) in Jump, Arc Bolt, Arc
+    Step, Open Circuit, Charge full and Select intro. v19 passes all 33. Its worst gated values are thumb +0.07
+    and palm -0.09. On forward-reaching arms the palm faces inward, which is the natural thumb-up grip.
+  - Side effects fixed: the reflected fingers brought the L hand closer to the thighs, so the arms moved out a
+    little. Walk adduct 10 -> 7 and backpedal 15 -> 7 now clear 29 and 25 mm. Strafes 14 -> 11, the Arc Step
+    wind-up 6 deg wider, and the Spawn crouch left arm 6 deg wider now read 0 mm contact.
+  - Before/after close-ups (v18 vs v19; front, back, palm and thumb views per hand) for Rest, Run forward, Arc
+    Bolt right, Jump, Open Circuit, Arc Step end, Charge full, Glide loop and Select intro are in
+    `art/anim/wip/hands/orientation/after-v19/<clip>/orient.gif` and `orient-sheet.jpg`; the v18 frames are in
+    `before-v18/`.
+  - Still open for 9i: forearm roll relative to the upper arm now reaches 80-90 deg in Arc Step and Open Circuit.
+    That passes the current hand QA (95 deg) but not the audit's new joint-sanity check (60 deg without twist
+    bones). The S6 twist bones will share it.
+- **Refinement item 9g (shoulder pads / pauldrons): DONE (v21, runs 4-5).**
+  - **Cause (SHOULDER-AUDIT):** each pad copied 40% of the whole upper-arm rotation about the shoulder joint, so on
+    big raises its inner edge dug into the collar/neck and its underside into the deltoid. Separately, the halo's
+    lower arcs and the yoke bar sat inside both pads at rest (10-13 mm), and the halo's own keyed lag/tilt drove the
+    arcs further in (Arc Bolt, Select intro, Idle combat, Arc Step).
+  - **Placement (`padfix.py`, applied on load):** the R scapula/pauldron bones mirror the L ones about the mesh
+    centre (they had the same x = 0 mirror error as the old R arm). The whole halo assembly moves 6.5 cm back and
+    3 cm up, so the lower arcs and yoke clear the pads at rest. The yoke bar's ends are trimmed 5.5 cm so they stop at
+    the lower-arc docks instead of poking out as bare rods behind the pads. The 40% Copy Rotation is muted for good.
+  - **Drive (`padpass.py`, runs in `bake` on every frame):** a pad takes a share of the upper arm's swing relative to
+    the chest (sideways raise 50%, forward/back 25%, horizontal 20%, twist ignored). It hinges on its collar-side
+    edge, so the outer edge lifts with the arm while the inner edge stays on the collar, and it lifts 1.5 cm up and
+    8 mm out at full raise. If a pad would meet the halo's lower arc, it gives up some of that follow. If any collar,
+    neck or upper-arm skin still ends up inside it, it lifts off just far enough. Both corrections are smoothed over
+    time and never go below what each frame needs. Loops keep the exact per-frame solve at their seam frames (new
+    meta `seam_anchors`), so seams stay 0.0 mm. A residual halo nudge (up/back) covers the few frames where an arc
+    would still come within 4 mm of a pad.
+  - **Halo at the source:** the halo root now tilts about the lower-arc dock instead of the ring centre
+    (`padfix.halo_pose`), so recoil and lean swing the top of the ring. Arc Bolt's yaw trail is damped, the
+    Arc Step lower arcs flare sideways only, and `hs_anim.halo_tether` soft-limits the halo lag's drop and forward
+    swing to 8 mm. Arc Bolt now needs 0-1 mm of halo correction instead of about 107 mm.
+  - **Arc Step neck (also FULL-AUDIT M2):** the dash counter-pitched the neck and head back 54 deg to keep the face
+    level, which bent the collar skin up into the pads (the pads had to lift ~6 cm off it). The neck now carries 40%
+    and the head 80% of that, so the head tucks into the dash (face about 25 deg down). The pad lift in Arc Step
+    dropped from 62-67 mm to 0-4.5 mm.
+  - **New QA (`contact.PadContact`, part of PASS):** pads vs torso, neck/collar and upper arm (beyond rest), and vs
+    the halo lower arcs and yoke bar (absolute), every frame, limit 5 mm. v19 failed it on most clips; v21 passes all 33
+    (worst 2.3 mm, Run forward R pad vs halo arc 3). `bake` also reports `pad_follow_max`, `halo_clear_push_max_mm`,
+    `pad_pop_mm_f2` and `halo_pop_mm_f2`.
+  - **Pops:** pad acceleration relative to the chest stays under 15 mm/f² except where the arm itself snaps:
+    Discharge's burst (71/91 mm/f², the declared accent), Arc Step start/end (25-45), Arc Bolt left (26). The
+    close-ups read smoothly through those frames.
+  - **Still visible, not clipping:** in Arc Step, Glide loop and Select intro the halo sits 3-9 cm further back than
+    its keyed pose (the residual nudge), which reads as a trailing halo. The small back shard at extreme raises
+    (item 1) doesn't show in the close-ups.
+  - **Before/after (v19 top, v21 bottom), colour-coded close-ups (pads orange, halo cyan, yoke yellow) from front,
+    back, top and both outsides:** `art/anim/wip/shoulders/<clip>/pads.gif` + `pads-sheet.jpg` for Rest, Idle,
+    Idle combat, Run forward, Discharge, Open Circuit, Glide enter, Glide loop, Arc Bolt right, Aim up, Select intro
+    and Arc Step start/loop/end. Tools: `pad_closeup.py`, `pad_sheet.py`.
+- **Refinement item 9i (full-body audit fixes, FULL-AUDIT M1-M6 / S1-S10): DONE (v22, run 5).**
+  - **Rig fixes on load (`bodyfix.py`).**
+    - The tabard Shrinkwrap is removed for good (Blender-only, it hid M1). The TABARD now rides the body flap
+      under it.
+    - The collar skin gets a chest -> neck -> head weight gradient (M2/S4), and the scapula shells and back node
+      move out of the skin.
+    - Chest core, chest/rib/abdomen plates and sigil rings move as rigid blocks (M3/S5); rigid edge change is
+      now under 2.2% everywhere.
+    - Conductors, cuffs, shells and neck cables take their weights from the skin under them, so they follow it
+      instead of tearing.
+    - Thigh weights fade into the pelvis (S3), the shins are re-rolled so X is the knee hinge (S8), and forearm
+      twist bones are added (S6).
+  - **Tabard motion (`tabardpass.py`).**
+    - The body's loincloth flaps swing just far enough to keep the legs 4 mm off their inner surface.
+    - Per-bone bend limits (10-22 deg) stop the flap's large faces from bending through the TABARD cloth.
+  - **Hands and forearm roll.**
+    - `handpass.finish` blurs the forearm roll over time, but only within the range that still passes the
+      orientation check. Seam and end frames stay exact.
+    - The worst roll step dropped from 81 to under 20 deg/f² outside accents.
+    - Run authors its own forearm roll (`ROLL_UP`) instead of letting the hand pass snap it.
+  - **Feet.** `gait` `angle_blur` smooths foot pitch/toe in time, and the backward run matches touch-down speed to
+    the stance slide.
+  - **Poses.** Jump, Land and Discharge declare their deliberate snaps as `accents`: Jump f3/f5, Land f2,
+    Discharge f7/f9. Special-move solves keep a per-pose waist margin, so elbows no longer sink into the hips
+    (M5: Discharge 45 -> 3.7 mm).
+  - **Result vs the v21 audit baseline** (`fixes/compare-v21-v22.md`):
+    - Full QA passes on 0 -> 10 clips.
+    - Worst contact 62 -> 17 mm, excluding the exempt hip/armpit creases.
+    - Worst plain pop 125 -> 28 deg/f².
+  - **Still failing (honest list).**
+    - Shin into the body flap panels: Spawn 17, Run back 15, Run right 14, Select idle 8, Idle combat 7 mm.
+    - Tabard front into thighs: Spawn 13.5, Glide enter 12.7, Run fwd 12.5 mm.
+    - Arc Step feet/shins: 10-12 mm (S1 partial).
+    - Neck cables into head: Spawn 10.7, Charge full 9, Aim down 7.9 mm.
+    - Back conductors into neck: 6-9.7 mm in 9 clips.
+    - Spawn halo: arc 2 into arc 1 11 mm; arc 4 into R pauldron 8 mm.
+    - Plain pops of 21-28 deg/f²: Glide enter, Run fwd/back/left, Arc Step start/end, Jump/Walk tabard,
+      Discharge f2 (the gather, to be reworked in item 11).
+  - **S9 (leg symmetry): report only.**
+    - The body mesh itself is 20-35 mm asymmetric (median) at the limbs, so mirroring the skeleton would pull
+      the bones out of their own skin.
+    - Permanent check 7 (L/R rest bones within 5 mm) therefore cannot pass on this mesh. It is reported, not
+      gated.
+  - **PROPOSALS (not approved):**
+    - Detach the body flap panels into the TABARD objects so the tabard pass can move them. That would clear
+      most of the shin/flap contacts.
+    - Replace check 7 with a bone-to-own-skin fit test.
+    - A symmetric re-sculpt of the legs.
+- **Refinement item 9h (eight-direction locomotion): DONE (v23, run 5).**
+  - **Travel and turn channels.** Every clip keys `hs_move_x` / `hs_move_y` on the root: the travel direction
+    relative to facing (+x = character right, +y = forward), unit length while moving (0/0 when still). The heel jets and sparks
+    (`vfx.py`) trail back along that vector instead of the facing, so a strafe's exhaust points sideways. Turn
+    clips also key `hs_turn`, which runs 0..1 over the clip's `meta.turn_deg` (+ = left). Unity reads it to
+    rotate the capsule in sync with the feet.
+  - **Run and walk, 8 directions (`loco8`, `run_dirs`).**
+    - All run directions share Run forward's 16-frame cycle and foot timing (L contact f1, R f9). All walk
+      directions share Walk forward's 26-frame cycle. Contact frames are therefore identical across each blend
+      space.
+    - Run diagonals (forward/backward right/left) blend the two neighbouring cardinal upper bodies 50/50, as a
+      blend tree would, with the feet solved along the diagonal.
+    - New walks: backward, left, right and the four diagonals. The side walk is authored slow (0.6 m/s) so the
+      feet stay about 19 cm apart as they close.
+    - The strafe runs were re-timed to the shared cycle at 3.4 m/s. A wider stance plus a small L foot offset
+      stops the legs crossing; the ankle gap stays positive through every pass.
+    - v23 fix: on the left diagonals the L upper arm opens 5 deg, so the L hand clears the lead thigh (4-8 mm
+      before, now 43-46 mm).
+  - **Blend QA (`blend_qa.py`, `art/anim/wip/locomotion8/blend-*.json`).** It plays neighbouring pairs mixed
+    50/50 and measures planted-foot slide.
+    - The v22 four-direction space slid 199-309 mm per contact at 50/50.
+    - The eight-direction space slides 10-34 mm (run) and 6-17 mm (walk).
+    - The 1 cm target is met by 6 of the 8 walk pairs and none of the 8 run pairs. The worst pairs are Run
+      forward with the forward diagonals (33-34 mm) and Walk forward with the forward diagonals (17 mm).
+  - **Turns (`turns`).** Run lean left/right (loops, blend with Run forward), Run pivot 180 left/right (20 f)
+    and Plant turn 90 left/right (16 f).
+    - Each turn starts on Run forward f1 and ends on Run forward f9, with exact seams both ways.
+    - v23 fix: both seams were 5-9 mm out (halo root and tabard front.3), because Run forward smoothed f9 and
+      picked a different halo nudge direction. Run forward now pins f9 as a seam anchor, and the turns take Run
+      forward's halo nudge direction (new meta `halo_clear_dir`).
+  - **Arc Step in 4 directions (`arcstep_dirs`).** Back, left and right, each with start/loop/end, built on the
+    forward Arc Step with exact seams to its rest pose. The loops are marked `air_ok` for use in the air.
+    - Back: the body leans back and the knees tuck up ahead of the hips.
+    - Left/right: the body rolls 36 deg into the dash with the feet folded behind. The arms tuck in low and bent
+      ahead of the roll; with the arms high, the hand-orientation solve flipped the forearms (up to 359 deg/f²).
+  - **Stitched GIFs (hero + chase, root motion on a checker floor), each at `art/anim/wip/locomotion8/<name>/`:**
+    - `stick-circle`: run around all 8 directions.
+    - `figure-8`: walk, two opposite circles.
+    - `zig-zag`: forward-diagonal alternation.
+    - `reversal-180`: run, then a pivot left, then run again, then a pivot right.
+    - `diag-run-to-glide` and `glide-to-diag-land`.
+    - `stitch.py` gained `out` and `root_motion` spec keys for these. Hand-off ratios are 1.0-1.4, except
+      tabard front.3 at the Run forward -> pivot cut (3.29) and at BL -> B (2.03). Item 10 will look at those.
+  - **Still failing (honest list).**
+    - Hand contact at Arc Step left/right start f4: the travel-side hand brushes its own crouched knee, 24-31 mm
+      beyond rest. Five variants were tried; none cleared it without bringing back the forearm flips. It is not
+      exempted.
+    - Pops: Arc Step start/end accent thigh pops of 72-85 deg/f² (accent limit 60). The turns have R shin pops of
+      34-38 deg/f² at the drive-off (Run forward: 26), and Run lean right has an R forearm pop of 31.
+    - Full-QA contacts: shin into the pelvis creases (6-17 mm) and the tabard into the shins/thighs (6-23 mm),
+      the same classes as the cardinal runs. Arc Step right has L upperarm > spine 12 mm.
+    - Blend slide is over 1 cm in every run pair (see above).
+    - Cardinal run starts/stops (optional in the plan) are not done.
+  - **PROPOSAL (not approved): foot IK for the blend space.** In Unity, turn on humanoid Foot IK for the
+    locomotion layer, and have a small grounding script lock a foot on its planted interval (the contact
+    markers). Authoring can't remove the last 1-3 cm of slide in a 50/50 mix of two different strides.
 - **Item 10** (expanded gameplay transitions) is not started yet (last).
 - Tooling: `refresh.py vN` reruns every preview (QA and renders), seams, sheets/GIFs, review.html
   and writes `art/anim/vN/qa-summary.json`. `preview.py` no longer deletes frames; stale frames
@@ -321,8 +529,10 @@ All previews re-rendered after the pauldron fix (all 33 PASS); `review.html` is 
 
 ## Open issues
 
-- Shoulder crumple in high arm raises: much reduced in v7 (helper bones), small back shard left.
+- Shoulder crumple in high arm raises: much reduced in v7 (helper bones), small back shard left. Pads no longer clip
+  (9g, v21).
 - No export or in-game test yet.
 - Crown hold sways +-9 deg; a continuous spin would be done in Unity on `halo root`.
-- Arm bones sit 3.75 cm off the mesh centreline, so L/R arm poses don't mirror exactly.
+- Arm bones sat 3.75 cm off the mesh centreline (fixed in v19 by `armfit.py`). The R arm mesh is still not a mirror
+  of the L arm mesh, so L/R arm poses can't mirror exactly.
 - For Unity: halo bones on their own avatar-mask layer would let the crown hold play under Arc Bolt.

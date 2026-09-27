@@ -1,0 +1,113 @@
+{
+ "mid_x": -0.0375,
+ "bones": {
+  "upperarm": {
+   "mesh_mirror_mm_p50": 22.1,
+   "mesh_mirror_mm_p90": 35.1,
+   "skin_centroid_mirror_mm": 23.2,
+   "bone_head_mirror_mm": 15.5,
+   "L_head_to_skin_centroid_mm": 189.1,
+   "R_head_to_skin_centroid_mm": 171.0,
+   "verts": [
+    120,
+    105
+   ]
+  },
+  "forearm": {
+   "mesh_mirror_mm_p50": 34.7,
+   "mesh_mirror_mm_p90": 51.5,
+   "skin_centroid_mirror_mm": 63.0,
+   "bone_head_mirror_mm": 38.8,
+   "L_head_to_skin_centroid_mm": 189.0,
+   "R_head_to_skin_centroid_mm": 200.6,
+   "verts": [
+    28,
+    31
+   ]
+  },
+  "hand": {
+   "mesh_mirror_mm_p50": 47.8,
+   "mesh_mirror_mm_p90": 47.9,
+   "skin_centroid_mirror_mm": 75.4,
+   "bone_head_mirror_mm": 69.3,
+   "L_head_to_skin_centroid_mm": 25.9,
+   "R_head_to_skin_centroid_mm": 15.6,
+   "verts": [
+    3,
+    5
+   ]
+  },
+  "forearm twist": {
+   "mesh_mirror_mm_p50": 28.9,
+   "mesh_mirror_mm_p90": 46.5,
+   "skin_centroid_mirror_mm": 46.3,
+   "bone_head_mirror_mm": 38.8,
+   "L_head_to_skin_centroid_mm": 78.6,
+   "R_head_to_skin_centroid_mm": 71.3,
+   "verts": [
+    26,
+    34
+   ]
+  },
+  "shoulder": {
+   "mesh_mirror_mm_p50": 13.6,
+   "mesh_mirror_mm_p90": 21.8,
+   "skin_centroid_mirror_mm": 19.7,
+   "bone_head_mirror_mm": 15.5,
+   "L_head_to_skin_centroid_mm": 81.3,
+   "R_head_to_skin_centroid_mm": 76.5,
+   "verts": [
+    26,
+    24
+   ]
+  },
+  "thigh": {
+   "mesh_mirror_mm_p50": 27.8,
+   "mesh_mirror_mm_p90": 45.9,
+   "skin_centroid_mirror_mm": 19.3,
+   "bone_head_mirror_mm": 75.0,
+   "L_head_to_skin_centroid_mm": 112.2,
+   "R_head_to_skin_centroid_mm": 144.1,
+   "verts": [
+    210,
+    133
+   ]
+  },
+  "shin": {
+   "mesh_mirror_mm_p50": 19.4,
+   "mesh_mirror_mm_p90": 33.0,
+   "skin_centroid_mirror_mm": 36.0,
+   "bone_head_mirror_mm": 30.1,
+   "L_head_to_skin_centroid_mm": 263.8,
+   "R_head_to_skin_centroid_mm": 242.7,
+   "verts": [
+    363,
+    324
+   ]
+  },
+  "foot": {
+   "mesh_mirror_mm_p50": 19.8,
+   "mesh_mirror_mm_p90": 47.8,
+   "skin_centroid_mirror_mm": 24.7,
+   "bone_head_mirror_mm": 24.5,
+   "L_head_to_skin_centroid_mm": 80.4,
+   "R_head_to_skin_centroid_mm": 82.2,
+   "verts": [
+    253,
+    180
+   ]
+  },
+  "toe": {
+   "mesh_mirror_mm_p50": 26.3,
+   "mesh_mirror_mm_p90": 67.4,
+   "skin_centroid_mirror_mm": 77.5,
+   "bone_head_mirror_mm": 43.3,
+   "L_head_to_skin_centroid_mm": 110.1,
+   "R_head_to_skin_centroid_mm": 120.4,
+   "verts": [
+    107,
+    103
+   ]
+  }
+ }
+}

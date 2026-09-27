@@ -1,0 +1,32 @@
+{
+ "plant_z": 0.06,
+ "slide_max_mm": 10.0,
+ "pairs": [
+  {
+   "a": "Run backward right",
+   "b": "Run backward",
+   "w": 0.5,
+   "contacts": 2,
+   "contact_slide_mm": 19.4,
+   "step_err_mm": 15.2,
+   "sink_mm": 42.1,
+   "gap_mm": {
+    "toe": 351.5,
+    "foot": 268.8,
+    "shin": 295.6
+   },
+   "phase": {
+    "Run backward right": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    },
+    "Run backward": {
+     "L contact": 0.0,
+     "R contact": 0.5
+    }
+   },
+   "ok": false
+  }
+ ],
+ "ok": false
+}

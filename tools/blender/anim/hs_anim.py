@@ -30,9 +30,9 @@ def require_background():
 
 
 def open_start(path=START, fix=True):
-    """Open v18 (never saved in place). fix applies the R arm refit (armfit.py, M6), the shoulder
-    corrective (rigfix.py), the hand chirality fix (handfix.py, 9f) and the VFX (vfx.py: heel thrust jets,
-    emissive glow, keyed through root-bone properties)."""
+    """Open v18 (never saved in place). fix applies the R arm refit (armfit.py, M6), the pauldron/halo
+    placement fix (padfix.py, 9g), the shoulder corrective (rigfix.py), the hand chirality fix (handfix.py, 9f),
+    the full-body fixes (bodyfix.py, 9i) and the VFX (vfx.py: heel thrust jets, emissive glow, keyed through root-bone properties)."""
     require_background()
     bpy.ops.wm.open_mainfile(filepath=str(path))
     bpy.context.preferences.filepaths.save_version = 0
@@ -41,12 +41,16 @@ def open_start(path=START, fix=True):
         rig.animation_data.action = None
     if fix:
         import armfit
+        import padfix
         import rigfix
         import handfix
+        import bodyfix
         import vfx
         print('ARMFIT', json.dumps(armfit.apply(rig)), flush=True)
+        print('PADFIX', json.dumps(padfix.apply(rig)), flush=True)
         print('RIGFIX', json.dumps(rigfix.apply(rig)), flush=True)
         print('HANDFIX', json.dumps(handfix.apply(rig)), flush=True)
+        print('BODYFIX', json.dumps(bodyfix.apply(rig)), flush=True)
         print('VFX', json.dumps(vfx.apply(rig)), flush=True)
     return Poser(rig)
 
@@ -221,11 +225,11 @@ class Poser:
                         c.influence = w
 
     def followers(self, active):
-        """Pauldron (40%) and shoulder helper (rigfix) Copy Rotations of the upper arm. On while
-        posing so captures include them, muted for baked playback: the keys already hold their
-        effect, and Unity drops constraints."""
+        """Shoulder helper (rigfix) Copy Rotation of the upper arm. On while posing so captures include
+        it, muted for baked playback: the keys already hold its effect, and Unity drops constraints.
+        The pauldrons are driven by padpass.py instead (their Copy Rotation stays muted)."""
         for s in SIDES:
-            for bone in (f'{s} pauldron', f'{s} shoulder'):
+            for bone in (f'{s} shoulder',):
                 if bone not in self.pb:
                     continue
                 for c in self.pb[bone].constraints:
@@ -358,10 +362,24 @@ def soft_limit(o, max_offset):
     return o*(max_offset*math.tanh(o.length/max_offset)/o.length)
 
 
+HALO_TETHER_DOWN = 0.008   # m: soft limit of the halo lag's drop (lower arcs onto the pads)
+HALO_TETHER_FWD = 0.008    # m: soft limit of its forward (-Y) lag
+
+
+def halo_tether(o):
+    """Soft-limit a halo offset's downward and forward components (both close the lower-arc/pad gap)."""
+    o = o.copy()
+    if o.z < 0:
+        o.z = -HALO_TETHER_DOWN*math.tanh(-o.z/HALO_TETHER_DOWN)
+    if o.y < 0:
+        o.y = -HALO_TETHER_FWD*math.tanh(-o.y/HALO_TETHER_FWD)
+    return o
+
+
 def halo_offsets(pts, loop, max_offset=0.035, stiffness=70.0, damping=11.0, gain=0.5):
-    """World offsets for the halo root given its chest-attached positions per frame."""
+    """World offsets for the halo root given its chest-attached positions per frame (tethered, halo_tether)."""
     follow = spring_follow(pts, loop, stiffness, damping)
-    return [soft_limit((q-p)*gain, max_offset) for p, q in zip(pts, follow)]
+    return [halo_tether(soft_limit((q-p)*gain, max_offset)) for p, q in zip(pts, follow)]
 
 
 def halo_lag(poser, caps_by_frame, frames, loop, max_offset=0.035, tilt_per_m=70.0, stiffness=70.0, damping=11.0,
@@ -391,6 +409,27 @@ def halo_lag(poser, caps_by_frame, frames, loop, max_offset=0.035, tilt_per_m=70
 
 
 # ----------------------------------------------------------------------------- baking
+MOVE_DIRS = {'forward': (0.0, 1.0), 'backward': (0.0, -1.0), 'left': (-1.0, 0.0), 'right': (1.0, 0.0)}
+
+
+def move_vector(meta):
+    """Character-space travel direction (+x right, +y forward) for vfx hs_move_x/y: meta 'move' [x, y], else
+    'direction' (forward/backward/left/right), else 'travel' (Blender XY; the character faces -Y, so its right
+    is -X), else forward for locomotion and (0, 0) for everything else."""
+    if 'move' in meta:
+        x, y = meta['move']
+    elif meta.get('direction') in MOVE_DIRS:
+        x, y = MOVE_DIRS[meta['direction']]
+    elif 'travel' in meta:
+        x, y = -meta['travel'][0], -meta['travel'][1]
+    elif meta.get('kind') == 'locomotion':
+        x, y = MOVE_DIRS['forward']
+    else:
+        return 0.0, 0.0
+    n = math.hypot(x, y)
+    return (round(x/n, 4), round(y/n, 4)) if n > 1e-9 else (0.0, 0.0)
+
+
 def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None, legs_ik=1.0, arms_ik=0.0,
          props=None, hands=True):
     """Evaluate pose_fn(poser, frame) with IK on, bake FK to a new action, verify the bake.
@@ -413,13 +452,29 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
     if hands:
         poser.handpass.max_roll = {}
         poser.handpass.infeasible = 0
+        poser.handpass.prev = {}
+        poser.handpass.hist = []
+    from handpass import set_twist
+    if not hasattr(poser, 'padpass'):
+        import padpass
+        poser.padpass = padpass.PadPass(poser)
+    poser.padpass.hist = []
+    if not hasattr(poser, 'tabardpass'):
+        import tabardpass
+        poser.tabardpass = tabardpass.TabardPass(poser)
+    poser.tabardpass.hist = []
     for f in frames:
         poser.reset()
         poser.ik(legs_ik, arms_ik)
         pose_fn(poser, f)
         if hands:
             poser.handpass.apply()
+        poser.padpass.apply()
+        poser.tabardpass.apply()
+        set_twist(poser)
         caps[f] = poser.capture()
+        if hands:
+            poser.handpass.hist.append(dict(poser.handpass.frame_roll))
         if legs_ik > 0:
             for s in SIDES:
                 target = poser.world(f'{s} foot IK').translation
@@ -433,12 +488,30 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
                 e = (got-hip).length/leg_len[s]
                 if e > extension:
                     extension, ext_at = e, f'{s}{f}'
-    extra = {}
+    # Seam frames of a loop keep the raw pad/halo solve: meta `seam_anchors` (frames other clips start or end on,
+    # e.g. Run forward [1, 10] for Glide exit/enter), default [first frame]; [] for loops nothing hands off to.
+    anchors = (meta or {}).get('seam_anchors', [frames[0]])
+    pins = sorted(frames.index(f) for f in anchors if f in frames) if loop else []
+    extra = poser.handpass.finish(caps, frames, loop, pins) if hands else {}
+    extra.update(poser.padpass.finish(caps, frames, loop, pins))
+    extra.update(poser.tabardpass.finish(caps, frames, loop, pins))
     if hands:
         extra['orient_roll_max_deg'] = {s: round(v, 1) for s, v in poser.handpass.max_roll.items()}
         extra['orient_infeasible'] = poser.handpass.infeasible
     if post:
         extra.update(post(poser, caps, frames) or {})
+    # meta `halo_clear_dir` forces the halo nudge direction (chest space) to match a clip this one hands off to.
+    hdir = (meta or {}).get('halo_clear_dir')
+    extra.update(poser.padpass.halo_clear(caps, frames, loop, pins, [Vector(hdir).normalized()] if hdir else None))
+    per = len(frames)-1 if loop and len(frames) > 2 else len(frames)
+    for key, bone in (('pad_pop_mm_f2', '{} pauldron'), ('halo_pop_mm_f2', 'halo root')):
+        pops = {}
+        for s in (SIDES if '{}' in bone else ('',)):
+            rel = [(caps[f]['chest'].inverted() @ caps[f][bone.format(s)]).translation for f in frames[:per]]
+            idx = range(per) if loop else range(1, per-1)
+            pops[s or 'ring'] = round(max(((rel[i-1]+rel[(i+1) % per]-2*rel[i]).length*1000 for i in idx),
+                                          default=0.0), 1)
+        extra[key] = pops
     name = PREFIX+title
     old = bpy.data.actions.get(name)
     if old:
@@ -472,6 +545,10 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
     root = poser.pb.get('root')
     from vfx import PROPS
     keyed_props = [k for k in PROPS if root is not None and k in root.keys()]
+    move = move_vector(meta or {})
+    props = dict(props or {})
+    for k, v in zip(('hs_move_x', 'hs_move_y'), move):
+        props.setdefault(k, lambda _f, v=v: v)
     prop_peak = {}
     for f in frames:
         for k in keyed_props:

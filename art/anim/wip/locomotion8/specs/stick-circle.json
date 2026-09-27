@@ -1,0 +1,17 @@
+{
+  "name": "stick-circle",
+  "out": "locomotion8/stick-circle",
+  "root_motion": true,
+  "modules": ["run", "run_dirs", "loco8"],
+  "segments": [
+    {"clip": "Run forward", "start": 1, "frames": 12},
+    {"clip": "Run forward left", "frames": 12, "blend": 12, "sync": true},
+    {"clip": "Run left", "frames": 12, "blend": 12, "sync": true},
+    {"clip": "Run backward left", "frames": 12, "blend": 12, "sync": true},
+    {"clip": "Run backward", "frames": 12, "blend": 12, "sync": true},
+    {"clip": "Run backward right", "frames": 12, "blend": 12, "sync": true},
+    {"clip": "Run right", "frames": 12, "blend": 12, "sync": true},
+    {"clip": "Run forward right", "frames": 12, "blend": 12, "sync": true},
+    {"clip": "Run forward", "frames": 12, "blend": 12, "sync": true}
+  ]
+}

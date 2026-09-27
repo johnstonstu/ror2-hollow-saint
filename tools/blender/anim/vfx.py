@@ -4,7 +4,14 @@
   `hs_glow` (0..1) boosts the cyan emissive materials (veins, core, halo gap lights);
   `hs_jet` (0..~1.6) scales both heel thrust jets (0 = hidden);
   `hs_spark_L` / `hs_spark_R` (0..~0.4) add a per-foot flash on top (run push-off sparks);
-  `hs_jet_dir` (deg) tilts the exhaust below horizontal (0 = straight back along the travel line).
+  `hs_jet_dir` (deg) tilts the exhaust below horizontal (0 = straight back along the travel line);
+  `hs_move_x` / `hs_move_y`: character-space travel direction (+x = the character's right, +y = forward; unit
+  length while moving, 0/0 = none). The jets yaw so the exhaust trails opposite it (backpedal streams forward,
+  strafes sideways). `bake` fills them from meta `move` / `direction` / `travel` when a clip doesn't key them.
+  `hs_turn` (not VFX): turn clips' body-yaw progress, 0..1 of meta `turn_deg` (turns.py), for Unity to drive the
+  model yaw from; 0 in every other clip.
+  `hs_spear` (Conduit Spear, spear.py): 0..1 materialize progress of the lance along the R forearm, 1 at the
+  core flash, back to 0 on the release frame (the projectile takes over); 0 in every other clip.
 - Heel thrusters: per foot, a hot core cone, an outer cone and three zigzag arcs that spin with the frame
   (crackle). They ride the heel spur (`heel socket` tail, the Achilles base) but keep the character's
   orientation, so the exhaust always trails back along the line of travel, tilted down by `hs_jet_dir`
@@ -17,7 +24,8 @@ import bmesh
 import bpy
 from mathutils import Matrix, Vector
 
-PROPS = ('hs_glow', 'hs_jet', 'hs_spark_L', 'hs_spark_R', 'hs_jet_dir')
+PROPS = ('hs_glow', 'hs_jet', 'hs_spark_L', 'hs_spark_R', 'hs_jet_dir', 'hs_move_x', 'hs_move_y', 'hs_turn',
+         'hs_spear')
 GLOW_GAIN = 1.6          # emission x (1 + GAIN*hs_glow)
 GLOW_MATERIALS = ('V11 cyan conductor light', 'HYBRID cyan conductor', 'V11 cyan core hot',
                   'V11 halo gap light', 'V11 halo top gap light')
@@ -122,6 +130,13 @@ def dir_driver(obj, rig):
     fc.driver.type = 'SCRIPTED'
     add_var(fc.driver, rig, 'hs_jet_dir', 'd')
     fc.driver.expression = '1.570796-d*0.0174533'
+    # Yaw after the tilt (XYZ): +Y (behind) turns onto the exhaust direction. Character right is -X in Blender
+    # (it faces -Y), so exhaust = -travel = (hs_move_x, hs_move_y) in Blender XY; atan2(0, 0) = 0 keeps it behind.
+    fc = obj.driver_add('rotation_euler', 2)
+    fc.driver.type = 'SCRIPTED'
+    add_var(fc.driver, rig, 'hs_move_x', 'x')
+    add_var(fc.driver, rig, 'hs_move_y', 'y')
+    fc.driver.expression = 'atan2(-x, y)'
 
 
 def spin_driver(obj, rate):

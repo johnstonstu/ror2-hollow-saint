@@ -1,0 +1,26 @@
+{
+ "title": "Idle combat",
+ "tag": "r5c",
+ "rendered_frames": [
+  1,
+  5,
+  9,
+  13,
+  17,
+  21,
+  25,
+  29,
+  33,
+  37,
+  41,
+  45,
+  49
+ ],
+ "views": [
+  "front",
+  "back",
+  "top",
+  "outL",
+  "outR"
+ ]
+}

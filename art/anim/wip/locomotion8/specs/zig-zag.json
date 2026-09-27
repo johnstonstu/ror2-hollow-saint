@@ -1,0 +1,14 @@
+{
+  "name": "zig-zag",
+  "out": "locomotion8/zig-zag",
+  "root_motion": true,
+  "modules": ["run", "loco8"],
+  "segments": [
+    {"clip": "Run forward", "start": 1, "frames": 8},
+    {"clip": "Run forward left", "frames": 16, "blend": 6, "sync": true},
+    {"clip": "Run forward right", "frames": 16, "blend": 6, "sync": true},
+    {"clip": "Run forward left", "frames": 16, "blend": 6, "sync": true},
+    {"clip": "Run forward right", "frames": 16, "blend": 6, "sync": true},
+    {"clip": "Run forward", "frames": 12, "blend": 6, "sync": true}
+  ]
+}
