@@ -1,0 +1,22 @@
+{
+ "name": "loco-idle-walkback",
+ "modules": [],
+ "out": "transitions/temp/loco-idle-walkback",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Idle",
+   "frames": 16,
+   "start": 81
+  },
+  {
+   "clip": "Walk backward",
+   "frames": 40,
+   "blend": 8
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

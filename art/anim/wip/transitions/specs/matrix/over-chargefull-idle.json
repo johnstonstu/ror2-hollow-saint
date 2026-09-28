@@ -1,0 +1,30 @@
+{
+ "name": "over-chargefull-idle",
+ "modules": [],
+ "out": "transitions/matrix/over-chargefull-idle",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Charge full",
+   "frames": 25,
+   "blend": 6,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Idle",
+   "frames": 60
+  }
+ ]
+}

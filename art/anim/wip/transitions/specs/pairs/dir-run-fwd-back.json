@@ -1,0 +1,18 @@
+{
+ "name": "dir-run-fwd-back",
+ "modules": [],
+ "out": "transitions/pairs/dir-run-fwd-back",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 17
+  },
+  {
+   "clip": "Run backward",
+   "frames": 34,
+   "blend": 6,
+   "sync": true
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "name": "cancel-stop-midcast",
+ "modules": [],
+ "out": "transitions/matrix/cancel-stop-midcast",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 8
+  },
+  {
+   "clip": "Conduit Spear",
+   "frames": 20,
+   "blend": 5,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 16
+  },
+  {
+   "clip": "Run stop",
+   "frames": 16,
+   "start": 1
+  },
+  {
+   "clip": "Idle",
+   "frames": 30,
+   "start": 2
+  }
+ ]
+}

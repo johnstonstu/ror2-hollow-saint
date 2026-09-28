@@ -1,0 +1,30 @@
+{
+ "name": "snaplean-p14-b3",
+ "modules": [],
+ "out": "transitions/exp2/snaplean-p14-b3",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 14
+  },
+  {
+   "clip": "Discharge snap",
+   "frames": 14,
+   "blend": 3,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 10,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run lean left",
+   "frames": 50
+  }
+ ]
+}

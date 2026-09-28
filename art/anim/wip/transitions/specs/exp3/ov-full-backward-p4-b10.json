@@ -1,0 +1,25 @@
+{
+ "name": "ov-full-backward-p4-b10",
+ "modules": [],
+ "out": "transitions/exp3/ov-full-backward-p4-b10",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 4
+  },
+  {
+   "clip": "Meter full flourish",
+   "frames": 16,
+   "blend": 10,
+   "mask": "upper",
+   "lower": "track"
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run backward",
+   "frames": 40
+  }
+ ]
+}

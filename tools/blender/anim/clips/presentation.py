@@ -44,6 +44,8 @@ N_COMBAT = 48
 N_SPAWN = 72
 N_SEL = 96
 N_INTRO = 44
+SEL_FLICK = 1+round(0.70*N_SEL)                              # Select idle's right ring/little flick open
+SEL_FLICK_FRAMES = list(range(SEL_FLICK-3, SEL_FLICK+10))    # handnat curl order exempt (little opens past ring)
 
 ARM_K = ('swing', 'adduct', 'elbow', 'twist', 'ftwist', 'wx', 'wy', 'wz', 'lift',
          'curl', 'thumb', 'idx', 'mid', 'ring', 'lit', 'splay', 'fx', 'fy', 'fz', 'pitch', 'toe', 'yaw', 'kx')
@@ -626,7 +628,7 @@ def build(p):
              markers={'Awaken': AWAKEN, 'Halo lit': HALO_LIT, 'Ready': READY},
              meta={**pres, 'seam_to': ['Idle', 1]}, post=one_shot_post(spawn_pose, gain=HALO_GAIN)),
         bake(p, 'Select idle', list(range(1, N_SEL+2)), select_pose, True,
-             markers={'Inhale': 1}, meta=pres, post=loop_post),
+             markers={'Inhale': 1}, meta={**pres, 'curl_exempt': SEL_FLICK_FRAMES}, post=loop_post),
         bake(p, 'Select intro', list(range(1, N_INTRO+1)), intro_pose, False,
              markers={'Snap': SNAP, 'Halo flare': FLARE, 'Settled': N_INTRO},
              meta={**pres, 'seam_from': ['Select idle', 1], 'seam_to': ['Select idle', 1], 'finger_accents': [10, SNAP]},

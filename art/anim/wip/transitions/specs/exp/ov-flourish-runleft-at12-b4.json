@@ -1,0 +1,30 @@
+{
+ "name": "ov-flourish-runleft-at12-b4",
+ "modules": [],
+ "out": "transitions/exp/ov-flourish-runleft-at12-b4",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Meter full flourish",
+   "frames": 24,
+   "mask": "upper",
+   "lower": "track",
+   "blend": 4
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run left",
+   "frames": 80
+  }
+ ]
+}

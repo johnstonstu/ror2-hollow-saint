@@ -1,0 +1,32 @@
+{
+ "name": "step-left-run",
+ "modules": [],
+ "out": "transitions/matrix/step-left-run",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run left",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step left start",
+   "frames": 7,
+   "blend": 4
+  },
+  {
+   "clip": "Arc Step left loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step left end",
+   "frames": 4,
+   "start": 2
+  },
+  {
+   "clip": "Run left",
+   "frames": 24,
+   "blend": 4
+  }
+ ]
+}

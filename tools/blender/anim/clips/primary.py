@@ -21,6 +21,7 @@ import air
 N = 20
 ANTICIPATION = 3
 RELEASE = 5
+INTERRUPT = 13      # the next Arc Bolt (or any skill) may cut in from here: 2-frame chain blend (item 10)
 TARGET = Vector((0.0, -1.0, 0.0))
 # Muzzle x, z at release: in front of the shoulder, outside the torso so the arm reads from the
 # chase camera behind the character.
@@ -249,8 +250,10 @@ def build(p):
         base, score = solve_arm(p, side)
         print(f'PRIMARY arm {side} {base} score {score:.3f}', flush=True)
         out.append(bake(p, title, list(range(1, N+1)), lambda q, f, s=side, b=base: gesture_pose(q, f, s, b), False,
-                        markers={'Anticipation': ANTICIPATION, 'Bolt release': RELEASE, 'Recovered': N},
+                        markers={'Anticipation': ANTICIPATION, 'Bolt release': RELEASE, 'Interrupt': INTERRUPT,
+                                 'Recovered': N},
                         meta={'kind': 'gesture', 'hand': side, 'muzzle': f'{side} muzzle',
+                              'cancel': {'locked': [1, RELEASE], 'chain_from': INTERRUPT},
                               'finger_accents': [ANTICIPATION, RELEASE], 'accents': [ANTICIPATION, RELEASE],
                               'arm_release': {k: round(v, 2) for k, v in base.items()}},
                         post=gesture_post(side), legs_ik=0.0))

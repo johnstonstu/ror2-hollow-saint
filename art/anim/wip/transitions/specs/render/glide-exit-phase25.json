@@ -1,0 +1,27 @@
+{
+ "name": "glide-exit-phase25",
+ "modules": [],
+ "out": "transitions/temp/glide-exit-phase25",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Glide loop",
+   "frames": 8,
+   "start": 25
+  },
+  {
+   "clip": "Glide exit",
+   "frames": 14,
+   "blend": 4
+  },
+  {
+   "clip": "Run forward",
+   "frames": 24,
+   "start": 2
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

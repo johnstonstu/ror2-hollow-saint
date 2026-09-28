@@ -1,0 +1,44 @@
+{
+ "name": "over-charge-run",
+ "modules": [],
+ "out": "transitions/pairs/over-charge-run",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Charge loop",
+   "frames": 20,
+   "blend": 2,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "Charge full",
+   "frames": 25,
+   "blend": 6,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "Meter full flourish",
+   "frames": 24,
+   "blend": 4,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 110
+  }
+ ]
+}

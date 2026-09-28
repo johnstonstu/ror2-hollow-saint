@@ -1,0 +1,97 @@
+{
+ "title": "Idle",
+ "blend": "art\\anim\\wip\\hands2\\_work\\v25-copy.blend",
+ "rendered_frames": [
+  1,
+  25,
+  49,
+  73
+ ],
+ "body_views": [],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.24,
+    "palm_fwd": -0.046,
+    "hand": -0.748,
+    "raise": 28.948,
+    "elbow_open": 160.688,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.24,
+    "palm_fwd": -0.037,
+    "hand": 0.748,
+    "raise": 30.002,
+    "elbow_open": 155.324,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 25,
+   "L": {
+    "thumb_up": 0.252,
+    "palm_fwd": -0.056,
+    "hand": -0.748,
+    "raise": 29.576,
+    "elbow_open": 157.609,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.272,
+    "palm_fwd": -0.045,
+    "hand": 0.748,
+    "raise": 32.829,
+    "elbow_open": 152.536,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 49,
+   "L": {
+    "thumb_up": 0.241,
+    "palm_fwd": -0.042,
+    "hand": -0.748,
+    "raise": 28.948,
+    "elbow_open": 160.688,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.241,
+    "palm_fwd": -0.032,
+    "hand": 0.748,
+    "raise": 30.002,
+    "elbow_open": 155.324,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 73,
+   "L": {
+    "thumb_up": 0.282,
+    "palm_fwd": -0.045,
+    "hand": -0.748,
+    "raise": 31.755,
+    "elbow_open": 157.609,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.244,
+    "palm_fwd": -0.052,
+    "hand": 0.748,
+    "raise": 30.635,
+    "elbow_open": 152.536,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

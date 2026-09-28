@@ -587,6 +587,62 @@ def discharge_pose(p, f):
     apply(p, s)
 
 
+# -- Discharge snap (item 11): the passive auto-trigger overlay. No gather: the arms fling straight from rest into the
+# release on f3 (a small tense on f2), hold the hit-stop and recoil/settle faster than Discharge.
+SNAP_N = 14
+SNAP_RELEASE = 3
+
+
+def snap_keys():
+    k = discharge_keys()
+    rest, release, recoil = k[1], k[RELEASE], k[12]
+    tense = mix(rest, release, 0.3)
+    for side in 'LR':      # fingers stay relaxed until they burst open (a clench on f2 reverses inside the accent)
+        for c in ('curl', 'thumb', 'splay'):
+            tense[f'{side}_{c}'] = rest[f'{side}_{c}']
+    tense['chest_x'] += 4.0
+    tense['spine_x'] += 2.0
+    settle = mix(recoil, rest, 0.45)
+    settle.update(both(curl=10, splay=6))
+    low = mix(recoil, rest, 0.85)
+    low.update(both(curl=12, thumb=9, splay=2))
+    return {1: rest, 2: tense, SNAP_RELEASE: release, SNAP_RELEASE+HITSTOP: dict(release), 6: recoil, 9: settle,
+            12: low, SNAP_N: rest}
+
+
+def snap_pose(p, f):
+    s = keyed(f, SNAP_KEYS)
+    x = f-SNAP_RELEASE
+    fade = 1.0-ramp(f, SNAP_N-6, SNAP_N)
+    burst = burst_env(x)*fade
+    s['h_spread'] += BURST['spread']*burst
+    s['h_lift'] += BURST['lift']*burst
+    s['h_flare'] += BURST['flare']*burst
+    s['h_spin'] += 9*kick(x-HITSTOP+1, freq=2.6, decay=3.0)*fade
+    s['h_oy'] += 0.025*burst
+    s['h_oz'] += 0.02*burst
+    s['h_rx'] += -5*burst
+    for i in range(1, 5):
+        s[f'a{i}_flare'] += 5*kick(x-HITSTOP+1.5-0.5*i, freq=2.8, decay=3.0)*fade*(1 if i % 2 else -1)
+    apply(p, s)
+
+
+# -- Meter full flourish (item 11): Charge full played once as an upper-body overlay when the Discharge meter fills.
+# The arms rise from rest into the Charge full cradle, ride two of its heartbeats and drop back to rest.
+FLOURISH_N = 24
+FLOURISH_IN, FLOURISH_OUT = (1, 6), (15, FLOURISH_N)
+FLOURISH_BOW = 0.45
+
+
+def flourish_pose(p, f):
+    t = ((f-1) % FULL_N)/FULL_N
+    w = ramp(f, *FLOURISH_IN)*(1.0-ramp(f, *FLOURISH_OUT))
+    s = charge_state(t, True)
+    s['neck_x'] *= FLOURISH_BOW      # a lighter bow than the held loop: the neck cables meet the head at 13 deg
+    s['head_x'] *= FLOURISH_BOW
+    apply(p, mix(rest_state(), s, w))
+
+
 # -- Open Circuit
 OC_N = 30
 UNFOLD, CROWN_ACTIVE = 6, 22
@@ -956,19 +1012,30 @@ def diagnose(p, D, act, info):
 
 # ----------------------------------------------------------------------------- build
 def build(p):
-    global DIS_KEYS, OC_KEYS, END_KEYS
+    global DIS_KEYS, OC_KEYS, END_KEYS, SNAP_KEYS
     arc_geometry()
     solve_poses(p)
     D = diag_setup(p)
     DIS_KEYS = discharge_keys()
+    SNAP_KEYS = snap_keys()
     OC_KEYS = oc_keys()
     END_KEYS = end_keys()
     g = dict(kind='gesture', layer='upper body (mask excludes pelvis/legs)')
+    meter = 'meter full: the Discharge meter reached 100% (passive), upper-body overlay'
     specs = [
         ('Charge loop', list(range(1, CHARGE_N+2)), charge_pose(False), True,
-         {'Pulse high': 1+CHARGE_N//4, 'Pulse low': 1+3*CHARGE_N//4}, {}),
+         {'Pulse high': 1+CHARGE_N//4, 'Pulse low': 1+3*CHARGE_N//4},
+         {'role': f'{meter}; idle/idle-combat accent while the meter waits (hands leave the aim)'}),
         ('Charge full', list(range(1, FULL_N+2)), charge_pose(True), True,
-         {'Pulse high': 1+FULL_N//4}, {'seam_anchors': []}),
+         {'Pulse high': 1+FULL_N//4}, {'seam_anchors': [], 'role': f'{meter}; held flourish loop'}),
+        ('Meter full flourish', list(range(1, FLOURISH_N+1)), flourish_pose, False,
+         {'Full': FLOURISH_IN[1], 'Release': FLOURISH_OUT[0], 'Recovered': FLOURISH_N},
+         {'role': f'{meter}; one-shot (Charge full once, in and out of rest)'}),
+        ('Discharge snap', list(range(1, SNAP_N+1)), snap_pose, False,
+         {'Release': SNAP_RELEASE, 'Recovered': SNAP_N},
+         {'role': 'passive Discharge: fires on the next enemy hit at 100%; plays over any state (upper-body layer)',
+          'socket_release': ['L muzzle', 'R muzzle', 'core socket'], 'finger_accents': [SNAP_RELEASE],
+          'accents': [2, SNAP_RELEASE, SNAP_RELEASE+HITSTOP]}),
         ('Discharge', list(range(1, DIS_N+1)), discharge_pose, False,
          {'Gather': GATHER, 'Release': RELEASE, 'Recovered': DIS_N}, {'socket_release': ['L muzzle', 'R muzzle', 'core socket'],
                                                               'finger_accents': [RELEASE],

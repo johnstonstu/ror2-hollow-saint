@@ -1,0 +1,31 @@
+{
+ "title": "Charge full",
+ "blend": "art\\anim\\wip\\hands2\\_work\\sX-1.blend",
+ "rendered_frames": [
+  9
+ ],
+ "body_views": [],
+ "rows": [
+  {
+   "f": 9,
+   "L": {
+    "thumb_up": 0.873,
+    "palm_fwd": 0.141,
+    "hand": -0.748,
+    "raise": 39.034,
+    "elbow_open": 89.52,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.882,
+    "palm_fwd": 0.143,
+    "hand": 0.748,
+    "raise": 52.537,
+    "elbow_open": 85.618,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

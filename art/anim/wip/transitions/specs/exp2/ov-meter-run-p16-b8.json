@@ -1,0 +1,30 @@
+{
+ "name": "ov-meter-run-p16-b8",
+ "modules": [],
+ "out": "transitions/exp2/ov-meter-run-p16-b8",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 16
+  },
+  {
+   "clip": "Meter full flourish",
+   "frames": 20,
+   "blend": 8,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 10,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 60
+  }
+ ]
+}

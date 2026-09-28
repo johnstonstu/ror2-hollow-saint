@@ -1,0 +1,17 @@
+{
+ "name": "step-air-b3",
+ "modules": [],
+ "out": "transitions/exp/step-air-b3",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Descend",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step start",
+   "frames": 7,
+   "blend": 3
+  }
+ ]
+}

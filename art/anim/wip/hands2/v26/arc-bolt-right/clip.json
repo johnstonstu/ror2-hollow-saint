@@ -1,0 +1,121 @@
+{
+ "title": "Arc Bolt right",
+ "blend": "art\\anim\\wip\\hands2\\_work\\v26-copy.blend",
+ "rendered_frames": [
+  1,
+  5,
+  9,
+  14,
+  19
+ ],
+ "body_views": [
+  "hero"
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.178,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.17,
+    "palm_fwd": -0.022,
+    "hand": 0.748,
+    "raise": 39.255,
+    "elbow_open": 166.266,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 5,
+   "L": {
+    "thumb_up": 0.107,
+    "palm_fwd": -0.033,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.815,
+    "palm_fwd": -0.199,
+    "hand": 0.748,
+    "raise": 76.395,
+    "elbow_open": 163.935,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 9,
+   "L": {
+    "thumb_up": 0.178,
+    "palm_fwd": -0.025,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.826,
+    "palm_fwd": -0.155,
+    "hand": 0.748,
+    "raise": 74.781,
+    "elbow_open": 161.764,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 14,
+   "L": {
+    "thumb_up": 0.217,
+    "palm_fwd": -0.018,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.844,
+    "palm_fwd": -0.178,
+    "hand": 0.748,
+    "raise": 58.605,
+    "elbow_open": 161.208,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 19,
+   "L": {
+    "thumb_up": 0.178,
+    "palm_fwd": -0.022,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.204,
+    "palm_fwd": -0.026,
+    "hand": 0.748,
+    "raise": 39.252,
+    "elbow_open": 166.159,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

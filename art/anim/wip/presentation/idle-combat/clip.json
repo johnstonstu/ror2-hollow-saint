@@ -16,7 +16,9 @@
   "kind": "idle",
   "speed_mps": 0.0,
   "hand": "R",
-  "orient_smooth_max_deg": 2.9,
+  "orient_smooth_max_deg": 2.7,
+  "hand_settle_max_deg": 2.7,
+  "hand_relax_peak_deg": 0.4,
   "pad_follow_max": {
     "L": {
       "deg": 0.0,
@@ -42,7 +44,7 @@
   },
   "tabard_swing_frames": 48,
   "orient_roll_max_deg": {
-    "L": 65.6
+    "L": 65.7
   },
   "orient_infeasible": 0,
   "halo_max_offset_m": 0.0176,
@@ -66,10 +68,14 @@
     ]
   ],
   "pop_finger_deg_f2": [
-    4.51,
-    "R middle.2",
-    7
+    2.94,
+    "L index.1",
+    2
   ],
+  "hand_leg_clear_ext_deg": {
+    "L": 9.7,
+    "R": 0.0
+  },
   "halo_clear_push_max_mm": 21.5,
   "halo_clear_frames": 48,
   "halo_clear_dir": [
@@ -92,7 +98,8 @@
     "hs_jet_dir": 0.0,
     "hs_move_x": 0.0,
     "hs_move_y": 0.0,
-    "hs_turn": 0.0
+    "hs_turn": 0.0,
+    "hs_spear": 0.0
   },
   "bake_error_m": 2e-06,
   "bake_error_deg": 0.0,
@@ -105,61 +112,61 @@
   "finite": true,
   "arm_clearance": {
     "L": {
-      "min_m": 0.0722,
-      "frame": 47,
-      "part": "ring segment 3",
+      "min_m": 0.0212,
+      "frame": 1,
+      "part": "V11 little tip light",
       "against": "L thigh",
       "frames_under_min": 0,
       "per_frame_mm": [
-        81,
-        90,
-        95,
-        97,
-        99,
-        103,
-        107,
-        108,
-        107,
-        106,
-        105,
-        103,
-        101,
-        98,
-        90,
-        83,
-        80,
-        80,
-        79,
-        76,
-        76,
-        80,
-        85,
-        87,
-        85,
-        83,
-        86,
-        93,
-        99,
-        102,
-        102,
-        103,
-        102,
-        101,
-        99,
-        95,
-        88,
-        84,
-        84,
-        83,
-        79,
-        75,
-        74,
-        75,
-        76,
-        74,
-        72,
-        74,
-        81
+        21,
+        28,
+        33,
+        35,
+        36,
+        37,
+        38,
+        40,
+        40,
+        38,
+        36,
+        34,
+        33,
+        33,
+        35,
+        36,
+        37,
+        36,
+        35,
+        35,
+        34,
+        35,
+        37,
+        38,
+        36,
+        34,
+        31,
+        29,
+        30,
+        31,
+        34,
+        35,
+        35,
+        35,
+        35,
+        33,
+        32,
+        34,
+        35,
+        36,
+        35,
+        34,
+        34,
+        34,
+        35,
+        36,
+        35,
+        34,
+        21
       ],
       "hits": {}
     },
@@ -189,11 +196,11 @@
         228,
         230,
         231,
+        232,
         233,
         233,
         233,
-        233,
-        233,
+        232,
         232,
         230,
         229,
@@ -217,47 +224,47 @@
         233,
         233,
         233,
-        233,
+        232,
         232
       ],
       "hits": {}
     }
   },
-  "arm_clear_min_m": 0.0722,
+  "arm_clear_min_m": 0.0212,
   "arm_clear_ok": null,
   "hand_qa": {
     "violations": {},
     "penetration_mm": {},
-    "max_penetration_mm": 0.4,
+    "max_penetration_mm": 1.5,
     "finger_pops_deg_f2": [
       [
-        4.51,
-        "R middle.2",
-        7
+        2.94,
+        "L index.1",
+        2
       ],
       [
-        4.36,
-        "R middle.2",
-        42
+        2.61,
+        "L index.1",
+        1
       ],
       [
-        4.14,
-        "R middle.2",
-        40
+        2.55,
+        "L index.2",
+        48
       ],
       [
-        4.08,
-        "R middle.2",
-        5
+        2.33,
+        "L middle.2",
+        48
       ]
     ],
     "accent_pops_deg_f2": [],
     "wrist": {
       "L": {
-        "hand_twist_deg": 1.5,
-        "hand_twist_frame": 33,
-        "hand_bend_max_deg": 5.8,
-        "forearm_roll_deg": -6.3,
+        "hand_twist_deg": 1.9,
+        "hand_twist_frame": 41,
+        "hand_bend_max_deg": 9.7,
+        "forearm_roll_deg": -6.6,
         "forearm_roll_frame": 34
       },
       "R": {
@@ -270,16 +277,16 @@
     },
     "flex_range": {
       "L": {
-        "thumb_min": 20.0,
-        "thumb_max": 20.0,
-        "finger_min": 28.2,
-        "finger_max": 69.1
+        "thumb_min": 11.5,
+        "thumb_max": 18.9,
+        "finger_min": 19.3,
+        "finger_max": 45.9
       },
       "R": {
-        "thumb_min": 32.2,
-        "thumb_max": 35.8,
-        "finger_min": 2.9,
-        "finger_max": 102.6
+        "thumb_min": 13.6,
+        "thumb_max": 28.5,
+        "finger_min": 5.3,
+        "finger_max": 80.4
       }
     }
   },
@@ -287,10 +294,10 @@
     "ok": true,
     "violations": 0,
     "pen_over": 0,
-    "worst_pop_deg_f2": 4.51,
-    "worst_pop": "R middle.2 f7",
+    "worst_pop_deg_f2": 2.94,
+    "worst_pop": "L index.1 f2",
     "worst_accent_pop_deg_f2": 0.0,
-    "max_pen_mm": 0.4
+    "max_pen_mm": 1.5
   },
   "hand_contact": {},
   "hand_contact_max_mm": 0.0,
@@ -480,12 +487,12 @@
         40.0
       ],
       "L forearm twist": [
-        -3.2,
-        -1.1
+        -3.3,
+        -1.3
       ],
       "L hand twist": [
-        1.5,
-        1.5
+        1.4,
+        1.9
       ],
       "L knee bend": [
         69.6,
@@ -526,6 +533,21 @@
     },
     "pops_deg_f2": [
       [
+        8.8,
+        "L hand",
+        1
+      ],
+      [
+        6.5,
+        "L hand",
+        48
+      ],
+      [
+        1.5,
+        "L hand",
+        3
+      ],
+      [
         1.3,
         "R hand",
         20
@@ -539,21 +561,6 @@
         1.2,
         "R hand",
         5
-      ],
-      [
-        1.1,
-        "tabard front.2",
-        26
-      ],
-      [
-        1.1,
-        "R hand",
-        44
-      ],
-      [
-        1.0,
-        "R hand",
-        11
       ]
     ],
     "accent_pops_deg_f2": [],
@@ -575,14 +582,64 @@
         35
       ]
     },
+    "hand_nat": {
+      "min_bend_deg": [
+        5.3,
+        "R index.3",
+        15
+      ],
+      "max_bend_deg": [
+        80.4,
+        "R little.2",
+        1
+      ],
+      "max_sideways_deg": [
+        0.0,
+        "R ring.3",
+        48
+      ],
+      "curl_order_gap_deg": [
+        -150.8,
+        "R middle>ring",
+        6
+      ],
+      "finger_contact_mm": {},
+      "finger_pen_mm": {
+        "R thumb/index": [
+          1.5,
+          20
+        ]
+      },
+      "pops_deg_f2": [
+        [
+          2.9,
+          "L index.1",
+          2
+        ],
+        [
+          2.6,
+          "L index.1",
+          1
+        ],
+        [
+          2.5,
+          "L index.2",
+          48
+        ]
+      ],
+      "accent_pops_deg_f2": [],
+      "fails": [],
+      "orient_9f_ok": true
+    },
     "fails": [
       "contact L shin > pelvis 7.3mm f47",
       "contact back conductors > neck 6.0mm f21"
     ]
   },
   "full_qa_ok": false,
+  "hand_nat_ok": true,
   "full_contact_max_mm": 34.3,
-  "full_pop_max_deg_f2": 1.3,
+  "full_pop_max_deg_f2": 8.8,
   "status": "CHECK",
   "step": 2,
   "views": [

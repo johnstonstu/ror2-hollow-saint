@@ -1,0 +1,6916 @@
+[
+  {
+    "title": "Run forward",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9538,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "L12",
+    "ik_miss_frames": {},
+    "speed_mps": 6.0,
+    "meters_per_cycle": 4.0,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "seam_anchors": [
+      1,
+      9,
+      10
+    ],
+    "orient_smooth_max_deg": 17.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.7,
+        "lift": 0.04,
+        "push_mm": 7.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 10.7,
+      "tabard front.2": 8.3,
+      "tabard front.3": 4.7,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 14,
+    "orient_roll_max_deg": {
+      "L": 23.3,
+      "R": 28.2
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0259,
+    "halo_clear_push_max_mm": 1.5,
+    "halo_clear_frames": 13,
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 6.8,
+      "R": 8.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.4
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "run",
+    "action": "HS_anim | Run forward"
+  },
+  {
+    "title": "Walk forward",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.9761,
+    "max_leg_extension_at": "L17",
+    "ik_miss_at": "R7",
+    "ik_miss_frames": {},
+    "speed_mps": 1.5,
+    "meters_per_cycle": 1.625,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 26.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.3,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 5.4,
+        "lift": 0.0,
+        "push_mm": 1.1,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 13.4,
+      "tabard front.2": 18.9,
+      "tabard front.3": 10.8,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 25,
+    "orient_roll_max_deg": {
+      "L": 39.4,
+      "R": 66.4
+    },
+    "orient_infeasible": 4,
+    "halo_max_offset_m": 0.0141,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 1.1,
+      "R": 1.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.7
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "walk",
+    "action": "HS_anim | Walk forward"
+  },
+  {
+    "title": "Glide enter",
+    "frames": [
+      1,
+      13
+    ],
+    "loop": false,
+    "markers": {
+      "Push off": 3,
+      "Airborne": 5
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9878,
+    "max_leg_extension_at": "L11",
+    "ik_miss_at": "L4",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 6.0,
+    "run_frame_start": 10,
+    "orient_smooth_max_deg": 16.5,
+    "pad_follow_max": {
+      "L": {
+        "deg": 7.5,
+        "lift": 0.03,
+        "push_mm": 1.0,
+        "yield_min_k": 0.54,
+        "yield_frames": 11
+      },
+      "R": {
+        "deg": 10.7,
+        "lift": 0.04,
+        "push_mm": 4.6,
+        "yield_min_k": 0.19,
+        "yield_frames": 11
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 16.1,
+      "tabard front.2": 31.0,
+      "tabard front.3": 18.5,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 13,
+    "orient_roll_max_deg": {
+      "R": 96.7,
+      "L": 75.4
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0308,
+    "body_pitch_max_deg": 14.92,
+    "body_pitch_mean_deg": 10.54,
+    "halo_clear_push_max_mm": 13.7,
+    "halo_clear_frames": 11,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 5.8,
+      "R": 6.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 30.3
+    },
+    "vfx_peak": {
+      "hs_glow": 1.0,
+      "hs_jet": 1.662,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.274,
+      "hs_jet_dir": 58.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "glide",
+    "action": "HS_anim | Glide enter"
+  },
+  {
+    "title": "Glide loop",
+    "frames": [
+      1,
+      33
+    ],
+    "loop": true,
+    "markers": {
+      "Hover high": 1,
+      "Hover low": 17
+    },
+    "ik_miss_m": 3e-05,
+    "max_leg_extension": 0.9784,
+    "max_leg_extension_at": "L3",
+    "ik_miss_at": "R29",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 8.7,
+    "meters_per_cycle": 11.6,
+    "orient_smooth_max_deg": 9.2,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.6,
+        "lift": 0.04,
+        "push_mm": 1.3,
+        "yield_min_k": 0.0,
+        "yield_frames": 32
+      },
+      "R": {
+        "deg": 2.5,
+        "lift": 0.01,
+        "push_mm": 1.8,
+        "yield_min_k": 0.0,
+        "yield_frames": 32
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 18.4,
+      "tabard front.2": 14.3,
+      "tabard front.3": 8.2,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 32,
+    "orient_roll_max_deg": {
+      "L": 102.4,
+      "R": 100.1
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0343,
+    "body_pitch_max_deg": 7.75,
+    "body_pitch_mean_deg": 6.73,
+    "halo_clear_push_max_mm": 34.9,
+    "halo_clear_frames": 25,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 1.1,
+      "R": 1.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 4.3
+    },
+    "vfx_peak": {
+      "hs_glow": 1.0,
+      "hs_jet": 1.19,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 28.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "glide",
+    "action": "HS_anim | Glide loop"
+  },
+  {
+    "title": "Glide exit",
+    "frames": [
+      1,
+      14
+    ],
+    "loop": false,
+    "markers": {
+      "Legs down": 5,
+      "L contact": 14
+    },
+    "ik_miss_m": 4e-05,
+    "max_leg_extension": 0.9784,
+    "max_leg_extension_at": "L3",
+    "ik_miss_at": "L9",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 8.7,
+    "run_frame_end": 1,
+    "orient_smooth_max_deg": 41.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.4,
+        "lift": 0.07,
+        "push_mm": 0.0,
+        "yield_min_k": 0.71,
+        "yield_frames": 9
+      },
+      "R": {
+        "deg": 7.0,
+        "lift": 0.02,
+        "push_mm": 7.9,
+        "yield_min_k": 0.41,
+        "yield_frames": 11
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 18.1,
+      "tabard front.2": 18.9,
+      "tabard front.3": 11.4,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 13,
+    "orient_roll_max_deg": {
+      "L": 80.0,
+      "R": 99.3
+    },
+    "orient_infeasible": 3,
+    "halo_max_offset_m": 0.035,
+    "body_pitch_max_deg": 19.43,
+    "body_pitch_mean_deg": 11.73,
+    "halo_clear_push_max_mm": 1.5,
+    "halo_clear_frames": 7,
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 6.8,
+      "R": 8.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 14.9
+    },
+    "vfx_peak": {
+      "hs_glow": 1.0,
+      "hs_jet": 1.072,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 28.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "glide",
+    "action": "HS_anim | Glide exit"
+  },
+  {
+    "title": "Jump",
+    "frames": [
+      1,
+      11
+    ],
+    "loop": false,
+    "markers": {
+      "Crouch": 3,
+      "Takeoff": 6
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.919,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R3",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "ends_in": "Ascend",
+    "accents": [
+      3,
+      5
+    ],
+    "orient_smooth_max_deg": 32.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.5,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      },
+      "R": {
+        "deg": 4.6,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 16.2,
+      "tabard front.2": 26.9,
+      "tabard front.3": 15.3,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 11,
+    "orient_roll_max_deg": {
+      "L": 98.9,
+      "R": 109.6
+    },
+    "orient_infeasible": 2,
+    "halo_max_offset_m": 0.0259,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 14.8,
+      "R": 13.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 57.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Jump"
+  },
+  {
+    "title": "Ascend",
+    "frames": [
+      1,
+      21
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9067,
+    "max_leg_extension_at": "R8",
+    "ik_miss_at": "L7",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "orient_smooth_max_deg": 2.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 2.3,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 2.0,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 27.4,
+      "tabard front.3": 16.4,
+      "tabard back.1": 2.4,
+      "tabard back.2": 1.9
+    },
+    "tabard_swing_frames": 20,
+    "orient_roll_max_deg": {
+      "L": 38.7,
+      "R": 35.6
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0116,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.8,
+      "R": 0.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 1.4
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Ascend"
+  },
+  {
+    "title": "Descend",
+    "frames": [
+      1,
+      21
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.795,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "L18",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "orient_smooth_max_deg": 1.5,
+    "pad_follow_max": {
+      "L": {
+        "deg": 2.9,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 2.6,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.7,
+      "tabard front.2": 2.2,
+      "tabard front.3": 1.5,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 20,
+    "orient_roll_max_deg": {
+      "L": 40.1,
+      "R": 37.5
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0161,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.5,
+      "R": 0.5
+    },
+    "halo_pop_mm_f2": {
+      "ring": 2.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Descend"
+  },
+  {
+    "title": "Land",
+    "frames": [
+      1,
+      15
+    ],
+    "loop": false,
+    "markers": {
+      "L touch": 2,
+      "R touch": 4,
+      "Compress": 6,
+      "Recovered": 15
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.919,
+    "max_leg_extension_at": "L15",
+    "ik_miss_at": "R7",
+    "ik_miss_frames": {},
+    "kind": "air",
+    "speed_mps": 0.0,
+    "starts_from": "Descend",
+    "ends_in": "Stand",
+    "accents": [
+      2
+    ],
+    "orient_smooth_max_deg": 7.3,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.5,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 13
+      },
+      "R": {
+        "deg": 4.6,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 13
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 5.3,
+      "tabard front.2": 12.7,
+      "tabard front.3": 7.4,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 15,
+    "orient_roll_max_deg": {
+      "L": 52.8,
+      "R": 58.6
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 5.0,
+    "halo_clear_frames": 11,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 9.1,
+      "R": 9.5
+    },
+    "halo_pop_mm_f2": {
+      "ring": 26.1
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "air",
+    "action": "HS_anim | Land"
+  },
+  {
+    "title": "Run backward",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.8973,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R5",
+    "ik_miss_frames": {},
+    "direction": "backward",
+    "speed_mps": 4.25,
+    "meters_per_cycle": 2.833,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 51.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.2,
+        "lift": 0.11,
+        "push_mm": 1.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 8.6,
+        "lift": 0.07,
+        "push_mm": 1.7,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 10.2,
+      "tabard front.2": 25.2,
+      "tabard front.3": 14.4,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 15,
+    "orient_roll_max_deg": {
+      "L": 61.3,
+      "R": 57.5
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.54,
+    "min_ankle_gap_x_m": 0.4593,
+    "min_knee_gap_x_m": 0.3566,
+    "halo_max_offset_m": 0.0137,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 7.5,
+      "R": 7.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 7.5
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "run_dirs",
+    "action": "HS_anim | Run backward"
+  },
+  {
+    "title": "Run left",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9843,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "R3",
+    "ik_miss_frames": {},
+    "direction": "left",
+    "speed_mps": 3.4,
+    "meters_per_cycle": 2.267,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 46.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.3,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 9.7,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 16.0,
+      "tabard front.2": 24.8,
+      "tabard front.3": 14.9,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 15,
+    "orient_roll_max_deg": {
+      "L": 50.6
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.2095,
+    "min_ankle_gap_x_m": 0.1237,
+    "min_knee_gap_x_m": 0.314,
+    "halo_max_offset_m": 0.0209,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 2.1,
+      "R": 2.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.1
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "run_dirs",
+    "action": "HS_anim | Run left"
+  },
+  {
+    "title": "Run right",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9763,
+    "max_leg_extension_at": "R8",
+    "ik_miss_at": "R15",
+    "ik_miss_frames": {},
+    "direction": "right",
+    "speed_mps": 3.4,
+    "meters_per_cycle": 2.267,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 33.4,
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.3,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 4.4,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 16.0,
+      "tabard front.2": 24.8,
+      "tabard front.3": 14.8,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 16,
+    "orient_roll_max_deg": {
+      "R": 35.8
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.2095,
+    "min_ankle_gap_x_m": 0.1271,
+    "min_knee_gap_x_m": 0.3161,
+    "halo_max_offset_m": 0.0199,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 2.3,
+      "R": 2.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.2
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 1.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "run_dirs",
+    "action": "HS_anim | Run right"
+  },
+  {
+    "title": "Run forward right",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9523,
+    "max_leg_extension_at": "L5",
+    "ik_miss_at": "R15",
+    "ik_miss_frames": {},
+    "direction": "forward_right",
+    "travel": [
+      -0.7071,
+      -0.7071
+    ],
+    "speed_mps": 4.7,
+    "meters_per_cycle": 3.133,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 27.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.3,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 6.0,
+        "lift": 0.0,
+        "push_mm": 7.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 9.9,
+      "tabard front.2": 8.0,
+      "tabard front.3": 4.5,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 16,
+    "orient_roll_max_deg": {
+      "L": 14.6,
+      "R": 29.9
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 2e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.1728,
+    "min_ankle_gap_x_m": 0.0924,
+    "min_knee_gap_x_m": 0.2684,
+    "halo_max_offset_m": 0.0224,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 3.1,
+      "R": 3.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.3
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.707,
+      "hs_move_y": 0.707,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Run forward right"
+  },
+  {
+    "title": "Run forward left",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9471,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "L12",
+    "ik_miss_frames": {},
+    "direction": "forward_left",
+    "travel": [
+      0.7071,
+      -0.7071
+    ],
+    "speed_mps": 4.7,
+    "meters_per_cycle": 3.133,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 41.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.8,
+        "lift": 0.02,
+        "push_mm": 4.3,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 9.7,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 15.1,
+      "tabard front.2": 17.4,
+      "tabard front.3": 9.9,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 15,
+    "orient_roll_max_deg": {
+      "L": 48.2,
+      "R": 2.9
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.1728,
+    "min_ankle_gap_x_m": 0.0907,
+    "min_knee_gap_x_m": 0.2489,
+    "halo_max_offset_m": 0.0235,
+    "halo_clear_push_max_mm": 2.0,
+    "halo_clear_frames": 13,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 3.0,
+      "R": 3.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.3
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.707,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Run forward left"
+  },
+  {
+    "title": "Run backward right",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9671,
+    "max_leg_extension_at": "R8",
+    "ik_miss_at": "L11",
+    "ik_miss_frames": {},
+    "direction": "backward_right",
+    "travel": [
+      -0.7071,
+      0.7071
+    ],
+    "speed_mps": 3.825,
+    "meters_per_cycle": 2.55,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 67.3,
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.2,
+        "lift": 0.11,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 8.6,
+        "lift": 0.07,
+        "push_mm": 9.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 10.7,
+      "tabard front.2": 22.6,
+      "tabard front.3": 13.6,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 16,
+    "orient_roll_max_deg": {
+      "L": 64.0,
+      "R": 85.5
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.2202,
+    "min_ankle_gap_x_m": 0.1372,
+    "min_knee_gap_x_m": 0.2715,
+    "halo_max_offset_m": 0.0164,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 7.6,
+      "R": 11.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 7.9
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.707,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Run backward right"
+  },
+  {
+    "title": "Run backward left",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 9e-05,
+    "max_leg_extension": 0.9803,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "R2",
+    "ik_miss_frames": {},
+    "direction": "backward_left",
+    "travel": [
+      0.7071,
+      0.7071
+    ],
+    "speed_mps": 3.825,
+    "meters_per_cycle": 2.55,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 53.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.7,
+        "lift": 0.16,
+        "push_mm": 6.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 8.6,
+        "lift": 0.07,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 14.0,
+      "tabard front.2": 21.4,
+      "tabard front.3": 12.2,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 15,
+    "orient_roll_max_deg": {
+      "L": 67.1,
+      "R": 60.0
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 6,
+    "min_ball_gap_x_m": 0.2202,
+    "min_ankle_gap_x_m": 0.1354,
+    "min_knee_gap_x_m": 0.2796,
+    "halo_max_offset_m": 0.016,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 8.7,
+      "R": 7.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 7.7
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Run backward left"
+  },
+  {
+    "title": "Walk backward",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9651,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "L16",
+    "ik_miss_frames": {},
+    "direction": "backward",
+    "travel": [
+      0.0,
+      1.0
+    ],
+    "speed_mps": 1.0,
+    "meters_per_cycle": 1.083,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 15.7,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.7,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 4.9,
+        "lift": 0.0,
+        "push_mm": 1.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 12.8,
+      "tabard front.2": 21.4,
+      "tabard front.3": 12.8,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 26,
+    "orient_roll_max_deg": {
+      "L": 31.8,
+      "R": 36.1
+    },
+    "orient_infeasible": 10,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 30,
+    "min_ball_gap_x_m": 0.5,
+    "min_ankle_gap_x_m": 0.4193,
+    "min_knee_gap_x_m": 0.3678,
+    "halo_max_offset_m": 0.0148,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.9,
+      "R": 1.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Walk backward"
+  },
+  {
+    "title": "Walk left",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9598,
+    "max_leg_extension_at": "L8",
+    "ik_miss_at": "R14",
+    "ik_miss_frames": {},
+    "direction": "left",
+    "travel": [
+      1.0,
+      0.0
+    ],
+    "speed_mps": 0.6,
+    "meters_per_cycle": 0.65,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 3.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.8,
+        "lift": 0.03,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 4.9,
+        "lift": 0.04,
+        "push_mm": 2.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 14.3,
+      "tabard front.2": 20.3,
+      "tabard front.3": 11.7,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 23,
+    "orient_roll_max_deg": {
+      "L": 23.8,
+      "R": 20.7
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 30,
+    "min_ball_gap_x_m": 0.275,
+    "min_ankle_gap_x_m": 0.1886,
+    "min_knee_gap_x_m": 0.3094,
+    "halo_max_offset_m": 0.0144,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.8,
+      "R": 0.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.9
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Walk left"
+  },
+  {
+    "title": "Walk right",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9629,
+    "max_leg_extension_at": "L9",
+    "ik_miss_at": "L25",
+    "ik_miss_frames": {},
+    "direction": "right",
+    "travel": [
+      -1.0,
+      0.0
+    ],
+    "speed_mps": 0.6,
+    "meters_per_cycle": 0.65,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 3.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.8,
+        "lift": 0.03,
+        "push_mm": 1.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 4.9,
+        "lift": 0.04,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 14.3,
+      "tabard front.2": 20.0,
+      "tabard front.3": 11.8,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 26,
+    "orient_roll_max_deg": {
+      "L": 24.1,
+      "R": 20.5
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 30,
+    "min_ball_gap_x_m": 0.275,
+    "min_ankle_gap_x_m": 0.1911,
+    "min_knee_gap_x_m": 0.3116,
+    "halo_max_offset_m": 0.0144,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.8,
+      "R": 0.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.9
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 1.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Walk right"
+  },
+  {
+    "title": "Walk forward right",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9573,
+    "max_leg_extension_at": "L10",
+    "ik_miss_at": "L21",
+    "ik_miss_frames": {},
+    "direction": "forward_right",
+    "travel": [
+      -0.7071,
+      -0.7071
+    ],
+    "speed_mps": 1.05,
+    "meters_per_cycle": 1.137,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 2.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 3.4,
+        "lift": 0.01,
+        "push_mm": 0.8,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 3.3,
+        "lift": 0.01,
+        "push_mm": 1.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 12.5,
+      "tabard front.2": 20.7,
+      "tabard front.3": 11.9,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 26,
+    "orient_roll_max_deg": {
+      "L": 17.6,
+      "R": 14.9
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 0.00033,
+    "direction_slide_pairs": 24,
+    "min_ball_gap_x_m": 0.1578,
+    "min_ankle_gap_x_m": 0.0763,
+    "min_knee_gap_x_m": 0.2434,
+    "halo_max_offset_m": 0.0142,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.9,
+      "R": 1.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.707,
+      "hs_move_y": 0.707,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Walk forward right"
+  },
+  {
+    "title": "Walk forward left",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9562,
+    "max_leg_extension_at": "L9",
+    "ik_miss_at": "L20",
+    "ik_miss_frames": {},
+    "direction": "forward_left",
+    "travel": [
+      0.7071,
+      -0.7071
+    ],
+    "speed_mps": 1.05,
+    "meters_per_cycle": 1.137,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 3.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 3.4,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 3.3,
+        "lift": 0.01,
+        "push_mm": 1.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 13.9,
+      "tabard front.2": 21.3,
+      "tabard front.3": 12.6,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 24,
+    "orient_roll_max_deg": {
+      "L": 17.4,
+      "R": 15.0
+    },
+    "orient_infeasible": 0,
+    "direction_slide_m_per_frame": 0.00033,
+    "direction_slide_pairs": 24,
+    "min_ball_gap_x_m": 0.1578,
+    "min_ankle_gap_x_m": 0.075,
+    "min_knee_gap_x_m": 0.2355,
+    "halo_max_offset_m": 0.0142,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.9,
+      "R": 0.9
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.707,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Walk forward left"
+  },
+  {
+    "title": "Walk backward right",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.9642,
+    "max_leg_extension_at": "R14",
+    "ik_miss_at": "L24",
+    "ik_miss_frames": {},
+    "direction": "backward_right",
+    "travel": [
+      -0.7071,
+      0.7071
+    ],
+    "speed_mps": 0.8,
+    "meters_per_cycle": 0.867,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 20.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.7,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 4.9,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 13.2,
+      "tabard front.2": 20.0,
+      "tabard front.3": 11.8,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 26,
+    "orient_roll_max_deg": {
+      "L": 30.7,
+      "R": 40.9
+    },
+    "orient_infeasible": 14,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 30,
+    "min_ball_gap_x_m": 0.2536,
+    "min_ankle_gap_x_m": 0.1706,
+    "min_knee_gap_x_m": 0.2825,
+    "halo_max_offset_m": 0.0143,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.9,
+      "R": 0.9
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.707,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Walk backward right"
+  },
+  {
+    "title": "Walk backward left",
+    "frames": [
+      1,
+      27
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9736,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "L14",
+    "ik_miss_frames": {},
+    "direction": "backward_left",
+    "travel": [
+      0.7071,
+      0.7071
+    ],
+    "speed_mps": 0.8,
+    "meters_per_cycle": 0.867,
+    "stance": 0.6,
+    "kind": "locomotion",
+    "orient_smooth_max_deg": 14.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 4.7,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 4.9,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 13.1,
+      "tabard front.2": 20.5,
+      "tabard front.3": 11.7,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 25,
+    "orient_roll_max_deg": {
+      "L": 36.5,
+      "R": 56.2
+    },
+    "orient_infeasible": 4,
+    "direction_slide_m_per_frame": 1e-05,
+    "direction_slide_pairs": 30,
+    "min_ball_gap_x_m": 0.2536,
+    "min_ankle_gap_x_m": 0.1693,
+    "min_knee_gap_x_m": 0.2859,
+    "halo_max_offset_m": 0.0143,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.9,
+      "R": 0.9
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "loco8",
+    "action": "HS_anim | Walk backward left"
+  },
+  {
+    "title": "Run lean left",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9579,
+    "max_leg_extension_at": "R8",
+    "ik_miss_at": "R4",
+    "ik_miss_frames": {},
+    "speed_mps": 6.0,
+    "meters_per_cycle": 4.0,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "direction": "forward",
+    "lean": "left",
+    "blend_with": "Run forward",
+    "orient_smooth_max_deg": 37.2,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 5.7,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.7,
+        "lift": 0.04,
+        "push_mm": 5.6,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 15.9,
+      "tabard front.2": 12.8,
+      "tabard front.3": 7.3,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 16,
+    "orient_roll_max_deg": {
+      "L": 58.8,
+      "R": 9.2
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0263,
+    "halo_clear_push_max_mm": 0.1,
+    "halo_clear_frames": 13,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 14.5,
+      "R": 6.4
+    },
+    "halo_pop_mm_f2": {
+      "ring": 11.7
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "turns",
+    "action": "HS_anim | Run lean left"
+  },
+  {
+    "title": "Run lean right",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": true,
+    "markers": {
+      "L contact": 1,
+      "R contact": 9
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9628,
+    "max_leg_extension_at": "L5",
+    "ik_miss_at": "R4",
+    "ik_miss_frames": {},
+    "speed_mps": 6.0,
+    "meters_per_cycle": 4.0,
+    "stance": 0.21,
+    "kind": "locomotion",
+    "direction": "forward",
+    "lean": "right",
+    "blend_with": "Run forward",
+    "orient_smooth_max_deg": 18.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.7,
+        "lift": 0.04,
+        "push_mm": 9.8,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 10.7,
+      "tabard front.2": 8.3,
+      "tabard front.3": 4.7,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 15,
+    "orient_roll_max_deg": {
+      "L": 23.0,
+      "R": 64.9
+    },
+    "orient_infeasible": 7,
+    "halo_max_offset_m": 0.0253,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 6.8,
+      "R": 6.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 11.6
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.445,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "turns",
+    "action": "HS_anim | Run lean right"
+  },
+  {
+    "title": "Run pivot 180 left",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "L contact": 1,
+      "R contact": 20
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9397,
+    "max_leg_extension_at": "R19",
+    "ik_miss_at": "L9",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 6.0,
+    "turn_deg": 180.0,
+    "turn_curve": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      4.19,
+      15.69,
+      32.86,
+      54.09,
+      77.76,
+      102.24,
+      125.91,
+      147.14,
+      164.31,
+      175.81,
+      180.0,
+      180.0,
+      180.0,
+      180.0,
+      180.0,
+      180.0
+    ],
+    "seam_from": [
+      "Run forward",
+      1
+    ],
+    "seam_to": [
+      "Run forward",
+      9
+    ],
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "orient_smooth_max_deg": 19.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 17.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.6,
+        "lift": 0.03,
+        "push_mm": 7.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 14.6,
+      "tabard front.2": 30.5,
+      "tabard front.3": 17.5,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 18,
+    "orient_roll_max_deg": {
+      "L": 23.2,
+      "R": 23.0
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0348,
+    "halo_clear_push_max_mm": 29.7,
+    "halo_clear_frames": 15,
+    "pad_pop_mm_f2": {
+      "L": 10.3,
+      "R": 8.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 37.6
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.384,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.733,
+      "hs_move_y": 1.0,
+      "hs_turn": 1.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "turns",
+    "action": "HS_anim | Run pivot 180 left"
+  },
+  {
+    "title": "Run pivot 180 right",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "L contact": 1,
+      "R contact": 20
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9686,
+    "max_leg_extension_at": "L14",
+    "ik_miss_at": "R16",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 6.0,
+    "turn_deg": -180.0,
+    "turn_curve": [
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -4.19,
+      -15.69,
+      -32.86,
+      -54.09,
+      -77.76,
+      -102.24,
+      -125.91,
+      -147.14,
+      -164.31,
+      -175.81,
+      -180.0,
+      -180.0,
+      -180.0,
+      -180.0,
+      -180.0,
+      -180.0
+    ],
+    "seam_from": [
+      "Run forward",
+      1
+    ],
+    "seam_to": [
+      "Run forward",
+      9
+    ],
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "orient_smooth_max_deg": 19.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.6,
+        "lift": 0.03,
+        "push_mm": 15.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 14.1,
+      "tabard front.2": 30.8,
+      "tabard front.3": 17.9,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 18,
+    "orient_roll_max_deg": {
+      "L": 21.4,
+      "R": 23.0
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 1.5,
+    "halo_clear_frames": 7,
+    "pad_pop_mm_f2": {
+      "L": 8.4,
+      "R": 9.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 20.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.384,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.257,
+      "hs_move_y": 1.0,
+      "hs_turn": 1.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "turns",
+    "action": "HS_anim | Run pivot 180 right"
+  },
+  {
+    "title": "Plant turn 90 left",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "L contact": 1,
+      "R contact": 16
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9753,
+    "max_leg_extension_at": "R8",
+    "ik_miss_at": "R12",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 6.0,
+    "turn_deg": 90.0,
+    "turn_curve": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      2.52,
+      9.36,
+      19.44,
+      31.68,
+      45.0,
+      58.32,
+      70.56,
+      80.64,
+      87.48,
+      90.0,
+      90.0,
+      90.0
+    ],
+    "seam_from": [
+      "Run forward",
+      1
+    ],
+    "seam_to": [
+      "Run forward",
+      9
+    ],
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "accents": [
+      5
+    ],
+    "orient_smooth_max_deg": 26.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.6,
+        "lift": 0.03,
+        "push_mm": 7.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 13.1,
+      "tabard front.2": 16.9,
+      "tabard front.3": 9.7,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 14,
+    "orient_roll_max_deg": {
+      "L": 34.9,
+      "R": 23.0
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 1.5,
+    "halo_clear_frames": 7,
+    "pad_pop_mm_f2": {
+      "L": 6.8,
+      "R": 7.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 45.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.45,
+      "hs_spark_R": 0.384,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 1.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "turns",
+    "action": "HS_anim | Plant turn 90 left"
+  },
+  {
+    "title": "Plant turn 90 right",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "L contact": 1,
+      "R contact": 16
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9702,
+    "max_leg_extension_at": "L5",
+    "ik_miss_at": "R2",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "speed_mps": 6.0,
+    "turn_deg": -90.0,
+    "turn_curve": [
+      -0.0,
+      -0.0,
+      -0.0,
+      -0.0,
+      -2.52,
+      -9.36,
+      -19.44,
+      -31.68,
+      -45.0,
+      -58.32,
+      -70.56,
+      -80.64,
+      -87.48,
+      -90.0,
+      -90.0,
+      -90.0
+    ],
+    "seam_from": [
+      "Run forward",
+      1
+    ],
+    "seam_to": [
+      "Run forward",
+      9
+    ],
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "accents": [
+      5
+    ],
+    "orient_smooth_max_deg": 18.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.6,
+        "lift": 0.03,
+        "push_mm": 12.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 9.5,
+      "tabard front.2": 23.2,
+      "tabard front.3": 13.2,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 14,
+    "orient_roll_max_deg": {
+      "L": 21.4,
+      "R": 23.0
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 24.2,
+    "halo_clear_frames": 15,
+    "pad_pop_mm_f2": {
+      "L": 6.8,
+      "R": 13.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 56.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.445,
+      "hs_spark_R": 0.384,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.238,
+      "hs_move_y": 1.0,
+      "hs_turn": 1.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "turns",
+    "action": "HS_anim | Plant turn 90 right"
+  },
+  {
+    "title": "Run stop",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "L contact": 1,
+      "R plant": 6,
+      "L plant": 11,
+      "Stopped": 16
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9366,
+    "max_leg_extension_at": "L5",
+    "ik_miss_at": "R6",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "speed_mps": 6.0,
+    "speed_curve": [
+      5.916,
+      5.76,
+      5.322,
+      4.668,
+      3.87,
+      3.0,
+      2.13,
+      1.332,
+      0.678,
+      0.24,
+      0.042,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "seam_from": [
+      "Run forward",
+      1
+    ],
+    "seam_to": [
+      "Idle",
+      1
+    ],
+    "role": "Run forward -> Idle from the L contact (Run forward f1; Glide exit ends there too): on stick release play whichever stop comes first (at most 8 frames)",
+    "orient_smooth_max_deg": 22.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.6,
+        "lift": 0.08,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 7.1,
+        "lift": 0.02,
+        "push_mm": 7.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 5.3,
+      "tabard front.2": 4.1,
+      "tabard front.3": 2.4,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 14,
+    "orient_roll_max_deg": {
+      "L": 52.4,
+      "R": 64.0
+    },
+    "orient_infeasible": 6,
+    "halo_max_offset_m": 0.0243,
+    "max_arm_raise_deg": 53.3,
+    "max_knee_out_m": 0.0691,
+    "pop_body_deg_f2": [
+      [
+        28.31,
+        "L shin",
+        5
+      ],
+      [
+        23.7,
+        "L thigh",
+        5
+      ],
+      [
+        19.13,
+        "R thigh",
+        2
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      1.29,
+      "R little.2",
+      3
+    ],
+    "halo_clear_push_max_mm": 1.5,
+    "halo_clear_frames": 15,
+    "pad_pop_mm_f2": {
+      "L": 7.3,
+      "R": 6.9
+    },
+    "halo_pop_mm_f2": {
+      "ring": 24.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.225,
+      "hs_spark_R": 0.407,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "startstop",
+    "action": "HS_anim | Run stop"
+  },
+  {
+    "title": "Run stop R",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "R contact": 1,
+      "L plant": 6,
+      "R plant": 11,
+      "Stopped": 16
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9258,
+    "max_leg_extension_at": "R5",
+    "ik_miss_at": "L3",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "speed_mps": 6.0,
+    "speed_curve": [
+      5.916,
+      5.76,
+      5.322,
+      4.668,
+      3.87,
+      3.0,
+      2.13,
+      1.332,
+      0.678,
+      0.24,
+      0.042,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "seam_from": [
+      "Run forward",
+      9
+    ],
+    "seam_to": [
+      "Idle",
+      1
+    ],
+    "role": "Run forward -> Idle from the R contact (Run forward f9): on stick release play whichever stop comes first (at most 8 frames)",
+    "orient_smooth_max_deg": 21.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 7.5,
+        "lift": 0.01,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.7,
+        "lift": 0.04,
+        "push_mm": 5.1,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 5.3,
+      "tabard front.2": 29.7,
+      "tabard front.3": 17.3,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 14,
+    "orient_roll_max_deg": {
+      "R": 49.8,
+      "L": 68.5
+    },
+    "orient_infeasible": 2,
+    "halo_max_offset_m": 0.0241,
+    "max_arm_raise_deg": 49.9,
+    "max_knee_out_m": 0.0715,
+    "pop_body_deg_f2": [
+      [
+        25.25,
+        "R shin",
+        5
+      ],
+      [
+        20.96,
+        "R thigh",
+        5
+      ],
+      [
+        20.15,
+        "L shin",
+        6
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      1.29,
+      "L little.2",
+      3
+    ],
+    "halo_clear_push_max_mm": 9.0,
+    "halo_clear_frames": 14,
+    "pad_pop_mm_f2": {
+      "L": 6.3,
+      "R": 6.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 25.1
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.407,
+      "hs_spark_R": 0.225,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "startstop",
+    "action": "HS_anim | Run stop R"
+  },
+  {
+    "title": "Run start",
+    "frames": [
+      1,
+      17
+    ],
+    "loop": false,
+    "markers": {
+      "L step": 8,
+      "R contact": 17
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9534,
+    "max_leg_extension_at": "R16",
+    "ik_miss_at": "R12",
+    "ik_miss_frames": {},
+    "kind": "locomotion",
+    "halo_clear_dir": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "speed_mps": 6.0,
+    "speed_curve": [
+      0.0,
+      0.03,
+      0.17,
+      0.486,
+      0.969,
+      1.576,
+      2.267,
+      3.0,
+      3.733,
+      4.424,
+      5.031,
+      5.514,
+      5.83,
+      5.97,
+      6.0,
+      6.0,
+      6.0
+    ],
+    "seam_from": [
+      "Idle",
+      1
+    ],
+    "seam_to": [
+      "Run forward",
+      9
+    ],
+    "role": "Idle -> Run forward: continue into Run forward f10",
+    "orient_smooth_max_deg": 32.6,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.3,
+        "lift": 0.07,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 10.6,
+        "lift": 0.03,
+        "push_mm": 5.6,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 20.9,
+      "tabard front.2": 29.4,
+      "tabard front.3": 17.8,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 16,
+    "orient_roll_max_deg": {
+      "L": 50.9,
+      "R": 49.8
+    },
+    "orient_infeasible": 3,
+    "halo_max_offset_m": 0.035,
+    "max_arm_raise_deg": 52.2,
+    "max_knee_out_m": 0.0533,
+    "pop_body_deg_f2": [
+      [
+        23.07,
+        "R shin",
+        16
+      ],
+      [
+        22.55,
+        "L toe",
+        3
+      ],
+      [
+        22.2,
+        "R shin",
+        15
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      1.83,
+      "L little.2",
+      10
+    ],
+    "halo_clear_push_max_mm": 10.0,
+    "halo_clear_frames": 7,
+    "pad_pop_mm_f2": {
+      "L": 8.2,
+      "R": 8.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 45.6
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.192,
+      "hs_spark_R": 0.384,
+      "hs_jet_dir": 12.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 1.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "startstop",
+    "action": "HS_anim | Run start"
+  },
+  {
+    "title": "Arc Bolt right",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "Anticipation": 3,
+      "Bolt release": 5,
+      "Interrupt": 13,
+      "Recovered": 20
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "hand": "R",
+    "muzzle": "R muzzle",
+    "cancel": {
+      "locked": [
+        1,
+        5
+      ],
+      "chain_from": 13
+    },
+    "finger_accents": [
+      3,
+      5
+    ],
+    "accents": [
+      3,
+      5
+    ],
+    "arm_release": {
+      "swing": -71.88,
+      "adduct": 11.25,
+      "wx": 18.38,
+      "wy": -14.88
+    },
+    "orient_smooth_max_deg": 9.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 6.6,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 15.9,
+        "lift": 0.45,
+        "push_mm": 14.1,
+        "yield_min_k": 0.85,
+        "yield_frames": 8
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 10.6,
+      "R": 34.8
+    },
+    "orient_infeasible": 0,
+    "muzzle_release_pos": [
+      -0.23,
+      -0.924,
+      1.359
+    ],
+    "muzzle_release_dir": [
+      0.019,
+      -1.0,
+      0.001
+    ],
+    "muzzle_release_angle_to_-Y_deg": 1.07,
+    "start_rest_err_m": 0.09226,
+    "end_rest_err_m": 0.09226,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 2.0,
+      "R": 14.5
+    },
+    "halo_pop_mm_f2": {
+      "ring": 46.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Arc Bolt right"
+  },
+  {
+    "title": "Arc Bolt left",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "Anticipation": 3,
+      "Bolt release": 5,
+      "Interrupt": 13,
+      "Recovered": 20
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "hand": "L",
+    "muzzle": "L muzzle",
+    "cancel": {
+      "locked": [
+        1,
+        5
+      ],
+      "chain_from": 13
+    },
+    "finger_accents": [
+      3,
+      5
+    ],
+    "accents": [
+      3,
+      5
+    ],
+    "arm_release": {
+      "swing": -77.38,
+      "adduct": 5.25,
+      "wx": 14.25,
+      "wy": -17.25
+    },
+    "orient_smooth_max_deg": 11.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 19.3,
+        "lift": 0.53,
+        "push_mm": 1.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 11.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 31.4,
+      "R": 12.4
+    },
+    "orient_infeasible": 0,
+    "muzzle_release_pos": [
+      0.231,
+      -0.91,
+      1.354
+    ],
+    "muzzle_release_dir": [
+      -0.02,
+      -1.0,
+      -0.02
+    ],
+    "muzzle_release_angle_to_-Y_deg": 1.61,
+    "start_rest_err_m": 0.092165,
+    "end_rest_err_m": 0.092165,
+    "halo_clear_push_max_mm": 1.0,
+    "halo_clear_frames": 10,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 25.8,
+      "R": 3.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 46.7
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Arc Bolt left"
+  },
+  {
+    "title": "Aim neutral",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": 0,
+    "orient_smooth_max_deg": 0.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim neutral"
+  },
+  {
+    "title": "Aim up",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 66,
+    "yaw_left_deg": 0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {},
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim up"
+  },
+  {
+    "title": "Aim down",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": -66,
+    "yaw_left_deg": 0,
+    "orient_smooth_max_deg": 0.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 1.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 1.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 50.0,
+      "R": 55.8
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim down"
+  },
+  {
+    "title": "Aim left",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": 66,
+    "orient_smooth_max_deg": 0.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 23.7,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim left"
+  },
+  {
+    "title": "Aim right",
+    "frames": [
+      1,
+      2
+    ],
+    "loop": false,
+    "markers": {},
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "aim",
+    "additive_reference": "Aim neutral",
+    "pitch_up_deg": 0,
+    "yaw_left_deg": -66,
+    "orient_smooth_max_deg": 0.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 6.8,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 0.0,
+    "bake_error_deg": 0.0,
+    "module": "primary",
+    "action": "HS_anim | Aim right"
+  },
+  {
+    "title": "Arc Step start",
+    "frames": [
+      1,
+      7
+    ],
+    "loop": false,
+    "markers": {
+      "Dash start": 7
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R4",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step end",
+      16
+    ],
+    "seam_to": [
+      "Arc Step loop",
+      1
+    ],
+    "finger_accents": [
+      4
+    ],
+    "accents": [
+      3,
+      4
+    ],
+    "orient_smooth_max_deg": 15.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 6.6,
+        "lift": 0.09,
+        "push_mm": 1.1,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      },
+      "R": {
+        "deg": 6.3,
+        "lift": 0.06,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 4.9,
+      "tabard front.2": 3.8,
+      "tabard front.3": 2.2,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 6,
+    "orient_roll_max_deg": {
+      "L": 103.9,
+      "R": 111.1
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "start_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 62.4,
+    "halo_clear_frames": 6,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 24.5,
+      "R": 29.4
+    },
+    "halo_pop_mm_f2": {
+      "ring": 77.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep",
+    "action": "HS_anim | Arc Step start"
+  },
+  {
+    "title": "Arc Step loop",
+    "frames": [
+      1,
+      11
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 1e-05,
+    "max_leg_extension": 0.985,
+    "max_leg_extension_at": "L7",
+    "ik_miss_at": "R2",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "dash_distance_m": [
+      8,
+      12
+    ],
+    "orient_smooth_max_deg": 3.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 4.5,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 1.4,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 5.0,
+      "tabard front.2": 3.9,
+      "tabard front.3": 2.2,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 10,
+    "orient_roll_max_deg": {
+      "L": 110.4,
+      "R": 112.4
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 87.7,
+    "halo_clear_frames": 10,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 1.6,
+      "R": 1.2
+    },
+    "halo_pop_mm_f2": {
+      "ring": 35.2
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep",
+    "action": "HS_anim | Arc Step loop"
+  },
+  {
+    "title": "Arc Step end",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "Arrive": 5,
+      "Cancel": 5,
+      "Recovered": 14
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "R7",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step loop",
+      1
+    ],
+    "seam_to": [
+      "Arc Step start",
+      1
+    ],
+    "accents": [
+      4,
+      7
+    ],
+    "cancel": {
+      "any_state_from": 5
+    },
+    "orient_smooth_max_deg": 58.8,
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.3,
+        "lift": 0.14,
+        "push_mm": 1.1,
+        "yield_min_k": 0.0,
+        "yield_frames": 14
+      },
+      "R": {
+        "deg": 7.9,
+        "lift": 0.1,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 13
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 6.1,
+      "tabard front.2": 4.7,
+      "tabard front.3": 2.7,
+      "tabard back.1": 0.2,
+      "tabard back.2": 10.8
+    },
+    "tabard_swing_frames": 10,
+    "orient_roll_max_deg": {
+      "L": 102.6,
+      "R": 108.1
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0223,
+    "end_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 62.4,
+    "halo_clear_frames": 14,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 45.4,
+      "R": 38.2
+    },
+    "halo_pop_mm_f2": {
+      "ring": 48.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep",
+    "action": "HS_anim | Arc Step end"
+  },
+  {
+    "title": "Arc Step back start",
+    "frames": [
+      1,
+      7
+    ],
+    "loop": false,
+    "markers": {
+      "Dash start": 7
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R4",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "backward",
+    "travel": [
+      0.0,
+      1.0
+    ],
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step back end",
+      16
+    ],
+    "seam_to": [
+      "Arc Step back loop",
+      1
+    ],
+    "finger_accents": [
+      4
+    ],
+    "accents": [
+      3,
+      4
+    ],
+    "orient_smooth_max_deg": 5.2,
+    "pad_follow_max": {
+      "L": {
+        "deg": 8.7,
+        "lift": 0.1,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 5
+      },
+      "R": {
+        "deg": 6.7,
+        "lift": 0.06,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 5
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 23.9,
+      "tabard front.2": 24.4,
+      "tabard front.3": 13.9,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 6,
+    "orient_roll_max_deg": {
+      "L": 24.6,
+      "R": 23.9
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.03,
+    "start_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 12.3,
+    "halo_clear_frames": 5,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 43.9,
+      "R": 27.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 57.6
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step back start"
+  },
+  {
+    "title": "Arc Step back loop",
+    "frames": [
+      1,
+      11
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 4e-05,
+    "max_leg_extension": 0.4007,
+    "max_leg_extension_at": "L9",
+    "ik_miss_at": "R10",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "backward",
+    "travel": [
+      0.0,
+      1.0
+    ],
+    "dash_distance_m": [
+      8,
+      12
+    ],
+    "air_ok": true,
+    "orient_smooth_max_deg": 7.5,
+    "pad_follow_max": {
+      "L": {
+        "deg": 8.9,
+        "lift": 0.1,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 9.1,
+        "lift": 0.11,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 23.7,
+      "tabard front.2": 27.0,
+      "tabard front.3": 15.6,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 10,
+    "orient_roll_max_deg": {
+      "L": 18.7,
+      "R": 18.6
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 2.2,
+      "R": 2.4
+    },
+    "halo_pop_mm_f2": {
+      "ring": 13.2
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step back loop"
+  },
+  {
+    "title": "Arc Step back end",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "Arrive": 5,
+      "Cancel": 5,
+      "Recovered": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "L4",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "backward",
+    "travel": [
+      0.0,
+      1.0
+    ],
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step back loop",
+      1
+    ],
+    "seam_to": [
+      "Arc Step back start",
+      1
+    ],
+    "accents": [
+      4,
+      7
+    ],
+    "cancel": {
+      "any_state_from": 5
+    },
+    "orient_smooth_max_deg": 5.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 19.3,
+        "lift": 0.39,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 18.0,
+        "lift": 0.35,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 22.9,
+      "tabard front.2": 18.8,
+      "tabard front.3": 10.7,
+      "tabard back.1": 2.3,
+      "tabard back.2": 14.8
+    },
+    "tabard_swing_frames": 10,
+    "orient_roll_max_deg": {
+      "L": 27.4,
+      "R": 23.8
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.028,
+    "end_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 20.5,
+      "R": 19.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 41.6
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step back end"
+  },
+  {
+    "title": "Arc Step left start",
+    "frames": [
+      1,
+      7
+    ],
+    "loop": false,
+    "markers": {
+      "Dash start": 7
+    },
+    "ik_miss_m": 4e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "L3",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "left",
+    "travel": [
+      1.0,
+      0.0
+    ],
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step left end",
+      16
+    ],
+    "seam_to": [
+      "Arc Step left loop",
+      1
+    ],
+    "finger_accents": [
+      4
+    ],
+    "accents": [
+      3,
+      4
+    ],
+    "orient_smooth_max_deg": 27.1,
+    "pad_follow_max": {
+      "L": {
+        "deg": 3.8,
+        "lift": 0.01,
+        "push_mm": 12.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      },
+      "R": {
+        "deg": 2.3,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.4,
+      "tabard back.2": 7.4
+    },
+    "tabard_swing_frames": 6,
+    "orient_roll_max_deg": {
+      "L": 23.4,
+      "R": 34.8
+    },
+    "orient_infeasible": 14,
+    "halo_max_offset_m": 0.035,
+    "start_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 61.5,
+    "halo_clear_frames": 6,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 25.6,
+      "R": 15.9
+    },
+    "halo_pop_mm_f2": {
+      "ring": 51.3
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step left start"
+  },
+  {
+    "title": "Arc Step left loop",
+    "frames": [
+      1,
+      11
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 3e-05,
+    "max_leg_extension": 0.8749,
+    "max_leg_extension_at": "L9",
+    "ik_miss_at": "R6",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "left",
+    "travel": [
+      1.0,
+      0.0
+    ],
+    "dash_distance_m": [
+      8,
+      12
+    ],
+    "air_ok": true,
+    "orient_smooth_max_deg": 10.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 3.8,
+      "tabard front.2": 2.9,
+      "tabard front.3": 1.7,
+      "tabard back.1": 0.8,
+      "tabard back.2": 7.4
+    },
+    "tabard_swing_frames": 10,
+    "orient_roll_max_deg": {
+      "L": 12.1,
+      "R": 19.3
+    },
+    "orient_infeasible": 22,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 73.7,
+    "halo_clear_frames": 10,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 41.2
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step left loop"
+  },
+  {
+    "title": "Arc Step left end",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "Arrive": 5,
+      "Cancel": 5,
+      "Recovered": 14
+    },
+    "ik_miss_m": 7e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "R7",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "left",
+    "travel": [
+      1.0,
+      0.0
+    ],
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step left loop",
+      1
+    ],
+    "seam_to": [
+      "Arc Step left start",
+      1
+    ],
+    "accents": [
+      4,
+      7
+    ],
+    "cancel": {
+      "any_state_from": 5
+    },
+    "orient_smooth_max_deg": 11.6,
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.1,
+        "lift": 0.15,
+        "push_mm": 4.8,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      },
+      "R": {
+        "deg": 8.2,
+        "lift": 0.13,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.4,
+      "tabard back.2": 7.4
+    },
+    "tabard_swing_frames": 7,
+    "orient_roll_max_deg": {
+      "L": 42.7,
+      "R": 33.9
+    },
+    "orient_infeasible": 4,
+    "halo_max_offset_m": 0.035,
+    "end_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 61.5,
+    "halo_clear_frames": 12,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 40.4,
+      "R": 46.3
+    },
+    "halo_pop_mm_f2": {
+      "ring": 41.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step left end"
+  },
+  {
+    "title": "Arc Step right start",
+    "frames": [
+      1,
+      7
+    ],
+    "loop": false,
+    "markers": {
+      "Dash start": 7
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R4",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "right",
+    "travel": [
+      -1.0,
+      0.0
+    ],
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step right end",
+      16
+    ],
+    "seam_to": [
+      "Arc Step right loop",
+      1
+    ],
+    "finger_accents": [
+      4
+    ],
+    "accents": [
+      3,
+      4
+    ],
+    "orient_smooth_max_deg": 38.6,
+    "pad_follow_max": {
+      "L": {
+        "deg": 2.5,
+        "lift": 0.01,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      },
+      "R": {
+        "deg": 5.0,
+        "lift": 0.0,
+        "push_mm": 15.6,
+        "yield_min_k": 0.0,
+        "yield_frames": 6
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 4.0,
+      "tabard front.2": 3.1,
+      "tabard front.3": 1.8,
+      "tabard back.1": 0.4,
+      "tabard back.2": 1.7
+    },
+    "tabard_swing_frames": 6,
+    "orient_roll_max_deg": {
+      "L": 47.1,
+      "R": 21.0
+    },
+    "orient_infeasible": 10,
+    "halo_max_offset_m": 0.035,
+    "start_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 58.7,
+    "halo_clear_frames": 6,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 17.2,
+      "R": 25.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 51.3
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 1.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step right start"
+  },
+  {
+    "title": "Arc Step right loop",
+    "frames": [
+      1,
+      11
+    ],
+    "loop": true,
+    "markers": {},
+    "ik_miss_m": 3e-05,
+    "max_leg_extension": 0.878,
+    "max_leg_extension_at": "L9",
+    "ik_miss_at": "R3",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "right",
+    "travel": [
+      -1.0,
+      0.0
+    ],
+    "dash_distance_m": [
+      8,
+      12
+    ],
+    "air_ok": true,
+    "orient_smooth_max_deg": 17.4,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      },
+      "R": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 10
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.1,
+      "tabard front.2": 0.1,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.8,
+      "tabard back.2": 7.3
+    },
+    "tabard_swing_frames": 10,
+    "orient_roll_max_deg": {
+      "L": 34.9,
+      "R": 5.3
+    },
+    "orient_infeasible": 22,
+    "halo_max_offset_m": 0.035,
+    "halo_clear_push_max_mm": 76.1,
+    "halo_clear_frames": 10,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 37.3
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 1.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step right loop"
+  },
+  {
+    "title": "Arc Step right end",
+    "frames": [
+      1,
+      16
+    ],
+    "loop": false,
+    "markers": {
+      "Arrive": 5,
+      "Cancel": 5,
+      "Recovered": 14
+    },
+    "ik_miss_m": 5e-05,
+    "max_leg_extension": 0.9967,
+    "max_leg_extension_at": "L16",
+    "ik_miss_at": "L7",
+    "ik_miss_frames": {},
+    "kind": "utility",
+    "direction": "right",
+    "travel": [
+      -1.0,
+      0.0
+    ],
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Arc Step right loop",
+      1
+    ],
+    "seam_to": [
+      "Arc Step right start",
+      1
+    ],
+    "accents": [
+      4,
+      7
+    ],
+    "cancel": {
+      "any_state_from": 5
+    },
+    "orient_smooth_max_deg": 12.2,
+    "pad_follow_max": {
+      "L": {
+        "deg": 9.1,
+        "lift": 0.15,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      },
+      "R": {
+        "deg": 8.2,
+        "lift": 0.13,
+        "push_mm": 7.6,
+        "yield_min_k": 0.0,
+        "yield_frames": 8
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 1.0,
+      "tabard back.2": 15.0
+    },
+    "tabard_swing_frames": 11,
+    "orient_roll_max_deg": {
+      "L": 45.5,
+      "R": 29.6
+    },
+    "orient_infeasible": 4,
+    "halo_max_offset_m": 0.035,
+    "end_rest_err_m": 0.105098,
+    "halo_clear_push_max_mm": 58.7,
+    "halo_clear_frames": 8,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 39.0,
+      "R": 48.2
+    },
+    "halo_pop_mm_f2": {
+      "ring": 29.5
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 1.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "arcstep_dirs",
+    "action": "HS_anim | Arc Step right end"
+  },
+  {
+    "title": "Charge loop",
+    "frames": [
+      1,
+      41
+    ],
+    "loop": true,
+    "markers": {
+      "Pulse high": 11,
+      "Pulse low": 31
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "role": "meter full: the Discharge meter reached 100% (passive), upper-body overlay; idle/idle-combat accent while the meter waits (hands leave the aim)",
+    "orient_smooth_max_deg": 3.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 10.4,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 9.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "R": 6.2
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 32.6,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 1.1,
+      "R": 1.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      3.28,
+      "R hand",
+      1
+    ],
+    "max_ang_acc_deg_f2": [
+      3.05,
+      "R hand",
+      8
+    ],
+    "max_pos_acc_mm_f2": [
+      20.06,
+      "halo 4",
+      23
+    ],
+    "arc_signed_min_mm": 17.4,
+    "arc_signed_frame": 31,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 209.4,
+    "hand_chest_frame": 28,
+    "pauldron_follow_err_deg": 8.42,
+    "arm_solves": {
+      "charge": {
+        "arms": {
+          "L": {
+            "swing": 12.0,
+            "adduct": 20.62,
+            "elbow": 86.0,
+            "ftwist": 27.75,
+            "wx": -24.5,
+            "wy": -12.38,
+            "wz": -12.88,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 24.0,
+            "adduct": 16.38,
+            "elbow": 85.88,
+            "ftwist": 10.62,
+            "wx": -32.12,
+            "wy": 1.0,
+            "wz": -25.38,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.1,
+            "wrist_mm": 8.6,
+            "palm_deg": 28.7,
+            "score": 3.721
+          },
+          "R": {
+            "miss_mm": 0.0,
+            "wrist_mm": 5.7,
+            "palm_deg": 29.6,
+            "score": 3.42
+          }
+        }
+      },
+      "charge_wide": {
+        "arms": {
+          "L": {
+            "swing": 12.88,
+            "adduct": 15.12,
+            "elbow": 89.88,
+            "ftwist": 28.38,
+            "wx": -18.12,
+            "wy": -11.0,
+            "wz": -5.0,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 24.25,
+            "adduct": 10.75,
+            "elbow": 87.0,
+            "ftwist": 19.0,
+            "wx": -26.94,
+            "wy": -11.0,
+            "wz": -18.25,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.3,
+            "wrist_mm": 7.2,
+            "palm_deg": 23.0,
+            "score": 2.783
+          },
+          "R": {
+            "miss_mm": 0.1,
+            "wrist_mm": 12.6,
+            "palm_deg": 21.0,
+            "score": 3.126
+          }
+        }
+      },
+      "charge_full": {
+        "arms": {
+          "L": {
+            "swing": -0.38,
+            "adduct": 3.19,
+            "elbow": 94.88,
+            "ftwist": 8.56,
+            "wx": -6.56,
+            "wy": -7.94,
+            "wz": -20.69,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 16.62,
+            "adduct": -7.62,
+            "elbow": 97.25,
+            "ftwist": 9.5,
+            "wx": -17.88,
+            "wy": -9.38,
+            "wz": -9.38,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.1,
+            "wrist_mm": 8.7,
+            "palm_deg": 45.8,
+            "score": 5.735
+          },
+          "R": {
+            "miss_mm": 0.3,
+            "wrist_mm": 17.8,
+            "palm_deg": 39.7,
+            "score": 5.137
+          }
+        }
+      },
+      "charge_full_wide": {
+        "arms": {
+          "L": {
+            "swing": -1.31,
+            "adduct": -4.62,
+            "elbow": 92.19,
+            "ftwist": 6.94,
+            "wx": -3.62,
+            "wy": -11.06,
+            "wz": -19.38,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 13.94,
+            "adduct": -17.19,
+            "elbow": 88.25,
+            "ftwist": 10.88,
+            "wx": -20.94,
+            "wy": -21.12,
+            "wz": -13.94,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.3,
+            "wrist_mm": 0.3,
+            "palm_deg": 41.8,
+            "score": 4.268
+          },
+          "R": {
+            "miss_mm": 0.1,
+            "wrist_mm": 4.8,
+            "palm_deg": 40.0,
+            "score": 4.204
+          }
+        }
+      },
+      "gather": {
+        "arms": {
+          "L": {
+            "swing": -28.5,
+            "adduct": 15.0,
+            "elbow": 103.25,
+            "ftwist": 16.62,
+            "wx": 3.12,
+            "wy": 51.56,
+            "wz": -1.88,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 7.19,
+            "adduct": 1.25,
+            "elbow": 115.94,
+            "ftwist": 11.69,
+            "wx": -6.31,
+            "wy": 25.0,
+            "wz": -10.12,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 64.2,
+            "wrist_mm": 155.0,
+            "palm_deg": 42.8,
+            "score": 28.307
+          },
+          "R": {
+            "miss_mm": 77.7,
+            "wrist_mm": 132.0,
+            "palm_deg": 24.9,
+            "score": 26.059
+          }
+        }
+      },
+      "release": {
+        "arms": {
+          "R": {
+            "swing": -71.56,
+            "adduct": 27.44,
+            "elbow": 34.75,
+            "ftwist": 41.44,
+            "wx": 16.31,
+            "wy": -2.25,
+            "wz": -3.44,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "R": {
+            "miss_mm": 1.2,
+            "wrist_mm": 1.2,
+            "palm_deg": 3.2,
+            "score": 1.9,
+            "palm_raw_deg": 41.9,
+            "finger_deg": 0.1
+          }
+        }
+      },
+      "frame": {
+        "arms": {
+          "L": {
+            "swing": -19.25,
+            "adduct": 10.94,
+            "elbow": 130.19,
+            "ftwist": 90.19,
+            "wx": -3.88,
+            "wy": -22.81,
+            "wz": -27.69,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": -3.25,
+            "adduct": 3.75,
+            "elbow": 128.12,
+            "ftwist": 96.69,
+            "wx": -7.12,
+            "wy": -25.06,
+            "wz": -26.12,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 32.6,
+            "wrist_mm": 69.7,
+            "palm_deg": 11.9,
+            "score": 13.052,
+            "palm_raw_deg": 49.4,
+            "finger_deg": 22.6
+          },
+          "R": {
+            "miss_mm": 24.4,
+            "wrist_mm": 63.5,
+            "palm_deg": 11.0,
+            "score": 12.365,
+            "palm_raw_deg": 49.1,
+            "finger_deg": 21.8
+          }
+        }
+      },
+      "spread": {
+        "arms": {
+          "L": {
+            "swing": -0.69,
+            "adduct": -27.19,
+            "elbow": 35.69,
+            "ftwist": -51.0,
+            "wx": -6.5,
+            "wy": -24.19,
+            "wz": 11.12,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 12.62,
+            "adduct": -33.31,
+            "elbow": 32.81,
+            "ftwist": -57.75,
+            "wx": -22.44,
+            "wy": -16.75,
+            "wz": 8.69,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.1,
+            "wrist_mm": 1.6,
+            "palm_deg": 26.2,
+            "score": 3.612
+          },
+          "R": {
+            "miss_mm": 1.5,
+            "wrist_mm": 1.8,
+            "palm_deg": 26.4,
+            "score": 3.674
+          }
+        }
+      },
+      "hold": {
+        "arms": {
+          "L": {
+            "swing": 3.62,
+            "adduct": -6.75,
+            "elbow": 42.44,
+            "ftwist": -48.88,
+            "wx": 13.81,
+            "wy": -19.19,
+            "wz": 24.31,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 12.06,
+            "adduct": -10.75,
+            "elbow": 39.56,
+            "ftwist": -52.81,
+            "wx": 1.44,
+            "wy": -9.0,
+            "wz": 18.88,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.4,
+            "wrist_mm": 1.5,
+            "palm_deg": 19.9,
+            "score": 3.86
+          },
+          "R": {
+            "miss_mm": 1.9,
+            "wrist_mm": 1.9,
+            "palm_deg": 19.9,
+            "score": 3.344
+          }
+        }
+      },
+      "recall": {
+        "arms": {
+          "L": {
+            "swing": -9.94,
+            "adduct": 16.0,
+            "elbow": 99.5,
+            "ftwist": 23.56,
+            "wx": -10.12,
+            "wy": 22.0,
+            "wz": -12.94,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 3.0,
+            "adduct": 11.69,
+            "elbow": 98.5,
+            "ftwist": 23.44,
+            "wx": -21.56,
+            "wy": 20.94,
+            "wz": -21.19,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 61.4,
+            "wrist_mm": 100.4,
+            "palm_deg": 32.9,
+            "score": 21.335
+          },
+          "R": {
+            "miss_mm": 61.6,
+            "wrist_mm": 98.4,
+            "palm_deg": 29.4,
+            "score": 21.623
+          }
+        }
+      },
+      "draw": {
+        "arms": {
+          "R": {
+            "swing": -107.94,
+            "adduct": -18.94,
+            "elbow": 63.31,
+            "ftwist": -20.12,
+            "wx": 19.75,
+            "wy": 29.12,
+            "wz": 9.81,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "R": {
+            "miss_mm": 0.2,
+            "wrist_mm": 41.7,
+            "palm_deg": 2.6,
+            "score": 5.852,
+            "palm_raw_deg": 7.8,
+            "finger_deg": 17.8
+          }
+        }
+      },
+      "point": {
+        "arms": {
+          "L": {
+            "swing": -79.06,
+            "adduct": 16.5,
+            "elbow": 31.25,
+            "ftwist": 41.25,
+            "wx": 29.5,
+            "wy": -1.06,
+            "wz": 9.94,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.8,
+            "wrist_mm": 1.8,
+            "palm_deg": 1.8,
+            "score": 2.178,
+            "palm_raw_deg": 43.4,
+            "finger_deg": 0.4
+          }
+        }
+      }
+    },
+    "module": "special",
+    "action": "HS_anim | Charge loop"
+  },
+  {
+    "title": "Charge full",
+    "frames": [
+      1,
+      25
+    ],
+    "loop": true,
+    "markers": {
+      "Pulse high": 7
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "seam_anchors": [],
+    "role": "meter full: the Discharge meter reached 100% (passive), upper-body overlay; held flourish loop",
+    "pad_follow_max": {
+      "L": {
+        "deg": 1.2,
+        "lift": 0.0,
+        "push_mm": 3.6,
+        "yield_min_k": 0.0,
+        "yield_frames": 22
+      },
+      "R": {
+        "deg": 4.8,
+        "lift": 0.04,
+        "push_mm": 5.2,
+        "yield_min_k": 0.0,
+        "yield_frames": 24
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {},
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 54.6,
+    "halo_clear_push_max_mm": 10.9,
+    "halo_clear_frames": 24,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 5.1,
+      "R": 3.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.6
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      6.63,
+      "R hand",
+      9
+    ],
+    "max_ang_acc_deg_f2": [
+      12.78,
+      "R forearm",
+      3
+    ],
+    "max_pos_acc_mm_f2": [
+      116.91,
+      "halo 4",
+      10
+    ],
+    "arc_signed_min_mm": 4.0,
+    "arc_signed_frame": 8,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 255.6,
+    "hand_chest_frame": 15,
+    "pauldron_follow_err_deg": 7.7,
+    "module": "special",
+    "action": "HS_anim | Charge full"
+  },
+  {
+    "title": "Meter full flourish",
+    "frames": [
+      1,
+      24
+    ],
+    "loop": false,
+    "markers": {
+      "Full": 6,
+      "Release": 15,
+      "Recovered": 24
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "role": "meter full: the Discharge meter reached 100% (passive), upper-body overlay; one-shot (Charge full once, in and out of rest)",
+    "orient_smooth_max_deg": 13.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.6,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 17
+      },
+      "R": {
+        "deg": 6.4,
+        "lift": 0.05,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 19
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 20.8,
+      "R": 17.3
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 54.6,
+    "start_rest_err_m": 0.094162,
+    "end_rest_err_m": 0.094162,
+    "halo_clear_push_max_mm": 6.2,
+    "halo_clear_frames": 22,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 3.7,
+      "R": 5.4
+    },
+    "halo_pop_mm_f2": {
+      "ring": 1.1
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      28.78,
+      "L forearm",
+      3
+    ],
+    "max_ang_acc_deg_f2": [
+      16.42,
+      "R forearm",
+      5
+    ],
+    "max_pos_acc_mm_f2": [
+      116.91,
+      "halo 4",
+      10
+    ],
+    "arc_signed_min_mm": 4.0,
+    "arc_signed_frame": 8,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 255.9,
+    "hand_chest_frame": 15,
+    "pauldron_follow_err_deg": 7.59,
+    "module": "special",
+    "action": "HS_anim | Meter full flourish"
+  },
+  {
+    "title": "Discharge snap",
+    "frames": [
+      1,
+      14
+    ],
+    "loop": false,
+    "markers": {
+      "Release": 3,
+      "Recovered": 14
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "role": "passive Discharge: fires on the next enemy hit at 100%; plays over any state (upper-body layer)",
+    "socket_release": [
+      "L muzzle",
+      "R muzzle",
+      "core socket"
+    ],
+    "finger_accents": [
+      3
+    ],
+    "accents": [
+      2,
+      3,
+      4
+    ],
+    "orient_smooth_max_deg": 4.4,
+    "pad_follow_max": {
+      "L": {
+        "deg": 15.3,
+        "lift": 0.27,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 18.2,
+        "lift": 0.36,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 4.8,
+      "R": 4.8
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 75.5,
+    "start_rest_err_m": 0.094162,
+    "end_rest_err_m": 0.094162,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 40.7,
+      "R": 49.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 39.1
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      45.49,
+      "R forearm",
+      2
+    ],
+    "max_ang_acc_deg_f2": [
+      45.49,
+      "R forearm",
+      3
+    ],
+    "max_pos_acc_mm_f2": [
+      499.68,
+      "halo 1",
+      3
+    ],
+    "arc_signed_min_mm": 10.3,
+    "arc_signed_frame": 9,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 400.7,
+    "hand_chest_frame": 1,
+    "pauldron_follow_err_deg": 10.84,
+    "module": "special",
+    "action": "HS_anim | Discharge snap"
+  },
+  {
+    "title": "Discharge",
+    "frames": [
+      1,
+      28
+    ],
+    "loop": false,
+    "markers": {
+      "Gather": 5,
+      "Release": 9,
+      "Recovered": 28
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "socket_release": [
+      "L muzzle",
+      "R muzzle",
+      "core socket"
+    ],
+    "finger_accents": [
+      9
+    ],
+    "accents": [
+      7,
+      9
+    ],
+    "orient_smooth_max_deg": 74.2,
+    "pad_follow_max": {
+      "L": {
+        "deg": 15.3,
+        "lift": 0.27,
+        "push_mm": 1.3,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 18.2,
+        "lift": 0.36,
+        "push_mm": 2.3,
+        "yield_min_k": 0.0,
+        "yield_frames": 14
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 32.8,
+      "R": 73.7
+    },
+    "orient_infeasible": 18,
+    "max_arm_raise_deg": 75.5,
+    "start_rest_err_m": 0.094162,
+    "end_rest_err_m": 0.094162,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 43.3,
+      "R": 46.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 41.5
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      54.6,
+      "R forearm",
+      8
+    ],
+    "max_ang_acc_deg_f2": [
+      54.79,
+      "R forearm",
+      9
+    ],
+    "max_pos_acc_mm_f2": [
+      489.23,
+      "halo 1",
+      9
+    ],
+    "arc_signed_min_mm": 7.9,
+    "arc_signed_frame": 16,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 192.2,
+    "hand_chest_frame": 5,
+    "pauldron_follow_err_deg": 11.61,
+    "module": "special",
+    "action": "HS_anim | Discharge"
+  },
+  {
+    "title": "Open Circuit",
+    "frames": [
+      1,
+      30
+    ],
+    "loop": false,
+    "markers": {
+      "Unfold": 6,
+      "Crown active": 22
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "seam_to": [
+      "Open Circuit hold",
+      1
+    ],
+    "orient_smooth_max_deg": 27.3,
+    "pad_follow_max": {
+      "L": {
+        "deg": 13.6,
+        "lift": 0.22,
+        "push_mm": 0.9,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 16.4,
+        "lift": 0.3,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 32.9,
+      "R": 36.4
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 71.9,
+    "start_rest_err_m": 0.094162,
+    "end_rest_err_m": 0.530544,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 5.1,
+      "R": 5.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 3.4
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      32.71,
+      "R forearm",
+      15
+    ],
+    "max_ang_acc_deg_f2": [
+      19.38,
+      "L forearm",
+      3
+    ],
+    "max_pos_acc_mm_f2": [
+      57.63,
+      "L hand",
+      2
+    ],
+    "arc_signed_min_mm": 21.6,
+    "arc_signed_frame": 1,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 118.4,
+    "hand_chest_frame": 12,
+    "pauldron_follow_err_deg": 5.94,
+    "module": "special",
+    "action": "HS_anim | Open Circuit"
+  },
+  {
+    "title": "Open Circuit hold",
+    "frames": [
+      1,
+      25
+    ],
+    "loop": true,
+    "markers": {
+      "Pulse": 1
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "orient_smooth_max_deg": 2.4,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.4,
+        "lift": 0.04,
+        "push_mm": 2.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 7.5,
+        "lift": 0.07,
+        "push_mm": 2.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 2.8,
+      "R": 0.2
+    },
+    "orient_infeasible": 0,
+    "max_arm_raise_deg": 53.9,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 1.3,
+      "R": 1.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.0
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      2.67,
+      "R hand",
+      20
+    ],
+    "max_ang_acc_deg_f2": [
+      3.1,
+      "L hand",
+      22
+    ],
+    "max_pos_acc_mm_f2": [
+      7.52,
+      "halo 3",
+      18
+    ],
+    "arc_signed_min_mm": 9000.0,
+    "arc_signed_frame": 0,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 382.1,
+    "hand_chest_frame": 19,
+    "pauldron_follow_err_deg": 4.19,
+    "module": "special",
+    "action": "HS_anim | Open Circuit hold"
+  },
+  {
+    "title": "Open Circuit end",
+    "frames": [
+      1,
+      22
+    ],
+    "loop": false,
+    "markers": {
+      "Recall": 3,
+      "Recovered": 22
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "seam_from": [
+      "Open Circuit hold",
+      1
+    ],
+    "orient_smooth_max_deg": 64.4,
+    "pad_follow_max": {
+      "L": {
+        "deg": 8.1,
+        "lift": 0.02,
+        "push_mm": 1.6,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 6.2,
+        "lift": 0.05,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 56.0,
+      "R": 71.8
+    },
+    "orient_infeasible": 10,
+    "max_arm_raise_deg": 51.1,
+    "start_rest_err_m": 0.530544,
+    "end_rest_err_m": 0.094162,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 5.2,
+      "R": 5.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 6.2
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "max_ang_vel_deg_f": [
+      20.59,
+      "R forearm",
+      4
+    ],
+    "max_ang_acc_deg_f2": [
+      9.3,
+      "L forearm",
+      13
+    ],
+    "max_pos_acc_mm_f2": [
+      59.03,
+      "halo 1",
+      8
+    ],
+    "arc_signed_min_mm": 18.0,
+    "arc_signed_frame": 18,
+    "arc_signed_rest_mm": 21.6,
+    "arc_verts_inside_max": 0,
+    "arc_verts_inside_frame": 0,
+    "arc_verts_inside_rest": 0,
+    "hand_chest_min_mm": 223.4,
+    "hand_chest_frame": 9,
+    "pauldron_follow_err_deg": 6.63,
+    "module": "special",
+    "action": "HS_anim | Open Circuit end"
+  },
+  {
+    "title": "Conduit Spear",
+    "frames": [
+      1,
+      20
+    ],
+    "loop": false,
+    "markers": {
+      "Materialize": 2,
+      "Draw": 5,
+      "Spear release": 7,
+      "Cancel": 11,
+      "Fade": 14,
+      "Recovered": 20
+    },
+    "ik_miss_m": 0.0,
+    "max_leg_extension": 0.0,
+    "max_leg_extension_at": "",
+    "ik_miss_at": "",
+    "ik_miss_frames": {},
+    "kind": "gesture",
+    "layer": "upper body (mask excludes pelvis/legs)",
+    "hand": "R",
+    "accents": [
+      6,
+      7
+    ],
+    "finger_accents": [
+      7
+    ],
+    "cancel": {
+      "locked": [
+        1,
+        7
+      ],
+      "skills_jump_sprint_from": 11,
+      "any_state_from": 14
+    },
+    "projectile_mps": 150.0,
+    "launch": "R palm (R middle.1 knuckle, along the hand velocity)",
+    "arm_solves": {
+      "charge": {
+        "arms": {
+          "L": {
+            "swing": 12.0,
+            "adduct": 20.62,
+            "elbow": 86.0,
+            "ftwist": 27.75,
+            "wx": -24.5,
+            "wy": -12.38,
+            "wz": -12.88,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 24.0,
+            "adduct": 16.38,
+            "elbow": 85.88,
+            "ftwist": 10.62,
+            "wx": -32.12,
+            "wy": 1.0,
+            "wz": -25.38,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.1,
+            "wrist_mm": 8.6,
+            "palm_deg": 28.7,
+            "score": 3.721
+          },
+          "R": {
+            "miss_mm": 0.0,
+            "wrist_mm": 5.7,
+            "palm_deg": 29.6,
+            "score": 3.42
+          }
+        }
+      },
+      "charge_wide": {
+        "arms": {
+          "L": {
+            "swing": 12.88,
+            "adduct": 15.12,
+            "elbow": 89.88,
+            "ftwist": 28.38,
+            "wx": -18.12,
+            "wy": -11.0,
+            "wz": -5.0,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 24.25,
+            "adduct": 10.75,
+            "elbow": 87.0,
+            "ftwist": 19.0,
+            "wx": -26.94,
+            "wy": -11.0,
+            "wz": -18.25,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.3,
+            "wrist_mm": 7.2,
+            "palm_deg": 23.0,
+            "score": 2.783
+          },
+          "R": {
+            "miss_mm": 0.1,
+            "wrist_mm": 12.6,
+            "palm_deg": 21.0,
+            "score": 3.126
+          }
+        }
+      },
+      "charge_full": {
+        "arms": {
+          "L": {
+            "swing": -0.38,
+            "adduct": 3.19,
+            "elbow": 94.88,
+            "ftwist": 8.56,
+            "wx": -6.56,
+            "wy": -7.94,
+            "wz": -20.69,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 16.62,
+            "adduct": -7.62,
+            "elbow": 97.25,
+            "ftwist": 9.5,
+            "wx": -17.88,
+            "wy": -9.38,
+            "wz": -9.38,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.1,
+            "wrist_mm": 8.7,
+            "palm_deg": 45.8,
+            "score": 5.735
+          },
+          "R": {
+            "miss_mm": 0.3,
+            "wrist_mm": 17.8,
+            "palm_deg": 39.7,
+            "score": 5.137
+          }
+        }
+      },
+      "charge_full_wide": {
+        "arms": {
+          "L": {
+            "swing": -1.31,
+            "adduct": -4.62,
+            "elbow": 92.19,
+            "ftwist": 6.94,
+            "wx": -3.62,
+            "wy": -11.06,
+            "wz": -19.38,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 13.94,
+            "adduct": -17.19,
+            "elbow": 88.25,
+            "ftwist": 10.88,
+            "wx": -20.94,
+            "wy": -21.12,
+            "wz": -13.94,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 0.3,
+            "wrist_mm": 0.3,
+            "palm_deg": 41.8,
+            "score": 4.268
+          },
+          "R": {
+            "miss_mm": 0.1,
+            "wrist_mm": 4.8,
+            "palm_deg": 40.0,
+            "score": 4.204
+          }
+        }
+      },
+      "gather": {
+        "arms": {
+          "L": {
+            "swing": -28.5,
+            "adduct": 15.0,
+            "elbow": 103.25,
+            "ftwist": 16.62,
+            "wx": 3.12,
+            "wy": 51.56,
+            "wz": -1.88,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 7.19,
+            "adduct": 1.25,
+            "elbow": 115.94,
+            "ftwist": 11.69,
+            "wx": -6.31,
+            "wy": 25.0,
+            "wz": -10.12,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 64.2,
+            "wrist_mm": 155.0,
+            "palm_deg": 42.8,
+            "score": 28.307
+          },
+          "R": {
+            "miss_mm": 77.7,
+            "wrist_mm": 132.0,
+            "palm_deg": 24.9,
+            "score": 26.059
+          }
+        }
+      },
+      "release": {
+        "arms": {
+          "R": {
+            "swing": -71.56,
+            "adduct": 27.44,
+            "elbow": 34.75,
+            "ftwist": 41.44,
+            "wx": 16.31,
+            "wy": -2.25,
+            "wz": -3.44,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "R": {
+            "miss_mm": 1.2,
+            "wrist_mm": 1.2,
+            "palm_deg": 3.2,
+            "score": 1.9,
+            "palm_raw_deg": 41.9,
+            "finger_deg": 0.1
+          }
+        }
+      },
+      "frame": {
+        "arms": {
+          "L": {
+            "swing": -19.25,
+            "adduct": 10.94,
+            "elbow": 130.19,
+            "ftwist": 90.19,
+            "wx": -3.88,
+            "wy": -22.81,
+            "wz": -27.69,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": -3.25,
+            "adduct": 3.75,
+            "elbow": 128.12,
+            "ftwist": 96.69,
+            "wx": -7.12,
+            "wy": -25.06,
+            "wz": -26.12,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 32.6,
+            "wrist_mm": 69.7,
+            "palm_deg": 11.9,
+            "score": 13.052,
+            "palm_raw_deg": 49.4,
+            "finger_deg": 22.6
+          },
+          "R": {
+            "miss_mm": 24.4,
+            "wrist_mm": 63.5,
+            "palm_deg": 11.0,
+            "score": 12.365,
+            "palm_raw_deg": 49.1,
+            "finger_deg": 21.8
+          }
+        }
+      },
+      "spread": {
+        "arms": {
+          "L": {
+            "swing": -0.69,
+            "adduct": -27.19,
+            "elbow": 35.69,
+            "ftwist": -51.0,
+            "wx": -6.5,
+            "wy": -24.19,
+            "wz": 11.12,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 12.62,
+            "adduct": -33.31,
+            "elbow": 32.81,
+            "ftwist": -57.75,
+            "wx": -22.44,
+            "wy": -16.75,
+            "wz": 8.69,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.1,
+            "wrist_mm": 1.6,
+            "palm_deg": 26.2,
+            "score": 3.612
+          },
+          "R": {
+            "miss_mm": 1.5,
+            "wrist_mm": 1.8,
+            "palm_deg": 26.4,
+            "score": 3.674
+          }
+        }
+      },
+      "hold": {
+        "arms": {
+          "L": {
+            "swing": 3.62,
+            "adduct": -6.75,
+            "elbow": 42.44,
+            "ftwist": -48.88,
+            "wx": 13.81,
+            "wy": -19.19,
+            "wz": 24.31,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 12.06,
+            "adduct": -10.75,
+            "elbow": 39.56,
+            "ftwist": -52.81,
+            "wx": 1.44,
+            "wy": -9.0,
+            "wz": 18.88,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.4,
+            "wrist_mm": 1.5,
+            "palm_deg": 19.9,
+            "score": 3.86
+          },
+          "R": {
+            "miss_mm": 1.9,
+            "wrist_mm": 1.9,
+            "palm_deg": 19.9,
+            "score": 3.344
+          }
+        }
+      },
+      "recall": {
+        "arms": {
+          "L": {
+            "swing": -9.94,
+            "adduct": 16.0,
+            "elbow": 99.5,
+            "ftwist": 23.56,
+            "wx": -10.12,
+            "wy": 22.0,
+            "wz": -12.94,
+            "twist": 0.0
+          },
+          "R": {
+            "swing": 3.0,
+            "adduct": 11.69,
+            "elbow": 98.5,
+            "ftwist": 23.44,
+            "wx": -21.56,
+            "wy": 20.94,
+            "wz": -21.19,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 61.4,
+            "wrist_mm": 100.4,
+            "palm_deg": 32.9,
+            "score": 21.335
+          },
+          "R": {
+            "miss_mm": 61.6,
+            "wrist_mm": 98.4,
+            "palm_deg": 29.4,
+            "score": 21.623
+          }
+        }
+      },
+      "draw": {
+        "arms": {
+          "R": {
+            "swing": -107.94,
+            "adduct": -18.94,
+            "elbow": 63.31,
+            "ftwist": -20.12,
+            "wx": 19.75,
+            "wy": 29.12,
+            "wz": 9.81,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "R": {
+            "miss_mm": 0.2,
+            "wrist_mm": 41.7,
+            "palm_deg": 2.6,
+            "score": 5.852,
+            "palm_raw_deg": 7.8,
+            "finger_deg": 17.8
+          }
+        }
+      },
+      "point": {
+        "arms": {
+          "L": {
+            "swing": -79.06,
+            "adduct": 16.5,
+            "elbow": 31.25,
+            "ftwist": 41.25,
+            "wx": 29.5,
+            "wy": -1.06,
+            "wz": 9.94,
+            "twist": 0.0
+          }
+        },
+        "fit": {
+          "L": {
+            "miss_mm": 1.8,
+            "wrist_mm": 1.8,
+            "palm_deg": 1.8,
+            "score": 2.178,
+            "palm_raw_deg": 43.4,
+            "finger_deg": 0.4
+          }
+        }
+      }
+    },
+    "orient_smooth_max_deg": 39.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 17.0,
+        "lift": 0.45,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      },
+      "R": {
+        "deg": 30.2,
+        "lift": 0.8,
+        "push_mm": 1.4,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.0,
+      "tabard front.2": 0.0,
+      "tabard front.3": 0.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 0,
+    "orient_roll_max_deg": {
+      "L": 29.8,
+      "R": 73.6
+    },
+    "orient_infeasible": 3,
+    "max_arm_raise_deg": 103.3,
+    "start_rest_err_m": 0.094162,
+    "end_rest_err_m": 0.094162,
+    "spear_release_pos": [
+      -0.173,
+      -0.689,
+      1.413
+    ],
+    "spear_hand_speed_mps": 9.73,
+    "spear_velocity_angle_to_target_deg": 49.7,
+    "spear_fingers_angle_to_target_deg": 11.7,
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 25.6,
+      "R": 75.0
+    },
+    "halo_pop_mm_f2": {
+      "ring": 11.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.44,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 1.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "spear",
+    "action": "HS_anim | Conduit Spear"
+  },
+  {
+    "title": "Idle",
+    "frames": [
+      1,
+      97
+    ],
+    "loop": true,
+    "markers": {
+      "Inhale": 1,
+      "Twitch L": 30,
+      "Glance": 58,
+      "Twitch R": 78
+    },
+    "ik_miss_m": 4e-05,
+    "max_leg_extension": 0.9193,
+    "max_leg_extension_at": "L4",
+    "ik_miss_at": "L56",
+    "ik_miss_frames": {},
+    "kind": "idle",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Land",
+      15
+    ],
+    "seam_to": [
+      "Jump",
+      1
+    ],
+    "orient_smooth_max_deg": 3.6,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.3,
+        "lift": 0.0,
+        "push_mm": 0.9,
+        "yield_min_k": 0.88,
+        "yield_frames": 14
+      },
+      "R": {
+        "deg": 5.1,
+        "lift": 0.0,
+        "push_mm": 1.9,
+        "yield_min_k": 0.0,
+        "yield_frames": 24
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 2.7,
+      "tabard front.2": 2.1,
+      "tabard front.3": 1.2,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 88,
+    "orient_roll_max_deg": {
+      "L": 53.5,
+      "R": 55.8
+    },
+    "orient_infeasible": 22,
+    "halo_max_offset_m": 0.0145,
+    "max_arm_raise_deg": 33.6,
+    "max_knee_out_m": 0.0559,
+    "pop_body_deg_f2": [
+      [
+        1.8,
+        "R shoulder",
+        44
+      ],
+      [
+        1.71,
+        "R shoulder",
+        33
+      ],
+      [
+        0.98,
+        "R shoulder",
+        43
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      9.89,
+      "R little.2",
+      75
+    ],
+    "halo_clear_push_max_mm": 0.0,
+    "halo_clear_frames": 0,
+    "pad_pop_mm_f2": {
+      "L": 0.3,
+      "R": 2.1
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.2
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Idle"
+  },
+  {
+    "title": "Idle combat",
+    "frames": [
+      1,
+      49
+    ],
+    "loop": true,
+    "markers": {
+      "Inhale": 1
+    },
+    "ik_miss_m": 6e-05,
+    "max_leg_extension": 0.852,
+    "max_leg_extension_at": "R31",
+    "ik_miss_at": "L48",
+    "ik_miss_frames": {},
+    "kind": "idle",
+    "speed_mps": 0.0,
+    "hand": "R",
+    "orient_smooth_max_deg": 2.9,
+    "pad_follow_max": {
+      "L": {
+        "deg": 0.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 48
+      },
+      "R": {
+        "deg": 6.7,
+        "lift": 0.01,
+        "push_mm": 25.2,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 0.2,
+      "tabard front.2": 16.4,
+      "tabard front.3": 9.4,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 48,
+    "orient_roll_max_deg": {
+      "L": 65.6
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0176,
+    "max_arm_raise_deg": 44.7,
+    "max_knee_out_m": 0.0951,
+    "pop_body_deg_f2": [
+      [
+        1.86,
+        "halo 3",
+        3
+      ],
+      [
+        1.76,
+        "halo 1",
+        7
+      ],
+      [
+        1.73,
+        "halo 3",
+        16
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      4.51,
+      "R middle.2",
+      7
+    ],
+    "halo_clear_push_max_mm": 21.5,
+    "halo_clear_frames": 48,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 0.0,
+      "R": 0.9
+    },
+    "halo_pop_mm_f2": {
+      "ring": 1.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Idle combat"
+  },
+  {
+    "title": "Spawn",
+    "frames": [
+      1,
+      72
+    ],
+    "loop": false,
+    "markers": {
+      "Awaken": 13,
+      "Halo lit": 38,
+      "Ready": 60
+    },
+    "ik_miss_m": 8e-05,
+    "max_leg_extension": 0.919,
+    "max_leg_extension_at": "L40",
+    "ik_miss_at": "R25",
+    "ik_miss_frames": {},
+    "kind": "presentation",
+    "speed_mps": 0.0,
+    "seam_to": [
+      "Idle",
+      1
+    ],
+    "orient_smooth_max_deg": 9.3,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.0,
+        "lift": 0.0,
+        "push_mm": 0.0,
+        "yield_min_k": 0.0,
+        "yield_frames": 15
+      },
+      "R": {
+        "deg": 4.6,
+        "lift": 0.0,
+        "push_mm": 15.3,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 3.3,
+      "tabard front.2": 9.7,
+      "tabard front.3": 6.4,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 48,
+    "orient_roll_max_deg": {
+      "L": 87.8,
+      "R": 83.4
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0107,
+    "halo_capped_frames": 0,
+    "max_arm_raise_deg": 41.1,
+    "max_knee_out_m": 0.052,
+    "pop_body_deg_f2": [
+      [
+        7.12,
+        "halo 1",
+        41
+      ],
+      [
+        6.74,
+        "halo 1",
+        45
+      ],
+      [
+        6.71,
+        "halo 4",
+        47
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      6.72,
+      "L little.2",
+      17
+    ],
+    "halo_clear_push_max_mm": 4.0,
+    "halo_clear_frames": 27,
+    "halo_clear_dir": [
+      0.0,
+      0.91,
+      0.41
+    ],
+    "pad_pop_mm_f2": {
+      "L": 2.3,
+      "R": 0.6
+    },
+    "halo_pop_mm_f2": {
+      "ring": 6.8
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 2e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Spawn"
+  },
+  {
+    "title": "Select idle",
+    "frames": [
+      1,
+      97
+    ],
+    "loop": true,
+    "markers": {
+      "Inhale": 1
+    },
+    "ik_miss_m": 4e-05,
+    "max_leg_extension": 0.9174,
+    "max_leg_extension_at": "L62",
+    "ik_miss_at": "R30",
+    "ik_miss_frames": {},
+    "kind": "presentation",
+    "speed_mps": 0.0,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.7,
+        "lift": 0.04,
+        "push_mm": 9.5,
+        "yield_min_k": 0.0,
+        "yield_frames": 48
+      },
+      "R": {
+        "deg": 3.5,
+        "lift": 0.01,
+        "push_mm": 1.6,
+        "yield_min_k": 0.0,
+        "yield_frames": 50
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 5.7,
+      "tabard front.2": 4.5,
+      "tabard front.3": 2.5,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 96,
+    "orient_roll_max_deg": {},
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0086,
+    "max_arm_raise_deg": 48.4,
+    "max_knee_out_m": 0.0557,
+    "pop_body_deg_f2": [
+      [
+        1.19,
+        "R hand",
+        65
+      ],
+      [
+        1.16,
+        "L hand",
+        19
+      ],
+      [
+        1.11,
+        "halo 3",
+        68
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      10.42,
+      "R little.1",
+      67
+    ],
+    "halo_clear_push_max_mm": 8.9,
+    "halo_clear_frames": 94,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 2.3,
+      "R": 3.8
+    },
+    "halo_pop_mm_f2": {
+      "ring": 0.7
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Select idle"
+  },
+  {
+    "title": "Select intro",
+    "frames": [
+      1,
+      44
+    ],
+    "loop": false,
+    "markers": {
+      "Snap": 13,
+      "Halo flare": 15,
+      "Settled": 44
+    },
+    "ik_miss_m": 3e-05,
+    "max_leg_extension": 0.9106,
+    "max_leg_extension_at": "L1",
+    "ik_miss_at": "R1",
+    "ik_miss_frames": {},
+    "kind": "presentation",
+    "speed_mps": 0.0,
+    "seam_from": [
+      "Select idle",
+      1
+    ],
+    "seam_to": [
+      "Select idle",
+      1
+    ],
+    "finger_accents": [
+      10,
+      13
+    ],
+    "orient_smooth_max_deg": 9.3,
+    "pad_follow_max": {
+      "L": {
+        "deg": 5.4,
+        "lift": 0.04,
+        "push_mm": 8.8,
+        "yield_min_k": 0.0,
+        "yield_frames": 18
+      },
+      "R": {
+        "deg": 9.0,
+        "lift": 0.12,
+        "push_mm": 0.0,
+        "yield_min_k": 1.0,
+        "yield_frames": 0
+      }
+    },
+    "tabard_swing_max_deg": {
+      "tabard front.1": 4.6,
+      "tabard front.2": 3.6,
+      "tabard front.3": 2.0,
+      "tabard back.1": 0.0,
+      "tabard back.2": 0.0
+    },
+    "tabard_swing_frames": 44,
+    "orient_roll_max_deg": {
+      "R": 16.3
+    },
+    "orient_infeasible": 0,
+    "halo_max_offset_m": 0.0096,
+    "halo_capped_frames": 0,
+    "max_arm_raise_deg": 58.9,
+    "max_knee_out_m": 0.0552,
+    "pop_body_deg_f2": [
+      [
+        12.57,
+        "R hand",
+        10
+      ],
+      [
+        11.13,
+        "R hand",
+        13
+      ],
+      [
+        9.84,
+        "R forearm",
+        10
+      ]
+    ],
+    "pop_finger_deg_f2": [
+      13.88,
+      "R middle.2",
+      10
+    ],
+    "halo_clear_push_max_mm": 25.2,
+    "halo_clear_frames": 17,
+    "halo_clear_dir": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "pad_pop_mm_f2": {
+      "L": 2.4,
+      "R": 1.7
+    },
+    "halo_pop_mm_f2": {
+      "ring": 10.6
+    },
+    "vfx_peak": {
+      "hs_glow": 0.0,
+      "hs_jet": 0.0,
+      "hs_spark_L": 0.0,
+      "hs_spark_R": 0.0,
+      "hs_jet_dir": 0.0,
+      "hs_move_x": 0.0,
+      "hs_move_y": 0.0,
+      "hs_turn": 0.0,
+      "hs_spear": 0.0
+    },
+    "bake_error_m": 1e-06,
+    "bake_error_deg": 0.0,
+    "module": "presentation",
+    "action": "HS_anim | Select intro"
+  }
+]

@@ -1,0 +1,17 @@
+{
+ "name": "loco-walk-idle",
+ "modules": [],
+ "out": "transitions/pairs/loco-walk-idle",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Walk forward",
+   "frames": 27
+  },
+  {
+   "clip": "Idle",
+   "frames": 30,
+   "blend": 10
+  }
+ ]
+}

@@ -22,6 +22,8 @@
   "lean": "right",
   "blend_with": "Run forward",
   "orient_smooth_max_deg": 18.8,
+  "hand_settle_max_deg": 6.0,
+  "hand_relax_peak_deg": 6.0,
   "pad_follow_max": {
     "L": {
       "deg": 10.6,
@@ -47,11 +49,15 @@
   },
   "tabard_swing_frames": 15,
   "orient_roll_max_deg": {
-    "L": 23.0,
+    "L": 23.3,
     "R": 64.9
   },
-  "orient_infeasible": 7,
+  "orient_infeasible": 9,
   "halo_max_offset_m": 0.0253,
+  "hand_leg_clear_ext_deg": {
+    "L": 0.0,
+    "R": 12.8
+  },
   "halo_clear_push_max_mm": 0.0,
   "halo_clear_frames": 0,
   "pad_pop_mm_f2": {
@@ -69,7 +75,8 @@
     "hs_jet_dir": 12.0,
     "hs_move_x": 0.0,
     "hs_move_y": 1.0,
-    "hs_turn": 0.0
+    "hs_turn": 0.0,
+    "hs_spear": 0.0
   },
   "bake_error_m": 2e-06,
   "bake_error_deg": 0.0,
@@ -82,36 +89,36 @@
   "finite": true,
   "arm_clearance": {
     "L": {
-      "min_m": 0.083,
+      "min_m": 0.0402,
       "frame": 4,
-      "part": "ring segment 3",
+      "part": "V11 little tip light",
       "against": "L thigh",
       "frames_under_min": 0,
       "per_frame_mm": [
-        154,
-        157,
-        132,
-        83,
-        93,
-        142,
+        111,
+        110,
+        77,
+        40,
+        42,
+        143,
         237,
         294,
         297,
         190,
         129,
         114,
-        90,
-        94,
-        88,
-        128,
-        154
+        99,
+        66,
+        60,
+        89,
+        111
       ],
       "hits": {}
     },
     "R": {
-      "min_m": 0.0452,
+      "min_m": 0.0124,
       "frame": 12,
-      "part": "little segment 3",
+      "part": "V11 little tip light",
       "against": "R thigh",
       "frames_under_min": 0,
       "per_frame_mm": [
@@ -120,14 +127,14 @@
         225,
         203,
         150,
-        96,
-        73,
-        87,
-        119,
-        123,
+        84,
+        43,
+        67,
         98,
-        45,
-        61,
+        112,
+        95,
+        12,
+        18,
         135,
         227,
         288,
@@ -136,32 +143,32 @@
       "hits": {}
     }
   },
-  "arm_clear_min_m": 0.0452,
+  "arm_clear_min_m": 0.0124,
   "arm_clear_ok": true,
   "hand_qa": {
     "violations": {},
     "penetration_mm": {},
-    "max_penetration_mm": 0.0,
+    "max_penetration_mm": 0.4,
     "finger_pops_deg_f2": [
       [
-        0.0,
-        "R thumb.3",
-        16
-      ],
-      [
-        0.0,
-        "R thumb.3",
-        15
-      ],
-      [
-        0.0,
-        "R thumb.3",
+        2.64,
+        "L little.1",
         14
       ],
       [
-        0.0,
-        "R thumb.3",
-        13
+        2.64,
+        "L middle.1",
+        14
+      ],
+      [
+        2.64,
+        "L index.1",
+        14
+      ],
+      [
+        2.64,
+        "L ring.1",
+        14
       ]
     ],
     "accent_pops_deg_f2": [],
@@ -169,30 +176,30 @@
       "L": {
         "hand_twist_deg": 1.9,
         "hand_twist_frame": 3,
-        "hand_bend_max_deg": 7.7,
-        "forearm_roll_deg": 48.6,
+        "hand_bend_max_deg": 8.5,
+        "forearm_roll_deg": 48.5,
         "forearm_roll_frame": 9
       },
       "R": {
-        "hand_twist_deg": 1.9,
-        "hand_twist_frame": 3,
-        "hand_bend_max_deg": 7.7,
+        "hand_twist_deg": -2.7,
+        "hand_twist_frame": 11,
+        "hand_bend_max_deg": 13.4,
         "forearm_roll_deg": -55.0,
         "forearm_roll_frame": 1
       }
     },
     "flex_range": {
       "L": {
-        "thumb_min": 22.0,
-        "thumb_max": 22.0,
-        "finger_min": 38.7,
-        "finger_max": 74.2
+        "thumb_min": 9.0,
+        "thumb_max": 20.0,
+        "finger_min": 24.0,
+        "finger_max": 55.8
       },
       "R": {
-        "thumb_min": 22.0,
-        "thumb_max": 22.0,
-        "finger_min": 38.7,
-        "finger_max": 74.2
+        "thumb_min": 9.0,
+        "thumb_max": 20.0,
+        "finger_min": 24.0,
+        "finger_max": 55.8
       }
     }
   },
@@ -200,10 +207,10 @@
     "ok": true,
     "violations": 0,
     "pen_over": 0,
-    "worst_pop_deg_f2": 0.0,
-    "worst_pop": "R thumb.3 f16",
+    "worst_pop_deg_f2": 2.64,
+    "worst_pop": "L little.1 f14",
     "worst_accent_pop_deg_f2": 0.0,
-    "max_pen_mm": 0.0
+    "max_pen_mm": 0.4
   },
   "hand_contact": {},
   "hand_contact_max_mm": 0.0,
@@ -226,8 +233,8 @@
       "fail_frames": "",
       "wrong_handed_frames": "",
       "swept_back_frames": "",
-      "worst_thumb_up": 0.05,
-      "worst_thumb_up_f": 11,
+      "worst_thumb_up": 0.17,
+      "worst_thumb_up_f": 9,
       "worst_palm_fwd": 0.24,
       "worst_palm_fwd_f": 1,
       "thumb_up_at_worst_palm": 0.99
@@ -455,10 +462,10 @@
       ],
       "L forearm twist": [
         -11.3,
-        24.3
+        24.2
       ],
       "L hand twist": [
-        -1.9,
+        -1.8,
         1.9
       ],
       "L knee bend": [
@@ -478,7 +485,7 @@
         27.2
       ],
       "R hand twist": [
-        -1.9,
+        -2.7,
         1.9
       ],
       "R knee bend": [
@@ -549,6 +556,50 @@
         11
       ]
     },
+    "hand_nat": {
+      "min_bend_deg": [
+        15.6,
+        "R thumb.2",
+        13
+      ],
+      "max_bend_deg": [
+        55.8,
+        "R little.2",
+        1
+      ],
+      "max_sideways_deg": [
+        -0.0,
+        "R ring.3",
+        14
+      ],
+      "curl_order_gap_deg": [
+        -9.6,
+        "R index>middle",
+        12
+      ],
+      "finger_contact_mm": {},
+      "finger_pen_mm": {},
+      "pops_deg_f2": [
+        [
+          2.6,
+          "L little.1",
+          14
+        ],
+        [
+          2.6,
+          "L middle.1",
+          14
+        ],
+        [
+          2.6,
+          "L index.1",
+          14
+        ]
+      ],
+      "accent_pops_deg_f2": [],
+      "fails": [],
+      "orient_9f_ok": true
+    },
     "fails": [
       "contact back conductors > neck 6.1mm f15",
       "contact tabard front > R thigh 15.3mm f3",
@@ -558,6 +609,7 @@
     ]
   },
   "full_qa_ok": false,
+  "hand_nat_ok": true,
   "full_contact_max_mm": 31.9,
   "full_pop_max_deg_f2": 31.1,
   "status": "CHECK",

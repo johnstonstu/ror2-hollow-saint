@@ -1,0 +1,17 @@
+{
+ "name": "loco-idle-idlecombat",
+ "modules": [],
+ "out": "transitions/pairs/loco-idle-idlecombat",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Idle",
+   "frames": 24
+  },
+  {
+   "clip": "Idle combat",
+   "frames": 30,
+   "blend": 8
+  }
+ ]
+}

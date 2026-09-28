@@ -104,3 +104,20 @@ __pycache__/
 node_modules/
 .venv*/
 ```
+
+## Update: Sep 27 2026, 09:00 to 09:12 PT
+
+**Result: SUCCESS.** `origin/main` = local `HEAD` = `0df5c2ec5d2d8913d044c1c75cafcbdeec2de367` (checked with `git ls-remote`).
+
+| Item | Value |
+|---|---|
+| Commit | `0df5c2e` "Hollow Saint update: anim v23, 9f thumbs + 9g shoulders + 9i/9h WIP" (parent `063b665`) |
+| Files changed | 10,665 (450,325 insertions, 10,951 deletions in text) |
+| Size added/modified | ~3.56 GB (sizes of added and modified files on disk) |
+| LFS | 10,198 objects, 3.5 GB uploaded at about 5.2 MB/s, taking roughly 12 minutes |
+| Newest anim file | `art/anim/hollow-saint-anim-v23.blend` |
+
+- **Excluded files:** only the existing `.gitignore` rules applied (`.env`, `*.log`, `*.err`, `*.blend1`, `*.blend@`, PID-suffix temp copies, `__pycache__/`). The scan found no secrets, so nothing extra was excluded. `.env` was not staged.
+- **Secret scan:** covered 408 newly staged or modified text files. The only hits were docs (this file and `art/anim/wip/git-update-prompt.txt`) and `art/anim/wip/refine-run-log.txt` (`"apiKeySource":"login"` and token-usage counters). None of them contain a real key.
+- **Errors:** the first `git add -A` failed with `short read while indexing art/anim/wip/spear/qa.json` because run5 was writing that file at the time. A retry a few seconds later succeeded. GitHub gave an informational warning (GH010: validated a random sample of 10,000 of the 10,198 LFS objects). There were no push rejections, no force push, and no hung processes.
+- **Not in this commit:** run5 kept editing, and about 700 paths showed as modified or new after the push. Those will go in the next update.

@@ -1,0 +1,18 @@
+{
+ "name": "runjump-j1-b5",
+ "modules": [],
+ "out": "transitions/exp/runjump-j1-b5",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 12
+  },
+  {
+   "clip": "Jump",
+   "frames": 11,
+   "start": 1,
+   "blend": 5
+  }
+ ]
+}

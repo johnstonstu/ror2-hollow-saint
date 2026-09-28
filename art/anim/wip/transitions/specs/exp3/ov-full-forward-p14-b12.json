@@ -1,0 +1,25 @@
+{
+ "name": "ov-full-forward-p14-b12",
+ "modules": [],
+ "out": "transitions/exp3/ov-full-forward-p14-b12",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 14
+  },
+  {
+   "clip": "Meter full flourish",
+   "frames": 16,
+   "blend": 12,
+   "mask": "upper",
+   "lower": "track"
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 40
+  }
+ ]
+}

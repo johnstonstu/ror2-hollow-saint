@@ -1,0 +1,22 @@
+{
+ "name": "loco-run-walk",
+ "modules": [],
+ "out": "transitions/temp/loco-run-walk",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 17
+  },
+  {
+   "clip": "Walk forward",
+   "frames": 40,
+   "blend": 8,
+   "sync": true
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

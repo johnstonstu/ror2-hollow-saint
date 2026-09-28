@@ -1,0 +1,31 @@
+{
+ "name": "step-right-run",
+ "modules": [],
+ "out": "transitions/pairs/step-right-run",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run right",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step right start",
+   "frames": 7,
+   "blend": 2
+  },
+  {
+   "clip": "Arc Step right loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step right end",
+   "frames": 5
+  },
+  {
+   "clip": "Run right",
+   "frames": 24,
+   "blend": 4
+  }
+ ]
+}

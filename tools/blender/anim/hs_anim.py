@@ -493,6 +493,10 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
     anchors = (meta or {}).get('seam_anchors', [frames[0]])
     pins = sorted(frames.index(f) for f in anchors if f in frames) if loop else []
     extra = poser.handpass.finish(caps, frames, loop, pins) if hands else {}
+    import handpose
+    if hands and handpose.ENABLED:
+        extra.update(handpose.settle(poser, poser.handpass.geo, caps, frames, loop, pins,
+                                     (meta or {}).get('finger_accents', ())))
     extra.update(poser.padpass.finish(caps, frames, loop, pins))
     extra.update(poser.tabardpass.finish(caps, frames, loop, pins))
     if hands:
@@ -500,6 +504,8 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
         extra['orient_infeasible'] = poser.handpass.infeasible
     if post:
         extra.update(post(poser, caps, frames) or {})
+    if hands and handpose.ENABLED and handpose.CLEAR:
+        extra.update(handpose.leg_clear(poser, poser.handpass.geo, caps, frames, loop, pins))
     # meta `halo_clear_dir` forces the halo nudge direction (chest space) to match a clip this one hands off to.
     hdir = (meta or {}).get('halo_clear_dir')
     extra.update(poser.padpass.halo_clear(caps, frames, loop, pins, [Vector(hdir).normalized()] if hdir else None))

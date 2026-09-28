@@ -1,0 +1,34 @@
+{
+ "name": "snap-lean",
+ "modules": [],
+ "out": "transitions/temp/snap-lean",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 10
+  },
+  {
+   "clip": "Discharge snap",
+   "frames": 14,
+   "blend": 4,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run lean left",
+   "frames": 60
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

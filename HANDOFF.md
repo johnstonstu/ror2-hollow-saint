@@ -1,305 +1,157 @@
 # Hollow Saint handoff
 
-Updated 2026-09-26. Selected character remains **Hollow Saint A / Cracked Icon**.
-Do not restart character selection. Names and supporting abilities are proposals.
+Updated Sun 2026-09-27 ~5:45 PM PT. Character: **Hollow Saint A / Cracked Icon** (settled, don't restart design).
+The model is final ([hybrid v18](art/hybrid/hollow-saint-hybrid-v18.blend)); all work since is animation, VFX source
+assets and planning. Approved plan: [art/MASTER-PLAN.md](art/MASTER-PLAN.md). Live anim status:
+[art/anim/STATUS.md](art/anim/STATUS.md). Every clip as GIFs: [art/anim/review.html](art/anim/review.html).
 
-## Current milestone
+## 1. Current state
 
-READY FOR ANIMATION: [Hybrid v18](art/hybrid/hollow-saint-hybrid-v18.blend) is the
-animation start file (longer neck, pauldrons angled over the deltoid, larger chest plates).
-Brief for the animation agent: [docs/animation-handoff.md](docs/animation-handoff.md).
-[v18 review](art/hybrid/v18/review.html), [notes](art/hybrid/README-v18.md).
+**Run 6 (item 12, natural hand curl) is still running** as of 5:45 PM. It saved
+[hollow-saint-anim-v26.blend](art/anim/hollow-saint-anim-v26.blend) at 5:25 PM and is now running the full refresh
+(previews, QA, seams, GIFs, review.html). `art/anim/v26/qa-summary.json`, `art/anim/wip/hands2/HANDS2-RESULT.md` and
+the STATUS entry for v26 don't exist yet. Treat **v25 as the last fully QA'd checkpoint** until run 6 finishes.
 
-PREVIOUS VISUAL PASS: user asked for all concept gap fixes. [Hybrid v17](art/hybrid/hollow-saint-hybrid-v17.blend)
-raises the head 9 cm on a cabled neck (head/halo bones moved), adds ear sockets, a recessed
-core housing with layered chest plates and segmented abdomen, faceted swept pauldrons, a halo
-yoke, a slimmer waist and crisper shading, on the v16 rig. Drift QA passes.
-[v17 review](art/hybrid/v17/review.html), [notes](art/hybrid/README-v17.md).
+Checkpoints in `art/anim/` (numbered, never overwritten; v1-v18 history is in STATUS.md):
 
-PREVIOUS RIG PASS: user decisions recorded in docs/animation-plan.md (walk/run with
-sprint turning into a glide, halo lags and sways, ragdoll death). [Hybrid v15](art/hybrid/hollow-saint-hybrid-v15.blend)
-adds forearm conductors and matches pauldron tone. [Hybrid v16](art/hybrid/hollow-saint-hybrid-v16.blend)
-is the animation-ready rig: leg chain refit to the digitigrade mesh (old knee was 12 cm off),
-toe bones, leg/arm IK (influence 0), pauldron bones, tabard chains, halo root, effect sockets.
-The six HS_v10 clips deform the body identically to v15. [v16 review](art/hybrid/v16/review.html),
-[notes](art/hybrid/README-v15-v16-rig.md). Next: locomotion block-out (walk/run, then glide).
+| File | Clips | Item | What it added |
+|---|---|---|---|
+| v19 | 33 | 9f + audit M6 | Thumbs up / palms forward on extended arms. The v18 hands were mirror-handed; fixed at rig level (`handfix.py`), R arm bones refit to the mesh (`armfit.py`), new orientation QA |
+| v20 | 33 | 9g (draft) | Superseded by v21 (7 inexact seams). Don't use |
+| v21 | 33 | 9g | Shoulder pads ride on the shoulder (`padfix.py`, `padpass.py`), halo moved back/up to clear them, pad contact QA |
+| v22 | 33 | 9i | Full-body audit fixes (`bodyfix.py`, `tabardpass.py`): Shrinkwrap removed, neck gradient, rigid chest parts, twist bones. New strict full QA: 10/33 |
+| v23 | 59 | 9h | 8-direction walk/run, leans, pivot 180s, plant turn 90s, Arc Step back/left/right, `hs_move_x/y` travel channels. **Last pushed to GitHub** |
+| v24 | 62 | 11 | Conduit Spear (20 f, release f7), Discharge snap (14 f, release f3), Meter full flourish |
+| v25 | 65 | 10 | Transitions: 149 stitched sequences, 402 handoffs (399 pass, 3 reviewed smooth); Run stop / Run stop R / Run start; Interrupt/Cancel markers. **Last fully QA'd** |
+| v26 | 65 | 12 | Natural graduated finger curl (`handpose.py` library, finger settle/lag), natural-hand QA (`handnat.py`) in full QA. **QA in progress** |
 
-V13-V14 POLISH PASSES: user liked v12 direction, asked for thicker plates and more
-polish rounds, and to start planning animation. [Hybrid v13](art/hybrid/hollow-saint-hybrid-v13.blend)
-rebuilt the pauldrons as thicker faceted plates with a stacked under-plate, calmed the
-core and added bloom; [hybrid v14](art/hybrid/hollow-saint-hybrid-v14.blend) moved the
-palette to the concept (warm bone ivory, deep red-brown copper, cyan core glow).
-[v14 review](art/hybrid/v14/review.html), [comparison](art/hybrid/v14/comparison.jpg),
-[notes](art/hybrid/README-v13-v14-polish.md). QA PASS for both. Animation planning:
-[docs/animation-plan.md](docs/animation-plan.md) (rig audit, RoR2 clip set, proposed
-v15 rig upgrade, open decisions). v1–v12 unchanged.
+Gates on v25: all 72 seams exact (worst 0.001 mm); bake, IK, hand QA, hand orientation, pads pass on every clip; strict
+full QA **13/65 PASS** (details below). Run 6's mid-run log reported 10/65 on an early v26 build before further fixes,
+so check the final number when it lands.
 
-V12 PAULDRON PASS: [hybrid v12](art/hybrid/hollow-saint-hybrid-v12.blend) is
-built from v11 and adds broad ivory ceramic pauldrons (procedural ellipsoid shells
-sized from the measured shoulder caps, tilted outward, bevelled plate edges),
-skinned to chest/upper-arm weights. [Review page](art/hybrid/v12/review.html),
-[comparison sheet](art/hybrid/v12/comparison.jpg),
-[notes](art/hybrid/README-v12-pauldrons.md). QA PASS (decals unchanged; pauldron
-drift 17 mm max at Arc Step, no visible clipping in pose renders). v1–v10 hashes
-unchanged; v11 not re-saved. Awaiting user review of v11 + v12.
+**VFX (Phase F): done.** [art/vfx/assets/hs-vfx-v07.blend](art/vfx/assets/hs-vfx-v07.blend) is current: 29 meshes in
+11 FBX, 25 alpha PNG textures, previews and `previews/_overview.png`. Import settings, palette, sockets and per-beat
+numbers (all PROPOSAL) are in [art/vfx/assets/README.md](art/vfx/assets/README.md). Hookup plan:
+[art/vfx/VFX-ABILITY-PLAN.md](art/vfx/VFX-ABILITY-PLAN.md).
 
-V11 FIDELITY PASS: user confirmed LEFT A is the target, preferred the extra v9
-detail, and asked for a fidelity/rendering pass toward the concept images before
-more animation. [Hybrid v11](art/hybrid/hollow-saint-hybrid-v11.blend) is built
-from v10 (rig and six actions retained): thick aged-copper halo with block seams
-and cyan gap seams, geometric emissive mask/core/neck/chest/spine conductors,
-dark copper-trimmed tabard with sigil, fingertip lights, emissive painted cyan,
-Cycles studio. [Review page](art/hybrid/v11/review.html),
-[comparison sheet](art/hybrid/v11/comparison.jpg),
-[notes](art/hybrid/README-v11-fidelity.md). Saved-file QA PASS across all
-HS_v10 actions; v1–v10 hashes unchanged. Awaiting user review of v11. All work
-used background Blender only; the live Blender MCP session belongs to a
-separate project and was not touched.
+**Not started:** export (E), Unity project (G), in-game testing (H). Unity 2021.3.33 is not installed (Hub has 6000.5 only).
 
-PREVIOUS ANIMATION PASS: user requested pushing the rig toward custom animations.
-[Hybrid v10](art/hybrid/hollow-saint-hybrid-v10.blend) adds six editable studies:
-idle, Arc Bolt, charge loop, discharge, in-place Arc Step, and unfolding crown.
-[Motion player](art/hybrid/v10-animation/review.html) and
-[rig/animation notes](art/hybrid/README-v10-animation.md). Corrected studio bone
-parenting, fitted finger pivots, recentered halo controls, and replaced hand-to-leg
-weight contamination with topology-aware arm isolation and regional weights.
-All v7–v9 source hashes are unchanged. Saved-file numerical QA covers 270 frames;
-rendered hero/side poses and motion previews remain art review evidence only.
-Fused shoulder/elbow deformation, cloth, locomotion, VFX, export and game tests
-remain outstanding. Supporting skills and animation timings are proposals.
+## 2. Design decisions (Stuart, approved 12:43 AM Sun unless noted)
 
-LATEST USER REVIEW: v1 was rejected as visually too far from the concepts.
-The subsequent refinement goal authorized repeated modeling/render/review passes.
-Hybrid v7 now meets the visual likeness milestone after actual five-view review
-and saved-scene checks. This completes this visual pass, not the survivor project.
-Preserve the original and intermediate passes for comparison.
+- Kit: **Arc Bolt** (primary, aimed, auto chains, 0.5 s interval, next shot interrupts at f13), **Conduit Spear**
+  (secondary), **Arc Step** (utility), **Open Circuit** (special), **Discharge** (passive).
+- **Discharge is passive:** the meter fills (~10 Arc Bolt hits) from every damaging skill, including Open Circuit
+  pulses; item procs give 0. At 100% it fires on the next enemy hit as an upper-body overlay (Discharge snap).
+  Charge loop / Charge full are repurposed as the "meter full" flourish, not retired.
+- **Cooldowns:** Spear 5 s; Arc Step 2 charges x 5 s; Open Circuit 12 s with an 8 s buff. All tuning stays configurable.
+- **Conduit Spear:** right-hand javelin throw, left arm points at the target, release f7 of 20 f, usable while moving
+  (upper-body layer), ~150 m/s projectile, 450% single target, 6 s conductor mark.
+- **Arc Step:** 2 charges, 4 directions (diagonals by blend), usable in the air.
+- **Hand rule (standing):** extended arms have thumbs up, palms forward, fingers curling in, L/R mirrored, fixed by
+  forearm/upper-arm roll, never wrist kinks. Item 12 adds: relaxed hands curl gradually index -> pinky, no hyperextension.
+- **Heel jets:** from the heel/Achilles, exhaust trailing opposite the travel vector (`hs_move_x/y`).
+- **Glide:** sprint becomes an upright Iron Man glide (~7 deg lean), heel jets lit.
+- **Controller-smooth 8-direction movement** that blends into every movement ability; transitions are top priority.
+- Other: 24 fps, clips in place, faces -Y in Blender, ragdoll death, halo lags and sways.
 
-LATEST VISUAL FEEDBACK: user says the model is starting to look pretty good
-and is entering final polishing passes. They specifically identify the hands
-as rotated awkwardly. Preserve the improving body/proportions; finish natural
-hand-to-forearm alignment and relaxed palm orientation, plus remaining local
-shoulder/material cleanup. Do not restart character or body design.
+## 3. Open items and proposals awaiting Stuart
 
-**Current model: [hybrid v7](art/hybrid/hollow-saint-hybrid-v7.blend).**
-Hands now follow the forearms with relaxed inward palm rotation. Rear shoulder
-seams are cleaned, the duplicate generated rear chest is corrected, and the
-halo comprises four separate arcs. [Five-view comparison](art/hybrid/review.html)
-and [deliverable notes](art/hybrid/README.md). User feedback endorsed the body
-direction; exact v7 acceptance has not yet been given.
+Quality (from STATUS.md "Still failing" lists and TRANSITIONS.md):
+- **Strict full QA is 13/65 on v25.** The older gates all pass; full QA (all-pairs contact at 5 mm, pops at 20 deg/f²,
+  joint sanity) is much stricter and most clips still miss it on the items below.
+- **Leg pops:** Run forward L/R shins 23-28 deg/f² (inherited by stop/start clips and turns), turn drive-offs 34-38,
+  Arc Step start/end thigh accents 72-85 (limit 60), Run lean right R forearm 31.
+- **Shin / tabard contacts:** shins into the body flap panels (Spawn 17, Run back 15, Run right 14 mm), tabard front
+  into thighs (6-23 mm), Arc Step shins 10-12 mm, Arc Step left/right start hand brushing the knee (24-31 mm).
+- **PROPOSAL, tabard flap detach:** move the body's loincloth flap panels into the TABARD objects so the tabard pass
+  can move them; would clear most shin/flap contacts.
+- **PROPOSAL, Unity foot IK for blend slide:** 8-way 50/50 blends still slide 10-34 mm (run) / 6-17 mm (walk) per
+  contact. Turn on humanoid Foot IK plus a small grounding script that locks planted feet on the contact markers.
+- **PROPOSAL, Glide exit speed curve:** Glide exit -> Run stop hits 70.6 m/s² root acceleration (limit 80).
+- **Not done:** standing full-body Conduit Spear variant (needs a stand layer that seams into Idle).
+- Other proposals: replace symmetry check 7 with a bone-to-own-skin fit test (the mesh is 20-35 mm asymmetric); a
+  symmetric leg re-sculpt; the item 10 blend table, mask and judging rules are PROPOSAL until approved.
+- **Open questions:** Arc Step i-frames (default none)? Heel jets on jump/land? Should Open Circuit strike during
+  glide/Arc Step?
+- **Run 6:** read `art/anim/wip/hands2/HANDS2-RESULT.md` once written for its QA result and any new regressions (mid-run
+  it was chasing fingertip-to-thigh contacts, finger-finger penetration and Glide enter clearance).
 
-LATEST REQUEST: user asked to try rigging the render and making animations with
-Higgsfield. The connected Higgsfield catalog exposes a Meshy rigging model, but
-the rigging job submission tool is not available, and no matching 3D Jutsu
-project exists. The only listed Higgsfield 3D project is unrelated. A local
-first-pass Blender study is saved separately as
-[hybrid v8](art/hybrid/hollow-saint-hybrid-v8.blend), with three editable actions
-and [review notes](art/hybrid/README-v8-rig.md). Keep v7 as the visual checkpoint;
-v8's fused-mesh weights and deformation are provisional and not game validated.
+## 4. Next phases (MASTER-PLAN)
 
-LATEST REAR FEEDBACK: user wants the rear halo/shoulder transition closer to the
-original Higgsfield version. The latest small candidate is
-[hybrid v9](art/hybrid/hollow-saint-hybrid-v9.blend): two dark diagonal yoke
-branches were removed, and pale-cyan inlay bands now cross the side arcs at
-shoulder height. The v8 rig and actions remain in the v9 file. Compare
-[rear](art/hybrid/v9-review-back.png) and [side](art/hybrid/v9-review-side.png);
-this candidate is not yet user-approved.
+- **E, sockets and export:** add sockets as bones (`L/R palm`, `orb`, `L/R heel jet`, `back`, `spear`, halo arc tips,
+  `ground`) and **keep the non-deforming socket bones in the FBX** (the old "deform bones only" rule would drop them).
+  Check whether `hs_glow` / `hs_jet` / `hs_move` / `hs_spear` curves survive import (fallback: Unity clip curves).
+  Test FBX first (Arc Bolt R + Glide enter), then the full set plus an export README.
+- **G, Unity/RoR2 integration:** Unity 2021.3.33 project, dependencies in the "Hollow Saint Dev" r2modman profile only
+  (`tools/dev-profile/New-HollowSaintDevProfile.ps1`), tiny bundle-load test, Animator (8-dir blend space, glide,
+  upper-body mask = `spine` and descendants, additive aim, halo layer), ChildLocator, VFX prefabs from Phase F,
+  EntityStates on marker fractions, SkillDefs, meter UI. Game 1.4.1, engine 2021.3.33f1.
+- **H, in-game testing:** controller stick circles/reversals/skill spam, attack speed 1-3x, crowds, boss, item procs,
+  death/stage reset, host + client.
 
-Local Blender-only refinement reached pass v6. Environment inspection and
-[implementation plan](docs/implementation-plan.md) are recorded. Original v1 is
-preserved but rejected. See [comparison gallery](art/refinement/review.html) and
-[visual review evidence](docs/model-fidelity-review.md). No C# survivor, Unity
-project, or playable build exists. The first v8 rig and actions are an unapproved
-deformation study, not an in-game asset.
+## 5. How to work
 
-LATEST USER STEERING: another agent produced a Higgsfield SAM3D GLB, supplied at
-output/higgsfield-hollow-saint/hollow-saint-sam3d.glb. It was inspected and rendered
-in the same studio as v6. [Direct comparison](art/comparison/review.html) and
-[findings/next pass](art/comparison/comparison.md). Recommendation is to use the
-HF body as the stronger visual base, adapting local separate halo/hand/back
-construction. **Hybrid v7 is the current visual review deliverable**, with source
-scripts, a full source-v7 snapshot and actual views in art/hybrid/. Earlier cut,
-hand-pose and rear seam issues were corrected. Original GLB preserved. See
-[hybrid audit](docs/hybrid-model-review.md) and [hybrid comparison](art/hybrid/review.html).
+Rules (MASTER-PLAN section g and [tools/blender/anim/README.md](tools/blender/anim/README.md)):
+- **Background Blender only** (`blender.exe --background --factory-startup ...`, Blender 5.2 at
+  `C:/Program Files/Blender Foundation/Blender 5.2/`). Never use blender-mcp or touch a Blender you didn't start
+  (Stuart's own is PID 4500). Run 6 caps itself at 2 Blenders at once.
+- **One agent per clip module** (`tools/blender/anim/clips/<module>.py`, output only under `art/anim/wip/<module>/`).
+  Shared files (`hs_anim.py`, `preview.py`, etc.) and `.blend` saves belong to the coordinator.
+- **Numbered saves, never overwrite** (`build_anim.py` refuses). Never delete; superseded files go to `_old/` or `stale/`.
+- Re-read `art/anim/REFINEMENT-PLAN.md` and `art/anim/wip/NEXT-RUN-NOTES.md` before each item; append only, back up
+  plan docs as `.bakN` first. Label unapproved numbers PROPOSAL. Times in PT.
+- Agent runs: Cursor CLI, headless, detached, working dir = project, log next to the prompt in `art/anim/wip/`
+  (e.g. `refine-prompt-run6-hands2.txt` + `agent-run6-hands2-*.log`). Don't kill or relaunch a running agent.
 
-Reserve Higgsfield spending for useful capabilities unavailable through
-ChatGPT/local tools. User asked to investigate a 3D starter mesh, then chose
-**Continue with local Blender for now** when the website fallback needed login.
-Do not resume paid generation automatically. No Higgsfield job was submitted,
-no reference media uploaded, and no generation credits spent this continuation.
+QA:
+- Per module: `blender --background --factory-startup --python-exit-code 1 --python tools/blender/anim/preview.py -- <module>`
+  writes `art/anim/wip/<module>/qa.json` (PASS = bake, IK, hand QA, hand contact, orientation, pads, full QA incl. hand_nat).
+- Whole checkpoint: `python tools/blender/anim/refresh.py vN --jobs 1` reruns all previews, seams, GIFs, review.html and
+  writes `art/anim/vN/qa-summary.json`. Don't edit clip modules while it runs.
+- Audits on a saved file: `fullqa_audit.py -- <blend> <out.json>`, `orient_audit.py -- <blend> <out.json>`; seams:
+  `seams.py -- <modules>`; blend slide: `blend_qa.py`; transitions: `stitch.py -- <spec.json>`.
 
-## Confirmed design and gameplay
+Previews: `art/anim/review.html` (clip cards + stitches), per-clip frames/GIFs in `art/anim/wip/<module>/<clip>/`,
+hands in `wip/hands/` and `wip/hands2/`, pads in `wip/shoulders/`, locomotion stitches in `wip/locomotion8/`,
+transitions in `wip/transitions/` (matrix in [TRANSITIONS.md](art/anim/wip/transitions/TRANSITIONS.md)), audits in
+`wip/audit*/` ([FULL-AUDIT.md](art/anim/wip/audit-full/FULL-AUDIT.md)).
 
-- Selected LEFT A in art/concepts/hollow-saint-variations-v1.png: slender ivory
-  ceramic body, blank mask, dark joints, small cyan core, segmented copper halo,
-  dark hip tabard.
-- Aimed left-click lightning with automatic chains after initial hit.
-- Successful hits build charge that strengthens chains.
-- r2modman is the mod manager; preserve existing game and profile setup.
+## 6. Git
 
-Conduit Spear, Arc Step, Open Circuit, automatic/manual charge release, charge
-gain rules, locomotion style, and **all numerical gameplay balance values**
-remain proposals. Earlier numerical criteria are untested hypotheses.
+- Remote: [johnstonstu/ror2-hollow-saint](https://github.com/johnstonstu/ror2-hollow-saint), branch `main`.
+- Git LFS covers `.blend`, `.fbx`, `.glb`, `.psd`, `.exr`, `.png`, `.jpg`, `.gif`, `.wav`, `.zip` and timestamped
+  backups (see `.gitattributes`). The repo is ~7 GB with ~22k LFS objects.
+- Remote `main` is at **`0df5c2e` (anim v23)**. **v24, v25 and v26 plus thousands of re-rendered frames are NOT
+  pushed.** Wait for run 6 to finish before `git add`, or files mid-write will fail to index.
+- `.env` is gitignored and must never be read, printed or staged. `*.log`, `*.err`, `*.blend1` and PID-suffix temp
+  copies are ignored too. History: [art/GIT-SETUP-RESULT.md](art/GIT-SETUP-RESULT.md).
+- `.vscode/settings.json` sets `git.enabled: false` (plus autorefresh/autofetch off) because Cursor's git panel spawned
+  ~1500 hung `git-lfs` processes on this repo. Use command-line git; re-enable at your own risk.
+- No releases or publishing without Stuart naming them.
 
-## Current hybrid deliverables
+## 7. Scratch and leftovers (safe to clean up later; don't delete now)
 
-- Editable scene: art/hybrid/hollow-saint-hybrid-v7.blend; five matching PNGs.
-- Build: tools/blender/hybrid_build.py; dependency snapshot: art/hybrid/source-v7.
-- Saved-file QA: art/hybrid/hollow-saint-hybrid-v7.qa.json, PASS.
-- 66 model parts; 26,808 evaluated triangles; four arcs and five digits per hand.
-- 1,226 source lower-leg/foot vertices preserved with zero displacement.
-- Packed source texture; original GLB and local v6 file hashes unchanged.
-- Actual front/hero/side/back/distance views inspected. Source texture blur and
-  coarse deformation topology remain production limitations; no rig/game tests.
+- `art/anim/--help/`: empty folder left by run 6 mis-invoking `refresh.py --help`.
+- Repo root: `@/` and several garbled-name folders (empty Blender `.thumbnails` caches).
+- `art/anim/wip/`: `_run3/`, `_run4/`, `_run5/` (probe scripts), `_stage-v21/`, loose `_*.py` / `_*.ps1` probes,
+  ~20 `seams-*.json`, old prompts and `run-*.cmd` launchers, `motion-range.json`.
+- `art/anim/wip/hands2/`: `_lab1`-`_lab5`, `_probe-*`, `_work` and `probe_*.py` from run 6.
+- `art/anim/wip/audit-full/audit-full-v16-copy.blend` and `v18/` copies; `art/vfx/assets/_old/`; `*.bakN` plan backups;
+  `art/MASTER-PLAN-DRAFT.md` (kept on purpose as the pre-approval copy).
+- Superseded checkpoints `art/anim/hollow-saint-anim-v1..v24.blend` (v20 is known bad) and hybrid v1-v17.
 
-## Historical local refinement deliverables
+## History (short)
 
-- Editable latest: art/refinement/hollow-saint-refinement-v6.blend.
-- Five actual PNG renders with matching prefix: front, hero, side, back,
-  gameplay-distance. The last is a simulated Blender camera, not in game.
-- All v2-v6 scenes and renders preserved; source snapshots for v4/v5/v6 only.
-- Current construction: tools/blender/refine_hollow_saint.py and refine_*.py.
-- Read-only reopen checks: tools/blender/verify_hollow_saint_refinement.py.
-- v6 base geometry: 123 meshes, 48 curves, 5,343 vertices, 5,607 polygons.
-- Saved-file QA passed: 171 parts, five cameras, four separate arcs, finite
-  geometry and no linked external assets. Evaluated output: 31,994 triangles.
-- Actual improvements: raised hips/knees and wider stance; bowed blank mask;
-  curved chest shells and smaller core; tapered arms; curled articulated fingers;
-  long draped tabard; smoother shin cutouts; split toes; fitted cyan conductors.
-- Four independent halo arcs now have shortened lower sections to follow
-  selected LEFT A. This replaces the earlier full-ring construction proposal.
-- Build exits successfully and all five renders saved. Thumbnail-cache errors
-  do not affect the saved scene or PNGs. Original interactive scene untouched.
-
-V5 closes visible chest gaps and seats previously floating cyan accents. V6 adds
-rear tendon/calf shapes, copper variation and restores the front cloth motif.
-The supplied HF model is nevertheless substantially closer to LEFT A's contours.
-User acceptance is not established. No rig, export or game-readiness claim.
-
-## Historical rejected v1 blockout
-
-- [Editable .blend](art/blockout/hollow-saint-blockout-v1.blend)
-- [Front](art/blockout/hollow-saint-blockout-v1-front.png)
-- [Side](art/blockout/hollow-saint-blockout-v1-side.png)
-- [Back](art/blockout/hollow-saint-blockout-v1-back.png)
-- [Simulated gameplay distance](art/blockout/hollow-saint-blockout-v1-gameplay-distance.png)
-- [Review gallery and reproduction](art/blockout/README.md)
-- Construction: tools/blender/build_hollow_saint_blockout.py
-- Saved-file checks: tools/blender/verify_hollow_saint_blockout.py
-- Counts: art/blockout/hollow-saint-blockout-v1-metrics.json
-
-Original procedural geometry made in isolated background Blender. Existing
-interactive scene untouched. 101 editable meshes, 2,208 vertices, 2,278 polygons,
-4,012 triangle equivalents. Saved-file reopening and static checks passed:
-four halo quadrants, five digits per hand, four cameras, rear cyan node, no
-armature, and approximately 0.152 m mask/halo depth clearance. Four renders inspected.
-
-No deformation, animation clearance, export, Unity bundle or game test.
-Gameplay-distance image is a **simulated Blender camera view**.
-Blender reported a thumbnail-cache write warning; .blend save/reopen and all
-requested renders succeeded. Build script refuses live interactive execution.
-
-## Historical v1 construction proposals (superseded by refinement)
-
-- Approximately 2.015 m body height, 0.89 m halo diameter, 0.045 m halo thickness.
-- Full four-quarter ring; lower arcs behind torso/shoulders; no duplicate ring.
-- Simple dark back yoke, small rear cyan node and short spine accent.
-- Compact paired ivory shoulder caps; five simple dark digits per hand.
-- Separate front/rear tabard panels ending just above knee center.
-
-These were unapproved v1 inferences. Latest passes use the selected LEFT A's long
-mid-shin tabard and open lower ring, with four separate arcs. Original LEFT A
-and detail sheet supply identity; 2D turnarounds are approximate.
-
-## Environment verified
-
-- Workspace: C:/Users/stuwj/Documents/Coding/ror2-lightning.
-- No Git repository/remote, commits, or release created.
-- Blender **5.2.0 LTS**, C:/Program Files/Blender Foundation/Blender 5.2/blender.exe.
-  Live MCP responds; initial interactive scene was clean default Cube/Camera/Light.
-- Game: C:/Program Files (x86)/Steam/steamapps/common/Risk of Rain 2.
-- Local metadata: game **1.4.1**, Steam build **21587608**, engine
-  **2021.3.33f1 (ee5a2aa03ab2)**. No runtime game launch yet.
-- .NET SDKs **8.0.423**, **10.0.302**; netstandard reference pack **2.1.0**.
-- Standard Unity Hub has only **6000.5.4f1**. Compatible asset editor and actual
-  bundle-load test outstanding. Do not assume Unity 6 compatibility.
-- No Unity MCP exposed. Candidate dependencies/API signatures in technical notes.
-  No dependency restore or survivor build run.
-
-Created isolated empty profile:
-C:/Users/stuwj/AppData/Roaming/r2modmanPlus-local/RiskOfRain2/profiles/Hollow Saint Dev
-
-Contains only mods.yml = []; no loader/mods installed. Existing demo time and
-demo time new manifest hashes checked unchanged. No selected profile, global
-settings or game files changed. Approved sandbox access used.
-Helper: tools/dev-profile/New-HollowSaintDevProfile.ps1 refuses existing target.
-Refresh r2modman and install selected complete dependencies into Hollow Saint Dev
-only. Cached packages are observations, not a compatibility lock.
-
-## Higgsfield and credentials
-
-- NEW supplied asset (generated by another agent, cost not verified here):
-  output/higgsfield-hollow-saint/hollow-saint-sam3d.glb. One textured mesh,
-  8,108 triangles, one 1024px texture, no rig/actions/weights. Temporary weld
-  analysis confirms one closed component; raw UV-seam islands are not damage.
-  Fused fingers/halo, painted glow and duplicate front chest on back need repair.
-  Comparison review scene/renders are in art/comparison/. No additional paid
-  jobs or source uploads were performed by this continuation.
-
-- .env is private: never print, upload, copy, package or include its contents
-  in messages/handoffs. Git, Docker and npm rules exclude environment variants.
-- Combined API credential passed documented **estimate-only** request: HTTP 200;
-  sample SOUL v2 estimate **0.05 credits / USD 0.004**. This is not a charge,
-  remaining balance, or verification of 3D access.
-- Probe: tools/higgsfield/Test-ApiAccess.ps1. Reads in memory, prints allowlisted
-  status/cost only, disables redirects. Approved network access succeeded.
-- Connector separately reported **4.85 credits / free plan**, pending trial.
-  Do not equate that with direct API balance. No trial activated.
-- Catalog lists Meshy image-to-3D and rigging. Image estimate tool rejects 3D and
-  requests generate_3d, which is **not exposed** here. No documented direct Meshy
-  endpoint established. Website 3D Jutsu needed login; user chose local Blender.
-  This is a capability gap, not a plan/balance finding.
-- Draft art/concepts/hollow-saint-3d-input-v1.png made through ChatGPT's built-in
-  image tool, not Higgsfield. Prompt in sibling prompts. It still has long-tabard,
-  hand and lower-ring ambiguity; source art only, not a mesh or override of blockout.
-
-## Exact next steps
-
-0. Animation agent: follow docs/animation-handoff.md; build a locomotion block-out
-   (idle to walk/run forward, then sprint to glide) on v18. Iterate visuals before
-   returning to deformation/animation polish (shoulders/elbows, tabard follow).
-1. Review the delivered hybrid v7 five-view gallery. Preserve this checkpoint;
-   do not restart body design. Any further requested visual changes should use
-   a new version. Rigging and detailed production cleanup follow the planned
-   blockout/prototype review milestone. Keep LEFT A as the design source.
-2. Prepare original C# primary prototype with exact dependency versions and
-   permitted local placeholder visuals. Register separate survivor without
-   changing original globally. Do not copy/run HenryTutorial wholesale: reuse
-   terms and author-specific postbuild copy remain unresolved.
-3. Establish explicitly provisional charge loop for playtesting. Clarify release
-   policy before treating it as settled design; keep tuning configurable.
-4. Install dependencies into Hollow Saint Dev only. Build and validate aimed
-   hits, finite distinct chains, authoritative damage and visible charge.
-5. Record crowd, isolated target, item procs, scaling, death and stage transitions.
-   Two-player host/client tests are required for multiplayer-tested claims.
-6. Resolve compatible patched 2021 LTS asset editor and tiny bundle-load test
-   before custom art integration. Placeholder combat does not depend on this.
-7. Review v9's rear transition and v8 deformation/animation poses; refine
-   skinning, game export, VFX/SFX and supporting abilities. Revisit Higgsfield
-   rigging when an actual 3D submission endpoint is available.
-
-No missing user information blocks continued local visual refinement. Profile
-dependencies, asset editor and live tests are setup work still to do.
-No publication without explicit approval naming the release.
-
-## Other references
-
-- docs/ability-kit-workshop.md: supporting kit proposals.
-- art/concepts/hollow-saint-art-pack.md: concept gallery.
-- docs/design-brief.md: earlier numerical hypotheses.
-- docs/technical-notes.md: evidence and sources.
-- docs/implementation-plan.md: milestone plan.
-
-Global agreements apply: read before overwrite; enumerate before broad renames;
-preserve credentials; confirm GitHub identity before remote configuration; never
-publish a release without explicit approval.
-
+- **Concepts to model:** LEFT A chosen from `art/concepts/hollow-saint-variations-v1.png`. Blockout v1 rejected;
+  local refinement v2-v6; a Higgsfield SAM3D GLB became the body base for hybrid v7 (hands/halo/back rebuilt locally).
+- **Hybrid v8-v14:** first rig and six HS_v10 studies, fidelity pass (copper halo, emissive conductors, tabard),
+  pauldrons, palette to concept. No paid Higgsfield jobs beyond the supplied GLB.
+- **Hybrid v15-v18:** v16 is the animation-ready rig (leg chain refit, IK, pauldron/tabard/halo bones, sockets);
+  v17 raised head, chest housing, faceted pauldrons; **v18** longer neck and larger chest plates = animation start file.
+- **Anim v1-v18 (Sep 26-27):** 33-clip set (locomotion, glide, air, Arc Bolt + aims, Arc Step, Charge/Discharge/Open
+  Circuit, presentation), then refinement items 1-9e (shoulder helpers, secondary motion, tabard follow, weight,
+  Iron Man glide, natural hands, aim/IK, heel jets). Details in STATUS.md and REFINEMENT-PLAN.md.
+- Old full handoff: [art/anim/wip/HANDOFF-before-20260927.md](art/anim/wip/HANDOFF-before-20260927.md) (environment
+  notes, Higgsfield/credential notes, r2modman profile details, v1-v7 deliverables).
+- Other references: `docs/animation-plan.md`, `docs/animation-handoff.md`, `docs/ability-kit-workshop.md`,
+  `docs/design-brief.md`, `docs/technical-notes.md`, `docs/implementation-plan.md`.

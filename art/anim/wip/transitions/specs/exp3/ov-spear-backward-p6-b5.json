@@ -1,0 +1,25 @@
+{
+ "name": "ov-spear-backward-p6-b5",
+ "modules": [],
+ "out": "transitions/exp3/ov-spear-backward-p6-b5",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 6
+  },
+  {
+   "clip": "Conduit Spear",
+   "frames": 16,
+   "blend": 5,
+   "mask": "upper",
+   "lower": "track"
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run backward",
+   "frames": 40
+  }
+ ]
+}

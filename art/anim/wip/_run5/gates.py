@@ -3,8 +3,8 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'primary', 'arcstep', 'arcstep_dirs', 'special',
-       'presentation']
+ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'startstop', 'primary', 'arcstep', 'arcstep_dirs', 'special',
+       'spear', 'presentation']
 bad = 0
 for m in ALL:
     q = ROOT/'art/anim/wip'/m/'qa.json'

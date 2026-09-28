@@ -1,0 +1,99 @@
+{
+ "title": "Charge full",
+ "blend": "art\\anim\\wip\\hands2\\_work\\v26-copy.blend",
+ "rendered_frames": [
+  1,
+  8,
+  16,
+  24
+ ],
+ "body_views": [
+  "hero"
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.836,
+    "palm_fwd": 0.145,
+    "hand": -0.748,
+    "raise": 37.34,
+    "elbow_open": 84.303,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.904,
+    "palm_fwd": 0.069,
+    "hand": 0.748,
+    "raise": 50.627,
+    "elbow_open": 83.058,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 8,
+   "L": {
+    "thumb_up": 0.804,
+    "palm_fwd": 0.217,
+    "hand": -0.748,
+    "raise": 39.133,
+    "elbow_open": 83.584,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.856,
+    "palm_fwd": 0.146,
+    "hand": 0.748,
+    "raise": 52.649,
+    "elbow_open": 86.097,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 16,
+   "L": {
+    "thumb_up": 0.89,
+    "palm_fwd": 0.043,
+    "hand": -0.748,
+    "raise": 35.861,
+    "elbow_open": 88.212,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.936,
+    "palm_fwd": 0.011,
+    "hand": 0.748,
+    "raise": 48.977,
+    "elbow_open": 80.953,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 24,
+   "L": {
+    "thumb_up": 0.887,
+    "palm_fwd": 0.085,
+    "hand": -0.748,
+    "raise": 36.737,
+    "elbow_open": 86.48,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.919,
+    "palm_fwd": 0.046,
+    "hand": 0.748,
+    "raise": 49.952,
+    "elbow_open": 82.541,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

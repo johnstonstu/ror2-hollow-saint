@@ -1,0 +1,786 @@
+{
+ "name": "ov-full-backward-p4-b10",
+ "frames": 20,
+ "handoffs": [
+  {
+   "frame": 5,
+   "from": "[Run backward f4]",
+   "to": "Meter full flourish f1 / Run backward f5",
+   "blend": 10,
+   "lower_track_cut": false,
+   "accent_window": false,
+   "finger_accent_window": false,
+   "worst_bone": "L hand",
+   "acc": 0.0826,
+   "clip_max_acc": 0.074,
+   "ease_acc": 0.0285,
+   "ref_acc": 0.074,
+   "step": 0.1008,
+   "ratio": 1.12,
+   "rot_bone": "R upperarm",
+   "rot_acc_deg": 5.3,
+   "rot_clip_max_deg": 4.7,
+   "rot_fail": null,
+   "bones": {
+    "pelvis": {
+     "acc": 0.0141,
+     "clip_max_acc": 0.0141,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0141,
+     "step": 0.0199,
+     "ratio": 1.0
+    },
+    "head": {
+     "acc": 0.0187,
+     "clip_max_acc": 0.0488,
+     "ease_acc": 0.0048,
+     "ref_acc": 0.0488,
+     "step": 0.0236,
+     "ratio": 0.38
+    },
+    "L hand": {
+     "acc": 0.0826,
+     "clip_max_acc": 0.074,
+     "ease_acc": 0.0285,
+     "ref_acc": 0.074,
+     "step": 0.1008,
+     "ratio": 1.12
+    },
+    "R hand": {
+     "acc": 0.0397,
+     "clip_max_acc": 0.0781,
+     "ease_acc": 0.0158,
+     "ref_acc": 0.0781,
+     "step": 0.0952,
+     "ratio": 0.51
+    },
+    "L toe": {
+     "acc": 0.0914,
+     "clip_max_acc": 0.1025,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1025,
+     "step": 0.1081,
+     "ratio": 0.89
+    },
+    "R toe": {
+     "acc": 0.0532,
+     "clip_max_acc": 0.1025,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1025,
+     "step": 0.1002,
+     "ratio": 0.52
+    },
+    "halo root": {
+     "acc": 0.026,
+     "clip_max_acc": 0.0792,
+     "ease_acc": 0.0081,
+     "ref_acc": 0.0792,
+     "step": 0.0213,
+     "ratio": 0.33
+    },
+    "tabard front.3": {
+     "acc": 0.0913,
+     "clip_max_acc": 0.0921,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0921,
+     "step": 0.0309,
+     "ratio": 0.99
+    },
+    "tabard back.2": {
+     "acc": 0.0335,
+     "clip_max_acc": 0.0335,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0335,
+     "step": 0.0301,
+     "ratio": 1.0
+    },
+    "L middle.3": {
+     "acc": 0.0919,
+     "clip_max_acc": 0.1389,
+     "ease_acc": 0.0377,
+     "ref_acc": 0.1389,
+     "step": 0.1338,
+     "ratio": 0.66
+    },
+    "R middle.3": {
+     "acc": 0.063,
+     "clip_max_acc": 0.1323,
+     "ease_acc": 0.0218,
+     "ref_acc": 0.1323,
+     "step": 0.1396,
+     "ratio": 0.48
+    }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 4.25,
+   "speed_after": 4.25,
+   "root_acc_mps2": 0.0
+  }
+ ],
+ "root_path": [
+  [
+   0.0,
+   0.1771,
+   0.0
+  ],
+  [
+   0.0,
+   0.3542,
+   0.0
+  ],
+  [
+   0.0,
+   0.5312,
+   0.0
+  ],
+  [
+   0.0,
+   0.7083,
+   0.0
+  ],
+  [
+   0.0,
+   0.8854,
+   0.0
+  ],
+  [
+   0.0,
+   1.0625,
+   0.0
+  ],
+  [
+   0.0,
+   1.2396,
+   0.0
+  ],
+  [
+   0.0,
+   1.4167,
+   0.0
+  ],
+  [
+   0.0,
+   1.5937,
+   0.0
+  ],
+  [
+   0.0,
+   1.7708,
+   0.0
+  ],
+  [
+   0.0,
+   1.9479,
+   0.0
+  ],
+  [
+   0.0,
+   2.125,
+   0.0
+  ],
+  [
+   0.0,
+   2.3021,
+   0.0
+  ],
+  [
+   0.0,
+   2.4792,
+   0.0
+  ],
+  [
+   0.0,
+   2.6562,
+   0.0
+  ],
+  [
+   0.0,
+   2.8333,
+   0.0
+  ],
+  [
+   0.0,
+   3.0104,
+   0.0
+  ],
+  [
+   0.0,
+   3.1875,
+   0.0
+  ],
+  [
+   0.0,
+   3.3646,
+   0.0
+  ],
+  [
+   0.0,
+   3.5417,
+   0.0
+  ]
+ ],
+ "acc_series_mm": {
+  "pelvis": [
+   0.0,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   0.0
+  ],
+  "head": [
+   0.0,
+   16.2,
+   16.7,
+   7.9,
+   6.8,
+   17.9,
+   18.7,
+   10.1,
+   7.3,
+   17.9,
+   16.3,
+   9.3,
+   25.6,
+   51.2,
+   18.0,
+   11.8,
+   8.0,
+   15.5,
+   15.6,
+   0.0
+  ],
+  "L hand": [
+   0.0,
+   37.5,
+   35.5,
+   38.9,
+   27.7,
+   56.5,
+   82.6,
+   65.1,
+   32.2,
+   31.5,
+   47.7,
+   53.8,
+   40.7,
+   84.0,
+   10.3,
+   6.8,
+   8.1,
+   28.6,
+   43.9,
+   0.0
+  ],
+  "R hand": [
+   0.0,
+   38.4,
+   38.8,
+   33.8,
+   20.2,
+   32.7,
+   39.7,
+   39.1,
+   43.0,
+   23.9,
+   10.8,
+   20.4,
+   23.1,
+   70.1,
+   10.7,
+   10.7,
+   12.2,
+   20.3,
+   16.1,
+   0.0
+  ],
+  "L toe": [
+   0.0,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   51.1,
+   39.7,
+   28.6,
+   18.4,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   42.4,
+   53.2,
+   64.2,
+   102.5,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "R toe": [
+   0.0,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   42.4,
+   53.2,
+   64.2,
+   102.5,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   51.1,
+   39.6,
+   28.6,
+   18.4,
+   11.6,
+   13.6,
+   0.0
+  ],
+  "halo root": [
+   0.0,
+   14.4,
+   15.0,
+   8.2,
+   2.5,
+   22.5,
+   26.0,
+   16.3,
+   5.3,
+   22.7,
+   21.0,
+   16.7,
+   40.5,
+   78.0,
+   25.5,
+   20.5,
+   13.7,
+   19.2,
+   19.7,
+   0.0
+  ],
+  "tabard front.3": [
+   0.0,
+   73.5,
+   91.3,
+   25.3,
+   32.1,
+   15.2,
+   13.5,
+   12.3,
+   21.5,
+   27.4,
+   26.3,
+   14.7,
+   13.8,
+   92.1,
+   62.1,
+   15.2,
+   57.7,
+   73.5,
+   91.3,
+   0.0
+  ],
+  "tabard back.2": [
+   0.0,
+   32.7,
+   33.5,
+   12.5,
+   14.6,
+   14.8,
+   15.0,
+   10.1,
+   26.2,
+   31.2,
+   32.3,
+   12.7,
+   14.8,
+   14.9,
+   14.8,
+   9.3,
+   24.8,
+   32.7,
+   33.5,
+   0.0
+  ],
+  "L middle.3": [
+   0.0,
+   54.7,
+   51.7,
+   52.2,
+   34.6,
+   91.9,
+   90.0,
+   99.4,
+   28.5,
+   42.4,
+   35.5,
+   79.8,
+   25.6,
+   88.2,
+   20.6,
+   12.4,
+   14.5,
+   42.4,
+   77.8,
+   0.0
+  ],
+  "R middle.3": [
+   0.0,
+   58.9,
+   57.7,
+   49.0,
+   30.7,
+   49.2,
+   63.0,
+   64.6,
+   77.8,
+   39.0,
+   7.5,
+   25.7,
+   38.0,
+   72.5,
+   11.3,
+   17.6,
+   16.6,
+   21.8,
+   15.2,
+   0.0
+  ]
+ },
+ "timeline": [
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 1
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 2
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 3
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 4
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 1,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 5
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 5
+     }
+    },
+    0.023
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 2,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 6
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 6
+     }
+    },
+    0.087
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 3,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 7
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 7
+     }
+    },
+    0.183
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 4,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 8
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 8
+     }
+    },
+    0.301
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 5,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 9
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 9
+     }
+    },
+    0.432
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 6,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 10
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 10
+     }
+    },
+    0.568
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 7,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 11
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 11
+     }
+    },
+    0.699
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 8,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 12
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 12
+     }
+    },
+    0.817
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 9,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 13
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 13
+     }
+    },
+    0.913
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 10,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 14
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 14
+     }
+    },
+    0.977
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 11,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 15
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 12,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 16
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 13,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 1
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 14,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 2
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 15,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 3
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Meter full flourish",
+   "f": 16,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 4
+   }
+  }
+ ]
+}

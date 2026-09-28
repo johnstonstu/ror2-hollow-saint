@@ -1,0 +1,18 @@
+{
+ "name": "fwdback-p13-b12",
+ "modules": [],
+ "out": "transitions/exp2/fwdback-p13-b12",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 29
+  },
+  {
+   "clip": "Run backward",
+   "frames": 30,
+   "blend": 12,
+   "sync": true
+  }
+ ]
+}

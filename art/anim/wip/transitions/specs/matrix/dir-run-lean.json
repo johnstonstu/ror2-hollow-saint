@@ -1,0 +1,24 @@
+{
+ "name": "dir-run-lean",
+ "modules": [],
+ "out": "transitions/matrix/dir-run-lean",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 17
+  },
+  {
+   "clip": "Run lean left",
+   "frames": 34,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run forward",
+   "frames": 17,
+   "blend": 10,
+   "sync": true
+  }
+ ]
+}

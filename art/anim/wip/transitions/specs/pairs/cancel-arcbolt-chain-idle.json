@@ -1,0 +1,44 @@
+{
+ "name": "cancel-arcbolt-chain-idle",
+ "modules": [],
+ "out": "transitions/pairs/cancel-arcbolt-chain-idle",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 13,
+   "blend": 2,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "Arc Bolt left",
+   "frames": 13,
+   "blend": 2,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 20,
+   "blend": 2,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Idle",
+   "frames": 80
+  }
+ ]
+}

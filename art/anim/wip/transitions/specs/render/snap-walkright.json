@@ -1,0 +1,34 @@
+{
+ "name": "snap-walkright",
+ "modules": [],
+ "out": "transitions/temp/snap-walkright",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 10
+  },
+  {
+   "clip": "Discharge snap",
+   "frames": 14,
+   "blend": 4,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Walk right",
+   "frames": 60
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

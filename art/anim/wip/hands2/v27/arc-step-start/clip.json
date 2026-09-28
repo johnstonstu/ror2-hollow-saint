@@ -1,0 +1,77 @@
+{
+ "title": "Arc Step start",
+ "blend": "art\\anim\\wip\\hands2\\_work\\v27-copy.blend",
+ "rendered_frames": [
+  1,
+  4,
+  7
+ ],
+ "body_views": [
+  "hero"
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.178,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.17,
+    "palm_fwd": -0.022,
+    "hand": 0.748,
+    "raise": 39.255,
+    "elbow_open": 166.266,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 4,
+   "L": {
+    "thumb_up": 0.111,
+    "palm_fwd": 0.078,
+    "hand": -0.748,
+    "raise": 59.498,
+    "elbow_open": 164.328,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.106,
+    "palm_fwd": 0.27,
+    "hand": 0.748,
+    "raise": 58.211,
+    "elbow_open": 158.539,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 7,
+   "L": {
+    "thumb_up": 0.167,
+    "palm_fwd": 0.114,
+    "hand": -0.748,
+    "raise": 50.797,
+    "elbow_open": 172.419,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.152,
+    "palm_fwd": 0.263,
+    "hand": 0.748,
+    "raise": 50.22,
+    "elbow_open": 165.499,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

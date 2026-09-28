@@ -1,0 +1,33 @@
+{
+ "title": "Idle combat",
+ "blend": "art\\anim\\wip\\hands2\\_work\\v25-copy.blend",
+ "rendered_frames": [
+  1
+ ],
+ "body_views": [
+  "hero"
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.387,
+    "palm_fwd": -0.101,
+    "hand": -0.748,
+    "raise": 27.231,
+    "elbow_open": 143.023,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.724,
+    "palm_fwd": 0.263,
+    "hand": 0.748,
+    "raise": 43.633,
+    "elbow_open": 86.812,
+    "gated": false,
+    "swept_back": false
+   }
+  }
+ ]
+}

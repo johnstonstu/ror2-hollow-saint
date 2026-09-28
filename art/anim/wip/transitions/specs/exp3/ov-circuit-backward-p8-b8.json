@@ -1,0 +1,25 @@
+{
+ "name": "ov-circuit-backward-p8-b8",
+ "modules": [],
+ "out": "transitions/exp3/ov-circuit-backward-p8-b8",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 8
+  },
+  {
+   "clip": "Open Circuit",
+   "frames": 16,
+   "blend": 8,
+   "mask": "upper",
+   "lower": "track"
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run backward",
+   "frames": 40
+  }
+ ]
+}

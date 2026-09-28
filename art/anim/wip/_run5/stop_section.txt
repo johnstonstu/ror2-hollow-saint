@@ -1,0 +1,72 @@
+STOP_TABARD = (('tabard front.1', -9.0, 3.0), ('tabard front.2', -8.0, 3.5), ('tabard front.3', -8.0, 4.0),
+               ('tabard back.1', -4.0, 3.0), ('tabard back.2', -4.0, 3.5))
+
+
+class Stop:
+    """entry: Run forward frame the stop starts on, 1 (L contact: R brakes, L steps up) or 9 (R contact: mirrored)."""
+
+    def __init__(self, entry):
+        self.entry = entry
+        self.lead = 'L' if entry == 1 else 'R'           # planted on frame 1, steps up beside at the end
+        self.brake = 'R' if entry == 1 else 'L'          # swinging on frame 1, makes the braking plant
+        self.title = 'Run stop' if entry == 1 else 'Run stop R'
+        path, last = STOP_PATH, STOP_N-1
+        ra = T.run_feet(entry)
+        yaw = lambda s: sign(s)*air.STAND_YAW
+        lead, brake = self.lead, self.brake
+        self.feet = {
+            lead: T.Foot(path, [(0, T.contact(lead, entry), 0.0, True),
+                                (T.RUN_LIFT, None, 0.0, False),
+                                (10, planted_until_end(path, 10, lead), yaw(lead), True),
+                                (last, planted_until_end(path, last, lead), yaw(lead), True)], lift=0.12),
+            brake: T.Foot(path, [(0, (ra[brake][0].x, ra[brake][0].y), 0.0, False),
+                                 (5, planted_until_end(path, 5, brake), yaw(brake)*0.5, True),
+                                 (last, planted_until_end(path, last, brake), yaw(brake), True)], lift=0.14),
+        }
+
+    def pose(self, p, f):
+        i, n = f-1, STOP_N
+        a = T.run_snap(p, self.entry+i)
+        p.reset()
+        body = ramp(i, 1.0, 11.0)
+        apply_blend(p, a, IDLE, {'R leg': body, 'L leg': body, 'body': body, 'arms': ramp(i, 1.0, 12.0),
+                                 'tabard': ramp(i, 2.0, 13.0), 'halo': ramp(i, 1.0, 12.0)})
+        m, e = engine_feet(p, self.feet, i)
+        wl = ramp(i, 0.0, 3.0)*(1.0-ramp(i, n-5.0, n-1.0))
+        p.reset()
+        apply_blend(p, m, e, {'R leg': wl, 'L leg': wl, 'body': 0.0, 'arms': 0.0, 'tabard': 0.0, 'halo': 0.0})
+        brake = bump(i, 1.0, 11.0)          # pelvis sits back and drops over the braking plant
+        surge = bump(i, 4.0, 14.0)          # the torso carries on forward over it, then settles
+        add_offset(p, 'pelvis', (0, 0, -0.055*brake))
+        add_rot(p, 'pelvis', R(x=-8.0*brake))
+        add_rot(p, 'spine', R(x=4.0*surge))
+        add_rot(p, 'chest', R(x=5.0*surge))
+        add_rot(p, 'neck', R(x=-1.5*surge))
+        add_rot(p, 'head', R(x=-5.0*surge))
+        for name, x, t0 in STOP_TABARD:
+            add_rot(p, name, R(x=x*bump(i, t0, 15.0)))
+
+    def props(self):
+        def spark(side):
+            def fn(f):
+                i = f-1
+                carry = run.spark(self.entry+i, side)*(1.0-ramp(i, 2.0, 5.0))
+                plant = run.SPARK*bump(i, 4.0, 9.0) if side == self.brake else 0.5*run.SPARK*bump(i, 9.0, 13.0)
+                return max(carry, plant)
+            return fn
+        moving = lambda f: STOP_PATH.v[f-1].length > 0.3
+        return {'hs_spark_L': spark('L'), 'hs_spark_R': spark('R'),
+                'hs_jet_dir': lambda f: run.JET_DIR*(1.0-ramp(f-1, 8.0, STOP_N-1.0)),
+                'hs_move_x': lambda f: 0.0, 'hs_move_y': lambda f: 1.0 if moving(f) else 0.0}
+
+    def post(self, p, caps, frames):
+        n = len(frames)
+        ro = T.run_offsets(p)
+        pre = halo_points(p, run.pose, [self.entry-N*2+j for j in range(N*2)])
+        offs = one_shot_offsets(caps, frames, pre, [ro[(self.entry-1+i) % N] for i in range(n)],
+                                [Vector((0, 0, 0))]*n)
+        out = apply_halo(p, caps, frames, offs)
+        out.update(P.checks(p, caps, frames, False))
+        return out
+
+

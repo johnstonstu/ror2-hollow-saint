@@ -1,0 +1,17 @@
+{
+ "name": "walkidle-p19-b14",
+ "modules": [],
+ "out": "transitions/exp2/walkidle-p19-b14",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Walk forward",
+   "frames": 19
+  },
+  {
+   "clip": "Idle",
+   "frames": 30,
+   "blend": 14
+  }
+ ]
+}

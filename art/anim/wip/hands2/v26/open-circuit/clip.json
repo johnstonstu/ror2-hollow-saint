@@ -1,0 +1,121 @@
+{
+ "title": "Open Circuit",
+ "blend": "art\\anim\\wip\\hands2\\_work\\v26-copy.blend",
+ "rendered_frames": [
+  1,
+  8,
+  15,
+  22,
+  29
+ ],
+ "body_views": [
+  "hero"
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.178,
+    "palm_fwd": -0.023,
+    "hand": -0.748,
+    "raise": 37.694,
+    "elbow_open": 172.885,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.17,
+    "palm_fwd": -0.022,
+    "hand": 0.748,
+    "raise": 39.255,
+    "elbow_open": 166.266,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 8,
+   "L": {
+    "thumb_up": -0.145,
+    "palm_fwd": 0.744,
+    "hand": -0.748,
+    "raise": 32.577,
+    "elbow_open": 57.47,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": -0.104,
+    "palm_fwd": 0.738,
+    "hand": 0.748,
+    "raise": 36.529,
+    "elbow_open": 57.285,
+    "gated": false,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 15,
+   "L": {
+    "thumb_up": 0.413,
+    "palm_fwd": 0.603,
+    "hand": -0.748,
+    "raise": 40.713,
+    "elbow_open": 79.79,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.506,
+    "palm_fwd": 0.482,
+    "hand": 0.748,
+    "raise": 47.042,
+    "elbow_open": 79.442,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 22,
+   "L": {
+    "thumb_up": 0.785,
+    "palm_fwd": 0.794,
+    "hand": -0.748,
+    "raise": 64.886,
+    "elbow_open": 143.7,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.792,
+    "palm_fwd": 0.786,
+    "hand": 0.748,
+    "raise": 71.942,
+    "elbow_open": 142.169,
+    "gated": true,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 29,
+   "L": {
+    "thumb_up": 0.198,
+    "palm_fwd": 0.671,
+    "hand": -0.748,
+    "raise": 43.495,
+    "elbow_open": 139.08,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.228,
+    "palm_fwd": 0.661,
+    "hand": 0.748,
+    "raise": 48.955,
+    "elbow_open": 137.774,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

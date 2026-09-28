@@ -1,0 +1,36 @@
+{
+ "name": "cancel-turn-midcast",
+ "modules": [],
+ "out": "transitions/matrix/cancel-turn-midcast",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 8
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 20,
+   "blend": 3,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 14
+  },
+  {
+   "clip": "Run left",
+   "frames": 40,
+   "blend": 10,
+   "sync": true
+  }
+ ]
+}

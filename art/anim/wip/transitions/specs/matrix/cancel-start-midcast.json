@@ -1,0 +1,41 @@
+{
+ "name": "cancel-start-midcast",
+ "modules": [],
+ "out": "transitions/matrix/cancel-start-midcast",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 8
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 20,
+   "blend": 3,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Idle",
+   "frames": 12,
+   "start": 85
+  },
+  {
+   "clip": "Run start",
+   "frames": 17,
+   "start": 1
+  },
+  {
+   "clip": "Run forward",
+   "frames": 30,
+   "start": 10
+  }
+ ]
+}

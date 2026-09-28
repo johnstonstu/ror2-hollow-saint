@@ -1,0 +1,5 @@
+{"name": "overlay-spear-run", "modules": ["run", "spear"], "root_motion": true,
+ "segments": [{"clip": "Run forward", "start": 1, "frames": 16},
+              {"clip": "Conduit Spear", "frames": 16, "blend": 3, "mask": "upper",
+               "lower_from": "Run forward", "lower_start": 17},
+              {"clip": "Run forward", "start": 1, "frames": 24, "blend": 6}]}

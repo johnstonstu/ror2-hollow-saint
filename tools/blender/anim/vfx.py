@@ -8,6 +8,9 @@
   `hs_move_x` / `hs_move_y`: character-space travel direction (+x = the character's right, +y = forward; unit
   length while moving, 0/0 = none). The jets yaw so the exhaust trails opposite it (backpedal streams forward,
   strafes sideways). `bake` fills them from meta `move` / `direction` / `travel` when a clip doesn't key them.
+  Jets and sparks scale by `jet_move_gain` (smoothstep of |hs_move| over JET_MOVE_FADE = 0.3..0.7): no clip
+  lights them with a shorter vector, so this only dims them through a cross-fade that reverses the travel (e.g.
+  Arc Step back end -> Glide loop). Unity's jet VFX should apply the same gain to the blended parameters.
   `hs_turn` (not VFX): turn clips' body-yaw progress, 0..1 of meta `turn_deg` (turns.py), for Unity to drive the
   model yaw from; 0 in every other clip.
   `hs_spear` (Conduit Spear, spear.py): 0..1 materialize progress of the lance along the R forearm, 1 at the
@@ -31,6 +34,13 @@ GLOW_MATERIALS = ('V11 cyan conductor light', 'HYBRID cyan conductor', 'V11 cyan
                   'V11 halo gap light', 'V11 halo top gap light')
 JET_LEN = 0.50
 JET_R = 0.05
+JET_MOVE_FADE = (0.3, 0.7)   # jets/sparks scale x smoothstep of |hs_move| over this range (blends of moves up to
+                             # 90 deg apart never drop below 0.707; a 180 deg reversal is dark around its flip)
+
+
+def jet_move_gain(x, y):
+    t = min(1.0, max(0.0, (math.hypot(x, y)-JET_MOVE_FADE[0])/(JET_MOVE_FADE[1]-JET_MOVE_FADE[0])))
+    return t*t*(3.0-2.0*t)
 HEEL = Vector((0.0, 0.0, 0.02))     # from the heel spur tip (`heel socket` tail) up to the Achilles base
 COLLECTION = 'VFX | glide'
 
@@ -116,12 +126,19 @@ def arc_mesh(name, length, n_arcs=3, kinks=6, amp=0.03, width=0.006):
 
 
 def scale_drivers(obj, rig, side):
+    """(hs_jet + spark) x jet_move_gain: every clip keys hs_move at unit length whenever the jets are lit, so the
+    gain only acts in cross-fades that reverse the travel, where the exhaust yaw flips 180 deg in one frame."""
+    a, b = JET_MOVE_FADE
+    t = f'min(1.0, max(0.0, (sqrt(x*x+y*y)-{a})*{1.0/(b-a):.4f}))'
     for i in range(3):
         fc = obj.driver_add('scale', i)
         drv = fc.driver
-        drv.type = 'SUM'
+        drv.type = 'SCRIPTED'
         add_var(drv, rig, 'hs_jet', 'g')
         add_var(drv, rig, f'hs_spark_{side}', 's')
+        add_var(drv, rig, 'hs_move_x', 'x')
+        add_var(drv, rig, 'hs_move_y', 'y')
+        drv.expression = f'(g+s)*{t}*{t}*(3.0-2.0*{t})'
 
 
 def dir_driver(obj, rig):
@@ -197,12 +214,30 @@ def build_jets(rig):
     return made
 
 
+VFX_VERSION = 2         # 2: jet scale dims with a short hs_move (JET_MOVE_FADE)
+
+
+def refresh_jet_drivers(rig):
+    done = []
+    for s in ('L', 'R'):
+        for tag in ('outer', 'core'):
+            o = bpy.data.objects.get(f'VFX | {s} heel jet {tag}')
+            if o:
+                o.driver_remove('scale')
+                scale_drivers(o, rig, s)
+                done.append(o.name)
+    return done
+
+
 def apply(rig):
     if rig.get('hs_vfx'):
+        if rig['hs_vfx'] < VFX_VERSION:
+            rig['hs_vfx'] = VFX_VERSION
+            return {'skipped': True, 'jet_drivers_refreshed': refresh_jet_drivers(rig)}
         return {'skipped': True}
     root = rig.pose.bones['root']
     for n in PROPS:
         root[n] = 0.0
     out = {'glow_materials': glow_drivers(rig), 'jets': build_jets(rig)}
-    rig['hs_vfx'] = 1
+    rig['hs_vfx'] = VFX_VERSION
     return out

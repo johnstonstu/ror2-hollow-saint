@@ -1,0 +1,22 @@
+{
+ "name": "dir-run-left-right",
+ "modules": [],
+ "out": "transitions/temp/dir-run-left-right",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run left",
+   "frames": 17
+  },
+  {
+   "clip": "Run right",
+   "frames": 34,
+   "blend": 10,
+   "sync": true
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

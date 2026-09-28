@@ -1,0 +1,1702 @@
+{
+ "name": "over-arcbolt-walk",
+ "frames": 52,
+ "handoffs": [
+  {
+   "frame": 13,
+   "from": "[Walk forward f12]",
+   "to": "Arc Bolt right f1 / Walk forward f13",
+   "blend": 3,
+   "lower_track_cut": false,
+   "accent_window": true,
+   "finger_accent_window": true,
+   "worst_bone": "head",
+   "acc": 0.0477,
+   "clip_max_acc": 0.0477,
+   "ease_acc": 0.0134,
+   "ref_acc": 0.0477,
+   "step": 0.0128,
+   "ratio": 1.0,
+   "rot_bone": "R upperarm",
+   "rot_acc_deg": 17.4,
+   "rot_clip_max_deg": 10.5,
+   "rot_fail": null,
+   "bones": {
+    "pelvis": {
+     "acc": 0.0059,
+     "clip_max_acc": 0.006,
+     "ease_acc": 0.0,
+     "ref_acc": 0.006,
+     "step": 0.0127,
+     "ratio": 0.98
+    },
+    "head": {
+     "acc": 0.0477,
+     "clip_max_acc": 0.0477,
+     "ease_acc": 0.0134,
+     "ref_acc": 0.0477,
+     "step": 0.0128,
+     "ratio": 1.0
+    },
+    "L hand": {
+     "acc": 0.1592,
+     "clip_max_acc": 0.2301,
+     "ease_acc": 0.1105,
+     "ref_acc": 0.2301,
+     "step": 0.0114,
+     "ratio": 0.69
+    },
+    "R hand": {
+     "acc": 0.282,
+     "clip_max_acc": 0.3296,
+     "ease_acc": 0.2335,
+     "ref_acc": 0.3296,
+     "step": 0.0159,
+     "ratio": 0.86
+    },
+    "L toe": {
+     "acc": 0.0,
+     "clip_max_acc": 0.0627,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0627,
+     "step": 0.0625,
+     "ratio": 0.0
+    },
+    "R toe": {
+     "acc": 0.0626,
+     "clip_max_acc": 0.0626,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0626,
+     "step": 0.0545,
+     "ratio": 1.0
+    },
+    "halo root": {
+     "acc": 0.0876,
+     "clip_max_acc": 0.1059,
+     "ease_acc": 0.027,
+     "ref_acc": 0.1059,
+     "step": 0.0121,
+     "ratio": 0.83
+    },
+    "tabard front.3": {
+     "acc": 0.0065,
+     "clip_max_acc": 0.1064,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1064,
+     "step": 0.0111,
+     "ratio": 0.06
+    },
+    "tabard back.2": {
+     "acc": 0.0061,
+     "clip_max_acc": 0.0098,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0098,
+     "step": 0.0129,
+     "ratio": 0.62
+    },
+    "L middle.3": {
+     "acc": 0.152,
+     "clip_max_acc": 0.2553,
+     "ease_acc": 0.1702,
+     "ref_acc": 0.2553,
+     "step": 0.0183,
+     "ratio": 0.6
+    },
+    "R middle.3": {
+     "acc": 0.5764,
+     "clip_max_acc": 0.6637,
+     "ease_acc": 0.4141,
+     "ref_acc": 0.6637,
+     "step": 0.0225,
+     "ratio": 0.87
+    }
+   },
+   "travel_turn_deg": 0.0,
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 1.5,
+   "speed_after": 1.5,
+   "root_acc_mps2": 0.0
+  },
+  {
+   "frame": 33,
+   "from": "Arc Bolt right f20 / Walk forward f6",
+   "to": "[Walk forward f7]",
+   "blend": 6,
+   "lower_track_cut": false,
+   "accent_window": false,
+   "finger_accent_window": false,
+   "worst_bone": "pelvis",
+   "acc": 0.006,
+   "clip_max_acc": 0.006,
+   "ease_acc": 0.0,
+   "ref_acc": 0.006,
+   "step": 0.0114,
+   "ratio": 1.0,
+   "rot_bone": "L forearm",
+   "rot_acc_deg": 1.6,
+   "rot_clip_max_deg": 0.6,
+   "rot_fail": null,
+   "bones": {
+    "pelvis": {
+     "acc": 0.006,
+     "clip_max_acc": 0.006,
+     "ease_acc": 0.0,
+     "ref_acc": 0.006,
+     "step": 0.0114,
+     "ratio": 1.0
+    },
+    "head": {
+     "acc": 0.006,
+     "clip_max_acc": 0.0477,
+     "ease_acc": 0.003,
+     "ref_acc": 0.0477,
+     "step": 0.0111,
+     "ratio": 0.12
+    },
+    "L hand": {
+     "acc": 0.0307,
+     "clip_max_acc": 0.2301,
+     "ease_acc": 0.031,
+     "ref_acc": 0.2301,
+     "step": 0.0198,
+     "ratio": 0.13
+    },
+    "R hand": {
+     "acc": 0.0405,
+     "clip_max_acc": 0.3296,
+     "ease_acc": 0.0218,
+     "ref_acc": 0.3296,
+     "step": 0.0257,
+     "ratio": 0.12
+    },
+    "L toe": {
+     "acc": 0.0068,
+     "clip_max_acc": 0.0627,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0627,
+     "step": 0.0625,
+     "ratio": 0.11
+    },
+    "R toe": {
+     "acc": 0.0554,
+     "clip_max_acc": 0.0626,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0626,
+     "step": 0.1178,
+     "ratio": 0.88
+    },
+    "halo root": {
+     "acc": 0.0079,
+     "clip_max_acc": 0.1059,
+     "ease_acc": 0.0065,
+     "ref_acc": 0.1059,
+     "step": 0.0134,
+     "ratio": 0.07
+    },
+    "tabard front.3": {
+     "acc": 0.0154,
+     "clip_max_acc": 0.1064,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1064,
+     "step": 0.0169,
+     "ratio": 0.14
+    },
+    "tabard back.2": {
+     "acc": 0.0098,
+     "clip_max_acc": 0.0098,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0098,
+     "step": 0.0117,
+     "ratio": 1.0
+    },
+    "L middle.3": {
+     "acc": 0.0412,
+     "clip_max_acc": 0.2553,
+     "ease_acc": 0.0484,
+     "ref_acc": 0.2553,
+     "step": 0.0183,
+     "ratio": 0.16
+    },
+    "R middle.3": {
+     "acc": 0.0507,
+     "clip_max_acc": 0.6637,
+     "ease_acc": 0.0356,
+     "ref_acc": 0.6637,
+     "step": 0.0323,
+     "ratio": 0.08
+    }
+   },
+   "travel_turn_deg": 0.0,
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 1.5,
+   "speed_after": 1.5,
+   "root_acc_mps2": 0.0
+  }
+ ],
+ "root_path": [
+  [
+   0.0,
+   -0.0625,
+   0.0
+  ],
+  [
+   0.0,
+   -0.125,
+   0.0
+  ],
+  [
+   0.0,
+   -0.1875,
+   0.0
+  ],
+  [
+   0.0,
+   -0.25,
+   0.0
+  ],
+  [
+   0.0,
+   -0.3125,
+   0.0
+  ],
+  [
+   0.0,
+   -0.375,
+   0.0
+  ],
+  [
+   0.0,
+   -0.4375,
+   0.0
+  ],
+  [
+   0.0,
+   -0.5,
+   0.0
+  ],
+  [
+   0.0,
+   -0.5625,
+   0.0
+  ],
+  [
+   0.0,
+   -0.625,
+   0.0
+  ],
+  [
+   0.0,
+   -0.6875,
+   0.0
+  ],
+  [
+   0.0,
+   -0.75,
+   0.0
+  ],
+  [
+   0.0,
+   -0.8125,
+   0.0
+  ],
+  [
+   0.0,
+   -0.875,
+   0.0
+  ],
+  [
+   0.0,
+   -0.9375,
+   0.0
+  ],
+  [
+   0.0,
+   -1.0,
+   0.0
+  ],
+  [
+   0.0,
+   -1.0625,
+   0.0
+  ],
+  [
+   0.0,
+   -1.125,
+   0.0
+  ],
+  [
+   0.0,
+   -1.1875,
+   0.0
+  ],
+  [
+   0.0,
+   -1.25,
+   0.0
+  ],
+  [
+   0.0,
+   -1.3125,
+   0.0
+  ],
+  [
+   0.0,
+   -1.375,
+   0.0
+  ],
+  [
+   0.0,
+   -1.4375,
+   0.0
+  ],
+  [
+   0.0,
+   -1.5,
+   0.0
+  ],
+  [
+   0.0,
+   -1.5625,
+   0.0
+  ],
+  [
+   0.0,
+   -1.625,
+   0.0
+  ],
+  [
+   0.0,
+   -1.6875,
+   0.0
+  ],
+  [
+   0.0,
+   -1.75,
+   0.0
+  ],
+  [
+   0.0,
+   -1.8125,
+   0.0
+  ],
+  [
+   0.0,
+   -1.875,
+   0.0
+  ],
+  [
+   0.0,
+   -1.9375,
+   0.0
+  ],
+  [
+   0.0,
+   -2.0,
+   0.0
+  ],
+  [
+   0.0,
+   -2.0625,
+   0.0
+  ],
+  [
+   0.0,
+   -2.125,
+   0.0
+  ],
+  [
+   0.0,
+   -2.1875,
+   0.0
+  ],
+  [
+   0.0,
+   -2.25,
+   0.0
+  ],
+  [
+   0.0,
+   -2.3125,
+   0.0
+  ],
+  [
+   0.0,
+   -2.375,
+   0.0
+  ],
+  [
+   0.0,
+   -2.4375,
+   0.0
+  ],
+  [
+   0.0,
+   -2.5,
+   0.0
+  ],
+  [
+   0.0,
+   -2.5625,
+   0.0
+  ],
+  [
+   0.0,
+   -2.625,
+   0.0
+  ],
+  [
+   0.0,
+   -2.6875,
+   0.0
+  ],
+  [
+   0.0,
+   -2.75,
+   0.0
+  ],
+  [
+   0.0,
+   -2.8125,
+   0.0
+  ],
+  [
+   0.0,
+   -2.875,
+   0.0
+  ],
+  [
+   0.0,
+   -2.9375,
+   0.0
+  ],
+  [
+   0.0,
+   -3.0,
+   0.0
+  ],
+  [
+   0.0,
+   -3.0625,
+   0.0
+  ],
+  [
+   0.0,
+   -3.125,
+   0.0
+  ],
+  [
+   0.0,
+   -3.1875,
+   0.0
+  ],
+  [
+   0.0,
+   -3.25,
+   0.0
+  ]
+ ],
+ "acc_series_mm": {
+  "pelvis": [
+   0.0,
+   5.9,
+   5.6,
+   4.1,
+   1.7,
+   1.6,
+   4.0,
+   5.6,
+   6.0,
+   5.1,
+   3.1,
+   0.8,
+   2.7,
+   4.8,
+   5.9,
+   5.6,
+   4.1,
+   1.7,
+   1.6,
+   4.0,
+   5.6,
+   6.0,
+   5.1,
+   3.1,
+   0.8,
+   2.7,
+   4.8,
+   5.9,
+   5.6,
+   4.1,
+   1.7,
+   1.6,
+   4.0,
+   5.6,
+   6.0,
+   5.1,
+   3.1,
+   0.8,
+   2.7,
+   4.8,
+   5.9,
+   5.6,
+   4.1,
+   1.7,
+   1.6,
+   4.0,
+   5.6,
+   6.0,
+   5.1,
+   3.1,
+   0.8,
+   0.0
+  ],
+  "head": [
+   0.0,
+   5.9,
+   5.7,
+   4.1,
+   1.7,
+   1.4,
+   3.9,
+   5.5,
+   6.0,
+   5.0,
+   3.0,
+   2.8,
+   8.7,
+   9.1,
+   47.7,
+   15.6,
+   47.6,
+   20.9,
+   2.5,
+   5.2,
+   5.6,
+   5.9,
+   5.0,
+   3.0,
+   0.6,
+   2.6,
+   4.7,
+   5.8,
+   5.6,
+   4.1,
+   1.9,
+   2.6,
+   4.9,
+   5.8,
+   6.0,
+   5.2,
+   3.9,
+   2.9,
+   3.0,
+   4.8,
+   5.9,
+   5.7,
+   4.1,
+   1.7,
+   1.4,
+   3.9,
+   5.5,
+   6.0,
+   5.0,
+   3.0,
+   0.6,
+   0.0
+  ],
+  "L hand": [
+   0.0,
+   12.4,
+   12.5,
+   12.2,
+   11.4,
+   10.1,
+   8.0,
+   4.9,
+   1.6,
+   4.3,
+   7.5,
+   53.8,
+   47.8,
+   29.9,
+   159.2,
+   76.7,
+   172.6,
+   12.9,
+   6.8,
+   9.0,
+   6.5,
+   5.7,
+   5.1,
+   2.1,
+   2.1,
+   4.6,
+   6.7,
+   7.8,
+   7.8,
+   7.2,
+   6.9,
+   10.4,
+   13.7,
+   26.1,
+   30.7,
+   23.5,
+   10.0,
+   21.9,
+   24.7,
+   12.3,
+   12.5,
+   12.4,
+   12.1,
+   11.4,
+   9.9,
+   7.5,
+   4.1,
+   1.9,
+   4.1,
+   7.0,
+   9.3,
+   0.0
+  ],
+  "R hand": [
+   0.0,
+   11.7,
+   11.7,
+   11.6,
+   11.1,
+   10.0,
+   8.0,
+   4.7,
+   1.7,
+   3.4,
+   6.5,
+   39.6,
+   216.5,
+   282.0,
+   223.4,
+   210.8,
+   277.2,
+   129.3,
+   17.0,
+   19.3,
+   4.9,
+   4.4,
+   23.3,
+   38.0,
+   25.7,
+   20.2,
+   22.4,
+   26.0,
+   30.4,
+   35.3,
+   40.5,
+   34.0,
+   5.4,
+   19.8,
+   28.7,
+   24.7,
+   9.8,
+   13.1,
+   15.9,
+   14.9,
+   12.5,
+   11.9,
+   12.0,
+   12.2,
+   9.8,
+   7.6,
+   4.3,
+   0.9,
+   4.6,
+   7.5,
+   9.7,
+   0.0
+  ],
+  "L toe": [
+   0.0,
+   9.7,
+   1.2,
+   10.6,
+   6.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   36.4,
+   62.5,
+   55.4,
+   41.3,
+   27.4,
+   14.1,
+   6.8,
+   17.1,
+   39.6,
+   46.8,
+   56.9,
+   62.7,
+   9.7,
+   1.2,
+   10.6,
+   6.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   36.4,
+   62.5,
+   55.4,
+   41.3,
+   27.4,
+   14.1,
+   6.8,
+   17.1,
+   39.6,
+   46.8,
+   0.0
+  ],
+  "R toe": [
+   0.0,
+   0.0,
+   36.4,
+   62.5,
+   55.4,
+   41.3,
+   27.4,
+   14.1,
+   6.8,
+   17.1,
+   39.6,
+   46.8,
+   56.9,
+   62.6,
+   9.7,
+   1.2,
+   10.6,
+   6.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   36.4,
+   62.5,
+   55.4,
+   41.3,
+   27.4,
+   14.1,
+   6.8,
+   17.1,
+   39.6,
+   46.8,
+   56.9,
+   62.6,
+   9.7,
+   1.2,
+   10.6,
+   6.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "halo root": [
+   0.0,
+   4.2,
+   3.1,
+   2.2,
+   5.4,
+   2.5,
+   3.3,
+   5.7,
+   5.8,
+   2.2,
+   0.7,
+   10.0,
+   17.0,
+   19.8,
+   87.6,
+   30.9,
+   105.8,
+   81.5,
+   3.8,
+   33.3,
+   7.0,
+   8.8,
+   8.6,
+   3.2,
+   1.3,
+   3.0,
+   5.2,
+   6.3,
+   6.1,
+   4.7,
+   2.7,
+   2.6,
+   6.3,
+   7.9,
+   7.3,
+   3.8,
+   2.4,
+   5.3,
+   4.3,
+   3.2,
+   4.3,
+   3.2,
+   2.2,
+   5.3,
+   2.7,
+   3.3,
+   5.7,
+   5.7,
+   2.2,
+   0.5,
+   2.5,
+   0.0
+  ],
+  "tabard front.3": [
+   0.0,
+   81.9,
+   106.4,
+   43.5,
+   8.9,
+   3.1,
+   6.1,
+   5.0,
+   15.4,
+   12.6,
+   3.7,
+   2.6,
+   4.6,
+   6.0,
+   6.5,
+   15.5,
+   14.4,
+   2.1,
+   1.2,
+   3.4,
+   5.2,
+   18.2,
+   5.0,
+   9.3,
+   9.8,
+   9.2,
+   11.6,
+   81.9,
+   106.4,
+   43.5,
+   8.9,
+   3.1,
+   6.1,
+   5.0,
+   15.4,
+   12.6,
+   3.7,
+   2.6,
+   4.6,
+   6.0,
+   6.5,
+   15.5,
+   14.4,
+   2.1,
+   1.2,
+   3.4,
+   5.2,
+   18.2,
+   5.0,
+   9.3,
+   9.8,
+   0.0
+  ],
+  "tabard back.2": [
+   0.0,
+   6.0,
+   5.8,
+   4.6,
+   2.7,
+   4.0,
+   7.9,
+   5.7,
+   9.8,
+   5.2,
+   3.0,
+   0.2,
+   2.9,
+   5.1,
+   6.1,
+   5.7,
+   4.4,
+   2.5,
+   3.9,
+   8.0,
+   5.8,
+   9.7,
+   5.3,
+   3.3,
+   0.4,
+   2.7,
+   5.0,
+   6.0,
+   5.8,
+   4.6,
+   2.7,
+   4.0,
+   7.9,
+   5.7,
+   9.8,
+   5.2,
+   3.0,
+   0.2,
+   2.9,
+   5.1,
+   6.1,
+   5.7,
+   4.4,
+   2.5,
+   3.9,
+   8.0,
+   5.8,
+   9.7,
+   5.3,
+   3.3,
+   0.4,
+   0.0
+  ],
+  "L middle.3": [
+   0.0,
+   17.1,
+   17.5,
+   17.4,
+   16.5,
+   14.8,
+   11.4,
+   6.7,
+   4.2,
+   6.2,
+   10.4,
+   82.2,
+   85.7,
+   29.5,
+   152.0,
+   106.4,
+   201.6,
+   19.7,
+   7.2,
+   12.9,
+   7.2,
+   5.8,
+   5.4,
+   2.0,
+   1.9,
+   4.5,
+   6.7,
+   7.9,
+   8.0,
+   7.4,
+   7.1,
+   9.6,
+   18.9,
+   35.8,
+   41.2,
+   31.1,
+   14.7,
+   34.0,
+   36.9,
+   17.2,
+   17.8,
+   17.8,
+   17.4,
+   16.2,
+   14.0,
+   10.6,
+   5.8,
+   4.7,
+   5.4,
+   9.3,
+   12.4,
+   0.0
+  ],
+  "R middle.3": [
+   0.0,
+   16.7,
+   17.2,
+   17.2,
+   16.6,
+   14.8,
+   11.5,
+   6.4,
+   3.9,
+   5.1,
+   9.4,
+   51.7,
+   380.0,
+   576.4,
+   539.1,
+   361.3,
+   459.7,
+   242.2,
+   30.2,
+   36.5,
+   10.3,
+   8.7,
+   39.7,
+   63.0,
+   42.4,
+   33.5,
+   33.9,
+   35.3,
+   43.8,
+   56.0,
+   50.7,
+   47.6,
+   9.3,
+   23.1,
+   37.1,
+   33.7,
+   15.8,
+   20.4,
+   9.5,
+   31.9,
+   15.7,
+   12.7,
+   15.1,
+   21.1,
+   13.7,
+   10.6,
+   5.7,
+   3.0,
+   6.1,
+   9.8,
+   12.8,
+   0.0
+  ]
+ },
+ "timeline": [
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 1
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 2
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 3
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 4
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 5
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 6
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 7
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 8
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 9
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 10
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 11
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 12
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 1,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 13
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 13
+     }
+    },
+    0.156
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 2,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 14
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 14
+     }
+    },
+    0.5
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 3,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 15
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 15
+     }
+    },
+    0.844
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 4,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 16
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 5,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 17
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 6,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 18
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 7,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 19
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 8,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 20
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 9,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 21
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 10,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 22
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 11,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 23
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 12,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 24
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 13,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 25
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 14,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 26
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 15,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 1
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 16,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 2
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 17,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 3
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 18,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 4
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 19,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 5
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Arc Bolt right",
+   "f": 20,
+   "lower": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 6
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 7
+   },
+   "from": [
+    {
+     "seg": 1,
+     "clip": "Arc Bolt right",
+     "f": 20,
+     "lower": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 7
+     }
+    },
+    0.055
+   ]
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 8
+   },
+   "from": [
+    {
+     "seg": 1,
+     "clip": "Arc Bolt right",
+     "f": 20,
+     "lower": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 8
+     }
+    },
+    0.198
+   ]
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 9
+   },
+   "from": [
+    {
+     "seg": 1,
+     "clip": "Arc Bolt right",
+     "f": 20,
+     "lower": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 9
+     }
+    },
+    0.394
+   ]
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 10
+   },
+   "from": [
+    {
+     "seg": 1,
+     "clip": "Arc Bolt right",
+     "f": 20,
+     "lower": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 10
+     }
+    },
+    0.606
+   ]
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 11
+   },
+   "from": [
+    {
+     "seg": 1,
+     "clip": "Arc Bolt right",
+     "f": 20,
+     "lower": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 11
+     }
+    },
+    0.802
+   ]
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 12
+   },
+   "from": [
+    {
+     "seg": 1,
+     "clip": "Arc Bolt right",
+     "f": 20,
+     "lower": {
+      "seg": 0,
+      "clip": "Walk forward",
+      "f": 12
+     }
+    },
+    0.945
+   ]
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 13
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 14
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 15
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 16
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 17
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 18
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 19
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 20
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 21
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 22
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 23
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 24
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 25
+   }
+  },
+  {
+   "seg": 2,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Walk forward",
+    "f": 26
+   }
+  }
+ ]
+}

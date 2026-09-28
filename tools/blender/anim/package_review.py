@@ -15,7 +15,8 @@ for info_path in sorted(WIP.glob('*/*/clip.json')):
     if d.parent.name in ('hands', 'transitions') or (d/'stitch.json').exists():
         continue
     info = json.loads(info_path.read_text())
-    gifs = sorted(d.glob('*.gif'))+sorted((WIP/'hands'/d.name).glob('hands.gif'))
+    hands2 = sorted((WIP/'hands2'/'sheets-v27'/d.name).glob('compare.gif'))
+    gifs = sorted(d.glob('*.gif'))+(hands2 or sorted((WIP/'hands'/d.name).glob('hands.gif')))
     stills = sorted(d.glob('still-*.png'))
     rel = lambda p: p.relative_to(ROOT/'art/anim').as_posix()
     facts = [f"{info['frames'][1]-info['frames'][0]} frames", 'loop' if info['loop'] else 'one-shot']

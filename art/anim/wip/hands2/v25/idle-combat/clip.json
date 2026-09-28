@@ -1,0 +1,97 @@
+{
+ "title": "Idle combat",
+ "blend": "art\\anim\\wip\\hands2\\_work\\v25-copy.blend",
+ "rendered_frames": [
+  1,
+  13,
+  25,
+  37
+ ],
+ "body_views": [],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.387,
+    "palm_fwd": -0.101,
+    "hand": -0.748,
+    "raise": 27.231,
+    "elbow_open": 143.023,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.724,
+    "palm_fwd": 0.263,
+    "hand": 0.748,
+    "raise": 43.633,
+    "elbow_open": 86.812,
+    "gated": false,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 13,
+   "L": {
+    "thumb_up": 0.444,
+    "palm_fwd": -0.096,
+    "hand": -0.748,
+    "raise": 28.335,
+    "elbow_open": 139.852,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.694,
+    "palm_fwd": 0.339,
+    "hand": 0.748,
+    "raise": 44.332,
+    "elbow_open": 83.665,
+    "gated": false,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 25,
+   "L": {
+    "thumb_up": 0.39,
+    "palm_fwd": -0.08,
+    "hand": -0.748,
+    "raise": 27.231,
+    "elbow_open": 143.023,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.727,
+    "palm_fwd": 0.263,
+    "hand": 0.748,
+    "raise": 43.633,
+    "elbow_open": 86.812,
+    "gated": false,
+    "swept_back": false
+   }
+  },
+  {
+   "f": 37,
+   "L": {
+    "thumb_up": 0.441,
+    "palm_fwd": -0.096,
+    "hand": -0.748,
+    "raise": 28.335,
+    "elbow_open": 139.852,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.679,
+    "palm_fwd": 0.335,
+    "hand": 0.748,
+    "raise": 44.332,
+    "elbow_open": 83.665,
+    "gated": false,
+    "swept_back": false
+   }
+  }
+ ]
+}

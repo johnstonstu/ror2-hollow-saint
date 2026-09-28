@@ -1,0 +1,36 @@
+{
+ "name": "step-fwd-air",
+ "modules": [],
+ "out": "transitions/temp/step-fwd-air",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Descend",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step start",
+   "frames": 7,
+   "blend": 4
+  },
+  {
+   "clip": "Arc Step loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step end",
+   "frames": 4,
+   "start": 2
+  },
+  {
+   "clip": "Descend",
+   "frames": 16,
+   "blend": 4
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

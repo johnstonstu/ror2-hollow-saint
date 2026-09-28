@@ -9,8 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 TOOLS = ROOT/'tools/blender/anim'
 BLENDER = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
-ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'primary', 'arcstep', 'arcstep_dirs', 'special',
-       'presentation']
+ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'startstop', 'primary', 'arcstep', 'arcstep_dirs', 'special',
+       'spear', 'presentation']
 HERE = Path(__file__).resolve().parent
 tag = sys.argv[1]
 print_only = '--print-only' in sys.argv

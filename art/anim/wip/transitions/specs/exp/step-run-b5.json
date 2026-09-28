@@ -1,0 +1,17 @@
+{
+ "name": "step-run-b5",
+ "modules": [],
+ "out": "transitions/exp/step-run-b5",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step start",
+   "frames": 7,
+   "blend": 5
+  }
+ ]
+}

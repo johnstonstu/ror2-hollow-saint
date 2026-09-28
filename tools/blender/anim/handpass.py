@@ -15,16 +15,22 @@ already look right are untouched and no new pops appear.
   palm-forward (arm raised); swept-back arms are left alone. It is a soft band, so hands already inside it are
   untouched. When several roll ranges qualify it takes the one nearest the previous frame's roll (bake resets
   `prev` per clip), so the forearm doesn't flip between solutions. Needs a depsgraph update per frame.
+- Item 12: `apply` first rebuilds the fingers from the hand-pose library (handpose.py) and flexes relaxed wrists
+  out of the modelled cock. With the library on, the fingers are the library's (built about their true hinge,
+  inside its natural range; only the fan is added here), thumb .2/.3 are limited on their true bend
+  (NAT_THUMB), and the thumb tuck is the library's.
 """
 import math
 from mathutils import Quaternion, Vector
 from handfix import ZSIGN
+import handpose
 
 DIGITS = ('index', 'middle', 'ring', 'little')
 THUMB_FLOOR = {1: 3.0, 2: 7.0, 3: 7.0}        # rest-relative deg, + curls toward the palm
 THUMB_CEIL = 72.0
 BASE_FLOOR, BASE_CEIL = -7.0, 90.0            # finger .1, rest-relative
 ANAT = {2: (-2.0, 104.0), 3: (-5.0, 88.0)}    # finger .2/.3 anatomical bend limits (deg)
+NAT_THUMB = {1: (0.0, 45.0), 2: (0.0, 70.0), 3: (0.0, 80.0)}   # thumb.1 rest-relative; .2/.3 true bend
 KNEE = 4.0
 TUCK = 10.0                                   # thumb-base swing toward the index when curled (deg)
 TUCK_RAMP = (4.0, 18.0)                       # thumb.1 flex over which the tuck fades in
@@ -126,6 +132,18 @@ class HandPass:
                 for i in (2, 3):
                     n, parent = f'{s} {d}.{i}', f'{s} {d}.{i-1}'
                     self.rest_rel[n] = r3[parent].inverted() @ r3[n]
+        self.geo = handpose.HandGeo(poser)
+        self.levels = {}
+        self.legclear = None      # handpose.LegClear, built on first use by handpose.leg_clear
+
+    def set_bend(self, n, q, lo, hi):
+        """Soft-band joint n's true bend (handpose.HandGeo.bend) by a local X twist."""
+        b = self.geo.bend(n, q)
+        want = soft_band(b, lo, hi)
+        if abs(want-b) < 1e-3:
+            return q
+        sw = q @ about(X, -twist(q, 0))
+        return sw @ about(X, self.geo.solve(n, sw, want))
 
     def anat(self, n, q):
         """Bend of joint n toward the palm, in the parent segment's frame (deg)."""
@@ -154,27 +172,44 @@ class HandPass:
         fist = 1.0-smooth((flex1['index']-TUCK_FIST[0])/(TUCK_FIST[1]-TUCK_FIST[0]))
         # Opening a gap between two fingers shifts each whole side of the hand, so no third finger is crowded.
         # (This moves the index fingertip muzzle; primary.solve_arm aims with this pass applied.)
+        nat = handpose.ENABLED
         fan = dict.fromkeys(DIGITS, 0.0)
         for j, (a, b) in enumerate(zip(DIGITS, DIGITS[1:])):
             sep = SEP*smooth((abs(flex1[a]-flex1[b])-SEP_DEAD)/SEP_RAMP)
-            sep += CURL_SEP*smooth((0.5*(flex1[a]+flex1[b])-CURL_SEP_RAMP[0])/(CURL_SEP_RAMP[1]-CURL_SEP_RAMP[0]))
+            if not nat:   # the library converges curled fingers instead (handpose.CONVERGE)
+                sep += CURL_SEP*smooth((0.5*(flex1[a]+flex1[b])-CURL_SEP_RAMP[0])/(CURL_SEP_RAMP[1]-CURL_SEP_RAMP[0]))
             for n, d in enumerate(DIGITS):
                 fan[d] += 0.5*sep if n > j else -0.5*sep
         for i in (1, 2, 3):
             b = pb[f'{s} thumb.{i}']
             q = b.rotation_quaternion.copy()
+            if nat and i > 1:
+                b.rotation_quaternion = self.set_bend(b.name, q, *NAT_THUMB[i])
+                continue
             f = twist(q, 0)
-            q = q @ about(X, soft_band(f, THUMB_FLOOR[i], THUMB_CEIL)-f)
-            if i == 1:
+            lo, hi = NAT_THUMB[1] if nat else (THUMB_FLOOR[i], THUMB_CEIL)
+            q = q @ about(X, soft_band(f, lo, hi)-f)
+            if i == 1 and not nat:
                 w = smooth((raw1-TUCK_RAMP[0])/(TUCK_RAMP[1]-TUCK_RAMP[0]))*fist
                 q = q @ about(Z, k*TUCK*w)
             b.rotation_quaternion = q
+        built = self.levels.get(s, {}).get('built', {}) if nat else {}
         for d in DIGITS:
             b = pb[f'{s} {d}.1']
             q = b.rotation_quaternion.copy()
-            f = flex1[d]
-            q = q @ about(X, soft_band(f, BASE_FLOOR, BASE_CEIL)-f)
+            if d in built:
+                # the library's planar finger, fanned about the palm normal (a local Z turn on a curled .1
+                # would tip the whole finger out of its bend plane)
+                bends, splay = built[d]
+                if fan[d]:
+                    self.geo.build(pb, s, d, bends, splay+self.geo.splay_of(s, d, about(Z, k*fan[d])))
+                continue
+            if not nat:   # the library builds fingers inside NAT_BASE / NAT_ANAT about their true hinge
+                f = flex1[d]
+                q = q @ about(X, soft_band(f, BASE_FLOOR, BASE_CEIL)-f)
             b.rotation_quaternion = q @ about(Z, k*fan[d]) if fan[d] else q
+            if nat:
+                continue
             for i in (2, 3):
                 b = pb[f'{s} {d}.{i}']
                 b.rotation_quaternion = self.set_anat(b.name, b.rotation_quaternion.copy(), *ANAT[i])
@@ -323,8 +358,19 @@ class HandPass:
         for s, v in done.items():
             self.max_roll[s] = max(self.max_roll.get(s, 0.0), abs(v))
 
+    def relax_wrist(self):
+        import handorient
+        p = self.p
+        p.update()
+        rest_chest = p.rest['chest'].to_3x3()
+        w = {s: self.orient_weight(handorient.arm_state(p.rig, s, rest_chest)) for s in ('L', 'R')}
+        handpose.wrist(p, self.geo, w)
+
     def apply(self):
         self.frame_roll = {}
+        if handpose.ENABLED:
+            self.levels = handpose.apply_fingers(self.p, self.geo)
+            self.relax_wrist()
         for s in ('L', 'R'):
             self.side(s)
         if ORIENT:

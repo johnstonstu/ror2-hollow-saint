@@ -16,6 +16,9 @@
   "kind": "gesture",
   "layer": "upper body (mask excludes pelvis/legs)",
   "seam_anchors": [],
+  "role": "meter full: the Discharge meter reached 100% (passive), upper-body overlay; held flourish loop",
+  "hand_settle_max_deg": 4.7,
+  "hand_relax_peak_deg": 1.3,
   "pad_follow_max": {
     "L": {
       "deg": 1.2,
@@ -43,6 +46,10 @@
   "orient_roll_max_deg": {},
   "orient_infeasible": 0,
   "max_arm_raise_deg": 54.6,
+  "hand_leg_clear_ext_deg": {
+    "L": 0.0,
+    "R": 0.0
+  },
   "halo_clear_push_max_mm": 10.9,
   "halo_clear_frames": 24,
   "halo_clear_dir": [
@@ -65,7 +72,8 @@
     "hs_jet_dir": 0.0,
     "hs_move_x": 0.0,
     "hs_move_y": 0.0,
-    "hs_turn": 0.0
+    "hs_turn": 0.0,
+    "hs_spear": 0.0
   },
   "bake_error_m": 1e-06,
   "bake_error_deg": 0.0,
@@ -102,7 +110,7 @@
   "finite": true,
   "arm_clearance": {
     "L": {
-      "min_m": 0.1936,
+      "min_m": 0.1937,
       "frame": 20,
       "part": "forearm",
       "against": "spine",
@@ -172,32 +180,32 @@
       "hits": {}
     }
   },
-  "arm_clear_min_m": 0.1936,
+  "arm_clear_min_m": 0.1937,
   "arm_clear_ok": null,
   "hand_qa": {
     "violations": {},
     "penetration_mm": {},
-    "max_penetration_mm": 0.7,
+    "max_penetration_mm": 0.6,
     "finger_pops_deg_f2": [
       [
-        10.75,
-        "R little.2",
-        17
+        0.96,
+        "R thumb.1",
+        14
       ],
       [
-        10.61,
-        "R little.2",
-        18
+        0.88,
+        "L thumb.1",
+        6
       ],
       [
-        10.48,
-        "L little.2",
-        8
+        0.87,
+        "L thumb.1",
+        23
       ],
       [
-        10.48,
-        "L little.2",
-        9
+        0.86,
+        "R thumb.1",
+        13
       ]
     ],
     "accent_pops_deg_f2": [],
@@ -205,7 +213,7 @@
       "L": {
         "hand_twist_deg": 21.1,
         "hand_twist_frame": 10,
-        "hand_bend_max_deg": 16.5,
+        "hand_bend_max_deg": 15.1,
         "forearm_roll_deg": 11.5,
         "forearm_roll_frame": 23
       },
@@ -219,16 +227,16 @@
     },
     "flex_range": {
       "L": {
-        "thumb_min": 23.3,
-        "thumb_max": 41.4,
-        "finger_min": 41.8,
-        "finger_max": 101.0
+        "thumb_min": 16.6,
+        "thumb_max": 31.0,
+        "finger_min": 36.5,
+        "finger_max": 78.6
       },
       "R": {
-        "thumb_min": 23.3,
-        "thumb_max": 41.5,
-        "finger_min": 40.4,
-        "finger_max": 99.0
+        "thumb_min": 16.3,
+        "thumb_max": 31.0,
+        "finger_min": 36.5,
+        "finger_max": 78.5
       }
     }
   },
@@ -236,10 +244,10 @@
     "ok": true,
     "violations": 0,
     "pen_over": 0,
-    "worst_pop_deg_f2": 10.75,
-    "worst_pop": "R little.2 f17",
+    "worst_pop_deg_f2": 0.96,
+    "worst_pop": "R thumb.1 f14",
     "worst_accent_pop_deg_f2": 0.0,
-    "max_pen_mm": 0.7
+    "max_pen_mm": 0.6
   },
   "hand_contact": {},
   "hand_contact_max_mm": 0.0,
@@ -420,7 +428,7 @@
         5.7
       ],
       "L hand twist": [
-        15.7,
+        15.8,
         21.1
       ],
       "L knee bend": [
@@ -495,12 +503,62 @@
         1
       ]
     },
+    "hand_nat": {
+      "min_bend_deg": [
+        29.8,
+        "R thumb.2",
+        13
+      ],
+      "max_bend_deg": [
+        78.6,
+        "L little.2",
+        10
+      ],
+      "max_sideways_deg": [
+        -0.0,
+        "L ring.3",
+        23
+      ],
+      "curl_order_gap_deg": [
+        -13.0,
+        "R index>middle",
+        9
+      ],
+      "finger_contact_mm": {},
+      "finger_pen_mm": {
+        "L middle/ring": [
+          0.6,
+          10
+        ]
+      },
+      "pops_deg_f2": [
+        [
+          1.0,
+          "R thumb.1",
+          14
+        ],
+        [
+          0.9,
+          "L thumb.1",
+          6
+        ],
+        [
+          0.9,
+          "L thumb.1",
+          23
+        ]
+      ],
+      "accent_pops_deg_f2": [],
+      "fails": [],
+      "orient_9f_ok": true
+    },
     "fails": [
       "contact neck cables > head 9.0mm f6",
       "contact R forearm conductor > R forearm 5.9mm f10"
     ]
   },
   "full_qa_ok": false,
+  "hand_nat_ok": true,
   "full_contact_max_mm": 9.0,
   "full_pop_max_deg_f2": 12.8,
   "status": "CHECK",

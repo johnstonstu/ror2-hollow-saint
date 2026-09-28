@@ -1,0 +1,31 @@
+{
+ "name": "step-fwd-glide",
+ "modules": [],
+ "out": "transitions/pairs/step-fwd-glide",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Glide loop",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step start",
+   "frames": 7,
+   "blend": 3
+  },
+  {
+   "clip": "Arc Step loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step end",
+   "frames": 5
+  },
+  {
+   "clip": "Glide loop",
+   "frames": 24,
+   "blend": 4
+  }
+ ]
+}

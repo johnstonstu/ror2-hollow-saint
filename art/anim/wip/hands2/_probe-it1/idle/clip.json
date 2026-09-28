@@ -1,0 +1,33 @@
+{
+ "title": "Idle",
+ "blend": "art\\anim\\wip\\hands2\\_work\\it1-1.blend",
+ "rendered_frames": [
+  1
+ ],
+ "body_views": [
+  "hero"
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.236,
+    "palm_fwd": -0.046,
+    "hand": -0.748,
+    "raise": 28.948,
+    "elbow_open": 160.688,
+    "gated": false,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.24,
+    "palm_fwd": -0.037,
+    "hand": 0.748,
+    "raise": 30.002,
+    "elbow_open": 155.324,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

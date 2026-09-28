@@ -118,7 +118,7 @@ for act, info in built:
         pad_frames.append((f, pad.frame()))
         hq.frame(f)
         oq.frame(f)
-        fq.frame(f)
+        fq.frame(f, hq.rows[-1]['pen'])
     speed = info.get('speed_mps')
     # Travel direction in world XY (character faces -Y; its left is +X). Planted feet move opposite.
     travel = {'forward': (0, -1), 'backward': (0, 1), 'left': (1, 0), 'right': (-1, 0)}.get(
@@ -142,7 +142,9 @@ for act, info in built:
     info.update(contact.summarize(contact_frames, con.rest, info.get('hand_contacts', ())))
     info.update(oq.summarize(info['loop']))
     info.update(contact.summarize_pads(pad_frames, pad.rest))
-    info.update(fq.summarize(info['loop'], info.get('accents', ()), info.get('contact_exempt', ())))
+    info.update(fq.summarize(info['loop'], info.get('accents', ()), info.get('contact_exempt', ()),
+                             info.get('finger_accents', ()), info.get('curl_exempt', ())))
+    info['full_qa']['hand_nat']['orient_9f_ok'] = info['hand_orient_ok']
     info['status'] = 'PASS' if (finite and info['bake_error_m'] < 1e-3 and info['ik_miss_m'] < 0.01
                                 and min_body_z > H.GROUND_Z-0.012 and info['arm_clear_ok'] is not False
                                 and info['hand_qa_summary']['ok'] and info['hand_contact_ok']

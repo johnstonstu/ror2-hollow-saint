@@ -26,6 +26,8 @@ class Rig:
     def __init__(self, rig):
         self.rig = rig
         self.pb = rig.pose.bones
+        self.rest = {b.name: b.matrix_local.copy() for b in rig.data.bones}
+        self.r3 = {n: m.to_3x3() for n, m in self.rest.items()}
 
 
 rig.data.pose_position = 'REST'
@@ -53,7 +55,8 @@ for act in sorted((a for a in bpy.data.actions if a.name.startswith(H.PREFIX)), 
         bpy.context.view_layer.update()
         fq.frame(f)
     report['clips'][title] = fq.summarize(info.get('loop', bool(act.use_cyclic)), info.get('accents', ()),
-                                          info.get('contact_exempt', ()))
+                                          info.get('contact_exempt', ()), info.get('finger_accents', ()),
+                                          info.get('curl_exempt', ()))
     print('FULLQA', title, round(time.time()-t1, 1), json.dumps(report['clips'][title]['full_qa']['fails']),
           flush=True)
 out = H.ROOT/args[1]

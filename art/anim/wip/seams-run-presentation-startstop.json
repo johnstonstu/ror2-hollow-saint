@@ -1,0 +1,57 @@
+[
+  {
+    "seam": "Run forward wrap",
+    "max_mm": 0.0,
+    "bone": "L little.3"
+  },
+  {
+    "seam": "Idle wrap",
+    "max_mm": 0.0,
+    "bone": "R little.3"
+  },
+  {
+    "seam": "Idle combat wrap",
+    "max_mm": 0.0,
+    "bone": "R thumb.3"
+  },
+  {
+    "seam": "Spawn to Idle f1",
+    "max_mm": 0.0,
+    "bone": "L muzzle"
+  },
+  {
+    "seam": "Select idle wrap",
+    "max_mm": 0.0,
+    "bone": "L ring.2"
+  },
+  {
+    "seam": "Select intro from Select idle f1",
+    "max_mm": 0.001,
+    "bone": "R muzzle"
+  },
+  {
+    "seam": "Select intro to Select idle f1",
+    "max_mm": 0.001,
+    "bone": "R muzzle"
+  },
+  {
+    "seam": "Run stop from Run forward f1",
+    "max_mm": 0.0,
+    "bone": "R heel socket"
+  },
+  {
+    "seam": "Run stop to Idle f1",
+    "max_mm": 0.0,
+    "bone": "R toe"
+  },
+  {
+    "seam": "Run start from Idle f1",
+    "max_mm": 0.0,
+    "bone": "L toe"
+  },
+  {
+    "seam": "Run start to Run forward f9",
+    "max_mm": 0.0,
+    "bone": "L index.2"
+  }
+]

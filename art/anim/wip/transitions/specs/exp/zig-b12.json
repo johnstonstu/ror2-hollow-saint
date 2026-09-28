@@ -1,0 +1,18 @@
+{
+ "name": "zig-b12",
+ "modules": [],
+ "out": "transitions/exp/zig-b12",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 8
+  },
+  {
+   "clip": "Run forward left",
+   "frames": 24,
+   "sync": true,
+   "blend": 12
+  }
+ ]
+}

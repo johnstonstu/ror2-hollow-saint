@@ -1,8 +1,9 @@
 """Hand QA (item 9c): thumb/finger joint limits, wrist twist, finger pops, finger interpenetration.
 
 Per frame (preview.py calls `frame()` after each frame_set on the baked action):
-- flex: twist of each finger/thumb joint about its bone X (the curl hinge; + curls toward the palm,
-  - bends back); off: the remaining swing (splay/abduction).
+- flex: each joint's true bend toward the palm (- bends back): fingers about their true hinge
+  (handpose.HandGeo.measure), thumb .2/.3 about bone X against the parent (HandGeo.bend), thumb.1 its twist
+  about bone X relative to rest; off: the remaining swing (splay/abduction).
 - wrist: hand twist about its bone axis relative to the forearm (candy-wrapper), hand bend, and the
   forearm's roll relative to the upper arm.
 - pops: the popscan metric (deg a frame's local rotation leaves the slerp midpoint of its neighbours).
@@ -18,9 +19,10 @@ from mathutils.bvhtree import BVHTree
 import hs_anim as H
 
 DIGITS = ('thumb', 'index', 'middle', 'ring', 'little')
-BASE_FLEX = (-10.0, 95.0)     # finger .1, rest-relative
-ANAT_FLEX = {2: (-5.0, 110.0), 3: (-8.0, 95.0)}   # finger .2/.3 anatomical bend (see handpass)
-THUMB_FLEX = (0.0, 80.0)      # every thumb joint, rest-relative: never bent back
+BASE_FLEX = (-3.0, 95.0)      # finger .1, true bend against the wrist -> knuckle line (handpose.HandGeo.bend)
+ANAT_FLEX = {2: (-3.0, 110.0), 3: (-3.0, 95.0)}   # finger .2/.3 true bend against the parent segment
+THUMB_FLEX = (0.0, 80.0)      # thumb.1, rest-relative: never bent back
+THUMB_ANAT = (-3.0, 85.0)     # thumb .2/.3 true bend (the rig's thumb tip is modelled hooked 56 deg)
 FINGER_OFF_MAX = 25.0         # .1 splay
 THUMB_OFF_MAX = 40.0          # thumb.1 (includes the tuck)
 HAND_TWIST_MAX = 30.0
@@ -56,7 +58,8 @@ class HandQA:
     def __init__(self, poser):
         import handpass
         self.p = poser
-        self.anat = handpass.HandPass(poser).anat
+        self.geo = handpass.HandPass(poser).geo
+        self.bend = self.geo.bend
         self.parts = {s: {} for s in H.SIDES}
         for o in bpy.data.objects:
             if o.type != 'MESH' or o.parent_type != 'BONE':
@@ -107,19 +110,22 @@ class HandQA:
         pb = self.p.pb
         row = {'f': f, 'q': {}, 'viol': [], 'flex': {}}
         for s in H.SIDES:
+            true = {f'{s} {d}.{i}': b for d in DIGITS[1:]
+                    for i, (b, _) in zip((1, 2, 3), self.geo.measure(pb, s, d))}
             for n in self.joints[s]:
                 q = pb[n].rotation_quaternion.copy()
                 row['q'][n] = q
                 flex, off = twist_swing(q, 0)
                 thumb = 'thumb' in n
                 seg = int(n[-1])
-                if thumb:
+                if thumb and seg == 1:
                     lo, hi = THUMB_FLEX
-                elif seg == 1:
-                    lo, hi = BASE_FLEX
+                elif thumb:
+                    lo, hi = THUMB_ANAT
+                    flex = self.bend(n, q)
                 else:
-                    lo, hi = ANAT_FLEX[seg]
-                    flex = self.anat(n, q)
+                    lo, hi = BASE_FLEX if seg == 1 else ANAT_FLEX[seg]
+                    flex = true[n]
                 row['flex'][n] = flex
                 if flex < lo:
                     row['viol'].append((n, 'bent back' if thumb else 'hyperextended', round(flex, 1)))

@@ -1,0 +1,14 @@
+﻿TASK: Rewrite HANDOFF.md at the project root so Stuart can pick this project up in Cursor right now. It is stale: it still says Sep 26 and "ready for animation, hybrid v18". A copy of the old version is saved at art/anim/wip/HANDOFF-before-20260927.md. Keep the useful model/rig history as a short "History" section at the bottom.
+
+Read to build it: art/MASTER-PLAN.md, art/anim/REFINEMENT-PLAN.md, art/anim/STATUS.md, art/anim/TRANSITIONS.md (if present), art/anim/wip/NEXT-RUN-NOTES.md, art/anim/wip/audit-full/FULL-AUDIT.md, art/vfx/VFX-ABILITY-PLAN.md, art/vfx/assets/README*, art/GIT-SETUP-RESULT.md, tools/blender/anim/README.md, docs/animation-plan.md, art/anim/wip/refine-prompt-run6-hands2.txt, and the tail of the newest agent-run6-hands2-*.log.
+
+HANDOFF.md must cover, concisely:
+1. Current state: newest anim checkpoint (v26 from run6 hands pass, if run6 is still running say so and that v25 is the last fully QA'd checkpoint), what each of v19-v26 added (9f thumbs, 9g shoulders, 9i audit fixes, 9h 8-direction locomotion, 11 Conduit Spear + Discharge snap + meter-full flourish, 10 transitions, 12 natural hand curl). VFX at art/vfx/assets/hs-vfx-v07.blend.
+2. Design decisions (Discharge passive meter, cooldowns, Conduit Spear, Arc Step 2 charges / 4 dirs / air, hand rule thumbs up palms forward on extended arms, heel jets, upright glide, controller-smooth 8-dir).
+3. Open items and proposals awaiting Stuart: strict full QA 13/65, leg pops, shin/tabard contacts, tabard flap detach, Unity foot IK for blend slide, glide-exit speed curve, standing full-body spear, open questions (Arc Step i-frames, jets on jump/land, Open Circuit during glide/Arc Step), plus anything from run6.
+4. Next phases: E sockets/export (keep socket bones in FBX), G Unity integration, H in-game testing.
+5. How to work: tools/blender/anim/README.md rules (one agent per clip file, background Blender only, numbered saves, never overwrite), QA scripts and how to run them, review.html, where previews live.
+6. Git: remote johnstonstu/ror2-hollow-saint, Git LFS for .blend/.fbx/large binaries, remote main is at 0df5c2e (anim v23) so v24-v26 are NOT pushed yet; .env is gitignored; .vscode/settings.json sets git.enabled false because Cursor's git panel spawned ~1500 hung git-lfs processes on this LFS repo (use command-line git, or re-enable at your own risk).
+7. Scratch/temp leftovers that could be cleaned up later (don't delete them).
+
+RULES: Edit ONLY HANDOFF.md (you may also fix obviously stale links inside it). Do NOT touch clip files, .blend files, or scripts; run6 is actively working on them. Do not launch Blender, use blender-mcp, or touch any process. No git commands. Never read .env. Keep it under about 200 lines, plain and scannable.

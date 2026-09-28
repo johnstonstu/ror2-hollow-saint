@@ -45,6 +45,10 @@
     "R": 55.8
   },
   "orient_infeasible": 0,
+  "hand_leg_clear_ext_deg": {
+    "L": 0.0,
+    "R": 0.0
+  },
   "halo_clear_push_max_mm": 0.0,
   "halo_clear_frames": 0,
   "pad_pop_mm_f2": {
@@ -62,7 +66,8 @@
     "hs_jet_dir": 0.0,
     "hs_move_x": 0.0,
     "hs_move_y": 0.0,
-    "hs_turn": 0.0
+    "hs_turn": 0.0,
+    "hs_spear": 0.0
   },
   "bake_error_m": 0.0,
   "bake_error_deg": 0.0,
@@ -87,24 +92,24 @@
       "hits": {}
     },
     "R": {
-      "min_m": 0.1422,
+      "min_m": 0.099,
       "frame": 1,
-      "part": "little segment 3",
+      "part": "V11 little tip light",
       "against": "R thigh",
       "frames_under_min": 0,
       "per_frame_mm": [
-        142,
-        142
+        99,
+        99
       ],
       "hits": {}
     }
   },
-  "arm_clear_min_m": 0.1422,
+  "arm_clear_min_m": 0.099,
   "arm_clear_ok": null,
   "hand_qa": {
     "violations": {},
     "penetration_mm": {},
-    "max_penetration_mm": 0.4,
+    "max_penetration_mm": 0.0,
     "finger_pops_deg_f2": [],
     "accent_pops_deg_f2": [],
     "wrist": {
@@ -125,16 +130,16 @@
     },
     "flex_range": {
       "L": {
-        "thumb_min": 12.0,
-        "thumb_max": 12.0,
-        "finger_min": 18.5,
-        "finger_max": 60.9
+        "thumb_min": 10.0,
+        "thumb_max": 15.0,
+        "finger_min": 11.0,
+        "finger_max": 32.0
       },
       "R": {
-        "thumb_min": 12.0,
-        "thumb_max": 12.0,
-        "finger_min": 18.5,
-        "finger_max": 60.9
+        "thumb_min": 10.0,
+        "thumb_max": 15.0,
+        "finger_min": 11.0,
+        "finger_max": 32.0
       }
     }
   },
@@ -145,7 +150,7 @@
     "worst_pop_deg_f2": 0.0,
     "worst_pop": " f0",
     "worst_accent_pop_deg_f2": 0.0,
-    "max_pen_mm": 0.4
+    "max_pen_mm": 0.0
   },
   "hand_contact": {},
   "hand_contact_max_mm": 0.0,
@@ -383,12 +388,41 @@
         2
       ]
     },
+    "hand_nat": {
+      "min_bend_deg": [
+        11.0,
+        "L index.3",
+        1
+      ],
+      "max_bend_deg": [
+        32.0,
+        "R little.2",
+        1
+      ],
+      "max_sideways_deg": [
+        0.0,
+        "L index.3",
+        1
+      ],
+      "curl_order_gap_deg": [
+        -13.7,
+        "R middle>ring",
+        1
+      ],
+      "finger_contact_mm": {},
+      "finger_pen_mm": {},
+      "pops_deg_f2": [],
+      "accent_pops_deg_f2": [],
+      "fails": [],
+      "orient_9f_ok": true
+    },
     "fails": [
       "contact rib plate R > spine 5.3mm f1",
       "contact neck cables > head 7.9mm f2"
     ]
   },
   "full_qa_ok": false,
+  "hand_nat_ok": true,
   "full_contact_max_mm": 7.9,
   "full_pop_max_deg_f2": 0.0,
   "status": "CHECK",

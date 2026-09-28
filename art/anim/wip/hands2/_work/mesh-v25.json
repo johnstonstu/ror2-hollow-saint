@@ -1,0 +1,482 @@
+{
+ "L HAND | index knuckle": {
+  "parent_bone": "L hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1254
+ },
+ "L HAND | index segment 1": {
+  "parent_bone": "L index.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0721,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0721,
+  "centre_from_head_along_Y": 0.0353
+ },
+ "L HAND | index segment 2": {
+  "parent_bone": "L index.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0658,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0658,
+  "centre_from_head_along_Y": 0.0322
+ },
+ "L HAND | index segment 3": {
+  "parent_bone": "L index.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0468,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0468,
+  "centre_from_head_along_Y": 0.0229
+ },
+ "L HAND | little knuckle": {
+  "parent_bone": "L hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1238
+ },
+ "L HAND | little segment 1": {
+  "parent_bone": "L little.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0654,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0654,
+  "centre_from_head_along_Y": 0.032
+ },
+ "L HAND | little segment 2": {
+  "parent_bone": "L little.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0604,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0604,
+  "centre_from_head_along_Y": 0.0296
+ },
+ "L HAND | little segment 3": {
+  "parent_bone": "L little.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.086,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.086,
+  "centre_from_head_along_Y": 0.0421
+ },
+ "L HAND | middle knuckle": {
+  "parent_bone": "L hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1249
+ },
+ "L HAND | middle segment 1": {
+  "parent_bone": "L middle.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0817,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0817,
+  "centre_from_head_along_Y": 0.04
+ },
+ "L HAND | middle segment 2": {
+  "parent_bone": "L middle.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.074,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.074,
+  "centre_from_head_along_Y": 0.0362
+ },
+ "L HAND | middle segment 3": {
+  "parent_bone": "L middle.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0552,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0552,
+  "centre_from_head_along_Y": 0.027
+ },
+ "L HAND | ring knuckle": {
+  "parent_bone": "L hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1243
+ },
+ "L HAND | ring segment 1": {
+  "parent_bone": "L ring.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0768,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0768,
+  "centre_from_head_along_Y": 0.0376
+ },
+ "L HAND | ring segment 2": {
+  "parent_bone": "L ring.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0699,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0699,
+  "centre_from_head_along_Y": 0.0342
+ },
+ "L HAND | ring segment 3": {
+  "parent_bone": "L ring.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0695,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0695,
+  "centre_from_head_along_Y": 0.0341
+ },
+ "L HAND | small wrist conductor": {
+  "parent_bone": "L hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.032,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.02
+ },
+ "L HAND | tapered sculpted palm": {
+  "parent_bone": "L hand",
+  "parent_type": "BONE",
+  "verts": 48,
+  "len_m": 0.1107,
+  "pca_vs_boneY_deg": 10.1,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1067
+ },
+ "L HAND | thumb segment 1": {
+  "parent_bone": "L thumb.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.055,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.055,
+  "centre_from_head_along_Y": 0.0269
+ },
+ "L HAND | thumb segment 2": {
+  "parent_bone": "L thumb.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.048,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.048,
+  "centre_from_head_along_Y": 0.0235
+ },
+ "L HAND | thumb segment 3": {
+  "parent_bone": "L thumb.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.046,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.046,
+  "centre_from_head_along_Y": 0.0226
+ },
+ "L HAND | V11 index tip light": {
+  "parent_bone": "L index.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0468,
+  "centre_from_head_along_Y": 0.0408
+ },
+ "L HAND | V11 little tip light": {
+  "parent_bone": "L little.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.086,
+  "centre_from_head_along_Y": 0.08
+ },
+ "L HAND | V11 middle tip light": {
+  "parent_bone": "L middle.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0552,
+  "centre_from_head_along_Y": 0.0492
+ },
+ "L HAND | V11 ring tip light": {
+  "parent_bone": "L ring.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0695,
+  "centre_from_head_along_Y": 0.0635
+ },
+ "L HAND | V11 thumb tip light": {
+  "parent_bone": "L thumb.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.046,
+  "centre_from_head_along_Y": 0.04
+ },
+ "L HAND | wrist cuff": {
+  "parent_bone": "L hand",
+  "parent_type": "OBJECT",
+  "verts": 48,
+  "len_m": 0.1511
+ },
+ "R HAND | index knuckle": {
+  "parent_bone": "R hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1293
+ },
+ "R HAND | index segment 1": {
+  "parent_bone": "R index.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0721,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0721,
+  "centre_from_head_along_Y": 0.0353
+ },
+ "R HAND | index segment 2": {
+  "parent_bone": "R index.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0658,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0658,
+  "centre_from_head_along_Y": 0.0322
+ },
+ "R HAND | index segment 3": {
+  "parent_bone": "R index.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0468,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0468,
+  "centre_from_head_along_Y": 0.0229
+ },
+ "R HAND | little knuckle": {
+  "parent_bone": "R hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1276
+ },
+ "R HAND | little segment 1": {
+  "parent_bone": "R little.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0654,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0654,
+  "centre_from_head_along_Y": 0.032
+ },
+ "R HAND | little segment 2": {
+  "parent_bone": "R little.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0604,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0604,
+  "centre_from_head_along_Y": 0.0296
+ },
+ "R HAND | little segment 3": {
+  "parent_bone": "R little.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.086,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.086,
+  "centre_from_head_along_Y": 0.0421
+ },
+ "R HAND | middle knuckle": {
+  "parent_bone": "R hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1288
+ },
+ "R HAND | middle segment 1": {
+  "parent_bone": "R middle.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0817,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0817,
+  "centre_from_head_along_Y": 0.04
+ },
+ "R HAND | middle segment 2": {
+  "parent_bone": "R middle.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.074,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.074,
+  "centre_from_head_along_Y": 0.0362
+ },
+ "R HAND | middle segment 3": {
+  "parent_bone": "R middle.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0552,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0552,
+  "centre_from_head_along_Y": 0.027
+ },
+ "R HAND | ring knuckle": {
+  "parent_bone": "R hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.038,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1282
+ },
+ "R HAND | ring segment 1": {
+  "parent_bone": "R ring.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0768,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0768,
+  "centre_from_head_along_Y": 0.0376
+ },
+ "R HAND | ring segment 2": {
+  "parent_bone": "R ring.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0699,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0699,
+  "centre_from_head_along_Y": 0.0342
+ },
+ "R HAND | ring segment 3": {
+  "parent_bone": "R ring.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.0695,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0695,
+  "centre_from_head_along_Y": 0.0341
+ },
+ "R HAND | small wrist conductor": {
+  "parent_bone": "R hand",
+  "parent_type": "BONE",
+  "verts": 42,
+  "len_m": 0.032,
+  "pca_vs_boneY_deg": 3.7,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.0238
+ },
+ "R HAND | tapered sculpted palm": {
+  "parent_bone": "R hand",
+  "parent_type": "BONE",
+  "verts": 48,
+  "len_m": 0.1107,
+  "pca_vs_boneY_deg": 10.1,
+  "bone_len": 0.1237,
+  "centre_from_head_along_Y": 0.1105
+ },
+ "R HAND | thumb segment 1": {
+  "parent_bone": "R thumb.1",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.055,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.055,
+  "centre_from_head_along_Y": 0.0269
+ },
+ "R HAND | thumb segment 2": {
+  "parent_bone": "R thumb.2",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.048,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.048,
+  "centre_from_head_along_Y": 0.0235
+ },
+ "R HAND | thumb segment 3": {
+  "parent_bone": "R thumb.3",
+  "parent_type": "BONE",
+  "verts": 32,
+  "len_m": 0.046,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.046,
+  "centre_from_head_along_Y": 0.0226
+ },
+ "R HAND | V11 index tip light": {
+  "parent_bone": "R index.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0468,
+  "centre_from_head_along_Y": 0.0408
+ },
+ "R HAND | V11 little tip light": {
+  "parent_bone": "R little.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.086,
+  "centre_from_head_along_Y": 0.08
+ },
+ "R HAND | V11 middle tip light": {
+  "parent_bone": "R middle.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0552,
+  "centre_from_head_along_Y": 0.0492
+ },
+ "R HAND | V11 ring tip light": {
+  "parent_bone": "R ring.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.0695,
+  "centre_from_head_along_Y": 0.0635
+ },
+ "R HAND | V11 thumb tip light": {
+  "parent_bone": "R thumb.3",
+  "parent_type": "BONE",
+  "verts": 86,
+  "len_m": 0.0204,
+  "pca_vs_boneY_deg": 0.0,
+  "bone_len": 0.046,
+  "centre_from_head_along_Y": 0.04
+ },
+ "R HAND | wrist cuff": {
+  "parent_bone": "R hand",
+  "parent_type": "OBJECT",
+  "verts": 48,
+  "len_m": 0.1511
+ }
+}

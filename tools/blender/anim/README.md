@@ -183,6 +183,62 @@ python tools/blender/anim/sheet.py art/anim/wip/run/run-forward --cols 4
   any `wip/*/<name>/stitch.json` and keeps them out of the clip cards.
 - `refresh.py` covers `loco8`, `turns` and `arcstep_dirs` (chase views for the last two).
 
+### Added in item 11 (run 5)
+- `clips/spear.py`: Conduit Spear (upper-body gesture, release f7). It reuses `special`'s state, `apply` and
+  `solve`. Poses are solved in the rest-torso frame, with each world target counter-rotated by the torso yaw at
+  that key (`to_rest`). The follow-through and the L-arm tuck are joint-space variants of the release and point
+  poses, so the forearm roll stays on one branch of the 9f check. `post` reports `spear_*` release-aim fields.
+- `special`: `Discharge snap` (passive overlay, release f3) and `Meter full flourish` (Charge full once, in and out
+  of rest). Charge loop/full carry meta `role`.
+- `vfx.PROPS` gains `hs_spear` (lance materialize 0..1, 0 from the release on).
+- `stitch.py`: fading out of an upper-body `mask` segment now blends from overlay-over-locomotion (`from_lower`
+  holds the locomotion clip and frame).
+
+### Added in item 10 (run 5)
+- `clips/startstop.py`: `Run stop` (brakes from the L contact, Run forward f1 -> Idle f1), `Run stop R` (from the
+  R contact, f9) and `Run start` (Idle f1 -> Run forward f9). All their seams are exact. It's in the build
+  list after `turns`.
+- Cancel markers: Arc Bolt `Interrupt` f13 (meta `cancel`: locked 1..release, `chain_from` 13) and Arc Step
+  end `Cancel` f5 on all four directions (meta `cancel.any_state_from` 5).
+- `vfx.py` (`VFX_VERSION = 2`): the heel jet and spark scale drivers multiply by
+  `jet_move_gain = smoothstep((|hs_move| - 0.3) / 0.4)`, so a cross-fade that reverses the travel vector dims the
+  jets instead of flipping the exhaust. `apply()` upgrades older rigs (`refresh_jet_drivers`). Authored clips
+  are unchanged, because every lit clip has |hs_move| ≥ 0.99.
+- `stitch.py` judging:
+  - Each handoff gets a reference acceleration per tracked point (`ref_acc`), the largest of:
+    - the peak inside the sequence, away from every cut and blend (±2 frames);
+    - the standalone peaks of the clips in the window;
+    - the ease allowance `6 d / (blend+1)²`.
+  - `rot_fail` uses fullqa's pop limit, and accent windows raise it to 60 (fingers 24).
+  - The jet-turn check weights by the dimmer side's lit jet (× `jet_move_gain`) and allows the travel-direction
+    turn rate. When Glide loop is in the window, Glide enter/exit count as the VFX reference.
+  - With `--blend <checkpoint>`, it runs `vfx.apply` first so older checkpoints get the new jet drivers.
+- Transition scripts in `art/anim/wip/_run5/`:
+  - `gen_matrix.py` writes the 149 specs and `_blend-table.json`.
+  - `matrix.py` scores handoffs and writes `matrix.md`.
+  - `grids.py` writes the pass/fail grids.
+  - `jumps.py` writes the velocity/acceleration report.
+  - `gen_exp*.py` are the blend sweeps.
+  - `gen_render.py`, `review_strips.py`, `publish.py` and `montage.py` handle the GIFs and self-review sheets.
+  - Results are in `art/anim/wip/transitions/TRANSITIONS.md`.
+
+### Added in item 12 (run 6, natural hands)
+- `handpose.py`: hand-pose library (docstring). `HandPass.apply` rebuilds every finger from anatomical joint bends
+  (`LIBRARY` per digit by curl level: straight -12, open 0, relaxed 21, casting 36, fist-light 46, grip 64, fist 92;
+  `THUMB`), converges curled fingers (`CONVERGE`), flexes the wrist `WRIST_FLEX` on low arms, then runs the old
+  limits/fan (planar in nat mode) and the 9f orient. `bake` then runs `handpose.settle` (finger spring lag and
+  follow-through relax) and, last, `handpose.leg_clear` (wrist extension that keeps the fingers `CLEAR` off the
+  thighs). `handpose.ENABLED = False` restores the v25 hands.
+- `handnat.py` (inside `fullqa`: `full_qa.hand_nat`, `hand_nat_ok`, fails feed `full_qa_ok`): per-finger true joint
+  bends in `NAT_RANGE` (no backward bend beyond 1 deg), sideways bend <= `SIDE_MAX`, curl index <= middle <= ring
+  <= little within `MONO_TOL` (meta `curl_exempt` frames skip it), finger-finger and finger-body penetration
+  <= 2 mm, finger angular pops (12 deg/f², 24 on `finger_accents`). `preview.py` copies `hand_orient_ok` into
+  `hand_nat.orient_9f_ok`.
+- `hand2_closeup.py -- --blend b --out dir --clips "Title:1,5;..." [--body hero,side,chase]`: both hands
+  profile/back/palm plus optional full-body frames. `hand2_sheet.py <after> [--before dir] [--labels v25,v26]`
+  (system Python): `hands.gif`, `compare.gif`, `before-after.jpg`, `body.gif`. `package_review.py` shows
+  `wip/hands2/sheets-v27/<slug>/compare.gif` on the clip card in place of the older `wip/hands/` close-up.
+
 ## Ownership (parallel agents)
 
 One owner per clip module. An owner edits only `clips/<module>.py` and writes only under

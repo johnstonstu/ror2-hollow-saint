@@ -1,0 +1,27 @@
+{
+ "name": "glidefall-g8-l4",
+ "modules": [],
+ "out": "transitions/exp2/glidefall-g8-l4",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Glide loop",
+   "frames": 16
+  },
+  {
+   "clip": "Descend",
+   "frames": 12,
+   "blend": 8
+  },
+  {
+   "clip": "Land",
+   "frames": 15,
+   "blend": 4
+  },
+  {
+   "clip": "Idle",
+   "frames": 12,
+   "start": 2
+  }
+ ]
+}

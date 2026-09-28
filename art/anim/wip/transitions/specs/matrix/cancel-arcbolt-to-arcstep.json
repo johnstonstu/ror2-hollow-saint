@@ -1,0 +1,45 @@
+{
+ "name": "cancel-arcbolt-to-arcstep",
+ "modules": [],
+ "out": "transitions/matrix/cancel-arcbolt-to-arcstep",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 8,
+   "blend": 3,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "Arc Step start",
+   "frames": 7,
+   "blend": 4
+  },
+  {
+   "clip": "Arc Step loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step end",
+   "frames": 4,
+   "start": 2
+  },
+  {
+   "clip": "Run forward",
+   "frames": 24,
+   "blend": 4
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 30
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "name": "over-arcboltL-back",
+ "modules": [],
+ "out": "transitions/matrix/over-arcboltL-back",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Bolt left",
+   "frames": 20,
+   "blend": 3,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run backward",
+   "frames": 80
+  }
+ ]
+}

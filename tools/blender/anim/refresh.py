@@ -13,11 +13,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 TOOLS = ROOT/'tools/blender/anim'
 BLENDER = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
-ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'primary', 'arcstep', 'arcstep_dirs', 'special',
-       'presentation']
+ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'startstop', 'primary', 'arcstep', 'arcstep_dirs', 'special',
+       'spear', 'presentation']
 VIEWS = {'primary': ('hero,side,front,gameplay', 1), 'special': ('hero,side,front,chase', 1),
          'presentation': ('hero,side,front,chase', 2), 'glide': ('hero,side,front,chase', 1),
-         'turns': ('hero,side,front,chase', 1), 'arcstep_dirs': ('hero,side,front,chase', 1)}
+         'turns': ('hero,side,front,chase', 1), 'startstop': ('hero,side,front,chase', 1), 'arcstep_dirs': ('hero,side,front,chase', 1),
+         'spear': ('hero,side,front,chase', 1)}
 
 args = sys.argv[1:]
 tag = args[0]
@@ -76,7 +77,8 @@ for m in ALL:
                 'max_planted_slide_m_per_frame', 'min_body_z', 'max_arm_raise_deg', 'arm_clear_min_m',
                 'arm_clearance', 'hand_qa_summary', 'hand_contact_max_mm', 'hand_contact_worst', 'hand_contact',
                 'hand_orient_ok', 'hand_orient', 'pad_contact_ok', 'pad_contact_max_mm', 'pad_contact_worst',
-                'pad_contact', 'pad_follow_max', 'halo_clear_push_max_mm', 'pad_pop_mm_f2', 'halo_pop_mm_f2')})
+                'pad_contact', 'pad_follow_max', 'halo_clear_push_max_mm', 'pad_pop_mm_f2', 'halo_pop_mm_f2',
+                'full_qa_ok', 'hand_nat_ok')})
 sp = ROOT/'art/anim/wip'/f"seams-{'-'.join(ALL)}.json"
 if sp.exists():
     summary['seams'] = json.loads(sp.read_text())

@@ -1,0 +1,64 @@
+{
+ "name": "dir-walk-circle",
+ "modules": [],
+ "out": "transitions/temp/dir-walk-circle",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Walk forward",
+   "frames": 14
+  },
+  {
+   "clip": "Walk forward left",
+   "frames": 14,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Walk left",
+   "frames": 14,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Walk backward left",
+   "frames": 14,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Walk backward",
+   "frames": 14,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Walk backward right",
+   "frames": 14,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Walk right",
+   "frames": 14,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Walk forward right",
+   "frames": 14,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Walk forward",
+   "frames": 20,
+   "blend": 10,
+   "sync": true
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

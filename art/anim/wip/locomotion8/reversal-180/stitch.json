@@ -7,11 +7,15 @@
    "from": "Run forward f16",
    "to": "Run pivot 180 left f1",
    "blend": 0,
-   "worst_bone": "tabard front.3",
-   "acc": 0.2595,
-   "clip_max_acc": 0.0788,
-   "step": 0.0323,
-   "ratio": 3.29,
+   "lower_track_cut": false,
+   "worst_bone": "pelvis",
+   "acc": 0.0174,
+   "clip_max_acc": 0.0174,
+   "step": 0.0245,
+   "ratio": 1.0,
+   "rot_bone": "R toe",
+   "rot_acc_deg": 13.8,
+   "rot_clip_max_deg": 13.2,
    "bones": {
     "pelvis": {
      "acc": 0.0174,
@@ -45,9 +49,9 @@
     },
     "R toe": {
      "acc": 0.1275,
-     "clip_max_acc": 0.1689,
+     "clip_max_acc": 0.1837,
      "step": 0.1442,
-     "ratio": 0.76
+     "ratio": 0.69
     },
     "halo root": {
      "acc": 0.0204,
@@ -57,9 +61,9 @@
     },
     "tabard front.3": {
      "acc": 0.2595,
-     "clip_max_acc": 0.0788,
+     "clip_max_acc": 0.2595,
      "step": 0.0323,
-     "ratio": 3.29
+     "ratio": 1.0
     },
     "tabard back.2": {
      "acc": 0.0176,
@@ -79,18 +83,28 @@
      "step": 0.108,
      "ratio": 0.59
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 6.0,
+   "speed_after": 6.0,
+   "root_acc_mps2": 0.0
   },
   {
    "frame": 37,
    "from": "Run pivot 180 left f20",
    "to": "Run forward f10",
    "blend": 0,
-   "worst_bone": "R toe",
-   "acc": 0.1837,
-   "clip_max_acc": 0.1689,
-   "step": 0.25,
-   "ratio": 1.09,
+   "lower_track_cut": false,
+   "worst_bone": "pelvis",
+   "acc": 0.0174,
+   "clip_max_acc": 0.0174,
+   "step": 0.0175,
+   "ratio": 1.0,
+   "rot_bone": "head socket",
+   "rot_acc_deg": 0.0,
+   "rot_clip_max_deg": 0.0,
    "bones": {
     "pelvis": {
      "acc": 0.0174,
@@ -124,9 +138,9 @@
     },
     "R toe": {
      "acc": 0.1837,
-     "clip_max_acc": 0.1689,
+     "clip_max_acc": 0.1837,
      "step": 0.25,
-     "ratio": 1.09
+     "ratio": 1.0
     },
     "halo root": {
      "acc": 0.0262,
@@ -136,9 +150,9 @@
     },
     "tabard front.3": {
      "acc": 0.0776,
-     "clip_max_acc": 0.0788,
+     "clip_max_acc": 0.2595,
      "step": 0.0561,
-     "ratio": 0.98
+     "ratio": 0.3
     },
     "tabard back.2": {
      "acc": 0.0186,
@@ -158,18 +172,28 @@
      "step": 0.0236,
      "ratio": 0.48
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 6.0,
+   "speed_after": 6.0,
+   "root_acc_mps2": 0.0
   },
   {
    "frame": 60,
    "from": "Run forward f16",
    "to": "Run pivot 180 right f1",
    "blend": 0,
+   "lower_track_cut": false,
    "worst_bone": "tabard front.3",
    "acc": 0.1242,
-   "clip_max_acc": 0.0788,
+   "clip_max_acc": 0.1169,
    "step": 0.0323,
-   "ratio": 1.57,
+   "ratio": 1.06,
+   "rot_bone": "tabard front.2",
+   "rot_acc_deg": 17.3,
+   "rot_clip_max_deg": 16.5,
    "bones": {
     "pelvis": {
      "acc": 0.0174,
@@ -203,9 +227,9 @@
     },
     "R toe": {
      "acc": 0.1275,
-     "clip_max_acc": 0.1689,
+     "clip_max_acc": 0.1691,
      "step": 0.1442,
-     "ratio": 0.76
+     "ratio": 0.75
     },
     "halo root": {
      "acc": 0.0204,
@@ -215,9 +239,9 @@
     },
     "tabard front.3": {
      "acc": 0.1242,
-     "clip_max_acc": 0.0788,
+     "clip_max_acc": 0.1169,
      "step": 0.0323,
-     "ratio": 1.57
+     "ratio": 1.06
     },
     "tabard back.2": {
      "acc": 0.0176,
@@ -237,18 +261,28 @@
      "step": 0.108,
      "ratio": 0.63
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 6.0,
+   "speed_after": 6.0,
+   "root_acc_mps2": 0.0
   },
   {
    "frame": 80,
    "from": "Run pivot 180 right f20",
    "to": "Run forward f10",
    "blend": 0,
-   "worst_bone": "R toe",
-   "acc": 0.1691,
-   "clip_max_acc": 0.1689,
-   "step": 0.25,
+   "lower_track_cut": false,
+   "worst_bone": "pelvis",
+   "acc": 0.0174,
+   "clip_max_acc": 0.0174,
+   "step": 0.0175,
    "ratio": 1.0,
+   "rot_bone": "tabard back.2",
+   "rot_acc_deg": 4.0,
+   "rot_clip_max_deg": 4.0,
    "bones": {
     "pelvis": {
      "acc": 0.0174,
@@ -282,7 +316,7 @@
     },
     "R toe": {
      "acc": 0.1691,
-     "clip_max_acc": 0.1689,
+     "clip_max_acc": 0.1691,
      "step": 0.25,
      "ratio": 1.0
     },
@@ -294,9 +328,9 @@
     },
     "tabard front.3": {
      "acc": 0.0776,
-     "clip_max_acc": 0.0788,
+     "clip_max_acc": 0.1169,
      "step": 0.0561,
-     "ratio": 0.98
+     "ratio": 0.66
     },
     "tabard back.2": {
      "acc": 0.0186,
@@ -316,7 +350,13 @@
      "step": 0.0236,
      "ratio": 0.48
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 6.0,
+   "speed_after": 6.0,
+   "root_acc_mps2": 0.0
   }
  ],
  "root_path": [

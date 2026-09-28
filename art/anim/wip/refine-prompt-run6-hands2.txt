@@ -1,0 +1,18 @@
+﻿TASK: Hollow Saint anim item 12 - natural hand curl pass (Stuart, Sep 27 2026 4:23 PM, approved). Start from the newest checkpoint (hollow-saint-anim-v25.blend) and save hollow-saint-anim-v26.blend (then v27... if more saves are needed). Never overwrite.
+
+READ FIRST: tools/blender/anim/README.md, art/anim/STATUS.md, art/anim/REFINEMENT-PLAN.md (esp. 9f), art/anim/wip/audit/ORIENT-AUDIT.md. Re-read them before each save.
+
+PROBLEM (Stuart's screenshot, idle/run-type pose, arms hanging): the fingers look clawed - hyperextended at the base knuckle, then hooked sharply at the middle/tip joints, spread like talons, with the wrist cocked. It reads unnatural in every clip.
+
+TARGET - natural relaxed hand, applied in EVERY clip (idle, idle combat, walk/run/strafe all 8 dirs, jump/air/land, glide, Arc Step, Arc Bolt, aims, Charge/meter-full flourish, Discharge snap, Conduit Spear, Open Circuit, spawn, select intro, transitions):
+- Relaxed default: graduated curl that increases from index to pinky (roughly index 15-25 deg per joint, pinky 35-50), all three joints bending the SAME direction (inward, no base-knuckle hyperextension, never backward), fingers close together with slight natural spread, a gentle arc like a hand hanging at rest. Thumb relaxed alongside the index finger, slightly opposed, not sticking out or tucked under.
+- Wrist near neutral when relaxed (no cocked wrist). Hanging arms: palms face the thighs.
+- Keep Stuart's standing 9f rule: when arms are extended, thumbs point UP, palms face FORWARD, fingers curl in, mirrored L/R, fixed via forearm/upper-arm roll, not wrist kinks. Curl on extended/casting hands should be the same natural graduated curl, a bit tighter for casting/throwing (spear grip = closed natural grip around the spear).
+- Add subtle life: fingers relax a little more on follow-through and settle with a 2-4 frame delay after big arm moves; no finger pops between frames.
+- Left and right hands mirror.
+
+METHOD: build a reusable hand-pose library (relaxed, casting, grip, open-release, fist-light) in a script under tools/blender/anim/, apply per clip with blending, including transitions from item 10. Add QA to fullqa: per-finger joint angles within natural range (no negative/backward bend at any finger joint, curl monotonic index to pinky within tolerance), no finger-finger or finger-body interpenetration > 2 mm, no finger angular pops, and 9f orientation still 100% pass. Do not regress hands/pads/seams/bake gates.
+
+PREVIEWS: render with background Blender on copies into art/anim/wip/hands2/: for 10+ key clips, a close-up hand GIF (both hands) and a before (v25) / after (v26) side-by-side sheet, plus one full-body GIF per clip. Include the idle/run pose from Stuart's screenshot. Update art/anim/review.html and STATUS.md (append, dated). Write a summary to art/anim/wip/hands2/HANDS2-RESULT.md listing clips changed, QA results, and preview file paths.
+
+RULES: Background Blender only, at most 2 at once. Never use blender-mcp or connect to any running Blender; never touch Blender PID 4500. Only you edit clip files. No git commands at all, no Cursor git panel. Never read .env. Do not delete files.

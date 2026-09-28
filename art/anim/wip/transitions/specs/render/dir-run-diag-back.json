@@ -1,0 +1,22 @@
+{
+ "name": "dir-run-diag-back",
+ "modules": [],
+ "out": "transitions/temp/dir-run-diag-back",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward right",
+   "frames": 17
+  },
+  {
+   "clip": "Run backward left",
+   "frames": 34,
+   "blend": 10,
+   "sync": true
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

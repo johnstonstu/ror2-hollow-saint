@@ -1,0 +1,64 @@
+{
+ "name": "dir-stick-circle",
+ "modules": [],
+ "out": "transitions/temp/dir-stick-circle",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 12
+  },
+  {
+   "clip": "Run forward left",
+   "frames": 12,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run left",
+   "frames": 12,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run backward left",
+   "frames": 12,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run backward",
+   "frames": 12,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run backward right",
+   "frames": 12,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run right",
+   "frames": 12,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run forward right",
+   "frames": 12,
+   "blend": 10,
+   "sync": true
+  },
+  {
+   "clip": "Run forward",
+   "frames": 16,
+   "blend": 10,
+   "sync": true
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

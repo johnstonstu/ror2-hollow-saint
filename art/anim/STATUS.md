@@ -1,11 +1,30 @@
 # Hollow Saint animation: live status
 
-Updated 2026-09-27 08:55 PT (v23, run 5) by the coordinator agent (refinement pass, `REFINEMENT-PLAN.md`). For remote check-ins: this page and
+Updated 2026-09-27 10:40 PT (v25, run 5) by the coordinator agent (refinement pass, `REFINEMENT-PLAN.md`). For remote check-ins: this page and
 `art/anim/review.html` (GIFs of every clip) are the current state. **Nothing needs the user.**
 
 ## Checkpoints
 
-- `art/anim/hollow-saint-anim-v23.blend` (**latest**, 59 clips): run 5, item 9h (eight-direction locomotion).
+- `art/anim/hollow-saint-anim-v27.blend` (**latest**, 65 clips): run 6, item 12 (natural hand curl in every clip).
+  v26 is the same pass before the Conduit Spear grip fix. See "Item 12" at the end and
+  `art/anim/wip/hands2/HANDS2-RESULT.md`.
+- `art/anim/hollow-saint-anim-v25.blend` (65 clips, superseded by v27): run 5, item 10 (every gameplay transition).
+  - New clips: `Run stop`, `Run stop R` and `Run start`.
+  - New cancel markers: Arc Bolt `Interrupt` f13 and Arc Step end `Cancel` f5.
+  - Heel jets now dim through travel reversals (`VFX_VERSION` 2).
+  - Full QA: **13/65 PASS**, the same 13 as v24. The three new clips fail only on faults they inherit from Run
+    forward's legs.
+  - The earlier gates are as in v24. **All 72 seams exact** (worst 0.001 mm). Summary in
+    `art/anim/v25/qa-summary.json`.
+  - Transitions: **402 handoffs in 149 stitched sequences, 399 pass, 3 flagged and reviewed smooth**. See
+    `art/anim/wip/transitions/TRANSITIONS.md` and "Refinement item 10" below.
+- `art/anim/hollow-saint-anim-v24.blend` (62 clips, superseded by v25): run 5, item 11 (Conduit Spear, Discharge
+  snap, Meter full flourish).
+  - Full QA: **13/62 PASS** (v23: 11/59). Conduit Spear and Discharge snap both PASS; Meter full flourish fails
+    one 6.0 mm contact inherited from Charge full.
+  - The earlier gates are as in v23 (only the Arc Step left/right start hand contact fails). **All 66 seams
+    exact.** Summary in `art/anim/v24/qa-summary.json`. Details under "Refinement item 11" below.
+- `art/anim/hollow-saint-anim-v23.blend` (59 clips, superseded by v24): run 5, item 9h (eight-direction locomotion).
   - 26 new clips: 4 run diagonals, 7 walk directions, 2 run leans, 2 pivot 180s, 2 plant turn 90s, and Arc Step
     back/left/right (start/loop/end each).
   - Full QA (`full_qa_ok`): **11/59 PASS** (v22: 10/33; the new one is Walk backward). No v22 clip lost PASS.
@@ -510,7 +529,88 @@ All previews re-rendered after the pauldron fix (all 33 PASS); `review.html` is 
   - **PROPOSAL (not approved): foot IK for the blend space.** In Unity, turn on humanoid Foot IK for the
     locomotion layer, and have a small grounding script lock a foot on its planted interval (the contact
     markers). Authoring can't remove the last 1-3 cm of slide in a 50/50 mix of two different strides.
-- **Item 10** (expanded gameplay transitions) is not started yet (last).
+- **Refinement item 11 (Conduit Spear, Discharge snap, meter-full flourish): DONE (v24, run 5).**
+  - **Conduit Spear** (`clips/spear.py`, 20 f, upper-body layer; legs untouched, first/last frame at rest like the
+    other gestures).
+    - f1-6: the chest winds back to the right while the R hand draws up beside the ear in a hammer grip (thumb
+      up, palm in). `hs_spear` keys the lance materializing along the R forearm (0 -> 1, core flash f6), and the
+      L arm rises to point at the target.
+    - f6-7: the elbow leads, then the R arm drives forward and the lance leaves the open palm on **f7** as the
+      chest turns through.
+    - f8-11: the arm carries on down in front while the L arm folds in. f12-20: recovery.
+    - Markers: Materialize 2, Draw 5, Spear release 7, Cancel 11 (Arc Bolt / Arc Step / jump / sprint), Fade 14
+      (any state), Recovered 20. Meta `cancel` lists the windows (locked f1-7); `projectile_mps` is 150.
+    - Release aim: the fingers point 12 deg off the target line at f7, 1.41 m up and 0.69 m in front. The game
+      aims the projectile at the crosshair from the palm.
+    - QA: **PASS**, including the 9f orientation check on both extended arms, hand contact, pads and full QA.
+      Worst plain pop 13 deg/f²; the whip accent is 52 (limit 60).
+    - Tuning notes: the first solved follow-through (down and across) put the hand on the other roll branch of
+      the 9f check, and the hand pass flipped the forearm (116 deg/f²). The follow-through is now the release
+      grip carried down in joint space. The draw hand sat behind the shoulder (27 mm into the chest) until it
+      moved up and out.
+  - **Discharge snap** (`special`, 14 f): the passive Discharge overlay. There is no gather: the arms fling from
+    rest to the release on **f3** (a small tense on f2), hold the hit-stop on f4, then recoil and settle by f14,
+    with the same halo burst as Discharge. Accents are f2-4. QA: **PASS** (finger accent 22.5, limit 24). The
+    full Discharge clip is unchanged.
+  - **Charge as the meter-full flourish.**
+    - New **Meter full flourish** (`special`, 24 f one-shot): the arms rise into the Charge full cradle, ride two
+      heartbeats and drop back to rest. It has a lighter head bow than the loop, because the neck cables met the
+      head.
+    - Charge loop and Charge full keep their motion; meta `role` now marks them as meter-full overlays: the
+      loop is an idle-only accent while the meter waits, and the full clip is a held flourish.
+    - QA: the flourish fails full QA only on the R forearm conductor into the forearm (6.0 mm, limit 5), the same
+      contact Charge full has (5.9).
+  - **Overlay stitches** (upper-body mask over locomotion, hero/side/chase GIFs, root motion) in
+    `art/anim/wip/transitions/`: `overlay-spear-run`, `overlay-spear-strafe` (Spear over Run left) and
+    `overlay-discharge-glide`. Each overlay fades out from its Fade marker. Hand-off ratios are 1.0-1.14.
+    - Fix: `stitch.py` now fades out of an upper-body overlay from overlay-over-locomotion; it used to crash
+      building that source.
+  - **Not done:** the standing full-body Spear variant with a step-in ("if cheap"). Its legs have to seam into the
+    Idle stand, which the gesture layer doesn't support yet (the item 10 stand-layer work).
+  - **For Unity:** all four new clips go on the upper-body avatar-mask layer (spine and everything under it:
+    neck/head, halo, scapulae, pauldrons, arms, hands). The lance VFX reads `hs_spear` and spawns from the R palm
+    on the Spear release marker.
+- **Refinement item 10 (run 5): every transition, smoothness first.** Done, in v25. The full write-up (blend
+  table, mask, VFX rules, grids, flagged handoffs, GIF self-review) is in `art/anim/wip/transitions/TRANSITIONS.md`.
+  Everything below is a **PROPOSAL** until Stuart approves it.
+  - **Coverage:** 149 stitched sequences with 402 handoffs.
+    - Every state pair: idle / idle combat / walk / run / glide / jump / fall / land, all 8 run and walk
+      directions, leans, pivots and plant turns.
+    - Arc Step (4 directions) from idle, run, air and glide.
+    - Every upper-body skill faded in and out over every state.
+    - Cancels (Arc Bolt -> Arc Step, Arc Step -> Arc Bolt, Spear -> Arc Bolt/Discharge, a glide or jump during
+      a cast), jumping mid-cast, stopping mid-stride, and direction changes (zigzag, reversals, a full stick
+      circle).
+    - The Discharge snap over every state.
+  - **Result:** 399 pass and 3 are flagged. All three were reviewed frame by frame and look smooth:
+    - Open Circuit fading in at one run phase (L hand 91 vs 59 mm/f²; a big pose change carried by the 10-frame
+      ease).
+    - Glide -> Arc Step left/right: the lit jets re-aim 90° over the 5-frame blend.
+  - **Root travel:** worst 70.6 m/s² (limit 80), at Glide exit -> Run stop. PROPOSAL: give Glide exit a speed
+    curve.
+  - **Judging (PROPOSAL):**
+    - Position pops: ≤ 1.25 × reference + 5 mm/f² on 11 tracked points. The reference is the largest of the
+      in-sequence peak, the clips' own peaks, and the ease allowance `6d/(blend+1)²`.
+    - Rotation: fullqa's pop limit, with accents allowed.
+    - VFX intensity and lit-jet turn rate.
+  - **Blend table:** Unity cross-fade lengths per transition are in TRANSITIONS.md. Examples: 8-way direction 10,
+    walk -> idle 12, run -> jump 6 (Jump from f4), Arc Step in/out 4, skill fade-in 3-10, skill fade-out 6,
+    skill chain 2.
+    - Run stop / Run stop R / Run start seam exactly, so they need no blend.
+  - **Upper-body mask:** `spine` and all its descendants (58 bones). Locomotion keeps root, pelvis, legs, tabard
+    and IK.
+  - **VFX:**
+    - The skill layer supplies `hs_spear`, and `hs_glow` is the max of both layers. Everything else follows
+      locomotion.
+    - Jet/spark gain is `smoothstep((|hs_move|-0.3)/0.4)`, so a reversal dims the exhaust instead of flipping it.
+  - **Outputs** (in `art/anim/wip/transitions/`):
+    - `matrix.md`: every handoff.
+    - `grids.md`: state -> state and skill-over-state grids.
+    - `velocity-report.md`: speed, acceleration and pop per handoff.
+    - `gifs/`: hero and chase GIFs plus a review sheet per sequence.
+    - `specs/matrix/`: the sequence specs.
+  - **Inherited, not transition faults:** Run forward's legs (L/R shin pops 23-28 deg/f², tabard > thigh) show in
+    the stop/start clips too.
 - Tooling: `refresh.py vN` reruns every preview (QA and renders), seams, sheets/GIFs, review.html
   and writes `art/anim/vN/qa-summary.json`. `preview.py` no longer deletes frames; stale frames
   move to `<clip>/stale/`.
@@ -536,3 +636,38 @@ All previews re-rendered after the pauldron fix (all 33 PASS); `review.html` is 
 - Arm bones sat 3.75 cm off the mesh centreline (fixed in v19 by `armfit.py`). The R arm mesh is still not a mirror
   of the L arm mesh, so L/R arm poses can't mirror exactly.
 - For Unity: halo bones on their own avatar-mask layer would let the crown hold play under Arc Bolt.
+
+## Item 12: natural hand curl (Sep 27 2026, run 6) -> v26, v27
+
+- **Problem:** the v18 finger bones are modelled as a claw (palm cocked 11-14 deg back, index/middle tips
+  pre-hooked, little tip bent back, thumb tip hooked 56 deg). Clips author curl as one local rotation per joint, so
+  every clip kept the claw.
+- **Fix:** `tools/blender/anim/handpose.py`, run inside the bake for every clip. Each finger is rebuilt from
+  anatomical joint bends, taken from a library keyed by the clip's authored curl level (straight, open, relaxed 21,
+  casting 36, fist-light 46, grip 64, fist 92):
+  - Curl cascades from index (least) to little (most).
+  - Every joint bends toward the palm, and no tip out-curls its middle joint.
+  - Curled fingers converge so their tips don't cross.
+  - The thumb sits alongside the index, slightly opposed.
+  - Low arms flex the wrist 6 deg toward neutral.
+  - A spring settle adds 2-4 frames of finger lag and a follow-through relax.
+  - A last pass extends the wrist only as far as needed to keep the fingers 15 mm off the thighs.
+  - The 9f orientation roll is unchanged.
+  - Conduit Spear (v27) now closes the lance hand into a grip on the draw and opens it into the open-palm release.
+- **New QA:** `handnat.py` inside full QA (`hand_nat_ok`, part of `full_qa_ok`) checks:
+  - joint range, with no backward bend;
+  - sideways bend;
+  - curl order index to little;
+  - finger-finger and finger-body penetration (2 mm);
+  - finger pops.
+- **v27 results:**
+  - 65 clips, **13/65 PASS**, the same 13 as v25. Seams: 72, worst 0.001 mm.
+  - 9f orientation: 65/65.
+  - Natural hands: 63/65 clean. All bends are 0.5-93.6 deg, sideways 0, curl order within 4.6 deg, worst finger
+    pop 9.3 deg/f², worst finger penetration 1.5 mm.
+  - v25 on the same check: 51/65 clips fail.
+- **Remaining:** Arc Step left/right start f4 (the launch frame) fail finger contact. The hand and forearm already
+  sat 24-46 mm inside the thigh/shin there in v25, and the curled fingers now read deeper (L 40 mm, R 29 mm). This needs
+  the arm pose on that frame re-authored in `arcstep_dirs`.
+- **Previews:** `art/anim/wip/hands2/` (details in HANDS2-RESULT.md). Before/after hand GIFs for 14 key clips also
+  appear on the clip cards in `art/anim/review.html`.

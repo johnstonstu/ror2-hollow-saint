@@ -1,0 +1,23 @@
+{
+ "name": "runjump-p12-j4-b5",
+ "modules": [],
+ "out": "transitions/exp2/runjump-p12-j4-b5",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 12
+  },
+  {
+   "clip": "Jump",
+   "frames": 8,
+   "start": 4,
+   "blend": 5
+  },
+  {
+   "clip": "Ascend",
+   "frames": 8,
+   "blend": 2
+  }
+ ]
+}

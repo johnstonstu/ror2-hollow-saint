@@ -1,0 +1,123 @@
+﻿PASS  (v25 PASS ) Idle                               orient_inf 23/22 settle 8.0 bend 2.4 side 0.0 order -13.0 clear 0.0251/0.0416
+CHECK (v25 CHECK) Idle combat                        orient_inf 0/0 settle 2.7 bend 5.3 side 0.0 order -151.0 clear 0.0322/0.0722
+      old  contact L shin > pelvis 7.3mm f47
+      old  contact back conductors > neck 6.0mm f21
+CHECK (v25 CHECK) Spawn                              orient_inf 0/0 settle 8.0 bend 9.0 side -0.0 order -9.1 clear 0.0265/0.0522
+      old  contact abdomen plates > spine 6.0mm f1
+      old  contact mask > head 5.5mm f19
+      old  contact neck cables > head 10.7mm f19
+      old  contact tabard front > L thigh 5.1mm f15
+      old  contact tabard front > R shin 13.5mm f22
+      old  contact halo arc 2 > halo arc 1 11.0mm f40
+      old  contact R shin > pelvis 17.2mm f21
+      old  contact tabard front > L shin 8.1mm f29
+      old  contact L shin > pelvis 5.0mm f29
+      old  contact halo arc 4 > R pauldron 8.1mm f34
+CHECK (v25 CHECK) Select idle                        orient_inf 0/0 settle 8.0 bend 2.1 side 0.0 order 4.6 clear 0.2412/0.2406
+      old  contact L shin > pelvis 8.0mm f55
+CHECK (v25 PASS ) Select intro                       orient_inf 0/0 settle 8.0 bend 1.4 side -0.0 order -21.8 clear 0.0992/0.0992
+      NEW  hand-nat finger pen R ring/little 4.1mm f14
+      NEW  handqa pen R ring/little [4.1, 14]
+CHECK (v25 CHECK) Run forward                        orient_inf 0/0 settle 5.1 bend 16.0 side 0.0 order -9.9 clear 0.0179/0.064
+      old  contact back conductors > neck 6.3mm f7
+      old  contact tabard front > R thigh 11.1mm f3
+      old  contact tabard front > L thigh 12.5mm f11
+      old  pop L shin 26deg/f2 f5
+CHECK (v25 CHECK) Glide enter                        orient_inf 0/0 settle 8.0 bend 8.8 side 0.0 order -9.3 clear 0.009/0.0711
+      old  contact back conductors > neck 6.3mm f2
+      old  contact tabard front > L thigh 12.7mm f2
+      old  pop L forearm 28deg/f2 f5
+      NEW  arm_clear_ok False
+CHECK (v25 CHECK) Glide loop                         orient_inf 0/0 settle 4.7 bend 8.7 side -0.0 order -11.1 clear 0.2042/0.2042
+      old  contact R shin > pelvis 5.6mm f18
+CHECK (v25 CHECK) Glide exit                         orient_inf 3/3 settle 8.0 bend 8.9 side 0.0 order -9.4 clear 0.0375/0.0671
+      old  contact back conductors > neck 6.2mm f14
+      old  contact L shin > pelvis 7.0mm f8
+      old  contact tabard front > L shin 6.7mm f9
+CHECK (v25 CHECK) Run stop                           orient_inf 6/6 settle 7.6 bend 11.0 side 0.0 order -9.5 clear 0.0234/0.0353
+      old  contact back conductors > neck 6.2mm f1
+      old  pop L shin 28deg/f2 f5
+CHECK (v25 CHECK) Run stop R                         orient_inf 2/2 settle 7.9 bend 11.0 side -0.0 order -9.5 clear 0.0239/0.0484
+      old  contact back conductors > neck 6.3mm f1
+      old  contact tabard front > L thigh 5.0mm f3
+      old  pop R shin 25deg/f2 f5
+CHECK (v25 CHECK) Run start                          orient_inf 3/3 settle 8.0 bend 10.8 side 0.0 order -9.1 clear 0.0214/0.0525
+      old  contact back conductors > neck 6.3mm f15
+      old  pop R shin 23deg/f2 f16
+CHECK (v25 CHECK) Charge loop                        orient_inf 0/0 settle 4.8 bend 21.9 side 0.0 order -10.3 clear 0.0599/0.0598
+      old  contact neck cables > head 5.3mm f10
+CHECK (v25 CHECK) Charge full                        orient_inf 0/0 settle 4.7 bend 29.8 side -0.0 order -13.4 clear 0.1937/0.1936
+      old  contact neck cables > head 9.0mm f6
+      old  contact R forearm conductor > R forearm 5.9mm f10
+      NEW  hand-nat finger pen L middle/ring 3.8mm f9
+      NEW  hand-nat finger pen R middle/ring 2.5mm f9
+      NEW  handqa pen L middle/ring [3.8, 9]
+      NEW  handqa pen R middle/ring [2.5, 9]
+CHECK (v25 CHECK) Meter full flourish                orient_inf 0/0 settle 8.0 bend 11.2 side 0.0 order -10.4 clear 0.0311/0.0862
+      old  contact R forearm conductor > R forearm 6.0mm f10
+PASS  (v25 PASS ) Discharge snap                     orient_inf 0/0 settle 4.2 bend 4.4 side 0.0 order -8.9 clear 0.0311/0.0862
+CHECK (v25 CHECK) Discharge                          orient_inf 18/18 settle 8.0 bend 4.8 side 0.0 order -6.1 clear 0.0311/0.0862
+      old  pop R forearm 23deg/f2 f2
+CHECK (v25 CHECK) Open Circuit                       orient_inf 0/0 settle 7.3 bend 0.5 side 0.0 order -4.5 clear 0.0311/0.0862
+      old  contact R forearm conductor > R forearm 5.5mm f16
+PASS  (v25 PASS ) Open Circuit hold                  orient_inf 0/0 settle 7.6 bend 5.6 side -0.0 order -10.2 clear 0.1474/0.1474
+PASS  (v25 PASS ) Open Circuit end                   orient_inf 14/10 settle 8.0 bend 3.8 side -0.0 order -11.7 clear 0.0311/0.0862
+CHECK (v25 CHECK) Run forward right                  orient_inf 0/0 settle 4.6 bend 16.2 side -0.0 order -9.9 clear 0.0175/0.0568
+      old  contact L shin > pelvis 10.4mm f1
+      old  contact L foot > pelvis 12.9mm f13
+      old  contact tabard front > L shin 10.3mm f1
+      old  contact tabard front > L foot 9.5mm f1
+      old  contact R shin > pelvis 17.0mm f14
+      old  contact tabard front > R thigh 12.7mm f14
+      old  contact tabard front > R shin 11.0mm f14
+      old  contact tabard back > R foot 6.5mm f15
+      old  pop L shin 26deg/f2 f5
+CHECK (v25 CHECK) Run forward left                   orient_inf 0/0 settle 5.0 bend 16.0 side 0.0 order -9.9 clear 0.0247/0.0431
+      old  contact tabard front > R foot 10.4mm f6
+      old  contact L shin > pelvis 9.8mm f6
+      old  contact R foot > pelvis 13.8mm f6
+      old  contact tabard front > R shin 8.9mm f8
+      old  contact R shin > pelvis 14.0mm f8
+      old  pop R shin 26deg/f2 f13
+CHECK (v25 CHECK) Run backward right                 orient_inf 0/0 settle 6.0 bend 15.6 side 0.0 order -9.9 clear 0.0555/0.0234
+      old  contact R shin > pelvis 16.0mm f12
+      old  contact tabard front > R shin 9.9mm f14
+      old  contact L shin > pelvis 11.5mm f14
+      old  contact R foot > pelvis 9.4mm f15
+      old  contact tabard front > R foot 7.9mm f15
+CHECK (v25 CHECK) Run backward left                  orient_inf 0/0 settle 5.5 bend 15.8 side -0.0 order -9.9 clear 0.0589/0.0459
+      old  contact L shin > pelvis 17.1mm f4
+      old  contact R shin > pelvis 17.2mm f5
+      old  contact tabard front > L shin 7.7mm f7
+      old  contact tabard front > L thigh 11.0mm f7
+      old  contact L foot > R foot 14.8mm f6
+      old  contact tabard front > R shin 5.6mm f6
+      old  contact tabard front > R thigh 7.3mm f6
+      old  pop L shin 21deg/f2 f16
+PASS  (v25 PASS ) Walk backward                      orient_inf 10/10 settle 2.1 bend 8.4 side -0.0 order -12.4 clear 0.0304/0.0641
+CHECK (v25 CHECK) Walk left                          orient_inf 0/0 settle 0.9 bend 9.1 side 0.0 order -12.4 clear 0.0698/0.1311
+      old  contact L shin > pelvis 14.1mm f17
+CHECK (v25 CHECK) Walk right                         orient_inf 0/0 settle 1.0 bend 9.1 side -0.0 order -12.4 clear 0.0971/0.1424
+      old  contact L foot > R foot 5.6mm f26
+      old  contact R shin > pelvis 17.7mm f5
+      old  contact R foot > L foot 6.0mm f1
+      old  contact tabard front > R shin 8.2mm f2
+      old  contact tabard front > R thigh 8.3mm f3
+CHECK (v25 CHECK) Walk forward right                 orient_inf 0/0 settle 2.6 bend 8.1 side -0.0 order -12.4 clear 0.061/0.0165
+      old  contact L shin > pelvis 16.5mm f3
+      old  contact R foot > L foot 9.0mm f3
+      old  contact tabard front > L shin 8.9mm f2
+CHECK (v25 CHECK) Walk forward left                  orient_inf 0/0 settle 1.8 bend 8.6 side 0.0 order -12.4 clear 0.0473/0.0385
+      old  contact R shin > pelvis 16.3mm f16
+      old  contact tabard front > R shin 8.0mm f12
+CHECK (v25 CHECK) Walk backward right                orient_inf 14/14 settle 2.9 bend 7.9 side 0.0 order -12.4 clear 0.0414/0.0415
+      old  contact R shin > pelvis 16.8mm f6
+      old  contact tabard front > R thigh 8.5mm f3
+      old  contact tabard front > R shin 8.4mm f3
+CHECK (v25 CHECK) Walk backward left                 orient_inf 4/4 settle 2.4 bend 8.2 side 0.0 order -12.4 clear 0.0394/0.0101
+      old  contact L shin > pelvis 16.5mm f17
+      old  contact L foot > R foot 5.7mm f16
+      old  contact tabard front > L thigh 6.3mm f14
+      old  contact tabard front > L shin 9.8mm f18
+      NEW  pop R hand 23deg/f2 f1
+{'pass': 5, 'check': 26, 'base_pass': 6}

@@ -6,8 +6,8 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'primary', 'arcstep', 'arcstep_dirs', 'special',
-       'presentation']
+ALL = ['run', 'walk', 'glide', 'air', 'run_dirs', 'loco8', 'turns', 'startstop', 'primary', 'arcstep', 'arcstep_dirs', 'special',
+       'spear', 'presentation']
 args = sys.argv[1:]
 flt = args[args.index('--filter')+1] if '--filter' in args else ''
 save = args[args.index('--save')+1] if '--save' in args else ''

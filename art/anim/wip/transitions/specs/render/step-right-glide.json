@@ -1,0 +1,36 @@
+{
+ "name": "step-right-glide",
+ "modules": [],
+ "out": "transitions/temp/step-right-glide",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Glide loop",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step right start",
+   "frames": 7,
+   "blend": 5
+  },
+  {
+   "clip": "Arc Step right loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step right end",
+   "frames": 4,
+   "start": 2
+  },
+  {
+   "clip": "Glide loop",
+   "frames": 24,
+   "blend": 5
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

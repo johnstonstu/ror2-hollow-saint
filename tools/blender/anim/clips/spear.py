@@ -139,11 +139,12 @@ def keys():
     rel2['swing'] = POSE['release']['swing']+6.0
     return {
         1: rest,
-        3: st(mixed('R', None, POSE['draw'], 0.55), mixed('L', None, POSE['point'], 0.5), rh=(24, 14, 4),
+        3: st(mixed('R', None, POSE['draw'], 0.55), mixed('L', None, POSE['point'], 0.5), rh=(32, 20, 4),
               lh=(14, 10, 2)),
-        DRAW: st(R_(POSE['draw']), L_(POSE['point']), rh=(26, 16, 6), lh=(6, 8, 4)),
-        LEAD: st(R_(lead), L_(POSE['point']), rh=(22, 14, 8), lh=(6, 8, 4)),
-        RELEASE: st(R_(POSE['release']), L_(POSE['point']), rh=(4, 6, 14), lh=(8, 9, 4)),
+        # the lance hand closes into a grip on the draw and opens over the lead into the open-palm release
+        DRAW: st(R_(POSE['draw']), L_(POSE['point']), rh=(40, 26, 2), lh=(6, 8, 4)),
+        LEAD: st(R_(lead), L_(POSE['point']), rh=(28, 20, 6), lh=(6, 8, 4)),
+        RELEASE: st(R_(POSE['release']), L_(POSE['point']), rh=(6, 7, 14), lh=(8, 9, 4)),
         8: st(R_(rel2), mixed('L', POSE['point'], POSE['tuck'], 0.35), rh=(3, 5, 14), lh=(14, 12, 3)),
         10: st(mixed('R', POSE['release'], POSE['follow'], 0.85), mixed('L', POSE['point'], POSE['tuck'], 0.9),
                rh=(10, 9, 10), lh=(30, 18, 1)),
@@ -214,7 +215,7 @@ def build(p):
     markers = {'Materialize': MATERIALIZE, 'Draw': DRAW, 'Spear release': RELEASE, 'Cancel': CANCEL, 'Fade': FADE,
                'Recovered': N}
     meta = {'kind': 'gesture', 'layer': 'upper body (mask excludes pelvis/legs)', 'hand': 'R',
-            'accents': [LEAD, RELEASE], 'finger_accents': [RELEASE],
+            'accents': [LEAD, RELEASE], 'finger_accents': [LEAD, RELEASE],
             'cancel': {'locked': [1, RELEASE], 'skills_jump_sprint_from': CANCEL, 'any_state_from': FADE},
             'projectile_mps': PROJECTILE_MPS, 'launch': 'R palm (R middle.1 knuckle, along the hand velocity)',
             'arm_solves': {k: v for k, v in S.SOLVED.items()}}

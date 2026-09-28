@@ -1,0 +1,21 @@
+{
+ "name": "air-ascend-descend",
+ "modules": [],
+ "out": "transitions/temp/air-ascend-descend",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Ascend",
+   "frames": 21
+  },
+  {
+   "clip": "Descend",
+   "frames": 21,
+   "blend": 4
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

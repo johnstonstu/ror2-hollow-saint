@@ -1,0 +1,34 @@
+{
+ "name": "over-arcbolt-idle",
+ "modules": [],
+ "out": "transitions/temp/over-arcbolt-idle",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 20,
+   "blend": 3,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Idle",
+   "frames": 80
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

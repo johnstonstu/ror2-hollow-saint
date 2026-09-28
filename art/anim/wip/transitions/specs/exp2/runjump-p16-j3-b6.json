@@ -1,0 +1,23 @@
+{
+ "name": "runjump-p16-j3-b6",
+ "modules": [],
+ "out": "transitions/exp2/runjump-p16-j3-b6",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 16
+  },
+  {
+   "clip": "Jump",
+   "frames": 9,
+   "start": 3,
+   "blend": 6
+  },
+  {
+   "clip": "Ascend",
+   "frames": 8,
+   "blend": 2
+  }
+ ]
+}

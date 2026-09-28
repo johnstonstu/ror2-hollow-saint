@@ -15,6 +15,8 @@
   POP_MAX outside the frames a clip declares in meta 'accents' (+-1 frame).
 - feet: soles no more than 1 cm below ground; a planted knee bent > 15 deg points within 45 deg of the foot.
 - symmetry (rig level, once): L/R rest bones mirrored about MID_X.
+- natural hands (item 12, handnat.py): finger bends/planarity/curl order, finger-part contact 2 mm, finger
+  interpenetration (preview.py passes handqa's row), finger pops.
 """
 import math
 from collections import defaultdict
@@ -25,6 +27,7 @@ from mathutils import Matrix, Quaternion, Vector
 from mathutils.bvhtree import BVHTree
 
 import hs_anim as H
+import handnat
 from handqa import twist_swing
 
 CONTACT_MAX = 0.005
@@ -221,6 +224,8 @@ class FullQA:
         self.bones = [b.name for b in self.rig.data.bones if b.use_deform and not any(
             k in b.name for k in ('index', 'middle', 'ring', 'little', 'thumb'))]
         self.rest = None
+        self.hn = handnat.HandNat(poser)
+        self.finger_mask = {}
         self.reset()
 
     def reset(self):
@@ -248,6 +253,11 @@ class FullQA:
                 base += len(co)
             if polys:
                 groups[g] = {'co': np.vstack(cos), 'polys': polys, 'closed': closed, 'per': per}
+                if g.endswith('hand parts') and g not in self.finger_mask:
+                    m = np.zeros(base, dtype=bool)
+                    for (name, b0, _), co in zip(per, cos):
+                        m[b0:b0+len(co)] = handnat.is_finger(name)
+                    self.finger_mask[g] = m[::STEP]
         return bco, bed, groups
 
     def _contact(self, bco, groups):
@@ -322,13 +332,15 @@ class FullQA:
                 'shrinkwrap_disabled': self.shrinkwrap_disabled, 'rigid_parts': sorted(self.rigid)}
 
     # per frame ---------------------------------------------------------------------------------------------
-    def frame(self, f):
+    def frame(self, f, hand_pen=None):
+        """hand_pen: handqa.HandQA's finger interpenetration for this frame (row['pen'])."""
         bco, bed, groups = self._geo()
         c = self._contact(bco, groups)
-        pen, where = {}, {}
+        pen, where, fpen = {}, {}, {}
         for k, r in c.items():
             base = self.rest['contact'].get(k)
             pts = self._points.get(k)
+            fm = self.finger_mask.get(k.split(' @ ')[0])
             for i, (d, obs, src) in enumerate(r):
                 if not d:
                     continue
@@ -336,6 +348,8 @@ class FullQA:
                 if b > BURIED:
                     continue
                 ex = d-b
+                if fm is not None and i < len(fm) and fm[i] and ex > fpen.get(f'{src} > {obs}', 0.0):
+                    fpen[f'{src} > {obs}'] = ex
                 if ex > 0.001:
                     key = f'{src} > {obs}'
                     if ex > pen.get(key, 0.0):
@@ -354,7 +368,8 @@ class FullQA:
         q = {n: pb[n].rotation_quaternion.copy() for n in self.bones}
         j = self._joints()
         ft = self._feet(bco)
-        self.rows.append({'f': f, 'pen': pen, 'where': where, 'rigid': rig, 'q': q, 'joints': j, 'feet': ft})
+        self.rows.append({'f': f, 'pen': pen, 'where': where, 'rigid': rig, 'q': q, 'joints': j, 'feet': ft,
+                          'hand': self.hn.frame(fpen, hand_pen)})
 
     def _joints(self):
         pb = self.p.pb
@@ -418,9 +433,10 @@ class FullQA:
         return out
 
     # summary -----------------------------------------------------------------------------------------------
-    def summarize(self, loop, accents=(), exempt=()):
+    def summarize(self, loop, accents=(), exempt=(), finger_accents=(), curl_exempt=()):
         """accents: frames declared as deliberate snaps (pops there may reach ACCENT_POP_MAX).
-        exempt: contact keys a clip means to have ('L hand > L thigh')."""
+        exempt: contact keys a clip means to have ('L hand > L thigh').
+        finger_accents / curl_exempt: meta frames for handnat (finger snaps, deliberate single-finger flicks)."""
         rows = self.rows[:-1] if loop and len(self.rows) > 2 else self.rows
         n = len(rows)
         fails = []
@@ -507,6 +523,8 @@ class FullQA:
                 fails.append(f'{k} {1000*(v-H.GROUND_Z):.1f}mm f{f}')
             if k.endswith('knee dir') and v > KNEE_DIR_MAX:
                 fails.append(f'{k} {v:.0f}deg f{f}')
+        nat, nat_fails = handnat.summarize(rows, loop, finger_accents, curl_exempt)
+        fails += nat_fails
         return {'full_qa': {
             'contact_mm': {k: [round(v*1000, 1), f, nf, at.get(k)] for k, (v, f, nf) in
                            sorted(pen.items(), key=lambda x: -x[1][0]) if v > 0.002},
@@ -515,8 +533,10 @@ class FullQA:
             'pops_deg_f2': [(round(r, 1), nm, f) for r, nm, f in plain[:6]],
             'accent_pops_deg_f2': [(round(r, 1), nm, f) for r, nm, f in accent[:3]],
             'feet': {k: [round(v, 4) if k.endswith('sole') else round(v, 1), f] for k, (v, f) in feet.items()},
+            'hand_nat': nat,
             'fails': fails},
             'full_qa_ok': not fails,
+            'hand_nat_ok': not nat_fails,
             'full_contact_max_mm': round(max((v for k, (v, f, nf) in pen.items() if k not in exempt), default=0)*1000, 1),
             'full_pop_max_deg_f2': round(plain[0][0], 1) if plain else 0.0}
 

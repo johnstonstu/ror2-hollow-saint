@@ -1,0 +1,18 @@
+{
+ "name": "dir-walk-fwd-back",
+ "modules": [],
+ "out": "transitions/matrix/dir-walk-fwd-back",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Walk forward",
+   "frames": 27
+  },
+  {
+   "clip": "Walk backward",
+   "frames": 40,
+   "blend": 10,
+   "sync": true
+  }
+ ]
+}

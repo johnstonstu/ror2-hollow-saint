@@ -1,0 +1,30 @@
+{
+ "name": "over-arcbolt-glide",
+ "modules": [],
+ "out": "transitions/pairs/over-arcbolt-glide",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 20,
+   "blend": 2,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Glide loop",
+   "frames": 80
+  }
+ ]
+}

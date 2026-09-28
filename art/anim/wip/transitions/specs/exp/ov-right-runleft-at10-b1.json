@@ -1,0 +1,30 @@
+{
+ "name": "ov-right-runleft-at10-b1",
+ "modules": [],
+ "out": "transitions/exp/ov-right-runleft-at10-b1",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 10
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 20,
+   "mask": "upper",
+   "lower": "track",
+   "blend": 1
+  },
+  {
+   "clip": "@track",
+   "frames": 20,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run left",
+   "frames": 80
+  }
+ ]
+}

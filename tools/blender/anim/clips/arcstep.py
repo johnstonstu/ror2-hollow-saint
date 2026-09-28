@@ -452,8 +452,9 @@ def build(p):
         bake(p, 'Arc Step loop', list(range(1, N_L+2)), loop_pose, True,
              meta={**meta, 'dash_distance_m': [8, 12]}, post=post_loop),
         bake(p, 'Arc Step end', list(range(1, N_E+1)), end_pose, False,
-             markers={'Arrive': ARRIVE, 'Recovered': RECOVERED},
+             markers={'Arrive': ARRIVE, 'Cancel': ARRIVE, 'Recovered': RECOVERED},
              meta={**meta, 'speed_mps': 0.0, 'seam_from': ['Arc Step loop', 1], 'seam_to': ['Arc Step start', 1],
-                   'accents': [4, 7]},   # L foot lands (Arrive follows), R foot braces
+                   'accents': [4, 7],   # L foot lands (Arrive follows), R foot braces
+                   'cancel': {'any_state_from': ARRIVE}},
              post=post_end),
     ]

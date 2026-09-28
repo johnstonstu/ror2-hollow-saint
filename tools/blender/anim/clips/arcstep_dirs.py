@@ -141,8 +141,8 @@ def build(p):
             bake(p, f'{name} loop', list(range(1, A.N_L+2)), lp, True,
                  meta={**meta, 'dash_distance_m': [8, 12], 'air_ok': True}, post=pl),
             bake(p, f'{name} end', list(range(1, A.N_E+1)), ep, False,
-                 markers={'Arrive': A.ARRIVE, 'Recovered': A.RECOVERED},
+                 markers={'Arrive': A.ARRIVE, 'Cancel': A.ARRIVE, 'Recovered': A.RECOVERED},
                  meta={**meta, 'speed_mps': 0.0, 'seam_from': [f'{name} loop', 1], 'seam_to': [f'{name} start', 1],
-                       'accents': [4, 7]}, post=pe),
+                       'accents': [4, 7], 'cancel': {'any_state_from': A.ARRIVE}}, post=pe),
         ]
     return out

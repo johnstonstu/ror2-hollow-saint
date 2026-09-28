@@ -7,6 +7,7 @@
   "loop": false,
   "markers": {
     "Arrive": 5,
+    "Cancel": 5,
     "Recovered": 14
   },
   "ik_miss_m": 8e-05,
@@ -28,7 +29,12 @@
     4,
     7
   ],
+  "cancel": {
+    "any_state_from": 5
+  },
   "orient_smooth_max_deg": 58.8,
+  "hand_settle_max_deg": 7.6,
+  "hand_relax_peak_deg": 6.0,
   "pad_follow_max": {
     "L": {
       "deg": 9.3,
@@ -59,7 +65,11 @@
   },
   "orient_infeasible": 0,
   "halo_max_offset_m": 0.0223,
-  "end_rest_err_m": 0.105098,
+  "end_rest_err_m": 0.076013,
+  "hand_leg_clear_ext_deg": {
+    "L": 0.0,
+    "R": 0.0
+  },
   "halo_clear_push_max_mm": 62.4,
   "halo_clear_frames": 14,
   "halo_clear_dir": [
@@ -82,7 +92,8 @@
     "hs_jet_dir": 0.0,
     "hs_move_x": 0.0,
     "hs_move_y": 0.0,
-    "hs_turn": 0.0
+    "hs_turn": 0.0,
+    "hs_spear": 0.0
   },
   "bake_error_m": 2e-06,
   "bake_error_deg": 0.0,
@@ -95,9 +106,9 @@
   "finite": true,
   "arm_clearance": {
     "L": {
-      "min_m": 0.0802,
+      "min_m": 0.034,
       "frame": 16,
-      "part": "little segment 3",
+      "part": "V11 little tip light",
       "against": "L thigh",
       "frames_under_min": 0,
       "per_frame_mm": [
@@ -115,13 +126,13 @@
         212,
         186,
         168,
-        112,
-        80
+        107,
+        34
       ],
       "hits": {}
     },
     "R": {
-      "min_m": 0.1025,
+      "min_m": 0.0567,
       "frame": 16,
       "part": "V11 little tip light",
       "against": "R thigh",
@@ -141,37 +152,37 @@
         214,
         194,
         181,
-        144,
-        102
+        132,
+        57
       ],
       "hits": {}
     }
   },
-  "arm_clear_min_m": 0.0802,
+  "arm_clear_min_m": 0.034,
   "arm_clear_ok": null,
   "hand_qa": {
     "violations": {},
     "penetration_mm": {},
-    "max_penetration_mm": 0.1,
+    "max_penetration_mm": 0.3,
     "finger_pops_deg_f2": [
       [
-        11.67,
-        "R middle.3",
+        8.42,
+        "L little.1",
         14
       ],
       [
-        11.67,
-        "R little.3",
+        8.4,
+        "R little.1",
         14
       ],
       [
-        11.67,
+        7.5,
+        "L little.2",
+        14
+      ],
+      [
+        7.48,
         "R little.2",
-        14
-      ],
-      [
-        11.67,
-        "R index.3",
         14
       ]
     ],
@@ -194,16 +205,16 @@
     },
     "flex_range": {
       "L": {
-        "thumb_min": 3.1,
-        "thumb_max": 12.0,
-        "finger_min": -6.8,
-        "finger_max": 60.8
+        "thumb_min": 0.5,
+        "thumb_max": 15.0,
+        "finger_min": 0.5,
+        "finger_max": 29.2
       },
       "R": {
-        "thumb_min": 3.1,
-        "thumb_max": 12.0,
-        "finger_min": -6.7,
-        "finger_max": 60.8
+        "thumb_min": 0.5,
+        "thumb_max": 15.0,
+        "finger_min": 0.5,
+        "finger_max": 29.3
       }
     }
   },
@@ -211,10 +222,10 @@
     "ok": true,
     "violations": 0,
     "pen_over": 0,
-    "worst_pop_deg_f2": 11.67,
-    "worst_pop": "R middle.3 f14",
+    "worst_pop_deg_f2": 8.42,
+    "worst_pop": "L little.1 f14",
     "worst_accent_pop_deg_f2": 0.0,
-    "max_pen_mm": 0.1
+    "max_pen_mm": 0.3
   },
   "hand_contact": {},
   "hand_contact_max_mm": 0.0,
@@ -545,6 +556,50 @@
         13
       ]
     },
+    "hand_nat": {
+      "min_bend_deg": [
+        0.5,
+        "R index.3",
+        5
+      ],
+      "max_bend_deg": [
+        29.3,
+        "R little.1",
+        16
+      ],
+      "max_sideways_deg": [
+        -0.0,
+        "L index.3",
+        14
+      ],
+      "curl_order_gap_deg": [
+        -2.6,
+        "R middle>ring",
+        14
+      ],
+      "finger_contact_mm": {},
+      "finger_pen_mm": {},
+      "pops_deg_f2": [
+        [
+          8.4,
+          "L little.1",
+          14
+        ],
+        [
+          8.4,
+          "R little.1",
+          14
+        ],
+        [
+          7.5,
+          "L little.2",
+          14
+        ]
+      ],
+      "accent_pops_deg_f2": [],
+      "fails": [],
+      "orient_9f_ok": true
+    },
     "fails": [
       "contact R foot > L foot 10.3mm f1",
       "contact back conductors > neck 9.5mm f1",
@@ -553,6 +608,7 @@
     ]
   },
   "full_qa_ok": false,
+  "hand_nat_ok": true,
   "full_contact_max_mm": 10.3,
   "full_pop_max_deg_f2": 25.6,
   "status": "CHECK",

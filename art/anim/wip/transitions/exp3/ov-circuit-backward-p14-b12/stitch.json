@@ -1,0 +1,1060 @@
+{
+ "name": "ov-circuit-backward-p14-b12",
+ "frames": 30,
+ "handoffs": [
+  {
+   "frame": 15,
+   "from": "[Run backward f14]",
+   "to": "Open Circuit f1 / Run backward f15",
+   "blend": 12,
+   "lower_track_cut": false,
+   "accent_window": false,
+   "finger_accent_window": false,
+   "worst_bone": "R hand",
+   "acc": 0.0608,
+   "clip_max_acc": 0.056,
+   "ease_acc": 0.0171,
+   "ref_acc": 0.056,
+   "step": 0.1043,
+   "ratio": 1.09,
+   "rot_bone": "L pauldron",
+   "rot_acc_deg": 2.3,
+   "rot_clip_max_deg": 2.2,
+   "rot_fail": null,
+   "bones": {
+    "pelvis": {
+     "acc": 0.0141,
+     "clip_max_acc": 0.0141,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0141,
+     "step": 0.002,
+     "ratio": 1.0
+    },
+    "head": {
+     "acc": 0.0157,
+     "clip_max_acc": 0.0167,
+     "ease_acc": 0.0024,
+     "ref_acc": 0.0167,
+     "step": 0.0058,
+     "ratio": 0.94
+    },
+    "L hand": {
+     "acc": 0.043,
+     "clip_max_acc": 0.0576,
+     "ease_acc": 0.022,
+     "ref_acc": 0.0576,
+     "step": 0.1142,
+     "ratio": 0.75
+    },
+    "R hand": {
+     "acc": 0.0608,
+     "clip_max_acc": 0.056,
+     "ease_acc": 0.0171,
+     "ref_acc": 0.056,
+     "step": 0.1043,
+     "ratio": 1.09
+    },
+    "L toe": {
+     "acc": 0.1025,
+     "clip_max_acc": 0.1025,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1025,
+     "step": 0.0475,
+     "ratio": 1.0
+    },
+    "R toe": {
+     "acc": 0.0914,
+     "clip_max_acc": 0.1025,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1025,
+     "step": 0.0496,
+     "ratio": 0.89
+    },
+    "halo root": {
+     "acc": 0.0161,
+     "clip_max_acc": 0.0169,
+     "ease_acc": 0.0047,
+     "ref_acc": 0.0169,
+     "step": 0.0022,
+     "ratio": 0.95
+    },
+    "tabard front.3": {
+     "acc": 0.0921,
+     "clip_max_acc": 0.0921,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0921,
+     "step": 0.0908,
+     "ratio": 1.0
+    },
+    "tabard back.2": {
+     "acc": 0.0248,
+     "clip_max_acc": 0.0335,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0335,
+     "step": 0.0094,
+     "ratio": 0.74
+    },
+    "L middle.3": {
+     "acc": 0.0468,
+     "clip_max_acc": 0.1206,
+     "ease_acc": 0.0356,
+     "ref_acc": 0.1206,
+     "step": 0.1203,
+     "ratio": 0.39
+    },
+    "R middle.3": {
+     "acc": 0.0849,
+     "clip_max_acc": 0.1136,
+     "ease_acc": 0.0254,
+     "ref_acc": 0.1136,
+     "step": 0.1616,
+     "ratio": 0.75
+    }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 4.25,
+   "speed_after": 4.25,
+   "root_acc_mps2": 0.0
+  }
+ ],
+ "root_path": [
+  [
+   0.0,
+   0.1771,
+   0.0
+  ],
+  [
+   0.0,
+   0.3542,
+   0.0
+  ],
+  [
+   0.0,
+   0.5312,
+   0.0
+  ],
+  [
+   0.0,
+   0.7083,
+   0.0
+  ],
+  [
+   0.0,
+   0.8854,
+   0.0
+  ],
+  [
+   0.0,
+   1.0625,
+   0.0
+  ],
+  [
+   0.0,
+   1.2396,
+   0.0
+  ],
+  [
+   0.0,
+   1.4167,
+   0.0
+  ],
+  [
+   0.0,
+   1.5937,
+   0.0
+  ],
+  [
+   0.0,
+   1.7708,
+   0.0
+  ],
+  [
+   0.0,
+   1.9479,
+   0.0
+  ],
+  [
+   0.0,
+   2.125,
+   0.0
+  ],
+  [
+   0.0,
+   2.3021,
+   0.0
+  ],
+  [
+   0.0,
+   2.4792,
+   0.0
+  ],
+  [
+   0.0,
+   2.6562,
+   0.0
+  ],
+  [
+   0.0,
+   2.8333,
+   0.0
+  ],
+  [
+   0.0,
+   3.0104,
+   0.0
+  ],
+  [
+   0.0,
+   3.1875,
+   0.0
+  ],
+  [
+   0.0,
+   3.3646,
+   0.0
+  ],
+  [
+   0.0,
+   3.5417,
+   0.0
+  ],
+  [
+   0.0,
+   3.7188,
+   0.0
+  ],
+  [
+   0.0,
+   3.8958,
+   0.0
+  ],
+  [
+   0.0,
+   4.0729,
+   0.0
+  ],
+  [
+   0.0,
+   4.25,
+   0.0
+  ],
+  [
+   0.0,
+   4.4271,
+   0.0
+  ],
+  [
+   0.0,
+   4.6042,
+   0.0
+  ],
+  [
+   0.0,
+   4.7812,
+   0.0
+  ],
+  [
+   0.0,
+   4.9583,
+   0.0
+  ],
+  [
+   0.0,
+   5.1354,
+   0.0
+  ],
+  [
+   0.0,
+   5.3125,
+   0.0
+  ]
+ ],
+ "acc_series_mm": {
+  "pelvis": [
+   0.0,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   0.0
+  ],
+  "head": [
+   0.0,
+   16.2,
+   16.7,
+   7.4,
+   6.6,
+   16.0,
+   16.3,
+   7.3,
+   6.3,
+   16.2,
+   16.7,
+   7.4,
+   6.6,
+   15.7,
+   15.6,
+   6.2,
+   7.6,
+   16.1,
+   15.3,
+   7.7,
+   10.4,
+   15.2,
+   14.5,
+   6.4,
+   7.3,
+   15.6,
+   15.8,
+   8.0,
+   7.1,
+   0.0
+  ],
+  "L hand": [
+   0.0,
+   37.5,
+   35.5,
+   35.5,
+   32.0,
+   33.5,
+   28.7,
+   37.0,
+   37.4,
+   36.7,
+   37.7,
+   35.1,
+   29.9,
+   25.2,
+   41.5,
+   43.0,
+   28.8,
+   14.6,
+   16.2,
+   30.9,
+   29.6,
+   23.4,
+   44.9,
+   15.9,
+   14.4,
+   27.4,
+   32.3,
+   27.5,
+   37.8,
+   0.0
+  ],
+  "R hand": [
+   0.0,
+   38.4,
+   38.8,
+   34.1,
+   27.3,
+   26.8,
+   33.0,
+   40.7,
+   39.5,
+   35.6,
+   33.5,
+   34.3,
+   30.9,
+   25.2,
+   33.6,
+   55.6,
+   60.8,
+   54.9,
+   48.4,
+   53.8,
+   58.8,
+   59.3,
+   56.6,
+   24.6,
+   15.2,
+   31.8,
+   34.5,
+   23.6,
+   28.9,
+   0.0
+  ],
+  "L toe": [
+   0.0,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   51.1,
+   39.7,
+   28.6,
+   18.4,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   42.4,
+   53.2,
+   64.2,
+   102.5,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   51.1,
+   39.7,
+   28.6,
+   18.4,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   0.0
+  ],
+  "R toe": [
+   0.0,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   42.4,
+   53.2,
+   64.2,
+   102.5,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   51.1,
+   39.6,
+   28.6,
+   18.4,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   42.4,
+   53.2,
+   64.2,
+   102.5,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   0.0
+  ],
+  "halo root": [
+   0.0,
+   14.4,
+   15.0,
+   6.7,
+   1.1,
+   16.8,
+   16.5,
+   4.3,
+   3.2,
+   12.9,
+   14.3,
+   6.8,
+   1.7,
+   16.1,
+   14.8,
+   4.4,
+   6.0,
+   15.3,
+   15.1,
+   12.3,
+   15.1,
+   20.0,
+   15.8,
+   8.7,
+   11.9,
+   20.4,
+   19.2,
+   10.8,
+   7.8,
+   0.0
+  ],
+  "tabard front.3": [
+   0.0,
+   73.5,
+   91.3,
+   25.3,
+   32.1,
+   15.2,
+   13.5,
+   12.3,
+   21.5,
+   27.4,
+   26.3,
+   14.7,
+   13.8,
+   92.1,
+   62.1,
+   15.2,
+   57.7,
+   73.5,
+   91.3,
+   25.3,
+   32.1,
+   15.2,
+   13.5,
+   12.3,
+   21.5,
+   27.4,
+   26.3,
+   14.7,
+   13.8,
+   0.0
+  ],
+  "tabard back.2": [
+   0.0,
+   32.7,
+   33.5,
+   12.5,
+   14.6,
+   14.8,
+   15.0,
+   10.1,
+   26.2,
+   31.2,
+   32.3,
+   12.7,
+   14.8,
+   14.9,
+   14.8,
+   9.3,
+   24.8,
+   32.7,
+   33.5,
+   12.5,
+   14.6,
+   14.8,
+   15.0,
+   10.1,
+   26.2,
+   31.2,
+   32.3,
+   12.7,
+   14.8,
+   0.0
+  ],
+  "L middle.3": [
+   0.0,
+   54.7,
+   51.7,
+   47.4,
+   41.3,
+   52.9,
+   19.9,
+   47.5,
+   51.8,
+   52.1,
+   52.5,
+   48.2,
+   39.1,
+   45.7,
+   20.1,
+   46.8,
+   45.0,
+   13.8,
+   18.9,
+   56.8,
+   77.3,
+   54.5,
+   81.2,
+   30.3,
+   31.2,
+   62.2,
+   59.1,
+   62.2,
+   84.8,
+   0.0
+  ],
+  "R middle.3": [
+   0.0,
+   58.9,
+   57.7,
+   51.3,
+   42.4,
+   42.6,
+   49.5,
+   58.9,
+   60.2,
+   58.6,
+   54.1,
+   52.0,
+   48.1,
+   38.5,
+   42.7,
+   80.2,
+   84.9,
+   90.8,
+   79.6,
+   95.2,
+   116.5,
+   125.4,
+   111.4,
+   43.4,
+   26.9,
+   57.4,
+   54.0,
+   50.7,
+   69.1,
+   0.0
+  ]
+ },
+ "timeline": [
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 1
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 2
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 3
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 4
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 5
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 6
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 7
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 8
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 9
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 10
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 11
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 12
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 13
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 14
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 1,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 15
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 15
+     }
+    },
+    0.017
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 2,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 16
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 16
+     }
+    },
+    0.064
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 3,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 1
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 1
+     }
+    },
+    0.135
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 4,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 2
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 2
+     }
+    },
+    0.226
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 5,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 3
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 3
+     }
+    },
+    0.33
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 6,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 4
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 4
+     }
+    },
+    0.442
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 7,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 5
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 5
+     }
+    },
+    0.558
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 8,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 6
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 6
+     }
+    },
+    0.67
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 9,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 7
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 7
+     }
+    },
+    0.774
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 10,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 8
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 8
+     }
+    },
+    0.865
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 11,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 9
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 9
+     }
+    },
+    0.936
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 12,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 10
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 10
+     }
+    },
+    0.983
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 13,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 11
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 14,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 12
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 15,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 13
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 16,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 14
+   }
+  }
+ ]
+}

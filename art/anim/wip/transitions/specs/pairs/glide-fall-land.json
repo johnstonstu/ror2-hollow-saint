@@ -1,0 +1,27 @@
+{
+ "name": "glide-fall-land",
+ "modules": [],
+ "out": "transitions/pairs/glide-fall-land",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Glide loop",
+   "frames": 16
+  },
+  {
+   "clip": "Descend",
+   "frames": 12,
+   "blend": 6
+  },
+  {
+   "clip": "Land",
+   "frames": 15,
+   "blend": 2
+  },
+  {
+   "clip": "Idle",
+   "frames": 20,
+   "start": 2
+  }
+ ]
+}

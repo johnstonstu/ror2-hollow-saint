@@ -1,0 +1,786 @@
+{
+ "name": "ov-circuit-backward-p4-b10",
+ "frames": 20,
+ "handoffs": [
+  {
+   "frame": 5,
+   "from": "[Run backward f4]",
+   "to": "Open Circuit f1 / Run backward f5",
+   "blend": 10,
+   "lower_track_cut": false,
+   "accent_window": false,
+   "finger_accent_window": false,
+   "worst_bone": "L hand",
+   "acc": 0.0788,
+   "clip_max_acc": 0.0576,
+   "ease_acc": 0.0298,
+   "ref_acc": 0.0576,
+   "step": 0.1008,
+   "ratio": 1.37,
+   "rot_bone": "neck",
+   "rot_acc_deg": 0.4,
+   "rot_clip_max_deg": 0.4,
+   "rot_fail": null,
+   "bones": {
+    "pelvis": {
+     "acc": 0.0141,
+     "clip_max_acc": 0.0141,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0141,
+     "step": 0.0199,
+     "ratio": 1.0
+    },
+    "head": {
+     "acc": 0.0167,
+     "clip_max_acc": 0.0167,
+     "ease_acc": 0.0034,
+     "ref_acc": 0.0167,
+     "step": 0.0236,
+     "ratio": 1.0
+    },
+    "L hand": {
+     "acc": 0.0788,
+     "clip_max_acc": 0.0576,
+     "ease_acc": 0.0298,
+     "ref_acc": 0.0576,
+     "step": 0.1008,
+     "ratio": 1.37
+    },
+    "R hand": {
+     "acc": 0.0388,
+     "clip_max_acc": 0.056,
+     "ease_acc": 0.0212,
+     "ref_acc": 0.056,
+     "step": 0.0952,
+     "ratio": 0.69
+    },
+    "L toe": {
+     "acc": 0.0914,
+     "clip_max_acc": 0.1025,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1025,
+     "step": 0.1081,
+     "ratio": 0.89
+    },
+    "R toe": {
+     "acc": 0.0532,
+     "clip_max_acc": 0.1025,
+     "ease_acc": 0.0,
+     "ref_acc": 0.1025,
+     "step": 0.1002,
+     "ratio": 0.52
+    },
+    "halo root": {
+     "acc": 0.0163,
+     "clip_max_acc": 0.0193,
+     "ease_acc": 0.0061,
+     "ref_acc": 0.0193,
+     "step": 0.0213,
+     "ratio": 0.84
+    },
+    "tabard front.3": {
+     "acc": 0.0913,
+     "clip_max_acc": 0.0921,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0921,
+     "step": 0.0309,
+     "ratio": 0.99
+    },
+    "tabard back.2": {
+     "acc": 0.0335,
+     "clip_max_acc": 0.0335,
+     "ease_acc": 0.0,
+     "ref_acc": 0.0335,
+     "step": 0.0301,
+     "ratio": 1.0
+    },
+    "L middle.3": {
+     "acc": 0.082,
+     "clip_max_acc": 0.1206,
+     "ease_acc": 0.046,
+     "ref_acc": 0.1206,
+     "step": 0.1338,
+     "ratio": 0.68
+    },
+    "R middle.3": {
+     "acc": 0.0577,
+     "clip_max_acc": 0.1136,
+     "ease_acc": 0.0366,
+     "ref_acc": 0.1136,
+     "step": 0.1396,
+     "ratio": 0.51
+    }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 4.25,
+   "speed_after": 4.25,
+   "root_acc_mps2": 0.0
+  }
+ ],
+ "root_path": [
+  [
+   0.0,
+   0.1771,
+   0.0
+  ],
+  [
+   0.0,
+   0.3542,
+   0.0
+  ],
+  [
+   0.0,
+   0.5312,
+   0.0
+  ],
+  [
+   0.0,
+   0.7083,
+   0.0
+  ],
+  [
+   0.0,
+   0.8854,
+   0.0
+  ],
+  [
+   0.0,
+   1.0625,
+   0.0
+  ],
+  [
+   0.0,
+   1.2396,
+   0.0
+  ],
+  [
+   0.0,
+   1.4167,
+   0.0
+  ],
+  [
+   0.0,
+   1.5937,
+   0.0
+  ],
+  [
+   0.0,
+   1.7708,
+   0.0
+  ],
+  [
+   0.0,
+   1.9479,
+   0.0
+  ],
+  [
+   0.0,
+   2.125,
+   0.0
+  ],
+  [
+   0.0,
+   2.3021,
+   0.0
+  ],
+  [
+   0.0,
+   2.4792,
+   0.0
+  ],
+  [
+   0.0,
+   2.6562,
+   0.0
+  ],
+  [
+   0.0,
+   2.8333,
+   0.0
+  ],
+  [
+   0.0,
+   3.0104,
+   0.0
+  ],
+  [
+   0.0,
+   3.1875,
+   0.0
+  ],
+  [
+   0.0,
+   3.3646,
+   0.0
+  ],
+  [
+   0.0,
+   3.5417,
+   0.0
+  ]
+ ],
+ "acc_series_mm": {
+  "pelvis": [
+   0.0,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   6.0,
+   5.7,
+   14.0,
+   14.1,
+   0.0
+  ],
+  "head": [
+   0.0,
+   16.2,
+   16.7,
+   7.9,
+   6.4,
+   15.5,
+   14.9,
+   6.1,
+   7.0,
+   14.5,
+   16.3,
+   9.6,
+   7.8,
+   14.7,
+   14.8,
+   6.9,
+   7.5,
+   15.4,
+   15.6,
+   0.0
+  ],
+  "L hand": [
+   0.0,
+   37.5,
+   35.5,
+   38.9,
+   27.6,
+   51.5,
+   78.8,
+   73.1,
+   51.9,
+   68.6,
+   84.1,
+   64.5,
+   55.3,
+   32.0,
+   23.1,
+   26.2,
+   31.8,
+   21.3,
+   23.9,
+   0.0
+  ],
+  "R hand": [
+   0.0,
+   38.4,
+   38.8,
+   33.8,
+   19.2,
+   28.2,
+   32.8,
+   34.3,
+   25.4,
+   20.8,
+   25.1,
+   24.8,
+   38.1,
+   25.0,
+   21.8,
+   21.1,
+   24.6,
+   25.8,
+   42.1,
+   0.0
+  ],
+  "L toe": [
+   0.0,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   51.1,
+   39.7,
+   28.6,
+   18.4,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   42.4,
+   53.2,
+   64.2,
+   102.5,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "R toe": [
+   0.0,
+   11.6,
+   13.6,
+   22.0,
+   32.0,
+   42.4,
+   53.2,
+   64.2,
+   102.5,
+   0.0,
+   0.0,
+   72.7,
+   91.4,
+   51.1,
+   39.6,
+   28.6,
+   18.4,
+   11.6,
+   13.6,
+   0.0
+  ],
+  "halo root": [
+   0.0,
+   14.4,
+   15.0,
+   8.2,
+   2.7,
+   16.3,
+   15.5,
+   4.9,
+   4.5,
+   13.4,
+   19.5,
+   14.3,
+   12.1,
+   16.4,
+   15.2,
+   9.9,
+   12.8,
+   19.3,
+   19.0,
+   0.0
+  ],
+  "tabard front.3": [
+   0.0,
+   73.5,
+   91.3,
+   25.3,
+   32.1,
+   15.2,
+   13.5,
+   12.3,
+   21.5,
+   27.4,
+   26.3,
+   14.7,
+   13.8,
+   92.1,
+   62.1,
+   15.2,
+   57.7,
+   73.5,
+   91.3,
+   0.0
+  ],
+  "tabard back.2": [
+   0.0,
+   32.7,
+   33.5,
+   12.5,
+   14.6,
+   14.8,
+   15.0,
+   10.1,
+   26.2,
+   31.2,
+   32.3,
+   12.7,
+   14.8,
+   14.9,
+   14.8,
+   9.3,
+   24.8,
+   32.7,
+   33.5,
+   0.0
+  ],
+  "L middle.3": [
+   0.0,
+   54.7,
+   51.7,
+   52.2,
+   34.5,
+   82.0,
+   73.3,
+   116.4,
+   96.7,
+   127.4,
+   161.9,
+   143.4,
+   121.2,
+   56.6,
+   33.5,
+   37.0,
+   38.2,
+   55.2,
+   66.0,
+   0.0
+  ],
+  "R middle.3": [
+   0.0,
+   58.9,
+   57.7,
+   49.0,
+   27.7,
+   38.7,
+   46.1,
+   38.2,
+   29.4,
+   46.5,
+   80.0,
+   64.9,
+   74.1,
+   41.4,
+   36.3,
+   43.7,
+   43.2,
+   56.6,
+   81.2,
+   0.0
+  ]
+ },
+ "timeline": [
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 1
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 2
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 3
+   }
+  },
+  {
+   "seg": 0,
+   "clip": "@track",
+   "track": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 4
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 1,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 5
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 5
+     }
+    },
+    0.023
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 2,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 6
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 6
+     }
+    },
+    0.087
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 3,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 7
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 7
+     }
+    },
+    0.183
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 4,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 8
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 8
+     }
+    },
+    0.301
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 5,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 9
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 9
+     }
+    },
+    0.432
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 6,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 10
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 10
+     }
+    },
+    0.568
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 7,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 11
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 11
+     }
+    },
+    0.699
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 8,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 12
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 12
+     }
+    },
+    0.817
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 9,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 13
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 13
+     }
+    },
+    0.913
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 10,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 14
+   },
+   "from": [
+    {
+     "seg": 0,
+     "clip": "@track",
+     "track": {
+      "seg": 0,
+      "clip": "Run backward",
+      "f": 14
+     }
+    },
+    0.977
+   ]
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 11,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 15
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 12,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 16
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 13,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 1
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 14,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 2
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 15,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 3
+   }
+  },
+  {
+   "seg": 1,
+   "clip": "Open Circuit",
+   "f": 16,
+   "lower": {
+    "seg": 0,
+    "clip": "Run backward",
+    "f": 4
+   }
+  }
+ ]
+}

@@ -7,11 +7,15 @@
    "from": "Walk forward f10",
    "to": "Walk forward left f11",
    "blend": 10,
-   "worst_bone": "tabard back.2",
-   "acc": 0.0098,
-   "clip_max_acc": 0.0087,
-   "step": 0.0105,
-   "ratio": 1.12,
+   "lower_track_cut": false,
+   "worst_bone": "pelvis",
+   "acc": 0.006,
+   "clip_max_acc": 0.006,
+   "step": 0.0093,
+   "ratio": 1.0,
+   "rot_bone": "neck",
+   "rot_acc_deg": 0.1,
+   "rot_clip_max_deg": 0.1,
    "bones": {
     "pelvis": {
      "acc": 0.006,
@@ -39,13 +43,13 @@
     },
     "L toe": {
      "acc": 0.0123,
-     "clip_max_acc": 0.0561,
+     "clip_max_acc": 0.0627,
      "step": 0.0623,
-     "ratio": 0.22
+     "ratio": 0.2
     },
     "R toe": {
      "acc": 0.0601,
-     "clip_max_acc": 0.0625,
+     "clip_max_acc": 0.0626,
      "step": 0.1335,
      "ratio": 0.96
     },
@@ -63,9 +67,9 @@
     },
     "tabard back.2": {
      "acc": 0.0098,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0098,
      "step": 0.0105,
-     "ratio": 1.12
+     "ratio": 1.0
     },
     "L middle.3": {
      "acc": 0.0178,
@@ -75,22 +79,32 @@
     },
     "R middle.3": {
      "acc": 0.0282,
-     "clip_max_acc": 0.0316,
+     "clip_max_acc": 0.0319,
      "step": 0.0714,
-     "ratio": 0.89
+     "ratio": 0.88
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 1.5,
+   "speed_after": 1.29,
+   "root_acc_mps2": 2.4
   },
   {
    "frame": 21,
    "from": "Walk forward left f20",
    "to": "Walk left f21",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "pelvis",
    "acc": 0.006,
    "clip_max_acc": 0.006,
    "step": 0.0075,
    "ratio": 1.0,
+   "rot_bone": "L pauldron",
+   "rot_acc_deg": 0.4,
+   "rot_clip_max_deg": 0.4,
    "bones": {
     "pelvis": {
      "acc": 0.006,
@@ -118,13 +132,13 @@
     },
     "L toe": {
      "acc": 0.0314,
-     "clip_max_acc": 0.0561,
+     "clip_max_acc": 0.0627,
      "step": 0.1011,
-     "ratio": 0.56
+     "ratio": 0.5
     },
     "R toe": {
      "acc": 0.011,
-     "clip_max_acc": 0.0625,
+     "clip_max_acc": 0.0626,
      "step": 0.045,
      "ratio": 0.18
     },
@@ -142,9 +156,9 @@
     },
     "tabard back.2": {
      "acc": 0.0063,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0098,
      "step": 0.0081,
-     "ratio": 0.72
+     "ratio": 0.65
     },
     "L middle.3": {
      "acc": 0.0112,
@@ -154,22 +168,32 @@
     },
     "R middle.3": {
      "acc": 0.0073,
-     "clip_max_acc": 0.0316,
+     "clip_max_acc": 0.0319,
      "step": 0.0631,
      "ratio": 0.23
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 1.07,
+   "speed_after": 0.87,
+   "root_acc_mps2": 2.4
   },
   {
    "frame": 31,
    "from": "Walk left f4",
    "to": "Walk backward left f5",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "R hand",
    "acc": 0.017,
    "clip_max_acc": 0.0166,
    "step": 0.0142,
    "ratio": 1.02,
+   "rot_bone": "R pauldron",
+   "rot_acc_deg": 0.5,
+   "rot_clip_max_deg": 0.4,
    "bones": {
     "pelvis": {
      "acc": 0.0056,
@@ -237,18 +261,28 @@
      "step": 0.0219,
      "ratio": 0.85
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.64,
+   "speed_after": 0.61,
+   "root_acc_mps2": 1.7
   },
   {
    "frame": 41,
    "from": "Walk backward left f14",
    "to": "Walk backward f15",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "L middle.3",
    "acc": 0.036,
    "clip_max_acc": 0.0305,
    "step": 0.0264,
    "ratio": 1.18,
+   "rot_bone": "L forearm",
+   "rot_acc_deg": 1.7,
+   "rot_clip_max_deg": 1.2,
    "bones": {
     "pelvis": {
      "acc": 0.0059,
@@ -300,9 +334,9 @@
     },
     "tabard back.2": {
      "acc": 0.0062,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0093,
      "step": 0.0059,
-     "ratio": 0.72
+     "ratio": 0.67
     },
     "L middle.3": {
      "acc": 0.036,
@@ -316,18 +350,28 @@
      "step": 0.0182,
      "ratio": 0.49
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.74,
+   "speed_after": 0.8,
+   "root_acc_mps2": 1.6
   },
   {
    "frame": 51,
    "from": "Walk backward f24",
    "to": "Walk backward right f25",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "pelvis",
    "acc": 0.0051,
    "clip_max_acc": 0.006,
    "step": 0.0124,
    "ratio": 0.85,
+   "rot_bone": "pelvis",
+   "rot_acc_deg": 0.7,
+   "rot_clip_max_deg": 0.5,
    "bones": {
     "pelvis": {
      "acc": 0.0051,
@@ -379,9 +423,9 @@
     },
     "tabard back.2": {
      "acc": 0.0058,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0093,
      "step": 0.0121,
-     "ratio": 0.67
+     "ratio": 0.62
     },
     "L middle.3": {
      "acc": 0.0146,
@@ -395,18 +439,28 @@
      "step": 0.0528,
      "ratio": 0.44
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.93,
+   "speed_after": 0.89,
+   "root_acc_mps2": 1.6
   },
   {
    "frame": 61,
    "from": "Walk backward right f8",
    "to": "Walk right f9",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "L middle.3",
    "acc": 0.0336,
    "clip_max_acc": 0.0305,
    "step": 0.0547,
    "ratio": 1.1,
+   "rot_bone": "L pauldron",
+   "rot_acc_deg": 0.6,
+   "rot_clip_max_deg": 0.4,
    "bones": {
     "pelvis": {
      "acc": 0.006,
@@ -458,9 +512,9 @@
     },
     "tabard back.2": {
      "acc": 0.0062,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0093,
      "step": 0.0048,
-     "ratio": 0.72
+     "ratio": 0.67
     },
     "L middle.3": {
      "acc": 0.0336,
@@ -474,18 +528,28 @@
      "step": 0.0644,
      "ratio": 0.7
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.79,
+   "speed_after": 0.7,
+   "root_acc_mps2": 1.6
   },
   {
    "frame": 71,
    "from": "Walk right f18",
    "to": "Walk forward right f19",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "L middle.3",
    "acc": 0.0362,
    "clip_max_acc": 0.0305,
    "step": 0.0112,
    "ratio": 1.19,
+   "rot_bone": "L forearm",
+   "rot_acc_deg": 2.2,
+   "rot_clip_max_deg": 1.2,
    "bones": {
     "pelvis": {
      "acc": 0.0056,
@@ -553,18 +617,28 @@
      "step": 0.0206,
      "ratio": 0.5
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.6,
+   "speed_after": 0.68,
+   "root_acc_mps2": 1.7
   },
   {
    "frame": 81,
    "from": "Walk forward right f2",
    "to": "Walk forward f3",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "pelvis",
    "acc": 0.0059,
    "clip_max_acc": 0.006,
    "step": 0.005,
    "ratio": 0.98,
+   "rot_bone": "head socket",
+   "rot_acc_deg": 0.0,
+   "rot_clip_max_deg": 0.0,
    "bones": {
     "pelvis": {
      "acc": 0.0059,
@@ -592,13 +666,13 @@
     },
     "L toe": {
      "acc": 0.0538,
-     "clip_max_acc": 0.0561,
+     "clip_max_acc": 0.0627,
      "step": 0.039,
-     "ratio": 0.96
+     "ratio": 0.86
     },
     "R toe": {
      "acc": 0.0475,
-     "clip_max_acc": 0.0625,
+     "clip_max_acc": 0.0626,
      "step": 0.0479,
      "ratio": 0.76
     },
@@ -616,9 +690,9 @@
     },
     "tabard back.2": {
      "acc": 0.0062,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0098,
      "step": 0.0051,
-     "ratio": 0.72
+     "ratio": 0.64
     },
     "L middle.3": {
      "acc": 0.0193,
@@ -628,22 +702,32 @@
     },
     "R middle.3": {
      "acc": 0.0156,
-     "clip_max_acc": 0.0316,
+     "clip_max_acc": 0.0319,
      "step": 0.0056,
-     "ratio": 0.5
+     "ratio": 0.49
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.94,
+   "speed_after": 1.1,
+   "root_acc_mps2": 2.4
   },
   {
    "frame": 91,
    "from": "Walk forward f12",
    "to": "Walk forward right f13",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "R toe",
    "acc": 0.0755,
-   "clip_max_acc": 0.0625,
+   "clip_max_acc": 0.0626,
    "step": 0.0541,
    "ratio": 1.21,
+   "rot_bone": "R forearm",
+   "rot_acc_deg": 5.6,
+   "rot_clip_max_deg": 5.1,
    "bones": {
     "pelvis": {
      "acc": 0.0059,
@@ -671,13 +755,13 @@
     },
     "L toe": {
      "acc": 0.0173,
-     "clip_max_acc": 0.0561,
+     "clip_max_acc": 0.0627,
      "step": 0.0618,
-     "ratio": 0.31
+     "ratio": 0.28
     },
     "R toe": {
      "acc": 0.0755,
-     "clip_max_acc": 0.0625,
+     "clip_max_acc": 0.0626,
      "step": 0.0541,
      "ratio": 1.21
     },
@@ -695,9 +779,9 @@
     },
     "tabard back.2": {
      "acc": 0.0061,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0098,
      "step": 0.0129,
-     "ratio": 0.7
+     "ratio": 0.62
     },
     "L middle.3": {
      "acc": 0.0176,
@@ -707,22 +791,32 @@
     },
     "R middle.3": {
      "acc": 0.0377,
-     "clip_max_acc": 0.0316,
+     "clip_max_acc": 0.0319,
      "step": 0.0445,
-     "ratio": 1.19
+     "ratio": 1.18
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 1.37,
+   "speed_after": 1.29,
+   "root_acc_mps2": 2.4
   },
   {
    "frame": 101,
    "from": "Walk forward right f22",
    "to": "Walk right f23",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "pelvis",
    "acc": 0.006,
    "clip_max_acc": 0.006,
    "step": 0.0042,
    "ratio": 1.0,
+   "rot_bone": "head socket",
+   "rot_acc_deg": 0.0,
+   "rot_clip_max_deg": 0.0,
    "bones": {
     "pelvis": {
      "acc": 0.006,
@@ -750,13 +844,13 @@
     },
     "L toe": {
      "acc": 0.0407,
-     "clip_max_acc": 0.0561,
+     "clip_max_acc": 0.0627,
      "step": 0.1046,
-     "ratio": 0.73
+     "ratio": 0.65
     },
     "R toe": {
      "acc": 0.0104,
-     "clip_max_acc": 0.0625,
+     "clip_max_acc": 0.0626,
      "step": 0.0441,
      "ratio": 0.17
     },
@@ -774,9 +868,9 @@
     },
     "tabard back.2": {
      "acc": 0.0066,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0098,
      "step": 0.006,
-     "ratio": 0.76
+     "ratio": 0.68
     },
     "L middle.3": {
      "acc": 0.017,
@@ -786,22 +880,32 @@
     },
     "R middle.3": {
      "acc": 0.0119,
-     "clip_max_acc": 0.0316,
+     "clip_max_acc": 0.0319,
      "step": 0.0633,
-     "ratio": 0.38
+     "ratio": 0.37
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 1.07,
+   "speed_after": 0.87,
+   "root_acc_mps2": 2.4
   },
   {
    "frame": 111,
    "from": "Walk right f6",
    "to": "Walk backward right f7",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "pelvis",
    "acc": 0.006,
    "clip_max_acc": 0.006,
    "step": 0.0114,
    "ratio": 1.0,
+   "rot_bone": "L forearm",
+   "rot_acc_deg": 1.4,
+   "rot_clip_max_deg": 1.2,
    "bones": {
     "pelvis": {
      "acc": 0.006,
@@ -869,18 +973,28 @@
      "step": 0.0317,
      "ratio": 0.57
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.64,
+   "speed_after": 0.61,
+   "root_acc_mps2": 1.7
   },
   {
    "frame": 121,
    "from": "Walk backward right f16",
    "to": "Walk backward f17",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "L middle.3",
    "acc": 0.0374,
    "clip_max_acc": 0.0305,
    "step": 0.0115,
    "ratio": 1.23,
+   "rot_bone": "L forearm",
+   "rot_acc_deg": 1.9,
+   "rot_clip_max_deg": 1.2,
    "bones": {
     "pelvis": {
      "acc": 0.0059,
@@ -932,9 +1046,9 @@
     },
     "tabard back.2": {
      "acc": 0.0061,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0093,
      "step": 0.0093,
-     "ratio": 0.71
+     "ratio": 0.66
     },
     "L middle.3": {
      "acc": 0.0374,
@@ -948,18 +1062,28 @@
      "step": 0.0072,
      "ratio": 0.61
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.74,
+   "speed_after": 0.8,
+   "root_acc_mps2": 1.6
   },
   {
    "frame": 131,
    "from": "Walk backward f26",
    "to": "Walk backward left f1",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "L toe",
    "acc": 0.0564,
    "clip_max_acc": 0.0561,
    "step": 0.0283,
    "ratio": 1.01,
+   "rot_bone": "L thigh",
+   "rot_acc_deg": 12.5,
+   "rot_clip_max_deg": 11.9,
    "bones": {
     "pelvis": {
      "acc": 0.0059,
@@ -1011,9 +1135,9 @@
     },
     "tabard back.2": {
      "acc": 0.0066,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0093,
      "step": 0.0106,
-     "ratio": 0.76
+     "ratio": 0.71
     },
     "L middle.3": {
      "acc": 0.016,
@@ -1027,18 +1151,28 @@
      "step": 0.0315,
      "ratio": 0.48
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.93,
+   "speed_after": 0.89,
+   "root_acc_mps2": 1.6
   },
   {
    "frame": 141,
    "from": "Walk backward left f10",
    "to": "Walk left f11",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "L middle.3",
    "acc": 0.0361,
    "clip_max_acc": 0.0305,
    "step": 0.0465,
    "ratio": 1.19,
+   "rot_bone": "L forearm",
+   "rot_acc_deg": 1.5,
+   "rot_clip_max_deg": 1.2,
    "bones": {
     "pelvis": {
      "acc": 0.006,
@@ -1090,9 +1224,9 @@
     },
     "tabard back.2": {
      "acc": 0.0065,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0093,
      "step": 0.0088,
-     "ratio": 0.75
+     "ratio": 0.7
     },
     "L middle.3": {
      "acc": 0.0361,
@@ -1106,18 +1240,28 @@
      "step": 0.0587,
      "ratio": 0.67
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.79,
+   "speed_after": 0.7,
+   "root_acc_mps2": 1.6
   },
   {
    "frame": 151,
    "from": "Walk left f20",
    "to": "Walk forward left f21",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "L middle.3",
    "acc": 0.0332,
    "clip_max_acc": 0.0305,
    "step": 0.0222,
    "ratio": 1.09,
+   "rot_bone": "L forearm",
+   "rot_acc_deg": 2.2,
+   "rot_clip_max_deg": 1.2,
    "bones": {
     "pelvis": {
      "acc": 0.006,
@@ -1185,18 +1329,28 @@
      "step": 0.031,
      "ratio": 0.48
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.6,
+   "speed_after": 0.68,
+   "root_acc_mps2": 1.7
   },
   {
    "frame": 161,
    "from": "Walk forward left f4",
    "to": "Walk forward f5",
    "blend": 10,
+   "lower_track_cut": false,
    "worst_bone": "pelvis",
    "acc": 0.0056,
    "clip_max_acc": 0.006,
    "step": 0.0116,
    "ratio": 0.93,
+   "rot_bone": "chest",
+   "rot_acc_deg": 0.4,
+   "rot_clip_max_deg": 0.4,
    "bones": {
     "pelvis": {
      "acc": 0.0056,
@@ -1224,13 +1378,13 @@
     },
     "L toe": {
      "acc": 0.012,
-     "clip_max_acc": 0.0561,
+     "clip_max_acc": 0.0627,
      "step": 0.0406,
-     "ratio": 0.21
+     "ratio": 0.19
     },
     "R toe": {
      "acc": 0.0498,
-     "clip_max_acc": 0.0625,
+     "clip_max_acc": 0.0626,
      "step": 0.0364,
      "ratio": 0.8
     },
@@ -1248,9 +1402,9 @@
     },
     "tabard back.2": {
      "acc": 0.006,
-     "clip_max_acc": 0.0087,
+     "clip_max_acc": 0.0098,
      "step": 0.0115,
-     "ratio": 0.69
+     "ratio": 0.62
     },
     "L middle.3": {
      "acc": 0.0212,
@@ -1260,11 +1414,17 @@
     },
     "R middle.3": {
      "acc": 0.0155,
-     "clip_max_acc": 0.0316,
+     "clip_max_acc": 0.0319,
      "step": 0.0251,
      "ratio": 0.49
     }
-   }
+   },
+   "prop": "hs_glow",
+   "prop_step": 0.0,
+   "prop_clip_max_step": 0.0,
+   "speed_before": 0.94,
+   "speed_after": 1.1,
+   "root_acc_mps2": 2.4
   }
  ],
  "root_path": [
@@ -4069,9 +4229,12 @@
    "clip": "Walk forward left",
    "f": 11,
    "from": [
-    "Walk forward",
-    11,
-    0.023290758827948913
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 11
+    },
+    0.023
    ]
   },
   {
@@ -4079,9 +4242,12 @@
    "clip": "Walk forward left",
    "f": 12,
    "from": [
-    "Walk forward",
-    12,
-    0.08715251690458302
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 12
+    },
+    0.087
    ]
   },
   {
@@ -4089,9 +4255,12 @@
    "clip": "Walk forward left",
    "f": 13,
    "from": [
-    "Walk forward",
-    13,
-    0.18256949661908337
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 13
+    },
+    0.183
    ]
   },
   {
@@ -4099,9 +4268,12 @@
    "clip": "Walk forward left",
    "f": 14,
    "from": [
-    "Walk forward",
-    14,
-    0.3005259203606311
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 14
+    },
+    0.301
    ]
   },
   {
@@ -4109,9 +4281,12 @@
    "clip": "Walk forward left",
    "f": 15,
    "from": [
-    "Walk forward",
-    15,
-    0.43200601051840715
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 15
+    },
+    0.432
    ]
   },
   {
@@ -4119,9 +4294,12 @@
    "clip": "Walk forward left",
    "f": 16,
    "from": [
-    "Walk forward",
-    16,
-    0.5679939894815927
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 16
+    },
+    0.568
    ]
   },
   {
@@ -4129,9 +4307,12 @@
    "clip": "Walk forward left",
    "f": 17,
    "from": [
-    "Walk forward",
-    17,
-    0.6994740796393689
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 17
+    },
+    0.699
    ]
   },
   {
@@ -4139,9 +4320,12 @@
    "clip": "Walk forward left",
    "f": 18,
    "from": [
-    "Walk forward",
-    18,
-    0.8174305033809166
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 18
+    },
+    0.817
    ]
   },
   {
@@ -4149,9 +4333,12 @@
    "clip": "Walk forward left",
    "f": 19,
    "from": [
-    "Walk forward",
-    19,
-    0.9128474830954171
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 19
+    },
+    0.913
    ]
   },
   {
@@ -4159,9 +4346,12 @@
    "clip": "Walk forward left",
    "f": 20,
    "from": [
-    "Walk forward",
-    20,
-    0.976709241172051
+    {
+     "seg": 0,
+     "clip": "Walk forward",
+     "f": 20
+    },
+    0.977
    ]
   },
   {
@@ -4169,9 +4359,12 @@
    "clip": "Walk left",
    "f": 21,
    "from": [
-    "Walk forward left",
-    21,
-    0.023290758827948913
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 21
+    },
+    0.023
    ]
   },
   {
@@ -4179,9 +4372,12 @@
    "clip": "Walk left",
    "f": 22,
    "from": [
-    "Walk forward left",
-    22,
-    0.08715251690458302
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 22
+    },
+    0.087
    ]
   },
   {
@@ -4189,9 +4385,12 @@
    "clip": "Walk left",
    "f": 23,
    "from": [
-    "Walk forward left",
-    23,
-    0.18256949661908337
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 23
+    },
+    0.183
    ]
   },
   {
@@ -4199,9 +4398,12 @@
    "clip": "Walk left",
    "f": 24,
    "from": [
-    "Walk forward left",
-    24,
-    0.3005259203606311
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 24
+    },
+    0.301
    ]
   },
   {
@@ -4209,9 +4411,12 @@
    "clip": "Walk left",
    "f": 25,
    "from": [
-    "Walk forward left",
-    25,
-    0.43200601051840715
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 25
+    },
+    0.432
    ]
   },
   {
@@ -4219,9 +4424,12 @@
    "clip": "Walk left",
    "f": 26,
    "from": [
-    "Walk forward left",
-    26,
-    0.5679939894815927
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 26
+    },
+    0.568
    ]
   },
   {
@@ -4229,9 +4437,12 @@
    "clip": "Walk left",
    "f": 1,
    "from": [
-    "Walk forward left",
-    1,
-    0.6994740796393689
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 1
+    },
+    0.699
    ]
   },
   {
@@ -4239,9 +4450,12 @@
    "clip": "Walk left",
    "f": 2,
    "from": [
-    "Walk forward left",
-    2,
-    0.8174305033809166
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 2
+    },
+    0.817
    ]
   },
   {
@@ -4249,9 +4463,12 @@
    "clip": "Walk left",
    "f": 3,
    "from": [
-    "Walk forward left",
-    3,
-    0.9128474830954171
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 3
+    },
+    0.913
    ]
   },
   {
@@ -4259,9 +4476,12 @@
    "clip": "Walk left",
    "f": 4,
    "from": [
-    "Walk forward left",
-    4,
-    0.976709241172051
+    {
+     "seg": 1,
+     "clip": "Walk forward left",
+     "f": 4
+    },
+    0.977
    ]
   },
   {
@@ -4269,9 +4489,12 @@
    "clip": "Walk backward left",
    "f": 5,
    "from": [
-    "Walk left",
-    5,
-    0.023290758827948913
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 5
+    },
+    0.023
    ]
   },
   {
@@ -4279,9 +4502,12 @@
    "clip": "Walk backward left",
    "f": 6,
    "from": [
-    "Walk left",
-    6,
-    0.08715251690458302
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 6
+    },
+    0.087
    ]
   },
   {
@@ -4289,9 +4515,12 @@
    "clip": "Walk backward left",
    "f": 7,
    "from": [
-    "Walk left",
-    7,
-    0.18256949661908337
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 7
+    },
+    0.183
    ]
   },
   {
@@ -4299,9 +4528,12 @@
    "clip": "Walk backward left",
    "f": 8,
    "from": [
-    "Walk left",
-    8,
-    0.3005259203606311
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 8
+    },
+    0.301
    ]
   },
   {
@@ -4309,9 +4541,12 @@
    "clip": "Walk backward left",
    "f": 9,
    "from": [
-    "Walk left",
-    9,
-    0.43200601051840715
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 9
+    },
+    0.432
    ]
   },
   {
@@ -4319,9 +4554,12 @@
    "clip": "Walk backward left",
    "f": 10,
    "from": [
-    "Walk left",
-    10,
-    0.5679939894815927
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 10
+    },
+    0.568
    ]
   },
   {
@@ -4329,9 +4567,12 @@
    "clip": "Walk backward left",
    "f": 11,
    "from": [
-    "Walk left",
-    11,
-    0.6994740796393689
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 11
+    },
+    0.699
    ]
   },
   {
@@ -4339,9 +4580,12 @@
    "clip": "Walk backward left",
    "f": 12,
    "from": [
-    "Walk left",
-    12,
-    0.8174305033809166
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 12
+    },
+    0.817
    ]
   },
   {
@@ -4349,9 +4593,12 @@
    "clip": "Walk backward left",
    "f": 13,
    "from": [
-    "Walk left",
-    13,
-    0.9128474830954171
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 13
+    },
+    0.913
    ]
   },
   {
@@ -4359,9 +4606,12 @@
    "clip": "Walk backward left",
    "f": 14,
    "from": [
-    "Walk left",
-    14,
-    0.976709241172051
+    {
+     "seg": 2,
+     "clip": "Walk left",
+     "f": 14
+    },
+    0.977
    ]
   },
   {
@@ -4369,9 +4619,12 @@
    "clip": "Walk backward",
    "f": 15,
    "from": [
-    "Walk backward left",
-    15,
-    0.023290758827948913
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 15
+    },
+    0.023
    ]
   },
   {
@@ -4379,9 +4632,12 @@
    "clip": "Walk backward",
    "f": 16,
    "from": [
-    "Walk backward left",
-    16,
-    0.08715251690458302
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 16
+    },
+    0.087
    ]
   },
   {
@@ -4389,9 +4645,12 @@
    "clip": "Walk backward",
    "f": 17,
    "from": [
-    "Walk backward left",
-    17,
-    0.18256949661908337
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 17
+    },
+    0.183
    ]
   },
   {
@@ -4399,9 +4658,12 @@
    "clip": "Walk backward",
    "f": 18,
    "from": [
-    "Walk backward left",
-    18,
-    0.3005259203606311
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 18
+    },
+    0.301
    ]
   },
   {
@@ -4409,9 +4671,12 @@
    "clip": "Walk backward",
    "f": 19,
    "from": [
-    "Walk backward left",
-    19,
-    0.43200601051840715
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 19
+    },
+    0.432
    ]
   },
   {
@@ -4419,9 +4684,12 @@
    "clip": "Walk backward",
    "f": 20,
    "from": [
-    "Walk backward left",
-    20,
-    0.5679939894815927
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 20
+    },
+    0.568
    ]
   },
   {
@@ -4429,9 +4697,12 @@
    "clip": "Walk backward",
    "f": 21,
    "from": [
-    "Walk backward left",
-    21,
-    0.6994740796393689
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 21
+    },
+    0.699
    ]
   },
   {
@@ -4439,9 +4710,12 @@
    "clip": "Walk backward",
    "f": 22,
    "from": [
-    "Walk backward left",
-    22,
-    0.8174305033809166
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 22
+    },
+    0.817
    ]
   },
   {
@@ -4449,9 +4723,12 @@
    "clip": "Walk backward",
    "f": 23,
    "from": [
-    "Walk backward left",
-    23,
-    0.9128474830954171
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 23
+    },
+    0.913
    ]
   },
   {
@@ -4459,9 +4736,12 @@
    "clip": "Walk backward",
    "f": 24,
    "from": [
-    "Walk backward left",
-    24,
-    0.976709241172051
+    {
+     "seg": 3,
+     "clip": "Walk backward left",
+     "f": 24
+    },
+    0.977
    ]
   },
   {
@@ -4469,9 +4749,12 @@
    "clip": "Walk backward right",
    "f": 25,
    "from": [
-    "Walk backward",
-    25,
-    0.023290758827948913
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 25
+    },
+    0.023
    ]
   },
   {
@@ -4479,9 +4762,12 @@
    "clip": "Walk backward right",
    "f": 26,
    "from": [
-    "Walk backward",
-    26,
-    0.08715251690458302
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 26
+    },
+    0.087
    ]
   },
   {
@@ -4489,9 +4775,12 @@
    "clip": "Walk backward right",
    "f": 1,
    "from": [
-    "Walk backward",
-    1,
-    0.18256949661908337
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 1
+    },
+    0.183
    ]
   },
   {
@@ -4499,9 +4788,12 @@
    "clip": "Walk backward right",
    "f": 2,
    "from": [
-    "Walk backward",
-    2,
-    0.3005259203606311
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 2
+    },
+    0.301
    ]
   },
   {
@@ -4509,9 +4801,12 @@
    "clip": "Walk backward right",
    "f": 3,
    "from": [
-    "Walk backward",
-    3,
-    0.43200601051840715
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 3
+    },
+    0.432
    ]
   },
   {
@@ -4519,9 +4814,12 @@
    "clip": "Walk backward right",
    "f": 4,
    "from": [
-    "Walk backward",
-    4,
-    0.5679939894815927
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 4
+    },
+    0.568
    ]
   },
   {
@@ -4529,9 +4827,12 @@
    "clip": "Walk backward right",
    "f": 5,
    "from": [
-    "Walk backward",
-    5,
-    0.6994740796393689
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 5
+    },
+    0.699
    ]
   },
   {
@@ -4539,9 +4840,12 @@
    "clip": "Walk backward right",
    "f": 6,
    "from": [
-    "Walk backward",
-    6,
-    0.8174305033809166
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 6
+    },
+    0.817
    ]
   },
   {
@@ -4549,9 +4853,12 @@
    "clip": "Walk backward right",
    "f": 7,
    "from": [
-    "Walk backward",
-    7,
-    0.9128474830954171
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 7
+    },
+    0.913
    ]
   },
   {
@@ -4559,9 +4866,12 @@
    "clip": "Walk backward right",
    "f": 8,
    "from": [
-    "Walk backward",
-    8,
-    0.976709241172051
+    {
+     "seg": 4,
+     "clip": "Walk backward",
+     "f": 8
+    },
+    0.977
    ]
   },
   {
@@ -4569,9 +4879,12 @@
    "clip": "Walk right",
    "f": 9,
    "from": [
-    "Walk backward right",
-    9,
-    0.023290758827948913
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 9
+    },
+    0.023
    ]
   },
   {
@@ -4579,9 +4892,12 @@
    "clip": "Walk right",
    "f": 10,
    "from": [
-    "Walk backward right",
-    10,
-    0.08715251690458302
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 10
+    },
+    0.087
    ]
   },
   {
@@ -4589,9 +4905,12 @@
    "clip": "Walk right",
    "f": 11,
    "from": [
-    "Walk backward right",
-    11,
-    0.18256949661908337
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 11
+    },
+    0.183
    ]
   },
   {
@@ -4599,9 +4918,12 @@
    "clip": "Walk right",
    "f": 12,
    "from": [
-    "Walk backward right",
-    12,
-    0.3005259203606311
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 12
+    },
+    0.301
    ]
   },
   {
@@ -4609,9 +4931,12 @@
    "clip": "Walk right",
    "f": 13,
    "from": [
-    "Walk backward right",
-    13,
-    0.43200601051840715
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 13
+    },
+    0.432
    ]
   },
   {
@@ -4619,9 +4944,12 @@
    "clip": "Walk right",
    "f": 14,
    "from": [
-    "Walk backward right",
-    14,
-    0.5679939894815927
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 14
+    },
+    0.568
    ]
   },
   {
@@ -4629,9 +4957,12 @@
    "clip": "Walk right",
    "f": 15,
    "from": [
-    "Walk backward right",
-    15,
-    0.6994740796393689
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 15
+    },
+    0.699
    ]
   },
   {
@@ -4639,9 +4970,12 @@
    "clip": "Walk right",
    "f": 16,
    "from": [
-    "Walk backward right",
-    16,
-    0.8174305033809166
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 16
+    },
+    0.817
    ]
   },
   {
@@ -4649,9 +4983,12 @@
    "clip": "Walk right",
    "f": 17,
    "from": [
-    "Walk backward right",
-    17,
-    0.9128474830954171
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 17
+    },
+    0.913
    ]
   },
   {
@@ -4659,9 +4996,12 @@
    "clip": "Walk right",
    "f": 18,
    "from": [
-    "Walk backward right",
-    18,
-    0.976709241172051
+    {
+     "seg": 5,
+     "clip": "Walk backward right",
+     "f": 18
+    },
+    0.977
    ]
   },
   {
@@ -4669,9 +5009,12 @@
    "clip": "Walk forward right",
    "f": 19,
    "from": [
-    "Walk right",
-    19,
-    0.023290758827948913
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 19
+    },
+    0.023
    ]
   },
   {
@@ -4679,9 +5022,12 @@
    "clip": "Walk forward right",
    "f": 20,
    "from": [
-    "Walk right",
-    20,
-    0.08715251690458302
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 20
+    },
+    0.087
    ]
   },
   {
@@ -4689,9 +5035,12 @@
    "clip": "Walk forward right",
    "f": 21,
    "from": [
-    "Walk right",
-    21,
-    0.18256949661908337
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 21
+    },
+    0.183
    ]
   },
   {
@@ -4699,9 +5048,12 @@
    "clip": "Walk forward right",
    "f": 22,
    "from": [
-    "Walk right",
-    22,
-    0.3005259203606311
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 22
+    },
+    0.301
    ]
   },
   {
@@ -4709,9 +5061,12 @@
    "clip": "Walk forward right",
    "f": 23,
    "from": [
-    "Walk right",
-    23,
-    0.43200601051840715
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 23
+    },
+    0.432
    ]
   },
   {
@@ -4719,9 +5074,12 @@
    "clip": "Walk forward right",
    "f": 24,
    "from": [
-    "Walk right",
-    24,
-    0.5679939894815927
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 24
+    },
+    0.568
    ]
   },
   {
@@ -4729,9 +5087,12 @@
    "clip": "Walk forward right",
    "f": 25,
    "from": [
-    "Walk right",
-    25,
-    0.6994740796393689
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 25
+    },
+    0.699
    ]
   },
   {
@@ -4739,9 +5100,12 @@
    "clip": "Walk forward right",
    "f": 26,
    "from": [
-    "Walk right",
-    26,
-    0.8174305033809166
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 26
+    },
+    0.817
    ]
   },
   {
@@ -4749,9 +5113,12 @@
    "clip": "Walk forward right",
    "f": 1,
    "from": [
-    "Walk right",
-    1,
-    0.9128474830954171
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 1
+    },
+    0.913
    ]
   },
   {
@@ -4759,9 +5126,12 @@
    "clip": "Walk forward right",
    "f": 2,
    "from": [
-    "Walk right",
-    2,
-    0.976709241172051
+    {
+     "seg": 6,
+     "clip": "Walk right",
+     "f": 2
+    },
+    0.977
    ]
   },
   {
@@ -4769,9 +5139,12 @@
    "clip": "Walk forward",
    "f": 3,
    "from": [
-    "Walk forward right",
-    3,
-    0.023290758827948913
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 3
+    },
+    0.023
    ]
   },
   {
@@ -4779,9 +5152,12 @@
    "clip": "Walk forward",
    "f": 4,
    "from": [
-    "Walk forward right",
-    4,
-    0.08715251690458302
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 4
+    },
+    0.087
    ]
   },
   {
@@ -4789,9 +5165,12 @@
    "clip": "Walk forward",
    "f": 5,
    "from": [
-    "Walk forward right",
-    5,
-    0.18256949661908337
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 5
+    },
+    0.183
    ]
   },
   {
@@ -4799,9 +5178,12 @@
    "clip": "Walk forward",
    "f": 6,
    "from": [
-    "Walk forward right",
-    6,
-    0.3005259203606311
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 6
+    },
+    0.301
    ]
   },
   {
@@ -4809,9 +5191,12 @@
    "clip": "Walk forward",
    "f": 7,
    "from": [
-    "Walk forward right",
-    7,
-    0.43200601051840715
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 7
+    },
+    0.432
    ]
   },
   {
@@ -4819,9 +5204,12 @@
    "clip": "Walk forward",
    "f": 8,
    "from": [
-    "Walk forward right",
-    8,
-    0.5679939894815927
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 8
+    },
+    0.568
    ]
   },
   {
@@ -4829,9 +5217,12 @@
    "clip": "Walk forward",
    "f": 9,
    "from": [
-    "Walk forward right",
-    9,
-    0.6994740796393689
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 9
+    },
+    0.699
    ]
   },
   {
@@ -4839,9 +5230,12 @@
    "clip": "Walk forward",
    "f": 10,
    "from": [
-    "Walk forward right",
-    10,
-    0.8174305033809166
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 10
+    },
+    0.817
    ]
   },
   {
@@ -4849,9 +5243,12 @@
    "clip": "Walk forward",
    "f": 11,
    "from": [
-    "Walk forward right",
-    11,
-    0.9128474830954171
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 11
+    },
+    0.913
    ]
   },
   {
@@ -4859,9 +5256,12 @@
    "clip": "Walk forward",
    "f": 12,
    "from": [
-    "Walk forward right",
-    12,
-    0.976709241172051
+    {
+     "seg": 7,
+     "clip": "Walk forward right",
+     "f": 12
+    },
+    0.977
    ]
   },
   {
@@ -4869,9 +5269,12 @@
    "clip": "Walk forward right",
    "f": 13,
    "from": [
-    "Walk forward",
-    13,
-    0.023290758827948913
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 13
+    },
+    0.023
    ]
   },
   {
@@ -4879,9 +5282,12 @@
    "clip": "Walk forward right",
    "f": 14,
    "from": [
-    "Walk forward",
-    14,
-    0.08715251690458302
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 14
+    },
+    0.087
    ]
   },
   {
@@ -4889,9 +5295,12 @@
    "clip": "Walk forward right",
    "f": 15,
    "from": [
-    "Walk forward",
-    15,
-    0.18256949661908337
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 15
+    },
+    0.183
    ]
   },
   {
@@ -4899,9 +5308,12 @@
    "clip": "Walk forward right",
    "f": 16,
    "from": [
-    "Walk forward",
-    16,
-    0.3005259203606311
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 16
+    },
+    0.301
    ]
   },
   {
@@ -4909,9 +5321,12 @@
    "clip": "Walk forward right",
    "f": 17,
    "from": [
-    "Walk forward",
-    17,
-    0.43200601051840715
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 17
+    },
+    0.432
    ]
   },
   {
@@ -4919,9 +5334,12 @@
    "clip": "Walk forward right",
    "f": 18,
    "from": [
-    "Walk forward",
-    18,
-    0.5679939894815927
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 18
+    },
+    0.568
    ]
   },
   {
@@ -4929,9 +5347,12 @@
    "clip": "Walk forward right",
    "f": 19,
    "from": [
-    "Walk forward",
-    19,
-    0.6994740796393689
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 19
+    },
+    0.699
    ]
   },
   {
@@ -4939,9 +5360,12 @@
    "clip": "Walk forward right",
    "f": 20,
    "from": [
-    "Walk forward",
-    20,
-    0.8174305033809166
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 20
+    },
+    0.817
    ]
   },
   {
@@ -4949,9 +5373,12 @@
    "clip": "Walk forward right",
    "f": 21,
    "from": [
-    "Walk forward",
-    21,
-    0.9128474830954171
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 21
+    },
+    0.913
    ]
   },
   {
@@ -4959,9 +5386,12 @@
    "clip": "Walk forward right",
    "f": 22,
    "from": [
-    "Walk forward",
-    22,
-    0.976709241172051
+    {
+     "seg": 8,
+     "clip": "Walk forward",
+     "f": 22
+    },
+    0.977
    ]
   },
   {
@@ -4969,9 +5399,12 @@
    "clip": "Walk right",
    "f": 23,
    "from": [
-    "Walk forward right",
-    23,
-    0.023290758827948913
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 23
+    },
+    0.023
    ]
   },
   {
@@ -4979,9 +5412,12 @@
    "clip": "Walk right",
    "f": 24,
    "from": [
-    "Walk forward right",
-    24,
-    0.08715251690458302
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 24
+    },
+    0.087
    ]
   },
   {
@@ -4989,9 +5425,12 @@
    "clip": "Walk right",
    "f": 25,
    "from": [
-    "Walk forward right",
-    25,
-    0.18256949661908337
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 25
+    },
+    0.183
    ]
   },
   {
@@ -4999,9 +5438,12 @@
    "clip": "Walk right",
    "f": 26,
    "from": [
-    "Walk forward right",
-    26,
-    0.3005259203606311
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 26
+    },
+    0.301
    ]
   },
   {
@@ -5009,9 +5451,12 @@
    "clip": "Walk right",
    "f": 1,
    "from": [
-    "Walk forward right",
-    1,
-    0.43200601051840715
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 1
+    },
+    0.432
    ]
   },
   {
@@ -5019,9 +5464,12 @@
    "clip": "Walk right",
    "f": 2,
    "from": [
-    "Walk forward right",
-    2,
-    0.5679939894815927
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 2
+    },
+    0.568
    ]
   },
   {
@@ -5029,9 +5477,12 @@
    "clip": "Walk right",
    "f": 3,
    "from": [
-    "Walk forward right",
-    3,
-    0.6994740796393689
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 3
+    },
+    0.699
    ]
   },
   {
@@ -5039,9 +5490,12 @@
    "clip": "Walk right",
    "f": 4,
    "from": [
-    "Walk forward right",
-    4,
-    0.8174305033809166
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 4
+    },
+    0.817
    ]
   },
   {
@@ -5049,9 +5503,12 @@
    "clip": "Walk right",
    "f": 5,
    "from": [
-    "Walk forward right",
-    5,
-    0.9128474830954171
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 5
+    },
+    0.913
    ]
   },
   {
@@ -5059,9 +5516,12 @@
    "clip": "Walk right",
    "f": 6,
    "from": [
-    "Walk forward right",
-    6,
-    0.976709241172051
+    {
+     "seg": 9,
+     "clip": "Walk forward right",
+     "f": 6
+    },
+    0.977
    ]
   },
   {
@@ -5069,9 +5529,12 @@
    "clip": "Walk backward right",
    "f": 7,
    "from": [
-    "Walk right",
-    7,
-    0.023290758827948913
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 7
+    },
+    0.023
    ]
   },
   {
@@ -5079,9 +5542,12 @@
    "clip": "Walk backward right",
    "f": 8,
    "from": [
-    "Walk right",
-    8,
-    0.08715251690458302
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 8
+    },
+    0.087
    ]
   },
   {
@@ -5089,9 +5555,12 @@
    "clip": "Walk backward right",
    "f": 9,
    "from": [
-    "Walk right",
-    9,
-    0.18256949661908337
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 9
+    },
+    0.183
    ]
   },
   {
@@ -5099,9 +5568,12 @@
    "clip": "Walk backward right",
    "f": 10,
    "from": [
-    "Walk right",
-    10,
-    0.3005259203606311
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 10
+    },
+    0.301
    ]
   },
   {
@@ -5109,9 +5581,12 @@
    "clip": "Walk backward right",
    "f": 11,
    "from": [
-    "Walk right",
-    11,
-    0.43200601051840715
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 11
+    },
+    0.432
    ]
   },
   {
@@ -5119,9 +5594,12 @@
    "clip": "Walk backward right",
    "f": 12,
    "from": [
-    "Walk right",
-    12,
-    0.5679939894815927
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 12
+    },
+    0.568
    ]
   },
   {
@@ -5129,9 +5607,12 @@
    "clip": "Walk backward right",
    "f": 13,
    "from": [
-    "Walk right",
-    13,
-    0.6994740796393689
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 13
+    },
+    0.699
    ]
   },
   {
@@ -5139,9 +5620,12 @@
    "clip": "Walk backward right",
    "f": 14,
    "from": [
-    "Walk right",
-    14,
-    0.8174305033809166
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 14
+    },
+    0.817
    ]
   },
   {
@@ -5149,9 +5633,12 @@
    "clip": "Walk backward right",
    "f": 15,
    "from": [
-    "Walk right",
-    15,
-    0.9128474830954171
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 15
+    },
+    0.913
    ]
   },
   {
@@ -5159,9 +5646,12 @@
    "clip": "Walk backward right",
    "f": 16,
    "from": [
-    "Walk right",
-    16,
-    0.976709241172051
+    {
+     "seg": 10,
+     "clip": "Walk right",
+     "f": 16
+    },
+    0.977
    ]
   },
   {
@@ -5169,9 +5659,12 @@
    "clip": "Walk backward",
    "f": 17,
    "from": [
-    "Walk backward right",
-    17,
-    0.023290758827948913
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 17
+    },
+    0.023
    ]
   },
   {
@@ -5179,9 +5672,12 @@
    "clip": "Walk backward",
    "f": 18,
    "from": [
-    "Walk backward right",
-    18,
-    0.08715251690458302
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 18
+    },
+    0.087
    ]
   },
   {
@@ -5189,9 +5685,12 @@
    "clip": "Walk backward",
    "f": 19,
    "from": [
-    "Walk backward right",
-    19,
-    0.18256949661908337
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 19
+    },
+    0.183
    ]
   },
   {
@@ -5199,9 +5698,12 @@
    "clip": "Walk backward",
    "f": 20,
    "from": [
-    "Walk backward right",
-    20,
-    0.3005259203606311
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 20
+    },
+    0.301
    ]
   },
   {
@@ -5209,9 +5711,12 @@
    "clip": "Walk backward",
    "f": 21,
    "from": [
-    "Walk backward right",
-    21,
-    0.43200601051840715
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 21
+    },
+    0.432
    ]
   },
   {
@@ -5219,9 +5724,12 @@
    "clip": "Walk backward",
    "f": 22,
    "from": [
-    "Walk backward right",
-    22,
-    0.5679939894815927
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 22
+    },
+    0.568
    ]
   },
   {
@@ -5229,9 +5737,12 @@
    "clip": "Walk backward",
    "f": 23,
    "from": [
-    "Walk backward right",
-    23,
-    0.6994740796393689
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 23
+    },
+    0.699
    ]
   },
   {
@@ -5239,9 +5750,12 @@
    "clip": "Walk backward",
    "f": 24,
    "from": [
-    "Walk backward right",
-    24,
-    0.8174305033809166
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 24
+    },
+    0.817
    ]
   },
   {
@@ -5249,9 +5763,12 @@
    "clip": "Walk backward",
    "f": 25,
    "from": [
-    "Walk backward right",
-    25,
-    0.9128474830954171
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 25
+    },
+    0.913
    ]
   },
   {
@@ -5259,9 +5776,12 @@
    "clip": "Walk backward",
    "f": 26,
    "from": [
-    "Walk backward right",
-    26,
-    0.976709241172051
+    {
+     "seg": 11,
+     "clip": "Walk backward right",
+     "f": 26
+    },
+    0.977
    ]
   },
   {
@@ -5269,9 +5789,12 @@
    "clip": "Walk backward left",
    "f": 1,
    "from": [
-    "Walk backward",
-    1,
-    0.023290758827948913
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 1
+    },
+    0.023
    ]
   },
   {
@@ -5279,9 +5802,12 @@
    "clip": "Walk backward left",
    "f": 2,
    "from": [
-    "Walk backward",
-    2,
-    0.08715251690458302
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 2
+    },
+    0.087
    ]
   },
   {
@@ -5289,9 +5815,12 @@
    "clip": "Walk backward left",
    "f": 3,
    "from": [
-    "Walk backward",
-    3,
-    0.18256949661908337
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 3
+    },
+    0.183
    ]
   },
   {
@@ -5299,9 +5828,12 @@
    "clip": "Walk backward left",
    "f": 4,
    "from": [
-    "Walk backward",
-    4,
-    0.3005259203606311
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 4
+    },
+    0.301
    ]
   },
   {
@@ -5309,9 +5841,12 @@
    "clip": "Walk backward left",
    "f": 5,
    "from": [
-    "Walk backward",
-    5,
-    0.43200601051840715
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 5
+    },
+    0.432
    ]
   },
   {
@@ -5319,9 +5854,12 @@
    "clip": "Walk backward left",
    "f": 6,
    "from": [
-    "Walk backward",
-    6,
-    0.5679939894815927
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 6
+    },
+    0.568
    ]
   },
   {
@@ -5329,9 +5867,12 @@
    "clip": "Walk backward left",
    "f": 7,
    "from": [
-    "Walk backward",
-    7,
-    0.6994740796393689
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 7
+    },
+    0.699
    ]
   },
   {
@@ -5339,9 +5880,12 @@
    "clip": "Walk backward left",
    "f": 8,
    "from": [
-    "Walk backward",
-    8,
-    0.8174305033809166
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 8
+    },
+    0.817
    ]
   },
   {
@@ -5349,9 +5893,12 @@
    "clip": "Walk backward left",
    "f": 9,
    "from": [
-    "Walk backward",
-    9,
-    0.9128474830954171
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 9
+    },
+    0.913
    ]
   },
   {
@@ -5359,9 +5906,12 @@
    "clip": "Walk backward left",
    "f": 10,
    "from": [
-    "Walk backward",
-    10,
-    0.976709241172051
+    {
+     "seg": 12,
+     "clip": "Walk backward",
+     "f": 10
+    },
+    0.977
    ]
   },
   {
@@ -5369,9 +5919,12 @@
    "clip": "Walk left",
    "f": 11,
    "from": [
-    "Walk backward left",
-    11,
-    0.023290758827948913
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 11
+    },
+    0.023
    ]
   },
   {
@@ -5379,9 +5932,12 @@
    "clip": "Walk left",
    "f": 12,
    "from": [
-    "Walk backward left",
-    12,
-    0.08715251690458302
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 12
+    },
+    0.087
    ]
   },
   {
@@ -5389,9 +5945,12 @@
    "clip": "Walk left",
    "f": 13,
    "from": [
-    "Walk backward left",
-    13,
-    0.18256949661908337
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 13
+    },
+    0.183
    ]
   },
   {
@@ -5399,9 +5958,12 @@
    "clip": "Walk left",
    "f": 14,
    "from": [
-    "Walk backward left",
-    14,
-    0.3005259203606311
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 14
+    },
+    0.301
    ]
   },
   {
@@ -5409,9 +5971,12 @@
    "clip": "Walk left",
    "f": 15,
    "from": [
-    "Walk backward left",
-    15,
-    0.43200601051840715
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 15
+    },
+    0.432
    ]
   },
   {
@@ -5419,9 +5984,12 @@
    "clip": "Walk left",
    "f": 16,
    "from": [
-    "Walk backward left",
-    16,
-    0.5679939894815927
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 16
+    },
+    0.568
    ]
   },
   {
@@ -5429,9 +5997,12 @@
    "clip": "Walk left",
    "f": 17,
    "from": [
-    "Walk backward left",
-    17,
-    0.6994740796393689
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 17
+    },
+    0.699
    ]
   },
   {
@@ -5439,9 +6010,12 @@
    "clip": "Walk left",
    "f": 18,
    "from": [
-    "Walk backward left",
-    18,
-    0.8174305033809166
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 18
+    },
+    0.817
    ]
   },
   {
@@ -5449,9 +6023,12 @@
    "clip": "Walk left",
    "f": 19,
    "from": [
-    "Walk backward left",
-    19,
-    0.9128474830954171
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 19
+    },
+    0.913
    ]
   },
   {
@@ -5459,9 +6036,12 @@
    "clip": "Walk left",
    "f": 20,
    "from": [
-    "Walk backward left",
-    20,
-    0.976709241172051
+    {
+     "seg": 13,
+     "clip": "Walk backward left",
+     "f": 20
+    },
+    0.977
    ]
   },
   {
@@ -5469,9 +6049,12 @@
    "clip": "Walk forward left",
    "f": 21,
    "from": [
-    "Walk left",
-    21,
-    0.023290758827948913
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 21
+    },
+    0.023
    ]
   },
   {
@@ -5479,9 +6062,12 @@
    "clip": "Walk forward left",
    "f": 22,
    "from": [
-    "Walk left",
-    22,
-    0.08715251690458302
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 22
+    },
+    0.087
    ]
   },
   {
@@ -5489,9 +6075,12 @@
    "clip": "Walk forward left",
    "f": 23,
    "from": [
-    "Walk left",
-    23,
-    0.18256949661908337
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 23
+    },
+    0.183
    ]
   },
   {
@@ -5499,9 +6088,12 @@
    "clip": "Walk forward left",
    "f": 24,
    "from": [
-    "Walk left",
-    24,
-    0.3005259203606311
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 24
+    },
+    0.301
    ]
   },
   {
@@ -5509,9 +6101,12 @@
    "clip": "Walk forward left",
    "f": 25,
    "from": [
-    "Walk left",
-    25,
-    0.43200601051840715
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 25
+    },
+    0.432
    ]
   },
   {
@@ -5519,9 +6114,12 @@
    "clip": "Walk forward left",
    "f": 26,
    "from": [
-    "Walk left",
-    26,
-    0.5679939894815927
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 26
+    },
+    0.568
    ]
   },
   {
@@ -5529,9 +6127,12 @@
    "clip": "Walk forward left",
    "f": 1,
    "from": [
-    "Walk left",
-    1,
-    0.6994740796393689
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 1
+    },
+    0.699
    ]
   },
   {
@@ -5539,9 +6140,12 @@
    "clip": "Walk forward left",
    "f": 2,
    "from": [
-    "Walk left",
-    2,
-    0.8174305033809166
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 2
+    },
+    0.817
    ]
   },
   {
@@ -5549,9 +6153,12 @@
    "clip": "Walk forward left",
    "f": 3,
    "from": [
-    "Walk left",
-    3,
-    0.9128474830954171
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 3
+    },
+    0.913
    ]
   },
   {
@@ -5559,9 +6166,12 @@
    "clip": "Walk forward left",
    "f": 4,
    "from": [
-    "Walk left",
-    4,
-    0.976709241172051
+    {
+     "seg": 14,
+     "clip": "Walk left",
+     "f": 4
+    },
+    0.977
    ]
   },
   {
@@ -5569,9 +6179,12 @@
    "clip": "Walk forward",
    "f": 5,
    "from": [
-    "Walk forward left",
-    5,
-    0.023290758827948913
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 5
+    },
+    0.023
    ]
   },
   {
@@ -5579,9 +6192,12 @@
    "clip": "Walk forward",
    "f": 6,
    "from": [
-    "Walk forward left",
-    6,
-    0.08715251690458302
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 6
+    },
+    0.087
    ]
   },
   {
@@ -5589,9 +6205,12 @@
    "clip": "Walk forward",
    "f": 7,
    "from": [
-    "Walk forward left",
-    7,
-    0.18256949661908337
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 7
+    },
+    0.183
    ]
   },
   {
@@ -5599,9 +6218,12 @@
    "clip": "Walk forward",
    "f": 8,
    "from": [
-    "Walk forward left",
-    8,
-    0.3005259203606311
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 8
+    },
+    0.301
    ]
   },
   {
@@ -5609,9 +6231,12 @@
    "clip": "Walk forward",
    "f": 9,
    "from": [
-    "Walk forward left",
-    9,
-    0.43200601051840715
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 9
+    },
+    0.432
    ]
   },
   {
@@ -5619,9 +6244,12 @@
    "clip": "Walk forward",
    "f": 10,
    "from": [
-    "Walk forward left",
-    10,
-    0.5679939894815927
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 10
+    },
+    0.568
    ]
   },
   {
@@ -5629,9 +6257,12 @@
    "clip": "Walk forward",
    "f": 11,
    "from": [
-    "Walk forward left",
-    11,
-    0.6994740796393689
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 11
+    },
+    0.699
    ]
   },
   {
@@ -5639,9 +6270,12 @@
    "clip": "Walk forward",
    "f": 12,
    "from": [
-    "Walk forward left",
-    12,
-    0.8174305033809166
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 12
+    },
+    0.817
    ]
   },
   {
@@ -5649,9 +6283,12 @@
    "clip": "Walk forward",
    "f": 13,
    "from": [
-    "Walk forward left",
-    13,
-    0.9128474830954171
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 13
+    },
+    0.913
    ]
   },
   {
@@ -5659,9 +6296,12 @@
    "clip": "Walk forward",
    "f": 14,
    "from": [
-    "Walk forward left",
-    14,
-    0.976709241172051
+    {
+     "seg": 15,
+     "clip": "Walk forward left",
+     "f": 14
+    },
+    0.977
    ]
   }
  ]

@@ -1,0 +1,41 @@
+{
+ "name": "snap-midcast-arcbolt",
+ "modules": [],
+ "out": "transitions/temp/snap-midcast-arcbolt",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 10
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 8,
+   "blend": 3,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "Discharge snap",
+   "frames": 14,
+   "blend": 4,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 60
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "name": "over-chargeloop-idlecombat",
+ "modules": [],
+ "out": "transitions/temp/over-chargeloop-idlecombat",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Charge loop",
+   "frames": 41,
+   "blend": 6,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Idle combat",
+   "frames": 80
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

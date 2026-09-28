@@ -1,0 +1,31 @@
+{
+ "name": "step-back-run",
+ "modules": [],
+ "out": "transitions/pairs/step-back-run",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run backward",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step back start",
+   "frames": 7,
+   "blend": 2
+  },
+  {
+   "clip": "Arc Step back loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step back end",
+   "frames": 5
+  },
+  {
+   "clip": "Run backward",
+   "frames": 24,
+   "blend": 4
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "title": "Run forward",
+ "blend": "art\\anim\\wip\\hands2\\_work\\it1-1.blend",
+ "rendered_frames": [
+  1
+ ],
+ "body_views": [
+  "hero"
+ ],
+ "rows": [
+  {
+   "f": 1,
+   "L": {
+    "thumb_up": 0.155,
+    "palm_fwd": 0.353,
+    "hand": -0.748,
+    "raise": 52.473,
+    "elbow_open": 138.065,
+    "gated": true,
+    "swept_back": false
+   },
+   "R": {
+    "thumb_up": 0.956,
+    "palm_fwd": 0.201,
+    "hand": 0.748,
+    "raise": 45.298,
+    "elbow_open": 106.077,
+    "gated": true,
+    "swept_back": false
+   }
+  }
+ ]
+}

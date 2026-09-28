@@ -1,0 +1,37 @@
+{
+ "name": "cancel-spear-to-arcbolt",
+ "modules": [],
+ "out": "transitions/pairs/cancel-spear-to-arcbolt",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "@track",
+   "frames": 12
+  },
+  {
+   "clip": "Conduit Spear",
+   "frames": 11,
+   "blend": 2,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "Arc Bolt right",
+   "frames": 20,
+   "blend": 2,
+   "mask": "upper",
+   "lower": "track"
+  },
+  {
+   "clip": "@track",
+   "frames": 16,
+   "blend": 6
+  }
+ ],
+ "lower_track": [
+  {
+   "clip": "Run forward",
+   "frames": 60
+  }
+ ]
+}

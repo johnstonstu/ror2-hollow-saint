@@ -1,0 +1,37 @@
+{
+ "name": "step-back-idle",
+ "modules": [],
+ "out": "transitions/temp/step-back-idle",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Idle",
+   "frames": 12,
+   "start": 85
+  },
+  {
+   "clip": "Arc Step back start",
+   "frames": 7,
+   "blend": 4
+  },
+  {
+   "clip": "Arc Step back loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step back end",
+   "frames": 15,
+   "start": 2
+  },
+  {
+   "clip": "Idle",
+   "frames": 24,
+   "blend": 6
+  }
+ ],
+ "views": [
+  "hero",
+  "chase"
+ ]
+}

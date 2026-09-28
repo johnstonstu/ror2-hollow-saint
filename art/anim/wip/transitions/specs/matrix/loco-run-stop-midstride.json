@@ -1,0 +1,22 @@
+{
+ "name": "loco-run-stop-midstride",
+ "modules": [],
+ "out": "transitions/matrix/loco-run-stop-midstride",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 24
+  },
+  {
+   "clip": "Run stop R",
+   "frames": 16,
+   "start": 1
+  },
+  {
+   "clip": "Idle",
+   "frames": 24,
+   "start": 2
+  }
+ ]
+}

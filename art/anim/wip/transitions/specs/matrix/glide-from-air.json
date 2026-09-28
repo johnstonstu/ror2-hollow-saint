@@ -1,0 +1,17 @@
+{
+ "name": "glide-from-air",
+ "modules": [],
+ "out": "transitions/matrix/glide-from-air",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Descend",
+   "frames": 12
+  },
+  {
+   "clip": "Glide loop",
+   "frames": 33,
+   "blend": 6
+  }
+ ]
+}

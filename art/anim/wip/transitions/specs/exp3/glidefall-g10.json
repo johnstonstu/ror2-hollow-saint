@@ -1,0 +1,17 @@
+{
+ "name": "glidefall-g10",
+ "modules": [],
+ "out": "transitions/exp3/glidefall-g10",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Glide loop",
+   "frames": 16
+  },
+  {
+   "clip": "Descend",
+   "frames": 14,
+   "blend": 10
+  }
+ ]
+}

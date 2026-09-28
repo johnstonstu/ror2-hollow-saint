@@ -1,0 +1,47 @@
+{
+ "name": "step-fwd-chain",
+ "modules": [],
+ "out": "transitions/matrix/step-fwd-chain",
+ "root_motion": true,
+ "segments": [
+  {
+   "clip": "Run forward",
+   "frames": 12
+  },
+  {
+   "clip": "Arc Step start",
+   "frames": 7,
+   "blend": 4
+  },
+  {
+   "clip": "Arc Step loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step end",
+   "frames": 4,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step start",
+   "frames": 7,
+   "blend": 4
+  },
+  {
+   "clip": "Arc Step loop",
+   "frames": 9,
+   "start": 2
+  },
+  {
+   "clip": "Arc Step end",
+   "frames": 15,
+   "start": 2
+  },
+  {
+   "clip": "Idle",
+   "frames": 24,
+   "blend": 6
+  }
+ ]
+}
