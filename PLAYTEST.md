@@ -3,12 +3,17 @@
 Build label: **v0.9.17 | release candidate**. No gameplay changes since 0.9.16; this is the 1.0 cleanup.
 The 0.9.16 list below is still open, and is what decides 1.0.
 
-- [ ] **Log:** after a run, `BepInEx/LogOutput.log` should have one Hollow Saint line ("Hollow Saint 0.9.17 loaded.") and nothing else from us. The clean-profile launch did; a real run should too.
-- [ ] **Options:** "6. Misc" has "Verbose log" (off). "Item displays (restart)" and "RoR2 body shader (restart)" are the renamed options; set them again if you had changed them.
-- [ ] **README footage:** `docs/media/*.gif` (hero, Arc Bolt, Stormspear, Arc Step, Gaze, storm, skins). Recorded by the autopilot showcase, so the aim is scripted. Good enough to ship, or do you want hand-played footage for some?
-- [ ] **Clean install:** profile "Hollow Saint Clean" in r2modman holds only the declared dependencies and the packaged zip contents. Start one run there.
-- [ ] **Multiplayer:** still never tested. The README says so. Ship 1.0 without it, or test with a friend first?
-- [ ] **Open Circuit cooldown** (from 0.9.15): 8 s after the crown closes. Confirm.
+## Before Thunderstore (about 20 minutes)
+
+Multiplayer ships untested (the README says so).
+
+- [ ] **Clean install:** r2modman profile **Hollow Saint Clean** (only the declared dependencies, now including Risk Of Options, plus the packaged zip, no config). Start it; Hollow Saint is in character select.
+- [ ] **Mod Options:** Settings > Mod Options shows Hollow Saint with sections "0. Movement" to "7. Gaze of the Hollow". "6. Misc" has "Verbose log" (off).
+- [ ] **One real run, stages 1 to 3, default config:** every skill, at least one Thunderbolt, one Gaze, one Open Circuit (8 s cooldown after the crown closes). Anything that feels wrong on fresh defaults?
+- [ ] **Skins:** each of the 5 in the Loadout spin and in game.
+- [ ] **Watch for:** the rare hand pop when a spear charge starts.
+- [ ] **Log:** quit, then open `BepInEx/LogOutput.log` in the Clean profile. One Hollow Saint line ("Hollow Saint 0.9.17 loaded.") and no Hollow Saint warnings or errors. "ClipCursor failed" lines are the game, not us.
+- [ ] **Pick:** the icon (previews in `artifacts/thunderstore-preview/`) and the package name (`HollowSaint` or `Hollow_Saint`).
 
 # Playtest v0.9.16 (2026-10-02)
 
