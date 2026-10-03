@@ -1,3 +1,5 @@
+<p align="center"><b>English</b> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/README.zh-CN.md">简体中文</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/README.ru.md">Русский</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/README.pt-BR.md">Português (BR)</a></p>
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/banner.jpg" alt="Hollow Saint, a storm survivor for Risk of Rain 2" width="100%">
 </p>
@@ -29,6 +31,10 @@
 Hollow Saint is an original survivor built around chain lightning. Snap bolts that leap between enemies, form a spear of lightning in your hand and drive it into a pack, and keep the hits coming until the storm answers with a Thunderbolt.
 
 **[Report a bug](https://github.com/johnstonstu/ror2-hollow-saint/issues)** · **[Changelog](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md)** · **[Source](https://github.com/johnstonstu/ror2-hollow-saint)** · **[Also by me: AH64](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/)**
+
+## Languages
+
+Hollow Saint follows the language you set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese ship with the mod; any other language shows the English text. The Mod Options menu stays in English. The Chinese, Russian and Brazilian Portuguese text is machine-translated, and corrections are welcome in a [translation issue](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md). How the strings are built is in [TRANSLATING.md](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/docs/TRANSLATING.md).
 
 ## The kit
 
@@ -95,7 +101,7 @@ Five skins, each with its own halo and lightning colour: Cracked Icon, Obsidian 
 
 **Mod manager (recommended):** install with [r2modman](https://thunderstore.io/c/riskofrain2/p/ebkr/r2modman/) or the Thunderstore Mod Manager. The dependencies are installed automatically.
 
-**Manual:** install the dependencies listed on this page, then copy the package's `plugins/HollowSaint` folder into `BepInEx/plugins/`. Keep `HollowSaint.dll` and `hollowsaintassets` together.
+**Manual:** install the dependencies listed on this page, then copy the package's `plugins/HollowSaint` folder into `BepInEx/plugins/`. Keep `HollowSaint.dll`, `hollowsaintassets` and `HollowSaint.language` together in that folder. If the language file is not next to the DLL, the game will not load the translations.
 
 ## Options
 

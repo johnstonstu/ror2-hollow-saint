@@ -15,6 +15,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\*.png" LogicalName="HollowSaint.Icons.%(Filename).png" />
     <EmbeddedResource Include="..\art\audio\HollowSaintAudio\GeneratedSoundBanks\Windows\HollowSaint.bnk" LogicalName="HollowSaint.Audio.HollowSaint.bnk" />
+    <!-- Shipped beside the DLL (R2API auto-load) and embedded so a missing file still has English. -->
+    <Content Include="Language\HollowSaint.language" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Language\HollowSaint.language" LogicalName="HollowSaint.Language.HollowSaint.language" />
     <Reference Include="RiskOfOptions">
       <HintPath>$(RiskOfOptionsDll)</HintPath>
       <Private>false</Private>

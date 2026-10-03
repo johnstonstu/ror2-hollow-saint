@@ -670,7 +670,8 @@ namespace HollowSaint.FoundationKit
         }
     }
 
-    /// <summary>Language token keys, registered in KitRegistration.RegisterTokens.</summary>
+    /// <summary>Language token keys. The text is in Language/HollowSaint.language.
+    /// Description tokens are templates; KitDescriptions fills the numbers.</summary>
     public static class KitTokens
     {
         public const string Name = "HS_NAME";

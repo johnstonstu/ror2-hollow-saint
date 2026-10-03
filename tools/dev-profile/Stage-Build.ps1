@@ -32,6 +32,13 @@ if (Test-Path $target) { Copy-Item $target $backupDir; $lines += "previousDll=" 
 Copy-Item $built $target -Force
 $lines += "stagedDll=" + (Get-FileHash $target).Hash
 
+$langSource = Join-Path $repo 'HollowSaintMod\Language\HollowSaint.language'
+if (-not (Test-Path -LiteralPath $langSource)) { throw "Missing $langSource" }
+$langTarget = Join-Path $pluginDir 'HollowSaint.language'
+if (Test-Path -LiteralPath $langTarget) { Copy-Item -LiteralPath $langTarget $backupDir; $lines += "previousLanguage=" + (Get-FileHash -LiteralPath $langTarget).Hash }
+Copy-Item -LiteralPath $langSource -Destination $langTarget -Force
+$lines += "stagedLanguage=" + (Get-FileHash -LiteralPath $langTarget).Hash
+
 if ($Bundle) {
     $bundleSource = Resolve-Path (Join-Path $repo $Bundle)
     $bundleTarget = Join-Path $pluginDir 'hollowsaintassets'

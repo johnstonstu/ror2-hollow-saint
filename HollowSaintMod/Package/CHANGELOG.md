@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0
+- In-game text follows the language set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese are included. Any other language shows the English text.
+- Those three translations are machine-translated. Corrections are welcome.
+- Skill, passive and keyword numbers still update when you change them in Mod Options, in every language.
+- The Mod Options menu itself stays in English.
+- `HollowSaint.language` ships next to the DLL. Keep it there if you install by hand.
+
 ## 1.0.1
 - Early-game damage buff: base damage 15 (was 12), +2.4 per level unchanged. Stage 1 and the first boss should go down faster; late game is nearly untouched.
 - Base armor 15 (was 0) so the early game is less squishy.

@@ -1,5 +1,4 @@
 using System.Reflection;
-using R2API;
 using RoR2;
 using RoR2.Skills;
 using UnityEngine;
@@ -222,40 +221,13 @@ namespace HollowSaint
 
         private static void RegisterTokens()
         {
-            void Add(string key, string value) { LanguageAPI.Add(key, value); }
-
-            Add(KitTokens.ArcBoltName, "Arc Bolt");
-            Add(KitTokens.ConduitSpearName, "Stormspear");
-            Add(KitTokens.ArcStepName, "Arc Step");
-            Add(KitTokens.OpenCircuitName, "Open Circuit");
-            Add(HollowSaint.FoundationKit.Gaze.GazeRegistration.NameToken, "Gaze of the Hollow");
-            Add(KitTokens.StormName, "Answered Prayer");
-            // Descriptions and keywords carry numbers, so they are generated from KitTuning
-            // (KitDescriptions) and refreshed whenever a config value changes.
+            // Names, lore, outros and skins are in HollowSaint.language (Install is safe to repeat).
+            // The logbook looks up lore by swapping _NAME for _LORE on the body's name token, so
+            // HS_NAME becomes HS_LORE. HS_BODY_LORE covers the other form. Both are in the file.
+            // Descriptions carry live numbers, so KitDescriptions fills those templates on every
+            // config change and again when the player changes language.
+            HollowSaint.FoundationKit.KitLanguage.Install();
             HollowSaint.FoundationKit.KitDescriptions.RegisterAll();
-
-            // Logbook. The game looks up the lore token by swapping _NAME for _LORE on the
-            // body's name token, so HS_NAME becomes HS_LORE. HS_BODY_LORE covers the other form.
-            string lore =
-                "<style=cMono>> AUDIO TRANSCRIPT RECOVERED FROM UES CONTACT LIGHT, CARGO MANIFEST 7-C\n" +
-                "> ITEM: DEVOTIONAL FIGURE, IVORY, CERAMIC AND COPPER. PURPOSE: UNKNOWN.</style>\n\n" +
-                "It was listed as a statue. Two meters of ivory plate, a copper ring standing behind the head, " +
-                "a crack running down the face where the paint had never been. Nobody on the crew could say who shipped it, " +
-                "only that the hold was warmer near its crate, and that the lights in that corridor flickered in time with something.\n\n" +
-                "When the ship came apart over Petrichor V, the crate split on impact. The survivors who went back for supplies " +
-                "found it empty, the packing foam scorched in a perfect ring.\n\n" +
-                "What walks the planet now does not speak. It does not eat. It does not seem to need anything at all, except the storm. " +
-                "It gathers current the way a saint gathers the faithful: patiently, from everything nearby, until the halo splits " +
-                "and the air itself remembers what it owes.\n\n" +
-                "The monsters learned to fear the sound first. A dry snap, like a finger against a bell. Then the light.";
-            Add("HS_LORE", lore);
-            Add("HS_BODY_LORE", lore);
-            Add("HS_SKIN_DEFAULT_NAME", "Cracked Icon");
-            Add("HS_SKIN_OBSIDIAN_NAME", "Obsidian Saint");
-            Add("HS_SKIN_VERDIGRIS_NAME", "Verdigris Relic");
-            Add("HS_SKIN_SOLAR_NAME", "Solar Vespers");
-            Add("HS_SKIN_UMBRAL_NAME", "Umbral Choir");
-            Add("HS_OUTRO_FAILURE", "..and so it went dark, a hollow shell the storm no longer answered.");
         }
     }
 }

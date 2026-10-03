@@ -38,6 +38,8 @@ foreach ($f in @($Bundle, $icon, (Join-Path $pkg 'README.md'), (Join-Path $pkg '
     if (-not (Test-Path -LiteralPath $f -PathType Leaf)) { Fail "Missing $f" }
 }
 if ((Get-Content (Join-Path $pkg 'CHANGELOG.md') -Raw) -notmatch ('(?m)^## ' + [regex]::Escape($version) + '\b')) { Fail "CHANGELOG.md has no '## $version' entry" }
+& powershell -ExecutionPolicy Bypass -File (Join-Path $repo 'tools\tests\Check-Language.ps1')
+if ($LASTEXITCODE -ne 0) { Fail "Language check failed (exit $LASTEXITCODE)" }
 
 Add-Type -AssemblyName System.Drawing
 $img = [System.Drawing.Image]::FromFile($icon)
@@ -63,6 +65,7 @@ $files = [ordered]@{
     'LICENSE' = $license
     'plugins/HollowSaint/HollowSaint.dll' = $dll
     'plugins/HollowSaint/hollowsaintassets' = $Bundle
+    'plugins/HollowSaint/HollowSaint.language' = (Join-Path $repo 'HollowSaintMod\Language\HollowSaint.language')
 }
 foreach ($e in $files.GetEnumerator()) {
     $target = Join-Path $stage ($e.Key.Replace('/', '\'))
