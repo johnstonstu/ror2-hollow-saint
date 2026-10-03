@@ -24,6 +24,8 @@ An original Risk of Rain 2 survivor built around chain lightning: bolts that lea
 
 ![The five skins](docs/media/skin-lineup.png)
 
+**Also by JohnstonStu:** [AH64](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/), an Apache attack helicopter survivor.
+
 ## Repo
 
 | Path | Contents |

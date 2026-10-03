@@ -75,6 +75,15 @@ Bugs and balance feedback are welcome on [GitHub issues](https://github.com/john
 - **Multiplayer has not had a real playtest yet.** The skills are server-authoritative and their effects are networked, but expect rough edges. Every player should run the same version and the same config. Reports are very welcome.
 - Item displays borrow Commando's placements on matching mounts, so a few items sit slightly off.
 
+## Also by JohnstonStu
+
+<table>
+  <tr>
+    <td><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/ah64-icon.png" alt="AH64" width="96"></a></td>
+    <td><b><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/">AH64</a></b>: an Apache attack helicopter survivor. It hovers and never lands, with a chain gun, Hydra rockets, Hellfire and Longbow missiles, and evasive rolls.</td>
+  </tr>
+</table>
+
 ## Credits and license
 
 - Created by JohnstonStu: design, code, model, animation and effects.
