@@ -4,7 +4,7 @@
 # stand-in for a fresh install: a missing dependency or a default-config problem shows up here, not in
 # the dev profile. -NoRiskOfOptions leaves it out to test the soft-dependency path (manual installs).
 # Copies from the "Hollow Saint Dev" profile.
-# Usage: powershell -ExecutionPolicy Bypass -File tools\release\New-CleanProfile.ps1 -Package artifacts\release\JohnstonStu-HollowSaint-<v>
+# Usage: powershell -ExecutionPolicy Bypass -File tools\release\New-CleanProfile.ps1 -Package artifacts\release\JohnstonStu-Hollow_Saint-<v>
 param([Parameter(Mandatory=$true)][string]$Package, [switch]$NoRiskOfOptions)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
@@ -24,7 +24,7 @@ foreach ($p in $deps) {
     if (Test-Path $src) { Copy-Item $src (Join-Path $clean 'BepInEx\plugins') -Recurse }
 }
 $pkgDir = (Resolve-Path (Join-Path $repo $Package)).Path
-$dest = Join-Path $clean 'BepInEx\plugins\JohnstonStu-HollowSaint'
+$dest = Join-Path $clean 'BepInEx\plugins\JohnstonStu-Hollow_Saint'
 New-Item -ItemType Directory -Force $dest | Out-Null
 Copy-Item (Join-Path $pkgDir 'plugins\HollowSaint\*') $dest
 Copy-Item (Join-Path $pkgDir 'manifest.json'), (Join-Path $pkgDir 'icon.png') $dest

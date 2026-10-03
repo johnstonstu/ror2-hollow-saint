@@ -55,8 +55,8 @@ Set `HS_SEGMENTS` first to run one script (`items`, `storm`, `gaze`, `polish`, `
 ## Release
 
 1. Bump `Plugin.Version` and `Package/manifest.json` together, and add a `CHANGELOG.md` entry.
-2. `tools\release\Make-Package.ps1` builds `artifacts\release\JohnstonStu-HollowSaint-<version>.zip` from the Release DLL and the playtested bundle.
-3. `tools\release\New-CleanProfile.ps1 -Package artifacts\release\JohnstonStu-HollowSaint-<version>` builds a `Hollow Saint Clean` profile with only the declared dependencies and no config (`-NoRiskOfOptions` tests the soft-dependency path); play it once to catch missing dependencies or default-config problems.
+2. `tools\release\Make-Package.ps1` builds `artifacts\release\JohnstonStu-Hollow_Saint-<version>.zip` from the Release DLL and the playtested bundle.
+3. `tools\release\New-CleanProfile.ps1 -Package artifacts\release\JohnstonStu-Hollow_Saint-<version>` builds a `Hollow Saint Clean` profile with only the declared dependencies and no config (`-NoRiskOfOptions` tests the soft-dependency path); play it once to catch missing dependencies or default-config problems.
 4. README footage: `tools\release\Record-Showcase.ps1 -Name showcaseNN` records the showcase script (game window only), then `tools\release\Make-ReadmeMedia.ps1 -Name showcaseNN` writes the GIFs to `docs/media`. The Thunderstore README loads them from `main` on GitHub, so push before uploading.
 
 ## Logging

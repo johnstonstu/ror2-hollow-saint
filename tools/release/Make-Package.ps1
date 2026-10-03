@@ -1,7 +1,7 @@
 # Builds the Thunderstore package zip for Hollow Saint from the Release DLL and the tested asset bundle.
 # Usage: powershell -ExecutionPolicy Bypass -File tools\release\Make-Package.ps1 [-Bundle <path to hollowsaintassets>]
 # Default bundle: the one staged in the "Hollow Saint Dev" profile (the build Stu playtested).
-# Output: artifacts\release\JohnstonStu-HollowSaint-<version>.zip (+ an unpacked folder for inspection).
+# Output: artifacts\release\JohnstonStu-Hollow_Saint-<version>.zip (+ an unpacked folder for inspection).
 param([string]$Bundle)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
@@ -15,7 +15,7 @@ $plugin = (Get-Content (Join-Path $repo 'HollowSaintMod\Plugin.cs') -Raw)
 if ($plugin -notmatch ('Version = "' + [regex]::Escape($version) + '"')) { throw "Plugin.cs Version does not match manifest $version" }
 
 $out = Join-Path $repo 'artifacts\release'
-$stage = Join-Path $out ("JohnstonStu-HollowSaint-" + $version)
+$stage = Join-Path $out ("JohnstonStu-Hollow_Saint-" + $version)
 if (Test-Path $stage) { Remove-Item $stage -Recurse -Force }
 New-Item -ItemType Directory -Force (Join-Path $stage 'plugins\HollowSaint') | Out-Null
 Copy-Item (Join-Path $pkg 'manifest.json'), (Join-Path $pkg 'README.md'), (Join-Path $pkg 'CHANGELOG.md'), (Join-Path $pkg 'icon.png') $stage

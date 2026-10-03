@@ -9,9 +9,10 @@ $pkg = Join-Path $repo 'HollowSaintMod\Package'
 $out = Join-Path $repo 'artifacts\thunderstore-preview'
 New-Item -ItemType Directory -Force $out | Out-Null
 $manifest = Get-Content (Join-Path $pkg 'manifest.json') -Raw | ConvertFrom-Json
+$manifest.name = $manifest.name -replace '_', ' '
 $Icons = @($Icons | ForEach-Object { $_ -split ',' } | Where-Object { $_ })
 if (-not $Icons) { $Icons = @((Join-Path $pkg 'icon.png')) }
-$iconFiles = foreach ($i in $Icons) { $p = (Resolve-Path $i).Path; $name = Split-Path $p -Leaf; if ((Split-Path $p) -ne $out) { Copy-Item $p (Join-Path $out $name) -Force }; $name }
+$iconFiles = @(foreach ($i in $Icons) { $p = (Resolve-Path $i).Path; $name = Split-Path $p -Leaf; if ((Split-Path $p) -ne $out) { Copy-Item $p (Join-Path $out $name) -Force }; $name })
 
 $readme = (gh api markdown/raw -H 'Content-Type: text/plain' --input (Join-Path $pkg 'README.md')) -join "`n"
 if ($LASTEXITCODE -ne 0) { throw 'gh api markdown/raw failed (is gh logged in?)' }
@@ -73,7 +74,9 @@ if ($Screenshot) {
     $ErrorActionPreference = 'Continue'
     foreach ($s in $shots) {
         $url = 'file:///' + (Join-Path $out $s.html).Replace('\', '/')
-        & $edge --headless=new --disable-gpu --hide-scrollbars --virtual-time-budget=15000 ('--window-size=' + $s.size) ('--screenshot=' + (Join-Path $out $s.png)) $url 2>$null | Out-Null
+        $profileDir = Join-Path $env:TEMP ('hs-preview-' + [guid]::NewGuid())
+        & $edge --headless=new --disable-gpu --hide-scrollbars --virtual-time-budget=15000 ('--user-data-dir=' + $profileDir) ('--window-size=' + $s.size) ('--screenshot=' + (Join-Path $out $s.png)) $url 2>&1 | Out-Null
+        Remove-Item $profileDir -Recurse -Force -ErrorAction SilentlyContinue
     }
 }
 Get-ChildItem $out -Filter *.html | ForEach-Object { 'preview: ' + $_.FullName }
