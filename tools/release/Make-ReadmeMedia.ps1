@@ -1,5 +1,5 @@
 # Trims the showcase clips (tools\release\Record-Showcase.ps1) to their best windows and writes the README
-# media to docs\media: animated WebP (640x360, 20 fps; committed, outside LFS so Thunderstore can hotlink
+# media to docs\media: animated WebP (20 fps; committed, outside LFS so Thunderstore can hotlink
 # them), plus the skin lineup from the showcase stills. Matching 1280x720 MP4s go to artifacts\<Name>\readme.
 # Usage: powershell -ExecutionPolicy Bypass -File tools\release\Make-ReadmeMedia.ps1 -Name showcase07
 param([Parameter(Mandatory=$true)][string]$Name)
@@ -11,16 +11,18 @@ $media = Join-Path $repo 'docs\media'
 $videos = Join-Path $repo ("artifacts\" + $Name + "\readme")
 New-Item -ItemType Directory -Force $media, $videos | Out-Null
 
-# output name, source clip, start s, length s, crop of the 1280x720 clip (w:h:x:y; zooms in on the Saint)
+# output name, source clip, start s, length s, crop of the 1280x720 clip (w:h:x:y; zooms in on the Saint), WebP width
+# The two full-width clips at the top of the README (gaze-hero, crown) are encoded larger than the per-skill clips.
 $wide = '1280:720:0:0'; $near = '1040:585:120:110'
 $cuts = @(
-    @('hero',         'hero',        0.8, 5.2, '1120:630:80:40'),
-    @('arc-bolt',     'arcbolt',     0.6, 4.8, $near),
-    @('stormspear',   'stormspear',  0.5, 5.5, $near),
-    @('arc-step',     'arcstep',     0.0, 4.6, $wide),
-    @('gaze',         'gaze',        0.5, 6.5, $near),
-    @('open-circuit', 'opencircuit', 1.5, 6.5, $near),
-    @('storm',        'storm',       8.5, 7.0, $near)
+    @('gaze-hero',    'gaze-c',      0.4, 6.0, '1120:630:80:40', 960),
+    @('crown',        'hero',        0.8, 5.2, '1120:630:80:40', 960),
+    @('arc-bolt',     'arcbolt',     0.6, 4.8, $near, 640),
+    @('stormspear',   'stormspear',  0.5, 5.5, $near, 640),
+    @('arc-step',     'arcstep',     0.0, 4.6, $wide, 640),
+    @('gaze',         'gaze-a',      0.4, 6.0, $near, 640),
+    @('open-circuit', 'opencircuit', 1.5, 6.5, $near, 640),
+    @('storm',        'storm',       8.5, 7.0, $near, 640)
 )
 $inv = [Globalization.CultureInfo]::InvariantCulture
 foreach ($c in $cuts) {
@@ -30,7 +32,7 @@ foreach ($c in $cuts) {
     $webp = Join-Path $media ($c[0] + '.webp'); $mp4 = Join-Path $videos ($c[0] + '.mp4')
     $crop = 'crop=' + $c[4]
     & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $src -vf ($crop + ',scale=1280:720:flags=lanczos') -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart -an $mp4
-    & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $src -vf ($crop + ',fps=20,scale=640:360:flags=lanczos') -c:v libwebp_anim -quality 72 -compression_level 6 -loop 0 -an $webp
+    & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $src -vf ($crop + ',fps=20,scale=' + $c[5] + ':-2:flags=lanczos') -c:v libwebp_anim -quality 72 -compression_level 6 -loop 0 -an $webp
     "{0,-13} webp={1,6:0} KB  mp4={2,6:0} KB" -f $c[0], ((Get-Item $webp).Length / 1KB), ((Get-Item $mp4).Length / 1KB)
 }
 

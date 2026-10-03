@@ -9,7 +9,9 @@
 
 An original Risk of Rain 2 survivor built around chain lightning: bolts that leap between enemies, a spear of lightning that sticks and bursts, and a storm passive that answers your hits with Thunderbolts.
 
-<p align="center"><img src="docs/media/hero.webp" alt="Open Circuit: the crown opens and strikes every enemy around the Saint" width="100%"></p>
+<p align="center"><img src="docs/media/gaze-hero.webp" alt="Gaze of the Hollow: the Saint rises and sweeps a forking lightning beam across a pack" width="100%"></p>
+
+<p align="center"><img src="docs/media/crown.webp" alt="Open Circuit: the crown opens and strikes every enemy around the Saint" width="100%"></p>
 
 **Players:** the full description (every skill with footage, the storm, skins, install, options) is the Thunderstore README: [HollowSaintMod/Package/README.md](HollowSaintMod/Package/README.md). Release notes are in [CHANGELOG.md](HollowSaintMod/Package/CHANGELOG.md).
 

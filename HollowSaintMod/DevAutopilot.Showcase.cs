@@ -47,6 +47,15 @@ namespace HollowSaint
             trace.AppendLine(scriptTime.ToString("000.00") + " SYNC utc=" + DateTime.UtcNow.ToString("o"));
             yield return Wait(1.0f);
 
+            if (Environment.GetEnvironmentVariable("HS_SHOWCASE_QUICK") == "gaze")
+            {
+                yield return GazeTake("gaze-a", 150f, 8.5f, 0.2f);
+                yield return GazeTake("gaze-b", 115f, 9.5f, 0.6f);
+                yield return GazeTake("gaze-c", 165f, 6.5f, -0.4f);
+                yield return FinishShowcase();
+                yield break;
+            }
+
             // Skins first, while the ground is still clear of corpses.
             yield return SkinLineup();
 
@@ -118,22 +127,9 @@ namespace HollowSaint
             Clip("arcstep", false);
 
             var special = pilot.skillLocator ? pilot.skillLocator.special : null;
-            var gaze = FoundationKit.Gaze.GazeRegistration.SkillDef;
-            if (special && gaze)
-            {
-                yield return Segment("show-gaze");
-                special.SetSkillOverride(this, gaze, GenericSkill.SkillOverridePriority.Replacement);
-                ClearLive(); SpawnLive("LemurianMaster", 6, 12f);
-                yield return Wait(1.2f);
-                Clip("gaze", true);
-                aimTarget = LiveCentre();
-                yield return Press(4);
-                yield return AimAtLive(1.2f, centre: true);
-                yield return SweepLive(3.6f);
-                yield return Wait(1.8f);
-                Clip("gaze", false);
-                special.UnsetSkillOverride(this, gaze, GenericSkill.SkillOverridePriority.Replacement);
-            }
+            yield return GazeTake("gaze", 150f, 8.5f, 0.2f);
+            SetCameraDistance(8.5f, 0.5f);
+            cameraWant = null;
 
             if (special && KitRegistration.OpenCircuitDef)
             {
@@ -215,6 +211,31 @@ namespace HollowSaint
                 pilot.skinIndex = 0u; skins.ApplySkin(0);
                 cameraWant = null;
             }
+        }
+
+        /// <summary>One Gaze of the Hollow shot on the default special: a pack ahead, the camera held at a fixed yaw.</summary>
+        private IEnumerator GazeTake(string name, float yaw, float back, float up)
+        {
+            var special = pilot.skillLocator ? pilot.skillLocator.special : null;
+            if (!special) yield break;
+            yield return Segment("show-" + name);
+            ClearLive(); SpawnLive("LemurianMaster", 7, 13f);
+            special.Reset();
+            aimTarget = null; aimPitch = 0f;
+            SetCameraDistance(back, up);
+            cameraWant = FrontLook(yaw, -0.05f);
+            cameraLook = cameraWant.Value;
+            yield return Wait(1.6f);
+            trace.AppendLine(scriptTime.ToString("000.00") + " GAZE " + name + " skill=" + (special.skillDef ? special.skillDef.skillName : "none") +
+                " stock=" + special.stock + " cooldown=" + special.cooldownRemaining.ToString("0.0"));
+            Clip(name, true);
+            aimTarget = LiveCentre();
+            fire4 = true; yield return Wait(0.25f); fire4 = false;
+            yield return AimAtLive(1.0f, centre: true);
+            yield return SweepLive(3.4f);
+            yield return Wait(1.6f);
+            Clip(name, false);
+            yield return Wait(1.0f);
         }
 
         /// <summary>A look direction from in front of the Saint back at it, turned by yaw degrees and tilted down.</summary>

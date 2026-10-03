@@ -13,25 +13,56 @@
 <p align="center">Enjoying it? Please <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/">like Hollow Saint on Thunderstore</a> so other players can find it.</p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/hero.webp" alt="Open Circuit: the Saint's crown opens and strikes every enemy around it" width="100%">
+  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Gaze of the Hollow: the Saint rises and sweeps a forking lightning beam across a pack" width="100%">
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/crown.webp" alt="Open Circuit: the crown opens over the Saint and strikes every enemy around it" width="100%">
 </p>
 
 <h3 align="center">Chain lightning. A spear of lightning. A storm that answers back.</h3>
 
 Hollow Saint is an original survivor built around chain lightning. Snap bolts that leap between enemies, form a spear of lightning in your hand and drive it into a pack, and keep the hits coming until the storm answers with a Thunderbolt.
 
-**[Report a bug](https://github.com/johnstonstu/ror2-hollow-saint/issues)** · **[Changelog](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md)** · **[Source](https://github.com/johnstonstu/ror2-hollow-saint)**
+**[Report a bug](https://github.com/johnstonstu/ror2-hollow-saint/issues)** · **[Changelog](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md)** · **[Source](https://github.com/johnstonstu/ror2-hollow-saint)** · **[Also by me: AH64](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/)**
 
 ## The kit
 
-| Slot | Skill | What it does | In game |
-| :---: | --- | --- | :---: |
-| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="64" alt="Answered Prayer"><br>**Passive** | **Answered Prayer** | Hits build **Static**. Full Static **Electrocutes** an enemy: a short jolt, it takes more damage for a few seconds, and the arc jumps to its neighbours. Every Electrocute lights an orb on your halo; with all five lit, a **Thunderbolt** strikes a strong enemy for 1000% damage. | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm.webp" width="320" alt="The last orbs light and a Thunderbolt strikes the pack"> |
-| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_bolt.png" width="64" alt="Arc Bolt"><br>**Primary** | **Arc Bolt** | Snap a bolt for 100% damage that chains to up to 3 more enemies. | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-bolt.webp" width="320" alt="Arc Bolt chaining through a pack"> |
-| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="64" alt="Stormspear"><br>**Secondary** | **Stormspear** | Hold to form a spear of lightning in your hand, release to throw it for 400% to 1600% damage. It sticks in what it hits, then bursts on everything around it. Arc Bolt keeps firing from your other hand while you charge. 5 s cooldown. | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" width="320" alt="A charged Stormspear sticking and bursting"> |
-| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="64" alt="Arc Step"><br>**Utility** | **Arc Step** | Blink a short distance in any direction, even in the air. Follows your aim a little, so look up to climb. Two charges, 5 s each; jump out of it to keep the momentum. | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-step.webp" width="320" alt="Arc Step left, right and up"> |
-| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="64" alt="Gaze of the Hollow"><br>**Special** | **Gaze of the Hollow** | Rise into the air and send your halo out before you: a lightning beam for 4 seconds, 500% damage per second, that pierces, splashes and forks across the ground, reaching further the longer it fires. Bonus armor while it channels. Recast, Arc Step or press B on a controller to end it early. 12 s cooldown. | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" width="320" alt="Gaze of the Hollow sweeping a pack"> |
-| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="64" alt="Open Circuit"><br>*Special variant* | **Open Circuit** | Open your halo into a crown for 10 seconds. It strikes every enemy within 8 m twice a second while you keep fighting, your spear forms above your head and charges 2.5x faster, and a fully charged crown spear calls a Thunderbolt. 8 s cooldown, counted from when the crown closes. | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/open-circuit.webp" width="320" alt="Open Circuit striking a pack, then a crown spear"> |
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="48" alt=""> Answered Prayer <sub>Passive</sub></h3>
+
+Hits build **Static**. Full Static **Electrocutes** an enemy: a short jolt, it takes more damage for a few seconds, and the arc jumps to its neighbours. Every Electrocute lights an orb on your halo; with all five lit, a **Thunderbolt** strikes a strong enemy for 1000% damage.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm.webp" width="640" alt="The last orbs light and a Thunderbolt strikes the pack"></p>
+
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_bolt.png" width="48" alt=""> Arc Bolt <sub>Primary</sub></h3>
+
+Snap a bolt for 100% damage that chains to up to 3 more enemies.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-bolt.webp" width="640" alt="Arc Bolt chaining through a pack"></p>
+
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="48" alt=""> Stormspear <sub>Secondary</sub></h3>
+
+Hold to form a spear of lightning in your hand, release to throw it for 400% to 1600% damage. It sticks in what it hits, then bursts on everything around it. Arc Bolt keeps firing from your other hand while you charge. 5 s cooldown.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" width="640" alt="A charged Stormspear sticking and bursting"></p>
+
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="48" alt=""> Arc Step <sub>Utility</sub></h3>
+
+Blink a short distance in any direction, even in the air. Follows your aim a little, so look up to climb. Two charges, 5 s each; jump out of it to keep the momentum.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-step.webp" width="640" alt="Arc Step left, right and up"></p>
+
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="48" alt=""> Gaze of the Hollow <sub>Special</sub></h3>
+
+Rise into the air and send your halo out before you: a lightning beam for 4 seconds, 500% damage per second, that pierces, splashes and forks across the ground, reaching further the longer it fires. Bonus armor while it channels. Recast, Arc Step or press B on a controller to end it early. 12 s cooldown.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" width="640" alt="Gaze of the Hollow sweeping a pack"></p>
+
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="48" alt=""> Open Circuit <sub>Special, alternate</sub></h3>
+
+Open your halo into a crown for 10 seconds. It strikes every enemy within 8 m twice a second while you keep fighting, your spear forms above your head and charges 2.5x faster, and a fully charged crown spear calls a Thunderbolt. 8 s cooldown, counted from when the crown closes.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/open-circuit.webp" width="640" alt="Open Circuit striking a pack, then a crown spear"></p>
 
 ## How the storm works
 
