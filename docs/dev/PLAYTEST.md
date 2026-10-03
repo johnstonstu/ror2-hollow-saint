@@ -12,7 +12,7 @@ Multiplayer ships untested (the README says so).
 - [ ] **One real run, stages 1 to 3, default config:** every skill, at least one Thunderbolt, one Gaze, one Open Circuit (8 s cooldown after the crown closes). Anything that feels wrong on fresh defaults?
 - [ ] **Skins:** each of the 5 in the Loadout spin and in game.
 - [ ] **Watch for:** the rare hand pop when a spear charge starts.
-- [ ] **Log:** quit, then open `BepInEx/LogOutput.log` in the Clean profile. One Hollow Saint line ("Hollow Saint 1.0.0 loaded.") and no Hollow Saint warnings or errors. "ClipCursor failed" lines are the game, not us.
+- [ ] **Log:** quit, then open `BepInEx/LogOutput.log` in the Clean profile. One Hollow Saint line ("Hollow Saint 1.0.1 loaded.") and no Hollow Saint warnings or errors. "ClipCursor failed" lines are the game, not us.
 - [ ] **Icon:** the new gaze-beam icon (package name is now `Hollow_Saint`, shown as "Hollow Saint"). Previews in `artifacts/thunderstore-preview/`.
 
 # Playtest v0.9.16 (2026-10-02)

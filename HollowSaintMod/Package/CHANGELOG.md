@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+- Early-game damage buff: base damage 15 (was 12), +2.4 per level unchanged. Stage 1 and the first boss should go down faster; late game is nearly untouched.
+- Base armor 15 (was 0) so the early game is less squishy.
+- Early access note added to the README.
+- New vanilla-style character select icon.
+
 ## 1.0.0
 - First public release.
 - No version tag in the top-left corner any more.

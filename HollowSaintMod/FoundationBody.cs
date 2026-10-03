@@ -13,6 +13,10 @@ namespace HollowSaint
         internal static float BaseMoveSpeed = 7.7f;
         internal static float SprintMultiplier = 1.45f;
         internal static float BaseJumpPower = 17f;
+        // Damage. Commando: 12 +2.4/level. 1.0.1 raises only the flat base for an early-game buff.
+        internal static float BaseDamage = 15f;
+        // Armor. Commando: 0. Flat, no per-level growth.
+        internal static float BaseArmor = 15f;
         private static GameObject prefab;
 
         /// <summary>Applies the movement numbers to the body prefab and, when a run is live,
@@ -80,6 +84,10 @@ namespace HollowSaint
             body.baseJumpCount = 2; // storm double jump (BodyFx draws the lightning cloud)
             prefab = bodyObject;
             ApplyTo(body); // levelMoveSpeed / levelJumpPower stay at Commando's values
+            body.baseDamage = BaseDamage;
+            body.levelDamage = 2.4f;
+            body.baseArmor = BaseArmor;
+            body.levelArmor = 0f;
             body.subtitleNameToken = "HS_SUBTITLE";
             body.bodyColor = new Color(0.2f, 0.9f, 1f);
             body.rootMotionInMainState = false;

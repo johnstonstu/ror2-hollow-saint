@@ -12,6 +12,10 @@
 
 <p align="center">Enjoying it? Please <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/">like Hollow Saint on Thunderstore</a> so other players can find it.</p>
 
+> **Early access:** Hollow Saint is still being tuned, so expect balance changes and the occasional bug. Your feedback directly shapes the next balance patch.
+>
+> **[Report a bug or share balance feedback](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Gaze of the Hollow: the Saint rises and sweeps a forking lightning beam across a pack" width="100%">
 </p>
