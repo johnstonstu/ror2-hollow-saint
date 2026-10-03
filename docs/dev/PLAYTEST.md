@@ -12,7 +12,7 @@ Multiplayer ships untested (the README says so).
 - [ ] **One real run, stages 1 to 3, default config:** every skill, at least one Thunderbolt, one Gaze, one Open Circuit (8 s cooldown after the crown closes). Anything that feels wrong on fresh defaults?
 - [ ] **Skins:** each of the 5 in the Loadout spin and in game.
 - [ ] **Watch for:** the rare hand pop when a spear charge starts.
-- [ ] **Log:** quit, then open `BepInEx/LogOutput.log` in the Clean profile. One Hollow Saint line ("Hollow Saint 1.0.1 loaded.") and no Hollow Saint warnings or errors. "ClipCursor failed" lines are the game, not us.
+- [ ] **Log:** quit, then open `BepInEx/LogOutput.log` in the Clean profile. One Hollow Saint line ("Hollow Saint 1.1.0 loaded.") and no Hollow Saint warnings or errors. "ClipCursor failed" lines are the game, not us.
 - [ ] **Icon:** the new gaze-beam icon (package name is now `Hollow_Saint`, shown as "Hollow Saint"). Previews in `artifacts/thunderstore-preview/`.
 
 # Playtest v0.9.16 (2026-10-02)
@@ -41,7 +41,7 @@ Build label: **v0.9.14 | left hand spear | right hand bolts**.
 - [ ] **Off hand:** while charging, the right hand is held out in front and Arc Bolt fires from it.
 - [ ] **Grip:** the left fingers close on the shaft. These are procedural because the bundle only has right-hand grip clips. Do they look right up close, e.g. in the character spin?
 - [ ] **Throw read:** the whip, release and follow-through across the body to the right hip.
-- [ ] If anything looks worse than the right hand did, Options > "2. Stormspear" > "Spear in left hand" switches it back live, so you can compare.
+- [ ] If anything looks worse than the right hand did, Options > "2. Stormspear" > "Spear hand" (Auto, Left, Right) switches it between throws, so you can compare.
 - [ ] Still open from 0.9.13: spear sound, splash, CC, Gaze ramp, storm explanation.
 
 # Playtest v0.9.13 (2026-10-02)

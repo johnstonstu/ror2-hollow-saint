@@ -21,6 +21,8 @@ namespace HollowSaint.FoundationKit
 
         /// <summary>Debug logging of the first few gameplay events (HOLLOW_SAINT_EVENT lines).</summary>
         public static ConfigEntry<bool> EventLog;
+        /// <summary>Stormspear "Spear hand" (Auto, Left, Right).</summary>
+        public static ConfigEntry<SpearDischarge.SpearHand> SpearHand;
 
         internal static void Bind(ConfigFile c)
         {
@@ -58,7 +60,9 @@ namespace HollowSaint.FoundationKit
             F(c, spear, "Charge seconds", Stormspear.StormspearTuning.ChargeSeconds, v => Stormspear.StormspearTuning.ChargeSeconds = v, 0.4f, 6f, 0.1f, "Seconds from tap to full charge at 1x attack speed. Attack speed shortens it.");
             F(c, spear, "Aim assistance angle", Stormspear.StormspearTuning.AssistConeDegrees, v => Stormspear.StormspearTuning.AssistConeDegrees = v, 0f, 6f, 0.5f, "Degrees either side of the launch direction that can acquire one visible enemy for gentle homing. 0 disables assistance; applies to new hand and crown throws.");
             F(c, spear, "Crown charge multiplier", Stormspear.StormspearTuning.CrownChargeMultiplier, v => Stormspear.StormspearTuning.CrownChargeMultiplier = v, 1f, 6f, 0.1f, "How much faster the spear charges while Open Circuit is up.");
-            B(c, spear, "Spear in left hand", SpearDischarge.SpearCarry.LeftHanded, v => SpearDischarge.SpearCarry.LeftHanded = v, "Hold and throw the hand spear with the left hand (matches the left trigger on a controller); Arc Bolt fires from the right hand while it charges. Off puts the spear back in the right hand.");
+            SpearHand = c.Bind(spear, "Spear hand", SpearDischarge.SpearHand.Auto, "Which hand holds and throws the hand spear. Auto follows your input device: left hand on a controller (left trigger), right hand on mouse and keyboard (right-click). Arc Bolt fires from the other hand while the spear charges. The hand only changes between throws.");
+            SpearDischarge.SpearCarry.HandMode = SpearHand.Value;
+            SpearHand.SettingChanged += (s, e) => SpearDischarge.SpearCarry.HandMode = SpearHand.Value;
             F(c, spear, "Off-hand Arc Bolt rate", Stormspear.StormspearTuning.OffHandRateMultiplier, v => Stormspear.StormspearTuning.OffHandRateMultiplier = v, 0.1f, 1f, 0.05f, "Arc Bolt fire-rate multiplier while charging in the hand (from the free hand only). No penalty in the crown.");
             F(c, spear, "Minimum throw interval", Stormspear.StormspearTuning.MinThrowInterval, v => Stormspear.StormspearTuning.MinThrowInterval = v, 0.05f, 1f, 0.05f, "Seconds between tap throws at 1x attack speed when dumping stocks.");
             F(c, spear, "Tap damage", Stormspear.StormspearTuning.TapDamage, v => Stormspear.StormspearTuning.TapDamage = v, 0.5f, 12f, 0.1f, "Damage coefficient of an uncharged throw.");
@@ -196,6 +200,16 @@ namespace HollowSaint.FoundationKit
                 // v0.9.16 (Stu playtest): Thunderbolts a little more often.
                 MigrateInt(storm, "Charges per Thunderbolt", 6, 5, v => KitTuning.StormChargeMax = v);
             }
+            if (defaultsVersion.Value < 10)
+            {
+                // 1.1.0: "Spear in left hand" (bool, default true) became "Spear hand" (Auto/Left/Right).
+                // The old default maps to the new default Auto; a player who turned it off keeps Right.
+                var oldHand = new ConfigDefinition(spear, "Spear in left hand");
+                var old = c.Bind(oldHand, true);
+                if (!old.Value) SpearHand.Value = SpearDischarge.SpearHand.Right;
+                c.Remove(oldHand);
+                c.Save();
+            }
             if (defaultsVersion.Value < CurrentDefaultsVersion) defaultsVersion.Value = CurrentDefaultsVersion;
             KitDescriptions.Refresh();
 
@@ -208,7 +222,7 @@ namespace HollowSaint.FoundationKit
             if (logVersion.Value < 1) { if (EventLog.Value) EventLog.Value = false; logVersion.Value = 1; }
         }
 
-        private const int CurrentDefaultsVersion = 9;
+        private const int CurrentDefaultsVersion = 10;
 
         private static void MigrateBool(string section, string key, bool oldDefault, bool newDefault, Action<bool> set)
         {
@@ -289,6 +303,16 @@ namespace HollowSaint.FoundationKit
                     new RiskOfOptions.OptionConfigs.IntSliderConfig { min = i.Min, max = i.Max, restartRequired = i.Restart }));
             foreach (var b in Bools)
                 RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(b));
+            if (SpearHand != null)
+            {
+                // Own tokens (HollowSaint.language) so the name, description and choices are translated;
+                // Risk of Options would register fixed English tokens for them otherwise.
+                var hand = new RiskOfOptions.Options.ChoiceOption(SpearHand);
+                RiskOfOptions.ModSettingsManager.AddOption(hand, Plugin.Guid, "Hollow Saint", "HS_OPTION_SPEAR_HAND_NAME", "HS_OPTION_SPEAR_HAND_DESC");
+                var tokens = typeof(RiskOfOptions.Options.ChoiceOption).GetField("_nameTokens", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                if (tokens != null && tokens.GetValue(hand) is string[] names && names.Length == 3)
+                    tokens.SetValue(hand, new[] { "HS_OPTION_SPEAR_HAND_AUTO", "HS_OPTION_SPEAR_HAND_LEFT", "HS_OPTION_SPEAR_HAND_RIGHT" });
+            }
         }
     }
 }

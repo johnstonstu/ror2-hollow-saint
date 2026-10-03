@@ -5,8 +5,9 @@
 # under artifacts\<Name>\clips. Stage the build first (tools\dev-profile\Stage-Build.ps1).
 # Usage: powershell -ExecutionPolicy Bypass -File tools\release\Record-Showcase.ps1 -Name showcase07
 #        add -CutOnly to re-cut an existing recording (raw.mp4 + trace.txt) without launching the game.
+#        -Quick gaze -Skin 4 records only the Gaze takes, on skin 4 (Umbral).
 param([Parameter(Mandatory=$true)][string]$Name, [int]$TimeoutSeconds = 300, [double]$Pad = 0.4,
-      [string]$ProfileName = 'Hollow Saint Dev', [switch]$CutOnly, [string]$Quick)
+      [string]$ProfileName = 'Hollow Saint Dev', [switch]$CutOnly, [string]$Quick, [string]$Skin)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $out = Join-Path $repo ("artifacts\" + $Name)
@@ -27,9 +28,10 @@ if (-not $CutOnly) {
     $env:HS_AUTOPILOT = $out
     $env:HS_SEGMENTS = 'showcase'
     if ($Quick) { $env:HS_SHOWCASE_QUICK = $Quick }
+    if ($Skin) { $env:HS_SHOWCASE_SKIN = $Skin }
     $arguments = '--doorstop-enabled true --doorstop-target-assembly "' + $preloader + '" --r2profile "' + $ProfileName + '"'
     $p = Start-Process -FilePath (Join-Path $game 'Risk of Rain 2.exe') -WorkingDirectory $game -ArgumentList $arguments -PassThru
-    Remove-Item Env:HS_AUTOPILOT, Env:HS_SEGMENTS, Env:HS_SHOWCASE_QUICK -ErrorAction SilentlyContinue
+    Remove-Item Env:HS_AUTOPILOT, Env:HS_SEGMENTS, Env:HS_SHOWCASE_QUICK, Env:HS_SHOWCASE_SKIN -ErrorAction SilentlyContinue
 
     # The game window, by handle, once it exists.
     $hwnd = 0
@@ -105,6 +107,9 @@ foreach ($line in Get-Content $trace) {
 }
 
 $starts = @{}
+# Where each clip sits in raw.mp4 (Make-ReadmeMedia's hero HQ cuts read it to encode from the raw recording).
+$offsets = Join-Path $clips 'offsets.txt'
+Set-Content -Path $offsets -Value '# clip start_s length_s (in raw.mp4)' -Encoding ASCII
 foreach ($line in Get-Content $trace) {
     if ($line -match 'CLIP (\S+) (start|end) utc=(\S+)') {
         $t = ([DateTime]::Parse($Matches[3], $inv, $roundtrip).ToUniversalTime() - $recStart).TotalSeconds
@@ -113,6 +118,7 @@ foreach ($line in Get-Content $trace) {
         if ($at -lt 0) { $at = 0.0 }
         [double]$len = $t - $at + $Pad
         $ss = $at.ToString('0.000', $inv); $tt = $len.ToString('0.000', $inv)
+        Add-Content -Path $offsets -Value ($Matches[1] + ' ' + $ss + ' ' + $tt) -Encoding ASCII
         $mp4 = Join-Path $clips ($Matches[1] + '.mp4'); $gif = Join-Path $clips ($Matches[1] + '.gif')
         & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $raw -vf 'scale=1280:720:flags=lanczos' -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart -an $mp4
         & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $raw -vf 'fps=15,scale=640:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle' $gif

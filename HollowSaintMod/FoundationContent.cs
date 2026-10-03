@@ -14,6 +14,7 @@ namespace HollowSaint
     {
         private readonly ContentPack pack = new ContentPack();
         private AssetBundle bundle;
+        private bool loaded;
         internal static GameObject SpearModel { get; private set; }
         internal GameObject Body { get; private set; }
         internal GameObject Display { get; private set; }
@@ -63,14 +64,18 @@ namespace HollowSaint
                 pack.bodyPrefabs.Add(new[] { Body });
                 pack.masterPrefabs.Add(new[] { master });
                 pack.survivorDefs.Add(new[] { Survivor });
+                loaded = true;
                 Plugin.Log.LogInfo("Hollow Saint assets and native body constructed.");
             }
-            catch (Exception error) { Plugin.Log.LogError("Hollow Saint content load failed: " + error); throw; }
+            // Content loading is part of the game's init routine; rethrowing would stop the whole
+            // game from launching, so a broken install only leaves Hollow Saint unregistered.
+            catch (Exception error) { Plugin.Log.LogError("Hollow Saint content load failed; Hollow Saint is disabled: " + error); }
             args.ReportProgress(1);
             yield break;
         }
         public IEnumerator GenerateContentPackAsync(GetContentPackAsyncArgs args)
         {
+            if (!loaded) { args.ReportProgress(1); yield break; }
             // The game owns the output identifier; populate its public collections directly.
             args.output.bodyPrefabs.Add(pack.bodyPrefabs.ToArray());
             args.output.masterPrefabs.Add(pack.masterPrefabs.ToArray());

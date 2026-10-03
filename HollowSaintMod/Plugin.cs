@@ -8,7 +8,6 @@ using Color = UnityEngine.Color;
 using FontStyle = UnityEngine.FontStyle;
 using BepInEx;
 using BepInEx.Logging;
-using R2API;
 using RoR2;
 using RoR2.ContentManagement;
 using HollowSaint.FoundationKit.SpearDischarge;
@@ -24,7 +23,7 @@ namespace HollowSaint
     {
         public const string Guid = "com.johnstonstu.hollowsaint";
         // Bump on every staged build; keep in sync with Package/manifest.json. 1.0.0 = first public release.
-        public const string Version = "1.0.1";
+        public const string Version = "1.1.0";
         // Two keywords describing what this build changed; shown in the top-left build tag (0.x builds only).
         public const string BuildKeywords = "release";
         private GUIStyle tagStyle;
@@ -60,17 +59,9 @@ namespace HollowSaint
             DevAutopilot.TryStart();
             try
             {
-                LanguageAPI.Add("HS_NAME", "Hollow Saint");
-                LanguageAPI.Add("HS_DESCRIPTION",
-                    "The Hollow Saint is a cracked devotional icon that answers only to the storm. It chains lightning through crowds, " +
-                    "throws spears of lightning into priority targets, and answers every prayer the storm counts.<color=#CCD3E0>\n\n" +
-                    "< ! > Hold secondary to charge a Stormspear and release to throw it. Arc Bolt keeps firing from your off hand while you charge.\n\n" +
-                    "< ! > Arc Step keeps its momentum if you jump out of it. Use both charges to cross gaps.\n\n" +
-                    "< ! > Stormspear sticks in what it hits and bursts on everything around it. Throw it into the middle of a pack.\n\n" +
-                    "< ! > Gaze of the Hollow lifts you out of reach. Sweep the beam across a line of enemies; recast or Arc Step to drop early.\n\n" +
-                    "< ! > How the storm works: every hit builds Static on the enemy (watch it crackle). Full Static Electrocutes it: a short jolt, it takes more damage for a few seconds, and the arc spreads Static to its neighbours. Each Electrocute lights an orb on your halo; with every orb lit, a Thunderbolt strikes a strong enemy in sight. Keep hitting the same pack to keep the chain going.</color>");
-                LanguageAPI.Add("HS_SUBTITLE", "Cracked Icon");
-                LanguageAPI.Add("HS_OUTRO", "..and so it left, its circuit closed at last.");
+                // Static strings (name, lore, skins) come from HollowSaint.language. English in that
+                // file is the fallback for every other language. Descriptions are filled in after Bind.
+                HollowSaint.FoundationKit.KitLanguage.Install();
 
                 HollowSaint.FoundationKit.KitConfig.Bind(Config);
                 HollowSaint.FoundationKit.KitConfig.TryRegisterOptionsMenu();
@@ -100,8 +91,15 @@ namespace HollowSaint
         }
 
         private void Collect(ContentManager.AddContentPackProviderDelegate add) => add(content);
+        // Runs inside RoR2Application.InitializeGameRoutine via onLoad. Nothing here may throw:
+        // an exception stops the game from finishing its launch.
         private void VerifyCatalog()
         {
+            if (content == null || !content.Body || !content.Survivor)
+            {
+                Log.LogWarning("Hollow Saint content did not load; skipping catalog verification.");
+                return;
+            }
             try
             {
                 HollowSaint.FoundationKit.Storm.RoyalCapacitorFx.VerifyCatalog();
@@ -110,7 +108,7 @@ namespace HollowSaint
                 if (kitOk) Log.LogInfo("HOLLOW_SAINT_KIT_VERIFIED " + detail);
                 else Log.LogError("HOLLOW_SAINT_KIT_VERIFY_FAILED " + detail);
             }
-            catch (Exception error) { Log.LogError("Hollow Saint kit verification threw: " + error); }
+            catch (Exception error) { Log.LogWarning("Hollow Saint kit verification threw: " + error); }
             try
             {
                 var s = content.Survivor;
@@ -122,9 +120,9 @@ namespace HollowSaint
                     " expansionReq=" + (content.Body && content.Body.GetComponent<RoR2.ExpansionManagement.ExpansionRequirementComponent>() ? "YES" : "no") +
                     " display=" + (s.displayPrefab ? s.displayPrefab.name : "NULL"));
             }
-            catch (Exception error) { Log.LogError("HOLLOW_SAINT_SELECT_DIAG threw: " + error); }
+            catch (Exception error) { Log.LogWarning("HOLLOW_SAINT_SELECT_DIAG threw: " + error); }
             try { FoundationAudit.Write(content.Body, content.Survivor, content.Display); }
-            catch (Exception error) { Log.LogError("Hollow Saint catalog verification failed: " + error); throw; }
+            catch (Exception error) { Log.LogWarning("Hollow Saint catalog verification failed: " + error); }
         }
         private void ReportBody(CharacterBody body)
         {

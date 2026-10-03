@@ -113,7 +113,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             VfxParticles.Burst(corePos, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.2f, Vector2.zero, new Vector2(0.7f, 0.9f), pal.Arc);
             if (c.Form == SpearForm.Hand)
             {
-                Vector3 palm = KitFx.Socket(body, SpearCarry.SpearMuzzle);
+                Vector3 palm = KitFx.Socket(body, SpearCarry.SpearMuzzleOf(body));
                 VfxParticles.Burst(palm, Quaternion.identity, pal.Material(VfxAssets.Spark), 6, 0.2f, new Vector2(1.5f, 4f), new Vector2(0.04f, 0.09f), pal.Core, stretch: 0.06f);
                 LightningLine.Spawn(palm, palm + Random.onUnitSphere * 0.3f, 0.1f, 0.25f, 0, palette: pal);
             }
@@ -199,7 +199,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             if (!carry) carry = body.GetComponent<SpearCarry>();
             bool fresh = carry && carry.SinceThrow < 0.3f;
             {
-                Vector3 palm = fresh ? carry.LastGrip : KitFx.Socket(body, SpearCarry.SpearMuzzle);
+                Vector3 palm = fresh ? carry.LastGrip : KitFx.Socket(body, SpearCarry.SpearMuzzleOf(body));
                 VfxParticles.Burst(palm, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.14f, Vector2.zero, new Vector2(0.6f, 0.8f) * (0.6f + charge01), pal.Arc);
                 // Streak: a short launch flash along the throw. v0.9.1: the spear ghost's wake now
                 // carries the path, so this is one thin line (the old pair was up to 3.8 wide and
@@ -293,7 +293,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
         {
             if (!ring || !ring.Valid) return;
             bool model = carry && carry.HandVisible && carry.Tip && carry.Contact;
-            Vector3 palm = carry && carry.HandVisible ? carry.GripPosition : KitFx.Socket(body, SpearCarry.SpearMuzzle);
+            Vector3 palm = carry && carry.HandVisible ? carry.GripPosition : KitFx.Socket(body, SpearCarry.SpearMuzzleOf(body));
             Vector3 tail = model ? (carry.Tail ? carry.Tail.position : carry.Contact.position) : palm, tip = model ? carry.Tip.position : palm;
             Vector3 axis = tip - tail;
             float len = axis.magnitude;
@@ -494,7 +494,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
         private Vector3 SpearCenter(SpearForm form)
         {
             if (form == SpearForm.Crown) return SpearCenterCrown();
-            return carry && carry.HandVisible ? carry.Center : KitFx.Socket(body, SpearCarry.SpearMuzzle);
+            return carry && carry.HandVisible ? carry.Center : KitFx.Socket(body, SpearCarry.SpearMuzzleOf(body));
         }
 
         private void UpdateLight(float c01, Vector3 at, SkinFxPalette pal)
@@ -523,12 +523,12 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             if (!carry) carry = body.GetComponent<SpearCarry>();
             if (!core) core = KitUtil.ResolveSocket(body, "Core");
             if (!chest) chest = KitUtil.ResolveSocket(body, "Chest");
-            // v0.9.14: the feed follows the spear arm (left by default); re-resolve when the config flips it.
-            if (!rUpper || !rFore || armLeft != SpearCarry.LeftHanded)
+            // v0.9.14: the feed follows the spear arm (left by default); re-resolve when the hand switches.
+            if (!rUpper || !rFore || armLeft != SpearCarry.SpearInLeft(body))
             {
-                armLeft = SpearCarry.LeftHanded;
-                rUpper = KitUtil.ResolveSocket(body, SpearCarry.SpearArmPrefix + "upperarm");
-                rFore = KitUtil.ResolveSocket(body, SpearCarry.SpearArmPrefix + "forearm");
+                armLeft = SpearCarry.SpearInLeft(body);
+                rUpper = KitUtil.ResolveSocket(body, SpearCarry.SpearArmPrefixOf(body) + "upperarm");
+                rFore = KitUtil.ResolveSocket(body, SpearCarry.SpearArmPrefixOf(body) + "forearm");
             }
             if (ring) ring.EnsureFitted();
             return ring && ring.Valid;

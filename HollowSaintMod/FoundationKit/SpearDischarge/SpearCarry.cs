@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace HollowSaint.FoundationKit.SpearDischarge
 {
+    public enum SpearHand { Auto = 0, Left = 1, Right = 2 }
+
     /// <summary>
     /// v0.9: the fitted spear model on the right-hand grip socket is the HAND-form lightning spear.
     /// It exists only while a hand-form Stormspear charge is held (plus a short window after the
@@ -19,7 +21,8 @@ namespace HollowSaint.FoundationKit.SpearDischarge
     /// socket and right-arm carry clips, so the left side is built at runtime: the grip socket is the
     /// right one mirrored through the rig's bind pose, every pose key is mirrored across the body, the
     /// carry clips are skipped and the left fingers close on the shaft procedurally.
-    /// Config "Spear hand" switches back to the right hand (live).
+    /// 1.1.0: config "Spear hand" (Auto, Left, Right) is resolved per body. Auto follows the owner's input
+    /// device; the owner's choice reaches other machines through the Stormspear states' serialization.
     /// </summary>
     [DefaultExecutionOrder(170)]
     [DisallowMultipleComponent]
@@ -45,12 +48,17 @@ namespace HollowSaint.FoundationKit.SpearDischarge
 
         private static float ReleaseTime { get { return Mathf.Max(0.02f, StormspearTuning.HandReleaseDelay); } }
 
-        /// <summary>Config "Spear hand": true holds and throws the hand spear with the left hand (default).</summary>
-        public static bool LeftHanded = true;
-        /// <summary>Muzzle of the hand that holds the spear (effect fallbacks when the model is hidden).</summary>
-        public static string SpearMuzzle { get { return LeftHanded ? "MuzzleLeft" : "MuzzleRight"; } }
-        /// <summary>Bone name prefix of the spear arm ("L " or "R ").</summary>
-        public static string SpearArmPrefix { get { return LeftHanded ? "L " : "R "; } }
+        /// <summary>Config "Spear hand". Auto follows the local player's input device: gamepad = left hand
+        /// (left trigger), mouse and keyboard = right hand (right-click).</summary>
+        public static SpearHand HandMode = SpearHand.Auto;
+        /// <summary>Dev only: -1 reads the real input source, 0 pretends mouse and keyboard, 1 a gamepad.</summary>
+        internal static int DevInputOverride = -1;
+        /// <summary>Auto: seconds the input source must stay changed before the hand follows it.</summary>
+        private const float AutoSwitchDelay = 0.5f;
+        /// <summary>Muzzle of the hand that holds this body's spear (effect fallbacks when the model is hidden).</summary>
+        public static string SpearMuzzleOf(CharacterBody owner) { return SpearInLeft(owner) ? "MuzzleLeft" : "MuzzleRight"; }
+        /// <summary>Bone name prefix of this body's spear arm ("L " or "R ").</summary>
+        public static string SpearArmPrefixOf(CharacterBody owner) { return SpearInLeft(owner) ? "L " : "R "; }
         private const string LeftSocketName = "SpearGripSocketL";
         // Procedural grip for the left hand (no mirrored clip in the bundle): degrees per finger segment.
         private static readonly float[] GripCurl = { 76f, 90f, 64f };
@@ -65,7 +73,11 @@ namespace HollowSaint.FoundationKit.SpearDischarge
         // The names predate v0.9.14, when the spear arm was always the right one.
         private Transform leftUpper, leftFore, leftHand;
         private bool left;          // resolved side: spear in the left hand
-        private bool resolvedFor;   // LeftHanded when last resolved (a failed mirror falls back to the right)
+        private bool resolvedFor;   // wantLeft when last resolved (a failed mirror falls back to the right)
+        // This body's hand. The authority decides it (HandMode + its own input source); every other machine
+        // takes it from the Stormspear charge/throw states' serialization. Left until a value arrives.
+        private bool wantLeft = true;
+        private float pendingSince = -1f;
         private float side = 1f;    // +1 right-handed, -1 left-handed (mirrors every key across the body)
         private readonly Transform[] gripFingers = new Transform[12];
         private readonly Quaternion[] savedGrip = new Quaternion[12];
@@ -110,7 +122,48 @@ namespace HollowSaint.FoundationKit.SpearDischarge
         internal static bool SpearInLeft(CharacterBody owner)
         {
             var carry = owner ? owner.GetComponent<SpearCarry>() : null;
-            return carry && carry.visual ? carry.left : LeftHanded;
+            if (!carry) return true;
+            return carry.visual && carry.resolvedFor == carry.wantLeft ? carry.left : carry.wantLeft;
+        }
+        /// <summary>The hand this body's authority chose (what the Stormspear states replicate).</summary>
+        internal static bool NetworkHandOf(CharacterBody owner)
+        {
+            var carry = owner ? owner.GetComponent<SpearCarry>() : null;
+            return !carry || carry.wantLeft;
+        }
+        /// <summary>A replicated hand for a body this machine has no authority over.</summary>
+        internal static void ApplyNetworkHand(CharacterBody owner, bool spearLeft)
+        {
+            var carry = owner ? owner.GetComponent<SpearCarry>() : null;
+            if (!carry || owner.hasEffectiveAuthority || carry.wantLeft == spearLeft) return;
+            carry.wantLeft = spearLeft;
+            Plugin.Log.LogInfo("SPEAR_HAND " + (spearLeft ? "left" : "right") + " (replicated)");
+        }
+
+        /// <summary>Authority only: follows HandMode / the input source, but only while no spear is held,
+        /// charging or mid-throw, and in Auto only once the new source has lasted AutoSwitchDelay.</summary>
+        private void UpdateHand(float now)
+        {
+            if (!body.hasEffectiveAuthority) return;
+            bool desired = HandMode == SpearHand.Left || (HandMode == SpearHand.Auto && InputIsGamepad());
+            if (desired == wantLeft) { pendingSince = -1f; return; }
+            if (pendingSince < 0f) pendingSince = now;
+            if (HandMode == SpearHand.Auto && now - pendingSince < AutoSwitchDelay) return;
+            if (holding || throwStarted > 0f || (charge && charge.Charging)) return;
+            wantLeft = desired;
+            pendingSince = -1f;
+            Plugin.Log.LogInfo("SPEAR_HAND " + (desired ? "left" : "right") + " mode=" + HandMode);
+        }
+
+        private bool InputIsGamepad()
+        {
+            if (DevInputOverride >= 0) return DevInputOverride == 1;
+            var master = body.master;
+            var player = master ? master.playerCharacterMasterController : null;
+            var user = player && player.networkUser ? player.networkUser.localUser : null;
+            var events = user != null ? user.eventSystem : null;
+            if (!events) return wantLeft;
+            return events.currentInputSource == RoR2.UI.MPEventSystem.InputSource.Gamepad;
         }
         /// <summary>The grip socket of the hand spear, or null (recall lines anchor to it).</summary>
         internal static Transform GripSocketOf(CharacterBody owner)
@@ -150,6 +203,7 @@ namespace HollowSaint.FoundationKit.SpearDischarge
             { DropOnDeath(); Clear(); return; }
             if (!charge) charge = StormspearCharge.Of(body);
             if (!charge) { SetVisible(false); return; }
+            UpdateHand(Time.time);
             if (!Resolve()) return;
             if (!fx) fx = StormspearFx.For(body);
 
@@ -246,13 +300,15 @@ namespace HollowSaint.FoundationKit.SpearDischarge
         {
             var current = body.modelLocator ? body.modelLocator.modelTransform : null;
             if (!current) return false;
-            if (current == model && visual && resolvedFor == LeftHanded) return true;
+            if (current == model && visual && resolvedFor == wantLeft) return true;
             if (visual)
             {
-                // Side switch (config) or a new model: drop the old pose cleanly first.
+                // Side switch or a new model: drop the old pose cleanly first.
                 Update();
                 if (holding || throwStarted > 0f) KitAnim.Stop(body, KitAnim.SpearCarryLayer, 0.1f);
+                visual.SetActive(false);
                 Destroy(visual);
+                visual = null; weaponFx = null; Tip = Contact = Tail = null;
             }
             model = current;
             holding = false; throwStarted = -10f; poseW = 0f; guideW = 0f; gripW = 0f;
@@ -271,7 +327,7 @@ namespace HollowSaint.FoundationKit.SpearDischarge
                 if (!warned) { warned = true; Plugin.Log.LogError("SPEAR_CARRY missing fitted socket/model; bundle11 required"); }
                 return false;
             }
-            left = resolvedFor = LeftHanded;
+            left = resolvedFor = wantLeft;
             Transform mirrored = left && lHand ? MirrorSocket(model, rightSocket, rHand, lHand) : null;
             if (left && !mirrored) { left = false; Plugin.Log.LogWarning("SPEAR_CARRY could not mirror the grip socket; spear stays in the right hand"); }
             side = left ? -1f : 1f;

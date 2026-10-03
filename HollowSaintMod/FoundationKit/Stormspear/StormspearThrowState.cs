@@ -18,12 +18,14 @@ namespace HollowSaint.FoundationKit.Stormspear
         public SpearForm form = SpearForm.Hand;
         private float duration, releaseAt;
         private bool fired;
+        private bool spearLeft = true, gotHand;
 
         public override void OnSerialize(NetworkWriter writer)
         {
             base.OnSerialize(writer);
             writer.Write(charge);
             writer.Write((byte)form);
+            writer.Write(SpearDischarge.SpearCarry.NetworkHandOf(characterBody));
         }
 
         public override void OnDeserialize(NetworkReader reader)
@@ -31,11 +33,14 @@ namespace HollowSaint.FoundationKit.Stormspear
             base.OnDeserialize(reader);
             charge = reader.ReadSingle();
             form = (SpearForm)reader.ReadByte();
+            spearLeft = reader.ReadBoolean();
+            gotHand = true;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            if (gotHand) SpearDischarge.SpearCarry.ApplyNetworkHand(characterBody, spearLeft);
             duration = StormspearTuning.MinThrowInterval / Mathf.Max(0.1f, attackSpeedStat);
             // v0.9.3: a hand throw leaves at the apex of the whip, so the arm visibly throws the spear.
             releaseAt = form == SpearForm.Hand ? Mathf.Max(0f, StormspearTuning.HandReleaseDelay) : 0f;
@@ -92,7 +97,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             Ray aim = GetAimRay();
             Vector3 hand;
             if (form == SpearForm.Crown) hand = KitUtil.EyePosition(characterBody) + Vector3.up * StormspearTuning.CrownSpearHeight;
-            else if (!SpearDischarge.SpearCarry.TryReleasePoint(characterBody, out hand)) hand = Vfx.KitFx.Socket(characterBody, SpearDischarge.SpearCarry.SpearMuzzle);
+            else if (!SpearDischarge.SpearCarry.TryReleasePoint(characterBody, out hand)) hand = Vfx.KitFx.Socket(characterBody, SpearDischarge.SpearCarry.SpearMuzzleOf(characterBody));
             Vector3 target = aim.origin + aim.direction * 1000f;
             RaycastHit hit;
             if (Util.CharacterRaycast(gameObject, aim, out hit, 1000f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask, QueryTriggerInteraction.Ignore))

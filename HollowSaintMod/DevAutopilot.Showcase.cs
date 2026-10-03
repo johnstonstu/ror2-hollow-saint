@@ -49,6 +49,16 @@ namespace HollowSaint
 
             if (Environment.GetEnvironmentVariable("HS_SHOWCASE_QUICK") == "gaze")
             {
+                // HS_SHOWCASE_SKIN=4 records the Gaze takes on Umbral (purple lightning).
+                int showSkin;
+                var skinController = pilot.modelLocator && pilot.modelLocator.modelTransform ? pilot.modelLocator.modelTransform.GetComponent<ModelSkinController>() : null;
+                if (skinController && int.TryParse(Environment.GetEnvironmentVariable("HS_SHOWCASE_SKIN"), out showSkin) &&
+                    showSkin >= 0 && showSkin < skinController.skins.Length)
+                {
+                    pilot.skinIndex = (uint)showSkin; skinController.ApplySkin(showSkin);
+                    trace.AppendLine(scriptTime.ToString("000.00") + " SHOWCASE_SKIN " + showSkin + " " + skinController.skins[showSkin].name);
+                    yield return Wait(0.5f);
+                }
                 yield return GazeTake("gaze-d", null, 7f, 1.4f);
                 yield return GazeTake("gaze-e", null, 9f, 2.4f);
                 yield return GazeTake("gaze-f", null, 5.5f, 0.8f);

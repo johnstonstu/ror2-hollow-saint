@@ -37,6 +37,12 @@ namespace HollowSaint
         private IEnumerator JavelinSegments()
         {
             javelinChecking = true;
+            // 1.1.0: HS_SPEAR_HAND=Right runs the whole set right-handed; anything else forces Left.
+            var wasMode = SpearCarry.HandMode;
+            var forced = System.Environment.GetEnvironmentVariable("HS_SPEAR_HAND") == "Right" ? SpearHand.Right : SpearHand.Left;
+            SpearCarry.HandMode = forced;
+            trace.AppendLine("SPEAR_HAND_FORCED " + forced);
+            yield return Wait(0.3f);
             yield return Segment("javelin-level");
             fire2 = true;
             yield return Wait(0.12f); yield return JavelinShot("j-draw", false);
@@ -60,16 +66,19 @@ namespace HollowSaint
             yield return Wait(0.3f); yield return JavelinShot("j-recovered", false);
             Time.timeScale = 1f;
 
-            // v0.9.14: one right-hand charge for comparison (the option switches live), then back.
-            yield return Segment("javelin-righthand");
-            bool wasLeft = SpearCarry.LeftHanded;
-            SpearCarry.LeftHanded = false;
+            // v0.9.14: one charge in the other hand for comparison (the option switches live), then back.
+            yield return Segment(forced == SpearHand.Left ? "javelin-righthand" : "javelin-lefthand");
+            SpearCarry.HandMode = forced == SpearHand.Left ? SpearHand.Right : SpearHand.Left;
             yield return Wait(0.3f);
             fire2 = true;
-            yield return Wait(2.3f); yield return JavelinShot("r-full", true);
+            yield return Wait(2.3f); yield return JavelinShot(forced == SpearHand.Left ? "r-full" : "l-full", true);
             fire2 = false;
             yield return Wait(0.8f);
-            SpearCarry.LeftHanded = wasLeft;
+            SpearCarry.HandMode = forced;
+            yield return Wait(0.3f);
+
+            yield return AutoHandFlip();
+            SpearCarry.HandMode = forced;
             yield return Wait(0.3f);
 
             foreach (float pitch in new[] { -40f, 40f })
@@ -93,7 +102,64 @@ namespace HollowSaint
             yield return Wait(1.1f); yield return JavelinShot("j-land", true);
             fire2 = false;
             yield return Wait(0.8f);
+            SpearCarry.HandMode = wasMode;
             javelinChecking = false;
+        }
+
+        /// <summary>1.1.0 Auto hand: a simulated input-source flip mid-charge must not move the spear; the
+        /// next throw after the delay is in the other hand, and flipping back works the same way.</summary>
+        private IEnumerator AutoHandFlip()
+        {
+            yield return Segment("javelin-autoflip");
+            var carry = pilot.GetComponent<SpearCarry>();
+            SpearCarry.HandMode = SpearHand.Auto;
+            SpearCarry.DevInputOverride = 1;
+            yield return Wait(0.8f);
+            fire2 = true;
+            yield return Wait(0.5f);
+            JavelinCheck(carry && carry.HandVisible && carry.Left, "autoflip gamepad charge not in the left hand");
+            SpearCarry.DevInputOverride = 0;
+            trace.AppendLine(scriptTime.ToString("000.00") + " AUTOFLIP input=mouse mid-charge");
+            yield return Wait(1.0f);
+            JavelinCheck(carry && carry.HandVisible && carry.Left, "autoflip hand switched mid-charge");
+            yield return JavelinShot("af-midcharge", false);
+            fire2 = false;
+            yield return Wait(0.1f);
+            JavelinCheck(carry && carry.Left, "autoflip hand switched mid-throw");
+            yield return Wait(1.0f);
+            pilot.skillLocator.secondary.Reset();
+            fire2 = true;
+            yield return Wait(0.6f);
+            JavelinCheck(carry && carry.HandVisible && !carry.Left, "autoflip next charge after mouse not in the right hand");
+            yield return JavelinShot("af-right", false);
+            fire2 = false;
+            yield return Wait(0.9f);
+            // A short bump back to the gamepad (shorter than the delay) must not switch.
+            SpearCarry.DevInputOverride = 1;
+            yield return Wait(0.2f);
+            SpearCarry.DevInputOverride = 0;
+            yield return Wait(0.7f);
+            pilot.skillLocator.secondary.Reset();
+            fire2 = true;
+            yield return Wait(0.4f);
+            JavelinCheck(carry && carry.HandVisible && !carry.Left, "autoflip a 0.2 s input bump switched the hand");
+            fire2 = false;
+            yield return Wait(0.9f);
+            SpearCarry.DevInputOverride = 1;
+            yield return Wait(0.8f);
+            pilot.skillLocator.secondary.Reset();
+            fire2 = true;
+            yield return Wait(0.6f);
+            JavelinCheck(carry && carry.HandVisible && carry.Left, "autoflip back to gamepad not in the left hand");
+            yield return JavelinShot("af-left-again", false);
+            fire2 = false;
+            yield return Wait(0.9f);
+            int spears = 0;
+            foreach (var t in pilot.modelLocator.modelTransform.GetComponentsInChildren<global::HollowSaint.FoundationKit.Vfx.SpearVisual>(true))
+                if (t && t.transform.parent && t.transform.parent.name.StartsWith("SpearGripSocket", System.StringComparison.Ordinal)) spears++;
+            trace.AppendLine("AUTOFLIP spearVisuals=" + spears);
+            JavelinCheck(spears == 1, "autoflip leaked spear visuals: " + spears);
+            SpearCarry.DevInputOverride = -1;
         }
 
         private IEnumerator JavelinShot(string name, bool checkReady)

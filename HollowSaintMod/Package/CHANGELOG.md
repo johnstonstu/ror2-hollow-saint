@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0
+- Fixed the game failing to launch with EnemiesReturns (its extra Anointed skin tripped a Hollow Saint startup check). Startup checks now only log a warning and never stop the game from loading.
+- In-game text follows the language set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese are included. Any other language shows the English text.
+- Those three translations are machine-translated. Corrections are welcome.
+- Skill, passive and keyword numbers still update when you change them in Mod Options, in every language.
+- The Mod Options menu itself stays in English, except the new Spear hand option.
+- The spear hand now follows your input device: left hand on a controller (left trigger), right hand on mouse and keyboard (right-click). It switches between throws, never mid-charge, and other players see your choice. Option "Spear hand" (Stormspear section): Auto (default), Left or Right. If you had turned off "Spear in left hand", it becomes Right.
+- `HollowSaint.language` ships next to the DLL. Keep it there if you install by hand.
+- README in Simplified Chinese, Russian and Brazilian Portuguese, with the early access note.
+- New README hero clip: Gaze of the Hollow on the Umbral skin, now sharper (1280x720 at 30 fps).
+
 ## 1.0.1
 - Early-game damage buff: base damage 15 (was 12), +2.4 per level unchanged. Stage 1 and the first boss should go down faster; late game is nearly untouched.
 - Base armor 15 (was 0) so the early game is less squishy.

@@ -13,6 +13,17 @@ namespace HollowSaint
     // every loadout change.
     internal static class FoundationSkin
     {
+        // Other mods append SkinDefs to every survivor's controller (EnemiesReturns adds a
+        // hidden Anointed skin), so anything that counts or orders skins must filter to these.
+        internal static readonly string[] OwnSkinNames =
+            { "HollowSaintDefault", "HollowSaintObsidian", "HollowSaintVerdigris", "HollowSaintSolar", "HollowSaintUmbral" };
+
+        internal static SkinDef[] OwnSkins(ModelSkinController controller)
+        {
+            if (!controller || controller.skins == null) return Array.Empty<SkinDef>();
+            return controller.skins.Where(s => s && Array.IndexOf(OwnSkinNames, s.name) >= 0).ToArray();
+        }
+
         // body is null for the standalone selection display. ModelSkinController.Start
         // guards its whole skin-init block on characterModel.body, and ApplySkinAsync
         // only touches characterModel.forceUpdate, so a display with no body is safe.

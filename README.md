@@ -1,3 +1,5 @@
+<p align="center"><b>English</b> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.zh-CN.md">简体中文</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.ru.md">Русский</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.pt-BR.md">Português (BR)</a></p>
+
 <p align="center">
   <img src="docs/media/banner.jpg" alt="Hollow Saint, a storm survivor for Risk of Rain 2" width="100%">
 </p>
@@ -8,6 +10,14 @@
 </p>
 
 An original Risk of Rain 2 survivor built around chain lightning: bolts that leap between enemies, a spear of lightning that sticks and bursts, and a storm passive that answers your hits with Thunderbolts.
+
+> **Early access:** Hollow Saint is still being tuned, so expect balance changes and the occasional bug. Your feedback directly shapes the next balance patch.
+>
+> **[Report a bug or share balance feedback](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
+## Languages
+
+Hollow Saint follows the language you set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese ship with the mod; any other language shows the English text. The Mod Options menu stays in English. The Chinese, Russian and Brazilian Portuguese text is machine-translated, and corrections are welcome in a [translation issue](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md). See [docs/TRANSLATING.md](docs/TRANSLATING.md).
 
 <p align="center"><img src="docs/media/gaze-hero.webp" alt="Gaze of the Hollow: the Saint rises and sweeps a forking lightning beam across a pack" width="100%"></p>
 
@@ -32,12 +42,12 @@ An original Risk of Rain 2 survivor built around chain lightning: bolts that lea
 
 | Path | Contents |
 |---|---|
-| `HollowSaintMod/` | BepInEx plugin (C#, netstandard2.1). `Package/` holds the Thunderstore manifest, README, changelog and icon |
+| `HollowSaintMod/` | BepInEx plugin (C#, netstandard2.1). `Language/HollowSaint.language` is the in-game text. `Package/` holds the Thunderstore manifest, README, changelog and icon |
 | `HollowSaintUnityProject/` | Unity 2021.3.33f1 project that builds the `hollowsaintassets` bundle (current generation: `GameFoundation11`-`15`, with clips from `GameFoundation10r1`) |
 | `art/audio/` | Wwise project and the generated `HollowSaint.bnk` (the Pixabay samples stay local, see `.gitignore`) |
 | `tools/dev-profile/` | Build staging into the `Hollow Saint Dev` r2modman profile, the scripted autopilot playtest |
 | `tools/release/` | Packaging, clean-profile install test, README footage |
-| `tools/tests/` | Offline checks for the presentation and kit math |
+| `tools/tests/` | Offline checks for the presentation, kit math and language file (`Check-Language.ps1`) |
 | `docs/` | Design and architecture docs; `docs/media/` is the README media, `docs/dev/` the playtest log and to-do list |
 
 Older model generations, concepts and Blender sources are kept out of this repo to keep clones small.
@@ -51,7 +61,11 @@ dotnet build HollowSaintMod/HollowSaint.csproj -c Release --no-restore
 powershell -ExecutionPolicy Bypass -File tools\dev-profile\Stage-Build.ps1 -SkipBuild
 ```
 
-Then launch the `Hollow Saint Dev` profile from r2modman. `Stage-Build.ps1` also runs `Check-Access.ps1`, which fails the stage if the DLL touches a private game member through the publicized reference.
+Then launch the `Hollow Saint Dev` profile from r2modman. `Stage-Build.ps1` copies `HollowSaint.language` into the plugin folder next to the DLL, and runs `Check-Access.ps1`, which fails the stage if the DLL touches a private game member through the publicized reference.
+
+```
+powershell -ExecutionPolicy Bypass -File tools\tests\Check-Language.ps1
+```
 
 Scripted playtest (hosts a solo run, plays a fixed skill script, writes screenshots and a trace to `artifacts/<name>`):
 

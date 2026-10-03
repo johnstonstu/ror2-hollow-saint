@@ -55,21 +55,21 @@ namespace HollowSaint
                 Require(display.GetComponentsInChildren<Renderer>(true).Length == renderers.Length &&
                     display.GetComponentsInChildren<Renderer>(true).All(r => r.sharedMaterials.Length == 1),
                     "Display uses the same complete single-material surface layout as the body");
+                var displaySkins = FoundationSkin.OwnSkins(displaySkinController);
+                var bodySkins = FoundationSkin.OwnSkins(model.GetComponent<ModelSkinController>());
                 // Compare against the same enumeration FoundationSkin.Attach uses when it
                 // builds rendererInfos. Using a different includeInactive setting here would
-                // make the counts disagree and throw at startup.
-                Require(displaySkinController.skins != null && displaySkinController.skins.Length > 0 &&
-                    displaySkinController.skins[0].skinDefParams != null &&
-                    displaySkinController.skins[0].skinDefParams.rendererInfos.Length ==
+                // make the counts disagree.
+                Require(displaySkins.Length > 0 &&
+                    displaySkins[0].skinDefParams != null &&
+                    displaySkins[0].skinDefParams.rendererInfos.Length ==
                         display.GetComponentsInChildren<Renderer>().Length,
                     "Display skin carries a renderer info per display renderer");
                 Require(display.GetComponentInChildren<Animator>(true), "Select-screen display has an Animator");
-                var bodySkins = model.GetComponent<ModelSkinController>();
-                Require(bodySkins && bodySkins.skins != null && bodySkins.skins.Length == 5 &&
-                    displaySkinController.skins.Length == 5 &&
-                    bodySkins.skins.Select(s => s.nameToken).SequenceEqual(displaySkinController.skins.Select(s => s.nameToken)),
+                Require(bodySkins.Length == 5 && displaySkins.Length == 5 &&
+                    bodySkins.Select(s => s.nameToken).SequenceEqual(displaySkins.Select(s => s.nameToken)),
                     "All five skins have matching body and mannequin order");
-                Require(bodySkins.skins.All(s => s.skinDefParams != null &&
+                Require(bodySkins.All(s => s.skinDefParams != null &&
                     s.skinDefParams.rendererInfos.Length == renderers.Length),
                     "Every body skin retains all renderers");
                 Require(model.GetComponent<FoundationSkinAnimation>() &&
@@ -79,8 +79,14 @@ namespace HollowSaint
                 checks.Add("UNVERIFIED: physical controller feel, gameplay movement/death, equipment, multiplayer and final kit.");
                 Plugin.Log.LogInfo("HOLLOW_SAINT_CATALOG_CHECKS_PASS");
             }
-            // v0.9.17: the check file is a dev artifact; players' plugin folders stay untouched.
-            finally { if (HsLog.Enabled) File.WriteAllLines(Path.Combine(Plugin.DirectoryPath, "foundation-catalog-checks.txt"), checks); }
+            // This runs inside RoR2Application.onLoad; an exception here aborts the game's init routine.
+            catch (Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_CATALOG_CHECK_FAILED " + error); }
+            finally
+            {
+                // v0.9.17: the check file is a dev artifact; players' plugin folders stay untouched.
+                try { if (HsLog.Enabled) File.WriteAllLines(Path.Combine(Plugin.DirectoryPath, "foundation-catalog-checks.txt"), checks); }
+                catch (Exception error) { Plugin.Log.LogWarning("Hollow Saint could not write catalog checks: " + error.Message); }
+            }
         }
 
         internal static void ReportGroundReference(CharacterBody body, string context)

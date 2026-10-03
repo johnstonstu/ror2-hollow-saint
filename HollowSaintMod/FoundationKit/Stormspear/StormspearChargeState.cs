@@ -2,6 +2,7 @@ using EntityStates;
 using HollowSaint.FoundationKit.OpenCircuit;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace HollowSaint.FoundationKit.Stormspear
 {
@@ -18,10 +19,27 @@ namespace HollowSaint.FoundationKit.Stormspear
         private float charge;
         private SpearForm form;
         private bool thrown;
+        private bool spearLeft = true, gotHand;
+
+        // The owner's spear hand rides on the charge (and throw) state: it can only change while no spear
+        // is out, so every machine has it before the spear shows, late joiners included.
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            base.OnSerialize(writer);
+            writer.Write(SpearDischarge.SpearCarry.NetworkHandOf(characterBody));
+        }
+
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            spearLeft = reader.ReadBoolean();
+            gotHand = true;
+        }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            if (gotHand) SpearDischarge.SpearCarry.ApplyNetworkHand(characterBody, spearLeft);
             comp = StormspearCharge.Of(characterBody);
             form = StormspearCharge.InCrown(characterBody) ? SpearForm.Crown : SpearForm.Hand;
             if (comp) comp.Begin(form);
