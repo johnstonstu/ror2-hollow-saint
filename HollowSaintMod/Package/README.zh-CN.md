@@ -16,6 +16,10 @@
 
 <p align="center">喜欢的话，请在 <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/">Thunderstore 上为空洞圣者点赞</a>，让其他玩家也能找到它。</p>
 
+> **抢先体验：** 空洞圣者仍在调整，平衡会改，偶尔也会有错误。你的反馈会直接决定下一次平衡补丁。
+>
+> **[报告问题或分享平衡反馈](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="空洞凝视：圣者升起，以分叉的闪电光束扫过一群敌人" width="100%">
 </p>

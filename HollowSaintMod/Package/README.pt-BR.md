@@ -16,6 +16,10 @@
 
 <p align="center">Gostou? <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/">Deixe um like no Santo Oco na Thunderstore</a> para outros jogadores encontrarem.</p>
 
+> **Acesso antecipado:** o Santo Oco ainda está sendo ajustado, então espere mudanças de balanceamento e algum bug de vez em quando. Seu retorno define o próximo patch de balanceamento.
+>
+> **[Reportar um bug ou comentar o balanceamento](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Olhar do Oco: o Santo se ergue e varre um grupo com um feixe de raio que se ramifica" width="100%">
 </p>

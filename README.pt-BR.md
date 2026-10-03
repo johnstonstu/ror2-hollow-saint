@@ -13,6 +13,10 @@
 
 Um sobrevivente original de Risk of Rain 2 feito em torno do raio em cadeia: setas que saltam entre inimigos, uma lança de relâmpago que crava e explode, e uma passiva de tempestade que responde aos seus acertos com Raios.
 
+> **Acesso antecipado:** o Santo Oco ainda está sendo ajustado, então espere mudanças de balanceamento e algum bug de vez em quando. Seu retorno define o próximo patch de balanceamento.
+>
+> **[Reportar um bug ou comentar o balanceamento](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
 ## Idiomas
 
 O Santo Oco segue o idioma que você define em Risk of Rain 2. Chinês simplificado, russo e português do Brasil vêm com o mod; qualquer outro idioma mostra o texto em inglês. O menu de opções do mod continua em inglês. Essas três traduções foram feitas por máquina, e correções são bem-vindas numa [correção de tradução](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md). Veja [docs/TRANSLATING.md](docs/TRANSLATING.md).

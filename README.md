@@ -11,6 +11,10 @@
 
 An original Risk of Rain 2 survivor built around chain lightning: bolts that leap between enemies, a spear of lightning that sticks and bursts, and a storm passive that answers your hits with Thunderbolts.
 
+> **Early access:** Hollow Saint is still being tuned, so expect balance changes and the occasional bug. Your feedback directly shapes the next balance patch.
+>
+> **[Report a bug or share balance feedback](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
 ## Languages
 
 Hollow Saint follows the language you set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese ship with the mod; any other language shows the English text. The Mod Options menu stays in English. The Chinese, Russian and Brazilian Portuguese text is machine-translated, and corrections are welcome in a [translation issue](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md). See [docs/TRANSLATING.md](docs/TRANSLATING.md).

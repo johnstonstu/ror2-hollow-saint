@@ -16,6 +16,10 @@
 
 <p align="center">Нравится? Поставьте <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/">лайк Полому Святому на Thunderstore</a>, чтобы его нашли другие игроки.</p>
 
+> **Ранний доступ:** Полый Святой ещё настраивается, поэтому ждите изменений баланса и редких ошибок. Ваши отзывы напрямую определяют следующий патч баланса.
+>
+> **[Сообщить об ошибке или о балансе](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Взор Полого: Святой поднимается и ведёт ветвящийся луч молнии по стае" width="100%">
 </p>

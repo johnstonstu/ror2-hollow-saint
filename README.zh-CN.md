@@ -13,6 +13,10 @@
 
 为 Risk of Rain 2 制作的原创幸存者，围绕连锁闪电：在敌人之间跳跃的电矢，会钉住并爆开的闪电之矛，以及用雷击回应你的命中的风暴被动。
 
+> **抢先体验：** 空洞圣者仍在调整，平衡会改，偶尔也会有错误。你的反馈会直接决定下一次平衡补丁。
+>
+> **[报告问题或分享平衡反馈](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+
 ## 语言
 
 空洞圣者跟随你在 Risk of Rain 2 中设置的语言。模组自带简体中文、俄文和巴西葡萄牙文；其他语言显示英文。模组选项菜单保持英文。这三种译文为机器翻译，欢迎在[翻译修正](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md)中指正。见 [docs/TRANSLATING.md](docs/TRANSLATING.md)。
