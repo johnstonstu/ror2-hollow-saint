@@ -49,9 +49,9 @@ namespace HollowSaint
 
             if (Environment.GetEnvironmentVariable("HS_SHOWCASE_QUICK") == "gaze")
             {
-                yield return GazeTake("gaze-a", 150f, 8.5f, 0.2f);
-                yield return GazeTake("gaze-b", 115f, 9.5f, 0.6f);
-                yield return GazeTake("gaze-c", 165f, 6.5f, -0.4f);
+                yield return GazeTake("gaze-d", null, 7f, 1.4f);
+                yield return GazeTake("gaze-e", null, 9f, 2.4f);
+                yield return GazeTake("gaze-f", null, 5.5f, 0.8f);
                 yield return FinishShowcase();
                 yield break;
             }
@@ -127,7 +127,7 @@ namespace HollowSaint
             Clip("arcstep", false);
 
             var special = pilot.skillLocator ? pilot.skillLocator.special : null;
-            yield return GazeTake("gaze", 150f, 8.5f, 0.2f);
+            yield return GazeTake("gaze", null, 7f, 1.4f);
             SetCameraDistance(8.5f, 0.5f);
             cameraWant = null;
 
@@ -213,19 +213,32 @@ namespace HollowSaint
             }
         }
 
-        /// <summary>One Gaze of the Hollow shot on the default special: a pack ahead, the camera held at a fixed yaw.</summary>
-        private IEnumerator GazeTake(string name, float yaw, float back, float up)
+        /// <summary>
+        /// One Gaze of the Hollow shot on the default special. With no yaw the camera follows the crosshair like
+        /// normal play; with a yaw it holds behind and above the Saint looking at the pack, turned by that many degrees.
+        /// </summary>
+        private IEnumerator GazeTake(string name, float? yaw, float back, float up)
         {
             var special = pilot.skillLocator ? pilot.skillLocator.special : null;
             if (!special) yield break;
             yield return Segment("show-" + name);
-            ClearLive(); SpawnLive("LemurianMaster", 7, 13f);
+            ClearLive(); SpawnLive("LemurianMaster", 7, 10f);
             special.Reset();
             aimTarget = null; aimPitch = 0f;
             SetCameraDistance(back, up);
-            cameraWant = FrontLook(yaw, -0.05f);
-            cameraLook = cameraWant.Value;
-            yield return Wait(1.6f);
+            yield return Wait(0.8f);
+            Vector3 toPack = (LiveCentre() ?? pilot.corePosition + facing * 10f) - pilot.corePosition;
+            if (yaw.HasValue)
+            {
+                cameraWant = (Quaternion.AngleAxis(yaw.Value, Vector3.up) * toPack.normalized + Vector3.down * 0.15f).normalized;
+                cameraLook = cameraWant.Value;
+            }
+            else
+            {
+                cameraWant = null;
+                aimTarget = LiveCentre();
+            }
+            yield return Wait(0.8f);
             trace.AppendLine(scriptTime.ToString("000.00") + " GAZE " + name + " skill=" + (special.skillDef ? special.skillDef.skillName : "none") +
                 " stock=" + special.stock + " cooldown=" + special.cooldownRemaining.ToString("0.0"));
             Clip(name, true);

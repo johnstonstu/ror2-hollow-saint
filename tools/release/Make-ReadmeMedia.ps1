@@ -15,12 +15,12 @@ New-Item -ItemType Directory -Force $media, $videos | Out-Null
 # The two full-width clips at the top of the README (gaze-hero, crown) are encoded larger than the per-skill clips.
 $wide = '1280:720:0:0'; $near = '1040:585:120:110'
 $cuts = @(
-    @('gaze-hero',    'gaze-c',      0.4, 6.0, '1120:630:80:40', 960),
+    @('gaze-hero',    'gaze-e',      0.4, 6.2, '1280:720:0:0', 960),
     @('crown',        'hero',        0.8, 5.2, '1120:630:80:40', 960),
     @('arc-bolt',     'arcbolt',     0.6, 4.8, $near, 640),
     @('stormspear',   'stormspear',  0.5, 5.5, $near, 640),
     @('arc-step',     'arcstep',     0.0, 4.6, $wide, 640),
-    @('gaze',         'gaze-a',      0.4, 6.0, $near, 640),
+    @('gaze',         'gaze-d',      0.4, 6.0, '1120:630:80:40', 640),
     @('open-circuit', 'opencircuit', 1.5, 6.5, $near, 640),
     @('storm',        'storm',       8.5, 7.0, $near, 640)
 )

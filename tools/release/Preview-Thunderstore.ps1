@@ -2,7 +2,7 @@
 # description and icon before uploading. The README goes through GitHub's Markdown API (Thunderstore
 # renders the same GitHub-flavoured Markdown), so the GIFs load from main exactly as they will live.
 # Usage: powershell -ExecutionPolicy Bypass -File tools\release\Preview-Thunderstore.ps1 [-Icons a.png,b.png] [-Screenshot]
-param([string[]]$Icons, [switch]$Screenshot)
+param([string[]]$Icons, [switch]$Screenshot, [int]$PageHeight = 2400)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $pkg = Join-Path $repo 'HollowSaintMod\Package'
@@ -14,6 +14,7 @@ $Icons = @($Icons | ForEach-Object { $_ -split ',' } | Where-Object { $_ })
 if (-not $Icons) { $Icons = @((Join-Path $pkg 'icon.png')) }
 $iconFiles = @(foreach ($i in $Icons) { $p = (Resolve-Path $i).Path; $name = Split-Path $p -Leaf; if ((Split-Path $p) -ne $out) { Copy-Item $p (Join-Path $out $name) -Force }; $name })
 
+[Console]::OutputEncoding = New-Object Text.UTF8Encoding $false
 $readme = (gh api markdown/raw -H 'Content-Type: text/plain' --input (Join-Path $pkg 'README.md')) -join "`n"
 if ($LASTEXITCODE -ne 0) { throw 'gh api markdown/raw failed (is gh logged in?)' }
 $enc = [Net.WebUtility]
@@ -70,7 +71,7 @@ $grid = @"
 if ($Screenshot) {
     $edge = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
     $shots = @(@{ html = 'grid.html'; png = 'grid.png'; size = '1220,640' })
-    $shots += @{ html = 'page_' + [IO.Path]::GetFileNameWithoutExtension($iconFiles[0]) + '.html'; png = 'page.png'; size = '1240,2400' }
+    $shots += @{ html = 'page_' + [IO.Path]::GetFileNameWithoutExtension($iconFiles[0]) + '.html'; png = 'page.png'; size = '1240,' + $PageHeight }
     $ErrorActionPreference = 'Continue'
     foreach ($s in $shots) {
         $url = 'file:///' + (Join-Path $out $s.html).Replace('\', '/')
