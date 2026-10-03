@@ -197,7 +197,7 @@ def main():
         manifest.append({"name": name, "event": "Play_HS_" + name, "seconds": duration,
                          "loop": kind == "loop", "peak_dbfs": round(20 * math.log10(max(abs(f))), 2),
                          "rms_dbfs": round(20 * math.log10(np.sqrt(np.mean(f * f))), 2)})
-        rows.append(f"{path}\t\\Actor-Mixer Hierarchy\\Default Work Unit\\<Sound SFX>HS_{name}\tPlay_HS_{name}")
+        rows.append(f"{path.relative_to(ROOT / 'art' / 'audio')}\t\\Actor-Mixer Hierarchy\\Default Work Unit\\<Sound SFX>HS_{name}\tPlay_HS_{name}")
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     (ROOT / "art/audio/import.tsv").write_text("\n".join(rows) + "\n", encoding="utf-8")
     print(f"Generated {len(manifest)} original WAV sources; peaks/headroom/endpoints/loops verified.")

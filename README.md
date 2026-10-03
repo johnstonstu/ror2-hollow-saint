@@ -38,7 +38,7 @@ An original Risk of Rain 2 survivor built around chain lightning: bolts that lea
 | `tools/dev-profile/` | Build staging into the `Hollow Saint Dev` r2modman profile, the scripted autopilot playtest |
 | `tools/release/` | Packaging, clean-profile install test, README footage |
 | `tools/tests/` | Offline checks for the presentation and kit math |
-| `docs/` | Design and architecture docs; `docs/media/` is the README media, `docs/dev/` the playtest log and to-do list, `docs/archive/` past handoffs and plans |
+| `docs/` | Design and architecture docs; `docs/media/` is the README media, `docs/dev/` the playtest log and to-do list |
 
 Older model generations, concepts and Blender sources are kept out of this repo to keep clones small.
 

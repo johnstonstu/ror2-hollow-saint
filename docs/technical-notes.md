@@ -86,7 +86,7 @@ account credits, separate from assumptions about the connected MCP plan.
 
 ### Dedicated development profile
 
-Prepared `C:\Users\stuwj\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Hollow Saint Dev`
+Prepared `%APPDATA%\r2modmanPlus-local\RiskOfRain2\profiles\Hollow Saint Dev`
 with only `mods.yml` containing `[]`. The two existing profiles, `demo time`
 and `demo time new`, were preserved; their manifest hashes were checked before
 and after creation. No selected-profile setting, game configuration, dependency
