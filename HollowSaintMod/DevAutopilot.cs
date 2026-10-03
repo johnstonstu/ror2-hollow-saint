@@ -67,12 +67,30 @@ namespace HollowSaint
         {
             Application.logMessageReceived += OnLog;
             On.RoR2.PlayerCharacterMasterController.FixedUpdate += AfterPlayerInput;
+            On.RoR2.PlayerCharacterMasterController.Update += AfterPlayerUpdate;
         }
 
         private void OnDisable()
         {
             Application.logMessageReceived -= OnLog;
             On.RoR2.PlayerCharacterMasterController.FixedUpdate -= AfterPlayerInput;
+            On.RoR2.PlayerCharacterMasterController.Update -= AfterPlayerUpdate;
+        }
+
+        // The vanilla Update aims the body along the camera every frame; keep the scripted aim instead,
+        // so the camera can turn independently (front-facing showcase shots).
+        private void AfterPlayerUpdate(On.RoR2.PlayerCharacterMasterController.orig_Update orig, PlayerCharacterMasterController self)
+        {
+            orig(self);
+            if (!scripting || !self.master) return;
+            var body = self.master.GetBody();
+            if (body && body.inputBank) body.inputBank.aimDirection = ScriptedAim(body.inputBank);
+        }
+
+        private Vector3 ScriptedAim(InputBankTest bank)
+        {
+            if (aimTarget.HasValue) return (aimTarget.Value - bank.aimOrigin).normalized;
+            return Quaternion.AngleAxis(aimPitch, Vector3.Cross(Vector3.up, facing)) * facing;
         }
 
         private void OnLog(string message, string stack, LogType type)
@@ -101,10 +119,7 @@ namespace HollowSaint
             Set(ref bank.jump, jump, ref prevJump);
             bank.sprint.down = sprint;
             bank.moveVector = move;
-            Vector3 dir = facing;
-            if (aimTarget.HasValue) dir = (aimTarget.Value - bank.aimOrigin).normalized;
-            else dir = Quaternion.AngleAxis(aimPitch, Vector3.Cross(Vector3.up, facing)) * facing;
-            bank.aimDirection = dir;
+            bank.aimDirection = ScriptedAim(bank);
         }
 
         private static void Set(ref InputBankTest.ButtonState button, bool down, ref bool previous, bool claimed = false)

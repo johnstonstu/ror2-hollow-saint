@@ -20,6 +20,10 @@ namespace HollowSaint
         private readonly List<CharacterBody> live = new List<CharacterBody>();
         private Vector3 cameraLook;
         private float syncFlashUntil;
+        /// <summary>When set, the camera looks this way instead of following the aim (front-facing shots).</summary>
+        private Vector3? cameraWant;
+        private CameraTargetParams.CameraParamsOverrideHandle cameraHandle;
+        private bool cameraHandleSet;
 
         private void OnGUI()
         {
@@ -31,6 +35,8 @@ namespace HollowSaint
         private IEnumerator ShowcaseSegments()
         {
             Plugin.HideBuildTag = true;
+            RoR2.UI.HUD.cvHudEnable.SetBool(false);
+            Application.quitting += () => RoR2.UI.HUD.cvHudEnable.SetBool(true);
             foreach (var d in dummies) if (d && d.healthComponent) { d.healthComponent.godMode = false; d.healthComponent.Suicide(); }
             dummies.Clear();
             cameraLook = facing;
@@ -40,6 +46,38 @@ namespace HollowSaint
             syncFlashUntil = Time.realtimeSinceStartup + 0.25f;
             trace.AppendLine(scriptTime.ToString("000.00") + " SYNC utc=" + DateTime.UtcNow.ToString("o"));
             yield return Wait(1.0f);
+
+            // Skins first, while the ground is still clear of corpses.
+            yield return SkinLineup();
+
+            // Hero: from the front, the crown opens over the Saint and strikes a ring of enemies.
+            if (pilot.skillLocator && pilot.skillLocator.special && KitRegistration.OpenCircuitDef)
+            {
+                yield return Segment("show-hero");
+                var heroSpecial = pilot.skillLocator.special;
+                heroSpecial.SetSkillOverride(this, KitRegistration.OpenCircuitDef, GenericSkill.SkillOverridePriority.Replacement);
+                ClearLive(); SpawnRing("LemurianMaster", 7, 6.5f);
+                SetCameraDistance(7f, -0.9f);
+                aimTarget = null; aimPitch = 0f;
+                cameraWant = FrontLook(25f);
+                cameraLook = cameraWant.Value;
+                yield return Wait(1.6f);
+                Clip("hero", true);
+                yield return Press(4);
+                float heroStart = scriptTime;
+                while (scriptTime - heroStart < 5.5f)
+                {
+                    cameraWant = FrontLook(25f - 50f * (scriptTime - heroStart) / 5.5f);
+                    yield return Wait(0.05f);
+                }
+                Clip("hero", false);
+                yield return WaitCrownEnd();
+                heroSpecial.UnsetSkillOverride(this, KitRegistration.OpenCircuitDef, GenericSkill.SkillOverridePriority.Replacement);
+                heroSpecial.Reset();
+                cameraWant = null;
+            }
+            SetCameraDistance(8.5f, 0.5f);
+            if (Environment.GetEnvironmentVariable("HS_SHOWCASE_QUICK") == "hero") { yield return FinishShowcase(); yield break; }
 
             yield return Segment("show-bolt");
             ClearLive(); SpawnLive("LemurianMaster", 5, 10f);
@@ -142,27 +180,81 @@ namespace HollowSaint
             yield return Wait(0.5f);
             Clip("storm", false);
 
+            yield return FinishShowcase();
+        }
+
+        private IEnumerator FinishShowcase()
+        {
+            ClearLive();
+            if (cameraHandleSet) { var ctp = pilot.GetComponent<CameraTargetParams>(); if (ctp) ctp.RemoveParamsOverride(cameraHandle, 0.3f); cameraHandleSet = false; }
+            RoR2.UI.HUD.cvHudEnable.SetBool(true);
+            yield return Wait(1f);
+        }
+
+        /// <summary>Close front view, each skin held still: a clip plus one "STILL skinN" mark per skin.</summary>
+        private IEnumerator SkinLineup()
+        {
             var skins = pilot.modelLocator && pilot.modelLocator.modelTransform ? pilot.modelLocator.modelTransform.GetComponent<ModelSkinController>() : null;
             if (skins)
             {
                 yield return Segment("show-skins");
-                ClearLive(); SpawnLive("LemurianMaster", 4, 10f);
-                yield return Wait(0.8f);
+                ClearLive();
+                aimTarget = null; aimPitch = 0f;
+                SetCameraDistance(5.8f, -1.5f);
+                cameraWant = FrontLook(18f, -0.02f);
+                yield return Wait(1.5f);
                 Clip("skins", true);
                 for (int skin = 0; skin < 5; skin++)
                 {
                     pilot.skinIndex = (uint)skin; skins.ApplySkin(skin);
-                    fire1 = true;
-                    yield return AimAtLive(1.6f);
-                    fire1 = false;
-                    if (live.All(b => !b || !b.healthComponent || !b.healthComponent.alive)) SpawnLive("LemurianMaster", 4, 10f);
-                    yield return Wait(0.3f);
+                    yield return Wait(1.1f);
+                    trace.AppendLine(scriptTime.ToString("000.00") + " STILL skin" + skin + " utc=" + DateTime.UtcNow.ToString("o"));
+                    yield return Wait(0.6f);
                 }
                 Clip("skins", false);
                 pilot.skinIndex = 0u; skins.ApplySkin(0);
+                cameraWant = null;
             }
-            ClearLive();
-            yield return Wait(1f);
+        }
+
+        /// <summary>A look direction from in front of the Saint back at it, turned by yaw degrees and tilted down.</summary>
+        private Vector3 FrontLook(float yaw, float down = -0.12f)
+        {
+            Vector3 back = Quaternion.AngleAxis(yaw, Vector3.up) * -facing;
+            return (back + Vector3.up * down).normalized;
+        }
+
+        /// <summary>Moves the player camera to the given distance behind / height above the pivot.</summary>
+        private void SetCameraDistance(float back, float up)
+        {
+            var ctp = pilot ? pilot.GetComponent<CameraTargetParams>() : null;
+            if (!ctp || !ctp.cameraParams) return;
+            if (cameraHandleSet) ctp.RemoveParamsOverride(cameraHandle, 0.4f);
+            var data = ctp.cameraParams.data;
+            data.idealLocalCameraPos = new Vector3(0f, up, -back);
+            cameraHandle = ctp.AddParamsOverride(new CameraTargetParams.CameraParamsOverrideRequest { cameraParamsData = data, priority = 1f }, 0.4f);
+            cameraHandleSet = true;
+        }
+
+        /// <summary>Spawns a ring of standing enemies around the Saint, leaving the camera side (in front) open.</summary>
+        private void SpawnRing(string masterName, int count, float radius)
+        {
+            var prefab = MasterCatalog.FindMasterPrefab(masterName);
+            if (!prefab) { trace.AppendLine("SHOWCASE missing " + masterName); return; }
+            for (int i = 0; i < count; i++)
+            {
+                float angle = 70f + 220f * i / Mathf.Max(1, count - 1);
+                Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * facing;
+                Vector3 at = TopGround(pilot.footPosition + dir * radius);
+                var master = new MasterSummon
+                {
+                    masterPrefab = prefab, position = at, rotation = Quaternion.LookRotation(-dir),
+                    teamIndexOverride = TeamIndex.Monster, ignoreTeamMemberLimit = true
+                }.Perform();
+                if (!master) continue;
+                foreach (var ai in master.GetComponents<BaseAI>()) ai.enabled = false;
+                StartCoroutine(TrackLive(master, at));
+            }
         }
 
         private void Clip(string name, bool start)
@@ -268,11 +360,16 @@ namespace HollowSaint
                 yield return null;
                 var rigs = CameraRigController.readOnlyInstancesList;
                 if (rigs.Count == 0 || !pilot.inputBank) continue;
-                Vector3 want = aimTarget.HasValue
-                    ? (aimTarget.Value - pilot.inputBank.aimOrigin).normalized
-                    : Quaternion.AngleAxis(aimPitch, Right) * facing;
-                // A slightly downward look keeps the Saint and the ground in frame.
-                want = (want + Vector3.down * 0.12f).normalized;
+                Vector3 want;
+                if (cameraWant.HasValue) want = cameraWant.Value;
+                else
+                {
+                    want = aimTarget.HasValue
+                        ? (aimTarget.Value - pilot.inputBank.aimOrigin).normalized
+                        : Quaternion.AngleAxis(aimPitch, Right) * facing;
+                    // A slightly downward look keeps the Saint and the ground in frame.
+                    want = (want + Vector3.down * 0.12f).normalized;
+                }
                 cameraLook = Vector3.Slerp(cameraLook, want, 1f - Mathf.Exp(-6f * Time.deltaTime));
                 SetCameraLook(rigs[0], cameraLook);
             }

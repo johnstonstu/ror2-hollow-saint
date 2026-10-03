@@ -83,3 +83,6 @@ art/audio/HollowSaintAudio/Originals/SFX/SpearBurst.wav
 art/audio/HollowSaintAudio/Originals/SFX/SpearThrowHeavy.wav
 art/audio/hollow-saint-audition.wav
 art/audio/hollow-saint-audition-v08.wav
+
+# Local editor settings
+.vscode/

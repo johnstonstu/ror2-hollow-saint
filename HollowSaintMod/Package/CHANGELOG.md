@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+- First public release.
+- No version tag in the top-left corner any more.
+- New icon and character-select portrait.
+- README with a banner, a clip for every skill and the skin lineup.
+
 ## 0.9.17 (release candidate)
 - Clean log: Hollow Saint writes one line when it loads, plus real warnings and errors. Option "Verbose log" (6. Misc) brings the load diagnostics back for bug reports.
 - Two options renamed: "Item displays (restart)" and "RoR2 body shader (restart)". If you had changed either, set it again.

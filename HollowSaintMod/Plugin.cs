@@ -24,16 +24,16 @@ namespace HollowSaint
     {
         public const string Guid = "com.johnstonstu.hollowsaint";
         // Bump on every staged build; keep in sync with Package/manifest.json. 1.0.0 = first public release.
-        public const string Version = "0.9.17";
-        // Two keywords describing what this build changed; shown in the top-left build tag.
-        public const string BuildKeywords = "release candidate";
+        public const string Version = "1.0.0";
+        // Two keywords describing what this build changed; shown in the top-left build tag (0.x builds only).
+        public const string BuildKeywords = "release";
         private GUIStyle tagStyle;
 
         /// <summary>Set by the dev showcase recording.</summary>
         internal static bool HideBuildTag;
 
-        /// <summary>Dev builds (0.x) and verbose logging show the version tag in the top-left corner.</summary>
-        private static bool ShowBuildTag { get { return !HideBuildTag && (Version.StartsWith("0.") || HsLog.Verbose); } }
+        /// <summary>Only dev builds (0.x) show the version tag in the top-left corner.</summary>
+        private static bool ShowBuildTag { get { return !HideBuildTag && Version.StartsWith("0."); } }
 
         private void OnGUI()
         {

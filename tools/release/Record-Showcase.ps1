@@ -6,7 +6,7 @@
 # Usage: powershell -ExecutionPolicy Bypass -File tools\release\Record-Showcase.ps1 -Name showcase07
 #        add -CutOnly to re-cut an existing recording (raw.mp4 + trace.txt) without launching the game.
 param([Parameter(Mandatory=$true)][string]$Name, [int]$TimeoutSeconds = 300, [double]$Pad = 0.4,
-      [string]$ProfileName = 'Hollow Saint Dev', [switch]$CutOnly)
+      [string]$ProfileName = 'Hollow Saint Dev', [switch]$CutOnly, [string]$Quick)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $out = Join-Path $repo ("artifacts\" + $Name)
@@ -26,9 +26,10 @@ if (-not $CutOnly) {
     if (Get-Process -Name 'Risk of Rain 2' -ErrorAction SilentlyContinue) { throw 'A game is already running; close it first' }
     $env:HS_AUTOPILOT = $out
     $env:HS_SEGMENTS = 'showcase'
+    if ($Quick) { $env:HS_SHOWCASE_QUICK = $Quick }
     $arguments = '--doorstop-enabled true --doorstop-target-assembly "' + $preloader + '" --r2profile "' + $ProfileName + '"'
     $p = Start-Process -FilePath (Join-Path $game 'Risk of Rain 2.exe') -WorkingDirectory $game -ArgumentList $arguments -PassThru
-    Remove-Item Env:HS_AUTOPILOT, Env:HS_SEGMENTS
+    Remove-Item Env:HS_AUTOPILOT, Env:HS_SEGMENTS, Env:HS_SHOWCASE_QUICK -ErrorAction SilentlyContinue
 
     # The game window, by handle, once it exists.
     $hwnd = 0
@@ -53,9 +54,12 @@ if (-not $CutOnly) {
     $errTask = $ff.StandardError.ReadToEndAsync()
 
     # Rough recording start (wall clock minus ffmpeg's output time); only narrows the sync-flash search.
-    Start-Sleep -Seconds 3
-    $now = [DateTime]::UtcNow
-    $last = (Get-Content $progress -ErrorAction SilentlyContinue | Select-String '^out_time_us=(\d+)' | Select-Object -Last 1)
+    $last = $null
+    for ($i = 0; $i -lt 30 -and -not $last -and -not $ff.HasExited; $i++) {
+        Start-Sleep -Milliseconds 500
+        $now = [DateTime]::UtcNow
+        $last = (Get-Content $progress -ErrorAction SilentlyContinue | Select-String '^out_time_us=(\d+)' | Select-Object -Last 1)
+    }
     if (-not $last -or $ff.HasExited) { Stop-Process -Id $p.Id -Force; throw ('ffmpeg did not start: ' + $errTask.Result) }
     $recStart = $now.AddTicks(-[int64]$last.Matches[0].Groups[1].Value * 10)
 
@@ -89,6 +93,16 @@ foreach ($line in Get-Content (Join-Path $out 'yavg.txt')) {
 if ($null -eq $flash) { throw 'sync flash not found in the recording' }
 $recStart = $syncUtc.AddSeconds(-$flash)
 "sync flash at " + $flash.ToString('0.000', $inv) + "s"
+
+$stills = Join-Path $out 'stills'
+New-Item -ItemType Directory -Force $stills | Out-Null
+foreach ($line in Get-Content $trace) {
+    if ($line -match 'STILL (\S+) utc=(\S+)') {
+        $t = ([DateTime]::Parse($Matches[2], $inv, $roundtrip).ToUniversalTime() - $recStart).TotalSeconds
+        & ffmpeg -hide_banner -loglevel error -y -ss $t.ToString('0.000', $inv) -i $raw -frames:v 1 (Join-Path $stills ($Matches[1] + '.png'))
+        "still " + $Matches[1] + " at " + $t.ToString('0.00', $inv) + "s"
+    }
+}
 
 $starts = @{}
 foreach ($line in Get-Content $trace) {
