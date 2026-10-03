@@ -6,6 +6,8 @@
     <RootNamespace>HollowSaint</RootNamespace>
     <Version>0.1.0</Version>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <!-- Release DLLs ship on Thunderstore: map the local build path out of the embedded PDB path. -->
+    <PathMap Condition="'$(Configuration)' == 'Release'">$(MSBuildProjectDirectory)=/_/HollowSaintMod</PathMap>
     <!-- Risk of Options is not on NuGet: copy RiskOfOptions.dll into lib\ (git-ignored), or pass -p:RiskOfOptionsDll=<path>. -->
     <RiskOfOptionsDll Condition="'$(RiskOfOptionsDll)' == '' And Exists('lib\RiskOfOptions.dll')">lib\RiskOfOptions.dll</RiskOfOptionsDll>
     <RiskOfOptionsDll Condition="'$(RiskOfOptionsDll)' == ''">$(APPDATA)\r2modmanPlus-local\RiskOfRain2\profiles\Hollow Saint Dev\BepInEx\plugins\Rune580-Risk_Of_Options\RiskOfOptions\RiskOfOptions.dll</RiskOfOptionsDll>

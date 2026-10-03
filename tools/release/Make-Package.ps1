@@ -46,7 +46,7 @@ finally { $img.Dispose() }
 
 # --- 2. Release build --------------------------------------------------------
 if (-not $SkipBuild) {
-    & dotnet build $csproj -c Release -nologo -v q
+    & dotnet build $csproj -c Release -nologo -v q --no-incremental
     if ($LASTEXITCODE -ne 0) { Fail "dotnet build -c Release failed (exit $LASTEXITCODE)" }
 }
 if (-not (Test-Path -LiteralPath $dll -PathType Leaf)) { Fail "Missing $dll" }
@@ -94,6 +94,13 @@ if (@($entries | Where-Object { $_.Contains([string][char]0x5C) }).Count -gt 0) 
 foreach ($k in $files.Keys) { if ($entries -notcontains $k) { Fail "zip is missing $k" } }
 if ($entries.Count -ne $files.Count) { Fail "zip has unexpected entries: $($entries -join ', ')" }
 
+# No local user paths in shipped files (e.g. an unmapped PDB path inside the DLL).
+foreach ($k in $files.Keys) {
+    $bytes = [IO.File]::ReadAllBytes((Join-Path $stage $k.Replace('/', '\')))
+    foreach ($text in @([Text.Encoding]::ASCII.GetString($bytes), [Text.Encoding]::Unicode.GetString($bytes))) {
+        if ($text -match '[A-Za-z]:\\Users\\') { Fail "$k contains a local user path ($($Matches[0])...)" }
+    }
+}
 $entries | ForEach-Object { $_ + "  " + (Get-Item -LiteralPath (Join-Path $stage $_.Replace('/', '\'))).Length }
 "dll sha256=" + (Get-FileHash -LiteralPath $dll -Algorithm SHA256).Hash
 "zip=" + $zip + " bytes=" + (Get-Item $zip).Length
