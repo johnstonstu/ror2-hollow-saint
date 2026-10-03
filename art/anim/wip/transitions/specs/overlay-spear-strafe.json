@@ -1,5 +1,0 @@
-{"name": "overlay-spear-strafe", "modules": ["run_dirs", "spear"], "root_motion": true,
- "segments": [{"clip": "Run left", "start": 1, "frames": 16},
-              {"clip": "Conduit Spear", "frames": 16, "blend": 3, "mask": "upper",
-               "lower_from": "Run left", "lower_start": 17},
-              {"clip": "Run left", "start": 1, "frames": 24, "blend": 6}]}

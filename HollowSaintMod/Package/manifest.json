@@ -1,0 +1,16 @@
+{
+  "name": "HollowSaint",
+  "version_number": "0.9.17",
+  "website_url": "https://github.com/johnstonstu/ror2-hollow-saint",
+  "description": "A storm-saint survivor: chain lightning, a sticking Stormspear and Thunderbolts that answer your hits.",
+  "dependencies": [
+    "bbepis-BepInExPack-5.4.2122",
+    "RiskofThunder-HookGenPatcher-1.2.9",
+    "RiskofThunder-RoR2BepInExPack-1.43.0",
+    "RiskofThunder-R2API_Core-5.3.0",
+    "RiskofThunder-R2API_ContentManagement-1.0.11",
+    "RiskofThunder-R2API_Prefab-1.1.1",
+    "RiskofThunder-R2API_Language-1.1.0",
+    "Rune580-Risk_Of_Options-2.8.6"
+  ]
+}

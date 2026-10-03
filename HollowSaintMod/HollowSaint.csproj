@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>HollowSaint</AssemblyName>
+    <RootNamespace>HollowSaint</RootNamespace>
+    <Version>0.1.0</Version>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <!-- Risk of Options is not on NuGet: copy RiskOfOptions.dll into lib\ (git-ignored), or pass -p:RiskOfOptionsDll=<path>. -->
+    <RiskOfOptionsDll Condition="'$(RiskOfOptionsDll)' == '' And Exists('lib\RiskOfOptions.dll')">lib\RiskOfOptions.dll</RiskOfOptionsDll>
+    <RiskOfOptionsDll Condition="'$(RiskOfOptionsDll)' == ''">$(APPDATA)\r2modmanPlus-local\RiskOfRain2\profiles\Hollow Saint Dev\BepInEx\plugins\Rune580-Risk_Of_Options\RiskOfOptions\RiskOfOptions.dll</RiskOfOptionsDll>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\*.png" LogicalName="HollowSaint.Icons.%(Filename).png" />
+    <EmbeddedResource Include="..\art\audio\HollowSaintAudio\GeneratedSoundBanks\Windows\HollowSaint.bnk" LogicalName="HollowSaint.Audio.HollowSaint.bnk" />
+    <Reference Include="RiskOfOptions">
+      <HintPath>$(RiskOfOptionsDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" />
+    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.4.1-r.0" />
+    <PackageReference Include="R2API.Core" Version="5.3.0" />
+    <PackageReference Include="R2API.Prefab" Version="1.1.1" />
+    <PackageReference Include="R2API.Language" Version="1.1.0" />
+  </ItemGroup>
+</Project>

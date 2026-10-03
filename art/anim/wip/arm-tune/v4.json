@@ -1,9 +1,0 @@
-[
- {"target": "walk", "label": "add10", "arm": {"adduct": 10}},
- {"target": "walk", "label": "add10 tw-8", "arm": {"adduct": 10, "twist": -8}},
- {"target": "walk", "label": "add11 tw-8 elbow20", "arm": {"adduct": 11, "twist": -8, "elbow": 20}},
- {"target": "left", "label": "add17 lead9 tw-25", "arm": {"adduct": 17, "lead": 9, "twist": -25}},
- {"target": "right", "label": "add17 lead9 tw-25", "arm": {"adduct": 17, "lead": 9, "twist": -25}},
- {"target": "left", "label": "add15 lead11 tw-25", "arm": {"adduct": 15, "lead": 11, "twist": -25}},
- {"target": "right", "label": "add15 lead11 tw-25", "arm": {"adduct": 15, "lead": 11, "twist": -25}}
-]

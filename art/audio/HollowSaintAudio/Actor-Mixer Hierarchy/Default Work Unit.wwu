@@ -1,0 +1,1100 @@
+<?xml version='1.0' encoding='utf-8'?>
+<WwiseDocument Type="WorkUnit" ID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" SchemaVersion="119">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="HS_AirJump" ID="{46A1A743-B488-4865-B5FD-C78D7B31F99B}" ShortID="536176588">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="AirJump" ID="{03A5C5FA-C136-453D-80A9-F121CD3BADD7}">
+							<Language>SFX</Language>
+							<AudioFile>AirJump.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="657386271" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="AirJump" ID="{03A5C5FA-C136-453D-80A9-F121CD3BADD7}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ArcBoltCast" ID="{BB6E9F48-E903-41AB-85D3-407284518B8E}" ShortID="949059110">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ArcBoltCast" ID="{EA92BE63-2697-4034-B9F9-22760AA195EC}">
+							<Language>SFX</Language>
+							<AudioFile>ArcBoltCast.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="775371542" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ArcBoltCast" ID="{EA92BE63-2697-4034-B9F9-22760AA195EC}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ArcStepEnd" ID="{3E4961F3-31A5-479F-B834-6D50BB561137}" ShortID="676345978">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ArcStepEnd" ID="{AFB9844E-2C36-4148-9A41-D42DC2516942}">
+							<Language>SFX</Language>
+							<AudioFile>ArcStepEnd.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="190845287" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ArcStepEnd" ID="{AFB9844E-2C36-4148-9A41-D42DC2516942}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ArcStepStart" ID="{615A15B7-6EFE-4BE4-8FC4-1E7FE442237E}" ShortID="402037429">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ArcStepStart" ID="{345AC9EC-B475-46F7-8F51-DA0A8690B47E}">
+							<Language>SFX</Language>
+							<AudioFile>ArcStepStart.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="474641275" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ArcStepStart" ID="{345AC9EC-B475-46F7-8F51-DA0A8690B47E}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_BoltImpact" ID="{D18DF11D-6E04-4271-A326-45E27865BAB8}" ShortID="269207037">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="BoltImpact" ID="{A71D9EF2-62DF-4CF8-8B95-88103BC1FF7A}">
+							<Language>SFX</Language>
+							<AudioFile>BoltImpact.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1257545" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="BoltImpact" ID="{A71D9EF2-62DF-4CF8-8B95-88103BC1FF7A}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ChainHop" ID="{81FDBFA5-31CF-4B7B-9F2F-61B1FAB8E482}" ShortID="1060676050">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ChainHop" ID="{22A6F3C7-1064-4F87-B4D2-A6F3013B2BC1}">
+							<Language>SFX</Language>
+							<AudioFile>ChainHop.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="656311151" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ChainHop" ID="{22A6F3C7-1064-4F87-B4D2-A6F3013B2BC1}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ChargeTick" ID="{65863E65-F94A-45C6-A11F-6F43456BB0F2}" ShortID="451337261">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ChargeTick" ID="{941E691C-3E1D-42F3-91B4-84D82ECFE807}">
+							<Language>SFX</Language>
+							<AudioFile>ChargeTick.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="221646426" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ChargeTick" ID="{941E691C-3E1D-42F3-91B4-84D82ECFE807}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_CircuitClose" ID="{62A00786-5BBB-4FF3-8F54-0846D8F191DA}" ShortID="857722932">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="CircuitClose" ID="{E0621B50-8C7E-4425-9CFE-8E3EA311B2FF}">
+							<Language>SFX</Language>
+							<AudioFile>CircuitClose.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1010847227" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="CircuitClose" ID="{E0621B50-8C7E-4425-9CFE-8E3EA311B2FF}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_CircuitLoop" ID="{0B80BC73-13BD-4535-83DA-CF97A9E45C48}" ShortID="802161595">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
+						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="CircuitLoop" ID="{5BF1CEE1-A04C-4777-A37D-FBAC417F0A08}">
+							<Language>SFX</Language>
+							<AudioFile>CircuitLoop.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="33030918" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="CircuitLoop" ID="{5BF1CEE1-A04C-4777-A37D-FBAC417F0A08}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_CircuitOpen" ID="{5FA2A2FD-8F3D-4EC1-B851-F1FCA66D5137}" ShortID="628540932">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="CircuitOpen" ID="{CEB12470-B99B-45B1-9E39-1BD0DA571349}">
+							<Language>SFX</Language>
+							<AudioFile>CircuitOpen.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="514016471" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="CircuitOpen" ID="{CEB12470-B99B-45B1-9E39-1BD0DA571349}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_CircuitPulse" ID="{1796F6BD-F6CA-4AFA-A3F7-A0FB7FC145CC}" ShortID="134352976">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="CircuitPulse" ID="{85556C32-5FAF-481C-B72B-1FF2747E31AE}">
+							<Language>SFX</Language>
+							<AudioFile>CircuitPulse.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1008213102" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="CircuitPulse" ID="{85556C32-5FAF-481C-B72B-1FF2747E31AE}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_CircuitUnfold" ID="{40DE948D-BE32-4F3B-955C-FD57AA4D82E7}" ShortID="900868369">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="CircuitUnfold" ID="{5752178D-F7D4-48F9-9DED-04C1DE022D40}">
+							<Language>SFX</Language>
+							<AudioFile>CircuitUnfold.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="607806067" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="CircuitUnfold" ID="{5752178D-F7D4-48F9-9DED-04C1DE022D40}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_Electrocute" ID="{6BCFAFC8-A791-4B33-8AE0-86F1191B6532}" ShortID="816632988">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Electrocute" ID="{31F28943-36C8-406B-B353-21F002A626A8}">
+							<Language>SFX</Language>
+							<AudioFile>Electrocute.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="257742114" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Electrocute" ID="{31F28943-36C8-406B-B353-21F002A626A8}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_Footstep" ID="{D61EF3EA-262D-4A55-BA68-0C934951BCD4}" ShortID="560753519">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Footstep" ID="{072C068A-50C1-4242-84EE-489E133454AB}">
+							<Language>SFX</Language>
+							<AudioFile>Footstep.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="358588627" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Footstep" ID="{072C068A-50C1-4242-84EE-489E133454AB}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_FootstepRun" ID="{3D7D6DE9-77CF-47FA-9962-45AD4CD1009B}" ShortID="1067219970">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="FootstepRun" ID="{67AC966F-94C7-4093-8991-DF370030F26D}">
+							<Language>SFX</Language>
+							<AudioFile>FootstepRun.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="770470904" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="FootstepRun" ID="{67AC966F-94C7-4093-8991-DF370030F26D}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GlideEnter" ID="{39555B00-2065-45CA-BB7C-71BF5849F342}" ShortID="979973050">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GlideEnter" ID="{56DB3917-EBA6-46C7-9B02-71D7E2299819}">
+							<Language>SFX</Language>
+							<AudioFile>GlideEnter.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="660741230" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GlideEnter" ID="{56DB3917-EBA6-46C7-9B02-71D7E2299819}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GlideExit" ID="{89174DD2-9257-4E7A-B9A7-A6570C77DAD3}" ShortID="263059111">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GlideExit" ID="{978A7AA6-00C7-48C0-94B0-97E58F6866B5}">
+							<Language>SFX</Language>
+							<AudioFile>GlideExit.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="79453612" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GlideExit" ID="{978A7AA6-00C7-48C0-94B0-97E58F6866B5}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GlideLoop" ID="{92710E2A-CD75-4D47-9B25-A43A3C7BB351}" ShortID="550213100">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
+						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GlideLoop" ID="{C44B93D2-A49F-4B73-9A4C-013A5DE71584}">
+							<Language>SFX</Language>
+							<AudioFile>GlideLoop.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="928920883" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GlideLoop" ID="{C44B93D2-A49F-4B73-9A4C-013A5DE71584}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_Land" ID="{CB6A9BCE-4AB9-4589-94AE-D272764B03DF}" ShortID="821376700">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Land" ID="{E3747E48-F291-4E73-AAE8-405034E1FC22}">
+							<Language>SFX</Language>
+							<AudioFile>Land.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="836776478" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Land" ID="{E3747E48-F291-4E73-AAE8-405034E1FC22}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_MeterFull" ID="{6C8ABFF2-1AE6-4B34-85C6-F9EB4D6DF98B}" ShortID="468547693">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="MeterFull" ID="{87398910-5ED9-4644-81B2-A8F2EDFBA264}">
+							<Language>SFX</Language>
+							<AudioFile>MeterFull.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="166024499" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="MeterFull" ID="{87398910-5ED9-4644-81B2-A8F2EDFBA264}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearImpact" ID="{D6DBAABA-64A7-4613-AD7C-902A1D4F686D}" ShortID="265948406">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearImpact" ID="{A81DFB4B-AFE3-4320-8596-24E04B2497A4}">
+							<Language>SFX</Language>
+							<AudioFile>SpearImpact.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="438432936" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearImpact" ID="{A81DFB4B-AFE3-4320-8596-24E04B2497A4}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearThrow" ID="{CF678599-4AA6-41E9-A1B0-6A04DE9A8977}" ShortID="278648339">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearThrow" ID="{CD153571-6AF4-461B-97A4-7BFB95CCF2A9}">
+							<Language>SFX</Language>
+							<AudioFile>SpearThrow.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1017473390" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearThrow" ID="{CD153571-6AF4-461B-97A4-7BFB95CCF2A9}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_StaticTier" ID="{4513956C-2A9D-47D2-ACE3-8223CC993DEB}" ShortID="631578316">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="StaticTier" ID="{6C5B77CE-96AC-425C-8E3D-5AA5E8623045}">
+							<Language>SFX</Language>
+							<AudioFile>StaticTier.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="952310624" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="StaticTier" ID="{6C5B77CE-96AC-425C-8E3D-5AA5E8623045}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ThunderRelease" ID="{C08B9CB4-4A6A-5183-AC7A-7EA280D63AD6}" ShortID="14039766">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ThunderRelease" ID="{E060E8F1-061F-579B-A509-F03493A26333}">
+							<Language>SFX</Language>
+							<AudioFile>ThunderRelease.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1050408044" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ThunderRelease" ID="{E060E8F1-061F-579B-A509-F03493A26333}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ThunderStrike" ID="{8A41292C-415B-52CF-9874-608B150EEFEB}" ShortID="353300459">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ThunderStrike" ID="{42EB088E-FF35-554B-9A83-FC8F4839679E}">
+							<Language>SFX</Language>
+							<AudioFile>ThunderStrike.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="139522181" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ThunderStrike" ID="{42EB088E-FF35-554B-9A83-FC8F4839679E}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ThunderTelegraph" ID="{D72D1F6E-ABF7-55F1-9B5C-FBF9B4AAB1A9}" ShortID="883601833">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ThunderTelegraph" ID="{55E8EFC1-EAAB-5EBC-A62F-93C92E2F5EDF}">
+							<Language>SFX</Language>
+							<AudioFile>ThunderTelegraph.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="630889456" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ThunderTelegraph" ID="{55E8EFC1-EAAB-5EBC-A62F-93C92E2F5EDF}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_FanEnd" ID="{52E957DC-217A-56C0-AF4A-A05E2C1B4087}" ShortID="739983495">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="FanEnd" ID="{4FC24D2B-1D0C-5B18-AE14-7F855EC8F660}">
+							<Language>SFX</Language>
+							<AudioFile>FanEnd.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="814680485" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="FanEnd" ID="{4FC24D2B-1D0C-5B18-AE14-7F855EC8F660}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_FanLoop" ID="{6B4BBBF0-7A79-53C7-89C3-A7B5BC9B8906}" ShortID="1016826118">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
+						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="FanLoop" ID="{59960D23-1F66-5690-BA42-915385459CAA}">
+							<Language>SFX</Language>
+							<AudioFile>FanLoop.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="204978553" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="FanLoop" ID="{59960D23-1F66-5690-BA42-915385459CAA}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_FanStart" ID="{BE0DC21B-E691-5E02-904F-E94018CE90F7}" ShortID="416190711">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="FanStart" ID="{AFCAD5A1-13E5-5525-8031-3C8028568FFB}">
+							<Language>SFX</Language>
+							<AudioFile>FanStart.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="175964897" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="FanStart" ID="{AFCAD5A1-13E5-5525-8031-3C8028568FFB}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearCatch" ID="{7C4BEC5D-26A6-55DC-8F13-E4B9B4F78B11}" ShortID="888638225">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearCatch" ID="{4CC053E6-389F-5B5A-840A-8017FDCCDF59}">
+							<Language>SFX</Language>
+							<AudioFile>SpearCatch.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="141852810" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearCatch" ID="{4CC053E6-389F-5B5A-840A-8017FDCCDF59}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearPulse" ID="{BD463B82-694F-5CEE-B2BA-3700B07CE577}" ShortID="813491575">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearPulse" ID="{D9CC021A-1DAA-5830-8722-97D402152589}">
+							<Language>SFX</Language>
+							<AudioFile>SpearPulse.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="367641278" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearPulse" ID="{D9CC021A-1DAA-5830-8722-97D402152589}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearRecall" ID="{6234EA3A-A0FB-5BEB-B86D-1B145FD3D5C0}" ShortID="533976512">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearRecall" ID="{9CB62304-16B0-554D-B275-2315F7F2E7DA}">
+							<Language>SFX</Language>
+							<AudioFile>SpearRecall.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="944014615" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearRecall" ID="{9CB62304-16B0-554D-B275-2315F7F2E7DA}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearStruck" ID="{D7286092-086B-5844-95B5-A7D314078B60}" ShortID="336038752">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearStruck" ID="{A14094CA-D9A1-527E-AB59-2DB1238F6B9D}">
+							<Language>SFX</Language>
+							<AudioFile>SpearStruck.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="914937734" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearStruck" ID="{A14094CA-D9A1-527E-AB59-2DB1238F6B9D}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearBurst" ID="{092FC182-FD50-5BAC-B3B4-334DB401CAAB}" ShortID="872532651">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearBurst" ID="{B48FF3B7-0F2D-5EC3-A309-C38FE2FB8AF7}">
+							<Language>SFX</Language>
+							<AudioFile>SpearBurst.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="567853106" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearBurst" ID="{B48FF3B7-0F2D-5EC3-A309-C38FE2FB8AF7}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearThrowHeavy" ID="{2A1E4399-DA3B-568F-B287-423F36420467}" ShortID="910296167">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearThrowHeavy" ID="{90FFD95C-E4B3-5AF1-9F52-C686F6C2EBBC}">
+							<Language>SFX</Language>
+							<AudioFile>SpearThrowHeavy.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="806440325" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearThrowHeavy" ID="{90FFD95C-E4B3-5AF1-9F52-C686F6C2EBBC}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

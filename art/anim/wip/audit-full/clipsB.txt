@@ -1,1 +1,0 @@
-Spawn;Idle combat;Select intro;Discharge;Open Circuit;Open Circuit hold;Open Circuit end;Charge full;Arc Step start;Arc Step loop;Arc Step end;Run left;Run right;Glide enter;Glide exit;Jump;Land;Descend

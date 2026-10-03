@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FittedTransitions
+  m_Controller: {fileID: 9100000, guid: 06c41d46ba1d6fb4ba079b8aa2d07906, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 60b08ac0286d9f149a84876218109273, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 34f611fee7dab0d46831a45cfd020a80, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 500d96d48e7424e4cb080ccf20fbc5de, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 35795b75f2cdf644f868da23de175f55, type: 2}

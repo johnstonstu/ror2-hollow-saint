@@ -1,36 +1,64 @@
-# RoR2 Lightning Survivor
+# Hollow Saint
 
-An original Risk of Rain 2 survivor built around aimed chain lightning.
-Selected visual direction: **Hollow Saint, option A / Cracked Icon**.
-The final name, model construction details, and full skill kit remain undecided.
+An original Risk of Rain 2 survivor built around chain lightning: bolts that leap between enemies, a spear of lightning that sticks and bursts, and a storm passive that answers your hits with Thunderbolts.
 
-## Agreed direction
+![Open Circuit: the crown strikes everything nearby, and a fully charged crown spear calls a Thunderbolt](docs/media/hero.gif)
 
-- Left click fires aimed bolts that automatically chain to nearby enemies.
-- Hitting enemies builds charge for stronger chains.
-- Explore appearance with Higgsfield, then model and rig in Blender and assemble assets in Unity.
+The player-facing description (skills, the storm, options, compatibility) is the Thunderstore README: [HollowSaintMod/Package/README.md](HollowSaintMod/Package/README.md). Release notes are in [CHANGELOG.md](HollowSaintMod/Package/CHANGELOG.md).
 
-## Project status
+| Slot | Skill |
+|---|---|
+| Passive | **Answered Prayer**: hits build Static; full Static Electrocutes; every 5 Electrocutes call a Thunderbolt |
+| Primary | **Arc Bolt**: 100% bolt that chains to 3 more enemies |
+| Secondary | **Stormspear**: hold to charge, 400% to 1600%; sticks, then bursts around the target |
+| Utility | **Arc Step**: two-charge blink in any direction, even in the air |
+| Special | **Gaze of the Hollow**: rise and fire a 4 s forking beam |
+| Special (alt) | **Open Circuit**: 10 s crown that strikes everything within 8 m |
 
-Selected character concept, turnarounds, detail sheets, and four dedicated
-ability illustrations are saved. The user is workshopping Hollow Saint A before
-3D or gameplay implementation. No playable mod or imported third-party source exists yet.
+| Stormspear | Thunderbolt |
+|---|---|
+| ![Stormspear](docs/media/stormspear.gif) | ![Thunderbolt](docs/media/storm.gif) |
 
-- [Start here: handoff](HANDOFF.md)
-- [Latest ability kit and artwork](docs/ability-kit-workshop.md)
+## Repo
 
-- [Design and proposed first milestone](docs/design-brief.md)
-- [Technical research and local setup](docs/technical-notes.md)
-- [Art directions and saved Higgsfield prompt](art/concepts/README.md)
-- [Current four-character workshop](art/concepts/workshop-01.md)
-- [Selected Hollow Saint A art pack](art/concepts/hollow-saint-art-pack.md)
+| Path | Contents |
+|---|---|
+| `HollowSaintMod/` | BepInEx plugin (C#, netstandard2.1). `Package/` holds the Thunderstore manifest, README, changelog and icon |
+| `HollowSaintUnityProject/` | Unity 2021.3.33f1 project that builds the `hollowsaintassets` bundle (current generation: `GameFoundation11`-`15`, with clips from `GameFoundation10r1`) |
+| `art/audio/` | Wwise project and the generated `HollowSaint.bnk` (the Pixabay samples stay local, see `.gitignore`) |
+| `tools/dev-profile/` | Build staging into the `Hollow Saint Dev` r2modman profile, the scripted autopilot playtest |
+| `tools/release/` | Packaging, clean-profile install test, README footage |
+| `tools/tests/` | Offline checks for the presentation and kit math |
+| `docs/` | Design and architecture docs (`docs/archive/` is history); `docs/media/` is the README footage |
 
-## Proposed first goal
+Older model generations, concepts and Blender sources are kept out of this repo to keep clones small.
 
-Build a locally playable placeholder survivor with an aimed chain-lightning
-primary, a visible charge meter, and an empowered attack at full charge.
-Verify target selection, damage, scaling, and charge behavior in game before
-committing to the final model or full skill kit.
+## Build and test
 
-This is a proposed milestone for the next work session, not a completed feature
-or an activated autonomous goal.
+Risk Of Options is not on NuGet. The build looks for `RiskOfOptions.dll` in `HollowSaintMod/lib/` (git-ignored), then in the `Hollow Saint Dev` r2modman profile; or pass `-p:RiskOfOptionsDll=<path>`.
+
+```
+dotnet build HollowSaintMod/HollowSaint.csproj -c Release --no-restore
+powershell -ExecutionPolicy Bypass -File tools\dev-profile\Stage-Build.ps1 -SkipBuild
+```
+
+Then launch the `Hollow Saint Dev` profile from r2modman. `Stage-Build.ps1` also runs `Check-Access.ps1`, which fails the stage if the DLL touches a private game member through the publicized reference.
+
+Scripted playtest (hosts a solo run, plays a fixed skill script, writes screenshots and a trace to `artifacts/<name>`):
+
+```
+powershell -ExecutionPolicy Bypass -File tools\dev-profile\Run-Autopilot.ps1 -Name autopilot01
+```
+
+Set `HS_SEGMENTS` first to run one script (`items`, `storm`, `gaze`, `polish`, `showcase`, ...). The autopilot only runs when the launcher sets `HS_AUTOPILOT`; players never see it.
+
+## Release
+
+1. Bump `Plugin.Version` and `Package/manifest.json` together, and add a `CHANGELOG.md` entry.
+2. `tools\release\Make-Package.ps1` builds `artifacts\release\JohnstonStu-HollowSaint-<version>.zip` from the Release DLL and the playtested bundle.
+3. `tools\release\New-CleanProfile.ps1 -Package artifacts\release\JohnstonStu-HollowSaint-<version>` builds a `Hollow Saint Clean` profile with only the declared dependencies and no config (`-NoRiskOfOptions` tests the soft-dependency path); play it once to catch missing dependencies or default-config problems.
+4. README footage: `tools\release\Record-Showcase.ps1 -Name showcaseNN` records the showcase script (game window only), then `tools\release\Make-ReadmeMedia.ps1 -Name showcaseNN` writes the GIFs to `docs/media`. The Thunderstore README loads them from `main` on GitHub, so push before uploading.
+
+## Logging
+
+A normal session writes one line to the BepInEx log ("Hollow Saint <version> loaded.") plus any real warnings or errors. Config `6. Misc` > `Verbose log` turns the load diagnostics back on for bug reports; `Event log` adds the first occurrences of each gameplay event.

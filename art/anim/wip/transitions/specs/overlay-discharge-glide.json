@@ -1,5 +1,0 @@
-{"name": "overlay-discharge-glide", "modules": ["glide", "special"], "root_motion": true,
- "segments": [{"clip": "Glide loop", "start": 1, "frames": 12},
-              {"clip": "Discharge snap", "frames": 14, "blend": 1, "mask": "upper",
-               "lower_from": "Glide loop", "lower_start": 13},
-              {"clip": "Glide loop", "start": 27, "frames": 16, "blend": 4}]}

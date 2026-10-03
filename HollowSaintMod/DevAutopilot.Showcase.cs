@@ -1,0 +1,300 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using HollowSaint.FoundationKit;
+using RoR2;
+using RoR2.CharacterAI;
+using UnityEngine;
+
+namespace HollowSaint
+{
+    /// <summary>
+    /// v0.9.17 (HS_SEGMENTS=showcase): README footage. The kit against killable standing packs (the
+    /// Saint invulnerable) through the normal player camera, which is turned to follow the scripted aim.
+    /// The build tag is hidden. Each clip writes "CLIP name start|end utc=..." to the trace so
+    /// tools\release\Record-Showcase.ps1 can cut the screen recording.
+    /// </summary>
+    internal sealed partial class DevAutopilot
+    {
+        private readonly List<CharacterBody> live = new List<CharacterBody>();
+        private Vector3 cameraLook;
+        private float syncFlashUntil;
+
+        private void OnGUI()
+        {
+            if (Time.realtimeSinceStartup >= syncFlashUntil) return;
+            GUI.depth = -1000;
+            GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), Texture2D.whiteTexture);
+        }
+
+        private IEnumerator ShowcaseSegments()
+        {
+            Plugin.HideBuildTag = true;
+            foreach (var d in dummies) if (d && d.healthComponent) { d.healthComponent.godMode = false; d.healthComponent.Suicide(); }
+            dummies.Clear();
+            cameraLook = facing;
+            StartCoroutine(CameraFollow());
+            yield return Wait(1.5f);
+            // Sync mark for the recording: a full-screen white flash at a logged time.
+            syncFlashUntil = Time.realtimeSinceStartup + 0.25f;
+            trace.AppendLine(scriptTime.ToString("000.00") + " SYNC utc=" + DateTime.UtcNow.ToString("o"));
+            yield return Wait(1.0f);
+
+            yield return Segment("show-bolt");
+            ClearLive(); SpawnLive("LemurianMaster", 5, 10f);
+            yield return Wait(1.2f);
+            Clip("arcbolt", true);
+            fire1 = true;
+            yield return AimAtLive(4.5f);
+            fire1 = false;
+            yield return Wait(0.6f);
+            Clip("arcbolt", false);
+            if (Environment.GetEnvironmentVariable("HS_SHOWCASE_QUICK") == "1") yield break;
+
+            yield return Segment("show-spear");
+            ClearLive(); SpawnLive("LemurianMaster", 5, 12f);
+            yield return Wait(1.2f);
+            Clip("stormspear", true);
+            fire2 = true; fire1 = true;
+            yield return AimAtLive(2.3f, centre: true);
+            fire2 = false;
+            yield return AimAtLive(0.4f, centre: true);
+            fire1 = false;
+            yield return Wait(1.6f);
+            SpawnLive("BeetleMaster", 3, 10f);
+            yield return Wait(0.8f);
+            fire2 = true; yield return AimAtLive(0.12f); fire2 = false;
+            yield return Wait(1.6f);
+            Clip("stormspear", false);
+
+            yield return Segment("show-step");
+            Clip("arcstep", true);
+            move = Right; yield return Press(3); yield return Wait(0.55f);
+            move = -Right; yield return Press(3); yield return Wait(0.7f);
+            pilot.skillLocator.utility.Reset();
+            aimPitch = -40f; move = facing; yield return Press(3); yield return Wait(0.25f);
+            yield return Press(0); yield return Wait(0.9f);
+            aimPitch = 0f; move = Vector3.zero;
+            yield return Wait(1.2f);
+            Clip("arcstep", false);
+
+            var special = pilot.skillLocator ? pilot.skillLocator.special : null;
+            var gaze = FoundationKit.Gaze.GazeRegistration.SkillDef;
+            if (special && gaze)
+            {
+                yield return Segment("show-gaze");
+                special.SetSkillOverride(this, gaze, GenericSkill.SkillOverridePriority.Replacement);
+                ClearLive(); SpawnLive("LemurianMaster", 6, 12f);
+                yield return Wait(1.2f);
+                Clip("gaze", true);
+                aimTarget = LiveCentre();
+                yield return Press(4);
+                yield return AimAtLive(1.2f, centre: true);
+                yield return SweepLive(3.6f);
+                yield return Wait(1.8f);
+                Clip("gaze", false);
+                special.UnsetSkillOverride(this, gaze, GenericSkill.SkillOverridePriority.Replacement);
+            }
+
+            if (special && KitRegistration.OpenCircuitDef)
+            {
+                yield return Segment("show-crown");
+                special.SetSkillOverride(this, KitRegistration.OpenCircuitDef, GenericSkill.SkillOverridePriority.Replacement);
+                ClearLive(); SpawnLive("LemurianMaster", 6, 8f);
+                yield return Wait(1.0f);
+                Clip("opencircuit", true);
+                yield return Press(4); yield return Wait(1.2f);
+                fire1 = true; move = facing * 0.6f;
+                yield return AimAtLive(1.2f);
+                move = Vector3.zero;
+                SpawnLive("LemurianMaster", 5, 11f);
+                fire2 = true;
+                yield return AimAtLive(1.0f, centre: true);
+                fire2 = false;
+                yield return AimAtLive(2.6f);
+                fire1 = false;
+                yield return WaitCrownEnd(); yield return Wait(0.8f);
+                Clip("opencircuit", false);
+                special.UnsetSkillOverride(this, KitRegistration.OpenCircuitDef, GenericSkill.SkillOverridePriority.Replacement);
+            }
+
+            yield return Segment("show-storm");
+            // Two orbs short of a Thunderbolt, so the clip shows the last Electrocutes lighting them.
+            var meter = pilot.GetComponent<DischargeMeter>();
+            if (meter) { meter.Consume(); for (int i = 0; i < KitTuning.StormChargeMax - 2; i++) meter.AddCharge(); }
+            ClearLive(); SpawnLive("LemurianMaster", 6, 10f);
+            yield return Wait(1.0f);
+            long bolts = FoundationKit.Storm.StormTelemetry.Thunderbolts;
+            Clip("storm", true);
+            fire1 = true;
+            float start = scriptTime, cycle = 0f, struck = -1f;
+            while (scriptTime - start < 30f && (struck < 0f || scriptTime - struck < 3.5f))
+            {
+                if (live.All(b => !b || !b.healthComponent || !b.healthComponent.alive)) SpawnLive("LemurianMaster", 6, 10f);
+                if (struck < 0f && FoundationKit.Storm.StormTelemetry.Thunderbolts > bolts) struck = scriptTime;
+                cycle = (cycle + 0.1f) % 6f;
+                fire2 = cycle < 2.2f;
+                yield return AimAtLive(0.1f, centre: fire2);
+            }
+            fire1 = fire2 = false;
+            trace.AppendLine("SHOWCASE_STORM thunderbolt=" + (struck >= 0f ? (struck - start).ToString("0.0") + "s" : "none"));
+            yield return Wait(0.5f);
+            Clip("storm", false);
+
+            var skins = pilot.modelLocator && pilot.modelLocator.modelTransform ? pilot.modelLocator.modelTransform.GetComponent<ModelSkinController>() : null;
+            if (skins)
+            {
+                yield return Segment("show-skins");
+                ClearLive(); SpawnLive("LemurianMaster", 4, 10f);
+                yield return Wait(0.8f);
+                Clip("skins", true);
+                for (int skin = 0; skin < 5; skin++)
+                {
+                    pilot.skinIndex = (uint)skin; skins.ApplySkin(skin);
+                    fire1 = true;
+                    yield return AimAtLive(1.6f);
+                    fire1 = false;
+                    if (live.All(b => !b || !b.healthComponent || !b.healthComponent.alive)) SpawnLive("LemurianMaster", 4, 10f);
+                    yield return Wait(0.3f);
+                }
+                Clip("skins", false);
+                pilot.skinIndex = 0u; skins.ApplySkin(0);
+            }
+            ClearLive();
+            yield return Wait(1f);
+        }
+
+        private void Clip(string name, bool start)
+        {
+            trace.AppendLine(scriptTime.ToString("000.00") + " CLIP " + name + " " + (start ? "start" : "end") +
+                " utc=" + DateTime.UtcNow.ToString("o") + " alive=" + Alive().Count);
+        }
+
+        private void SpawnLive(string masterName, int count, float distance)
+        {
+            var prefab = MasterCatalog.FindMasterPrefab(masterName);
+            if (!prefab) { trace.AppendLine("SHOWCASE missing " + masterName); return; }
+            Vector3 centre = pilot.footPosition + facing * distance;
+            for (int i = 0; i < count; i++)
+            {
+                float side = (i % 2 == 0 ? 1f : -1f) * (1.5f + 2.2f * ((i + 1) / 2));
+                Vector3 at = TopGround(centre + Right * side + facing * ((i % 3) - 1) * 1.5f);
+                if (i == 0) trace.AppendLine(scriptTime.ToString("000.00") + " SHOWCASE spawn " + masterName + " x" + count + " at " + at.ToString("F1") + " saint=" + pilot.footPosition.ToString("F1"));
+                var master = new MasterSummon
+                {
+                    masterPrefab = prefab, position = at, rotation = Quaternion.LookRotation(-facing),
+                    teamIndexOverride = TeamIndex.Monster, ignoreTeamMemberLimit = true
+                }.Perform();
+                if (!master) continue;
+                // AI off: a crowding melee pack hides the Saint from the camera.
+                foreach (var ai in master.GetComponents<BaseAI>()) ai.enabled = false;
+                StartCoroutine(TrackLive(master, at));
+            }
+        }
+
+        private IEnumerator TrackLive(CharacterMaster master, Vector3 spot)
+        {
+            CharacterBody body = null; float t = 0f;
+            while (!body && t < 5f) { body = master ? master.GetBody() : null; t += Time.deltaTime; yield return null; }
+            if (!body) yield break;
+            live.Add(body);
+            while (body && body.healthComponent && body.healthComponent.alive && scripting)
+            {
+                if (body.inputBank) body.inputBank.moveVector = Vector3.zero;
+                if ((body.footPosition - spot).sqrMagnitude > 4f) TeleportHelper.TeleportBody(body, spot);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+
+        /// <summary>The highest walkable surface under a point (Ground's short ray starts inside hills).</summary>
+        private static Vector3 TopGround(Vector3 near)
+        {
+            RaycastHit hit;
+            return Physics.Raycast(near + Vector3.up * 40f, Vector3.down, out hit, 80f, LayerIndex.world.mask, QueryTriggerInteraction.Ignore) ? hit.point : near;
+        }
+
+        private void ClearLive()
+        {
+            foreach (var body in live.ToArray()) if (body && body.healthComponent && body.healthComponent.alive) body.healthComponent.Suicide();
+            live.Clear();
+        }
+
+        private List<CharacterBody> Alive() => live.Where(b => b && b.healthComponent && b.healthComponent.alive).ToList();
+
+        private Vector3? LiveCentre()
+        {
+            var alive = Alive();
+            if (alive.Count == 0) return null;
+            Vector3 sum = Vector3.zero;
+            foreach (var b in alive) sum += b.corePosition;
+            return sum / alive.Count;
+        }
+
+        /// <summary>Holds the aim on the nearest living enemy (or the pack's centre) for the duration.</summary>
+        private IEnumerator AimAtLive(float seconds, bool centre = false)
+        {
+            float end = scriptTime + seconds;
+            while (scriptTime < end)
+            {
+                var alive = Alive();
+                if (alive.Count > 0)
+                    aimTarget = centre ? LiveCentre() : alive.OrderBy(b => (b.corePosition - pilot.corePosition).sqrMagnitude).First().corePosition;
+                yield return Wait(Mathf.Min(0.1f, Mathf.Max(0.01f, end - scriptTime)));
+            }
+        }
+
+        /// <summary>Sweeps the aim across the pack from its leftmost to its rightmost member.</summary>
+        private IEnumerator SweepLive(float seconds)
+        {
+            var alive = Alive();
+            if (alive.Count == 0) { yield return Wait(seconds); yield break; }
+            var ordered = alive.OrderBy(b => Vector3.Dot(b.corePosition - pilot.corePosition, Right)).ToList();
+            Vector3 from = ordered.First().corePosition, to = ordered.Last().corePosition;
+            float start = scriptTime;
+            while (scriptTime - start < seconds)
+            {
+                float u = (scriptTime - start) / seconds;
+                aimTarget = Vector3.Lerp(from, to, Mathf.PingPong(u * 2f, 1f));
+                yield return Wait(0.05f);
+            }
+        }
+
+        /// <summary>Turns the player camera toward the scripted aim, smoothed so cuts read as play.</summary>
+        private IEnumerator CameraFollow()
+        {
+            while (pilot && scripting)
+            {
+                yield return null;
+                var rigs = CameraRigController.readOnlyInstancesList;
+                if (rigs.Count == 0 || !pilot.inputBank) continue;
+                Vector3 want = aimTarget.HasValue
+                    ? (aimTarget.Value - pilot.inputBank.aimOrigin).normalized
+                    : Quaternion.AngleAxis(aimPitch, Right) * facing;
+                // A slightly downward look keeps the Saint and the ground in frame.
+                want = (want + Vector3.down * 0.12f).normalized;
+                cameraLook = Vector3.Slerp(cameraLook, want, 1f - Mathf.Exp(-6f * Time.deltaTime));
+                SetCameraLook(rigs[0], cameraLook);
+            }
+        }
+
+        // Both members are private in the shipped game, so they are reached by reflection.
+        private static System.Reflection.FieldInfo camInstanceField;
+        private static System.Reflection.MethodInfo setLookMethod;
+
+        private void SetCameraLook(CameraRigController rig, Vector3 look)
+        {
+            const System.Reflection.BindingFlags any = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic;
+            var mode = rig ? rig.cameraMode : null;
+            if (camInstanceField == null) camInstanceField = typeof(RoR2.CameraModes.CameraModeBase).GetField("camToRawInstanceData", any);
+            var map = mode != null && camInstanceField != null ? camInstanceField.GetValue(mode) as System.Collections.IDictionary : null;
+            // Keyed by a wrapper around the rig; a solo run has exactly one entry.
+            object data = null;
+            if (map != null) foreach (System.Collections.DictionaryEntry e in map) { data = e.Value; break; }
+            if (data == null) return;
+            if (setLookMethod == null) setLookMethod = data.GetType().GetMethod("SetPitchYawFromLookVector", any);
+            if (setLookMethod == null) return;
+            setLookMethod.Invoke(data, new object[] { look });
+        }
+    }
+}

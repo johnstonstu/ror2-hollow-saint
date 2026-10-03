@@ -1,2 +1,0 @@
-C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\build_vfx.py:473: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
-  m.use_nodes = True

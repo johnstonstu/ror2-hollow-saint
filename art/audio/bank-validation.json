@@ -1,0 +1,188 @@
+{
+  "bank_version": 150,
+  "bytes": 1806729,
+  "sha256": "c02ce392adb79f5f5b9a0990acfbde3371ba855c0d101415b1a5857f0560159e",
+  "events": 39,
+  "local_stop_actions": 4,
+  "infinite_loops": 3,
+  "embedded_pcm_sources": 35,
+  "bus_reference": 213475909,
+  "owned_busses": 0,
+  "source_clipping": [
+    {
+      "name": "AirJump",
+      "peak_pcm16": 6226,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ArcBoltCast",
+      "peak_pcm16": 6226,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ArcStepEnd",
+      "peak_pcm16": 4587,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ArcStepStart",
+      "peak_pcm16": 6553,
+      "clipped_samples": 0
+    },
+    {
+      "name": "BoltImpact",
+      "peak_pcm16": 7864,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ChainHop",
+      "peak_pcm16": 5243,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ChargeTick",
+      "peak_pcm16": 3277,
+      "clipped_samples": 0
+    },
+    {
+      "name": "CircuitClose",
+      "peak_pcm16": 5243,
+      "clipped_samples": 0
+    },
+    {
+      "name": "CircuitLoop",
+      "peak_pcm16": 2458,
+      "clipped_samples": 0
+    },
+    {
+      "name": "CircuitOpen",
+      "peak_pcm16": 7209,
+      "clipped_samples": 0
+    },
+    {
+      "name": "CircuitPulse",
+      "peak_pcm16": 3277,
+      "clipped_samples": 0
+    },
+    {
+      "name": "CircuitUnfold",
+      "peak_pcm16": 7209,
+      "clipped_samples": 0
+    },
+    {
+      "name": "Electrocute",
+      "peak_pcm16": 7536,
+      "clipped_samples": 0
+    },
+    {
+      "name": "FanEnd",
+      "peak_pcm16": 3932,
+      "clipped_samples": 0
+    },
+    {
+      "name": "FanLoop",
+      "peak_pcm16": 2949,
+      "clipped_samples": 0
+    },
+    {
+      "name": "FanStart",
+      "peak_pcm16": 4915,
+      "clipped_samples": 0
+    },
+    {
+      "name": "Footstep",
+      "peak_pcm16": 3277,
+      "clipped_samples": 0
+    },
+    {
+      "name": "FootstepRun",
+      "peak_pcm16": 3932,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GlideEnter",
+      "peak_pcm16": 4260,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GlideExit",
+      "peak_pcm16": 3277,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GlideLoop",
+      "peak_pcm16": 1802,
+      "clipped_samples": 0
+    },
+    {
+      "name": "Land",
+      "peak_pcm16": 5243,
+      "clipped_samples": 0
+    },
+    {
+      "name": "MeterFull",
+      "peak_pcm16": 5898,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearBurst",
+      "peak_pcm16": 9235,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearCatch",
+      "peak_pcm16": 7864,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearImpact",
+      "peak_pcm16": 9175,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearPulse",
+      "peak_pcm16": 1638,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearRecall",
+      "peak_pcm16": 6553,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearStruck",
+      "peak_pcm16": 8519,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearThrow",
+      "peak_pcm16": 7209,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearThrowHeavy",
+      "peak_pcm16": 5827,
+      "clipped_samples": 0
+    },
+    {
+      "name": "StaticTier",
+      "peak_pcm16": 1475,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ThunderRelease",
+      "peak_pcm16": 6553,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ThunderStrike",
+      "peak_pcm16": 11626,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ThunderTelegraph",
+      "peak_pcm16": 4587,
+      "clipped_samples": 0
+    }
+  ]
+}

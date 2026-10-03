@@ -121,3 +121,20 @@ node_modules/
 - **Secret scan:** covered 408 newly staged or modified text files. The only hits were docs (this file and `art/anim/wip/git-update-prompt.txt`) and `art/anim/wip/refine-run-log.txt` (`"apiKeySource":"login"` and token-usage counters). None of them contain a real key.
 - **Errors:** the first `git add -A` failed with `short read while indexing art/anim/wip/spear/qa.json` because run5 was writing that file at the time. A retry a few seconds later succeeded. GitHub gave an informational warning (GH010: validated a random sample of 10,000 of the 10,198 LFS objects). There were no push rejections, no force push, and no hung processes.
 - **Not in this commit:** run5 kept editing, and about 700 paths showed as modified or new after the push. Those will go in the next update.
+
+## Update: Sep 27 2026, 18:17 to 18:31 PT
+
+**Result: SUCCESS.** `origin/main` = local `HEAD` = `f38d5215a4c47ed7cc34f386f965e692b82e36eb` (checked with `git ls-remote`).
+
+| Item | Value |
+|---|---|
+| Commit | `f38d521` "Hollow Saint update: anim v27 (8-dir, spear, transitions, natural hands), new HANDOFF.md" (parent `0df5c2e`) |
+| Files changed | 9,474 added or modified, 0 deleted (1,292,333 insertions, 18,745 deletions in text) |
+| Size added/modified | ~3.0 GB total: ~25 MB of regular git blobs plus 2.98 GB of LFS content |
+| LFS | 7,443 objects uploaded, 3.0 GB at about 5.7 MB/s, taking roughly 9.5 minutes |
+| Newest anim file | `art/anim/hollow-saint-anim-v27.blend` (v24 to v27 added in this commit) |
+
+- **Excluded files:** only the existing `.gitignore` rules applied (`.env`, `*.log`, `*.err`, `*.blend1`, `*.blend@`, PID-suffix temp copies, `__pycache__/`). The scan found no secrets, so nothing extra was excluded. `.env` was not staged.
+- **Secret scan:** covered the ~1,950 newly staged or modified non-LFS text files. The only hits were docs (this file and `art/anim/wip/git-update2-prompt.txt`) and `art/anim/wip/refine-run-log.txt` (`"apiKeySource":"login"` and token-usage counters). None of them contain a real key.
+- **Errors:** none. `git add -A` succeeded on the first try. There were no push rejections, no force push, and no hung processes.
+- **Not in this commit:** 8 untracked folders appeared after the commit (`art/anim/wip/polish-20260928/`, `polish_dash_launchA/` to `polish_dash_launchF/`, `polish_dash_wide/`), so something was still writing files. This file's own update is also uncommitted. Both will go in the next update.

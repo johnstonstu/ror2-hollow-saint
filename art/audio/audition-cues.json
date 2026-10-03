@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Footstep",
+    "start_seconds": 0.0
+  },
+  {
+    "name": "FootstepRun",
+    "start_seconds": 0.67
+  },
+  {
+    "name": "Land",
+    "start_seconds": 1.32
+  },
+  {
+    "name": "GlideEnter",
+    "start_seconds": 2.12
+  },
+  {
+    "name": "GlideLoop",
+    "start_seconds": 3.02
+  },
+  {
+    "name": "GlideExit",
+    "start_seconds": 5.52
+  },
+  {
+    "name": "CircuitUnfold",
+    "start_seconds": 6.37
+  },
+  {
+    "name": "CircuitLoop",
+    "start_seconds": 7.47
+  },
+  {
+    "name": "CircuitPulse",
+    "start_seconds": 9.97
+  },
+  {
+    "name": "CircuitClose",
+    "start_seconds": 10.73
+  },
+  {
+    "name": "ArcBoltCast",
+    "start_seconds": 11.78
+  },
+  {
+    "name": "BoltImpact",
+    "start_seconds": 12.46
+  },
+  {
+    "name": "ChainHop",
+    "start_seconds": 13.24
+  },
+  {
+    "name": "ThunderTelegraph",
+    "start_seconds": 13.94
+  },
+  {
+    "name": "ThunderRelease",
+    "start_seconds": 14.29
+  },
+  {
+    "name": "ThunderStrike",
+    "start_seconds": 14.54
+  }
+]

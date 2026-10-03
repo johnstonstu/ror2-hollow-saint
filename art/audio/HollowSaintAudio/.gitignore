@@ -1,0 +1,16 @@
+# GITIGNORE template for Wwise Project
+
+.backup*
+.cache*
+*.akd
+*.prof
+*.validationcache
+*.wsettings
+AkWwiseProjectData.asset
+IncrementalSoundBankData.xml
+
+# The mod embeds only its content bank. Never distribute our authoring Init.
+GeneratedSoundBanks/*
+!GeneratedSoundBanks/Windows/
+GeneratedSoundBanks/Windows/*
+!GeneratedSoundBanks/Windows/HollowSaint.bnk

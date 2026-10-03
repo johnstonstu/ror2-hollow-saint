@@ -22,6 +22,7 @@ SIDE_ARM = (20.0, 10.0, 75.0)   # arm swing / adduct / elbow at full dash
 SIDE_ARM_LEAD = 0.5     # fraction of the dash pitch by which the arms are tucked
 SIDE_TRAIL_IN = 0.06    # m the airborne ankles swing away from the travel: the leg on the travel side
 SIDE_TRAIL_OUT = 0.20   # the other leg
+LEFT_ANKLE_CLEARANCE = 0.06  # additional airborne splay clears the back tabard in the left bank
 BACK_TUCK = (55.0, 95.0)    # air_leg thigh (deg forward of vertical) / shin (deg back of vertical)
 SIDE_TUCK = (-30.0, 95.0)
 
@@ -76,6 +77,8 @@ def transform(c, d):
         c[s+'th'] = lerp(c[s+'th'], SIDE_TUCK[0], a*w)
         c[s+'sh'] = lerp(c[s+'sh'], SIDE_TUCK[1], a*w)
         c[s+'spl'] = c[s+'spl']-ks*k*(SIDE_TRAIL_IN if lead else SIDE_TRAIL_OUT)*a
+        if d == 'left':
+            c[s+'spl'] += LEFT_ANKLE_CLEARANCE*a*w
     return c
 
 
@@ -83,8 +86,32 @@ def apply(p, c, tt, d):
     A.apply(p, c, tt)
 
 
-def make(d):
+def start_channels(d):
+    """Grounded load, compact arm tuck, then airborne launch; both seam poses stay exact."""
     start_keys = {f: transform(A.keyed(f, A.START_KEYS), d) for f in range(1, A.N_S+1)}
+    if d in ('left', 'right'):
+        # Keep the elbows compact and the hands above the rising knees through launch.
+        # Recover the original flight pose before the seam; widening the arms instead
+        # crosses the orientation solver's roll branch on this banked body.
+        for f, c in start_keys.items():
+            tuck = A.track(f, {1: 0.0, 3: 0.75, 4: 1.0, 5: 0.65, 7: 0.0})
+            for channel, target in (('sw', 30.0), ('ad', 10.0), ('el', 115.0)):
+                c[channel] = lerp(c[channel], target, tuck)
+            if f in (3, 4):
+                c['pz'] += 0.06
+            if f == 4:
+                # Release the planted targets on the launch frame. Holding them for
+                # one extra frame reverses the thigh before the airborne knee tuck.
+                c['Lgw'] = c['Rgw'] = 0.0
+                if d == 'left':
+                    w = clamp(A.keyed(f, A.START_KEYS)['pp']/PITCH)
+                    for s in ('L', 'R'):
+                        c[s+'spl'] += LEFT_ANKLE_CLEARANCE*w
+    return start_keys
+
+
+def make(d):
+    start_keys = start_channels(d)
     end_keys = {f: transform(A.keyed(f, A.END_KEYS), d) for f in range(1, A.N_E+1)}
 
     def start_pose(p, f):

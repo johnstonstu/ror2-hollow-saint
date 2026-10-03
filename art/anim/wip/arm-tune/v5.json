@@ -1,8 +1,0 @@
-[
- {"target": "left", "label": "add15 lead4 tw-25 el75", "arm": {"adduct": 15, "lead": 4, "twist": -25, "elbow": 75}},
- {"target": "right", "label": "add15 lead4 tw-25 el75", "arm": {"adduct": 15, "lead": 4, "twist": -25, "elbow": 75}},
- {"target": "left", "label": "add14 lead5 tw-25 el85 base2", "arm": {"adduct": 14, "lead": 5, "twist": -25, "elbow": 85, "base": 2}},
- {"target": "right", "label": "add14 lead5 tw-25 el85 base2", "arm": {"adduct": 14, "lead": 5, "twist": -25, "elbow": 85, "base": 2}},
- {"target": "left", "label": "add13 lead5 tw-30 el80 base4", "arm": {"adduct": 13, "lead": 5, "twist": -30, "elbow": 80, "base": 4}},
- {"target": "right", "label": "add13 lead5 tw-30 el80 base4", "arm": {"adduct": 13, "lead": 5, "twist": -30, "elbow": 80, "base": 4}}
-]

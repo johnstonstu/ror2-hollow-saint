@@ -1,0 +1,559 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HS_UpperBody
+  m_Mask: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 segment plate 1
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 segment plate 2
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 segment plate 3
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 segment slit 1
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 segment slit 2
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 segment slit 3
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 side slit L1
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 side slit L2
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 side slit R1
+    m_Weight: 0
+  - m_Path: ABDOMEN | V17 side slit R2
+    m_Weight: 0
+  - m_Path: BACK | V11 lower spine conductor
+    m_Weight: 0
+  - m_Path: BACK | V11 upper spine conductor
+    m_Weight: 0
+  - m_Path: CHEST | V11 core hot centre
+    m_Weight: 0
+  - m_Path: CHEST | V11 core ring
+    m_Weight: 0
+  - m_Path: CHEST | V17 core drop slit
+    m_Weight: 0
+  - m_Path: CHEST | V17 core housing rim
+    m_Weight: 0
+  - m_Path: CHEST | V17 rib plate L
+    m_Weight: 0
+  - m_Path: CHEST | V17 rib plate R
+    m_Weight: 0
+  - m_Path: CHEST | V17 upper chest plate L
+    m_Weight: 0
+  - m_Path: CHEST | V17 upper chest plate R
+    m_Weight: 0
+  - m_Path: HF BODY | retained UV sculpt, corrected posterior
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/L elbow pole
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/L foot IK
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/L hand IK
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/L knee pole
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/L thigh
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/L thigh/L shin
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/L thigh/L shin/L foot
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/L thigh/L shin/L foot/L heel socket
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/L thigh/L shin/L foot/L toe
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/R thigh
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/R thigh/R shin
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/R thigh/R shin/R foot
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/R thigh/R shin/R foot/R heel socket
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/R thigh/R shin/R foot/R toe
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/BACK | small dark node
+      housing
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/BACK | small recessed charge
+      node
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/core socket
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 1/HALO |
+      independent copper arc 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 1/HALO |
+      V11 gap light top
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 2/HALO |
+      independent copper arc 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 2/HALO |
+      V11 gap light right
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 2/HALO |
+      V11 shoulder inlay band L
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 3/HALO |
+      independent copper arc 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 3/HALO |
+      V11 gap light left
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 3/HALO |
+      V11 shoulder inlay band R
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 4
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo 4/HALO |
+      independent copper arc 4
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/halo root/halo socket
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/HALO | V17 yoke bar
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/HALO | V17 yoke light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/HALO | V17 yoke strut
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L scapula
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L scapula/L pauldron
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L shoulder
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      forearm twist
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L HAND | index knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L HAND | little knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L HAND | middle knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L HAND | ring knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L HAND | small wrist conductor
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L HAND | tapered sculpted palm
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1/L HAND | index segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1/L index.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1/L index.2/L HAND | index segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1/L index.2/L index.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1/L index.2/L index.3/L HAND | index segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1/L index.2/L index.3/L HAND | V11 index tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L index.1/L index.2/L index.3/L muzzle
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L little.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L little.1/L HAND | little segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L little.1/L little.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L little.1/L little.2/L HAND | little segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L little.1/L little.2/L little.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L little.1/L little.2/L little.3/L HAND | little segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L little.1/L little.2/L little.3/L HAND | V11 little tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L middle.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L middle.1/L HAND | middle segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L middle.1/L middle.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L middle.1/L middle.2/L HAND | middle segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L middle.1/L middle.2/L middle.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L middle.1/L middle.2/L middle.3/L HAND | middle segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L middle.1/L middle.2/L middle.3/L HAND | V11 middle tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L ring.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L ring.1/L HAND | ring segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L ring.1/L ring.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L ring.1/L ring.2/L HAND | ring segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L ring.1/L ring.2/L ring.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L ring.1/L ring.2/L ring.3/L HAND | ring segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L ring.1/L ring.2/L ring.3/L HAND | V11 ring tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L thumb.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L thumb.1/L HAND | thumb segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L thumb.1/L thumb.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L thumb.1/L thumb.2/L HAND | thumb segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L thumb.1/L thumb.2/L thumb.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L thumb.1/L thumb.2/L thumb.3/L HAND | thumb segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/L upperarm/L forearm/L
+      hand/L thumb.1/L thumb.2/L thumb.3/L HAND | V11 thumb tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/neck
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/neck/head
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/neck/head/head socket
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/neck/head/MASK | V17 ear
+      socket L
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/neck/head/MASK | V17 ear
+      socket light L
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/neck/head/MASK | V17 ear
+      socket light R
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/neck/head/MASK | V17 ear
+      socket R
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R scapula
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R scapula/R pauldron
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R shoulder
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      forearm twist
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R HAND | index knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R HAND | little knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R HAND | middle knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R HAND | ring knuckle
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R HAND | small wrist conductor
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R HAND | tapered sculpted palm
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1/R HAND | index segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1/R index.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1/R index.2/R HAND | index segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1/R index.2/R index.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1/R index.2/R index.3/R HAND | index segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1/R index.2/R index.3/R HAND | V11 index tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R index.1/R index.2/R index.3/R muzzle
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R little.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R little.1/R HAND | little segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R little.1/R little.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R little.1/R little.2/R HAND | little segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R little.1/R little.2/R little.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R little.1/R little.2/R little.3/R HAND | little segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R little.1/R little.2/R little.3/R HAND | V11 little tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R middle.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R middle.1/R HAND | middle segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R middle.1/R middle.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R middle.1/R middle.2/R HAND | middle segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R middle.1/R middle.2/R middle.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R middle.1/R middle.2/R middle.3/R HAND | middle segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R middle.1/R middle.2/R middle.3/R HAND | V11 middle tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R ring.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R ring.1/R HAND | ring segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R ring.1/R ring.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R ring.1/R ring.2/R HAND | ring segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R ring.1/R ring.2/R ring.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R ring.1/R ring.2/R ring.3/R HAND | ring segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R ring.1/R ring.2/R ring.3/R HAND | V11 ring tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R thumb.1
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R thumb.1/R HAND | thumb segment 1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R thumb.1/R thumb.2
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R thumb.1/R thumb.2/R HAND | thumb segment 2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R thumb.1/R thumb.2/R thumb.3
+    m_Weight: 1
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R thumb.1/R thumb.2/R thumb.3/R HAND | thumb segment 3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/spine/chest/R upperarm/R forearm/R
+      hand/R thumb.1/R thumb.2/R thumb.3/R HAND | V11 thumb tip light
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/tabard back.1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/tabard back.1/tabard back.2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/tabard front.1
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/tabard front.1/tabard front.2
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/pelvis/tabard front.1/tabard front.2/tabard
+      front.3
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/R elbow pole
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/R foot IK
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/R hand IK
+    m_Weight: 0
+  - m_Path: Hollow Saint | v8 rig/root/R knee pole
+    m_Weight: 0
+  - m_Path: L ARM | V15 outer forearm conductor
+    m_Weight: 0
+  - m_Path: L BACK | small scapula shell
+    m_Weight: 0
+  - m_Path: L HAND | wrist cuff
+    m_Weight: 0
+  - m_Path: L SHOULDER | V17 pauldron upper
+    m_Weight: 0
+  - m_Path: MASK | V11 cyan centre stripe
+    m_Weight: 0
+  - m_Path: MASK | V11 temple node L
+    m_Weight: 0
+  - m_Path: MASK | V11 temple node R
+    m_Weight: 0
+  - m_Path: NECK | V11 centre conductor
+    m_Weight: 0
+  - m_Path: NECK | V11 conductor L
+    m_Weight: 0
+  - m_Path: NECK | V11 conductor R
+    m_Weight: 0
+  - m_Path: NECK | V17 cable +35
+    m_Weight: 0
+  - m_Path: NECK | V17 cable +145
+    m_Weight: 0
+  - m_Path: NECK | V17 cable -35
+    m_Weight: 0
+  - m_Path: NECK | V17 cable -145
+    m_Weight: 0
+  - m_Path: R ARM | V15 outer forearm conductor
+    m_Weight: 0
+  - m_Path: R BACK | small scapula shell
+    m_Weight: 0
+  - m_Path: R HAND | wrist cuff
+    m_Weight: 0
+  - m_Path: R SHOULDER | V17 pauldron upper
+    m_Weight: 0
+  - m_Path: TABARD | V11 back cloth
+    m_Weight: 0
+  - m_Path: TABARD | V11 back edge L
+    m_Weight: 0
+  - m_Path: TABARD | V11 back edge R
+    m_Weight: 0
+  - m_Path: TABARD | V11 back sigil ring
+    m_Weight: 0
+  - m_Path: TABARD | V11 back sigil stem lower
+    m_Weight: 0
+  - m_Path: TABARD | V11 back sigil stem upper
+    m_Weight: 0
+  - m_Path: TABARD | V11 back trim bottom
+    m_Weight: 0
+  - m_Path: TABARD | V11 back trim left
+    m_Weight: 0
+  - m_Path: TABARD | V11 back trim right
+    m_Weight: 0
+  - m_Path: TABARD | V11 back trim top
+    m_Weight: 0
+  - m_Path: TABARD | V11 front cloth
+    m_Weight: 0
+  - m_Path: TABARD | V11 front edge L
+    m_Weight: 0
+  - m_Path: TABARD | V11 front edge R
+    m_Weight: 0
+  - m_Path: TABARD | V11 front lower tab
+    m_Weight: 0
+  - m_Path: TABARD | V11 front lower tab edge L
+    m_Weight: 0
+  - m_Path: TABARD | V11 front lower tab edge R
+    m_Weight: 0
+  - m_Path: TABARD | V11 front lower tab trim bottom
+    m_Weight: 0
+  - m_Path: TABARD | V11 front lower tab trim left
+    m_Weight: 0
+  - m_Path: TABARD | V11 front lower tab trim right
+    m_Weight: 0
+  - m_Path: TABARD | V11 front lower tab trim top
+    m_Weight: 0
+  - m_Path: TABARD | V11 front sigil ring
+    m_Weight: 0
+  - m_Path: TABARD | V11 front sigil stem lower
+    m_Weight: 0
+  - m_Path: TABARD | V11 front sigil stem upper
+    m_Weight: 0
+  - m_Path: TABARD | V11 front trim bottom
+    m_Weight: 0
+  - m_Path: TABARD | V11 front trim left
+    m_Weight: 0
+  - m_Path: TABARD | V11 front trim right
+    m_Weight: 0
+  - m_Path: TABARD | V11 front trim top
+    m_Weight: 0
+  - m_Path: TABARD | V11 lower tab rear cloth
+    m_Weight: 0

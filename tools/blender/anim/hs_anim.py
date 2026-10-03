@@ -463,6 +463,8 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
         import tabardpass
         poser.tabardpass = tabardpass.TabardPass(poser)
     poser.tabardpass.hist = []
+    import clothmotion
+    cloth_motion = clothmotion.prepare(poser, frames, pose_fn, loop, meta, legs_ik, arms_ik, title)
     for f in frames:
         poser.reset()
         poser.ik(legs_ik, arms_ik)
@@ -470,6 +472,7 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
         if hands:
             poser.handpass.apply()
         poser.padpass.apply()
+        clothmotion.apply(poser, cloth_motion.get(f, {}))
         poser.tabardpass.apply()
         set_twist(poser)
         caps[f] = poser.capture()
@@ -499,6 +502,7 @@ def bake(poser, title, frames, pose_fn, loop, markers=None, meta=None, post=None
                                      (meta or {}).get('finger_accents', ())))
     extra.update(poser.padpass.finish(caps, frames, loop, pins))
     extra.update(poser.tabardpass.finish(caps, frames, loop, pins))
+    extra.update(clothmotion.report(cloth_motion))
     if hands:
         extra['orient_roll_max_deg'] = {s: round(v, 1) for s, v in poser.handpass.max_roll.items()}
         extra['orient_infeasible'] = poser.handpass.infeasible

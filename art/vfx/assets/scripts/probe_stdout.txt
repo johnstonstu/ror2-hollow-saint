@@ -1,8 +1,0 @@
-PROBE version 5.2.0 LTS
-PROBE engines ['BLENDER_EEVEE']
-PROBE fbx True
-PROBE numpy 2.3.4
-PROBE compositing_node_group False
-Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
-
-Blender quit

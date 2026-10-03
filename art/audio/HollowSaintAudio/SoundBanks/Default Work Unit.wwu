@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<WwiseDocument Type="WorkUnit" ID="{C554A73B-FD42-492F-9817-70B3CB98A9CE}" SchemaVersion="119">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{C554A73B-FD42-492F-9817-70B3CB98A9CE}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="HollowSaint" ID="{68B4F46F-F644-4A0C-909D-E9C211E46283}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_HS_AirJump" ID="{C28D1020-6441-58EF-A49C-E8EAA2A485C3}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ArcBoltCast" ID="{A9177844-6670-5F54-B177-5A7B3EF38659}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ArcStepEnd" ID="{C648A9A3-4535-5CE8-B416-3F57EFB17C76}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ArcStepStart" ID="{0B5864B7-BC6A-5772-A40E-3A3F248D12CD}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_BoltImpact" ID="{68F40D91-5762-51BC-ADBD-F05447BC9437}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ChainHop" ID="{976C590A-D28C-5525-B2E4-E455DDB42BF3}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ChargeTick" ID="{BC0C71B0-C452-5A7F-8CC3-A1E984C682A1}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_CircuitClose" ID="{10339644-5D2D-5364-8031-E2FB603E7F9F}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_CircuitLoop" ID="{239E1844-6FF3-59AE-A484-9220642D6513}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Stop_HS_CircuitLoop" ID="{FD149FE7-D1FB-541C-90C8-8C41C65B5471}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_CircuitOpen" ID="{4E5F2F09-F032-5DF2-A5F6-BB1B3A766AAE}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_CircuitPulse" ID="{22555897-C18F-5AF9-95A2-078D06683FEE}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_CircuitUnfold" ID="{472B0875-9A65-575B-A75C-6A4849CB70D4}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_Electrocute" ID="{C2511E14-5B72-5CC9-8A74-2F1AE597E394}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_FanEnd" ID="{5A3AEC52-EFAA-58EE-B002-22946D3D9D2F}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_FanLoop" ID="{DA586244-6D87-5683-8663-101060543069}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Stop_HS_FanLoop" ID="{95123EA3-2782-552D-940B-0B975E3173F3}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_FanStart" ID="{9ED1832C-EE41-5931-9356-7FF9B927DE8D}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_Footstep" ID="{3D159989-157D-5754-A63F-A6AC73DA3C05}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_FootstepRun" ID="{651E7888-EEC7-59D7-BB4F-9D5E18639FD2}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GlideEnter" ID="{A1B8DD7A-7993-55CD-9BA9-94C21B0FE296}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GlideExit" ID="{8643706B-61BD-5070-896F-3021415F0E1C}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GlideLoop" ID="{18559C74-2EF5-54BF-B8B3-171F8CAF92CA}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Stop_HS_GlideLoop" ID="{4D085AB1-C86F-5A22-8C28-F032D0C6E79A}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_Land" ID="{1479617B-2A93-501B-BB17-B7A75E06FC30}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_MeterFull" ID="{66650A09-566C-5E71-BAC3-7AF655E56C60}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearBurst" ID="{79301C2D-213C-5483-8EAA-E8894A842CEA}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearCatch" ID="{A2BCA050-DA6F-5F7C-AB77-280AD36B2064}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearImpact" ID="{5F20ED18-664B-5554-934F-EB17AD05D456}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearPulse" ID="{1BD587FE-8D9A-513B-9DA0-473EEEA0E1A6}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearRecall" ID="{15ADC23E-E565-5204-86C8-77081B1DD75C}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearStruck" ID="{EE0DAB88-47D0-53A8-9778-336669D77DB5}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearThrow" ID="{2F8AF264-5D80-53A1-AE97-666594CDA616}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearThrowHeavy" ID="{DB2D90FD-4EB6-5813-8ACE-C401D437D0B2}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_StaticTier" ID="{32E490D9-1932-55C4-B2D6-E1D96BE23E3D}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ThunderRelease" ID="{FA5FF151-50CC-534B-9088-88B05BDC346C}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ThunderStrike" ID="{51C46C9A-012C-5E08-A64D-46AE80FD8661}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ThunderTelegraph" ID="{1A60468A-88B1-583E-AF43-E03F09B57C5F}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Stop_HS_ThunderTelegraph" ID="{C46CD47B-EBF8-51D8-9B36-56CF43D0958C}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+					</ObjectInclusionList>
+					<ObjectExclusionList />
+					<GameSyncExclusionList />
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

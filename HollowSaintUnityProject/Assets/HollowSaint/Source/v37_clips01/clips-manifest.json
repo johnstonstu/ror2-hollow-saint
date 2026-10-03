@@ -1,0 +1,88 @@
+{
+ "source": "art\\anim\\hollow-saint-anim-v37.blend",
+ "modelFrom": "v31_probe03",
+ "clips": [
+  {
+   "title": "Conduit Spear",
+   "file": "Conduit_Spear.fbx",
+   "start": 1,
+   "end": 20,
+   "loop": false,
+   "fps": 24,
+   "markers": [
+    {
+     "name": "Spear release",
+     "frame": 7
+    }
+   ]
+  },
+  {
+   "title": "Conduit Spear recover",
+   "file": "Conduit_Spear_recover.fbx",
+   "start": 1,
+   "end": 13,
+   "loop": false,
+   "fps": 24,
+   "markers": []
+  },
+  {
+   "title": "Spear catch",
+   "file": "Spear_catch.fbx",
+   "start": 1,
+   "end": 20,
+   "loop": false,
+   "fps": 24,
+   "markers": [
+    {
+     "name": "Spear caught",
+     "frame": 14
+    }
+   ]
+  },
+  {
+   "title": "Spear crown held",
+   "file": "Spear_crown_held.fbx",
+   "start": 1,
+   "end": 49,
+   "loop": true,
+   "fps": 24,
+   "markers": []
+  },
+  {
+   "title": "Spear fan end",
+   "file": "Spear_fan_end.fbx",
+   "start": 1,
+   "end": 13,
+   "loop": false,
+   "fps": 24,
+   "markers": []
+  },
+  {
+   "title": "Spear fan loop",
+   "file": "Spear_fan_loop.fbx",
+   "start": 1,
+   "end": 25,
+   "loop": true,
+   "fps": 24,
+   "markers": []
+  },
+  {
+   "title": "Spear fan start",
+   "file": "Spear_fan_start.fbx",
+   "start": 1,
+   "end": 9,
+   "loop": false,
+   "fps": 24,
+   "markers": []
+  },
+  {
+   "title": "Spear held",
+   "file": "Spear_held.fbx",
+   "start": 1,
+   "end": 49,
+   "loop": true,
+   "fps": 24,
+   "markers": []
+  }
+ ]
+}

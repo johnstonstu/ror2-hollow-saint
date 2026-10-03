@@ -1,0 +1,566 @@
+<?xml version='1.0' encoding='utf-8'?>
+<WwiseDocument Type="WorkUnit" ID="{35F29809-8466-4069-AAD8-7D6B659627A3}" SchemaVersion="119">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{35F29809-8466-4069-AAD8-7D6B659627A3}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_HS_AirJump" ID="{C28D1020-6441-58EF-A49C-E8EAA2A485C3}">
+					<ChildrenList>
+						<Action Name="" ID="{F094FC2C-E738-58FA-80C5-69636B47377C}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_AirJump" ID="{46A1A743-B488-4865-B5FD-C78D7B31F99B}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ArcBoltCast" ID="{A9177844-6670-5F54-B177-5A7B3EF38659}">
+					<ChildrenList>
+						<Action Name="" ID="{B7FBD386-988C-5FA8-A2FF-ED18B4CD7809}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ArcBoltCast" ID="{BB6E9F48-E903-41AB-85D3-407284518B8E}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ArcStepEnd" ID="{C648A9A3-4535-5CE8-B416-3F57EFB17C76}">
+					<ChildrenList>
+						<Action Name="" ID="{A7C7669B-E618-57BF-A39F-CFCD31E19BAC}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ArcStepEnd" ID="{3E4961F3-31A5-479F-B834-6D50BB561137}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ArcStepStart" ID="{0B5864B7-BC6A-5772-A40E-3A3F248D12CD}">
+					<ChildrenList>
+						<Action Name="" ID="{4F641B8D-4AAC-5BFF-830F-FDFA5406C2B0}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ArcStepStart" ID="{615A15B7-6EFE-4BE4-8FC4-1E7FE442237E}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_BoltImpact" ID="{68F40D91-5762-51BC-ADBD-F05447BC9437}">
+					<ChildrenList>
+						<Action Name="" ID="{5D76AA1E-019E-53D6-9362-CEA0103E0074}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_BoltImpact" ID="{D18DF11D-6E04-4271-A326-45E27865BAB8}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ChainHop" ID="{976C590A-D28C-5525-B2E4-E455DDB42BF3}">
+					<ChildrenList>
+						<Action Name="" ID="{E3B70C9A-9D2F-5B86-9238-2F81A1977D6A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ChainHop" ID="{81FDBFA5-31CF-4B7B-9F2F-61B1FAB8E482}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ChargeTick" ID="{BC0C71B0-C452-5A7F-8CC3-A1E984C682A1}">
+					<ChildrenList>
+						<Action Name="" ID="{71E52BE4-4219-5DF4-963A-A92D37435F7A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ChargeTick" ID="{65863E65-F94A-45C6-A11F-6F43456BB0F2}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_CircuitClose" ID="{10339644-5D2D-5364-8031-E2FB603E7F9F}">
+					<ChildrenList>
+						<Action Name="" ID="{C2E200CC-9A3B-5181-8443-C652F87CC3CC}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_CircuitClose" ID="{62A00786-5BBB-4FF3-8F54-0846D8F191DA}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_CircuitLoop" ID="{239E1844-6FF3-59AE-A484-9220642D6513}">
+					<ChildrenList>
+						<Action Name="" ID="{F7B769D3-F669-5590-B98A-D724CD69CDC8}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_CircuitLoop" ID="{0B80BC73-13BD-4535-83DA-CF97A9E45C48}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_HS_CircuitLoop" ID="{FD149FE7-D1FB-541C-90C8-8C41C65B5471}">
+					<ChildrenList>
+						<Action Name="" ID="{BC2C41A8-4C5B-56CB-96DA-BE62DA7E962C}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+								<Property Name="Scope" Type="int16" Value="0" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_CircuitLoop" ID="{0B80BC73-13BD-4535-83DA-CF97A9E45C48}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_CircuitOpen" ID="{4E5F2F09-F032-5DF2-A5F6-BB1B3A766AAE}">
+					<ChildrenList>
+						<Action Name="" ID="{0B14F68D-40A4-5FEE-B438-9AED29359124}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_CircuitOpen" ID="{5FA2A2FD-8F3D-4EC1-B851-F1FCA66D5137}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_CircuitPulse" ID="{22555897-C18F-5AF9-95A2-078D06683FEE}">
+					<ChildrenList>
+						<Action Name="" ID="{1D57E48E-6E9C-504E-B1E4-BD3548523CEF}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_CircuitPulse" ID="{1796F6BD-F6CA-4AFA-A3F7-A0FB7FC145CC}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_CircuitUnfold" ID="{472B0875-9A65-575B-A75C-6A4849CB70D4}">
+					<ChildrenList>
+						<Action Name="" ID="{8EADA863-7326-5DBA-84FA-244B334EEC1A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_CircuitUnfold" ID="{40DE948D-BE32-4F3B-955C-FD57AA4D82E7}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_Electrocute" ID="{C2511E14-5B72-5CC9-8A74-2F1AE597E394}">
+					<ChildrenList>
+						<Action Name="" ID="{29BE597A-655F-5665-AA35-B196B0D9ACCE}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_Electrocute" ID="{6BCFAFC8-A791-4B33-8AE0-86F1191B6532}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_FanEnd" ID="{5A3AEC52-EFAA-58EE-B002-22946D3D9D2F}">
+					<ChildrenList>
+						<Action Name="" ID="{B20E93BA-3426-51AA-AB2E-A2339CE38D1B}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_FanEnd" ID="{52E957DC-217A-56C0-AF4A-A05E2C1B4087}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_FanLoop" ID="{DA586244-6D87-5683-8663-101060543069}">
+					<ChildrenList>
+						<Action Name="" ID="{45E15AB5-A406-5815-92E9-4B9E32997E02}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_FanLoop" ID="{6B4BBBF0-7A79-53C7-89C3-A7B5BC9B8906}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_HS_FanLoop" ID="{95123EA3-2782-552D-940B-0B975E3173F3}">
+					<ChildrenList>
+						<Action Name="" ID="{CE561DB9-AD1D-5721-9072-60AE56CC68B2}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+								<Property Name="Scope" Type="int16" Value="0" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_FanLoop" ID="{6B4BBBF0-7A79-53C7-89C3-A7B5BC9B8906}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_FanStart" ID="{9ED1832C-EE41-5931-9356-7FF9B927DE8D}">
+					<ChildrenList>
+						<Action Name="" ID="{75A4280F-CED1-5190-B917-DB76061AFC5B}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_FanStart" ID="{BE0DC21B-E691-5E02-904F-E94018CE90F7}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_Footstep" ID="{3D159989-157D-5754-A63F-A6AC73DA3C05}">
+					<ChildrenList>
+						<Action Name="" ID="{AC347149-8A56-5E7D-A1FB-2FD9E2891C03}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_Footstep" ID="{D61EF3EA-262D-4A55-BA68-0C934951BCD4}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_FootstepRun" ID="{651E7888-EEC7-59D7-BB4F-9D5E18639FD2}">
+					<ChildrenList>
+						<Action Name="" ID="{47898B8C-F1F3-5802-A091-929C2D131AC2}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_FootstepRun" ID="{3D7D6DE9-77CF-47FA-9962-45AD4CD1009B}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GlideEnter" ID="{A1B8DD7A-7993-55CD-9BA9-94C21B0FE296}">
+					<ChildrenList>
+						<Action Name="" ID="{8704CA0C-9D95-5871-8726-AA50D5621EAB}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GlideEnter" ID="{39555B00-2065-45CA-BB7C-71BF5849F342}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GlideExit" ID="{8643706B-61BD-5070-896F-3021415F0E1C}">
+					<ChildrenList>
+						<Action Name="" ID="{6B302D39-405E-545A-874C-F01119174B6A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GlideExit" ID="{89174DD2-9257-4E7A-B9A7-A6570C77DAD3}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GlideLoop" ID="{18559C74-2EF5-54BF-B8B3-171F8CAF92CA}">
+					<ChildrenList>
+						<Action Name="" ID="{18C287D5-D4EF-5CFC-837B-723B1FD3AAD3}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GlideLoop" ID="{92710E2A-CD75-4D47-9B25-A43A3C7BB351}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_HS_GlideLoop" ID="{4D085AB1-C86F-5A22-8C28-F032D0C6E79A}">
+					<ChildrenList>
+						<Action Name="" ID="{659B570E-7CDF-5417-82BC-2B8771F65E65}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+								<Property Name="Scope" Type="int16" Value="0" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GlideLoop" ID="{92710E2A-CD75-4D47-9B25-A43A3C7BB351}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_Land" ID="{1479617B-2A93-501B-BB17-B7A75E06FC30}">
+					<ChildrenList>
+						<Action Name="" ID="{C8D9A9CA-87C1-50A3-80F2-2005187C4986}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_Land" ID="{CB6A9BCE-4AB9-4589-94AE-D272764B03DF}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_MeterFull" ID="{66650A09-566C-5E71-BAC3-7AF655E56C60}">
+					<ChildrenList>
+						<Action Name="" ID="{A344EBF5-6C16-5FC9-A87C-3ABFCC841C47}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_MeterFull" ID="{6C8ABFF2-1AE6-4B34-85C6-F9EB4D6DF98B}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearBurst" ID="{79301C2D-213C-5483-8EAA-E8894A842CEA}">
+					<ChildrenList>
+						<Action Name="" ID="{2C1E412B-032B-5900-BF51-E46ECDC437D0}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearBurst" ID="{092FC182-FD50-5BAC-B3B4-334DB401CAAB}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearCatch" ID="{A2BCA050-DA6F-5F7C-AB77-280AD36B2064}">
+					<ChildrenList>
+						<Action Name="" ID="{79E8F752-0DD8-5B35-9654-81CC23478C82}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearCatch" ID="{7C4BEC5D-26A6-55DC-8F13-E4B9B4F78B11}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearImpact" ID="{5F20ED18-664B-5554-934F-EB17AD05D456}">
+					<ChildrenList>
+						<Action Name="" ID="{9C09CE97-CEA0-525B-85FC-B4FF8D90668A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearImpact" ID="{D6DBAABA-64A7-4613-AD7C-902A1D4F686D}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearPulse" ID="{1BD587FE-8D9A-513B-9DA0-473EEEA0E1A6}">
+					<ChildrenList>
+						<Action Name="" ID="{57D84A9E-883A-5C87-B14A-6E257B3EFF7D}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearPulse" ID="{BD463B82-694F-5CEE-B2BA-3700B07CE577}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearRecall" ID="{15ADC23E-E565-5204-86C8-77081B1DD75C}">
+					<ChildrenList>
+						<Action Name="" ID="{1085891B-570C-5BDA-B57C-914E68D32A48}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearRecall" ID="{6234EA3A-A0FB-5BEB-B86D-1B145FD3D5C0}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearStruck" ID="{EE0DAB88-47D0-53A8-9778-336669D77DB5}">
+					<ChildrenList>
+						<Action Name="" ID="{A38630EF-C49A-5813-A103-5284C26F9E66}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearStruck" ID="{D7286092-086B-5844-95B5-A7D314078B60}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearThrow" ID="{2F8AF264-5D80-53A1-AE97-666594CDA616}">
+					<ChildrenList>
+						<Action Name="" ID="{D599D2F9-E231-5D8D-BCCC-F1A2C356883C}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearThrow" ID="{CF678599-4AA6-41E9-A1B0-6A04DE9A8977}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearThrowHeavy" ID="{DB2D90FD-4EB6-5813-8ACE-C401D437D0B2}">
+					<ChildrenList>
+						<Action Name="" ID="{8C03B076-0780-53CB-89FB-92661ADEAE0E}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearThrowHeavy" ID="{2A1E4399-DA3B-568F-B287-423F36420467}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_StaticTier" ID="{32E490D9-1932-55C4-B2D6-E1D96BE23E3D}">
+					<ChildrenList>
+						<Action Name="" ID="{39BB9F3A-574B-522E-8283-C64D6ABE3F60}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_StaticTier" ID="{4513956C-2A9D-47D2-ACE3-8223CC993DEB}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ThunderRelease" ID="{FA5FF151-50CC-534B-9088-88B05BDC346C}">
+					<ChildrenList>
+						<Action Name="" ID="{CEB9D61B-20E6-5E56-B140-CDBF77F2053F}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ThunderRelease" ID="{C08B9CB4-4A6A-5183-AC7A-7EA280D63AD6}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ThunderStrike" ID="{51C46C9A-012C-5E08-A64D-46AE80FD8661}">
+					<ChildrenList>
+						<Action Name="" ID="{F0B5FD93-2132-5D2C-9229-19E92ACC1141}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ThunderStrike" ID="{8A41292C-415B-52CF-9874-608B150EEFEB}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ThunderTelegraph" ID="{1A60468A-88B1-583E-AF43-E03F09B57C5F}">
+					<ChildrenList>
+						<Action Name="" ID="{80C33BDD-5EC1-50F3-B9F3-BA82B111801E}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ThunderTelegraph" ID="{D72D1F6E-ABF7-55F1-9B5C-FBF9B4AAB1A9}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_HS_ThunderTelegraph" ID="{C46CD47B-EBF8-51D8-9B36-56CF43D0958C}">
+					<ChildrenList>
+						<Action Name="" ID="{47970EB4-0DEE-5141-AA79-EFCB035B004C}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2" />
+								<Property Name="FadeTime" Type="Real64" Value="0.03" />
+								<Property Name="Scope" Type="int16" Value="0" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ThunderTelegraph" ID="{D72D1F6E-ABF7-55F1-9B5C-FBF9B4AAB1A9}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -1,0 +1,286 @@
+[
+  {
+    "name": "Footstep",
+    "event": "Play_HS_Footstep",
+    "seconds": 0.17,
+    "loop": false,
+    "peak_dbfs": -20.0,
+    "rms_dbfs": -36.14
+  },
+  {
+    "name": "FootstepRun",
+    "event": "Play_HS_FootstepRun",
+    "seconds": 0.15,
+    "loop": false,
+    "peak_dbfs": -18.42,
+    "rms_dbfs": -35.51
+  },
+  {
+    "name": "Land",
+    "event": "Play_HS_Land",
+    "seconds": 0.3,
+    "loop": false,
+    "peak_dbfs": -15.92,
+    "rms_dbfs": -35.53
+  },
+  {
+    "name": "AirJump",
+    "event": "Play_HS_AirJump",
+    "seconds": 0.3,
+    "loop": false,
+    "peak_dbfs": -14.42,
+    "rms_dbfs": -27.36
+  },
+  {
+    "name": "GlideEnter",
+    "event": "Play_HS_GlideEnter",
+    "seconds": 0.4,
+    "loop": false,
+    "peak_dbfs": -17.72,
+    "rms_dbfs": -31.24
+  },
+  {
+    "name": "GlideExit",
+    "event": "Play_HS_GlideExit",
+    "seconds": 0.35,
+    "loop": false,
+    "peak_dbfs": -20.0,
+    "rms_dbfs": -32.78
+  },
+  {
+    "name": "GlideLoop",
+    "event": "Play_HS_GlideLoop",
+    "seconds": 2.0,
+    "loop": true,
+    "peak_dbfs": -25.19,
+    "rms_dbfs": -38.98
+  },
+  {
+    "name": "CircuitLoop",
+    "event": "Play_HS_CircuitLoop",
+    "seconds": 2.0,
+    "loop": true,
+    "peak_dbfs": -22.5,
+    "rms_dbfs": -35.13
+  },
+  {
+    "name": "ArcBoltCast",
+    "event": "Play_HS_ArcBoltCast",
+    "seconds": 0.18,
+    "loop": false,
+    "peak_dbfs": -14.42,
+    "rms_dbfs": -32.27
+  },
+  {
+    "name": "BoltImpact",
+    "event": "Play_HS_BoltImpact",
+    "seconds": 0.28,
+    "loop": false,
+    "peak_dbfs": -12.4,
+    "rms_dbfs": -29.09
+  },
+  {
+    "name": "ChainHop",
+    "event": "Play_HS_ChainHop",
+    "seconds": 0.2,
+    "loop": false,
+    "peak_dbfs": -15.92,
+    "rms_dbfs": -36.96
+  },
+  {
+    "name": "SpearThrow",
+    "event": "Play_HS_SpearThrow",
+    "seconds": 0.28,
+    "loop": false,
+    "peak_dbfs": -13.15,
+    "rms_dbfs": -26.26
+  },
+  {
+    "name": "SpearImpact",
+    "event": "Play_HS_SpearImpact",
+    "seconds": 0.6,
+    "loop": false,
+    "peak_dbfs": -4.0,
+    "rms_dbfs": -19.2,
+    "source": "v0.9.16 synth + crack from sample:dragon-studio-lightning-strike-386161.mp3"
+  },
+  {
+    "name": "ArcStepStart",
+    "event": "Play_HS_ArcStepStart",
+    "seconds": 0.25,
+    "loop": false,
+    "peak_dbfs": -13.98,
+    "rms_dbfs": -28.73
+  },
+  {
+    "name": "ArcStepEnd",
+    "event": "Play_HS_ArcStepEnd",
+    "seconds": 0.2,
+    "loop": false,
+    "peak_dbfs": -17.08,
+    "rms_dbfs": -31.72
+  },
+  {
+    "name": "CircuitUnfold",
+    "event": "Play_HS_CircuitUnfold",
+    "seconds": 0.6,
+    "loop": false,
+    "peak_dbfs": -13.15,
+    "rms_dbfs": -27.45
+  },
+  {
+    "name": "CircuitOpen",
+    "event": "Play_HS_CircuitOpen",
+    "seconds": 0.4,
+    "loop": false,
+    "peak_dbfs": -13.15,
+    "rms_dbfs": -30.96
+  },
+  {
+    "name": "CircuitPulse",
+    "event": "Play_HS_CircuitPulse",
+    "seconds": 0.26,
+    "loop": false,
+    "peak_dbfs": -20.0,
+    "rms_dbfs": -36.39
+  },
+  {
+    "name": "CircuitClose",
+    "event": "Play_HS_CircuitClose",
+    "seconds": 0.55,
+    "loop": false,
+    "peak_dbfs": -15.92,
+    "rms_dbfs": -29.85
+  },
+  {
+    "name": "MeterFull",
+    "event": "Play_HS_MeterFull",
+    "seconds": 0.65,
+    "loop": false,
+    "peak_dbfs": -14.89,
+    "rms_dbfs": -33.12
+  },
+  {
+    "name": "ChargeTick",
+    "event": "Play_HS_ChargeTick",
+    "seconds": 0.22,
+    "loop": false,
+    "peak_dbfs": -20.0,
+    "rms_dbfs": -37.03
+  },
+  {
+    "name": "Electrocute",
+    "event": "Play_HS_Electrocute",
+    "seconds": 0.35,
+    "loop": false,
+    "peak_dbfs": -12.77,
+    "rms_dbfs": -28.99
+  },
+  {
+    "name": "StaticTier",
+    "event": "Play_HS_StaticTier",
+    "seconds": 0.14,
+    "loop": false,
+    "peak_dbfs": -26.93,
+    "rms_dbfs": -41.06
+  },
+  {
+    "name": "ThunderTelegraph",
+    "event": "Play_HS_ThunderTelegraph",
+    "seconds": 0.35,
+    "loop": false,
+    "peak_dbfs": -17.08,
+    "rms_dbfs": -37.97
+  },
+  {
+    "name": "ThunderRelease",
+    "event": "Play_HS_ThunderRelease",
+    "seconds": 0.24,
+    "loop": false,
+    "peak_dbfs": -13.98,
+    "rms_dbfs": -36.12
+  },
+  {
+    "name": "ThunderStrike",
+    "event": "Play_HS_ThunderStrike",
+    "seconds": 2.4,
+    "loop": false,
+    "peak_dbfs": -9.0,
+    "rms_dbfs": -25.99,
+    "source": "sample:patricksilvey-weather-lightning-2-464187.mp3"
+  },
+  {
+    "name": "SpearRecall",
+    "event": "Play_HS_SpearRecall",
+    "seconds": 0.5,
+    "loop": false,
+    "peak_dbfs": -13.98,
+    "rms_dbfs": -30.29
+  },
+  {
+    "name": "SpearCatch",
+    "event": "Play_HS_SpearCatch",
+    "seconds": 0.25,
+    "loop": false,
+    "peak_dbfs": -12.4,
+    "rms_dbfs": -33.72
+  },
+  {
+    "name": "FanLoop",
+    "event": "Play_HS_FanLoop",
+    "seconds": 2.0,
+    "loop": true,
+    "peak_dbfs": -20.92,
+    "rms_dbfs": -45.33
+  },
+  {
+    "name": "FanStart",
+    "event": "Play_HS_FanStart",
+    "seconds": 0.2,
+    "loop": false,
+    "peak_dbfs": -16.48,
+    "rms_dbfs": -36.57
+  },
+  {
+    "name": "FanEnd",
+    "event": "Play_HS_FanEnd",
+    "seconds": 0.25,
+    "loop": false,
+    "peak_dbfs": -18.42,
+    "rms_dbfs": -44.17
+  },
+  {
+    "name": "SpearPulse",
+    "event": "Play_HS_SpearPulse",
+    "seconds": 0.18,
+    "loop": false,
+    "peak_dbfs": -26.02,
+    "rms_dbfs": -45.42
+  },
+  {
+    "name": "SpearStruck",
+    "event": "Play_HS_SpearStruck",
+    "seconds": 0.35,
+    "loop": false,
+    "peak_dbfs": -11.7,
+    "rms_dbfs": -34.86
+  },
+  {
+    "name": "SpearBurst",
+    "event": "Play_HS_SpearBurst",
+    "seconds": 1.0,
+    "loop": false,
+    "peak_dbfs": -4.5,
+    "rms_dbfs": -18.63,
+    "source": "v0.9.16 sample:dragon-studio-lightning-strike-386161.mp3 + sub boom + zap"
+  },
+  {
+    "name": "SpearThrowHeavy",
+    "event": "Play_HS_SpearThrowHeavy",
+    "seconds": 0.42,
+    "loop": false,
+    "peak_dbfs": -15.0,
+    "rms_dbfs": -30.21,
+    "source": "sample:dragon-studio-lightning-strike-386161.mp3"
+  }
+]

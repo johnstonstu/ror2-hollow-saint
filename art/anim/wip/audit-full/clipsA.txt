@@ -1,1 +1,0 @@
-Idle;Select idle;Charge loop;Arc Bolt left;Arc Bolt right;Aim down;Aim left;Aim neutral;Aim right;Aim up;Run forward;Run backward;Walk forward;Glide loop;Ascend

@@ -1,9 +1,0 @@
-{
-  "source": "art\\hybrid\\hollow-saint-hybrid-v14.blend",
-  "changes": [
-    "2 outer forearm cyan conductors",
-    "Pauldron ceramic toned down about 7% to sit with the tinted body ivory"
-  ],
-  "render_device": "OPTIX",
-  "status": "Visual fidelity study; renders are Blender studio evidence only, no game test"
-}

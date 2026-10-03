@@ -1,2 +1,0 @@
-C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\render_previews.py:57: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
-  sc.camera = cam

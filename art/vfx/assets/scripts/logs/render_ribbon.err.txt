@@ -1,2 +1,0 @@
-C:\Users\stuwj\Documents\Coding\ror2-lightning\art\vfx\assets\scripts\render_previews.py:46: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
-  w.use_nodes = True
