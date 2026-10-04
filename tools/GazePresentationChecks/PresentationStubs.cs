@@ -77,7 +77,7 @@ namespace RoR2
 namespace HollowSaint.FoundationKit.Vfx
 {
     using UnityEngine;using RoR2;
-    public class SkinFxPalette {public int Index;public Color Arc=new Color(.3f,.9f,1),Outer=new Color(.1f,.5f,.8f),Core=new Color(1,1,1);public static SkinFxPalette ForBody(CharacterBody b)=>new SkinFxPalette {Index=(int)b.skinIndex};public Material Material(Material m)=>m;}
+    public class SkinFxPalette {public int Index;public Color Arc=new Color(.3f,.9f,1),Outer=new Color(.1f,.5f,.8f),Core=new Color(1,1,1);public static SkinFxPalette ForBody(CharacterBody b)=>new SkinFxPalette {Index=(int)b.skinIndex, Arc=new[] { new Color(.3f,.92f,1), new Color(.3f,.92f,1), new Color(.45f,1,.72f), new Color(1,.72f,.22f), new Color(.75f,.35f,1), HollowSaint.CrimsonMasteryVisuals.Arc }[b.skinIndex]};public Material Material(Material m)=>m;}
     public static class VfxAssets {public static Material ArcCore=new Material(),ArcGlow=new Material();public static void Load(){} }
     public class HaloRing:Object {public bool Valid=true;public float RadiusScale=1;public ShapeData Shape=new ShapeData();public class ShapeData {public Vector3 Center,Axis=Vector3.forward,Binormal=Vector3.right;}public static HaloRing For(CharacterBody b)=>null;}
 }
