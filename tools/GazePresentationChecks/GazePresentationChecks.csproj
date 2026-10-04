@@ -6,5 +6,7 @@
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Geometry.cs" Link="GazeEmpowermentFx.Geometry.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Pulse.cs" Link="GazeEmpowermentFx.Pulse.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeContrastAssets.cs" Link="GazeContrastAssets.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Vfx/SkinFxPalette.cs" Link="SkinFxPalette.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeTendrils.cs" Link="GazeTendrils.cs" />
   </ItemGroup>
 </Project>

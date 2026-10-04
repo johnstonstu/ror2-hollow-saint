@@ -41,7 +41,9 @@ Longer duration also means more ordinary-beam exposure, longer hover/armor uptim
 
 ## Presentation to inspect
 
-The ordinary beam should read as a **medium-width baseline** (0.8 m body), with a **fatter travelling pulse** (3.85 m sleeve) for each launched orb. Round entry orbs retain the skin's primary energy color through crown intake and travel, including crimson red. Secondary color is a subdued outline. Intake should move the same round orb into the crown before that pulse travels out. Confirmed enemy connectors should agree with actual hits; the expanding ground pattern is not blanket area damage.
+The ordinary beam should read as a **medium-width baseline** (0.8 m body), with a **fatter travelling pulse** (3.85 m sleeve) for each launched charge. Static Charges appear as compact irregular lightning clusters, keeping the primary skin energy through crown intake and travel, with fine complementary filaments. Pulses add two narrow branching forks (one with reduced effects). Ground strokes lash outward with varied paths and a fading wake rather than a continuously lit radial star. Confirmed enemy connectors should agree with actual hits; decorative lashes stay within the existing footprint and do not authorize damage.
+
+All six palettes retain their primary identity and add sparse secondary color: cyan/lilac for Default and Obsidian, mint/blue for Verdigris, gold/violet for Solar, violet/ice cyan for Umbral, and crimson/amber for Crimson Vow. Shared forks and sparks apply that layering to Arc Bolt, Stormspear/conductors, Arc Step, Open Circuit and Thunderbolt. Native chain and Thunderbolt variants now include the sixth Crimson slot. Inspect contrast, bloom, crowded fights and reduced effects before accepting the appearance.
 
 The physical crown arcs expand **radially**, preserving their thickness, and return to their original pose on every exit. Open Circuit has a new lightning dome to inspect separately: it must follow its active state and clear when the effect ends. These are candidate visual expectations, not approval of the in-game result.
 

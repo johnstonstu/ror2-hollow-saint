@@ -86,19 +86,19 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 float accentValue=.2126f*chosen.r+.7152f*chosen.g+.0722f*chosen.b;
                 Check(distance>.65f,"secondary RGB separation all skins");
                 Check(Math.Abs(baseValue-accentValue)>.12f,"secondary value separation all skins");
-                Check(fx.fuel[0].stroke.line.positionCount==17&&fx.fuel[0].outline.line.enabled,"outlined round fuel");
+                Check(fx.fuel[0].stroke.line.positionCount==17&&fx.fuel[0].outline.line.enabled,"outlined energy knot");
                 fx.SetReserve(1004+skin,1);fx.LateUpdate();
-                Check(fx.reserve[0].stroke.line.positionCount==17,"round reserve retains identity");
+                Check(fx.reserve[0].stroke.line.positionCount==17,"reserve knot retains identity");
                 Check(fx.ReadabilityFocus==0f,"no focus at rest");
                 fx.Swallow(1004+skin,0,0,0,.32f);Time.time+=.1f;
                 Check(fx.ReadabilityFocus>.95f,"focus available before renderer update");
                 fx.LateUpdate();Check(fx.intakeOutlines[0].line.enabled,"outlined intake trail");
-                Check(fx.fuel[0].stroke.line.positionCount==17,"intake stays round");
+                Check(fx.fuel[0].stroke.line.positionCount==17,"intake keeps knot topology");
                 Check(Math.Abs(fx.intakeTrails[0].line.startColor.r-baseColor.r)<.001f && Math.Abs(fx.intakeTrails[0].line.startColor.g-baseColor.g)<.001f && Math.Abs(fx.intakeTrails[0].line.startColor.b-baseColor.b)<.001f,"intake retains primary colour");
                 fx.LaunchPulse(1004+skin,0,Vector3.up,new Vector3(0,0,10),new Vector3(0,0,10),Vector3.up,true,0,.2f,4,.3f,false);
                 fx.ReducedEffects=true;Time.time+=.1f;fx.LateUpdate();
                 Check(fx.pulses[0].front.line.enabled&&fx.pulses[0].outline.line.enabled,"reduced effects keep pulse silhouette");
-                Check(fx.pulses[0].front.line.positionCount==17,"round pulse front");
+                Check(fx.pulses[0].front.line.positionCount==17,"irregular pulse front");
                 Check(Math.Abs(fx.pulses[0].sleeve.line.startColor.r-baseColor.r)<.001f && Math.Abs(fx.pulses[0].sleeve.line.startColor.g-baseColor.g)<.001f && Math.Abs(fx.pulses[0].sleeve.line.startColor.b-baseColor.b)<.001f,"pulse retains primary colour");
                 Time.time+=.2f;fx.LateUpdate();
                 Check(fx.pulses[0].roots[0].stroke.line.enabled&&!fx.pulses[0].roots[1].stroke.line.enabled,"reduced effects omit secondary roots");
@@ -159,34 +159,80 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             foreach(var outline in fx.intakeOutlines)Check(!outline.line.enabled,"clear hides every intake outline");
             for(uint skin=0;skin<6;skin++)
             {
-                body.skinIndex=skin; fx.ReducedEffects=false; fx.BeginCast(4000+skin,5,5,true,0); fx.SetReserve(4000+skin,2); fx.LateUpdate();
-                var orb=fx.fuel[0]; var filament=orb.filament.line;
-                Check(filament.enabled && fx.reserve[0].filament.line.enabled,"fuel and reserve crawl");
-                Check(orb.stroke.line.positionCount==17 && filament.positionCount==9,"circle survives separate short filament");
-                Color rgb=primary[skin];
-                Check(Math.Abs(filament.startColor.r-rgb.r)<.001f && Math.Abs(filament.startColor.g-rgb.g)<.001f && Math.Abs(filament.startColor.b-rgb.b)<.001f,"filament uses primary skin colour");
-                Vector3 old=filament.points[4]; Time.time+=.08f; fx.LateUpdate();
-                Check(Vector3.Distance(old,filament.points[4])>.001f,"filament crawls over time");
-                for(int point=0;point<9;point++) Check(Vector3.Distance(filament.points[point],fx.FuelPosition(0))<=.22f*1.11f,"filament remains close to orb");
-                fx.Swallow(4000+skin,1,0,0,.32f); Time.time+=.15f; fx.LateUpdate();
+                body.skinIndex=skin; fx.ReducedEffects=false; fx.BeginCast(5000+skin,5,5,true,0); fx.SetReserve(5000+skin,2); fx.LateUpdate();
+                var pal=HollowSaint.FoundationKit.Vfx.SkinFxPalette.ForIndex(skin);
+                Check(pal.Core.maxColorComponent<=1 && pal.Secondary.maxColorComponent<=1,"bounded six-skin colours");
+                Check(Math.Abs(pal.Secondary.r-pal.Arc.r)+Math.Abs(pal.Secondary.g-pal.Arc.g)+Math.Abs(pal.Secondary.b-pal.Arc.b)>.45f,"secondary differs meaningfully from primary");
+                Check(HollowSaint.FoundationKit.Vfx.SkinFxPalette.FromNetwork(pal.NetworkColor).Index==(skin==1?0:(int)skin),"all six palette network identities preserved");
+                var source=HollowSaint.FoundationKit.Vfx.VfxAssets.ArcCore;
+                Color sourceTint=source.GetColor("_TintColor");
+                var secondary=pal.SecondaryMaterial(source);
+                Check(!System.Object.ReferenceEquals(source,secondary) && System.Object.ReferenceEquals(secondary,pal.SecondaryMaterial(secondary)),"secondary owns cached canonical material");
+                Check(source.GetColor("_TintColor").r==sourceTint.r && source.GetColor("_TintColor").g==sourceTint.g,"secondary leaves source tint untouched");
+                foreach(var rgb in secondary.Textures["_RemapTex"].pixels)Check(rgb.r==rgb.g && rgb.g==rgb.b,"secondary neutral ramp prevents primary hue multiplication");
+                long cachedBefore=GC.GetAllocatedBytesForCurrentThread();for(int n=0;n<120;n++)pal.SecondaryMaterial(source);
+                Check(GC.GetAllocatedBytesForCurrentThread()==cachedBefore,"material cache adds no warmed allocations");
+                var orb=fx.fuel[0]; var knots=orb.stroke.line;
+                Vector3 center=fx.FuelPosition(0);
+                Check(Vector3.Distance(knots.points[0],knots.points[2])>.07f,"knot has irregular radial depth");
+                Check(Vector3.Distance(knots.points[0],knots.points[16])>.0001f,"knot is not a closed ring");
+                var secondaryColor=orb.filament.line.startColor;
+                Check(Math.Abs(secondaryColor.r-pal.Secondary.r)<.001f && Math.Abs(secondaryColor.g-pal.Secondary.g)<.001f,"fine filament uses shared complementary colour");
+                Vector3 oldKnot=knots.points[2]; Time.time+=.09f;fx.LateUpdate();Check(Vector3.Distance(oldKnot,knots.points[2])>.001f,"knot crackles");
+                fx.Swallow(5000+skin,1,0,0,.32f); Time.time+=.15f;fx.LateUpdate();
                 var trail=fx.intakeFilaments[0].line; var smooth=fx.intakeTrails[0].line;
-                Check(trail.enabled && trail.widthMultiplier<=.025f,"thin energized intake");
-                Check(Vector3.Distance(trail.points[0],smooth.points[0])<.001f && Vector3.Distance(trail.points[11],smooth.points[11])<.001f,"filament endpoints pinned");
-                Check(Vector3.Distance(trail.points[5],smooth.points[5])>.001f,"intake has electric teeth");
-                fx.ReducedEffects=true; fx.LateUpdate();
-                Check(orb.filament.line.enabled && !fx.fuel[1].filament.line.enabled && !fx.reserve[0].filament.line.enabled,"reduced effects keep only swallowing crawl");
-                Time.time+=.2f; fx.LateUpdate(); Check(!filament.enabled && !trail.enabled,"consumed charge leaves no filament");
-                fx.ReducedEffects=false; fx.RenderOrbs();
-                long before=GC.GetAllocatedBytesForCurrentThread();
-                for(int frame=0;frame<120;frame++){Time.time+=.016f;fx.RenderOrbs();}
-                Check(GC.GetAllocatedBytesForCurrentThread()==before,"orb rendering adds no managed allocations after warmup");
-                fx.EndCast(4000+skin,4,1,5,EndReason.Cancelled); fx.LateUpdate();
-                foreach(var charge in fx.fuel) Check(!charge.filament.line.enabled,"return merge hides crawl");
-                fx.OnDisable();
-                foreach(var charge in fx.reserve) Check(!charge.filament.line.enabled,"disable hides reserve crawl");
-                foreach(var line in fx.intakeFilaments) Check(!line.line.enabled,"disable hides intake filaments");
-                Check(GameObject.Created==allocated,"electric pool reused without new objects");
+                Check(trail.enabled && Vector3.Distance(trail.points[11],smooth.points[11])<.001f,"intake electric trail stays attached");
+                fx.LaunchPulse(5000+skin,0,new Vector3(0,2,0),new Vector3(0,0,20),new Vector3(0,0,20),Vector3.up,true,0,.55f,4,.4f,false);
+                var storm=fx.pulses[0]; Time.time=storm.at+.2f;fx.LateUpdate();
+                Check(storm.forks[0].line.enabled && storm.forks[1].line.enabled,"two pooled travelling forks");
+                Check(Vector3.Distance(storm.forkPoints[0][0],storm.line[3])<.001f,"surge fork stays attached to main spine");
+                for(int n=0;n<storm.line.Length;n++)Check(Vector3.Dot(storm.line[n]-storm.origin,storm.direction)<=storm.length*(.2f/.55f)+.001f,"surge never jumps ahead of authoritative head");
+                int queries=Physics.Rays+Physics.Segments;
+                long renderBefore=GC.GetAllocatedBytesForCurrentThread();
+                for(int frame=0;frame<120;frame++){Time.time+=.001f;fx.RenderOrbs();fx.RenderPulses();}
+                Check(GC.GetAllocatedBytesForCurrentThread()==renderBefore,"travel and knot hot paths allocate no managed memory");
+                Check(Physics.Rays+Physics.Segments==queries,"travel has no terrain resampling");
+                Time.time=storm.at+storm.travel+.16f;fx.LateUpdate(); var rootStroke=storm.roots[0].stroke.line;
+                Check(!storm.forks[0].line.enabled && rootStroke.enabled,"arrival clears travelling forks and starts grounded lash");
+                Vector3 wake=rootStroke.points[0];Time.time+=.08f;fx.LateUpdate();
+                Check(Vector3.Distance(wake,rootStroke.points[0])>.05f,"ground wake moves outward rather than remaining a static star");
+                foreach(var root in storm.roots)for(int n=0;n<root.stroke.line.positionCount;n++)
+                    if(root.stroke.line.enabled)Check(Vector3.Distance(root.stroke.line.points[n],storm.groundPoint)<=storm.radius,"animated ground lash stays in supplied radius");
+                long groundBefore=GC.GetAllocatedBytesForCurrentThread();
+                for(int frame=0;frame<60;frame++){Time.time+=.001f;fx.RenderPulses();}
+                Check(GC.GetAllocatedBytesForCurrentThread()==groundBefore && Physics.Rays+Physics.Segments==queries,"ground lash allocates no memory and never resamples terrain");
+                fx.LaunchPulse(5000+skin,1,storm.origin,storm.end,storm.groundPoint,Vector3.up,true,0,.55f,4,.4f,false);
+                Check(Vector3.Distance(storm.roots[0].path[4],fx.pulses[1].roots[0].path[4])>.05f,"successive pulses vary their terrain paths");
+                fx.ReducedEffects=true;Time.time+=.1f;fx.LateUpdate();Check(fx.pulses[1].forks[0].line.enabled && !fx.pulses[1].forks[1].line.enabled,"reduced effects use one surge fork");
+                fx.EndCast(5000+skin,4,1,5,EndReason.Cancelled);fx.LateUpdate();
+                foreach(var pulse in fx.pulses)foreach(var fork in pulse.forks)Check(!fork.line.enabled,"cancellation hides every surge fork");
+                foreach(var charge in fx.fuel)Check(!charge.filament.line.enabled,"return merge hides charge crawl");
+                fx.OnDisable();foreach(var filament in fx.intakeFilaments)Check(!filament.line.enabled,"disable clears intake electricity");
+                Check(GameObject.Created==allocated,"six-skin storm reuses bounded renderer pool");
             }
+            var beamOwner=go.AddComponent<HollowSaint.FoundationKit.Gaze.GazeBeam>();beamOwner.Body=body;
+            var tendrils=go.AddComponent<GazeTendrils>();tendrils.Begin(beamOwner,HollowSaint.FoundationKit.Vfx.SkinFxPalette.ForIndex(5));
+            var impact=new HollowSaint.FoundationKit.Gaze.GazeServer.Impact {Point=Vector3.zero};
+            var ambient=(Array)typeof(GazeTendrils).GetField("ambient",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(tendrils);
+            var strokeType=ambient.GetValue(0).GetType();
+            var glowField=strokeType.GetField("glow",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
+            var firstGlow=(LineRenderer)glowField.GetValue(ambient.GetValue(0));
+            Time.time=20.15f;tendrils.Render(impact);Vector3 oldLash=firstGlow.points[4];
+            Time.time+=.11f;tendrils.Render(impact);Check(Vector3.Distance(oldLash,firstGlow.points[4])>.01f,"baseline endpoint lash changes across refreshes");
+            for(int frame=0;frame<30;frame++)
+            {
+                Time.time+=.11f;tendrils.Render(impact);
+                foreach(var stroke in ambient)
+                {
+                    var line=(LineRenderer)glowField.GetValue(stroke);
+                    if(line.enabled)for(int n=0;n<line.positionCount;n++)Check(Vector3.Distance(line.points[n],impact.Point)<=4,"ambient lash stays inside splash footprint");
+                }
+            }
+            long ambientBefore=GC.GetAllocatedBytesForCurrentThread();int ambientObjects=GameObject.Created;
+            for(int frame=0;frame<120;frame++){Time.time+=.11f;tendrils.Render(impact);}
+            Check(GC.GetAllocatedBytesForCurrentThread()==ambientBefore && GameObject.Created==ambientObjects,"ambient endpoint uses existing pool with no hot allocations");
+            body.healthComponent.alive=false;tendrils.Render(impact);foreach(var stroke in ambient)Check(!((LineRenderer)glowField.GetValue(stroke)).enabled,"death clears baseline lashes");
+            body.healthComponent.alive=true;tendrils.Clear();
             Console.WriteLine("PASS "+checks+" assertions; 1000 cast reuse; production presentation files with physics/render substitutes. Not Unity runtime validation.");
         }
     }

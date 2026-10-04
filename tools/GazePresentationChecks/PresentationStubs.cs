@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 namespace UnityEngine
 {
-    public class Object { public static implicit operator bool(Object o) => o != null; public static void Destroy(Object o) {} }
+    public class Object { public string name="stub"; public static implicit operator bool(Object o) => o != null; public static void Destroy(Object o) {} }
     public class Component : Object { public GameObject gameObject; public Transform transform => gameObject.transform; public T GetComponent<T>() where T : Component => gameObject.GetComponent<T>(); }
-    public class MonoBehaviour : Component {}
+    public class MonoBehaviour : Component {public bool isActiveAndEnabled=true;}
     public class Transform : Component { public Vector3 position, forward=Vector3.forward, right=Vector3.right; public void SetParent(Transform p,bool b) {} }
     public class GameObject : Object
     {
@@ -12,7 +12,7 @@ namespace UnityEngine
         public GameObject(string n="") { Created++; transform=new Transform { gameObject=this }; }
         public T AddComponent<T>() where T:Component,new() { var p=new T { gameObject=this }; parts[typeof(T)]=p; return p; }
         public T GetComponent<T>() where T:Component { Component c; return parts.TryGetValue(typeof(T),out c)?(T)c:null; }
-        public void SetActive(bool b) {activeSelf=b;}
+        public T[] GetComponentsInChildren<T>(bool includeInactive=true) where T:Component => Array.Empty<T>(); public void SetActive(bool b) {activeSelf=b;}
     }
     [AttributeUsage(AttributeTargets.Class)] public class DefaultExecutionOrder:Attribute { public DefaultExecutionOrder(int n){} }
     [AttributeUsage(AttributeTargets.Class)] public class DisallowMultipleComponent:Attribute {}
@@ -44,15 +44,15 @@ namespace UnityEngine
         public static float InverseLerp(float a,float b,float t)=>a==b?0:Clamp01((t-a)/(b-a));
         public static float SmoothStep(float a,float b,float t){t=Clamp01(t);return Lerp(a,b,t*t*(3-2*t));}
     }
-    public struct Color {public float r,g,b,a; public Color(float r,float g,float b,float a=1){this.r=r;this.g=g;this.b=b;this.a=a;} public static Color white=>new Color(1,1,1);public static Color black=>new Color(0,0,0);public static Color operator *(Color c,float f)=>new Color(c.r*f,c.g*f,c.b*f,c.a*f);public static Color Lerp(Color x,Color y,float t)=>new Color(Mathf.Lerp(x.r,y.r,t),Mathf.Lerp(x.g,y.g,t),Mathf.Lerp(x.b,y.b,t),Mathf.Lerp(x.a,y.a,t)); }
+    public struct Color {public float maxColorComponent=>Math.Max(r,Math.Max(g,b)); public float grayscale=>.299f*r+.587f*g+.114f*b;public float r,g,b,a; public Color(float r,float g,float b,float a=1){this.r=r;this.g=g;this.b=b;this.a=a;} public static Color white=>new Color(1,1,1);public static Color black=>new Color(0,0,0);public static Color operator *(Color c,float f)=>new Color(c.r*f,c.g*f,c.b*f,c.a*f);public static Color Lerp(Color x,Color y,float t)=>new Color(Mathf.Lerp(x.r,y.r,t),Mathf.Lerp(x.g,y.g,t),Mathf.Lerp(x.b,y.b,t),Mathf.Lerp(x.a,y.a,t)); }
     public class Shader:Object {public static Shader Find(string name)=>new Shader();}
-    public class Material:Object {public string name="test";public int renderQueue;public Dictionary<string,Color> Colors=new Dictionary<string,Color>();public Dictionary<string,Texture2D> Textures=new Dictionary<string,Texture2D>();public Material(){}public Material(Material m){}public Material(Shader s){}public bool HasProperty(string p)=>true;public void SetColor(string p,Color c){Colors[p]=c;}public void SetTexture(string p,Texture2D t){Textures[p]=t;} }
+    public class Material:Object {public string name="test";public int renderQueue;public Dictionary<string,Color> Colors=new Dictionary<string,Color>();public Dictionary<string,Texture2D> Textures=new Dictionary<string,Texture2D>();public Material(){}public Material(Material m){}public Material(Shader s){}public Color GetColor(string p)=>Colors.TryGetValue(p,out var c)?c:Color.white;public bool HasProperty(string p)=>true;public void SetColor(string p,Color c){Colors[p]=c;}public void SetTexture(string p,Texture2D t){Textures[p]=t;} }
     public enum TextureFormat {RGBA32}public enum TextureWrapMode {Clamp}
     public class Texture2D:Object {public string name;public TextureWrapMode wrapMode;public readonly Color[] pixels;public Texture2D(int w,int h,TextureFormat f,bool m){pixels=new Color[w*h];}public void SetPixel(int x,int y,Color c){pixels[x]=c;}public void Apply(bool x,bool y){} }
     public enum LineAlignment { View } public enum LineTextureMode { Stretch }
-    public class LineRenderer:Component { public bool useWorldSpace,receiveShadows,enabled; public LineAlignment alignment; public LineTextureMode textureMode; public Material sharedMaterial; public Rendering.ShadowCastingMode shadowCastingMode; public int numCapVertices,numCornerVertices,positionCount; public float widthMultiplier; public Color startColor,endColor; public AnimationCurve widthCurve; public readonly Vector3[] points=new Vector3[32]; public void SetPosition(int i,Vector3 p){points[i]=p;} }
+    public class LineRenderer:Renderer { public bool useWorldSpace,receiveShadows,enabled; public LineAlignment alignment; public LineTextureMode textureMode; public Material sharedMaterial; public Rendering.ShadowCastingMode shadowCastingMode; public int numCapVertices,numCornerVertices,positionCount; public float widthMultiplier; public Color startColor,endColor; public AnimationCurve widthCurve; public readonly Vector3[] points=new Vector3[32]; public void SetPosition(int i,Vector3 p){points[i]=p;} }
     namespace Rendering {public enum ShadowCastingMode { Off }}
-    public class AnimationCurve { public AnimationCurve(params Keyframe[] f){} } public struct Keyframe { public Keyframe(float a,float b){} }
+    public class AnimationCurve { public static AnimationCurve Linear(float a,float b,float c,float d)=>new AnimationCurve(); public AnimationCurve(params Keyframe[] f){} } public struct Keyframe { public Keyframe(float a,float b){} }
     public static class Time {public static float time;}
     public enum QueryTriggerInteraction { Ignore }
     public struct RaycastHit {public Vector3 point,normal;}
@@ -67,19 +67,18 @@ namespace UnityEngine
 namespace RoR2
 {
     using UnityEngine;
-    public class CharacterBody:Component {public uint skinIndex;public HealthComponent healthComponent=new HealthComponent(); public Vector3 corePosition; public ModelLocator modelLocator;}
+    public class CharacterBody:Component {public uint skinIndex;public HealthComponent healthComponent=new HealthComponent(); public Vector3 corePosition,footPosition; public ModelLocator modelLocator;}
     public class HealthComponent:Object {public bool alive=true;}
     public class ModelLocator:Object {public Transform modelTransform;}
-    public class CharacterModel:Component {public int invisibilityCount;}
+    public class CharacterModel:Component {public int invisibilityCount; public RendererInfo[] baseRendererInfos=Array.Empty<RendererInfo>(); public struct RendererInfo {public Material defaultMaterial;} }
     public struct LayerIndex {public int mask;public static LayerIndex world=>new LayerIndex();}
     public static class Util {public static int Sounds;public static void PlaySound(string s,GameObject o){Sounds++;}}
 }
 namespace HollowSaint.FoundationKit.Vfx
 {
     using UnityEngine;using RoR2;
-    public class SkinFxPalette {public int Index;public Color Arc=new Color(.3f,.9f,1),Outer=new Color(.1f,.5f,.8f),Core=new Color(1,1,1);public static SkinFxPalette ForBody(CharacterBody b)=>new SkinFxPalette {Index=(int)b.skinIndex, Arc=new[] { new Color(.3f,.92f,1), new Color(.3f,.92f,1), new Color(.45f,1,.72f), new Color(1,.72f,.22f), new Color(.75f,.35f,1), HollowSaint.CrimsonMasteryVisuals.Arc }[b.skinIndex]};public Material Material(Material m)=>m;}
-    public static class VfxAssets {public static Material ArcCore=new Material(),ArcGlow=new Material();public static void Load(){} }
+    public static class VfxAssets {public static Material ArcCore=new Material(),ArcGlow=new Material(),Spark=new Material();public static void Load(){} }
     public class HaloRing:Object {public bool Valid=true;public float RadiusScale=1;public ShapeData Shape=new ShapeData();public class ShapeData {public Vector3 Center,Axis=Vector3.forward,Binormal=Vector3.right;}public static HaloRing For(CharacterBody b)=>null;}
 }
-namespace HollowSaint.FoundationKit.Gaze {public class GazeBeam:UnityEngine.Component {public UnityEngine.Vector3 Origin,Direction=UnityEngine.Vector3.forward;}}
+namespace HollowSaint.FoundationKit.Gaze {public class GazeBeam:UnityEngine.MonoBehaviour {public enum Phase {Beam} public Phase Current; public RoR2.CharacterBody Body;public float PhaseAge,ProgressionDuration=1;public UnityEngine.Vector3 Origin,Direction=UnityEngine.Vector3.forward;}}
 namespace HollowSaint.FoundationKit.Gaze.Fx {public static class GazeSfx {public const string ForkHit="hit";}}
