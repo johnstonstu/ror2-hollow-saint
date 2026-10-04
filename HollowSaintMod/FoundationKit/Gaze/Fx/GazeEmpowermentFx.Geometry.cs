@@ -38,6 +38,20 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Draw(loop, loop.Length, width, color, alpha);
             }
             internal void Hide() { line.enabled = false; }
+            // One short crawling filament; the separate circular silhouette stays intact.
+            // Reuse this stroke's buffer, with bounded radial teeth and no random state.
+            internal void Crawl(Vector3 center, Vector3 normal, float radius, float phase, Color color, float alpha)
+            {
+                Vector3 u, v; Basis(normal, out u, out v);
+                int tick = (int)(Time.time * 18f);
+                for (int i = 0; i < 9; i++)
+                {
+                    float a = phase + i * 0.28f;
+                    float tooth = i == 0 || i == 8 ? 1f : 0.88f + 0.22f * Mathf.Sin(i * 2.4f + tick);
+                    loop[i] = center + (u * Mathf.Cos(a) + v * Mathf.Sin(a)) * (radius * tooth);
+                }
+                Draw(loop, 9, 0.025f, color, alpha);
+            }
             internal void Diamond(Vector3 center, Vector3 normal, float radius, float width, Color color, float alpha)
             {
                 Vector3 u, v; Basis(normal, out u, out v);
@@ -58,13 +72,14 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             root.SetParent(transform, false);
             for (int i = 0; i < MaxCharges; i++)
             {
-                fuel[i] = new Orb { stroke = NewStroke("Fuel", false), outline = NewOutline("FuelOutline") };
-                reserve[i] = new Orb { stroke = NewStroke("Reserve", false), outline = NewOutline("ReserveOutline") };
+                fuel[i] = new Orb { stroke = NewStroke("Fuel", false), outline = NewOutline("FuelOutline"), filament = NewStroke("FuelFilament", true) };
+                reserve[i] = new Orb { stroke = NewStroke("Reserve", false), outline = NewOutline("ReserveOutline"), filament = NewStroke("ReserveFilament", true) };
             }
             for (int i = 0; i < intakeTrails.Length; i++)
             {
                 intakeTrails[i] = NewStroke("RearIntake", false);
                 intakeOutlines[i] = NewOutline("RearIntakeOutline");
+                intakeFilaments[i] = NewStroke("RearIntakeFilament", true);
             }
             crownRim = NewStroke("AbsorptionRim", false);
             for (int i = 0; i < pulses.Length; i++)
@@ -91,7 +106,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             {
                 if (intakeTrails[i] != null) intakeTrails[i].Hide();
                 if (intakeOutlines[i] != null) intakeOutlines[i].Hide();
+                if (intakeFilaments[i] != null) intakeFilaments[i].Hide();
             }
+            foreach (var orb in fuel) if (orb != null) orb.filament.Hide();
+            foreach (var orb in reserve) if (orb != null) orb.filament.Hide();
             if (crownRim != null) crownRim.Hide();
             foreach (var p in pulses)
             {

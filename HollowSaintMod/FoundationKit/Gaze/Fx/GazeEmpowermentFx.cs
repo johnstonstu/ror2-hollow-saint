@@ -37,6 +37,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private Stroke crownRim;
         // .32-second intake at .25-second admission spacing overlaps at most twice.
         private readonly Stroke[] intakeTrails = new Stroke[2], intakeOutlines = new Stroke[2];
+        private readonly Stroke[] intakeFilaments = new Stroke[2];
         private readonly Vector3[][] trailPoints = { new Vector3[12], new Vector3[12] };
         public bool ReducedEffects { get; set; }
         public bool EnableAudio { get; set; } = true;
@@ -98,7 +99,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
 
         private sealed class Orb
         {
-            internal Stroke stroke, outline;
+            internal Stroke stroke, outline, filament;
             internal bool visible, swallowing;
             internal int intakeSlot;
             internal float at, duration;
@@ -261,10 +262,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         }
         private void RenderOrbs()
         {
-            for (int slot = 0; slot < intakeTrails.Length; slot++) { intakeTrails[slot].Hide(); intakeOutlines[slot].Hide(); }
+            for (int slot = 0; slot < intakeTrails.Length; slot++) { intakeTrails[slot].Hide(); intakeOutlines[slot].Hide(); intakeFilaments[slot].Hide(); }
             for (int i = 0; i < MaxCharges; i++)
             {
                 var orb = fuel[i];
+                orb.filament.Hide(); reserve[i].filament.Hide();
                 if (!orb.visible) { orb.stroke.Hide(); orb.outline.Hide(); }
                 else
                 {
@@ -279,15 +281,32 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                         for (int j = 0; j < points.Length; j++) points[j] = IntakePosition(orb, Mathf.Max(0f, t - 0.25f + j * 0.25f / (points.Length - 1)));
                         intakeOutlines[orb.intakeSlot].Draw(points, points.Length, 0.18f, outlineTint, 0.8f);
                         intakeTrails[orb.intakeSlot].Draw(points, points.Length, 0.10f, accent, 0.85f);
+                        // Draw copied the smooth path; reuse its buffer for a thin zigzag.
+                        // Pinned endpoints keep the electricity attached to the moving orb.
+                        Vector3 u, v; Basis(direction, out u, out v);
+                        int tick = (int)(Time.time * 18f);
+                        float jag = ReducedEffects ? 0.025f : 0.06f;
+                        for (int j = 1; j < points.Length - 1; j++)
+                        {
+                            float envelope = Mathf.Sin(j * Mathf.PI / (points.Length - 1));
+                            points[j] += (u * Mathf.Sin(j * 2.4f + tick + i) +
+                                v * Mathf.Cos(j * 1.7f + tick + i)) * (jag * envelope);
+                        }
+                        intakeFilaments[orb.intakeSlot].Draw(points, points.Length, 0.025f, accent, ReducedEffects ? 0.55f : 0.85f);
                     }
                     // Preserve the round orb and its hue all the way into the aperture.
                     orb.outline.Loop(p, direction, size, 0.14f, outlineTint, 0.9f);
                     orb.stroke.Loop(p, direction, size, fullEntry ? 0.09f : 0.08f, accent, 0.95f);
+                    if (!ending && (!ReducedEffects || orb.swallowing))
+                        orb.filament.Crawl(p, direction, size, Time.time * (orb.swallowing ? 9f : 4f) + i * 2.4f,
+                            accent, orb.swallowing ? 0.85f : 0.65f);
                 }
                 if (reserve[i].visible && !ending)
                 {
                     reserve[i].outline.Loop(ReservePosition(i), direction, 0.14f, 0.09f, outlineTint, 0.65f);
                     reserve[i].stroke.Loop(ReservePosition(i), direction, 0.14f, 0.05f, accent, 0.8f);
+                    if (!ReducedEffects) reserve[i].filament.Crawl(ReservePosition(i), direction, 0.14f,
+                        -Time.time * 3f + i * 2.4f, accent, 0.5f);
                 }
                 else { reserve[i].stroke.Hide(); reserve[i].outline.Hide(); }
             }
