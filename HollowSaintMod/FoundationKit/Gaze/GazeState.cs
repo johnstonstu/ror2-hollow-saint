@@ -21,6 +21,8 @@ namespace HollowSaint.FoundationKit.Gaze
         private bool gravityHeld, ignited;
         private float targetFootY, tickTimer, forkTimer, armsRest;
         private bool padCancel, armored;
+        private GazeFuelController fuel;
+        private GazeFuelEndReason fuelEndReason = GazeFuelEndReason.Interrupted;
 
         private float BeamEnd => GazeTuning.WindupSeconds + GazeTuning.BeamSeconds;
 
@@ -29,6 +31,8 @@ namespace HollowSaint.FoundationKit.Gaze
             base.OnEnter();
             beam = GazeBeam.For(characterBody);
             if (beam) beam.Begin(GetAimRay().direction);
+            fuel = characterBody ? characterBody.GetComponent<GazeFuelController>() : null;
+            if (fuel && NetworkServer.active) fuel.BeginCast();
             GazeFallGuard.Hold(characterBody);
             weapon = EntityStateMachine.FindByCustomName(gameObject, "Weapon");
             spear = EntityStateMachine.FindByCustomName(gameObject, StormspearRegistration.MachineName);
@@ -84,6 +88,7 @@ namespace HollowSaint.FoundationKit.Gaze
                 KitLog.Event("GAZE_IGNITE");
             }
             if (ignited && NetworkServer.active && fixedAge < BeamEnd && beam) ServerTick(dt);
+            if (fuel && NetworkServer.active) fuel.Tick(fixedAge, beam);
 
             if (!isAuthority) return;
             bool timeUp = fixedAge >= BeamEnd;
@@ -94,6 +99,8 @@ namespace HollowSaint.FoundationKit.Gaze
             padCancel = false;
             if (timeUp || recast || stepped || pad)
             {
+                fuelEndReason = recast ? GazeFuelEndReason.Recast : stepped ? GazeFuelEndReason.ArcStep :
+                    pad ? GazeFuelEndReason.ControllerCancel : GazeFuelEndReason.Completed;
                 if (recast || stepped || pad) KitLog.Event("GAZE_CANCELLED", recast ? "recast" : pad ? "pad B" : "arc step");
                 // v0.9.9: the recast press is spent ending the beam, so a spare stock (Lysate Cell)
                 // does not also launch a new Gaze from the same press.
@@ -192,6 +199,13 @@ namespace HollowSaint.FoundationKit.Gaze
 
         public override void OnExit()
         {
+            if (fuel && NetworkServer.active)
+            {
+                if (!characterBody || !characterBody.healthComponent || !characterBody.healthComponent.alive)
+                    fuelEndReason = GazeFuelEndReason.Death;
+                else if (fixedAge >= BeamEnd) fuelEndReason = GazeFuelEndReason.Completed;
+                fuel.EndCast(fuelEndReason);
+            }
             if (gravityHeld && characterMotor)
             {
                 var gravity = characterMotor.gravityParameters;

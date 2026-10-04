@@ -102,6 +102,7 @@ namespace HollowSaint
             if (body && portrait) body.portraitIcon = portrait;
 
             if (!bodyObject.GetComponent<DischargeMeter>()) bodyObject.AddComponent<DischargeMeter>();
+            if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Gaze.GazeFuelController>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Gaze.GazeFuelController>();
             if (!bodyObject.GetComponent<SpearCarry>()) bodyObject.AddComponent<SpearCarry>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>();

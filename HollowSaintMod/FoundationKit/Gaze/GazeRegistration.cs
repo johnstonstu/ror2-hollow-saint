@@ -21,6 +21,9 @@ namespace HollowSaint.FoundationKit.Gaze
             KitContent.AddState(typeof(GazeEndState));
             KitContent.AddState(typeof(GazeLockState));
             GazeArmor.Register();
+            // Transport/presentation failure must not prevent damage/state registration.
+            try { GazeFuelTransport.Install(); }
+            catch (System.Exception error) { GazeFuelTransport.Warn("registration failed", error); }
             // Presentation must never be able to abort the content load.
             try { Fx.GazeEffect.Register(); }
             catch (System.Exception error) { Plugin.Log.LogError("HOLLOW_SAINT_GAZE_FX_REGISTER_FAILED: " + error); }

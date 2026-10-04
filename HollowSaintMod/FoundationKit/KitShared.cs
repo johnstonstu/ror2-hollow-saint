@@ -199,6 +199,11 @@ namespace HollowSaint.FoundationKit
 
         private CharacterBody owner;
         private int lastSeen;
+        private Gaze.GazeFuelLedger gazeFuel;
+        // A full living merge is held for a future explicit claim/consume. Merely
+        // rejecting a new charge at full does not re-arm the automatic passive.
+        public bool AutoHeldFromMerge { get; private set; }
+        public bool AutomaticHeld { get { return (gazeFuel != null && gazeFuel.Active) || AutoHeldFromMerge; } }
 
         internal static void RegisterBuff()
         {
@@ -221,15 +226,48 @@ namespace HollowSaint.FoundationKit
         public bool AddCharge()
         {
             if (!NetworkServer.active || owner == null || ChargeBuff == null) return false;
+            if (gazeFuel != null && gazeFuel.Active)
+            {
+                bool accepted = gazeFuel.TryGain();
+                if (accepted)
+                {
+                    owner.SetBuffCount(ChargeBuff.buffIndex, gazeFuel.Reserve);
+                    var driver = owner.GetComponent<Gaze.GazeFuelController>();
+                    if (driver) driver.ReserveChanged();
+                }
+                else KitLog.Event("GAZE_FUEL_GAIN_REJECTED", "cast bank at capacity=" + gazeFuel.Capacity);
+                return accepted && gazeFuel.Unspent + gazeFuel.Reserve == gazeFuel.Capacity;
+            }
             if (IsFull) return false;
             owner.AddBuff(ChargeBuff);
             return IsFull;
+        }
+
+        internal void ClaimGazeFuel(Gaze.GazeFuelLedger ledger)
+        {
+            if (!NetworkServer.active || !owner || !ChargeBuff) return;
+            ledger.Begin(Charge, KitTuning.StormChargeMax);
+            gazeFuel = ledger;
+            AutoHeldFromMerge = false;
+            owner.SetBuffCount(ChargeBuff.buffIndex, 0);
+        }
+
+        internal int ReleaseGazeFuel(bool alive)
+        {
+            if (!NetworkServer.active || gazeFuel == null) return 0;
+            int retained = gazeFuel.End(alive);
+            AutoHeldFromMerge = gazeFuel.HoldAfterMerge;
+            gazeFuel = null;
+            if (owner && ChargeBuff) owner.SetBuffCount(ChargeBuff.buffIndex, retained);
+            return retained;
         }
 
         /// <summary>Server only. Empties the meter.</summary>
         public void Consume()
         {
             if (!NetworkServer.active || owner == null || ChargeBuff == null) return;
+            if (gazeFuel != null && gazeFuel.Active) return;
+            AutoHeldFromMerge = false;
             owner.SetBuffCount(ChargeBuff.buffIndex, 0);
         }
 
@@ -237,6 +275,7 @@ namespace HollowSaint.FoundationKit
         {
             if (owner == null) return;
             int now = Charge;
+            if (Gaze.GazeFuelController.OwnsPresentation(owner)) { lastSeen = now; return; }
             if (now == lastSeen) return;
             int max = KitTuning.StormChargeMax;
             if (now >= max && lastSeen < max)

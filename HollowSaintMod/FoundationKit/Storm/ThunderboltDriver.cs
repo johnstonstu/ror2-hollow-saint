@@ -152,6 +152,7 @@ namespace HollowSaint.FoundationKit.Storm
                 CancelTelegraph();
                 return;
             }
+            if (meter.AutomaticHeld) { CancelTelegraph(); return; }
             if (telegraphing)
             {
                 if (now < strikeAt) return;
@@ -198,6 +199,10 @@ namespace HollowSaint.FoundationKit.Storm
             target = null;
             repicks = 0;
         }
+
+        /// <summary>Claim cancels only an unlaunched warning. A committed independent
+        /// passive flight is left intact and continues through the ordinary driver.</summary>
+        internal void ClaimForGaze() { if (NetworkServer.active) CancelTelegraph(); }
 
         /// <summary>Bosses first, then elites, then current health; random among the top 3.</summary>
         private HealthComponent PickTarget()

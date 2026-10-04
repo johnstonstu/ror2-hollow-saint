@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelSequence.cs" Link="GazeFuelSequence.cs" />
+  </ItemGroup>
+</Project>

@@ -69,6 +69,12 @@ namespace HollowSaint.FoundationKit.Storm
         private void LateUpdate()
         {
             if (!body || !meter || !halo) return;
+            if (Gaze.GazeFuelController.OwnsPresentation(body))
+            {
+                StopGatherSound();
+                if (orbitRoot && orbitRoot.gameObject.activeSelf) orbitRoot.gameObject.SetActive(false);
+                return;
+            }
             var currentPalette = SkinFxPalette.ForBody(body);
             if (currentPalette != palette)
             {
