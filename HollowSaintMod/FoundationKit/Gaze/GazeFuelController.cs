@@ -32,6 +32,7 @@ namespace HollowSaint.FoundationKit.Gaze
         internal int AvailableEntry => NetworkServer.active && ledger.Active ?
             Mathf.Max(0, ledger.Unspent - schedule.PendingCount) : clientAvailableEntry;
         internal int EntryCapacity => NetworkServer.active && ledger.Active ? ledger.Capacity : Mathf.Max(2, clientEntryCapacity);
+        internal bool PulseRequestReady => Time.unscaledTime >= nextClientRequest;
 
         private void Awake()
         {

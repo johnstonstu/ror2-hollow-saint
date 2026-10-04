@@ -30,6 +30,28 @@ static class Program {
     static void Main() {
         GazeChannelSkillDefs.Register();
         Check(!GazeChannelSkillDefs.Pulse.fullRestockOnAssign&&GazeChannelSkillDefs.Pulse.stockToConsume==0&&GazeChannelSkillDefs.Pulse.mustKeyPress,"pulse definition uses custom stockless execution");
+        foreach(bool nativeFirst in new[]{false,true})foreach(string unavailable in new[]{"windup","rate interval","empty bank"}) {
+            var f=new Fixture();f.Begin();
+            if(unavailable=="windup")f.state.PrimaryPulseReady=false;
+            else if(unavailable=="rate interval")f.fuel.PulseRequestReady=false;
+            else f.fuel.AvailableEntry=0;
+            f.body.inputBank.skill1.down=true;
+            if(!nativeFirst)f.controls.ObservePrimary();
+            Check(!f.skills[0].ExecuteIfReady()&&f.fuel.Requests==0,unavailable+" press rejected in either polling order");
+            if(nativeFirst)f.controls.ObservePrimary();
+            f.state.PrimaryPulseReady=true;f.fuel.PulseRequestReady=true;f.fuel.AvailableEntry=5;
+            // Model native HandleSkill retrying an unclaimed held mustKeyPress input.
+            for(int retry=0;retry<10;retry++) {
+                if(!nativeFirst)f.controls.ObservePrimary();
+                Check(!f.skills[0].ExecuteIfReady()&&f.fuel.Requests==0,unavailable+" held press never queues across eligibility transition");
+                if(nativeFirst)f.controls.ObservePrimary();
+            }
+            f.Press(false);f.body.inputBank.skill1.down=true;
+            if(!nativeFirst)f.controls.ObservePrimary();
+            Check(f.skills[0].ExecuteIfReady()&&f.fuel.Requests==1,unavailable+" later release/fresh press executes exactly once");
+            if(nativeFirst)f.controls.ObservePrimary();
+            Check(!f.skills[0].ExecuteIfReady()&&f.fuel.Requests==1,"fresh eligible press cannot repeat");f.controls.End();
+        }
         foreach(int count in new[]{0,1,2,5,6,20}) {
             var f=new Fixture(true);f.fuel.EntryCapacity=Math.Max(2,count);f.fuel.AvailableEntry=count;f.Begin();
             Check(f.skills[0].stock==count&&f.skills[0].maxStock==Math.Max(2,count),"native HUD available entry/max count");

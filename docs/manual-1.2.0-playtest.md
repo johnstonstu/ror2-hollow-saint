@@ -46,7 +46,7 @@ Record the candidate commit/DLL hash, game build, level, config, input device/bi
 | Cast and hold | One Special stock consumed; ordinary beam begins after windup; no fueled pulse from the initial hold. | Pending |
 | Release and tap | Each accepted later edge takes one entry orb through intake, launch, travel and arrival; holding that tap adds no repeats. | Pending |
 | Mash / extra stocks | Closely spaced taps do not bypass the 0.25 s gate; no stock loss, restart or delayed burst from rejected taps. | Pending |
-| Windup / empty entry | Windup taps do not queue; zero entry fuel allows the ordinary beam but no fueled shots. Reserve earned later stays unavailable for shots. | Pending |
+| Windup / empty entry | Press Primary during windup and keep holding through ignition: no pulse. Release, then press again: one pulse. Presses while rate-limited or without entry fuel must likewise require a later release/press rather than firing when readiness returns. Zero entry allows the ordinary beam; reserve earned later stays unavailable for shots. | Pending |
 | Intake interruption | A real living interruption before launch returns the unlaunched orb; no pulse damage follows. | Pending |
 | In-flight interruption | An interruption after launch removes pending arrivals without refunding that spent orb. Repeat at a near-arrival boundary. | Pending |
 | Late admission | Taps with 1.22 s or less remaining do not intake or spend. Earlier accepted pulses finish before natural end; no post-end pulse damage. | Pending |

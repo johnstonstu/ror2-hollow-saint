@@ -35,22 +35,23 @@ namespace HollowSaint.FoundationKit.Gaze
     }
 
     /// <summary>Polling and native CanExecute may observe the same frame in either
-    /// order. A pending mapped Primary edge is consumed once by native OnExecute.</summary>
+    /// order. Only an eligible mapped Primary edge can reach native OnExecute;
+    /// observing an ineligible press discards it rather than queueing a held tap.</summary>
     internal sealed class GazePrimaryTapGate
     {
         private readonly GazeTapEdges edges = new GazeTapEdges();
         private bool pending;
         public void Begin(bool primaryHeld) { edges.Begin(primaryHeld); pending = false; }
-        public bool Observe(bool down)
+        public bool Observe(bool down, bool eligible = true)
         {
             bool fresh = edges.Observe(down);
-            if (!down) pending = false;
+            if (!down || !eligible) pending = false;
             else if (fresh) pending = true;
             return pending;
         }
-        public bool Take(bool down)
+        public bool Take(bool down, bool eligible = true)
         {
-            if (!Observe(down)) return false;
+            if (!Observe(down, eligible)) return false;
             pending = false;
             return true;
         }

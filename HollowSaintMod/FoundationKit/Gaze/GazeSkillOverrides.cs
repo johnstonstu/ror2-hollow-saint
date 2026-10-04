@@ -21,8 +21,17 @@ namespace HollowSaint.FoundationKit.Gaze
         internal bool Active { get; private set; }
         internal int Capacity => fuel ? fuel.EntryCapacity : 2;
         internal bool PulseReady => Active && body && body.healthComponent && body.healthComponent.alive &&
-            state != null && state.PrimaryPulseReady && fuel && fuel.AvailableEntry > 0;
-        internal bool CanExecutePrimary => PulseReady && body.hasEffectiveAuthority && body.inputBank && taps.Observe(body.inputBank.skill1.down);
+            state != null && state.PrimaryPulseReady && fuel && fuel.AvailableEntry > 0 && fuel.PulseRequestReady;
+        internal bool CanExecutePrimary
+        {
+            get
+            {
+                if (!Active || !body || !body.inputBank) return false;
+                // Native HandleSkill retries held, unclaimed mustKeyPress inputs.
+                // Observe even when unavailable so that hold cannot become a later tap.
+                return taps.Observe(body.inputBank.skill1.down, PulseReady && body.hasEffectiveAuthority);
+            }
+        }
 
         private sealed class Slot
         {
@@ -86,11 +95,13 @@ namespace HollowSaint.FoundationKit.Gaze
         }
         internal void ObservePrimary()
         {
-            if (Active && body && body.inputBank) taps.Observe(body.inputBank.skill1.down);
+            if (Active && body && body.inputBank)
+                taps.Observe(body.inputBank.skill1.down, PulseReady && body.hasEffectiveAuthority);
         }
         internal void ExecutePrimary()
         {
-            if (!PulseReady || !body.hasEffectiveAuthority || !body.inputBank || !taps.Take(body.inputBank.skill1.down)) return;
+            if (!Active || !body || !body.inputBank ||
+                !taps.Take(body.inputBank.skill1.down, PulseReady && body.hasEffectiveAuthority)) return;
             fuel.RequestPulse();
         }
         internal bool OwnsPrimary => slots[0]?.skill && slots[0].skill.skillDef == GazeChannelSkillDefs.Pulse;

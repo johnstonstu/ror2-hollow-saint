@@ -111,6 +111,7 @@ namespace HollowSaint.FoundationKit.Gaze {
     public class GazeLockState {}
     public class GazeFuelController:UnityEngine.MonoBehaviour {
         public int EntryCapacity=5,AvailableEntry=5,Requests;
+        public bool PulseRequestReady=true;
         public void RequestPulse()=>Requests++;
     }
 }
