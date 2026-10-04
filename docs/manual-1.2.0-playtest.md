@@ -5,11 +5,14 @@ Status: source-reviewed candidate; the checks below are **pending native gamepla
 ## Controls and timing
 
 - Press the mapped **Special** action once to start Gaze, consuming one normal Special stock. The ordinary beam starts after the windup and remains automatic.
-- Release, then tap Special again to request **one entry orb per accepted tap**. Holding never repeats. The activation hold is not a fuel tap, and later taps never consume another Special stock, even with extra stocks available.
+- Press the mapped **Primary** action to request **one entry orb per accepted press**. If Primary was held on entry, release it first. Holding never repeats, and pulse presses never consume another Special stock, even with extra stocks available. Normal Primary shots do not fire alongside pulses.
+- During the channel, Primary uses a contextual pulse icon and shows acknowledged available entry fuel; queued intake and reserve are excluded. Secondary, Utility and Special are unavailable. Movement and camera aiming remain active. Native overrides restore the original skills, stock and cooldown progress on every exit.
+- Known kit base skills keep their normal recharge progress, with Gaze's Special cooldown held until its channel ends and Stormspear's prerelease pause retained. An unknown custom base skill or a preexisting contextual override from another mod retains its saved stock and timer rather than running that mod's callbacks against Gaze's temporary data. Known kit skills retain their original instance data; unknown custom skills keep the engine's freshly assigned data so disposed state is not revived. Higher-priority external overrides are not removed or rolled back; mod combinations require separate acceptance.
+- An already committed spear throw finishes normally. An unthrown charge is interrupted and refunded before its slot is overridden; the native Secondary bank stays active until that handoff completes, with further Secondary input claimed.
 - Taps during windup, with no available entry fuel, too close together, or too late are rejected. Accepted taps are at least **0.25 seconds** apart; rejected taps are not deferred into an automatic burst.
 - An accepted tap starts **0.32 seconds of intake**, followed by **0.35–0.55 seconds of travel**, then up to **0.30 seconds of ground spread**. Aim is sampled at launch, after intake.
 - Admission requires **more than 1.22 seconds remaining** before beam end: intake + maximum travel + spread + 0.05 seconds safety. Equality is rejected. A delayed intake is checked again before spending, so a fixed-step hitch cannot spend fuel into an impossible arrival.
-- **Arc Step is the only deliberate early-cancel action.** Repressing Special fires a fuel request; the former physical B/Circle shortcut no longer cancels. A button bound to Utility still invokes Arc Step normally. Natural timeout, interruption, death and disable also end the cast.
+- **There is no manual cancel binding.** The channel ends naturally or through a real interruption, death or disable. Utility is unavailable, so Arc Step is not a channel cancel; neither Special nor a hidden physical B/Circle shortcut ends it.
 - Cancellation and natural end stop pending work. A launched pulse cancelled before impact has still spent its orb; there is no refund for a miss or an interrupted arrival.
 
 Sources: [GazeState](../HollowSaintMod/FoundationKit/Gaze/GazeState.cs), [request and duration policies](../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs), [fuel controller](../HollowSaintMod/FoundationKit/Gaze/GazeFuelController.cs), [schedule](../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs).
@@ -44,16 +47,18 @@ Record the candidate commit/DLL hash, game build, level, config, input device/bi
 | Release and tap | Each accepted later edge takes one entry orb through intake, launch, travel and arrival; holding that tap adds no repeats. | Pending |
 | Mash / extra stocks | Closely spaced taps do not bypass the 0.25 s gate; no stock loss, restart or delayed burst from rejected taps. | Pending |
 | Windup / empty entry | Windup taps do not queue; zero entry fuel allows the ordinary beam but no fueled shots. Reserve earned later stays unavailable for shots. | Pending |
-| Intake cancellation | Arc Step before launch returns the unlaunched orb on a living exit; no pulse damage follows. | Pending |
-| In-flight cancellation | Arc Step after launch removes pending arrivals without refunding that spent orb. Repeat at a near-arrival boundary. | Pending |
+| Intake interruption | A real living interruption before launch returns the unlaunched orb; no pulse damage follows. | Pending |
+| In-flight interruption | An interruption after launch removes pending arrivals without refunding that spent orb. Repeat at a near-arrival boundary. | Pending |
 | Late admission | Taps with 1.22 s or less remaining do not intake or spend. Earlier accepted pulses finish before natural end; no post-end pulse damage. | Pending |
 | Reserve / full merge | New gains remain separate; living exit returns the expected bank, with no automatic end-of-cast Thunderbolt. | Pending |
 | Duration bounds | Default levels 1/11/21 give 4/5/6 s of beam; higher levels and configured bases above 6 stay capped. Level-up during a cast does not extend it. | Pending |
 | Attack speed | Faster ordinary-beam ticks do not shorten manual admission spacing or extend duration. | Pending |
 | Aim and terrain | Steer during intake; verify launch aim, near/far travel, ground arrival, moving targets, walls, slopes and ledges. No invented ground strikes over voids. | Pending |
-| Input parity | Keyboard and physical controller both honor mapped Special edges and Utility cancellation. Physical B/Circle alone has no old cancellation behavior. | Pending |
+| Input parity | Keyboard and physical controller honor mapped Special activation and fresh Primary edges. Holding Primary on entry produces no pulse until release/press. Default controller RB→RT and keyboard R→LMB are examples, not hardcoded bindings. | Pending |
+| Native skill overrides | Pulse icon/count agree with available entry fuel; Primary does not also fire Arc Bolt, and Secondary/Utility/Special cannot activate. Originals and stock/cooldowns restore after expiry, interruption, death, disable, stage exit and respawn without free restock. | Pending |
+| Spear handoff | Enter Gaze while charging, during prerelease, and during a failed throw. Unthrown/failed shots refund correctly, committed throws finish, and no refund goes into the temporary locked bank. | Pending |
 | Visual hierarchy | Thin baseline and fat pulse remain distinguishable with HUD visible, against bright/dark terrain and across skins. | Pending |
-| Crown restoration | Natural end, Arc Step, interruption, death and repeated casts restore physical crown geometry without drift or lingering expansion. | Pending |
+| Crown restoration | Natural end, interruption, death and repeated casts restore physical crown geometry without drift or lingering expansion. | Pending |
 | Open Circuit dome | Dome appears only during its active effect, follows the character, respects the intended visual radius and clears on end/death/disable. | Pending |
 | Cleanup | Interruption, death and stage transition leave no orb, pulse, crown or dome remnants; subsequent casts behave normally. | Pending |
 

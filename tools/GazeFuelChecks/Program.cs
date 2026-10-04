@@ -89,10 +89,15 @@ static class Program
         Check(!GazeDurationPolicy.ValidSnapshot(7)&&!GazeDurationPolicy.ValidSnapshot(float.NaN)&&GazeDurationPolicy.ValidSnapshot(6),"network duration validation");
         var twenty=new GazeManualRequestPolicy();twenty.Begin(2);for(int i=0;i<20;i++)Check(twenty.TryAccept(2,(uint)i+1,true,true,1+i*.25f,1,7,20-i),"twenty taps retain complete arrival margin");
         var pending=new GazeFuelSchedule();pending.Begin(5);pending.QueueIntake(1,out _);var bank=new GazeFuelLedger();bank.Begin(5,5);
-        Check(GazeManualLifetime.StopBeforeWork(1.32f,5,true),"Arc Step wins exact launch due boundary");
-        if(GazeManualLifetime.StopBeforeWork(1.32f,5,true))pending.Cancel();else Resolve(pending,bank,1.32f);
+        // Native interrupt invokes OnExit directly, which cancels the pending queue.
+        pending.Cancel();
         Check(bank.Spent==0&&bank.End(true)==5&&!pending.TakeLaunch(2,out _),"cancel boundary refunds intake before spending");
-        Check(GazeManualLifetime.StopBeforeWork(5,5,false)&&!GazeManualLifetime.StopBeforeWork(4.99f,5,false),"natural end stops work at boundary");
+        Check(GazeManualLifetime.StopBeforeWork(5,5)&&!GazeManualLifetime.StopBeforeWork(4.99f,5),"natural end stops work at boundary");
+        var primary=new GazePrimaryTapGate();primary.Begin(true);
+        Check(!primary.Observe(true)&&!primary.Take(true),"held Primary on entry never pulses");
+        Check(!primary.Observe(false)&&primary.Observe(true)&&primary.Take(true)&&!primary.Take(true),"poll before native execute fires once");
+        primary.Observe(false);Check(primary.Take(true)&&!primary.Observe(true),"native execute before state poll fires once");
+        Check(!primary.Take(false),"release never pulses");
         Check(GazeManualRequestPolicy.HasArrivalRoom(3.77f,5,true)&&!GazeManualRequestPolicy.HasArrivalRoom(3.79f,5,true),"intake admission includes safety and complete arrival");
         var delayed=new GazeFuelLedger();delayed.Begin(5,5);
         if(GazeManualRequestPolicy.HasArrivalRoom(4.2f,5,false))delayed.TrySpend(1);

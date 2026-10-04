@@ -11,6 +11,7 @@ namespace HollowSaint
         private static Texture2D lightMask;
         private static bool warned;
         private static readonly Dictionary<Material, Material> materials = new Dictionary<Material, Material>();
+        private static readonly Dictionary<Material, Color> intendedAlbedos = new Dictionary<Material, Color>();
         private static readonly Dictionary<Texture, Texture2D[]> atlases = new Dictionary<Texture, Texture2D[]>();
 
         /// <summary>Call beside FoundationLightMaps.Load, before MakeVariant. Already shipped in the bundle.</summary>
@@ -30,6 +31,8 @@ namespace HollowSaint
             if (materials.TryGetValue(source, out cached) && cached) return cached;
             var style = CrimsonMasteryVisuals.Describe(source.name);
             var result = new Material(source) { name = source.name + CrimsonMasteryVisuals.MaterialSuffix };
+            intendedAlbedos[result] = style.Albedo;
+            bool maskedBodyEmission = false;
             try
             {
                 if (result.HasProperty("_Color")) result.SetColor("_Color", style.Albedo);
@@ -42,15 +45,19 @@ namespace HollowSaint
                 if (source.mainTexture && source.mainTexture.name == "body_base")
                 {
                     if (!lightMask) throw new InvalidOperationException("Call CrimsonMasteryMaterials.Load before Tint");
-                    bool headless = SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null;
-                    result.mainTexture = headless ? Texture2D.whiteTexture : Atlas(source.mainTexture, style.Kind == CrimsonMasteryVisuals.Role.Plate);
-                    if (!headless && result.HasProperty("_Color")) result.SetColor("_Color", Color.white);
+                    // The GPU emission mask does not require CPU diffuse readback.
+                    // Install it first so an atlas failure retains the red light pixels.
                     if (result.HasProperty("_EmissionMap") && result.HasProperty("_EmissionColor"))
                     {
                         result.SetTexture("_EmissionMap", lightMask);
                         result.SetColor("_EmissionColor", CrimsonMasteryVisuals.Arc * 0.72f);
                         result.EnableKeyword("_EMISSION"); // neutral mask excludes armor and cloth
+                        maskedBodyEmission = true;
                     }
+                    else result.DisableKeyword("_EMISSION"); // never emit across an unmasked body
+                    bool headless = SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null;
+                    result.mainTexture = headless ? Texture2D.whiteTexture : Atlas(source.mainTexture, style.Kind == CrimsonMasteryVisuals.Role.Plate);
+                    if (!headless && result.HasProperty("_Color")) result.SetColor("_Color", Color.white);
                 }
                 materials[source] = result;
                 return result;
@@ -63,12 +70,17 @@ namespace HollowSaint
                 {
                     result.mainTexture = source.mainTexture;
                     if (result.HasProperty("_Color")) result.SetColor("_Color", style.Albedo);
-                    if (!style.IsLight) result.DisableKeyword("_EMISSION");
+                    if (!maskedBodyEmission) result.DisableKeyword("_EMISSION");
                 }
                 materials[source] = result;
                 return result;
             }
         }
+
+        // Atlas pixels already contain the skin tint, so _Color becomes white. Shader
+        // conversion must still classify the authored albedo rather than that neutral tint.
+        internal static bool TryGetIntendedAlbedo(Material material, out Color albedo) =>
+            intendedAlbedos.TryGetValue(material, out albedo);
 
         private static Texture2D Atlas(Texture source, bool plate)
         {

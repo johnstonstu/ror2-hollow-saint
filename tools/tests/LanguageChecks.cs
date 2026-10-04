@@ -25,6 +25,7 @@ namespace HollowSaint.FoundationKit
             "HS_LORE", "HS_BODY_LORE",
             "HS_SKIN_DEFAULT_NAME", "HS_SKIN_OBSIDIAN_NAME", "HS_SKIN_VERDIGRIS_NAME", "HS_SKIN_SOLAR_NAME", "HS_SKIN_UMBRAL_NAME",
             "HS_SKIN_CRIMSON_VOW_NAME", "ACHIEVEMENT_HOLLOWSAINTCLEARGAMEMONSOON_NAME", "ACHIEVEMENT_HOLLOWSAINTCLEARGAMEMONSOON_DESCRIPTION",
+            "HS_SKILL_GAZE_PULSE_NAME", "HS_SKILL_GAZE_PULSE_DESC", "HS_SKILL_GAZE_LOCK_NAME", "HS_SKILL_GAZE_LOCK_DESC",
             "HS_OPTION_SPEAR_HAND_NAME", "HS_OPTION_SPEAR_HAND_DESC",
             "HS_OPTION_SPEAR_HAND_AUTO", "HS_OPTION_SPEAR_HAND_LEFT", "HS_OPTION_SPEAR_HAND_RIGHT"
         };
@@ -305,7 +306,7 @@ namespace HollowSaint.FoundationKit
             t["HS_SKILL_GAZE_DESC"] =
                 "Rise and fire a beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + " seconds") + ", dealing " + Dmg(a["dps"] + " damage per second") +
                 (a["armorOn"] == "yes" ? ", with " + Util(a["armor"] + " bonus armor") : "") + ". Its " + Dmg("forks") + " reach further over time." +
-                " Once the beam fires, tap Special again to spend one entry orb on a pulse (minimum " + a["pulseInterval"] + "s between taps). Holding does not repeat. New orbs are saved for later. Arc Step ends the channel. Duration grows with level.";
+                " Once the beam fires, press Primary to spend one entry orb on a pulse (minimum " + a["pulseInterval"] + "s between presses). Holding does not repeat; release Primary first if already held. New orbs are saved for later. Other combat skills are unavailable until the channel ends. Duration grows with level.";
             t["HS_PASSIVE_STORM_DESC"] =
                 "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy. Every " + a["orbs"] + " Electrocutes call down a " +
                 Dmg("Thunderbolt") + " for " + Dmg(a["thunder"] + " damage") + ".";

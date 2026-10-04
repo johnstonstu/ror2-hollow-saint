@@ -34,8 +34,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private int capacity, reserveCount, mergedCount, nextPulse, nextStrike;
         private float started, ended, flashAt = -100f, nextSound;
         private Vector3 crown, direction = Vector3.forward, reserveCenter;
-        private Stroke intakeTrail, intakeOutline, crownRim;
-        private readonly Vector3[] trailPoints = new Vector3[12];
+        private Stroke crownRim;
+        // .32-second intake at .25-second admission spacing overlaps at most twice.
+        private readonly Stroke[] intakeTrails = new Stroke[2], intakeOutlines = new Stroke[2];
+        private readonly Vector3[][] trailPoints = { new Vector3[12], new Vector3[12] };
         public bool ReducedEffects { get; set; }
         public bool EnableAudio { get; set; } = true;
         /// <summary>Adapter suppresses the ordinary charge halo while this is true.</summary>
@@ -98,6 +100,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         {
             internal Stroke stroke, outline;
             internal bool visible, swallowing;
+            internal int intakeSlot;
             internal float at, duration;
             internal Vector3 p0, p1, mergeFrom;
         }
@@ -145,6 +148,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             orb.p0 = u * Mathf.Cos(angle) * 1.12f + v * Mathf.Sin(angle) * 1.12f - direction * 0.24f;
             orb.p1 = orb.p0 + (-u * Mathf.Sin(angle) + v * Mathf.Cos(angle)) * 0.34f - direction * 0.6f;
             orb.at = Time.time - Mathf.Max(0f, elapsed); orb.duration = Mathf.Max(0.08f, duration);
+            // Network intake sequence is packetSequence * 20, so use the sequential
+            // entry-orb index rather than its even-valued deduplication key.
+            orb.intakeSlot = orbIndex % intakeTrails.Length;
             orb.swallowing = true;
             if (elapsed >= orb.duration) { orb.visible = false; orb.swallowing = false; }
         }
@@ -253,7 +259,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         }
         private void RenderOrbs()
         {
-            intakeTrail.Hide(); intakeOutline.Hide();
+            for (int slot = 0; slot < intakeTrails.Length; slot++) { intakeTrails[slot].Hide(); intakeOutlines[slot].Hide(); }
             for (int i = 0; i < MaxCharges; i++)
             {
                 var orb = fuel[i];
@@ -265,11 +271,12 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                     else if (orb.swallowing)
                     {
                         float t = Mathf.Clamp01((Time.time - orb.at) / orb.duration);
-                        p = IntakePosition(orb, t); size *= 1f - 0.8f * Mathf.Pow(t, 5f);
-                        for (int j = 0; j < trailPoints.Length; j++) trailPoints[j] = IntakePosition(orb, Mathf.Max(0f, t - 0.25f + j * 0.25f / (trailPoints.Length - 1)));
-                        intakeOutline.Draw(trailPoints, trailPoints.Length, 0.16f, GazeContrastAssets.Ink, 0.8f);
-                        intakeTrail.Draw(trailPoints, trailPoints.Length, 0.075f, accent, 0.85f);
                         if (t >= 1f) { orb.visible = orb.swallowing = false; flashAt = Time.time; orb.stroke.Hide(); orb.outline.Hide(); continue; }
+                        p = IntakePosition(orb, t); size *= 1f - 0.8f * Mathf.Pow(t, 5f);
+                        var points = trailPoints[orb.intakeSlot];
+                        for (int j = 0; j < points.Length; j++) points[j] = IntakePosition(orb, Mathf.Max(0f, t - 0.25f + j * 0.25f / (points.Length - 1)));
+                        intakeOutlines[orb.intakeSlot].Draw(points, points.Length, 0.16f, GazeContrastAssets.Ink, 0.8f);
+                        intakeTrails[orb.intakeSlot].Draw(points, points.Length, 0.075f, accent, 0.85f);
                     }
                     // Angular fuel silhouettes remain distinct from round reserve beads.
                     orb.outline.Diamond(p, direction, size, 0.14f, GazeContrastAssets.Ink, 0.9f);

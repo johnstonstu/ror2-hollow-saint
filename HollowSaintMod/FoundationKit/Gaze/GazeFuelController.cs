@@ -26,6 +26,12 @@ namespace HollowSaint.FoundationKit.Gaze
         private float age, presentationRelease, beamDuration, nextClientRequest;
         private bool presentationOwned;
         private GazeState activeState;
+        private GazeState localState, acknowledgedState;
+        private int clientAvailableEntry, clientEntryCapacity;
+        private float clientBeamDuration;
+        internal int AvailableEntry => NetworkServer.active && ledger.Active ?
+            Mathf.Max(0, ledger.Unspent - schedule.PendingCount) : clientAvailableEntry;
+        internal int EntryCapacity => NetworkServer.active && ledger.Active ? ledger.Capacity : Mathf.Max(2, clientEntryCapacity);
 
         private void Awake()
         {
@@ -43,10 +49,32 @@ namespace HollowSaint.FoundationKit.Gaze
                 (beam && beam.Current != GazeBeam.Phase.Idle);
         }
 
-        internal void BeginLocalCast()
+        internal void BeginLocalCast(GazeState state)
         {
-            clientCast = clientRequestSequence = 0;
+            localState = state;
+            // The reliable Begin channel can arrive before Crown's state transition.
+            // Keep that one accepted, unbound ACK rather than erasing its cast/count.
+            if (acknowledgedState != null)
+            {
+                clientCast = 0;
+                clientAvailableEntry = 0;
+            }
+            acknowledgedState = clientCast != 0 ? state : null;
+            if (acknowledgedState != null) state.ApplyServerDuration(clientBeamDuration);
+            clientRequestSequence = 0;
             nextClientRequest = 0f;
+        }
+
+        internal void EndLocalCast(GazeState state)
+        {
+            if (localState != state) return;
+            localState = null;
+            if (acknowledgedState == state)
+            {
+                clientAvailableEntry = 0;
+                // Retain the binding until reliable End so it can finish the crown
+                // return. A future Begin replaces it; BeginLocal discards a bound ACK.
+            }
         }
 
         internal void BeginCast(GazeState state, float duration)
@@ -192,16 +220,24 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 presentationOwned = true;
                 clientCast = packet.cast;
+                clientAvailableEntry = packet.count;
+                clientEntryCapacity = packet.capacity;
+                clientBeamDuration = packet.beamDuration;
+                acknowledgedState = localState;
                 var beam = GetComponent<GazeBeam>();
                 if (beam) beam.SetBeamDuration(packet.beamDuration);
                 var machine = EntityStateMachine.FindByCustomName(gameObject, KitRegistration.CrownMachineName);
                 var state = machine ? machine.state as GazeState : null;
                 if (state != null) state.ApplyServerDuration(packet.beamDuration);
             }
+            if (packet.kind == GazeFuelTransport.Kind.Swallow)
+                clientAvailableEntry = Mathf.Max(0, clientAvailableEntry - packet.count);
             if (packet.kind == GazeFuelTransport.Kind.End)
             {
                 presentationOwned = false;
                 clientCast = 0;
+                clientAvailableEntry = 0;
+                acknowledgedState = null;
                 presentationRelease = Time.time + GazeTuning.EndSeconds;
             }
             try
@@ -246,6 +282,8 @@ namespace HollowSaint.FoundationKit.Gaze
         private void ClearPresentation()
         {
             receiver.Retire(); presentationOwned = false; presentationRelease = 0f;
+            clientCast = 0; clientAvailableEntry = 0;
+            localState = acknowledgedState = null;
             if (!presentation) return;
             try { presentation.Clear(); }
             catch (System.Exception error) { GazeFuelTransport.Warn("presentation clear failed", error); }

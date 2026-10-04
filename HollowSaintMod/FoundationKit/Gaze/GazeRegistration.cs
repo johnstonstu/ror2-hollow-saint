@@ -20,6 +20,7 @@ namespace HollowSaint.FoundationKit.Gaze
             var beamType = KitContent.AddState(typeof(GazeState));
             KitContent.AddState(typeof(GazeEndState));
             KitContent.AddState(typeof(GazeLockState));
+            GazeChannelSkillDefs.Register();
             GazeArmor.Register();
             // Transport/presentation failure must not prevent damage/state registration.
             try { GazeFuelTransport.Install(); }

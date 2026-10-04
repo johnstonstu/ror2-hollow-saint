@@ -17,7 +17,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
     internal static class GazeManualLifetime
     {
-        public static bool StopBeforeWork(float age, float beamEnd, bool arcStepActive) => arcStepActive || age >= beamEnd;
+        public static bool StopBeforeWork(float age, float beamEnd) => age >= beamEnd;
     }
 
     /// <summary>Seed from the cast press. Holding it never becomes a fueled tap;
@@ -31,6 +31,28 @@ namespace HollowSaint.FoundationKit.Gaze
             bool edge = down && !wasDown;
             wasDown = down;
             return edge;
+        }
+    }
+
+    /// <summary>Polling and native CanExecute may observe the same frame in either
+    /// order. A pending mapped Primary edge is consumed once by native OnExecute.</summary>
+    internal sealed class GazePrimaryTapGate
+    {
+        private readonly GazeTapEdges edges = new GazeTapEdges();
+        private bool pending;
+        public void Begin(bool primaryHeld) { edges.Begin(primaryHeld); pending = false; }
+        public bool Observe(bool down)
+        {
+            bool fresh = edges.Observe(down);
+            if (!down) pending = false;
+            else if (fresh) pending = true;
+            return pending;
+        }
+        public bool Take(bool down)
+        {
+            if (!Observe(down)) return false;
+            pending = false;
+            return true;
         }
     }
 

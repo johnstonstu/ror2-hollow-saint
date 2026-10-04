@@ -1,4 +1,5 @@
 using System;
+using HollowSaint.FoundationKit.Gaze.Fx;
 using HollowSaint.FoundationKit.Vfx;
 using RoR2;
 using UnityEngine;
@@ -76,7 +77,10 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
         private void Build(SkinFxPalette current)
         {
             VfxAssets.Load();
-            if (!VfxAssets.ArcCore || !VfxAssets.ArcGlow)
+            // Reuse the owned, cached neutral clone so vertex skin hues are not
+            // multiplied through ArcCore's house tint and cyan/copper remap.
+            GazeContrastAssets.Load();
+            if (!GazeContrastAssets.Core || !VfxAssets.ArcGlow)
                 throw new InvalidOperationException("shared arc materials unavailable");
             visualRoot = new GameObject("HS_OpenCircuitDomeEdges");
             visualRoot.transform.SetParent(transform, false);
@@ -120,7 +124,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             if (!glowMaterial) throw new InvalidOperationException("palette arc material unavailable");
             foreach (var edge in edges)
             {
-                edge.Core.sharedMaterial = VfxAssets.ArcCore;
+                edge.Core.sharedMaterial = GazeContrastAssets.Core;
                 edge.Glow.sharedMaterial = glowMaterial;
             }
         }

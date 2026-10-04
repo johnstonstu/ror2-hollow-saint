@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.2.0 (private candidate)
-- Gaze fuel pulses now use fresh Special taps: one entry orb per tap, with a 0.25-second minimum interval. Holding does not repeat; new charges stay in reserve. Arc Step cancels. Unlaunched orbs return on living exits, and late taps are rejected before they can spend fuel without completing their travel.
+- Special starts Gaze; fresh Primary presses send one entry orb per pulse, with a 0.25-second minimum interval. Holding does not repeat; new charges stay in reserve. Primary shows the pulse icon and available entry count, and other combat skills are unavailable until the channel ends. Original skills and cooldown progress return on exit. Unlaunched orbs return on living exits, and late presses are rejected before they can spend fuel without completing their travel.
 - Gaze channel duration is fixed at cast entry and grows by 0.1 seconds per level above 1, up to two extra seconds and a six-second total cap. The default grows from four to six seconds; longer channels also increase ordinary beam exposure and delay cooldown.
 - Gaze uses a thinner continuous beam, broad traveling pulses and physical radial crown expansion. Open Circuit now has moving tapered dome arcs. Effects reuse bounded geometry and clear on cancellation or teardown.
 - Added Crimson Vow as the sixth skin, with red conductors and gold-white Gaze pulse accents. It unlocks through the native survivor mastery condition: a qualifying winning ending on Monsoon-equivalent hard difficulty. Previous clears are not replayed for the new achievement.

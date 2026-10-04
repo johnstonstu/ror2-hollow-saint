@@ -92,7 +92,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Check(fx.ReadabilityFocus==0f,"no focus at rest");
                 fx.Swallow(1004+skin,0,0,0,.32f);Time.time+=.1f;
                 Check(fx.ReadabilityFocus>.95f,"focus available before renderer update");
-                fx.LateUpdate();Check(fx.intakeOutline.line.enabled,"outlined intake trail");
+                fx.LateUpdate();Check(fx.intakeOutlines[0].line.enabled,"outlined intake trail");
                 fx.LaunchPulse(1004+skin,0,Vector3.up,new Vector3(0,0,10),new Vector3(0,0,10),Vector3.up,true,0,.2f,4,.3f,false);
                 fx.ReducedEffects=true;Time.time+=.1f;fx.LateUpdate();
                 Check(fx.pulses[0].front.line.enabled&&fx.pulses[0].outline.line.enabled,"reduced effects keep pulse silhouette");
@@ -142,6 +142,17 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             fx.OnDisable();
             foreach(var pulse in fx.pulses)Check(!pulse.active,"disable clears all manual pulse slots");
             foreach(var contact in fx.contacts)Check(!contact.active,"disable clears all manual contacts");
+            fx.BeginCast(3001,5,5,true,0);
+            fx.Swallow(3001,20,0,0,.32f);
+            Time.time+=.25f;fx.Swallow(3001,40,1,0,.32f);
+            Time.time+=.01f;fx.LateUpdate();
+            Check(fx.intakeTrails[0].line.enabled&&fx.intakeTrails[1].line.enabled,"overlapping intakes keep both trails");
+            Check(Vector3.Distance(fx.intakeTrails[0].line.points[11],fx.intakeTrails[1].line.points[11])>.1f,"intake paths independently follow different orbs");
+            Time.time+=.25f;fx.Swallow(3001,60,2,0,.32f);fx.LateUpdate();
+            Check(!fx.fuel[0].visible&&fx.intakeTrails[0].line.enabled&&fx.intakeTrails[1].line.enabled,"expired intake slot reused while neighbour remains");
+            Check(GameObject.Created==allocated,"intake overlap allocates no new geometry");
+            fx.Clear();foreach(var trail in fx.intakeTrails)Check(!trail.line.enabled,"clear hides every intake trail");
+            foreach(var outline in fx.intakeOutlines)Check(!outline.line.enabled,"clear hides every intake outline");
             Console.WriteLine("PASS "+checks+" assertions; 1000 cast reuse; production presentation files with physics/render substitutes. Not Unity runtime validation.");
         }
     }

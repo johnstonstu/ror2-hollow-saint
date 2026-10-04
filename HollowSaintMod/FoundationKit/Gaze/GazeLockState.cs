@@ -5,8 +5,8 @@ namespace HollowSaint.FoundationKit.Gaze
 {
     /// <summary>
     /// Parks the "Weapon" and "Spear" machines while the beam runs, so Arc Bolt (priority Any) and
-    /// Stormspear (priority Skill) cannot start. Arc Step lives on "Body" and stays usable; it
-    /// cancels the beam instead. The authority leaves as soon as the Crown machine is no longer
+    /// Stormspear (priority Skill) cannot start. Native slot overrides suppress other combat
+    /// skills. The authority leaves as soon as the Crown machine is no longer
     /// in GazeState (the transition networks to the other machines).
     /// </summary>
     public class GazeLockState : BaseState

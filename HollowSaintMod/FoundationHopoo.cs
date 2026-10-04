@@ -81,6 +81,8 @@ namespace HollowSaint
         private static Material ToHopoo(Material s)
         {
             var m = new Material(shader) { name = s.name };
+            Color intendedAlbedo;
+            bool crimsonAlbedo = CrimsonMasteryMaterials.TryGetIntendedAlbedo(s, out intendedAlbedo);
             // v0.9.10: RoR2's ramp lighting reads cooler than Unity Standard under the same sky (ivory came
             // out lavender, measured R/G/B about 0.85/0.92/1.04 of the Standard look), so the albedo tint is
             // warmed back a little. Overlays and elite ramps are unaffected.
@@ -90,7 +92,8 @@ namespace HollowSaint
             {
                 var c = s.color;
                 // Lift fades in below DarkThreshold, strongest for the darkest plates.
-                float lift = Mathf.Lerp(DarkLift, 1f, Mathf.Clamp01(c.maxColorComponent / DarkThreshold));
+                float darkness = crimsonAlbedo ? intendedAlbedo.maxColorComponent : c.maxColorComponent;
+                float lift = Mathf.Lerp(DarkLift, 1f, Mathf.Clamp01(darkness / DarkThreshold));
                 var warm = new Color(c.r * AlbedoWarm.r * lift, c.g * AlbedoWarm.g * lift, c.b * AlbedoWarm.b * lift, c.a);
                 // The ramp also pushes saturation (Umbral's navy halo went royal blue, Solar went orange).
                 float grey = warm.r * 0.3f + warm.g * 0.59f + warm.b * 0.11f;
@@ -114,7 +117,8 @@ namespace HollowSaint
             // Dark plates need some specular or the ramp crushes them to a flat silhouette (Umbral, Obsidian).
             // Glossy dark skins (Umbral 0.82, Obsidian 0.88) read through their highlights in Standard; HG
             // needs a strong, fairly tight specular and more rim to keep that shape.
-            bool dark = s.HasProperty("_Color") && s.color.maxColorComponent < DarkThreshold;
+            bool dark = crimsonAlbedo ? intendedAlbedo.maxColorComponent < DarkThreshold
+                : s.HasProperty("_Color") && s.color.maxColorComponent < DarkThreshold;
             m.SetFloat("_SpecularStrength", dark ? Mathf.Lerp(0.6f, 1.3f, smooth) : Mathf.Lerp(0.35f, 0.8f, Mathf.Max(smooth, metal)));
             m.SetFloat("_SpecularExponent", Mathf.Lerp(3f, 12f, smooth));
             m.EnableKeyword("DITHER"); // fades like vanilla bodies when the camera gets close

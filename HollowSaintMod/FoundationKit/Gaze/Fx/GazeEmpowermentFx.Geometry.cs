@@ -61,8 +61,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 fuel[i] = new Orb { stroke = NewStroke("Fuel", false), outline = NewOutline("FuelOutline") };
                 reserve[i] = new Orb { stroke = NewStroke("Reserve", false), outline = NewOutline("ReserveOutline") };
             }
-            intakeTrail = NewStroke("RearIntake", false);
-            intakeOutline = NewOutline("RearIntakeOutline");
+            for (int i = 0; i < intakeTrails.Length; i++)
+            {
+                intakeTrails[i] = NewStroke("RearIntake", false);
+                intakeOutlines[i] = NewOutline("RearIntakeOutline");
+            }
             crownRim = NewStroke("AbsorptionRim", false);
             for (int i = 0; i < pulses.Length; i++)
             {
@@ -84,8 +87,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
 
         private void HideTransient()
         {
-            if (intakeTrail != null) intakeTrail.Hide();
-            if (intakeOutline != null) intakeOutline.Hide();
+            for (int i = 0; i < intakeTrails.Length; i++)
+            {
+                if (intakeTrails[i] != null) intakeTrails[i].Hide();
+                if (intakeOutlines[i] != null) intakeOutlines[i].Hide();
+            }
             if (crownRim != null) crownRim.Hide();
             foreach (var p in pulses)
             {
