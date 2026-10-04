@@ -19,7 +19,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
     public sealed class GazeBeamFx
     {
         private const int HelixCount = 2;
-        private const float HazeWidth = 0.85f, BodyWidth = 0.36f, SheathWidth = 0.55f, CoreWidth = 0.095f;
+        // Broader body with restrained haze and narrow core beneath the 3.85m event sleeve.
+        private const float HazeWidth = 1.05f, BodyWidth = 0.8f, SheathWidth = 0.9f, CoreWidth = 0.095f;
         private const float HelixRadius = 0.25f;
         private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 

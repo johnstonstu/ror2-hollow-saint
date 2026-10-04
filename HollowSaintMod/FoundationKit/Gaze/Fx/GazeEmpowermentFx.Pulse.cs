@@ -139,10 +139,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                     float tail = Mathf.Max(0f, head - Mathf.Min(7f, p.length * 0.45f));
                     for (int j = 0; j < p.line.Length; j++) p.line[j] = p.origin + p.direction * Mathf.Lerp(tail, head, j / (float)(p.line.Length - 1));
                     float scale = (p.finale ? 1.16f : 1f) * Mathf.SmoothStep(0.35f, 1f, age / 0.1f);
-                    p.outline.Draw(p.line, p.line.Length, 4.2f * scale, GazeContrastAssets.Ink, 0.28f);
+                    p.outline.Draw(p.line, p.line.Length, 4.2f * scale, outlineTint, 0.28f);
                     p.sleeve.Draw(p.line, p.line.Length, 3.85f * scale, accent, ReducedEffects ? 0.4f : 0.55f);
                     p.spine.Draw(p.line, p.line.Length, 0.24f * scale, accentEdge, ReducedEffects ? 0.4f : 0.65f);
-                    if (p.finale) p.front.Diamond(p.origin + p.direction * head, p.direction, 1.72f * scale, 0.15f, accentEdge, 0.8f);
+                    if (p.finale) p.front.Loop(p.origin + p.direction * head, p.direction, 1.72f * scale, 0.15f, accentEdge, 0.8f);
                     else p.front.Loop(p.origin + p.direction * head, p.direction, 1.72f * scale, 0.14f, accentEdge, 0.75f);
                     continue;
                 }

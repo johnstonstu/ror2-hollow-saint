@@ -27,7 +27,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private CharacterBody body;
         private GazeBeam beam;
         private SkinFxPalette palette;
-        private Color accent, accentEdge;
+        private Color accent, accentEdge, outlineTint;
         private Transform root;
         private uint castId;
         private bool seenCast, active, ending, fullEntry, externalAnchors;
@@ -113,8 +113,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             EnsureBuilt();
             if (!root) return;
             palette = SkinFxPalette.ForBody(body);
-            accent = GazeContrastAssets.Accent(palette.Index);
-            accentEdge = GazeContrastAssets.Edge(palette.Index);
+            // Keep primary skin energy throughout; secondary colour is outline-only.
+            accent = palette.Arc;
+            outlineTint = Color.Lerp(GazeContrastAssets.Ink, GazeContrastAssets.Accent(palette.Index), 0.25f);
+            accentEdge = palette.Arc;
             capacity = Mathf.Clamp(max, 2, MaxCharges);
             entryCount = Mathf.Clamp(entryCount, 0, capacity);
             fullEntry = enteredFull;
@@ -266,26 +268,26 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 if (!orb.visible) { orb.stroke.Hide(); orb.outline.Hide(); }
                 else
                 {
-                    Vector3 p = FuelPosition(i); float size = fullEntry ? 0.19f : 0.16f;
+                    Vector3 p = FuelPosition(i); float size = fullEntry ? 0.22f : 0.20f;
                     if (ending) p = Vector3.Lerp(orb.mergeFrom, p, Mathf.SmoothStep(0f, 1f, (Time.time - ended) / 0.4f));
                     else if (orb.swallowing)
                     {
                         float t = Mathf.Clamp01((Time.time - orb.at) / orb.duration);
                         if (t >= 1f) { orb.visible = orb.swallowing = false; flashAt = Time.time; orb.stroke.Hide(); orb.outline.Hide(); continue; }
-                        p = IntakePosition(orb, t); size *= 1f - 0.8f * Mathf.Pow(t, 5f);
+                        p = IntakePosition(orb, t); size *= 1f - 0.45f * Mathf.Pow(t, 8f);
                         var points = trailPoints[orb.intakeSlot];
                         for (int j = 0; j < points.Length; j++) points[j] = IntakePosition(orb, Mathf.Max(0f, t - 0.25f + j * 0.25f / (points.Length - 1)));
-                        intakeOutlines[orb.intakeSlot].Draw(points, points.Length, 0.16f, GazeContrastAssets.Ink, 0.8f);
-                        intakeTrails[orb.intakeSlot].Draw(points, points.Length, 0.075f, accent, 0.85f);
+                        intakeOutlines[orb.intakeSlot].Draw(points, points.Length, 0.18f, outlineTint, 0.8f);
+                        intakeTrails[orb.intakeSlot].Draw(points, points.Length, 0.10f, accent, 0.85f);
                     }
-                    // Angular fuel silhouettes remain distinct from round reserve beads.
-                    orb.outline.Diamond(p, direction, size, 0.14f, GazeContrastAssets.Ink, 0.9f);
-                    orb.stroke.Diamond(p, direction, size, fullEntry ? 0.07f : 0.055f, orb.swallowing ? accentEdge : accent, 0.95f);
+                    // Preserve the round orb and its hue all the way into the aperture.
+                    orb.outline.Loop(p, direction, size, 0.14f, outlineTint, 0.9f);
+                    orb.stroke.Loop(p, direction, size, fullEntry ? 0.09f : 0.08f, accent, 0.95f);
                 }
                 if (reserve[i].visible && !ending)
                 {
-                    reserve[i].outline.Loop(ReservePosition(i), direction, 0.095f, 0.09f, GazeContrastAssets.Ink, 0.65f);
-                    reserve[i].stroke.Loop(ReservePosition(i), direction, 0.095f, 0.025f, palette.Arc, 0.65f);
+                    reserve[i].outline.Loop(ReservePosition(i), direction, 0.14f, 0.09f, outlineTint, 0.65f);
+                    reserve[i].stroke.Loop(ReservePosition(i), direction, 0.14f, 0.05f, accent, 0.8f);
                 }
                 else { reserve[i].stroke.Hide(); reserve[i].outline.Hide(); }
             }
