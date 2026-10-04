@@ -174,7 +174,6 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             active = false; ending = true; ended = Time.time;
             mergedCount = Mathf.Clamp(retainedTotal, 0, capacity);
             int fromFuel = Mathf.Clamp(unspentEntry, 0, mergedCount);
-            int fromReserve = Mathf.Clamp(retainedReserve, 0, mergedCount - fromFuel);
             // Preserve the positions of surviving entry orbs; never animate a consumed orb returning.
             int found = 0;
             for (int i = 0; i < capacity && found < fromFuel; i++)
@@ -185,7 +184,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 }
             for (int i = found; i < fromFuel; i++) fuel[i].mergeFrom = crown;
             for (int i = fromFuel; i < mergedCount; i++)
-                fuel[i].mergeFrom = i - fromFuel < fromReserve ? ReservePosition(i - fromFuel) : crown;
+                fuel[i].mergeFrom = crown; // Hidden earnings rejoin here, never fly in from behind the player.
             for (int i = 0; i < MaxCharges; i++) { fuel[i].visible = i < mergedCount; fuel[i].swallowing = false; reserve[i].visible = false; }
             HideTransient();
         }
@@ -301,14 +300,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                         orb.filament.Crawl(p, direction, size, Time.time * (orb.swallowing ? 9f : 4f) + i * 2.4f,
                             palette.Secondary, orb.swallowing ? 0.85f : 0.65f);
                 }
-                if (reserve[i].visible && !ending)
-                {
-                    reserve[i].outline.Knot(ReservePosition(i), direction, 0.14f, i * 2.4f, 0.075f, outlineTint, 0.65f, ReducedEffects);
-                    reserve[i].stroke.Knot(ReservePosition(i), direction, 0.14f, i * 2.4f, 0.035f, accent, 0.8f, ReducedEffects);
-                    if (!ReducedEffects) reserve[i].filament.Crawl(ReservePosition(i), direction, 0.14f,
-                        -Time.time * 3f + i * 2.4f, palette.Secondary, 0.5f);
-                }
-                else { reserve[i].stroke.Hide(); reserve[i].outline.Hide(); }
+                // Retain authoritative reserve counts, but only entry fuel is visible during Gaze.
+                reserve[i].stroke.Hide(); reserve[i].outline.Hide(); reserve[i].filament.Hide();
             }
             float flash = 1f - Mathf.Clamp01((Time.time - flashAt) / (ReducedEffects ? 0.2f : 0.12f));
             if (flash > 0f && !ending) crownRim.Knot(crown - direction * 0.07f, direction, 0.38f + flash * 0.1f,

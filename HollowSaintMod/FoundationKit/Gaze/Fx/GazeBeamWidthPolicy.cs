@@ -14,10 +14,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             return shownSteps < target ? Math.Min(target, shownSteps + change) : Math.Max(target, shownSteps - change);
         }
 
-        public static float Body(float steps, float envelope, float radius) => Width(.55f, .10f, steps, envelope, radius);
-        public static float Haze(float steps, float envelope, float radius) => Width(.80f, .10f, steps, envelope, radius);
-        public static float Sheath(float steps, float envelope, float radius) => Width(.70f, .10f, steps, envelope, radius);
-        public static float Core(float steps, float envelope, float radius) => Width(.075f, .008f, steps, envelope, radius);
+        public static float Body(float steps, float envelope, float radius) => Width(.65f, .40f, steps, envelope, radius);
+        public static float Haze(float steps, float envelope, float radius) => Width(.90f, .41f, steps, envelope, radius);
+        public static float Sheath(float steps, float envelope, float radius) => Width(.80f, .40f, steps, envelope, radius);
+        public static float Core(float steps, float envelope, float radius) => Width(.09f, .016f, steps, envelope, radius);
+        public static float Sweep(float envelope, float radius) => Width(2.95f, 0f, 0f, envelope, radius);
 
         private static float Width(float baseline, float increase, float steps, float envelope, float radius)
         {

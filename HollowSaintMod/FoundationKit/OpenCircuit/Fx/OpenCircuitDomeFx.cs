@@ -1,4 +1,4 @@
-using System;
+using HollowSaint.FoundationKit.Gaze;
 using HollowSaint.FoundationKit.Gaze.Fx;
 using HollowSaint.FoundationKit.Vfx;
 using RoR2;
@@ -7,179 +7,145 @@ using UnityEngine.Networking;
 
 namespace HollowSaint.FoundationKit.OpenCircuit.Fx
 {
-    /// <summary>
-    /// Presentation of the actual core-centered spherical BlastAttack, on every observer.
-    /// Reads the replicated buff rather than cast events (including late joining clients).
-    /// Transparent edge geometry only: no collider, damage, targeting or shielding.
-    /// </summary>
-    [DefaultExecutionOrder(200)]
-    [DisallowMultipleComponent]
+    /// <summary>Historic component name retained for prefab registration. The dome is gone:
+    /// the real crown expands to the damage perimeter, with sparse open lightning sweeps.
+    /// Runs after Gaze's pose owner (140), before HaloRing refits (150).</summary>
+    [DefaultExecutionOrder(145), DisallowMultipleComponent]
     public sealed class OpenCircuitDomeFx : MonoBehaviour
     {
+        private const int Points = 17;
+        private static readonly string[] ArcNames = { "halo 1", "halo 2", "halo 3", "halo 4" };
+        private readonly Transform[] arcs = new Transform[4];
+        private readonly OpenCircuitCrownPose pose = new OpenCircuitCrownPose();
+        private readonly Stroke[] strokes = new Stroke[6];
         private CharacterBody body;
+        private HaloRing ring;
+        private OpenCircuitPulseDriver driver;
+        private GazeBeam gaze;
+        private Transform model;
         private GameObject visualRoot;
-        private Edge[] edges;
         private SkinFxPalette palette;
-        private bool failed;
-        private static bool warned;
-
-        private sealed class Edge
+        private float expansion, nextResolve;
+        public float Expansion { get { return pose.Weight; } }
+        public bool OwnsPerimeter { get { return pose.Weight > 0.02f; } }
+        private sealed class Stroke
         {
-            internal OpenCircuitDomeGeometry.Point[] Unit;
-            internal Vector3[] World;
-            internal LineRenderer Core, Glow;
-            internal bool Lower;
+            internal LineRenderer glow, core;
+            internal readonly Vector3[] points = new Vector3[Points];
         }
-
-        private void Awake() { body = GetComponent<CharacterBody>(); }
-        private void OnDisable() { DestroyVisuals(); }
-        private void OnDestroy() { DestroyVisuals(); }
-
+        private void Awake() { body = GetComponent<CharacterBody>(); ring = HaloRing.For(body); }
+        private void Update()
+        {
+            bool wasExpanded = pose.Weight > 0f;
+            pose.Restore(); // Before Animator; never accumulate overrides.
+            // Gaze captures its centre before HaloRing's LateUpdate; discard the expanded cache.
+            if (wasExpanded && ring) ring.EnsureFitted(true);
+        }
+        private void OnDisable() { Release(); DestroyVisuals(); }
+        private void OnDestroy() { Release(); DestroyVisuals(); }
+        private void Release() { pose.Release(); expansion = 0f; SetVisible(false); }
+        private bool Resolve()
+        {
+            var current = body && body.modelLocator ? body.modelLocator.modelTransform : null;
+            if (current == model && arcs[0] && arcs[1] && arcs[2] && arcs[3]) return true;
+            if (current == model && Time.unscaledTime < nextResolve) return false;
+            pose.Release(); expansion = 0f; model = current; nextResolve = Time.unscaledTime + 1f;
+            for (int i = 0; i < arcs.Length; i++) arcs[i] = null;
+            if (!model) { pose.Bind(arcs); return false; }
+            foreach (var t in model.GetComponentsInChildren<Transform>(true))
+                for (int i = 0; i < arcs.Length; i++) if (t.name == ArcNames[i]) arcs[i] = t;
+            pose.Bind(arcs);
+            return pose.Fit();
+        }
         private void LateUpdate()
         {
-            // A dedicated server needs no local renderers; hosts still render normally.
-            if (NetworkServer.active && !NetworkClient.active) return;
-            if (!body) { DestroyVisuals(); return; }
-            bool alive = body.healthComponent && body.healthComponent.alive;
-            if (!alive) { DestroyVisuals(); return; }
-            bool buff = OpenCircuitBuff.Def && body.HasBuff(OpenCircuitBuff.Def);
-            var model = body.modelLocator && body.modelLocator.modelTransform
-                ? body.modelLocator.modelTransform.GetComponent<CharacterModel>() : null;
-            bool visible = !model || model.invisibilityCount <= 0;
-            float radius = KitTuning.OpenCircuitRadius; // Exactly the damage radius, including live config.
-            if (!OpenCircuitDomeGeometry.ShouldShow(alive, buff, visible, isActiveAndEnabled)
-                || !OpenCircuitDomeGeometry.IsValidRadius(radius))
-            {
-                SetVisible(false);
-                return;
-            }
-            if (failed) return;
-            try
-            {
-                var current = SkinFxPalette.ForBody(body);
-                if (edges == null) Build(current);
-                if (!ReferenceEquals(current, palette)) ApplyPalette(current);
-                SetVisible(true);
-                UpdateEdges(body.corePosition, radius);
-            }
-            catch (Exception error)
-            {
-                failed = true;
-                DestroyVisuals();
-                if (!warned)
-                {
-                    warned = true;
-                    Plugin.Log.LogWarning("HOLLOW_SAINT_OPEN_CIRCUIT_DOME_DISABLED: " + error);
-                }
-            }
+            if (NetworkServer.active && !NetworkClient.active) { Release(); return; }
+            if (!body || !body.healthComponent || !body.healthComponent.alive) { Release(); return; }
+            if (!gaze) gaze = GetComponent<GazeBeam>();
+            // Gaze owns these bones throughout its windup, beam and return.
+            if (gaze && gaze.Current != GazeBeam.Phase.Idle) { Release(); return; }
+            if (!Resolve() || !pose.Fit()) { Release(); return; }
+            var characterModel = model.GetComponent<CharacterModel>();
+            if (characterModel && characterModel.invisibilityCount > 0) { Release(); return; }
+            float radius = KitTuning.OpenCircuitRadius;
+            if (!OpenCircuitDomeGeometry.IsValidRadius(radius)) { Release(); return; }
+            if (!driver) driver = GetComponent<OpenCircuitPulseDriver>();
+            bool open = (OpenCircuitBuff.Def && body.HasBuff(OpenCircuitBuff.Def)) || (driver && driver.CrownOpen);
+            // Authored back-to-overhead unfold leads; expand only once the ring lies flat.
+            float flat = Mathf.Abs(Vector3.Dot(pose.Shape.Normal, Vector3.up));
+            float target = open ? Mathf.SmoothStep(0f, 1f, (flat - 0.45f) / 0.35f) : 0f;
+            expansion = Mathf.MoveTowards(expansion, target, Time.deltaTime / (open ? 0.65f : 0.3f));
+            if (!pose.Apply(body.corePosition, radius, expansion)) { Release(); return; }
+            if (expansion <= 0.02f) { SetVisible(false); return; }
+            if (!visualRoot) Build();
+            palette = SkinFxPalette.ForBody(body);
+            visualRoot.SetActive(true);
+            RenderPerimeter(radius);
         }
-
-        private void Build(SkinFxPalette current)
+        private void Build()
         {
-            VfxAssets.Load();
-            // Reuse the owned, cached neutral clone so vertex skin hues are not
-            // multiplied through ArcCore's house tint and cyan/copper remap.
             GazeContrastAssets.Load();
-            if (!GazeContrastAssets.Core || !VfxAssets.ArcGlow)
-                throw new InvalidOperationException("shared arc materials unavailable");
-            visualRoot = new GameObject("HS_OpenCircuitDomeEdges");
+            visualRoot = new GameObject("HS_OpenCircuitCrownPerimeter");
             visualRoot.transform.SetParent(transform, false);
-            edges = new Edge[OpenCircuitDomeGeometry.PathCount];
-            for (int i = 0; i < edges.Length; i++)
+            for (int i = 0; i < strokes.Length; i++)
             {
-                var unit = OpenCircuitDomeGeometry.CreateUnitPath(i);
-                var edge = new Edge { Unit = unit, World = new Vector3[unit.Length],
-                    Lower = OpenCircuitDomeGeometry.IsLower(i) };
-                edges[i] = edge;
-                // Sparse tapered ribbons, not closed latitude/meridian wires.
-                edge.Glow = MakeRenderer("Edge" + i + "Hue", unit.Length);
-                edge.Core = MakeRenderer("Edge" + i + "Core", unit.Length);
-            }
-            ApplyPalette(current);
-        }
-
-        private LineRenderer MakeRenderer(string name, int count)
-        {
-            var child = new GameObject(name);
-            child.transform.SetParent(visualRoot.transform, false);
-            var line = child.AddComponent<LineRenderer>();
-            line.useWorldSpace = true;
-            line.alignment = LineAlignment.View;
-            line.textureMode = LineTextureMode.Stretch;
-            line.positionCount = count;
-            line.numCapVertices = 0;
-            line.numCornerVertices = 0;
-            line.widthCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.14f, 1f),
-                new Keyframe(0.86f, 1f), new Keyframe(1f, 0f));
-            line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            line.receiveShadows = false;
-            line.enabled = false;
-            return line;
-        }
-
-        private void ApplyPalette(SkinFxPalette current)
-        {
-            palette = current;
-            var glowMaterial = palette.Material(VfxAssets.ArcGlow);
-            if (!glowMaterial) throw new InvalidOperationException("palette arc material unavailable");
-            foreach (var edge in edges)
-            {
-                edge.Core.sharedMaterial = GazeContrastAssets.Core;
-                edge.Glow.sharedMaterial = glowMaterial;
+                var stroke = new Stroke(); strokes[i] = stroke;
+                stroke.glow = MakeLine("CrownLightningGlow", GazeContrastAssets.Glow);
+                stroke.core = MakeLine("CrownLightningCore", GazeContrastAssets.Core);
             }
         }
-
-        private void UpdateEdges(Vector3 center, float radius)
+        private LineRenderer MakeLine(string name, Material material)
         {
-            // A restrained current traveling through edges, never expansion of the volume.
-            float time = Time.time;
-            var origin = new OpenCircuitDomeGeometry.Point(center.x, center.y, center.z);
-            for (int path = 0; path < edges.Length; path++)
+            var go = new GameObject(name); go.transform.SetParent(visualRoot.transform, false);
+            var line = go.AddComponent<LineRenderer>();
+            line.sharedMaterial = material; line.useWorldSpace = true; line.alignment = LineAlignment.View;
+            line.textureMode = LineTextureMode.Stretch; line.positionCount = Points;
+            line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; line.receiveShadows = false;
+            line.widthCurve = new AnimationCurve(new Keyframe(0f, 0.25f), new Keyframe(0.2f, 1f), new Keyframe(0.8f, 1f), new Keyframe(1f, 0.25f));
+            line.enabled = false; return line;
+        }
+        private void RenderPerimeter(float radius)
+        {
+            var shape = pose.Shape;
+            float clock = Time.time * 3.2f;
+            int hop = (int)clock;
+            float progress = clock - hop;
+            for (int i = 0; i < strokes.Length; i++)
             {
-                var edge = edges[path];
-                OpenCircuitDomeGeometry.WriteUnitPath(path, time, edge.Unit);
-                for (int i = 0; i < edge.Unit.Length; i++)
+                var stroke = strokes[i];
+                bool upward = i >= 4;
+                float flash = upward ? Mathf.Max(0f, Mathf.Sin(Time.time * 4.7f + i * 2.6f) - 0.65f) / 0.35f :
+                    i == (hop & 3) ? 1f : i == ((hop + 3) & 3) ? (1f - progress) * 0.2f : 0f;
+                if (flash <= 0.001f) { stroke.glow.enabled = stroke.core.enabled = false; continue; }
+                float start = shape.Angle[i & 3];
+                float travel = i == (hop & 3) ? progress : 1f;
+                for (int j = 0; j < Points; j++)
                 {
-                    var p = OpenCircuitDomeGeometry.ScaleTranslate(edge.Unit[i], origin, radius);
-                    edge.World[i] = new Vector3(p.X, p.Y, p.Z);
+                    float t = j / (float)(Points - 1);
+                    float sweep = upward ? t * 0.14f : Mathf.Lerp(Mathf.Max(0f, travel - 0.6f), travel, t) * Mathf.PI * 0.5f;
+                    float angle = start + shape.Direction * sweep;
+                    float rise = upward ? Mathf.Min(1.8f, radius * 0.22f) * t : 0f;
+                    float r = Mathf.Max(0f, shape.Radius - 0.07f);
+                    float radial = Mathf.Sqrt(Mathf.Max(0f, r * r - rise * rise));
+                    float teeth = Mathf.Sin(t * Mathf.PI) * (0.025f + 0.025f * Mathf.Sin(j * 2.7f + (int)(Time.time * 16f) + i));
+                    Vector3 point = shape.Center + shape.Direction3(angle) * Mathf.Max(0f, radial - teeth) + Vector3.up * rise;
+                    stroke.points[j] = body.corePosition + Vector3.ClampMagnitude(point - body.corePosition, Mathf.Max(0f, radius - 0.07f));
                 }
-                edge.Core.SetPositions(edge.World);
-                edge.Glow.SetPositions(edge.World);
-                float current = 0.88f + 0.12f * Mathf.Sin(time * 2f + path * 0.9f);
-                float strength = edge.Lower ? 0.18f : path < 4 ? 0.85f : 0.48f;
-                // Sparse complementary currents; the primary glow still defines the volume.
-                Color coreColor = path % 4 == 3 ? palette.Secondary : palette.Core; coreColor.a = 0.48f;
-                SetStyle(edge.Core, 0.018f, coreColor, strength * current);
-                SetStyle(edge.Glow, 0.065f, new Color(0.4f, 0.4f, 0.4f, 0.32f), strength * current);
+                Draw(stroke.glow, stroke.points, upward ? 0.075f : 0.12f, palette.Arc, flash * expansion * 0.48f);
+                Draw(stroke.core, stroke.points, upward ? 0.025f : 0.04f, upward ? palette.Secondary : palette.Core, flash * expansion * 0.85f);
             }
         }
-
-        private static void SetStyle(LineRenderer line, float width, Color color, float strength)
+        private static void Draw(LineRenderer line, Vector3[] points, float width, Color color, float alpha)
         {
-            // Keep the tapered widthCurve; startWidth/endWidth would rewrite its endpoints.
-            line.widthMultiplier = width;
-            color *= strength;
-            line.startColor = line.endColor = color;
+            line.enabled = true; line.SetPositions(points); line.widthMultiplier = width;
+            color.a = alpha; line.startColor = line.endColor = color;
         }
-
-        private void SetVisible(bool visible)
-        {
-            if (edges == null) return;
-            foreach (var edge in edges)
-            {
-                if (edge == null) continue;
-                if (edge.Core) edge.Core.enabled = visible;
-                if (edge.Glow) edge.Glow.enabled = visible;
-            }
-        }
-
+        private void SetVisible(bool visible) { if (visualRoot) visualRoot.SetActive(visible); }
         private void DestroyVisuals()
         {
-            SetVisible(false);
             if (visualRoot) { visualRoot.SetActive(false); Destroy(visualRoot); }
             visualRoot = null;
-            edges = null;
-            palette = null;
+            for (int i = 0; i < strokes.Length; i++) strokes[i] = null;
         }
     }
 }

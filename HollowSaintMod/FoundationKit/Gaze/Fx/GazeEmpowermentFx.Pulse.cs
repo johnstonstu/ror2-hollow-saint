@@ -159,16 +159,20 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                     float tail = Mathf.Max(0f, head - Mathf.Min(7f, p.length * 0.45f));
                     for (int j = 0; j < p.line.Length; j++) p.line[j] = p.origin + p.direction * Mathf.Lerp(tail, head, j / (float)(p.line.Length - 1));
                     float scale = (p.finale ? 1.16f : 1f) * Mathf.SmoothStep(0.35f, 1f, age / 0.1f);
-                    p.outline.Draw(p.line, p.line.Length, 4.2f * scale, outlineTint, 0.28f);
-                    p.sleeve.Draw(p.line, p.line.Length, 3.85f * scale, accent, ReducedEffects ? 0.22f : 0.32f);
+                    float sweepWidth = GazeBeamWidthPolicy.Sweep(scale, GazeTuning.Radius);
+                    float radialLimit = Mathf.Max(0f, GazeTuning.Radius - 0.12f);
+                    p.outline.Draw(p.line, p.line.Length, sweepWidth, outlineTint, 0.4f);
+                    p.sleeve.Draw(p.line, p.line.Length, sweepWidth * 0.94f, accent, ReducedEffects ? 0.34f : 0.52f);
+                    Color leading = accentEdge; leading.a = ReducedEffects ? 0.45f : 0.75f;
+                    p.sleeve.line.endColor = leading;
                     Vector3 u, v; Basis(p.direction, out u, out v);
                     int tick = (int)(age * (ReducedEffects ? 8f : 18f));
                     for (int j = 1; j < p.line.Length - 1; j++)
                     {
                         float envelope = Mathf.Sin(j * Mathf.PI / (p.line.Length - 1));
-                        p.line[j] += (u * (Noise(p.seed + tick, j) - 0.5f) + v * (Noise(p.seed + tick, j + 20) - 0.5f)) * (0.95f * scale * envelope);
+                        p.line[j] += Vector3.ClampMagnitude((u * (Noise(p.seed + tick, j) - 0.5f) + v * (Noise(p.seed + tick, j + 20) - 0.5f)) * (0.95f * scale * envelope), radialLimit);
                     }
-                    p.spine.Draw(p.line, p.line.Length, 0.14f * scale, accentEdge, ReducedEffects ? 0.5f : 0.8f);
+                    p.spine.Draw(p.line, p.line.Length, Mathf.Min(0.2f * scale, sweepWidth), accentEdge, ReducedEffects ? 0.65f : 0.9f);
                     for (int branch = 0; branch < p.forks.Length; branch++)
                     {
                         if (ReducedEffects && branch == 1) { p.forks[branch].Hide(); continue; }
@@ -179,11 +183,13 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                         {
                             float f = j / (float)(points.Length - 1);
                             points[j] = Vector3.Lerp(start, end, f) + v * (Mathf.Sin(f * Mathf.PI) * (Noise(p.seed + tick, j + branch * 9) - 0.5f) * scale);
+                            Vector3 axis = p.origin + p.direction * Vector3.Dot(points[j] - p.origin, p.direction);
+                            points[j] = axis + Vector3.ClampMagnitude(points[j] - axis, radialLimit);
                         }
-                        p.forks[branch].Draw(points, points.Length, 0.055f * scale, palette.Secondary, 0.65f);
+                        p.forks[branch].Draw(points, points.Length, Mathf.Min(0.09f * scale, sweepWidth), palette.Secondary, 0.8f);
                     }
-                    p.front.Knot(p.origin + p.direction * head, p.direction, 1.1f * scale, p.seed % 31,
-                        0.07f, accentEdge, 0.7f, ReducedEffects);
+                    p.front.Knot(p.origin + p.direction * head, p.direction, Mathf.Min(1.3f * scale, radialLimit), p.seed % 31,
+                        Mathf.Min(0.11f, sweepWidth), accentEdge, 0.9f, ReducedEffects);
                     continue;
                 }
                 p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();

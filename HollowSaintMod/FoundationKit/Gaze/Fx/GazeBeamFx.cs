@@ -214,7 +214,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 if (core) core.widthCurve = beamWidthCurve;
             }
             FocusTint(haze, palette.Outer, 0.14f, Mathf.Lerp(1f, 0.16f, focus));
-            FocusTint(beamBody, palette.Arc, 0.8f, Mathf.Lerp(1f, 0.5f, focus));
+            FocusTint(beamBody, palette.Arc, 0.72f, Mathf.Lerp(1f, 0.72f, focus));
             FocusTint(sheath, palette.Arc, 0.5f, Mathf.Lerp(1f, 0.24f, focus));
             FocusTint(core, palette.Core, 1f, Mathf.Lerp(1f, 0.38f, focus));
             foreach (var helix in helices) FocusTint(helix, palette.Core, 1f, Mathf.Lerp(1f, 0.12f, focus));

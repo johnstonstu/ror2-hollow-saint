@@ -32,6 +32,7 @@ namespace HollowSaint.FoundationKit.Vfx
         private Transform chest;
         private SkinFxPalette palette;
         private LightningLine[] lines;
+        private OpenCircuit.Fx.OpenCircuitDomeFx perimeter;
         private float feedWeight;
         private float ringWeight;
         private float unfoldUntil;
@@ -119,8 +120,16 @@ namespace HollowSaint.FoundationKit.Vfx
             Vector3 chestPos = chest ? chest.position : corePos;
             Vector3 spine = chestPos + back * (0.17f * unit) + Vector3.up * (0.06f * unit);
             Vector3 dock = shape.Nearest(spine);
-            Place(FeedCore, corePos, spine, feedWeight * flare);
-            Place(FeedSpine, spine, dock, feedWeight * flare);
+            if (!perimeter) perimeter = GetComponent<OpenCircuit.Fx.OpenCircuitDomeFx>();
+            float feed = feedWeight * flare * (perimeter && perimeter.OwnsPerimeter ? 1f - perimeter.Expansion : 1f);
+            Place(FeedCore, corePos, spine, feed);
+            Place(FeedSpine, spine, dock, feed);
+            if (perimeter && perimeter.OwnsPerimeter)
+            {
+                // Expanded crown owns its perimeter hops; avoid duplicate small-ring wires.
+                for (int i = GapFirst; i < LineCount; i++) Place(i, shape.Center, shape.Center, 0f);
+                return;
+            }
 
             // ---- Ring: bridges across the four real gaps ----
             for (int i = 0; i < 4; i++)

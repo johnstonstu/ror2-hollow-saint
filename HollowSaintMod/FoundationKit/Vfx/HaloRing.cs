@@ -72,10 +72,10 @@ namespace HollowSaint.FoundationKit.Vfx
             Refit();
         }
 
-        /// <summary>For callers outside LateUpdate (network beats): fit once if never fitted.</summary>
-        public void EnsureFitted()
+        /// <summary>Fit on demand; pose owners can refresh after restoring animated bones.</summary>
+        public void EnsureFitted(bool force = false)
         {
-            if (!Shape.Valid) Refit();
+            if (force || !Shape.Valid) Refit();
         }
 
         private void Refit()
