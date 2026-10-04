@@ -235,6 +235,7 @@ namespace HollowSaint.FoundationKit.Vfx
     public static class KitFx
     {
         public static GameObject NetworkedPrefab { get; private set; }
+        private static bool warnedStuckOwner;
 
         internal static void Register()
         {
@@ -281,14 +282,25 @@ namespace HollowSaint.FoundationKit.Vfx
         public static void ServerStuck(Vector3 point, Vector3 direction, float charge, float seconds, GameObject victim, CharacterBody owner)
         {
             if (!NetworkServer.active || NetworkedPrefab == null) return;
+            var identity = owner ? owner.GetComponent<NetworkIdentity>() : null;
+            uint ownerId = identity ? identity.netId.Value : 0u;
+            if (ownerId > Stormspear.SpearStuckEvent.MaxOwnerId)
+            {
+                seconds = Mathf.Min(seconds, Stormspear.StormspearTuning.StickSeconds);
+                if (!warnedStuckOwner)
+                {
+                    warnedStuckOwner = true;
+                    Plugin.Log.LogWarning("HOLLOW_SAINT_STUCK_OWNER_ID: using short spear FX for an oversized network ID.");
+                }
+            }
             var data = new EffectData
             {
                 origin = point,
                 start = direction,
                 scale = charge,
-                genericUInt = (uint)Beat.SpearStuck,
+                genericUInt = Stormspear.SpearStuckEvent.Encode(ownerId),
                 genericBool = true,
-                genericFloat = Mathf.Clamp(seconds, 0f, 1.2f),
+                genericFloat = Mathf.Clamp(seconds, 0f, 3f),
                 color = SkinFxPalette.ForBody(owner).NetworkColor
             };
             if (victim) data.SetNetworkedObjectReference(victim);
@@ -345,7 +357,7 @@ namespace HollowSaint.FoundationKit.Vfx
             var component = GetComponent<EffectComponent>();
             var data = component != null ? component.effectData : null;
             if (data == null) return;
-            var beat = (Beat)data.genericUInt;
+            var beat = Stormspear.SpearStuckEvent.IsStuck(data.genericUInt) ? Beat.SpearStuck : (Beat)data.genericUInt;
             if (beat == Beat.ThunderGather || beat == Beat.ThunderRelease || beat == Beat.ThunderCancel)
             {
                 var owner = data.ResolveNetworkedObjectReference();
@@ -358,7 +370,7 @@ namespace HollowSaint.FoundationKit.Vfx
                 try
                 {
                     var palette = SkinFxPalette.FromNetwork(data.color);
-                    Stormspear.Fx.StuckSpearFx.Spawn(data.origin, data.start, data.scale, data.genericFloat, data.ResolveNetworkedObjectReference(), palette);
+                    Stormspear.Fx.StuckSpearFx.Spawn(data.origin, data.start, data.scale, data.genericFloat, data.ResolveNetworkedObjectReference(), palette, Stormspear.SpearStuckEvent.OwnerId(data.genericUInt));
                     if (data.genericBool) KitSfx.Play(beat, gameObject, false, data.scale);
                 }
                 catch (Exception error) { Plugin.Log.LogError("HOLLOW_SAINT_FX_ERROR " + beat + ": " + error); }

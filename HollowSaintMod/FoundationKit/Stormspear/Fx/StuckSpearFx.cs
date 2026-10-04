@@ -1,6 +1,7 @@
 using HollowSaint.FoundationKit.Vfx;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace HollowSaint.FoundationKit.Stormspear.Fx
 {
@@ -23,8 +24,13 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
         private GameObject model;
         private SkinFxPalette palette;
         private float nextCrackle;
+        private HealthComponent host;
+        private CharacterBody owner;
+        private bool conductor, hadStage;
+        private Stage stage;
+        private SpearConductorVisual holder;
 
-        internal static void Spawn(Vector3 point, Vector3 direction, float charge, float seconds, GameObject victim, SkinFxPalette palette)
+        internal static void Spawn(Vector3 point, Vector3 direction, float charge, float seconds, GameObject victim, SkinFxPalette palette, uint ownerNetId = 0u)
         {
             if (!FoundationContent.SpearModel) return;
             if (direction.sqrMagnitude < 0.001f) direction = Vector3.down;
@@ -36,6 +42,21 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             fx.size = size;
             fx.life = Mathf.Max(0.05f, seconds);
             fx.palette = palette;
+            fx.conductor = victim && seconds > StormspearTuning.StickSeconds + 0.01f;
+            fx.host = victim ? victim.GetComponent<HealthComponent>() : null;
+            fx.stage = Stage.instance;
+            fx.hadStage = fx.stage != null;
+            if (fx.conductor)
+            {
+                var id = new NetworkInstanceId(ownerNetId);
+                var ownerObject = NetworkServer.active ? NetworkServer.FindLocalObject(id) : ClientScene.FindLocalObject(id);
+                fx.owner = ownerObject ? ownerObject.GetComponent<CharacterBody>() : null;
+                // A missing owner reference cannot create an unbounded anonymous conductor visual.
+                if (!fx.owner || !fx.host || !fx.host.alive) { Destroy(root); return; }
+                fx.holder = fx.owner.GetComponent<SpearConductorVisual>();
+                if (!fx.holder) fx.holder = fx.owner.gameObject.AddComponent<SpearConductorVisual>();
+                fx.holder.Replace(fx);
+            }
 
             // Same fitted model and arcs as the flying ghost (LanceGhost), so the spear in flight and
             // the spear in the target are one object to the eye.
@@ -55,7 +76,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 fx.localPos = fx.anchor.InverseTransformPoint(root.transform.position);
                 fx.localRot = Quaternion.Inverse(fx.anchor.rotation) * root.transform.rotation;
             }
-            VfxParticles.FlashLight(point - direction * 0.4f * size, palette.Arc, 2.5f + 2f * charge, 3.5f + 2f * charge, fx.life);
+            VfxParticles.FlashLight(point - direction * 0.4f * size, palette.Arc, 2.5f + 2f * charge, 3.5f + 2f * charge, Mathf.Min(fx.life, StormspearTuning.StickSeconds));
             VfxParticles.Burst(point, Quaternion.identity, palette.Material(VfxAssets.Spark), 10, 0.3f, new Vector2(3f, 7f), new Vector2(0.05f, 0.12f), palette.Core, stretch: 0.08f);
         }
 
@@ -81,19 +102,23 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
         private void LateUpdate()
         {
             age += Time.deltaTime;
+            if (conductor && (!host || !host.alive || !owner || !owner.isActiveAndEnabled || !owner.healthComponent ||
+                !owner.healthComponent.alive || !anchor || stage != Stage.instance || (hadStage && !stage)))
+            { Destroy(gameObject); return; }
             if (anchor) transform.SetPositionAndRotation(anchor.TransformPoint(localPos), anchor.rotation * localRot);
             if (age < life)
             {
                 // Charging up to the burst: the sheath arcs swell.
-                if (visual) visual.Gain = 1f + 1.6f * (age / life);
+                bool afterBurst = conductor && age >= StormspearTuning.StickSeconds;
+                if (visual) visual.Gain = afterBurst ? 0.65f : 1f + 0.4f * Mathf.Clamp01(age / Mathf.Max(0.05f, StormspearTuning.StickSeconds));
                 // v0.9.16: the struck enemy crackles in 3D around the lodged tip until the burst.
                 if (age >= nextCrackle && palette != null)
                 {
-                    nextCrackle = age + 0.04f;
+                    nextCrackle = age + 0.18f;
                     Vector3 tip = transform.position;
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < 1; i++)
                     {
-                        var arc = LightningLine.Spawn(tip, tip + Random.onUnitSphere * Random.Range(0.6f, 1.4f) * size, 0.08f, 0.35f + 0.2f * size, 1, 0.25f, palette: palette);
+                        var arc = LightningLine.Spawn(tip, tip + Random.onUnitSphere * Random.Range(0.4f, 0.8f) * size, 0.05f, afterBurst ? 0.22f : 0.35f, 1, 0.18f, palette: palette);
                         arc.drawTime = 0.02f;
                     }
                 }
@@ -101,8 +126,21 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             }
             float t = (age - life) / BurnOut;
             if (t >= 1f) { Destroy(gameObject); return; }
-            if (visual) visual.Gain = 2.6f * (1f - t);
+            if (visual) visual.Gain = (conductor ? 0.65f : 1.4f) * (1f - t);
             if (model) model.transform.localScale = Vector3.one * size * Mathf.Lerp(1f, 0.2f, t);
         }
+
+        private void OnDestroy() { if (holder) holder.Forget(this); }
+    }
+
+    /// <summary>One client-side lodged conductor model per owner; no global caches survive a stage.</summary>
+    internal sealed class SpearConductorVisual : MonoBehaviour
+    {
+        private StuckSpearFx current;
+        internal void Replace(StuckSpearFx next)
+        { if (current) Destroy(current.gameObject); current = next; }
+        internal void Forget(StuckSpearFx old) { if (current == old) current = null; }
+        private void OnDisable() { if (current) Destroy(current.gameObject); current = null; }
+        private void OnDestroy() { if (current) Destroy(current.gameObject); current = null; }
     }
 }

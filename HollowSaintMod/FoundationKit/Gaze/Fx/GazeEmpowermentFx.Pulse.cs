@@ -7,7 +7,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
     {
         private sealed class GroundStroke
         {
-            internal Stroke stroke;
+            internal Stroke stroke, outline;
             internal readonly Vector3[] path = new Vector3[9], shown = new Vector3[9];
             internal readonly float[] distance = new float[9];
             internal int count;
@@ -17,7 +17,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             internal bool active, ground, finale;
             internal float at, travel, spread, radius, length;
             internal Vector3 origin, end, groundPoint, direction, normal;
-            internal Stroke sleeve, spine, front;
+            internal Stroke sleeve, spine, front, outline;
             internal readonly Vector3[] line = new Vector3[12];
             internal readonly GroundStroke[] roots = new GroundStroke[12];
         }
@@ -25,7 +25,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         {
             internal bool active;
             internal float at;
-            internal Stroke glow, core, branch;
+            internal Stroke glow, core, branch, outline, stamp;
             internal readonly Vector3[] path = new Vector3[9], fork = new Vector3[5];
         }
 
@@ -54,10 +54,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             p.radius = Mathf.Clamp(spreadRadius, 0f, 30f); // cosmetic ceiling only
             p.finale = finale && fullEntry;
             p.ground = hasGround && p.normal.y > 0.35f;
-            p.sleeve.Hide(); p.spine.Hide(); p.front.Hide();
+            p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
             for (int i = 0; i < p.roots.Length; i++)
             {
-                var g = p.roots[i]; g.count = 0; g.stroke.Hide();
+                var g = p.roots[i]; g.count = 0; g.stroke.Hide(); g.outline.Hide();
                 if (p.ground) BuildGround(p, g, i, sequence);
             }
         }
@@ -100,7 +100,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             Vector3 radial = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
             Vector3 side = new Vector3(-radial.z, 0f, radial.x);
             bool branch = index % 2 == 1;
-            float radius = Mathf.Max(0f, p.radius - 0.18f);
+            float radius = Mathf.Max(0f, p.radius - 0.3f); // includes the wider outline half-width
             var parent = branch ? p.roots[index - 1] : null;
             if (branch && parent.count < 5) return;
             Vector3 branchStart = branch ? parent.path[4] - p.groundPoint : Vector3.zero;
@@ -139,19 +139,21 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                     float tail = Mathf.Max(0f, head - Mathf.Min(5f, p.length * 0.3f));
                     for (int j = 0; j < p.line.Length; j++) p.line[j] = p.origin + p.direction * Mathf.Lerp(tail, head, j / (float)(p.line.Length - 1));
                     float scale = p.finale ? 1.16f : 1f;
-                    p.sleeve.Draw(p.line, p.line.Length, 2.15f * scale, palette.Arc, ReducedEffects ? 0.45f : 0.7f);
-                    p.spine.Draw(p.line, p.line.Length, 0.16f * scale, palette.Core, ReducedEffects ? 0.25f : 0.6f);
-                    p.front.Loop(p.origin + p.direction * head, p.direction, 0.72f * scale, 0.06f, palette.Arc, 0.7f);
+                    p.outline.Draw(p.line, p.line.Length, 3.15f * scale, GazeContrastAssets.Ink, 0.36f);
+                    p.sleeve.Draw(p.line, p.line.Length, 2.85f * scale, accent, ReducedEffects ? 0.45f : 0.62f);
+                    p.spine.Draw(p.line, p.line.Length, 0.24f * scale, accentEdge, ReducedEffects ? 0.4f : 0.65f);
+                    if (p.finale) p.front.Diamond(p.origin + p.direction * head, p.direction, 1.22f * scale, 0.12f, accentEdge, 0.85f);
+                    else p.front.Loop(p.origin + p.direction * head, p.direction, 1.22f, 0.11f, accentEdge, 0.8f);
                     continue;
                 }
-                p.sleeve.Hide(); p.spine.Hide(); p.front.Hide();
+                p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
                 float spreadAge = age - p.travel;
                 float progress = Mathf.Clamp01(spreadAge / p.spread);
                 float fade = 1f - Mathf.Clamp01((spreadAge - p.spread * 0.6f) / (p.spread * 0.4f + 0.18f));
                 for (int i = 0; i < p.roots.Length; i++)
                 {
                     var g = p.roots[i];
-                    if (!p.ground || (ReducedEffects && i % 2 == 1)) { g.stroke.Hide(); continue; }
+                    if (!p.ground || (ReducedEffects && i % 2 == 1)) { g.stroke.Hide(); g.outline.Hide(); continue; }
                     float wave = progress * p.radius;
                     int count = 0;
                     for (int j = 0; j < g.count; j++)
@@ -168,8 +170,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                         }
                     }
                     // Only colored roots: white belongs to confirmed target strikes.
-                    g.stroke.Draw(g.shown, count, (i % 2 == 0 ? 0.22f : 0.1f) * (p.finale ? 1.2f : 1f),
-                        i % 2 == 0 ? palette.Arc : palette.Outer, fade * (ReducedEffects ? 0.5f : 0.8f));
+                    float width = (i % 2 == 0 ? 0.3f : 0.12f) * (p.finale ? 1.2f : 1f);
+                    g.outline.Draw(g.shown, count, width + 0.16f, GazeContrastAssets.Ink, fade * 0.62f);
+                    g.stroke.Draw(g.shown, count, width, accent, fade * (ReducedEffects ? 0.5f : 0.75f));
+                    Color tip = accentEdge; tip.a = fade * 0.8f;
+                    g.stroke.line.endColor = tip;
                 }
                 if (spreadAge >= p.spread + 0.18f) p.active = false;
             }
@@ -182,10 +187,12 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 if (!s.active) continue;
                 float age = Time.time - s.at;
                 float fade = 1f - Mathf.Clamp01(age / 0.26f);
-                s.glow.Draw(s.path, s.path.Length, 0.3f, palette.Arc, fade * 0.8f);
-                s.core.Draw(s.path, s.path.Length, 0.055f, ReducedEffects ? palette.Arc : palette.Core, fade * (ReducedEffects ? 0.5f : 0.9f));
+                s.outline.Draw(s.path, s.path.Length, 0.5f, GazeContrastAssets.Ink, fade * 0.8f);
+                s.glow.Draw(s.path, s.path.Length, 0.3f, accent, fade * 0.8f);
+                s.core.Draw(s.path, s.path.Length, 0.07f, ReducedEffects ? accent : accentEdge, fade * (ReducedEffects ? 0.5f : 0.9f));
+                s.stamp.Diamond(s.path[s.path.Length - 1], direction, 0.2f + 0.22f * (1f - fade), 0.055f, accentEdge, fade * 0.8f);
                 if (ReducedEffects) s.branch.Hide();
-                else s.branch.Draw(s.fork, s.fork.Length, 0.075f, palette.Arc, fade * 0.6f);
+                else s.branch.Draw(s.fork, s.fork.Length, 0.075f, accent, fade * 0.6f);
                 if (age >= 0.26f) s.active = false;
             }
         }

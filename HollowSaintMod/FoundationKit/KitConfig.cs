@@ -55,7 +55,7 @@ namespace HollowSaint.FoundationKit
             I(c, bolt, "Chain targets", KitTuning.ArcBoltMaxChainTargets, v => KitTuning.ArcBoltMaxChainTargets = v, 1, 10, "Enemies hit per bolt including the first.");
             F(c, bolt, "Chain range", KitTuning.ArcBoltChainRange, v => KitTuning.ArcBoltChainRange = v, 4f, 30f, 0.5f, "Metres between chain hops.");
             F(c, bolt, "Chain falloff", KitTuning.ArcBoltChainFalloff, v => KitTuning.ArcBoltChainFalloff = v, 0.3f, 1f, 0.05f, "Damage multiplier per hop.");
-            F(c, bolt, "Projectile speed", KitTuning.ArcBoltProjectileSpeed, v => KitTuning.ArcBoltProjectileSpeed = v, 30f, 200f, 5f, "Metres per second (restart).", restart: true);
+            F(c, bolt, "Projectile speed", KitTuning.ArcBoltProjectileSpeed, v => KitTuning.ArcBoltProjectileSpeed = v, 30f, 200f, 5f, "Metres per second (restart). Speeds above 80 shorten flight lifetime to preserve the previous maximum range.", restart: true);
 
             F(c, spear, "Charge seconds", Stormspear.StormspearTuning.ChargeSeconds, v => Stormspear.StormspearTuning.ChargeSeconds = v, 0.4f, 6f, 0.1f, "Seconds from tap to full charge at 1x attack speed. Attack speed shortens it.");
             F(c, spear, "Aim assistance angle", Stormspear.StormspearTuning.AssistConeDegrees, v => Stormspear.StormspearTuning.AssistConeDegrees = v, 0f, 6f, 0.5f, "Degrees either side of the launch direction that can acquire one visible enemy for gentle homing. 0 disables assistance; applies to new hand and crown throws.");
@@ -221,6 +221,11 @@ namespace HollowSaint.FoundationKit
                 Migrate(spear, "Tap damage", 4f, 3.5f, v => Stormspear.StormspearTuning.TapDamage = v, matchExactly: true);
                 Migrate(spear, "Full damage", 16f, 14f, v => Stormspear.StormspearTuning.FullDamage = v, matchExactly: true);
             }
+            if (defaultsVersion.Value < 13)
+            {
+                // Reliability pass: migrate only the exact prior default; preserve custom speeds.
+                Migrate(bolt, "Projectile speed", 80f, 120f, v => KitTuning.ArcBoltProjectileSpeed = v, matchExactly: true);
+            }
             if (defaultsVersion.Value < CurrentDefaultsVersion) defaultsVersion.Value = CurrentDefaultsVersion;
             KitDescriptions.Refresh();
 
@@ -233,7 +238,7 @@ namespace HollowSaint.FoundationKit
             if (logVersion.Value < 1) { if (EventLog.Value) EventLog.Value = false; logVersion.Value = 1; }
         }
 
-        private const int CurrentDefaultsVersion = 12;
+        private const int CurrentDefaultsVersion = 13;
 
         private static void MigrateBool(string section, string key, bool oldDefault, bool newDefault, Action<bool> set)
         {

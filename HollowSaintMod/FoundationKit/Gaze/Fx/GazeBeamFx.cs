@@ -31,6 +31,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private readonly List<Material> ownedMaterials = new List<Material>();
         private LightningLine tether;
         private GazeTendrils tendrils;
+        private GazeEmpowermentFx empowerment;
+        private float focus;
         private readonly LightningLine[] arcs = new LightningLine[2];
         private Transform impact, muzzle;
         private Light impactLight, muzzleLight;
@@ -157,6 +159,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             var body = Body;
             if (!body) return;
 
+            if (!empowerment) empowerment = owner.GetComponent<GazeEmpowermentFx>();
+            focus = empowerment ? empowerment.ReadabilityFocus : 0f;
+
             // Tether: chest core to the floating crown, while the crown is away.
             bool away = mount.Weight > 0.05f;
             if (tether)
@@ -166,7 +171,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 {
                     tether.start = coreSocket ? coreSocket.position : body.corePosition;
                     tether.end = origin;
-                    tether.width = 0.35f + 0.25f * mount.Weight;
+                    tether.width = (0.35f + 0.25f * mount.Weight) * Mathf.Lerp(1f, 0.2f, focus);
                     tether.Tick(dt);
                 }
             }
@@ -180,7 +185,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 return;
             }
             SetBeamVisible(true);
-            SetLoopsVisible(true);
+            SetLoopsVisible(focus < 0.15f);
 
             var hit = GazeServer.Trace(origin, dir);
             if (tendrils) tendrils.Render(hit);
@@ -193,15 +198,39 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             float pulse = 1f + 0.07f * Mathf.Sin(Time.time * 38f) + 0.05f * (Mathf.PerlinNoise(Time.time * 9f, 0.3f) - 0.5f);
             float w = pop * grow * pulse * collapse;
 
-            Line(haze, origin, end, HazeWidth * w, Time.time * -1.5f);
+            // Resource motion owns the accent. Duck the continuous decorative layers while
+            // preserving the baseline damage beam and server-confirmed contacts.
+            FocusTint(haze, palette.Outer, 0.55f, Mathf.Lerp(1f, 0.16f, focus));
+            FocusTint(beamBody, palette.Arc, 0.8f, Mathf.Lerp(1f, 0.5f, focus));
+            FocusTint(sheath, palette.Arc, 0.9f, Mathf.Lerp(1f, 0.24f, focus));
+            FocusTint(core, palette.Core, 1f, Mathf.Lerp(1f, 0.38f, focus));
+            foreach (var helix in helices) FocusTint(helix, palette.Core, 1f, Mathf.Lerp(1f, 0.12f, focus));
+            FocusEmitter(impactFlash, palette.Arc, 28f, Mathf.Lerp(1f, 0.12f, focus));
+            FocusEmitter(impactSparks, palette.Core, 80f, Mathf.Lerp(1f, 0.2f, focus));
+            FocusEmitter(muzzleFlash, palette.Arc, 30f, Mathf.Lerp(1f, 0.08f, focus));
+            Line(haze, origin, end, HazeWidth * w * Mathf.Lerp(1f, 0.7f, focus), Time.time * -1.5f);
             Line(beamBody, origin, end, BodyWidth * w, Time.time * -6f);
             Line(sheath, origin, end, SheathWidth * w * (0.85f + 0.3f * Mathf.PerlinNoise(Time.time * 25f, 1.7f)), Time.time * -14f);
             Line(core, origin, end, CoreWidth * w, 0f);
             Helices(origin, dir, length, w, dt);
-            Arcs(origin, end, w, dt);
-            Snaps(origin, dir, length, w, dt);
-            Impact(hit, origin, dir, w, dt);
-            Muzzle(origin, dir, w);
+            if (focus < 0.15f) Arcs(origin, end, w, dt);
+            if (focus < 0.1f) Snaps(origin, dir, length, w, dt);
+            Impact(hit, origin, dir, w * Mathf.Lerp(1f, 0.12f, focus), dt);
+            Muzzle(origin, dir, w * Mathf.Lerp(1f, 0.12f, focus));
+        }
+
+        private static void FocusTint(LineRenderer line, Color color, float alpha, float gain)
+        {
+            if (!line) return;
+            color *= gain; color.a = alpha;
+            line.startColor = line.endColor = color;
+        }
+
+        private static void FocusEmitter(ParticleSystem particles, Color color, float rate, float gain)
+        {
+            if (!particles) return;
+            var emission = particles.emission; emission.rateOverTimeMultiplier = rate * gain;
+            var main = particles.main; color *= gain; color.a = 1f; main.startColor = color;
         }
 
         private void RenderWindup(float age, Vector3 origin, Vector3 dir, GazeCrownMount mount, float dt)

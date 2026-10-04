@@ -75,9 +75,11 @@ namespace HollowSaint.FoundationKit.Stormspear
             if (!thrown && isAuthority && characterBody && characterBody.healthComponent && characterBody.healthComponent.alive)
             {
                 var slot = activatorSkillSlot ? activatorSkillSlot : (skillLocator ? skillLocator.secondary : null);
-                if (slot && slot.stock < slot.maxStock)
+                if (slot && StormspearCooldownPolicy.CanRefund(thrown, isAuthority, true, slot.stock, slot.maxStock))
                 {
+                    float progress = slot.rechargeStopwatch;
                     slot.AddOneStock();
+                    slot.rechargeStopwatch = progress; // vanilla AddOneStock resets an existing spare-stock queue
                     KitLog.Event("STORMSPEAR_INTERRUPTED", "refunded before release");
                 }
             }

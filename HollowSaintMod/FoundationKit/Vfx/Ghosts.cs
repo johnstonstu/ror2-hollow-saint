@@ -20,7 +20,7 @@ namespace HollowSaint.FoundationKit.Vfx
             ArcBolt = VfxAssets.NewPrefab("HollowSaintArcBoltGhost");
             ArcBolt.AddComponent<ProjectileGhostController>();
             ArcBolt.AddComponent<ArcOrbGhost>();
-            AddTrail(ArcBolt, 0.18f, 0.35f, HsPalette.ArcCyan);
+            AddTrail(ArcBolt, 0.10f, KitTuning.ArcBoltRadius * 0.6f, HsPalette.ArcCyan);
             AddLight(ArcBolt, HsPalette.ArcCyan, 2.5f, 5f);
 
             Spear = VfxAssets.NewPrefab("HollowSaintSpearGhost");
@@ -94,6 +94,7 @@ namespace HollowSaint.FoundationKit.Vfx
         private Vector3[] arcDirs;
         private float[] arcRoll;
         private ParticleSystem core;
+        private LineRenderer[] contours;
         private SkinFxPalette palette;
 
         private void OnEnable()
@@ -109,17 +110,40 @@ namespace HollowSaint.FoundationKit.Vfx
                     var line = new GameObject("arc" + i).AddComponent<LightningLine>();
                     line.transform.SetParent(transform, false);
                     line.loop = true;
-                    line.width = 0.55f;
+                    line.width = KitTuning.ArcBoltRadius * 0.55f;
                     line.branches = 0;
-                    line.jag = 0.35f;
+                    line.jag = 0.05f;
                     line.rejagInterval = 0.03f;
                     line.drawTime = 0f;
                     arcs[i] = line;
                     arcDirs[i] = Random.onUnitSphere;
                 }
-                core = VfxParticles.Loop(transform, VfxAssets.Flash, 40f, 0.08f, Vector2.zero, new Vector2(0.55f, 0.7f), HsPalette.WhiteHot);
+                float diameter = ArcBolt.ArcBoltReliabilityRules.CoreDiameter(KitTuning.ArcBoltRadius);
+                core = VfxParticles.Loop(transform, VfxAssets.Flash, 60f, 0.08f, Vector2.zero, new Vector2(diameter, diameter), HsPalette.WhiteHot);
                 var main = core.main;
                 main.simulationSpace = ParticleSystemSimulationSpace.Local;
+                var shape = core.shape; shape.enabled = false; // core stays at the collision center
+                contours = new LineRenderer[2];
+                for (int i = 0; i < contours.Length; i++)
+                {
+                    var ring = new GameObject("collisionContour" + i).AddComponent<LineRenderer>();
+                    ring.transform.SetParent(transform, false);
+                    ring.useWorldSpace = false;
+                    ring.loop = true;
+                    ring.positionCount = 32;
+                    ring.sharedMaterial = VfxAssets.ArcCore;
+                    ring.widthMultiplier = ArcBolt.ArcBoltReliabilityRules.ContourWidth(KitTuning.ArcBoltRadius);
+                    ring.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                    float radius = ArcBolt.ArcBoltReliabilityRules.ContourRadius(KitTuning.ArcBoltRadius);
+                    for (int j = 0; j < ring.positionCount; j++)
+                    {
+                        float angle = j * Mathf.PI * 2f / ring.positionCount;
+                        ring.SetPosition(j, i == 0
+                            ? new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius
+                            : new Vector3(0f, Mathf.Cos(angle), Mathf.Sin(angle)) * radius);
+                    }
+                    contours[i] = ring;
+                }
             }
             var trail = GetComponent<TrailRenderer>();
             if (trail) trail.Clear();
@@ -135,8 +159,13 @@ namespace HollowSaint.FoundationKit.Vfx
                 palette = next;
                 Ghosts.TintRoot(gameObject, palette);
                 foreach (var arc in arcs) if (arc) arc.SetPalette(palette);
-                var main = core.main; main.startColor = palette.Core;
-                core.GetComponent<ParticleSystemRenderer>().sharedMaterial = palette.Material(VfxAssets.Flash);
+                // The central white-hot flash stays distinct across all skins. Only
+                // the contour, crackle and trail take the owner's arc color.
+                foreach (var ring in contours)
+                {
+                    ring.sharedMaterial = VfxAssets.ArcCore;
+                    ring.startColor = ring.endColor = palette.Arc;
+                }
             }
             UpdateArcs(false);
         }
@@ -147,7 +176,6 @@ namespace HollowSaint.FoundationKit.Vfx
         {
             if (arcs == null) return;
             Vector3 p = transform.position;
-            Vector3 back = transform.forward * 0.25f;
             for (int i = 0; i < arcs.Length; i++)
             {
                 if (!arcs[i]) continue;
@@ -157,8 +185,8 @@ namespace HollowSaint.FoundationKit.Vfx
                     arcRoll[i] = Random.Range(0.04f, 0.09f);
                     arcDirs[i] = Random.onUnitSphere;
                 }
-                arcs[i].start = p + arcDirs[i] * 0.06f;
-                arcs[i].end = p + arcDirs[i] * 0.45f - back;
+                arcs[i].start = p + arcDirs[i] * (KitTuning.ArcBoltRadius * 0.08f);
+                arcs[i].end = p + arcDirs[i] * (KitTuning.ArcBoltRadius * 0.8f);
             }
         }
     }

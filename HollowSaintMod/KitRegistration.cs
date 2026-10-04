@@ -107,6 +107,12 @@ namespace HollowSaint
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>();
             if (!bodyObject.GetComponent<OpenCircuitPulseDriver>()) bodyObject.AddComponent<OpenCircuitPulseDriver>();
+            try
+            {
+                if (!bodyObject.GetComponent<FoundationKit.OpenCircuit.Fx.OpenCircuitDomeFx>())
+                    bodyObject.AddComponent<FoundationKit.OpenCircuit.Fx.OpenCircuitDomeFx>();
+            }
+            catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_CIRCUIT_DOME_REGISTRATION_FAILED " + error); }
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Vfx.BodyFx>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Vfx.BodyFx>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Storm.StormChargeHalo>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Storm.StormChargeHalo>();
 

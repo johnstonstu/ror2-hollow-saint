@@ -12,6 +12,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private readonly Stroke[] ambient = new Stroke[AmbientCount * 2];
         private readonly Stroke[] hits = new Stroke[HitCount];
         private GazeBeam beam;
+        private GazeEmpowermentFx empowerment;
         private SkinFxPalette palette;
         private float refreshAt;
         private int nextHit;
@@ -49,6 +50,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         public void Render(GazeServer.Impact impact)
         {
             if (!Channeling) { Clear(); return; }
+            if (!empowerment) empowerment = GetComponent<GazeEmpowermentFx>();
+            // Leave confirmed hit strokes intact. Only the decorative roots yield to the
+            // accent wave, otherwise two similar footprints obscure its moving front.
+            if (empowerment && empowerment.ReadabilityFocus > 0.2f) { HideAmbient(); return; }
             if (Time.time < refreshAt) return;
             refreshAt = Time.time + Refresh;
             float reach = Mathf.Lerp(GazeTuning.ReachStart, GazeTuning.ReachEnd,

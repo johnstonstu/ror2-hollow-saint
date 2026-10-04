@@ -2,6 +2,7 @@ param([string]$GameAssembly = 'C:\Program Files (x86)\Steam\steamapps\common\Ris
 # Success: actual shot helper preserves charge and crown identity through float/byte
 # transport, overlapping throws and owner changes; actual engine and source wiring
 # still carry that snapshot to detonation. This is not a Unity multiplayer playtest.
+# Run with pwsh: the production immutable structs require its modern C# compiler.
 $ErrorActionPreference = 'Stop'
 $repo = Resolve-Path (Join-Path $PSScriptRoot '..\..')
 $folder = Join-Path $repo 'HollowSaintMod\FoundationKit\Stormspear'
@@ -81,6 +82,14 @@ $throw = Get-Content (Join-Path $folder 'StormspearThrowState.cs') -Raw
 if ($impact.Contains('directDamage / body.damage') -or $impact.Contains('StormspearCharge.InCrown(body)')) { throw 'Impact still uses mutable owner state' }
 foreach ($pattern in @('onInitialized += CaptureShot','projectileDamage.force','controller.combo','crit, shot, struck','d.shot = shot','shot.CallsThunderbolt')) {
  if (!$impact.Contains($pattern)) { throw "Snapshot wiring missing: $pattern" }
+}
+if (!$impact.Contains('conductorShot = new SpearConductorSchedule(') -or
+    !$impact.Contains('SpearConductor.Begin(body, struck, anchor, point, crit, conductorShot)')) {
+ throw 'Conductor initialization snapshot or immutable impact handoff missing'
+}
+$conductor = Get-Content (Join-Path $folder 'SpearConductor.cs') -Raw
+if ($conductor.Contains('StormspearTuning.DamageAt(') -or !$conductor.Contains('conductor.schedule = snapshot;')) {
+ throw 'Conductor must reuse initialization snapshot without impact-time normalization'
 }
 if (!$throw.Contains('comboNumber = form == SpearForm.Crown') -or !$throw.Contains('force = StormspearShot.ForceForCharge(charge)')) { throw 'Throw does not transmit snapshot' }
 'STORMSPEAR_WIRING_PASS: actual installed engine serialization and initialization ordering, immutable impact/detonation wiring.'

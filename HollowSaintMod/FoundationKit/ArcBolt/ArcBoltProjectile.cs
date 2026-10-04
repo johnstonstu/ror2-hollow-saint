@@ -61,37 +61,50 @@ namespace HollowSaint.FoundationKit.ArcBolt
             var explosion = clone.GetComponent<ProjectileExplosion>();
             if (explosion != null) Object.DestroyImmediate(explosion);
 
-            // Collision: reuse the template's trigger collider if it has one, otherwise
-            // add one sized from KitTuning.ArcBoltRadius (approved: 0.6).
+            // Native solid collision keeps ProjectileController's impact filters and
+            // single damage dispatcher. Unity's swept CCD does not protect triggers.
             var sphere = clone.GetComponent<SphereCollider>();
             if (sphere == null)
             {
                 sphere = clone.AddComponent<SphereCollider>();
-                sphere.isTrigger = true;
             }
+            sphere.isTrigger = false;
+            sphere.center = Vector3.zero;
             sphere.radius = KitTuning.ArcBoltRadius;
+            var body = clone.GetComponent<Rigidbody>();
+            if (body != null)
+            {
+                body.isKinematic = false;
+                body.useGravity = false;
+                body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            }
+            else Plugin.Log.LogWarning("Arc Bolt: template has no Rigidbody; swept collision is unavailable.");
 
             // Proc coefficient has no approved number in KitTuning — PROPOSAL 1.0
             // (see RESULT-ARCBOLT.md, Proposals).
             var controller = clone.GetComponent<ProjectileController>();
             if (controller != null)
             {
+                Plugin.Log.LogInfo("Arc Bolt: native controller " + controller.GetType().Name +
+                    "; solid sphere radius " + sphere.radius + "; Rigidbody " +
+                    (body != null ? "nonkinematic, gravity off, ContinuousDynamic" : "missing"));
                 controller.procCoefficient = KitTuning.ArcBoltProcCoefficient; // v0.9.13: 0.8 (was 1.0); config, restart
                 controller.allowPrediction = false; // server homing must also drive the visible flight
                 if (HollowSaint.FoundationKit.Vfx.Ghosts.ArcBolt) controller.ghostPrefab = HollowSaint.FoundationKit.Vfx.Ghosts.ArcBolt;
             }
 
-            // Apply the approved bolt speed. Without this the clone keeps the Mage
-            // lightning bolt's own velocity, so the tuned 80 m/s in KitTuning was
-            // defined but never actually applied. desiredForwardSpeed is the field
-            // ProjectileSimple reads to drive travel.
+            // ProjectileSimple drives Rigidbody velocity. Preserve the previous nominal
+            // range (80 m/s * serialized template lifetime) when increasing speed.
             var simple = clone.GetComponent<ProjectileSimple>();
             if (simple != null)
             {
+                float templateLifetime = simple.lifetime;
+                simple.lifetime = ArcBoltReliabilityRules.Lifetime(templateLifetime, KitTuning.ArcBoltProjectileSpeed);
                 simple.desiredForwardSpeed = KitTuning.ArcBoltProjectileSpeed;
                 simple.updateAfterFiring = true; // follow the small in-flight aim correction
                 Plugin.Log.LogInfo("Arc Bolt: bolt speed set to " +
-                    KitTuning.ArcBoltProjectileSpeed + " m/s (was the Mage template default).");
+                    KitTuning.ArcBoltProjectileSpeed + " m/s; lifetime " + simple.lifetime +
+                    " s (template " + templateLifetime + " s; range capped to previous speed).");
             }
             else
             {

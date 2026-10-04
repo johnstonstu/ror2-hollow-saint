@@ -73,13 +73,13 @@ public static class ArcBoltDefaultsChecks {
     }
     private static readonly float FreshDefault = KitTuning.ArcBoltDamageCoefficient;
     public static string Run() {
-        Check(FreshDefault == 1.2f && CurrentDefaultsVersion == 12, "Incorrect new defaults");
+        Check(FreshDefault == 1.2f && CurrentDefaultsVersion == 13, "Incorrect new defaults");
         Case(null, 1, 1.2f, CurrentDefaultsVersion);
         Case(1f, 1, 1.2f, CurrentDefaultsVersion);
         Case(1f, 10, 1.2f, CurrentDefaultsVersion);
         foreach (float custom in new[] { 0.75f, 0.9995f, 0.99999994f, 1.00000012f, 1.0005f, 1.2f, 1.5f }) Case(custom, 10, custom, CurrentDefaultsVersion);
         Case(1f, 11, 1f, CurrentDefaultsVersion);
-        Case(1f, 12, 1f, 12);
+        Case(1f, 12, 1f, CurrentDefaultsVersion);
         Check(KitTuning.ArcBoltInterval == 0.5f, "Cadence changed");
         Check(KitTuning.ArcBoltProcCoefficient == 0.8f && KitTuning.ArcBoltChainProc == 0.4f, "Proc coefficients changed");
         Check(KitTuning.ArcBoltMaxChainTargets == 4 && KitTuning.ArcBoltChainRange == 12f && KitTuning.ArcBoltChainFalloff == 0.75f, "Chain tuning changed");

@@ -18,6 +18,8 @@ namespace HollowSaint.FoundationKit.Stormspear
         public SpearForm form = SpearForm.Hand;
         private float duration, releaseAt;
         private bool fired;
+        private bool attempted;
+        internal bool CooldownReleased => fired || (!isAuthority && fixedAge >= releaseAt);
         private bool spearLeft = true, gotHand;
 
         public override void OnSerialize(NetworkWriter writer)
@@ -61,22 +63,33 @@ namespace HollowSaint.FoundationKit.Stormspear
 
         private void FireOnce()
         {
-            if (fired) return;
-            fired = true;
-            Fire();
+            if (attempted) return;
+            attempted = true;
+            fired = Fire();
+            if (!fired) return;
             AddRecoil(-0.8f * (0.5f + charge), -1.4f * (0.5f + charge), -0.4f, 0.4f);
         }
 
         public override void OnExit()
         {
             if (isAuthority && !fired) FireOnce(); // interrupted before the apex: the throw still happens
+            if (isAuthority && !fired && characterBody && characterBody.healthComponent && characterBody.healthComponent.alive)
+            {
+                var slot = activatorSkillSlot ? activatorSkillSlot : (skillLocator ? skillLocator.secondary : null);
+                if (slot && StormspearCooldownPolicy.CanRefund(fired, isAuthority, true, slot.stock, slot.maxStock))
+                {
+                    float progress = slot.rechargeStopwatch;
+                    slot.AddOneStock();
+                    slot.rechargeStopwatch = progress;
+                }
+            }
             base.OnExit();
         }
 
-        private void Fire()
+        private bool Fire()
         {
             var prefab = StormspearProjectile.Prefab;
-            if (prefab == null || ProjectileManager.instance == null) return;
+            if (prefab == null || ProjectileManager.instance == null) return false;
             Ray launch = ReleaseRay();
             ProjectileManager.instance.FireProjectile(new FireProjectileInfo
             {
@@ -92,6 +105,7 @@ namespace HollowSaint.FoundationKit.Stormspear
                 damageColorIndex = DamageColorIndex.Default,
                 damageTypeOverride = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary)
             });
+            return true;
         }
 
         private Ray ReleaseRay()

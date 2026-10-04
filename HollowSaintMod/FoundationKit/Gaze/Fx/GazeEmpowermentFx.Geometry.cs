@@ -38,6 +38,13 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Draw(loop, loop.Length, width, color, alpha);
             }
             internal void Hide() { line.enabled = false; }
+            internal void Diamond(Vector3 center, Vector3 normal, float radius, float width, Color color, float alpha)
+            {
+                Vector3 u, v; Basis(normal, out u, out v);
+                loop[0] = center + v * radius * 1.25f; loop[1] = center + u * radius;
+                loop[2] = center - v * radius * 1.25f; loop[3] = center - u * radius; loop[4] = loop[0];
+                Draw(loop, 5, width, color, alpha);
+            }
         }
 
         private void EnsureBuilt()
@@ -46,45 +53,50 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             body = GetComponent<CharacterBody>(); beam = GetComponent<GazeBeam>();
             palette = SkinFxPalette.ForBody(body);
             VfxAssets.Load();
+            GazeContrastAssets.Load();
             root = new GameObject("HS_GazeEmpowermentPool").transform;
             root.SetParent(transform, false);
             for (int i = 0; i < MaxCharges; i++)
             {
-                fuel[i] = new Orb { stroke = NewStroke("Fuel", false) };
-                reserve[i] = new Orb { stroke = NewStroke("Reserve", false) };
+                fuel[i] = new Orb { stroke = NewStroke("Fuel", false), outline = NewOutline("FuelOutline") };
+                reserve[i] = new Orb { stroke = NewStroke("Reserve", false), outline = NewOutline("ReserveOutline") };
             }
             intakeTrail = NewStroke("RearIntake", false);
+            intakeOutline = NewOutline("RearIntakeOutline");
             crownRim = NewStroke("AbsorptionRim", false);
             for (int i = 0; i < pulses.Length; i++)
             {
-                var pulse = new Pulse { sleeve = NewStroke("PulseSleeve", false), spine = NewStroke("PulseSpine", true), front = NewStroke("PulseFront", false) };
+                var pulse = new Pulse { sleeve = NewStroke("PulseSleeve", false), spine = NewStroke("PulseSpine", true), front = NewStroke("PulseFront", false), outline = NewOutline("PulseOutline") };
                 // A travelling tapered sleeve, not a uniform full-length beam flare.
-                pulse.sleeve.line.widthCurve = new AnimationCurve(new Keyframe(0f, 0.05f), new Keyframe(0.55f, 0.6f), new Keyframe(0.85f, 1f), new Keyframe(1f, 0.15f));
+                pulse.sleeve.line.widthCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.5f, 0.18f), new Keyframe(0.8f, 0.9f), new Keyframe(0.95f, 1f), new Keyframe(1f, 0.1f));
                 pulse.spine.line.widthCurve = pulse.sleeve.line.widthCurve;
-                for (int j = 0; j < pulse.roots.Length; j++) pulse.roots[j] = new GroundStroke { stroke = NewStroke("GroundBranch", false) };
+                pulse.outline.line.widthCurve = pulse.sleeve.line.widthCurve;
+                for (int j = 0; j < pulse.roots.Length; j++) pulse.roots[j] = new GroundStroke { stroke = NewStroke("GroundBranch", false), outline = NewOutline("GroundOutline") };
                 pulses[i] = pulse;
             }
             for (int i = 0; i < contacts.Length; i++)
-                contacts[i] = new Strike { glow = NewStroke("WeakStrike", false), core = NewStroke("WeakStrikeCore", true), branch = NewStroke("WeakStrikeBranch", false) };
+                contacts[i] = new Strike { glow = NewStroke("WeakStrike", false), core = NewStroke("WeakStrikeCore", true), branch = NewStroke("WeakStrikeBranch", false), outline = NewOutline("StrikeOutline"), stamp = NewStroke("StrikeStamp", false) };
         }
 
         private Stroke NewStroke(string name, bool core)
-        { return new Stroke(root, name, palette.Material(core ? VfxAssets.ArcCore : VfxAssets.ArcGlow)); }
+        { return new Stroke(root, name, core ? GazeContrastAssets.Core : GazeContrastAssets.Glow); }
+        private Stroke NewOutline(string name) { return new Stroke(root, name, GazeContrastAssets.Outline); }
 
         private void HideTransient()
         {
             if (intakeTrail != null) intakeTrail.Hide();
+            if (intakeOutline != null) intakeOutline.Hide();
             if (crownRim != null) crownRim.Hide();
             foreach (var p in pulses)
             {
                 if (p == null) continue;
-                p.active = false; p.sleeve.Hide(); p.spine.Hide(); p.front.Hide();
-                foreach (var g in p.roots) g.stroke.Hide();
+                p.active = false; p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
+                foreach (var g in p.roots) { g.stroke.Hide(); g.outline.Hide(); }
             }
             foreach (var s in contacts)
             {
                 if (s == null) continue;
-                s.active = false; s.glow.Hide(); s.core.Hide(); s.branch.Hide();
+                s.active = false; s.glow.Hide(); s.core.Hide(); s.branch.Hide(); s.outline.Hide(); s.stamp.Hide();
             }
         }
     }

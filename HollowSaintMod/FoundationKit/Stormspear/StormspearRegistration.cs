@@ -21,7 +21,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             if (KitContent.AddProjectile(StormspearProjectile.EnsurePrefab()) == null)
                 Plugin.Log.LogError("Stormspear: no projectile prefab; the skill will charge but throw nothing.");
 
-            var def = ScriptableObject.CreateInstance<SkillDef>();
+            var def = ScriptableObject.CreateInstance<StormspearSkillDef>();
             def.skillName = SkillName;
             ((ScriptableObject)def).name = SkillName;
             def.skillNameToken = KitTokens.ConduitSpearName;

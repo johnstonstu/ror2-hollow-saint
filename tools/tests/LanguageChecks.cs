@@ -252,6 +252,7 @@ namespace HollowSaint.FoundationKit
             var a = new Dictionary<string, string>();
             a["boltDamage"] = "100%"; a["hops"] = "3";
             a["tap"] = "400%"; a["full"] = "1600%"; a["burst"] = "50%"; a["burstFull"] = "100%"; a["spearStock"] = "1";
+            a["conductorSeconds"] = "3"; a["conductorTargets"] = "2"; a["conductorInterval"] = "0.75"; a["conductorTap"] = "20%"; a["conductorFull"] = "35%";
             a["stepStock"] = "2";
             a["circuitSeconds"] = "10"; a["radius"] = "8"; a["pulse"] = "60%"; a["interval"] = "0.5"; a["mult"] = "2.5";
             a["gazeSeconds"] = "4"; a["dps"] = "500%"; a["armorOn"] = "yes"; a["armor"] = "30";
@@ -289,7 +290,9 @@ namespace HollowSaint.FoundationKit
             t["HS_SKILL_SPEAR_DESC"] =
                 Util("Agile.") + " Charge a spear of lightning for " + Dmg(a["tap"] + "-" + a["full"] + " damage") +
                 ". It " + Util("sticks") + ", then bursts for " + Dmg(a["burst"] + "-" + a["burstFull"] + " of its damage") + " around it." +
-                (spearStock > 1 ? " Holds " + Util(a["spearStock"] + " charges") + "." : "");
+                (spearStock > 1 ? " Holds " + Util(a["spearStock"] + " charges") + "." : "") +
+                " Enemies struck conduct lightning for " + a["conductorSeconds"] + "s, arcing to up to " + a["conductorTargets"] + " nearby enemies for " +
+                Dmg(a["conductorTap"] + "-" + a["conductorFull"] + " damage") + " every " + a["conductorInterval"] + "s. Recharge starts when thrown.";
             int stepStock = int.Parse(a["stepStock"], CultureInfo.InvariantCulture);
             t["HS_SKILL_ARCSTEP_DESC"] =
                 Util("Blink") + " a short distance in any direction, even in the air. Jump out of it to keep the momentum. Holds " +

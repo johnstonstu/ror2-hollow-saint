@@ -41,8 +41,8 @@ namespace HollowSaint.FoundationKit
         // v0.9.13 (Stu: primary procs felt high): direct hit 0.8 (was 1.0); chain hops 0.4, 0.2, 0.1 (were 0.5 each).
         public static float ArcBoltProcCoefficient = 0.8f;
         public static float ArcBoltChainProc = 0.4f;
-        public static float ArcBoltProjectileSpeed = 80f;
-        public static float ArcBoltRadius = 0.6f;
+        public static float ArcBoltProjectileSpeed = 120f;
+        public static float ArcBoltRadius = 0.75f;
         public static float ArcBoltAssistConeDegrees = 3f;
         // Anim spec section 4: "Bolt release" marker.
         public static float ArcBoltReleaseNormalizedTime = 0.2105f;

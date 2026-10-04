@@ -10,7 +10,7 @@ namespace HollowSaint.FoundationKit.Stormspear
 {
     /// <summary>
     /// Builds the Stormspear projectile prefab: a clone of the Mage lightning bolt with the vanilla
-    /// impact and explosion stripped, replaced by StormspearImpact. No anchor, no planting; a
+    /// impact and explosion stripped, replaced by StormspearImpact. No terrain planting; a
     /// short lifetime backstop. Fired by the casting authority through ProjectileManager.
     /// </summary>
     public static class StormspearProjectile
@@ -82,7 +82,8 @@ namespace HollowSaint.FoundationKit.Stormspear
     /// StickSeconds and bursts (SpearDetonation): on an enemy, every OTHER enemy in the radius takes
     /// the burst; on terrain it is a weaker fizzle (GroundBurstScale). The crown Thunderbolt calls at
     /// the burst. Charge and crown form are captured from the initialized projectile, not the
-    /// owner's mutable damage stat or crown buff at impact.
+    /// owner's mutable damage stat or crown buff at impact. Enemy impacts also replace the owner's
+    /// bounded three-second conductor; that weak secondary path is separate from this unchanged burst.
     /// </summary>
     [DisallowMultipleComponent]
     public class StormspearImpact : MonoBehaviour, IProjectileImpactBehavior
@@ -91,6 +92,7 @@ namespace HollowSaint.FoundationKit.Stormspear
         private ProjectileDamage projectileDamage;
         private bool consumed;
         private StormspearShot shot;
+        private SpearConductorSchedule conductorShot;
 
         private void Awake()
         {
@@ -104,6 +106,11 @@ namespace HollowSaint.FoundationKit.Stormspear
             // InitializeProjectile has assigned both fields before this callback on the server,
             // including throws forwarded from a remote casting authority. Never read them in Awake.
             shot = new StormspearShot(projectileDamage != null ? projectileDamage.force : 0f, controller.combo);
+            // Tuning changes live. Freeze normalization at initialized server spawn, not later impact.
+            // Remote launches normalize with the server-at-spawn coefficient under config agreement;
+            // the remote owner's private tuning is not part of the projectile transport.
+            conductorShot = new SpearConductorSchedule(shot.Charge, projectileDamage != null ? projectileDamage.damage : 0f,
+                StormspearTuning.DamageAt(shot.Charge));
             controller.onInitialized -= CaptureShot;
         }
 
@@ -169,7 +176,9 @@ namespace HollowSaint.FoundationKit.Stormspear
             Vector3 dir = transform.forward;
             // Lodge in the struck enemy (riding its hurtbox) or in the ground.
             Transform anchor = struck != null && hurtBox != null ? hurtBox.transform : null;
-            Vfx.KitFx.ServerStuck(point, dir, charge, StormspearTuning.StickSeconds, struck != null ? struck.gameObject : null, body);
+            bool conducts = struck != null && struck.alive && body != null && anchor != null;
+            Vfx.KitFx.ServerStuck(point, dir, charge, conducts ? SpearConductorSchedule.Lifetime : StormspearTuning.StickSeconds, struck != null ? struck.gameObject : null, body);
+            if (conducts) SpearConductor.Begin(body, struck, anchor, point, crit, conductorShot);
             SpearDetonation.Begin(body, owner, gameObject, point, impactInfo.estimatedImpactNormal, anchor, directDamage, crit, shot, struck,
                 projectileController != null ? projectileController.procChainMask : default(ProcChainMask),
                 projectileDamage != null ? projectileDamage.damageType : new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary));

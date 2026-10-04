@@ -25,22 +25,50 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private CharacterBody body;
         private GazeBeam beam;
         private SkinFxPalette palette;
+        private Color accent, accentEdge;
         private Transform root;
         private uint castId;
         private bool seenCast, active, ending, fullEntry, externalAnchors;
         private int capacity, reserveCount, mergedCount, nextPulse, nextStrike;
         private float started, ended, flashAt = -100f, nextSound;
         private Vector3 crown, direction = Vector3.forward, reserveCenter;
-        private Stroke intakeTrail, crownRim;
+        private Stroke intakeTrail, intakeOutline, crownRim;
         private readonly Vector3[] trailPoints = new Vector3[12];
         public bool ReducedEffects { get; set; }
         public bool EnableAudio { get; set; } = true;
         /// <summary>Adapter suppresses the ordinary charge halo while this is true.</summary>
         public bool OwnsChargePresentation { get { return active || ending; } }
+        /// <summary>Read-only presentation envelope; baseline FX duck their decorations.
+        /// Calculated from event clocks so render order cannot add a frame of delay.</summary>
+        public float ReadabilityFocus
+        {
+            get
+            {
+                if (!active) return 0f;
+                float focus = 0f;
+                foreach (var orb in fuel)
+                    if (orb != null && orb.visible && orb.swallowing)
+                    {
+                        float age = Time.time - orb.at;
+                        if (age >= 0f && age < orb.duration) focus = Mathf.Max(focus, Mathf.Clamp01(age / 0.055f));
+                    }
+                focus = Mathf.Max(focus, 1f - Mathf.Clamp01((Time.time - flashAt) / 0.18f));
+                foreach (var p in pulses)
+                    if (p != null && p.active)
+                    {
+                        float age = Time.time - p.at;
+                        if (age >= 0f) focus = Mathf.Max(focus, age < p.travel ? 1f :
+                            0.85f * (1f - Mathf.Clamp01((age - p.travel) / (p.spread + 0.18f))));
+                    }
+                foreach (var s in contacts)
+                    if (s != null && s.active) focus = Mathf.Max(focus, 0.65f * (1f - Mathf.Clamp01((Time.time - s.at) / 0.26f)));
+                return focus;
+            }
+        }
 
         private sealed class Orb
         {
-            internal Stroke stroke;
+            internal Stroke stroke, outline;
             internal bool visible, swallowing;
             internal float at, duration;
             internal Vector3 p0, p1, mergeFrom;
@@ -53,6 +81,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             seenCast = true; castId = id;
             EnsureBuilt();
             if (!root) return;
+            palette = SkinFxPalette.ForBody(body);
+            accent = GazeContrastAssets.Accent(palette.Index);
+            accentEdge = GazeContrastAssets.Edge(palette.Index);
             capacity = Mathf.Clamp(max, 2, MaxCharges);
             entryCount = Mathf.Clamp(entryCount, 0, capacity);
             fullEntry = enteredFull;
@@ -83,8 +114,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             ResolveAnchors();
             Vector3 u, v; Basis(direction, out u, out v);
             float angle = OrbitAngle(orbIndex);
-            orb.p0 = u * Mathf.Cos(angle) * 0.9f + v * Mathf.Sin(angle) * 0.9f - direction * 0.12f;
-            orb.p1 = orb.p0 + (-u * Mathf.Sin(angle) + v * Mathf.Cos(angle)) * 0.28f - direction * 0.48f;
+            orb.p0 = u * Mathf.Cos(angle) * 1.12f + v * Mathf.Sin(angle) * 1.12f - direction * 0.24f;
+            orb.p1 = orb.p0 + (-u * Mathf.Sin(angle) + v * Mathf.Cos(angle)) * 0.34f - direction * 0.6f;
             orb.at = Time.time - Mathf.Max(0f, elapsed); orb.duration = Mathf.Max(0.08f, duration);
             orb.swallowing = true;
             if (elapsed >= orb.duration) { orb.visible = false; orb.swallowing = false; }
@@ -179,7 +210,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             }
             Vector3 u, v; Basis(direction, out u, out v);
             float a = OrbitAngle(i);
-            return crown + (u * Mathf.Cos(a) + v * Mathf.Sin(a)) * 0.9f - direction * 0.12f;
+            return crown + (u * Mathf.Cos(a) + v * Mathf.Sin(a)) * 1.12f - direction * 0.24f;
         }
         private Vector3 ReservePosition(int i)
         {
@@ -194,31 +225,38 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         }
         private void RenderOrbs()
         {
-            intakeTrail.Hide();
+            intakeTrail.Hide(); intakeOutline.Hide();
             for (int i = 0; i < MaxCharges; i++)
             {
                 var orb = fuel[i];
-                if (!orb.visible) orb.stroke.Hide();
+                if (!orb.visible) { orb.stroke.Hide(); orb.outline.Hide(); }
                 else
                 {
-                    Vector3 p = FuelPosition(i); float size = 0.09f;
+                    Vector3 p = FuelPosition(i); float size = fullEntry ? 0.19f : 0.16f;
                     if (ending) p = Vector3.Lerp(orb.mergeFrom, p, Mathf.SmoothStep(0f, 1f, (Time.time - ended) / 0.4f));
                     else if (orb.swallowing)
                     {
                         float t = Mathf.Clamp01((Time.time - orb.at) / orb.duration);
                         p = IntakePosition(orb, t); size *= 1f - 0.8f * Mathf.Pow(t, 5f);
                         for (int j = 0; j < trailPoints.Length; j++) trailPoints[j] = IntakePosition(orb, Mathf.Max(0f, t - 0.25f + j * 0.25f / (trailPoints.Length - 1)));
-                        intakeTrail.Draw(trailPoints, trailPoints.Length, 0.045f, palette.Arc, 0.7f);
-                        if (t >= 1f) { orb.visible = orb.swallowing = false; flashAt = Time.time; orb.stroke.Hide(); continue; }
+                        intakeOutline.Draw(trailPoints, trailPoints.Length, 0.16f, GazeContrastAssets.Ink, 0.8f);
+                        intakeTrail.Draw(trailPoints, trailPoints.Length, 0.075f, accent, 0.85f);
+                        if (t >= 1f) { orb.visible = orb.swallowing = false; flashAt = Time.time; orb.stroke.Hide(); orb.outline.Hide(); continue; }
                     }
-                    orb.stroke.Loop(p, direction, size, fullEntry ? 0.045f : 0.032f, palette.Arc, 0.9f);
+                    // Angular fuel silhouettes remain distinct from round reserve beads.
+                    orb.outline.Diamond(p, direction, size, 0.14f, GazeContrastAssets.Ink, 0.9f);
+                    orb.stroke.Diamond(p, direction, size, fullEntry ? 0.07f : 0.055f, orb.swallowing ? accentEdge : accent, 0.95f);
                 }
-                if (reserve[i].visible && !ending) reserve[i].stroke.Loop(ReservePosition(i), direction, 0.075f, 0.018f, palette.Outer, 0.8f);
-                else reserve[i].stroke.Hide();
+                if (reserve[i].visible && !ending)
+                {
+                    reserve[i].outline.Loop(ReservePosition(i), direction, 0.095f, 0.09f, GazeContrastAssets.Ink, 0.65f);
+                    reserve[i].stroke.Loop(ReservePosition(i), direction, 0.095f, 0.025f, palette.Arc, 0.65f);
+                }
+                else { reserve[i].stroke.Hide(); reserve[i].outline.Hide(); }
             }
             float flash = 1f - Mathf.Clamp01((Time.time - flashAt) / (ReducedEffects ? 0.2f : 0.12f));
             if (flash > 0f && !ending) crownRim.Loop(crown - direction * 0.07f, direction, 0.38f + flash * 0.1f,
-                0.04f + flash * 0.055f, ReducedEffects ? palette.Arc : palette.Core, flash * 0.8f);
+                0.05f + flash * 0.065f, ReducedEffects ? accent : accentEdge, flash * 0.85f);
             else crownRim.Hide();
         }
 

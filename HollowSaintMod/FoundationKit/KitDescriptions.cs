@@ -42,6 +42,11 @@ namespace HollowSaint.FoundationKit
             args["burst"] = Pct(StormspearTuning.BurstDamageFraction);
             args["burstFull"] = Pct(StormspearTuning.BurstDamageFractionFull);
             args["spearStock"] = StormspearTuning.BaseStock.ToString(CultureInfo.InvariantCulture);
+            args["conductorSeconds"] = Num(SpearConductorSchedule.Lifetime);
+            args["conductorTargets"] = SpearConductorSchedule.VictimsPerTick.ToString(CultureInfo.InvariantCulture);
+            args["conductorInterval"] = SpearConductorSchedule.Interval.ToString("0.##", CultureInfo.InvariantCulture);
+            args["conductorTap"] = Pct(SpearConductorSchedule.TapCoefficient);
+            args["conductorFull"] = Pct(SpearConductorSchedule.FullCoefficient);
             args["stepStock"] = KitTuning.ArcStepMaxStock.ToString(CultureInfo.InvariantCulture);
             args["circuitSeconds"] = Num(KitTuning.OpenCircuitBuffSeconds);
             args["radius"] = Num(KitTuning.OpenCircuitRadius);
