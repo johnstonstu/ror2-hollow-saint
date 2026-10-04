@@ -6,14 +6,15 @@ using HollowSaint.FoundationKit.Vfx;
 namespace HollowSaint.FoundationKit.Gaze.Fx
 {
     /// <summary>
-    /// Networked Gaze moments (fork hits and chain hops), raised on the server and played on
+    /// Networked Gaze moments (core/splash contacts, fork hits and chain hops), raised on the server and played on
     /// every machine. Own effect prefab, so the shared Beat list stays untouched.
     /// EffectData: origin = target, start = where the lightning leaves, genericUInt = Kind,
-    /// genericFloat = delay, genericBool = sound, color = skin palette.
+    /// genericBool = sound, networkedObjectReference = channel owner. Hits render immediately.
     /// </summary>
     public sealed class GazeEffect : MonoBehaviour
     {
-        public enum Kind : uint { Fork = 1, Chain = 2 }
+        public enum Kind : uint { Fork = 1, Chain = 2, Contact = 3 }
+        private static bool reportedSendFailure;
 
         public static GameObject Prefab { get; private set; }
 
@@ -29,24 +30,34 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             vfx.DoNotPool = true; // initialises in Start; pooled reuse would skip it
             vfx.vfxPriority = VFXAttributes.VFXPriority.Always;
             prefab.AddComponent<GazeEffect>();
-            prefab.AddComponent<DestroyOnTimer>().duration = 2f;
+            prefab.AddComponent<DestroyOnTimer>().duration = 0.1f;
             Prefab = prefab;
             KitContent.AddEffect(prefab);
         }
 
         public static void Server(Kind kind, Vector3 target, Vector3 from, CharacterBody owner, bool sound, float delay)
         {
-            if (!NetworkServer.active || !Prefab) return;
-            var data = new EffectData
+            if (!NetworkServer.active || !Prefab || !owner) return;
+            try
             {
-                origin = target,
-                start = from,
-                genericUInt = (uint)kind,
-                genericBool = sound,
-                genericFloat = Mathf.Clamp(delay, 0f, 1f),
-                color = SkinFxPalette.ForBody(owner).NetworkColor
-            };
-            EffectManager.SpawnEffect(Prefab, data, true);
+                var data = new EffectData
+                {
+                    origin = target,
+                    start = from,
+                    genericUInt = (uint)kind,
+                    genericBool = sound,
+                    genericFloat = Mathf.Clamp(delay, 0f, 1f),
+                    color = SkinFxPalette.ForBody(owner).NetworkColor
+                };
+                data.SetNetworkedObjectReference(owner.gameObject);
+                EffectManager.SpawnEffect(Prefab, data, true);
+            }
+            catch (System.Exception error)
+            {
+                // A cosmetic send failure must not stop the rest of the damage tick.
+                if (!reportedSendFailure) Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_FX_SEND_FAILED " + error);
+                reportedSendFailure = true;
+            }
         }
 
         private void Start()
@@ -56,17 +67,13 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             if (data == null) return;
             try
             {
-                var palette = SkinFxPalette.FromNetwork(data.color);
-                switch ((Kind)data.genericUInt)
-                {
-                    case Kind.Fork:
-                        GazeForkFx.ToTarget(this, data.start, data.origin, palette, data.genericFloat);
-                        if (data.genericBool) Util.PlaySound(GazeSfx.ForkHit, gameObject);
-                        break;
-                    case Kind.Chain:
-                        StartCoroutine(Chain(data.start, data.origin, palette, data.genericFloat));
-                        break;
-                }
+                var owner = data.ResolveNetworkedObjectReference();
+                var tendrils = owner ? owner.GetComponent<GazeTendrils>() : null;
+                // An ended/destroyed channel never resurrects from a late hit packet.
+                if (!tendrils) return;
+                bool shown = tendrils.Confirm(data.start, data.origin, (Kind)data.genericUInt == Kind.Fork);
+                if (shown && (Kind)data.genericUInt == Kind.Fork && data.genericBool)
+                    Util.PlaySound(GazeSfx.ForkHit, gameObject);
             }
             catch (System.Exception error)
             {
@@ -74,13 +81,6 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             }
         }
 
-        private static System.Collections.IEnumerator Chain(Vector3 from, Vector3 to, SkinFxPalette palette, float delay)
-        {
-            if (delay > 0f) yield return new WaitForSeconds(delay);
-            LightningLine.Spawn(from, to, 0.3f, 1.2f, 2, 0.16f, palette: palette);
-            LightningLine.Spawn(from, to, 0.5f, 0.4f, 0, 0.03f, 10f, palette: palette);
-            GazeForkFx.Strike(to, palette, 0.8f);
-        }
     }
 
     /// <summary>Gaze sounds: vanilla events from banks the kit already loads (KitSfx.Banks).</summary>

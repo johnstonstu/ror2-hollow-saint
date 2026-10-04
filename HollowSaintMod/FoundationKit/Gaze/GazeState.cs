@@ -201,6 +201,7 @@ namespace HollowSaint.FoundationKit.Gaze
             }
             if (isAuthority && characterMotor) characterMotor.walkSpeedPenaltyCoefficient = 1f;
             if (beam) beam.End();
+            CrownGestureFlow.Cancel(characterBody);
             if (armored && NetworkServer.active && characterBody && GazeArmor.Def) characterBody.RemoveBuff(GazeArmor.Def);
             armored = false;
             GazeFallGuard.Release(characterBody);
@@ -220,7 +221,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public override void OnEnter()
         {
             base.OnEnter();
-            KitAnim.PlayGestureOnBody(characterBody, OpenCircuitTuning.EndAnimState, OpenCircuitTuning.EndClipSeconds);
+            CrownGestureFlow.Recover(characterBody);
         }
 
         public override void FixedUpdate()

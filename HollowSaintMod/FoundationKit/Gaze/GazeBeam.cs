@@ -25,6 +25,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private Vector3 direction = Vector3.forward;
         private Vector3 shownDirection = Vector3.forward;
         private float phaseStart;
+        private float nextContactFx;
         private readonly GazeCrownMount mount = new GazeCrownMount();
         private GazeBeamFx fx;
 
@@ -33,6 +34,14 @@ namespace HollowSaint.FoundationKit.Gaze
         public Vector3 Direction { get { return direction; } }
         public Vector3 Origin { get { return OriginFor(direction); } }
         public CharacterBody Body { get { return body; } }
+
+        // Cosmetic network traffic is bounded independently of attack speed / damage cadence.
+        internal bool ClaimContactFxTick()
+        {
+            if (Time.fixedTime < nextContactFx) return false;
+            nextContactFx = Time.fixedTime + 0.15f;
+            return true;
+        }
 
         public static GazeBeam For(CharacterBody body)
         {
@@ -58,6 +67,7 @@ namespace HollowSaint.FoundationKit.Gaze
             direction = aim.sqrMagnitude > 1e-4f ? aim.normalized : transform.forward;
             shownDirection = direction;
             Current = Phase.Windup;
+            nextContactFx = 0f;
             phaseStart = Time.time;
             mount.Begin(body);
             Presentation(f => f.Begin(SkinFxPalette.ForBody(body)));

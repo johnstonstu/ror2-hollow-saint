@@ -34,7 +34,7 @@ namespace HollowSaint.FoundationKit
     {
         // Arc Bolt: approved. One shot every 0.5 s at 1x attack speed.
         public static float ArcBoltInterval = 0.5f;
-        public static float ArcBoltDamageCoefficient = 1.0f;
+        public static float ArcBoltDamageCoefficient = 1.2f;
         public static int ArcBoltMaxChainTargets = 4;
         public static float ArcBoltChainRange = 12f;
         public static float ArcBoltChainFalloff = 0.75f;
@@ -502,6 +502,10 @@ namespace HollowSaint.FoundationKit
         {
             if (animator == null || fromLayer < 0 || toLayer < 0 || fromLayer == toLayer) return false;
             if (fromLayer >= animator.layerCount || toLayer >= animator.layerCount) return false;
+            // FixedUpdate may have queued a fresh cast before presentation migrates
+            // the previous pose. Wait for that request to evaluate instead of moving
+            // stale state over the new cast (or its pending fade to Empty).
+            if (PendingState(animator, fromLayer) != 0 || PendingState(animator, toLayer) != 0) return false;
             if (animator.IsInTransition(fromLayer) || animator.IsInTransition(toLayer)) return false;
             var info = animator.GetCurrentAnimatorStateInfo(fromLayer);
             if (info.shortNameHash == EmptyHash || !animator.HasState(toLayer, info.shortNameHash)) return false;

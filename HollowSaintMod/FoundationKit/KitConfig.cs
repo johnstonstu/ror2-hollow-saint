@@ -210,6 +210,17 @@ namespace HollowSaint.FoundationKit
                 c.Remove(oldHand);
                 c.Save();
             }
+            if (defaultsVersion.Value < 11)
+            {
+                // Primary damage pass: preserve custom values, including those close to 1.0.
+                Migrate(bolt, "Damage", 1.0f, 1.2f, v => KitTuning.ArcBoltDamageCoefficient = v, matchExactly: true);
+            }
+            if (defaultsVersion.Value < 12)
+            {
+                // Stormspear damage pass: burst inherits the curve; preserve every custom coefficient.
+                Migrate(spear, "Tap damage", 4f, 3.5f, v => Stormspear.StormspearTuning.TapDamage = v, matchExactly: true);
+                Migrate(spear, "Full damage", 16f, 14f, v => Stormspear.StormspearTuning.FullDamage = v, matchExactly: true);
+            }
             if (defaultsVersion.Value < CurrentDefaultsVersion) defaultsVersion.Value = CurrentDefaultsVersion;
             KitDescriptions.Refresh();
 
@@ -222,7 +233,7 @@ namespace HollowSaint.FoundationKit
             if (logVersion.Value < 1) { if (EventLog.Value) EventLog.Value = false; logVersion.Value = 1; }
         }
 
-        private const int CurrentDefaultsVersion = 10;
+        private const int CurrentDefaultsVersion = 12;
 
         private static void MigrateBool(string section, string key, bool oldDefault, bool newDefault, Action<bool> set)
         {
@@ -244,12 +255,13 @@ namespace HollowSaint.FoundationKit
             }
         }
 
-        private static void Migrate(string section, string key, float oldDefault, float newDefault, Action<float> set)
+        private static void Migrate(string section, string key, float oldDefault, float newDefault, Action<float> set, bool matchExactly = false)
         {
             foreach (var o in Floats)
             {
                 if (o.Entry.Definition.Section != section || o.Entry.Definition.Key != key) continue;
-                if (Math.Abs(o.Entry.Value - oldDefault) < 0.001f) { o.Entry.Value = newDefault; set(newDefault); }
+                if (matchExactly ? o.Entry.Value == oldDefault : Math.Abs(o.Entry.Value - oldDefault) < 0.001f)
+                { o.Entry.Value = newDefault; set(newDefault); }
                 return;
             }
         }

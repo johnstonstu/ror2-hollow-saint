@@ -48,6 +48,9 @@ namespace HollowSaint.FoundationKit.Gaze
             float length = Vector3.Distance(origin, impact.Point);
 
             struck.Clear();
+            int shownHits = 0; // Cosmetic budget only; every eligible enemy still takes its normal hit.
+            var presentation = attacker.GetComponent<GazeBeam>();
+            bool showContacts = presentation && presentation.ClaimContactFxTick();
             var hits = Physics.SphereCastAll(origin, GazeTuning.Radius, direction, length,
                 LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int i = 0; i < hits.Length; i++)
@@ -57,7 +60,10 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (!health || health == self || !health.alive || struck.Contains(health)) continue;
                 if (!FriendlyFireManager.ShouldDirectHitProceed(health, team)) continue;
                 struck.Add(health);
+                Vector3 contactPoint = Center(box);
                 Hit(attacker, box, damage, crit, GazeTuning.ProcCoefficient);
+                if (showContacts && shownHits++ < 4) GazeEffect.Server(GazeEffect.Kind.Contact, contactPoint,
+                    origin + direction * Mathf.Clamp(Vector3.Dot(contactPoint - origin, direction) - 2f, 0f, length), attacker, false, 0f);
             }
 
             // Splash: enemies around the impact the core did not touch this tick.
@@ -66,7 +72,9 @@ namespace HollowSaint.FoundationKit.Gaze
                 var health = box.healthComponent;
                 if (struck.Contains(health)) continue;
                 struck.Add(health);
+                Vector3 contactPoint = Center(box);
                 Hit(attacker, box, damage * GazeTuning.SplashFraction, crit, GazeTuning.SplashProc);
+                if (showContacts && shownHits++ < 4) GazeEffect.Server(GazeEffect.Kind.Contact, contactPoint, impact.Point, attacker, false, 0f);
             }
             if (struck.Count > 0) KitLog.Event("GAZE_TICK", "hits=" + struck.Count);
             return impact;

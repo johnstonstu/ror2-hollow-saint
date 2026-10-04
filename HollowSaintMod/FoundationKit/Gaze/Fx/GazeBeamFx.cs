@@ -30,6 +30,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private readonly LineRenderer[] helices = new LineRenderer[HelixCount];
         private readonly List<Material> ownedMaterials = new List<Material>();
         private LightningLine tether;
+        private GazeTendrils tendrils;
         private readonly LightningLine[] arcs = new LightningLine[2];
         private Transform impact, muzzle;
         private Light impactLight, muzzleLight;
@@ -37,7 +38,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private Transform coreSocket;
 
         private float ignitedAt = -10f, endedAt = -10f;
-        private float snapTimer, ringTimer, forkTimer, streamTimer, helixJitterTimer;
+        private float snapTimer, ringTimer, streamTimer, helixJitterTimer;
         private int gapsLit;
         private bool humming, beamVisible = true;
         private Vector3[] linePoints = new Vector3[0];
@@ -58,9 +59,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             GazeAssets.Load();
             palette = skin ?? SkinFxPalette.ForIndex(0);
             Build();
+            if (!tendrils) tendrils = owner.GetComponent<GazeTendrils>() ?? owner.gameObject.AddComponent<GazeTendrils>();
+            tendrils.Begin(owner, palette);
             gapsLit = 0;
             ignitedAt = endedAt = -10f;
-            streamTimer = snapTimer = ringTimer = forkTimer = 0f;
+            streamTimer = snapTimer = ringTimer = 0f;
             SetBeamVisible(false);
             var body = Body;
             if (!body) return;
@@ -106,6 +109,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         public void End()
         {
             endedAt = Time.time;
+            if (tendrils) tendrils.Clear();
             StopHum();
             var body = Body;
             if (!body || ignitedAt < 0f) return;
@@ -118,6 +122,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
 
         public void Stop()
         {
+            if (tendrils) tendrils.Clear();
             StopHum();
             SetBeamVisible(false);
             SetLoopsVisible(false);
@@ -126,6 +131,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
 
         public void Dispose()
         {
+            if (tendrils) tendrils.Clear();
             StopHum();
             if (root) Object.Destroy(root);
             foreach (var material in ownedMaterials) if (material) Object.Destroy(material);
@@ -177,6 +183,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             SetLoopsVisible(true);
 
             var hit = GazeServer.Trace(origin, dir);
+            if (tendrils) tendrils.Render(hit);
             Vector3 end = hit.Point;
             float length = Vector3.Distance(origin, end);
             float sinceIgnite = Time.time - ignitedAt;
@@ -330,13 +337,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 ringTimer = 0.28f;
                 VfxParticles.Ring(hit.Point + normal * 0.08f, normal, 0.4f, GazeTuning.SplashRadius + 0.6f, 0.35f, 0.1f, palette.Material(VfxAssets.Trail), palette);
             }
-            forkTimer -= dt;
-            if (forkTimer <= 0f && w > 0.2f)
-            {
-                forkTimer = Random.Range(0.08f, 0.16f);
-                if (hit.HitWorld) GazeForkFx.Ambient(owner, hit.Point, normal, palette);
-                else LightningLine.Spawn(hit.Point, hit.Point + Random.onUnitSphere * Random.Range(2f, 4f), 0.2f, 0.7f, 1, 0.2f, palette: palette);
-            }
+
         }
 
         private void Muzzle(Vector3 origin, Vector3 dir, float w)

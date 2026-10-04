@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1
+- Gaze of the Hollow now has broad, branching ground tendrils throughout its channel, plus bright connectors at confirmed hit positions. The effects follow the skin palette and clear when the channel ends or is interrupted; damage and hit cadence are unchanged.
+- Stormspear keeps its original charge and crown form through flight and lodging. Damage-stat changes no longer shrink a charged spear's burst, and opening or closing Open Circuit after the throw no longer changes its crown bonus.
+- Arc Bolt damage increased from 100% to 120%. Fire rate, chain reach, target count and proc coefficients are unchanged. Saved default damage values migrate; custom values are retained.
+- Crown recovery and movement transitions preserve queued casts and Gaze poses. Interrupted crown startup and Gaze exit clear their own hold poses.
+- Stormspear direct damage reduced from 400-1600% to 350-1400% (12.5% less at every charge level). Its damage-derived burst follows the reduction; charge time, radius, proc coefficients and crown Thunderbolt damage are unchanged. Saved default values migrate; custom values are retained.
+- English README updated with skill roles, practical combos and an approved normal-camera Gaze screenshot. Multiplayer and physical controller acceptance remain unverified.
+
 ## 1.1.0
 - Fixed the game failing to launch with EnemiesReturns (its extra Anointed skin tripped a Hollow Saint startup check). Startup checks now only log a warning and never stop the game from loading.
 - In-game text follows the language set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese are included. Any other language shows the English text.

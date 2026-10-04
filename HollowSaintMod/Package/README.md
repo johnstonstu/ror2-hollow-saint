@@ -12,25 +12,21 @@
 
 <p align="center"><b>A cracked devotional icon that answers only to the storm.</b></p>
 
-<p align="center">Enjoying it? Please <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/">like Hollow Saint on Thunderstore</a> so other players can find it.</p>
+Hollow Saint is an original **Risk of Rain 2 survivor** who turns a crowded fight into a gathering storm. Chain lightning through a pack, charge a spear in your other hand, and watch each Electrocute light your halo until a Thunderbolt answers from above.
 
-> **Early access:** Hollow Saint is still being tuned, so expect balance changes and the occasional bug. Your feedback directly shapes the next balance patch.
->
-> **[Report a bug or share balance feedback](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+**Keep the pressure on. Choose your moment to commit. Blink to a better angle.** Arc Bolt and Stormspear work together; your special changes how you approach the fight. Rise above a line of enemies with **Gaze of the Hollow**, or carry **Open Circuit** into close range and keep attacking beneath a striking crown.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Gaze of the Hollow: the Saint rises and sweeps a forking lightning beam across a pack" width="100%">
-</p>
+**[Install on Thunderstore](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/)** · **[Skills](#the-kit)** · **[Combos](#put-it-together)** · **[Feedback](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/crown.webp" alt="Open Circuit: the crown opens over the Saint and strikes every enemy around it" width="100%">
-</p>
+> **Early access:** Hollow Saint is still being tuned. Expect balance changes and the occasional bug; your feedback helps shape the next patch. In-game skill descriptions show the numbers for your current configuration.
 
-<h3 align="center">Chain lightning. A spear of lightning. A storm that answers back.</h3>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-player-view.png" alt="Gaze of the Hollow from the normal gameplay camera, with the HUD visible and lightning connecting to enemies ahead" width="100%"></p>
 
-Hollow Saint is an original survivor built around chain lightning. Snap bolts that leap between enemies, form a spear of lightning in your hand and drive it into a pack, and keep the hits coming until the storm answers with a Thunderbolt.
+*Gaze from the player's view: the halo projects ahead of the Saint, with lightning connecting to struck enemies. Captured in a development encounter with the normal gameplay camera and HUD.*
 
-**[Report a bug](https://github.com/johnstonstu/ror2-hollow-saint/issues)** · **[Changelog](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md)** · **[Source](https://github.com/johnstonstu/ror2-hollow-saint)** · **[Also by me: AH64](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/)**
+**[Changelog](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md)** · **[Source](https://github.com/johnstonstu/ror2-hollow-saint)**
+
+Enjoying the Saint? [Like it on Thunderstore](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/) to help other players find it.
 
 ## Languages
 
@@ -38,56 +34,57 @@ Hollow Saint follows the language you set in Risk of Rain 2. Simplified Chinese,
 
 ## The kit
 
+These gameplay clips show each skill in isolation. They were captured with the HUD hidden; use the opening screenshot to see Gaze from the normal player view. Balance and effects may differ as development continues.
+
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="48" alt=""> Answered Prayer <sub>Passive</sub></h3>
 
-Hits build **Static**. Full Static **Electrocutes** an enemy: a short jolt, it takes more damage for a few seconds, and the arc jumps to its neighbours. Every Electrocute lights an orb on your halo; with all five lit, a **Thunderbolt** strikes a strong enemy for 1000% damage.
+Hits build **Static**. Full Static **Electrocutes** an enemy: a short jolt, it takes more damage for a few seconds, and the arc jumps to its neighbours. Every Electrocute lights an orb on your halo; with all five lit, a **Thunderbolt** strikes a strong enemy in sight.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm.webp" width="640" alt="The last orbs light and a Thunderbolt strikes the pack"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm.webp" width="100%" alt="The last orbs light and a Thunderbolt strikes the pack"></p>
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_bolt.png" width="48" alt=""> Arc Bolt <sub>Primary</sub></h3>
 
-Snap a bolt for 100% damage that chains to up to 3 more enemies.
+Snap a bolt that chains to nearby enemies. Use it to build Static across a group and keep pressure on while charging Stormspear.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-bolt.webp" width="640" alt="Arc Bolt chaining through a pack"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-bolt.webp" width="100%" alt="Arc Bolt chaining through a pack"></p>
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="48" alt=""> Stormspear <sub>Secondary</sub></h3>
 
-Hold to form a spear of lightning in your hand, release to throw it for 400% to 1600% damage. It sticks in what it hits, then bursts on everything around it. Arc Bolt keeps firing from your other hand while you charge. 5 s cooldown.
+Hold to form a spear of lightning in your hand; release to throw. More charge means a stronger throw. It sticks in what it hits, then bursts on everything around it. Arc Bolt keeps firing from your other hand while you charge.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" width="640" alt="A charged Stormspear sticking and bursting"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" width="100%" alt="A charged Stormspear sticking and bursting"></p>
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="48" alt=""> Arc Step <sub>Utility</sub></h3>
 
-Blink a short distance in any direction, even in the air. Follows your aim a little, so look up to climb. Two charges, 5 s each; jump out of it to keep the momentum.
+Blink a short distance in any direction, even in the air. Follows your aim a little, so look up to climb. Two charges; jump out of it to keep the momentum.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-step.webp" width="640" alt="Arc Step left, right and up"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-step.webp" width="100%" alt="Arc Step left, right and up"></p>
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="48" alt=""> Gaze of the Hollow <sub>Special</sub></h3>
 
-Rise into the air and send your halo out before you: a lightning beam for 4 seconds, 500% damage per second, that pierces, splashes and forks across the ground, reaching further the longer it fires. Bonus armor while it channels. Recast, Arc Step or press B on a controller to end it early. 12 s cooldown.
+Rise into the air and send your halo out before you. The beam pierces and splashes, reaching further the longer it fires, with bonus armor while you channel. Recast or use Arc Step to end it early. The clip below shows an earlier effect pass; the opening HUD screenshot shows the updated Gaze presentation.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" width="640" alt="Gaze of the Hollow sweeping a pack"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" width="100%" alt="Gaze of the Hollow sweeping a pack"></p>
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="48" alt=""> Open Circuit <sub>Special, alternate</sub></h3>
 
-Open your halo into a crown for 10 seconds. It strikes every enemy within 8 m twice a second while you keep fighting, your spear forms above your head and charges 2.5x faster, and a fully charged crown spear calls a Thunderbolt. 8 s cooldown, counted from when the crown closes.
+Open your halo into a crown that repeatedly strikes nearby enemies while you keep fighting. Your spear forms above your head and charges faster; a fully charged crown spear calls a Thunderbolt. Its cooldown begins when the crown closes.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/open-circuit.webp" width="640" alt="Open Circuit striking a pack, then a crown spear"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/open-circuit.webp" width="100%" alt="Open Circuit striking a pack, then a crown spear"></p>
 
 ## How the storm works
 
 1. **Static.** Every hit charges the enemy you hit. Bigger hits, critical strikes and items with high proc coefficients charge it faster. It fades if you stop hitting.
-2. **Electrocute.** At full Static the enemy is jolted (not bosses) and **Shocked**, taking 15% more damage for 3 seconds. The arc jumps to two nearby enemies and charges them too. An enemy that dies holding half its Static or more Electrocutes as it falls.
+2. **Electrocute.** At full Static the enemy is jolted (not bosses) and **Shocked**, briefly taking more damage. The arc jumps to two nearby enemies and charges them too. An enemy that dies holding half its Static or more Electrocutes as it falls.
 3. **Thunderbolt.** Each Electrocute lights an orb on your halo. When all five are lit, they combine, rise off your crown, streak across the sky and strike a strong enemy in sight.
 
 Keep hitting the same pack and the chain feeds itself.
 
-### Tips
+## Put it together
 
-- Throw the Stormspear into the middle of a pack: the burst hits everything around the enemy it sticks in. A full charge bursts for its whole damage.
-- Charging the spear does not stop Arc Bolt. Keep the bolts going from your other hand.
-- Gaze of the Hollow lifts you out of reach. Sweep the beam across a line of enemies.
-- Arc Step lets you jump out of the step and keep its speed. Look up as you step to get onto ledges.
+- **Bolts into spear.** Keep Arc Bolt firing while you charge Stormspear. Release into the centre of the pack, then keep landing hits as the spear bursts and Static spreads.
+- **Step into Gaze.** Blink to an angle that lines enemies up, channel across them, then recast or Arc Step when you need to move again. Gaze grants bonus armor during the channel, but positioning still matters.
+- **Crown into pressure.** Activate Open Circuit near a group. Fire Arc Bolt and use the faster spear charge while the crown strikes around you; Arc Step helps you adjust your distance.
 
 ## Skins
 
@@ -114,6 +111,7 @@ Bugs and balance feedback are welcome on [GitHub issues](https://github.com/john
 ## Known limitations
 
 - **Multiplayer has not had a real playtest yet.** The skills are server-authoritative and their effects are networked, but expect rough edges. Every player should run the same version and the same config. Reports are very welcome.
+- **Physical controller acceptance remains unverified.** Please report the controller and input setup used when reporting an input issue.
 - Item displays borrow Commando's placements on matching mounts, so a few items sit slightly off.
 
 ## Also by JohnstonStu

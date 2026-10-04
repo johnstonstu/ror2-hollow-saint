@@ -1,3 +1,7 @@
+# Historical playtest checklists
+
+These entries preserve earlier build checklists, including their original version labels and numbers. For the current release preparation and validation limits, see [Release 1.1.1](RELEASE-1.1.1.md).
+
 # Playtest v0.9.17 release candidate (2026-10-02)
 
 Build label: **v0.9.17 | release candidate**. No gameplay changes since 0.9.16; this is the 1.0 cleanup.

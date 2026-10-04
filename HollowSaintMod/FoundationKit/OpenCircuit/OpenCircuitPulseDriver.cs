@@ -139,7 +139,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit
                 else
                 {
                     // The Halo layer closes itself from crownOpen; only the arms need the end gesture.
-                    KitAnim.PlayGestureOnBody(body, OpenCircuitTuning.EndAnimState, OpenCircuitTuning.EndClipSeconds);
+                    CrownGestureFlow.Recover(body);
                     Util.PlaySound(Vfx.KitSfx.CrownLoopStop, body.gameObject);
                     Vfx.KitFx.Local(Vfx.Beat.CircuitClose, body, Vfx.HaloRing.CenterOf(body));
                     if (body.healthComponent && body.healthComponent.alive) OpenCircuitVfxHooks.RaiseRecall(body);

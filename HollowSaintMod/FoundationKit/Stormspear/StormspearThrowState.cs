@@ -85,7 +85,9 @@ namespace HollowSaint.FoundationKit.Stormspear
                 rotation = Util.QuaternionSafeLookRotation(launch.direction),
                 owner = gameObject,
                 damage = StormspearTuning.DamageAt(charge) * damageStat,
-                force = 8f + 12f * charge,
+                force = StormspearShot.ForceForCharge(charge),
+                // Reserved only on our custom projectile; transported for remote owners too.
+                comboNumber = form == SpearForm.Crown ? StormspearShot.CrownCombo : (byte)0,
                 crit = RollCrit(),
                 damageColorIndex = DamageColorIndex.Default,
                 damageTypeOverride = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary)

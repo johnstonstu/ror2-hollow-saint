@@ -70,6 +70,10 @@ namespace HollowSaint.FoundationKit.OpenCircuit
                 hasOpenedCircuit = true;
                 characterBody.AddTimedBuff(OpenCircuitBuff.Def, KitTuning.OpenCircuitBuffSeconds);
             }
+            // A pre-unfold interruption has no buff to drive a later close. Do not
+            // leave the authored cast -> arms-hold chain running indefinitely.
+            if (!hasUnfolded || !characterBody || !characterBody.healthComponent || !characterBody.healthComponent.alive)
+                CrownGestureFlow.Cancel(characterBody);
             base.OnExit();
         }
 
