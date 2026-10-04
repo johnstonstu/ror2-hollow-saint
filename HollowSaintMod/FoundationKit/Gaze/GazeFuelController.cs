@@ -270,6 +270,10 @@ namespace HollowSaint.FoundationKit.Gaze
             if (packet.kind == GazeFuelTransport.Kind.Launch)
             {
                 clientPendingIntakes = Mathf.Max(0, clientPendingIntakes - 1);
+                // Only the deduplicated, server-confirmed Launch replays the
+                // startup one-shot. Never restart Charge/Hum/Crackle loops.
+                try { RoR2.Util.PlaySound(GazeSfx.Launch, body.gameObject); }
+                catch (System.Exception error) { GazeFuelTransport.Warn("pulse launch sound failed", error); }
             }
             if (packet.kind == GazeFuelTransport.Kind.End)
             {

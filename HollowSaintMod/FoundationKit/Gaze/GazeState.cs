@@ -30,6 +30,8 @@ namespace HollowSaint.FoundationKit.Gaze
         // EntityState.fixedAge is protected in the real engine. Read it legally
         // inside this subclass rather than through the publicized build reference.
         internal float AuthoritativeCastAge => fixedAge;
+        internal float RemainingBeamSeconds => Mathf.Max(0f, BeamEnd - fixedAge);
+        internal bool TimerVisible => ignited && !endRequested;
         internal bool FuelAdmissionOpen => !endRequested && !GazeManualLifetime.StopBeforeWork(fixedAge, BeamEnd);
         internal bool PrimaryPulseReady => FuelAdmissionOpen && fixedAge >= GazeTuning.WindupSeconds &&
             fuel && fuel.CanAdmitPulse(fixedAge, BeamEnd);

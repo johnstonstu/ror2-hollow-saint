@@ -157,6 +157,36 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             Check(GameObject.Created==allocated,"intake overlap allocates no new geometry");
             fx.Clear();foreach(var trail in fx.intakeTrails)Check(!trail.line.enabled,"clear hides every intake trail");
             foreach(var outline in fx.intakeOutlines)Check(!outline.line.enabled,"clear hides every intake outline");
+            for(uint skin=0;skin<6;skin++)
+            {
+                body.skinIndex=skin; fx.ReducedEffects=false; fx.BeginCast(4000+skin,5,5,true,0); fx.SetReserve(4000+skin,2); fx.LateUpdate();
+                var orb=fx.fuel[0]; var filament=orb.filament.line;
+                Check(filament.enabled && fx.reserve[0].filament.line.enabled,"fuel and reserve crawl");
+                Check(orb.stroke.line.positionCount==17 && filament.positionCount==9,"circle survives separate short filament");
+                Color rgb=primary[skin];
+                Check(Math.Abs(filament.startColor.r-rgb.r)<.001f && Math.Abs(filament.startColor.g-rgb.g)<.001f && Math.Abs(filament.startColor.b-rgb.b)<.001f,"filament uses primary skin colour");
+                Vector3 old=filament.points[4]; Time.time+=.08f; fx.LateUpdate();
+                Check(Vector3.Distance(old,filament.points[4])>.001f,"filament crawls over time");
+                for(int point=0;point<9;point++) Check(Vector3.Distance(filament.points[point],fx.FuelPosition(0))<=.22f*1.11f,"filament remains close to orb");
+                fx.Swallow(4000+skin,1,0,0,.32f); Time.time+=.15f; fx.LateUpdate();
+                var trail=fx.intakeFilaments[0].line; var smooth=fx.intakeTrails[0].line;
+                Check(trail.enabled && trail.widthMultiplier<=.025f,"thin energized intake");
+                Check(Vector3.Distance(trail.points[0],smooth.points[0])<.001f && Vector3.Distance(trail.points[11],smooth.points[11])<.001f,"filament endpoints pinned");
+                Check(Vector3.Distance(trail.points[5],smooth.points[5])>.001f,"intake has electric teeth");
+                fx.ReducedEffects=true; fx.LateUpdate();
+                Check(orb.filament.line.enabled && !fx.fuel[1].filament.line.enabled && !fx.reserve[0].filament.line.enabled,"reduced effects keep only swallowing crawl");
+                Time.time+=.2f; fx.LateUpdate(); Check(!filament.enabled && !trail.enabled,"consumed charge leaves no filament");
+                fx.ReducedEffects=false; fx.RenderOrbs();
+                long before=GC.GetAllocatedBytesForCurrentThread();
+                for(int frame=0;frame<120;frame++){Time.time+=.016f;fx.RenderOrbs();}
+                Check(GC.GetAllocatedBytesForCurrentThread()==before,"orb rendering adds no managed allocations after warmup");
+                fx.EndCast(4000+skin,4,1,5,EndReason.Cancelled); fx.LateUpdate();
+                foreach(var charge in fx.fuel) Check(!charge.filament.line.enabled,"return merge hides crawl");
+                fx.OnDisable();
+                foreach(var charge in fx.reserve) Check(!charge.filament.line.enabled,"disable hides reserve crawl");
+                foreach(var line in fx.intakeFilaments) Check(!line.line.enabled,"disable hides intake filaments");
+                Check(GameObject.Created==allocated,"electric pool reused without new objects");
+            }
             Console.WriteLine("PASS "+checks+" assertions; 1000 cast reuse; production presentation files with physics/render substitutes. Not Unity runtime validation.");
         }
     }

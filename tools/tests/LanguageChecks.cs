@@ -26,6 +26,7 @@ namespace HollowSaint.FoundationKit
             "HS_SKIN_DEFAULT_NAME", "HS_SKIN_OBSIDIAN_NAME", "HS_SKIN_VERDIGRIS_NAME", "HS_SKIN_SOLAR_NAME", "HS_SKIN_UMBRAL_NAME",
             "HS_SKIN_CRIMSON_VOW_NAME", "ACHIEVEMENT_HOLLOWSAINTCLEARGAMEMONSOON_NAME", "ACHIEVEMENT_HOLLOWSAINTCLEARGAMEMONSOON_DESCRIPTION",
             "HS_SKILL_GAZE_PULSE_NAME", "HS_SKILL_GAZE_PULSE_DESC", "HS_SKILL_GAZE_LOCK_NAME", "HS_SKILL_GAZE_LOCK_DESC",
+            "HS_GAZE_TIMER_LABEL",
             "HS_OPTION_SPEAR_HAND_NAME", "HS_OPTION_SPEAR_HAND_DESC",
             "HS_OPTION_SPEAR_HAND_AUTO", "HS_OPTION_SPEAR_HAND_LEFT", "HS_OPTION_SPEAR_HAND_RIGHT"
         };
@@ -294,7 +295,7 @@ namespace HollowSaint.FoundationKit
                 ". It " + Util("sticks") + ", then bursts for " + Dmg(a["burst"] + "-" + a["burstFull"] + " of its damage") + " around it." +
                 (spearStock > 1 ? " Holds " + Util(a["spearStock"] + " charges") + "." : "") +
                 " Enemies struck conduct lightning for " + a["conductorSeconds"] + "s, arcing to up to " + a["conductorTargets"] + " nearby enemies for " +
-                Dmg(a["conductorTap"] + "-" + a["conductorFull"] + " damage") + " every " + a["conductorInterval"] + "s. Recharge starts when thrown.";
+                Dmg(a["conductorTap"] + "-" + a["conductorFull"] + " damage") + " every " + a["conductorInterval"] + "s. Recharge starts when thrown. With a full Static Charge bank, a successful throw spends it for one Thunderbolt on impact. Partial banks are kept.";
             int stepStock = int.Parse(a["stepStock"], CultureInfo.InvariantCulture);
             t["HS_SKILL_ARCSTEP_DESC"] =
                 Util("Blink") + " a short distance in any direction, even in the air. Jump out of it to keep the momentum. Holds " +
@@ -308,8 +309,8 @@ namespace HollowSaint.FoundationKit
                 (a["armorOn"] == "yes" ? ", with " + Util(a["armor"] + " bonus armor") : "") + ". Its " + Dmg("forks") + " reach further over time." +
                 " Once the beam fires, press Primary to spend one entry orb on a pulse (minimum " + a["pulseInterval"] + "s between presses). Holding does not repeat; release Primary first if already held. New orbs are saved for later. Other combat skills are unavailable until the channel ends. Duration grows with level. Each launched pulse adds 2 seconds, up to 14 seconds of beam time.";
             t["HS_PASSIVE_STORM_DESC"] =
-                "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy. Every " + a["orbs"] + " Electrocutes call down a " +
-                Dmg("Thunderbolt") + " for " + Dmg(a["thunder"] + " damage") + ".";
+                "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy and stores a Static Charge (up to " + a["orbs"] + "). A full bank empowers your next successful Stormspear throw with one " +
+                Dmg("Thunderbolt") + " for " + Dmg(a["thunder"] + " damage") + " on impact. Partial banks are kept. Gaze uses stored charges for manual pulses. Charges never discharge automatically.";
 
             string jolt = a["jolt"] == "on" ? " is jolted for " + Seconds(a["stun"]) + " (not bosses) and" : "";
             string death = "";
@@ -321,9 +322,9 @@ namespace HollowSaint.FoundationKit
                 Dmg(a["bonus"] + " more damage") + " for " + Seconds(a["shocked"]) + ". The arc jumps to " +
                 Enemies(a["targets"]) + " nearby for " + Dmg(a["pop"] + " damage") +
                 " and charges them too. That enemy can't build Static again for " + Seconds(a["immune"]) + ".";
-            string boltLine = Dmg("Thunderbolt") + ": each Electrocute lights an orb on your halo. With all " + a["orbs"] +
-                " lit, they combine and strike a strong enemy within " + a["range"] + "m for " +
-                Dmg(a["thunder"] + " damage") + ".";
+            string boltLine = Dmg("Static Charges") + ": each Electrocute stores one charge, up to " + a["orbs"] +
+                ". A full bank is spent by the next successful Stormspear throw for one Thunderbolt on impact, dealing " +
+                Dmg(a["thunder"] + " damage") + ". Partial banks stay stored; Gaze claims entry charges for manual pulses. No automatic discharge.";
             t["HS_KEYWORD_STORM"] = "<style=cKeywordName>The Storm</style><style=cSub>" + staticLine + "\n" + shockLine + "\n" + boltLine + "</style>";
             t["HS_KEYWORD_STATIC"] = "<style=cKeywordName>Static</style><style=cSub>" + staticLine.Substring(staticLine.IndexOf(':') + 2) + " At full Static the enemy is " + Dmg("Electrocuted") + ".</style>";
             t["HS_KEYWORD_ELECTROCUTE"] = "<style=cKeywordName>Electrocute</style><style=cSub>" + shockLine.Substring(shockLine.IndexOf(':') + 2) + "</style>";

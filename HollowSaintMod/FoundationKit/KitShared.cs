@@ -200,22 +200,21 @@ namespace HollowSaint.FoundationKit
         private CharacterBody owner;
         private int lastSeen;
         private Gaze.GazeFuelLedger gazeFuel;
-        // A full living merge is held for a future explicit claim/consume. Merely
-        // rejecting a new charge at full does not re-arm the automatic passive.
+        // Historical merge marker; every bank is now stored until an explicit claim.
         public bool AutoHeldFromMerge { get; private set; }
-        public bool AutomaticHeld { get { return (gazeFuel != null && gazeFuel.Active) || AutoHeldFromMerge; } }
 
         internal static void RegisterBuff()
         {
             if (ChargeBuff != null) return;
-            // Visible with its stack count: this is the player-facing Storm charge (0 to 6).
+            // The stack count is the stored bank, up to the configured capacity.
             ChargeBuff = KitContent.MakeBuff("bdHsStormCharge",
                 new Color(0.3f, 0.92f, 1f), canStack: true, isDebuff: false, hidden: false, icon: "buff_discharge_charge");
         }
 
         public int Charge { get { return owner != null && ChargeBuff != null ? owner.GetBuffCount(ChargeBuff) : 0; } }
-        public float Normalized { get { return Mathf.Clamp01(Charge / (float)Mathf.Max(1, KitTuning.StormChargeMax)); } }
-        public bool IsFull { get { return Charge >= KitTuning.StormChargeMax; } }
+        public int Capacity => Storm.StoredPrayerPolicy.Capacity(KitTuning.StormChargeMax);
+        public float Normalized { get { return Mathf.Clamp01(Charge / (float)Capacity); } }
+        public bool IsFull { get { return Charge >= Capacity; } }
 
         private void Awake()
         {
@@ -269,6 +268,21 @@ namespace HollowSaint.FoundationKit
             if (gazeFuel != null && gazeFuel.Active) return;
             AutoHeldFromMerge = false;
             owner.SetBuffCount(ChargeBuff.buffIndex, 0);
+        }
+
+        /// <summary>Called only after the initialized server spear exists. There is
+        /// no authority-side optimistic spend or refund after a successful creation.</summary>
+        internal bool TryClaimSpearPrayer(out int spent)
+        {
+            spent = 0;
+            bool alive = owner && owner.isActiveAndEnabled && owner.healthComponent && owner.healthComponent.alive &&
+                (!owner.master || owner.master.GetBody() == owner);
+            bool reserved = gazeFuel != null && gazeFuel.Active;
+            int bank = Charge;
+            if (!ChargeBuff || !Storm.StoredPrayerPolicy.TrySpend(ref bank, KitTuning.StormChargeMax,
+                NetworkServer.active, true, alive, reserved, out spent)) return false;
+            Consume();
+            return true;
         }
 
         private void FixedUpdate()

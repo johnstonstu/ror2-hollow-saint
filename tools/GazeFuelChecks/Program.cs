@@ -66,6 +66,13 @@ static class Program
         Check(Math.Abs(GazeFuelSchedule.StrikeAt(1,.55f,8,8)-1.85f)<.0001f,"travel plus ground arrival");
         InputChecks();
         ExtensionChecks();
+        Check(GazeTimerPolicy.Fill(0)==0 && GazeTimerPolicy.Fill(-1)==0 && GazeTimerPolicy.Fill(14)==1 && GazeTimerPolicy.Fill(30)==1,"timer clamps to actual fourteen-second scale");
+        Check(GazeTimerPolicy.Fill(float.NaN)==0 && GazeTimerPolicy.Fill(float.PositiveInfinity)==0,"timer rejects nonfinite durations");
+        Check(GazeTimerPolicy.Fill(6)>GazeTimerPolicy.Fill(4) && GazeTimerPolicy.Fill(3)<GazeTimerPolicy.Fill(4),"successful extension grows meter and elapsed time drains it");
+        var audioSequence=new GazeFuelSequence(); int launchSounds=0;
+        foreach(var packet in new[]{(seq:1u,begin:true,end:false,launch:false),(seq:2u,begin:false,end:false,launch:false),(seq:3u,begin:false,end:false,launch:true),(seq:3u,begin:false,end:false,launch:true),(seq:4u,begin:false,end:true,launch:false),(seq:5u,begin:false,end:false,launch:true)})
+            if(audioSequence.Accept(88,packet.seq,packet.begin,packet.end)&&packet.launch)launchSounds++;
+        Check(launchSounds==1,"only accepted launch plays pulse cue; intake duplicate and retired cast do not");
         var seq=new GazeFuelSequence();Check(!seq.Accept(1,2,false,false),"orphan launch rejected");
         Check(seq.Accept(1,1,true,false)&&seq.Accept(1,2,false,false)&&!seq.Accept(1,2,false,false),"ordered and duplicate packets");
         Check(seq.Accept(1,4,false,true)&&!seq.Accept(1,5,false,false)&&!seq.Accept(1,1,true,false),"retired cannot resurrect");

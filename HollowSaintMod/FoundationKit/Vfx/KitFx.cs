@@ -62,6 +62,8 @@ namespace HollowSaint.FoundationKit.Vfx
             if (beat == Beat.ChainHop && ChainLightningFx.HasSound) return null;
             if (CustomSoundBank.Ready)
             {
+                // A shorter, quieter existing crackle replaces the loud impact cue.
+                if (beat == Beat.BoltImpact) return "Play_HS_ChainHop";
                 switch (beat)
                 {
                     case Beat.ArcBoltCast: case Beat.BoltImpact: case Beat.ChainHop:
@@ -79,7 +81,7 @@ namespace HollowSaint.FoundationKit.Vfx
             switch (beat)
             {
                 case Beat.ArcBoltCast: return "Play_mage_m1_cast_lightning";
-                case Beat.BoltImpact: return "Play_mage_m1_impact_lightning";
+                case Beat.BoltImpact: return "Play_captain_m2_tazer_bounce";
                 case Beat.ChainHop: return "Play_captain_m2_tazer_bounce";
                 case Beat.SpearThrow: return "Play_captain_m2_tazer_shoot";
                 case Beat.SpearImpact: return "Play_captain_m2_tazer_impact";
@@ -113,7 +115,7 @@ namespace HollowSaint.FoundationKit.Vfx
                 switch (beat)
                 {
                     case Beat.ArcBoltCast: return "Play_mage_m1_cast_lightning";
-                    case Beat.BoltImpact: case Beat.SpearStuck: return "Play_captain_m2_tazer_impact";
+                    case Beat.SpearStuck: return "Play_captain_m2_tazer_impact";
                 }
             }
             return beat == Beat.ThunderStrike && !CustomSoundBank.Ready ? "Play_mage_R_lightningBlast" : null;
@@ -194,7 +196,7 @@ namespace HollowSaint.FoundationKit.Vfx
             switch (beat)
             {
                 case Beat.ArcBoltCast: return 0.06f;
-                case Beat.BoltImpact: return 0.05f;
+                case Beat.BoltImpact: return 0.22f;
                 case Beat.ChainHop: return 0.05f;
                 case Beat.CircuitPulse: return 0.9f;
                 case Beat.StaticTier: return 0.25f;
@@ -499,11 +501,10 @@ namespace HollowSaint.FoundationKit.Vfx
                     break;
 
                 case Beat.BoltImpact:
-                    VfxParticles.Burst(origin, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, 0.12f, Vector2.zero, new Vector2(0.6f, 0.8f), palette.Arc);
-                    VfxParticles.Burst(origin, Quaternion.identity, palette.Material(VfxAssets.Spark), 14, 0.3f, new Vector2(6f, 14f), new Vector2(0.08f, 0.18f), palette.Core, stretch: 0.09f);
-                    for (int i = 0; i < 3; i++)
-                        LightningLine.Spawn(origin, origin + UnityEngine.Random.onUnitSphere * UnityEngine.Random.Range(0.6f, 1.2f), 0.12f, 0.6f, 0, palette: palette);
-                    VfxParticles.FlashLight(origin, palette.Arc, 1.5f, 4f, 0.12f);
+                    VfxParticles.Burst(origin, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, 0.09f, Vector2.zero, new Vector2(0.35f, 0.5f), palette.Arc);
+                    VfxParticles.Burst(origin, Quaternion.identity, palette.Material(VfxAssets.Spark), 6, 0.2f, new Vector2(4f, 9f), new Vector2(0.06f, 0.12f), palette.Core, stretch: 0.06f);
+                    LightningLine.Spawn(origin, origin + UnityEngine.Random.onUnitSphere * UnityEngine.Random.Range(0.35f, 0.7f), 0.09f, 0.4f, 0, palette: palette);
+                    VfxParticles.FlashLight(origin, palette.Arc, 0.6f, 2f, 0.09f);
                     break;
 
                 case Beat.ChainHop:

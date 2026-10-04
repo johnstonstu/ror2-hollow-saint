@@ -75,7 +75,7 @@ namespace HollowSaint.FoundationKit
             F(c, spear, "Stick seconds", Stormspear.StormspearTuning.StickSeconds, v => Stormspear.StormspearTuning.StickSeconds = v, 0f, 1f, 0.05f, "How long the spear stays lodged in what it hit before it bursts.");
             F(c, spear, "Ground burst", Stormspear.StormspearTuning.GroundBurstScale, v => Stormspear.StormspearTuning.GroundBurstScale = v, 0f, 1f, 0.05f, "Damage and radius of the burst when the spear hits terrain instead of an enemy (1 = same as an enemy hit).");
             F(c, spear, "Burst proc coefficient", Stormspear.StormspearTuning.BurstProcCoefficient, v => Stormspear.StormspearTuning.BurstProcCoefficient = v, 0f, 1f, 0.05f, "Item proc coefficient of the burst (and so how much Static it builds).");
-            B(c, spear, "Crown Thunderbolt", Stormspear.StormspearTuning.CrownThunderbolt, v => Stormspear.StormspearTuning.CrownThunderbolt = v, "A fully charged spear thrown from the crown also calls a Thunderbolt at the impact point, independent of the Storm charge.");
+            B(c, spear, "Crown Thunderbolt", Stormspear.StormspearTuning.CrownThunderbolt, v => Stormspear.StormspearTuning.CrownThunderbolt = v, "A fully charged Crown spear retains its independent Thunderbolt with a partial bank. A full stored bank funds one landing Thunderbolt and suppresses this extra strike.");
             F(c, spear, "Crown Thunderbolt min charge", Stormspear.StormspearTuning.CrownThunderboltMinCharge, v => Stormspear.StormspearTuning.CrownThunderboltMinCharge = v, 0.1f, 1f, 0.05f, "Charge fraction needed for the crown Thunderbolt (1 = full).");
 
             F(c, step, "Look lift", KitTuning.ArcStepLookLift, v => KitTuning.ArcStepLookLift = v, 0f, 1f, 0.05f, "How much the step follows where you look, up or down (0 = flat; 0.35 lifts about 2 m looking 45 degrees up).");
@@ -132,14 +132,14 @@ namespace HollowSaint.FoundationKit
             F(c, storm, "Electrocute immunity", KitTuning.ElectrocuteImmuneSeconds, v => KitTuning.ElectrocuteImmuneSeconds = v, 0f, 15f, 0.5f, "Seconds an Electrocuted enemy cannot build Static.");
             I(c, storm, "Electrocute cap per second", KitTuning.ElectrocutesPerSecondCap, v => KitTuning.ElectrocutesPerSecondCap = v, 1, 20, "Max Electrocutes per second per Saint (screen and performance guard).");
             F(c, storm, "Death discharge", KitTuning.DeathDischargeStatic, v => KitTuning.DeathDischargeStatic = v, 0f, 1f, 0.05f, "An enemy that dies holding at least this much Static (0.5 = half) Electrocutes as it dies: it lights an orb and arcs to its neighbours. 0 turns it off.");
-            I(c, storm, "Charges per Thunderbolt", KitTuning.StormChargeMax, v => KitTuning.StormChargeMax = v, 2, 20, "Electrocutes needed to call a Thunderbolt.");
+            I(c, storm, "Charges per Thunderbolt", KitTuning.StormChargeMax, v => KitTuning.StormChargeMax = v, 2, 20, "Stored Static Charge capacity. A full bank empowers the next successful spear throw; Gaze claims entry charges. Charges never discharge automatically.");
             F(c, storm, "Thunderbolt damage", KitTuning.ThunderboltDamageCoefficient, v => KitTuning.ThunderboltDamageCoefficient = v, 1f, 30f, 0.5f, "Damage coefficient of the strike (proc 1.0, can crit).");
             F(c, storm, "Thunderbolt splash", KitTuning.ThunderboltSplashFraction, v => KitTuning.ThunderboltSplashFraction = v, 0f, 1f, 0.05f, "Fraction of the strike damage dealt to nearby enemies.");
             F(c, storm, "Thunderbolt splash radius", KitTuning.ThunderboltSplashRadius, v => KitTuning.ThunderboltSplashRadius = v, 1f, 10f, 0.5f, "Metres.");
-            F(c, storm, "Thunderbolt range", KitTuning.ThunderboltRange, v => KitTuning.ThunderboltRange = v, 10f, 60f, 1f, "Metres. Needs line of sight.");
-            F(c, storm, "Thunderbolt telegraph", KitTuning.ThunderboltTelegraphSeconds, v => KitTuning.ThunderboltTelegraphSeconds = v, 0.1f, 1.5f, 0.05f, "Seconds the charges take to combine above the crown before the Thunderbolt launches.");
-            F(c, storm, "Thunderbolt flight", KitTuning.ThunderboltFlightSeconds, v => KitTuning.ThunderboltFlightSeconds = v, 0.2f, 2f, 0.05f, "Seconds from the charge leaving the crown to the strike landing (rise, hang, streak across the sky, strike).");
-            F(c, storm, "Thunderbolt cooldown", KitTuning.ThunderboltCooldown, v => KitTuning.ThunderboltCooldown = v, 0f, 20f, 0.5f, "Minimum seconds between strikes.");
+            F(c, storm, "Thunderbolt range", KitTuning.ThunderboltRange, v => KitTuning.ThunderboltRange = v, 10f, 60f, 1f, "Legacy automatic-target range, retained for config compatibility. Stored charges no longer search for targets automatically.");
+            F(c, storm, "Thunderbolt telegraph", KitTuning.ThunderboltTelegraphSeconds, v => KitTuning.ThunderboltTelegraphSeconds = v, 0.1f, 1.5f, 0.05f, "Legacy automatic-discharge setting, retained for compatibility. The bank-funded spear strike occurs on landing.");
+            F(c, storm, "Thunderbolt flight", KitTuning.ThunderboltFlightSeconds, v => KitTuning.ThunderboltFlightSeconds = v, 0.2f, 2f, 0.05f, "Legacy automatic-discharge flight setting, retained for compatibility. Bank-funded strikes follow the spear's actual landing.");
+            F(c, storm, "Thunderbolt cooldown", KitTuning.ThunderboltCooldown, v => KitTuning.ThunderboltCooldown = v, 0f, 20f, 0.5f, "Legacy automatic-discharge cooldown, retained for compatibility. Stored charges require an explicit ability use.");
 
             // Defaults migration: BepInEx keeps saved values, so a changed default only reaches an
             // existing config through here. Each step rewrites an entry only when its saved value

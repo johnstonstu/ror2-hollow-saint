@@ -11,7 +11,7 @@
 
 <p align="center"><b>A cracked devotional icon that answers only to the storm.</b></p>
 
-Hollow Saint is an original **Risk of Rain 2 survivor** who turns a crowded fight into a gathering storm. Chain lightning through a pack, charge a spear in your other hand, and watch each Electrocute light your halo until a Thunderbolt answers from above.
+Hollow Saint is an original **Risk of Rain 2 survivor** who turns a crowded fight into a gathering storm. Chain lightning through a pack, charge a spear in your other hand, and store Static Charges from Electrocutes, then spend a full bank on a spear-borne Thunderbolt or use entry charges for Gaze pulses.
 
 **Keep the pressure on. Choose your moment to commit. Blink to a better angle.** Arc Bolt and Stormspear work together; your special changes how you approach the fight. Rise above a line of enemies with **Gaze of the Hollow**, or carry **Open Circuit** into close range and keep attacking beneath a striking crown.
 
@@ -27,7 +27,7 @@ Hollow Saint is an original **Risk of Rain 2 survivor** who turns a crowded figh
 
 **Answered Prayer · Passive**
 
-Your hits build **Static** on enemies. Full Static triggers an **Electrocute**, spreading the storm to nearby targets and lighting an orb on your halo. Fill the halo and a **Thunderbolt** strikes a strong enemy in sight. Staying on a pack keeps this cycle moving.
+Your hits build **Static** on enemies. Full Static triggers an **Electrocute**, spreading the storm and storing one **Static Charge**. Charges stay stored until you use them. A full bank empowers your next successful Stormspear throw with one **Thunderbolt** on impact; partial banks stay intact. Gaze claims the entry bank for manual pulses. The default capacity remains five, and configured capacity is respected.
 
 **Arc Bolt · Primary**
 
@@ -35,7 +35,7 @@ Your steady attack: snap lightning into a target and let it chain to nearby enem
 
 **Stormspear · Secondary**
 
-Hold to form a spear of lightning, then release to throw. The spear sticks and bursts around its impact; aim into a group to catch its neighbours. A longer charge makes the throw stronger, while Arc Bolt stays available in your other hand.
+Hold to form a spear of lightning, then release to throw. The spear sticks and bursts around its impact; aim into a group to catch its neighbours. A longer charge makes the throw stronger, while Arc Bolt stays available in your other hand. A full Static Charge bank is claimed when the server creates a successful throw and produces one Thunderbolt at a qualifying landing. Partial banks are preserved.
 
 **Arc Step · Utility**
 
@@ -43,7 +43,7 @@ Two charges of a short blink, usable on the ground or in the air. Look upward to
 
 **Gaze of the Hollow · Special**
 
-Rise and project your halo forward to channel a piercing lightning beam. Sweep it along a line of enemies as its reach grows. Ground tendrils surround the channel, while separate lightning connectors mark enemies actually hit. Recast or use Arc Step to end the channel early.
+Rise and project your halo forward to channel a piercing lightning beam. Sweep it along a line of enemies as its reach grows. Ground tendrils surround the channel, while separate lightning connectors mark enemies actually hit. Fresh Primary presses spend entry charges on pulses, each adding two seconds up to fourteen seconds total. A small local HUD meter shows remaining time. Other combat skills return at channel end; there is no manual cancel binding.
 
 **Open Circuit · Alternate special**
 
@@ -52,7 +52,7 @@ Open the halo into a crown that repeatedly strikes nearby enemies while you keep
 ## Put it together
 
 - **Bolts into spear.** Keep Arc Bolt firing while you charge Stormspear. Release into the centre of the pack, then keep landing hits as the spear bursts and Static spreads.
-- **Step into Gaze.** Blink to an angle that lines enemies up, channel across them, then recast or Arc Step when you need to move again. Gaze grants bonus armor during the channel, but positioning still matters.
+- **Step into Gaze.** Blink to an angle that lines enemies up, channel across them, then use fresh Primary presses for fueled pulses. Other combat skills return when the channel ends. Gaze grants bonus armor during the channel, but positioning still matters.
 - **Crown into pressure.** Activate Open Circuit near a group. Fire Arc Bolt and use the faster spear charge while the crown strikes around you; Arc Step helps you adjust your distance.
 
 ## Skins

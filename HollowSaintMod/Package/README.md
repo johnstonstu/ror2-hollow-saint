@@ -12,7 +12,7 @@
 
 <p align="center"><b>A cracked devotional icon that answers only to the storm.</b></p>
 
-Hollow Saint is an original **Risk of Rain 2 survivor** who turns a crowded fight into a gathering storm. Chain lightning through a pack, charge a spear in your other hand, and watch each Electrocute light your halo until a Thunderbolt answers from above.
+Hollow Saint is an original **Risk of Rain 2 survivor** who turns a crowded fight into a gathering storm. Chain lightning through a pack, charge a spear in your other hand, and store Static Charges from Electrocutes, then spend a full bank on a spear-borne Thunderbolt or use entry charges for Gaze pulses.
 
 **Keep the pressure on. Choose your moment to commit. Blink to a better angle.** Arc Bolt and Stormspear work together; your special changes how you approach the fight. Rise above a line of enemies with **Gaze of the Hollow**, or carry **Open Circuit** into close range and keep attacking beneath a striking crown.
 
@@ -38,9 +38,8 @@ These gameplay clips show each skill in isolation. They were captured with the H
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="48" alt=""> Answered Prayer <sub>Passive</sub></h3>
 
-Hits build **Static**. Full Static **Electrocutes** an enemy: a short jolt, it takes more damage for a few seconds, and the arc jumps to its neighbours. Every Electrocute lights an orb on your halo; with all five lit, a **Thunderbolt** strikes a strong enemy in sight.
+Hits build **Static**. Full Static **Electrocutes** an enemy and stores one **Static Charge**. A full bank empowers your next successful spear throw with one **Thunderbolt** on impact; partial banks stay stored. Gaze claims entry charges for manual pulses. Charges never discharge automatically. The default bank holds five; your configured capacity is respected.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm.webp" width="100%" alt="The last orbs light and a Thunderbolt strikes the pack"></p>
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_bolt.png" width="48" alt=""> Arc Bolt <sub>Primary</sub></h3>
 
@@ -50,7 +49,7 @@ Snap a bolt that chains to nearby enemies. Use it to build Static across a group
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="48" alt=""> Stormspear <sub>Secondary</sub></h3>
 
-Hold to form a spear of lightning in your hand; release to throw. More charge means a stronger throw. It sticks in what it hits, then bursts on everything around it. Arc Bolt keeps firing from your other hand while you charge.
+Hold to form a spear of lightning in your hand; release to throw. More charge means a stronger throw. It sticks and bursts around its impact while Arc Bolt remains available. A full Static Charge bank funds one Thunderbolt at a qualifying landing; partial banks are preserved.
 
 <p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" width="100%" alt="A charged Stormspear sticking and bursting"></p>
 
@@ -76,14 +75,14 @@ Open your halo into a crown that repeatedly strikes nearby enemies while you kee
 
 1. **Static.** Every hit charges the enemy you hit. Bigger hits, critical strikes and items with high proc coefficients charge it faster. It fades if you stop hitting.
 2. **Electrocute.** At full Static the enemy is jolted (not bosses) and **Shocked**, briefly taking more damage. The arc jumps to two nearby enemies and charges them too. An enemy that dies holding half its Static or more Electrocutes as it falls.
-3. **Thunderbolt.** Each Electrocute lights an orb on your halo. When all five are lit, they combine, rise off your crown, streak across the sky and strike a strong enemy in sight.
+3. **Static Charges.** Each Electrocute stores one charge. A full bank is spent on the next successful spear launch and funds one landing Thunderbolt. A charged miss, death or scene change does not refund that launch. Partial banks stay stored; charges gained during Gaze stay reserved for later.
 
 Keep hitting the same pack and the chain feeds itself.
 
 ## Put it together
 
 - **Bolts into spear.** Keep Arc Bolt firing while you charge Stormspear. Release into the centre of the pack, then keep landing hits as the spear bursts and Static spreads.
-- **Step into Gaze.** Blink to an angle that lines enemies up, channel across them, then recast or Arc Step when you need to move again. Gaze grants bonus armor during the channel, but positioning still matters.
+- **Step into Gaze.** Blink to an angle that lines enemies up, channel across them, then use fresh Primary presses for fueled pulses. Other combat skills return when the channel ends. Gaze grants bonus armor during the channel, but positioning still matters.
 - **Crown into pressure.** Activate Open Circuit near a group. Fire Arc Bolt and use the faster spear charge while the crown strikes around you; Arc Step helps you adjust your distance.
 
 ## Skins

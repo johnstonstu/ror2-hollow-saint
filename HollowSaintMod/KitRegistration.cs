@@ -103,6 +103,12 @@ namespace HollowSaint
 
             if (!bodyObject.GetComponent<DischargeMeter>()) bodyObject.AddComponent<DischargeMeter>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Gaze.GazeFuelController>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Gaze.GazeFuelController>();
+            try
+            {
+                if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Gaze.GazeTimerHud>())
+                    bodyObject.AddComponent<HollowSaint.FoundationKit.Gaze.GazeTimerHud>();
+            }
+            catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_TIMER_REGISTRATION_FAILED " + error); }
             if (!bodyObject.GetComponent<SpearCarry>()) bodyObject.AddComponent<SpearCarry>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>();

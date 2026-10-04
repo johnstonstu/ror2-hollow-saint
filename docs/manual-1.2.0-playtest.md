@@ -19,6 +19,10 @@ Sources: [GazeState](../HollowSaintMod/FoundationKit/Gaze/GazeState.cs), [reques
 
 ## Fuel and duration
 
+Answered Prayer now stores **Static Charges** with no automatic passive discharge, including full banks returned from Gaze. The configured capacity remains unchanged (default five, allowed 2–20). A successful server-created spear throw with a full bank spends it and snapshots one landing Thunderbolt. Partial banks stay intact. A failed throw before projectile creation spends no bank; an empowered miss, owner death or scene change grants no refund and cannot resurrect the bonus. A funded Crown spear suppresses the old separate free Crown bonus, while an unfunded Crown spear retains its existing behavior. Ordinary spear, burst and conductor damage stay as before.
+
+The local HUD timer appears after Gaze ignition and uses the actual acknowledged remaining time. Its fixed fourteen-second scale makes a successful +2-second launch visibly lengthen the bar. It hides on exit, death, disable, stage/body replacement and when the native HUD is hidden; observers have no meter for another player's body.
+
 **Entry fuel** is the existing passive bank claimed when Gaze starts. Accepted intake reserves availability, but the orb is **spent only at launch**. New gains during the cast go into a separate **reserve** and cannot feed that cast's manual shots. Living exits return unlaunched entry fuel plus reserve; death/disable clears them. Returning a full bank must not automatically fire an end-of-cast Thunderbolt. Pulse visuals do not authorize damage or spend resources; the server does.
 
 The baseline duration is frozen at cast entry:
@@ -41,7 +45,7 @@ The ordinary beam should read as a **medium-width baseline** (0.8 m body), with 
 
 The physical crown arcs expand **radially**, preserving their thickness, and return to their original pose on every exit. Open Circuit has a new lightning dome to inspect separately: it must follow its active state and clear when the effect ends. These are candidate visual expectations, not approval of the in-game result.
 
-Arc Bolt cast gains a short mage-lightning body layer; confirmed Arc Bolt and lodged spear impacts gain a captain-tazer accent. These additions run only alongside the loaded custom bank, avoiding doubled fallback cues, and are limited to one layer per beat/key per 0.25 seconds. Transient hit effects share a global beat limit; persistent body casts throttle independently. Saturated tracking skips extra layers. Spear's existing heavy throw crackle starts at 50% charge. Gaze audio, chain audio, sound assets and bank volume settings are unchanged. Audition high attack speed and simultaneous hits for clarity before accepting the mix.
+Arc Bolt's main impact cue now uses the shorter, quieter existing ChainHop crackle, with a 0.22-second global impact gap and no extra impact accent. Its spark count drops from fourteen to six, one short arc replaces three, and its flash is smaller and dimmer. Arc Bolt cast and lodged spear accents retain their existing bounded layers. Spear's heavy throw crackle starts at 50% charge. Each deduplicated server-confirmed Gaze Launch replays `Play_captain_shift_start`, the existing startup one-shot; rejected taps and cancelled intakes play none. The charge, hum, crackle and ending sequence are preserved. No bank rebuild or audio asset change. Audition high attack speed and rapid Gaze pulses for clarity.
 
 **Near-expiry multiplayer limitation:** duration is earned on the server and acknowledged by the existing reliable Launch packet. A remote owner can reach its old local deadline before a very late grant arrives and exit after the server spent the orb. This prototype retains the existing owner end policy; it has no speculative client extension. Test late pulses under latency before multiplayer acceptance.
 
@@ -61,6 +65,11 @@ Record the candidate commit/DLL hash, game build, level, config, input device/bi
 | Reserve / full merge | New gains remain separate; living exit returns the expected bank, with no automatic end-of-cast Thunderbolt. | Pending |
 | Duration bounds | Default levels 1/11/21 give 4/5/6 s of beam; higher levels and configured bases above 6 stay capped. Level-up during a cast does not extend it. | Pending |
 | Pulse extensions | Each successful launch adds 2 s up to 14 s total. Check 4 s + five launches and 6 s + four launches. Failed taps and cancelled intakes add zero. Reach never retracts at launch; unchanged DPS over longer time produces more total damage and later cooldown. | Pending |
+| Stored Prayer | With a full bank and enemies nearby, wait without using an ability: no automatic strike or spend. Repeat after a full Gaze reserve merge. | Pending |
+| Full / partial spear | Full configured banks of 2/5/6/20 are claimed once at successful throw and produce one Thunderbolt at qualifying enemy/terrain impact. Partial banks remain. Failed throws before spawn preserve the bank. | Pending |
+| Crown / misses | A funded Crown spear delivers one Thunderbolt, without the old bonus duplicating it. An unfunded Crown retains its ordinary feature. Test lifetime miss, friendly collision, owner death and stage transition: no delayed bonus or refund. | Pending |
+| Timer / pulse cue | Only the local player sees actual remaining seconds; fired pulses add two seconds and one startup cue. Rejected taps, cancelled intake and duplicate launch packets add no cue. Native HUD hide, exit, death and body replacement clear it. | Pending |
+| Arc impact clarity | At high attack speed and many simultaneous hits, the main impact crackle is quieter and throttled, with restrained flashes and no extra impact accent. Damage remains unchanged. | Pending |
 | Attack speed | Faster ordinary-beam ticks do not shorten manual admission spacing or extend duration. | Pending |
 | Aim and terrain | Steer during intake; verify launch aim, near/far travel, ground arrival, moving targets, walls, slopes and ledges. No invented ground strikes over voids. | Pending |
 | Input parity | Keyboard and physical controller honor mapped Special activation and fresh Primary edges. Holding Primary on entry produces no pulse until release/press. Default controller RB→RT and keyboard R→LMB are examples, not hardcoded bindings. | Pending |

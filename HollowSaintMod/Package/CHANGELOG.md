@@ -1,12 +1,16 @@
 # Changelog
 
 ## 1.2.0 (private candidate)
+- Answered Prayer now stores Static Charges deliberately, with no automatic discharge. A successful full-bank spear launch spends the configured bank and snapshots one Thunderbolt for its first qualifying landing. Partial banks remain intact; a funded Crown spear suppresses its separate free bonus strike. Ordinary spear and conductor damage are retained.
+- Gaze has a small local-player remaining-time meter that grows with acknowledged launched-pulse extensions. Successful pulse launches replay the existing startup one-shot without restarting the established charge, hum or crackle loops.
+- Arc Bolt's main impact sound uses a shorter, quieter existing crackle, with a 0.22-second shared impact gap and no extra impact accent. Impact spark, arc and flash intensity is reduced.
+- Round Gaze charges have pooled crawling lightning filaments and energized intake trails; reduced effects and teardown hide the additional geometry.
 - Special starts Gaze; fresh Primary presses send one entry orb per pulse, with a 0.25-second minimum interval. Holding does not repeat; new charges stay in reserve. Primary shows the pulse icon and available entry count, and other combat skills are unavailable until the channel ends. Original skills and cooldown progress return on exit. Unlaunched orbs return on living exits, and late presses are rejected before they can spend fuel without completing their travel.
 - Gaze's baseline duration grows from four to six seconds with level. Each launched entry-fuel pulse adds two seconds, up to fourteen seconds total beam time. Rejected taps and cancelled intakes add none. Reach progression keeps its frozen baseline; longer channels increase total ordinary-beam output and delay cooldown without increasing damage per hit.
 - Gaze uses a medium-width continuous beam, broad traveling pulses and physical radial crown expansion. Entry orbs stay round and retain the primary skin energy color through intake and travel. Open Circuit now has moving tapered dome arcs. Effects reuse bounded geometry and clear on cancellation or teardown.
-- Added Crimson Vow as the sixth skin, with red conductors and gold-white Gaze pulse accents. It unlocks through the native survivor mastery condition: a qualifying winning ending on Monsoon-equivalent hard difficulty. Previous clears are not replayed for the new achievement.
+- Added Crimson Vow as the sixth skin, with red conductors and primary red Gaze energy. It unlocks through the native survivor mastery condition: a qualifying winning ending on Monsoon-equivalent hard difficulty. Previous clears are not replayed for the new achievement.
 - Includes the accepted private prototype's faster, wider Arc Bolt; Stormspear recharge pause until throw; and a short, bounded conductor effect on a struck enemy. Existing direct damage and proc behavior are retained from that prototype.
-- Arc Bolt and Stormspear gain short accents from existing loaded sound banks, with new layers limited to four per second. Stormspear's charged throw crackle starts at half charge. Gaze audio and the embedded sound bank are unchanged.
+- Arc Bolt cast and Stormspear retain bounded accents from existing loaded banks. Stormspear's charged throw crackle starts at half charge. The embedded sound bank is unchanged.
 - Private source/build candidate only. Native visual, unlock, controller and multiplayer acceptance remain pending.
 
 ## 1.1.1

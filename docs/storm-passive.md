@@ -1,6 +1,8 @@
 # Storm passive: Static, Electrocute, Thunderbolt
 
-Status: approved direction (Stu, 2026-09-28). Target: v0.4.0 playtest build.
+Current private 1.2.0 revision (2026-10-04): Answered Prayer stores Static Charges deliberately. No automatic discharge occurs. A successful full-bank spear launch claims the configured bank and snapshots one qualifying landing Thunderbolt; partial banks remain. Gaze entry charges and reserve separation remain.
+
+The original v0.4.0 direction below is historical and describes the superseded automatic trigger.
 Replaces the current Discharge meter (own hits fill a meter, next hit bursts).
 
 Working passive name: **Answered Prayer**. The Saint's lightning builds Static on enemies, overloaded enemies are Electrocuted, and every Electrocute is a prayer the storm counts. When enough are counted, the sky answers with a Thunderbolt.
