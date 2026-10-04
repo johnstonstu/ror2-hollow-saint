@@ -48,10 +48,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             foreach(var g in fx.pulses[1].roots)for(int j=0;j<g.count;j++)Check(Math.Abs(g.path[j].x)<=.5f,"gap clipping");
             Physics.GapAt=float.PositiveInfinity;
             fx.LaunchPulse(2,2,Vector3.up,Vector3.forward*10,Vector3.zero,Vector3.up,false,0,.2f,4,.4f,false);
-            Check(!fx.pulses[0].ground,"sky miss no ground");
+            Check(!fx.pulses[2].ground,"sky miss no ground");
             var airTarget=new Vector3(3,8,10);var groundPoint=new Vector3(6,0,10);
             fx.LaunchPulse(2,3,Vector3.up,airTarget,groundPoint,Vector3.up,true,0,.2f,4,.4f,false);
-            var separate=fx.pulses[1];
+            var separate=fx.pulses[3];
             Check(Vector3.Distance(separate.end,airTarget)<.001f,"beam keeps elevated endpoint");
             Check(separate.ground&&separate.roots[0].count>1,"air target has independent ground spread");
             Check(Vector3.Distance(separate.roots[0].path[0],groundPoint+Vector3.up*.07f)<.001f,"roots start at supplied ground point");
@@ -62,10 +62,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             }
             Physics.Rays=0;
             fx.LaunchPulse(2,4,Vector3.up,airTarget,groundPoint,Vector3.up,false,0,.2f,4,.4f,false);
-            Check(Physics.Rays==0&&!fx.pulses[0].ground,"hasGround false forbids ground inference");
-            foreach(var g in fx.pulses[0].roots)Check(g.count==0,"reused slot clears prior roots");
+            Check(Physics.Rays==0&&!fx.pulses[4].ground,"hasGround false forbids ground inference");
+            foreach(var g in fx.pulses[4].roots)Check(g.count==0,"hasGround false clears roots");
             fx.LaunchPulse(2,5,Vector3.up,airTarget,groundPoint,Vector3.zero,true,0,.2f,4,.4f,false);
-            Check(!fx.pulses[1].ground,"invalid ground normal rejected");
+            Check(!fx.pulses[0].ground,"invalid ground normal rejected");
             fx.EndCast(2,0,0,0,EndReason.Death);Check(!fx.OwnsChargePresentation,"death clears immediately");
             for(uint id=3;id<1003;id++)
             {
@@ -75,8 +75,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             fx.BeginCast(1003,2,5,false,0);fx.Swallow(1003,0,0,.5f,.3f);Check(!fx.fuel[0].visible,"late intake catchup");
             fx.ConfirmStrike(1003,0,Vector3.zero,1);Check(!fx.contacts[0].active,"expired strike not replayed");
             fx.OnDisable();Check(!fx.OwnsChargePresentation&&!fx.root.gameObject.activeSelf,"disable hides pool");
-            Color[] primary = { new Color(.3f,.92f,1), new Color(.3f,.92f,1), new Color(.45f,1,.72f), new Color(1,.72f,.22f), new Color(.75f,.35f,1) };
-            for (uint skin=0;skin<5;skin++)
+            Color[] primary = { new Color(.3f,.92f,1), new Color(.3f,.92f,1), new Color(.45f,1,.72f), new Color(1,.72f,.22f), new Color(.75f,.35f,1), CrimsonMasteryVisuals.Arc };
+            for (uint skin=0;skin<6;skin++)
             {
                 body.skinIndex=skin;fx.BeginCast(1004+skin,2,5,false,0);fx.LateUpdate();
                 Color chosen=GazeContrastAssets.Accent((int)skin), baseColor=primary[skin];
@@ -107,6 +107,41 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             var neutral=GazeContrastAssets.Glow.Textures["_RemapTex"];
             foreach(var c in neutral.pixels)Check(c.r==c.g&&c.g==c.b,"neutral ramp cannot reimpose primary hue");
             Check(GazeContrastAssets.Glow.Colors["_TintColor"].g==1f,"neutral material does not multiply primary tint");
+            fx.BeginCast(2000,5,5,true,0);
+            Time.time+=30f;fx.LateUpdate();
+            Check(fx.CrownExpansion==0f&&fx.CrownApertureScale==1f&&fx.nextPulse==0,"manual aim hold never auto-fires or opens crown");
+            fx.Swallow(2000,0,0,0,.32f);Time.time+=.24f;
+            Check(fx.CrownExpansion>.7f&&fx.CrownApertureScale>1.4f,"actual intake opens pose-owner envelope");
+            fx.LaunchPulse(2000,0,Vector3.zero,Vector3.forward*20,Vector3.forward*20,Vector3.up,true,0,.5f,4,.3f,false);
+            Check(fx.CrownExpansion==1f&&Math.Abs(fx.CrownApertureScale-1.6f)<.001f,"launch peaks crown aperture");
+            Time.time+=.25f;fx.LateUpdate();
+            var slow=fx.pulses[0];
+            Check(Vector3.Distance(slow.line[11],Vector3.forward*10)<.01f,"caller supplied half-second travel stays synchronized");
+            Check(slow.sleeve.line.widthMultiplier>3.8f,"fat pulse geometry");
+            Check(fx.CrownExpansion==0f,"crown recovers while pulse travels");
+            Check(!slow.roots[0].stroke.line.enabled,"ground burst waits for supplied arrival");
+            Time.time+=.25f;fx.LateUpdate();Check(!slow.sleeve.line.enabled&&slow.front.line.enabled,"arrival punctuation begins at arrival");
+            fx.Swallow(2000,1,1,0,.32f);Time.time+=.24f;
+            Check(fx.CrownExpansion>.7f,"another manual event opens independently");
+            body.healthComponent.alive=false;Check(fx.CrownExpansion==0f&&fx.CrownApertureScale==1f,"death immediately releases pose hook");
+            body.healthComponent.alive=true;fx.Clear();Check(fx.CrownExpansion==0f,"clear releases pose hook");
+            fx.BeginCast(3000,20,20,true,0);
+            Check(fx.pulses.Length==5&&fx.contacts.Length==24,"bounded manual overlap pools");
+            for(int eventIndex=0;eventIndex<20;eventIndex++)
+            {
+                Time.time+=.25f;
+                fx.LaunchPulse(3000,eventIndex,Vector3.up,Vector3.forward*20,Vector3.forward*20,Vector3.up,true,0,.55f,4,.3f,false);
+                fx.LateUpdate();
+                int livePulses=0;
+                foreach(var pulse in fx.pulses)if(pulse.active)livePulses++;
+                Check(livePulses>=Math.Min(eventIndex+1,4),"manual cadence keeps overlapping pulses");
+                for(int target=0;target<8;target++)fx.ConfirmStrike(3000,eventIndex*8+target,new Vector3(target,0,20),0);
+                fx.LateUpdate();
+                Check(GameObject.Created==allocated,"twenty manual pulses allocate no geometry");
+            }
+            fx.OnDisable();
+            foreach(var pulse in fx.pulses)Check(!pulse.active,"disable clears all manual pulse slots");
+            foreach(var contact in fx.contacts)Check(!contact.active,"disable clears all manual contacts");
             Console.WriteLine("PASS "+checks+" assertions; 1000 cast reuse; production presentation files with physics/render substitutes. Not Unity runtime validation.");
         }
     }

@@ -58,44 +58,42 @@ namespace HollowSaint.FoundationKit.Gaze
         }
     }
 
-    /// <summary>At most five pulses, even with the supported twenty-orb cap. A full
-    /// cast always contributes 2.5 damage coefficient per struck enemy, without a finale.</summary>
+    /// <summary>Manual taps queue one entry orb each. Intake is acknowledged before
+    /// launch, but is refundable until the server spends it. Storage is fixed at twenty.</summary>
     internal sealed class GazeFuelSchedule
     {
-        public const int MaxPhases = 5;
+        public const int MaxPhases = 20;
         public const float IntakeDuration = 0.32f;
         public const float SpreadDuration = 0.30f;
-        private readonly int[] groups = new int[MaxPhases];
-        private int intakes, launches;
+        public const float MaximumTravel = 0.55f;
+        private readonly float[] launchAt = new float[MaxPhases];
+        private int entry, launches;
         public int Count { get; private set; }
+        public int PendingCount => Count - launches;
         public bool Active { get; private set; }
-        public void Begin(int entry)
+        public void Begin(int entryCount)
         {
-            entry = Math.Max(0, Math.Min(20, entry));
-            Count = Math.Min(MaxPhases, entry);
-            for (int i = 0; i < MaxPhases; i++)
-                groups[i] = i < Count ? entry / Count + (i < entry % Count ? 1 : 0) : 0;
-            intakes = launches = 0;
+            entry = Math.Max(0, Math.Min(MaxPhases, entryCount));
+            Count = launches = 0;
             Active = true;
         }
-        public int Group(int phase) => phase >= 0 && phase < Count ? groups[phase] : 0;
-        public float IntakeAt(int phase) => 0.15f + phase * 0.70f;
-        public bool TakeIntake(float beamAge, out int phase)
+        public bool QueueIntake(float castAge, out int phase)
         {
-            phase = intakes;
-            if (!Active || intakes >= Count || beamAge < IntakeAt(intakes)) return false;
-            intakes++;
+            phase = Count;
+            if (!Active || Count >= entry) return false;
+            launchAt[Count++] = castAge + IntakeDuration;
             return true;
         }
-        public bool TakeLaunch(float beamAge, out int phase)
+        public bool TakeLaunch(float castAge, out int phase)
         {
             phase = launches;
-            if (!Active || launches >= intakes || beamAge < IntakeAt(launches) + IntakeDuration) return false;
+            if (!Active || launches >= Count || castAge < launchAt[launches]) return false;
             launches++;
             return true;
         }
         public void Cancel() { Active = false; }
-        public static float Travel(float distance) => Math.Max(0.12f, Math.Min(0.22f, distance / 275f));
+        // Server strike timing and transported presentation use this same duration.
+        public static float Travel(float distance) => 0.35f + 0.20f * Math.Max(0f, Math.Min(1f, distance / 60f));
         public static float SpreadRadius(float beamAge, float beamSeconds, float baseRange, float reachStart, float reachEnd)
         {
             float progress = Math.Max(0f, Math.Min(1f, beamAge / Math.Max(0.1f, beamSeconds)));

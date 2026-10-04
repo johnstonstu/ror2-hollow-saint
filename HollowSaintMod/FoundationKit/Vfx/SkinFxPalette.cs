@@ -12,7 +12,8 @@ namespace HollowSaint.FoundationKit.Vfx
             new SkinFxPalette(1, HsPalette.ArcCyan), // Obsidian retains its cyan conductors.
             new SkinFxPalette(2, new Color(0.45f, 1f, 0.72f)),
             new SkinFxPalette(3, new Color(1f, 0.72f, 0.22f)),
-            new SkinFxPalette(4, new Color(0.75f, 0.35f, 1f))
+            new SkinFxPalette(4, new Color(0.75f, 0.35f, 1f)),
+            new SkinFxPalette(5, CrimsonMasteryVisuals.Arc, CrimsonMasteryVisuals.Outer, CrimsonMasteryVisuals.Core)
         };
         public readonly int Index;
         public readonly Color Arc, Outer, Core;
@@ -28,6 +29,8 @@ namespace HollowSaint.FoundationKit.Vfx
             Color outer = index < 2 ? HsPalette.OuterCyan : arc * 0.65f;
             outer.a = 1f; Outer = outer;
         }
+        private SkinFxPalette(int index, Color arc, Color outer, Color core) : this(index, arc)
+        { Outer = outer; Core = core; }
 
         public static SkinFxPalette ForBody(CharacterBody body) => ForIndex(KitUtil.IsHollowSaint(body) ? body.skinIndex : 0u);
         internal static SkinFxPalette ForModel(CharacterModel model)
@@ -36,6 +39,7 @@ namespace HollowSaint.FoundationKit.Vfx
             foreach (var info in model.baseRendererInfos)
             {
                 string name = info.defaultMaterial ? info.defaultMaterial.name : "";
+                if (CrimsonMasteryVisuals.MatchesMaterial(name)) return themes[5];
                 if (name.EndsWith(" (Verdigris)", System.StringComparison.Ordinal)) return themes[2];
                 if (name.EndsWith(" (Solar)", System.StringComparison.Ordinal)) return themes[3];
                 if (name.EndsWith(" (Umbral)", System.StringComparison.Ordinal)) return themes[4];

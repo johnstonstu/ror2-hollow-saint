@@ -16,7 +16,7 @@ namespace HollowSaint
         // Other mods append SkinDefs to every survivor's controller (EnemiesReturns adds a
         // hidden Anointed skin), so anything that counts or orders skins must filter to these.
         internal static readonly string[] OwnSkinNames =
-            { "HollowSaintDefault", "HollowSaintObsidian", "HollowSaintVerdigris", "HollowSaintSolar", "HollowSaintUmbral" };
+            { "HollowSaintDefault", "HollowSaintObsidian", "HollowSaintVerdigris", "HollowSaintSolar", "HollowSaintUmbral", CrimsonMasteryVisuals.SkinName };
 
         internal static SkinDef[] OwnSkins(ModelSkinController controller)
         {
@@ -69,12 +69,18 @@ namespace HollowSaint
             var umbral = MakeVariant(model, skin, "HollowSaintUmbral", "HS_SKIN_UMBRAL_NAME", m => RelicTint(m, 2));
             umbral.icon = SkinIcon(new Color(0.07f, 0.055f, 0.12f), new Color(0.27f, 0.19f, 0.36f),
                 new Color(0.75f, 0.35f, 1f), new Color(0.11f, 0.065f, 0.17f));
+            var crimsonVow = MakeVariant(model, skin, CrimsonMasteryVisuals.SkinName,
+                CrimsonMasteryVisuals.NameToken, CrimsonMasteryMaterials.Tint);
+            crimsonVow.icon = SkinIcon(CrimsonMasteryVisuals.Plate, CrimsonMasteryVisuals.Crown,
+                CrimsonMasteryVisuals.Arc, CrimsonMasteryVisuals.Trim);
+            crimsonVow.unlockableDef = FoundationMasteryUnlock.EnsureUnlockable(crimsonVow.icon);
 
             // ModelSkinController is [RequireComponent(typeof(CharacterModel))] and its
             // ApplySkinAsync dereferences characterModel, so both must exist together.
             // Skin order must match between the body and the select-screen display.
-            model.AddComponent<ModelSkinController>().skins = new[] { skin, obsidian, verdigris, solar, umbral };
-            FoundationHopoo.Apply(characterModel, new[] { skin, obsidian, verdigris, solar, umbral });
+            var skins = new[] { skin, obsidian, verdigris, solar, umbral, crimsonVow };
+            model.AddComponent<ModelSkinController>().skins = skins;
+            FoundationHopoo.Apply(characterModel, skins);
             if (body) model.AddComponent<FoundationEliteTint>();
             model.AddComponent<FoundationSkinAnimation>();
             return characterModel;

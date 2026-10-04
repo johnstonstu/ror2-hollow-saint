@@ -66,9 +66,13 @@ namespace HollowSaint
                         display.GetComponentsInChildren<Renderer>().Length,
                     "Display skin carries a renderer info per display renderer");
                 Require(display.GetComponentInChildren<Animator>(true), "Select-screen display has an Animator");
-                Require(bodySkins.Length == 5 && displaySkins.Length == 5 &&
+                Require(bodySkins.Length == FoundationSkin.OwnSkinNames.Length && displaySkins.Length == FoundationSkin.OwnSkinNames.Length &&
                     bodySkins.Select(s => s.nameToken).SequenceEqual(displaySkins.Select(s => s.nameToken)),
-                    "All five skins have matching body and mannequin order");
+                    "All owned skins have matching body and mannequin order");
+                Require(bodySkins[5].name == CrimsonMasteryVisuals.SkinName &&
+                    bodySkins[5].unlockableDef == FoundationMasteryUnlock.EnsureUnlockable() &&
+                    displaySkins[5].unlockableDef == bodySkins[5].unlockableDef,
+                    "Appended Crimson Vow shares its native mastery unlock across body and display");
                 Require(bodySkins.All(s => s.skinDefParams != null &&
                     s.skinDefParams.rendererInfos.Length == renderers.Length),
                     "Every body skin retains all renderers");

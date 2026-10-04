@@ -6,13 +6,14 @@ using System.Collections.Generic;
 
 namespace HollowSaint.FoundationKit.Gaze
 {
-    /// <summary>Fixed-size server-to-client cosmetic messages on UNet's reliable channel.
-    /// No per-frame traffic or dependency. Collision is checked instead of replacing another handler.</summary>
+    /// <summary>Fixed-size reliable cast events plus authenticated owner tap requests.
+    /// No per-frame traffic or dependency. Collisions never replace another handler.</summary>
     internal static class GazeFuelTransport
     {
         private const short MessageId = 29037;
+        private const short RequestMessageId = 29038;
         private static bool installed, warned;
-        private const int MaxPendingOwners = 16, MaxPendingPackets = 64;
+        private const int MaxPendingOwners = 16, MaxPendingPackets = 256;
         private const float PendingLifetime = 2f;
         private sealed class Pending
         {
@@ -29,7 +30,7 @@ namespace HollowSaint.FoundationKit.Gaze
             public Kind kind;
             public byte phase, count, capacity, reserve, unspent, spent, reason, orbIndex, retained;
             public bool full, ground;
-            public float age, travel, spread, radius, sentAt;
+            public float age, travel, spread, radius, sentAt, beamDuration;
             public Vector3 origin, impact, groundPoint, normal;
             public override void Serialize(NetworkWriter writer)
             {
@@ -39,6 +40,7 @@ namespace HollowSaint.FoundationKit.Gaze
                 writer.Write(orbIndex); writer.Write(retained);
                 writer.Write(age); writer.Write(travel); writer.Write(spread); writer.Write(radius);
                 writer.Write(sentAt);
+                writer.Write(beamDuration);
                 writer.Write(origin); writer.Write(impact); writer.Write(groundPoint); writer.Write(normal);
             }
             public override void Deserialize(NetworkReader reader)
@@ -49,8 +51,17 @@ namespace HollowSaint.FoundationKit.Gaze
                 orbIndex = reader.ReadByte(); retained = reader.ReadByte();
                 age = reader.ReadSingle(); travel = reader.ReadSingle(); spread = reader.ReadSingle(); radius = reader.ReadSingle();
                 sentAt = reader.ReadSingle();
+                beamDuration = reader.ReadSingle();
                 origin = reader.ReadVector3(); impact = reader.ReadVector3(); groundPoint = reader.ReadVector3(); normal = reader.ReadVector3();
             }
+        }
+
+        internal sealed class TapRequest : MessageBase
+        {
+            public NetworkInstanceId owner;
+            public uint cast, sequence;
+            public override void Serialize(NetworkWriter writer) { writer.Write(owner); writer.Write(cast); writer.Write(sequence); }
+            public override void Deserialize(NetworkReader reader) { owner = reader.ReadNetworkId(); cast = reader.ReadUInt32(); sequence = reader.ReadUInt32(); }
         }
 
         public static void Install()
@@ -58,7 +69,42 @@ namespace HollowSaint.FoundationKit.Gaze
             if (installed) return;
             installed = true;
             NetworkManagerSystem.onStartClientGlobal += Register;
+            NetworkManagerSystem.onStartServerGlobal += RegisterServer;
             foreach (var client in NetworkClient.allClients) Register(client);
+            if (NetworkServer.active) RegisterServer();
+        }
+
+        private static void RegisterServer()
+        {
+            try
+            {
+                if (NetworkServer.handlers.ContainsKey(RequestMessageId)) { Warn("manual request id already registered", null); return; }
+                NetworkServer.RegisterHandler(RequestMessageId, ReceiveRequest);
+            }
+            catch (System.Exception error) { Warn("manual request registration failed", error); }
+        }
+
+        internal static void Request(CharacterBody body, uint castId, uint sequence)
+        {
+            if (!body || !body.hasEffectiveAuthority || NetworkServer.active) return;
+            var identity = body.GetComponent<NetworkIdentity>();
+            var connection = ClientScene.readyConnection;
+            if (!identity || connection == null) return;
+            try { connection.Send(RequestMessageId, new TapRequest { owner = identity.netId, cast = castId, sequence = sequence }); }
+            catch (System.Exception error) { Warn("manual request send failed", error); }
+        }
+
+        private static void ReceiveRequest(NetworkMessage message)
+        {
+            try
+            {
+                if (!NetworkServer.active || message.conn == null) return;
+                var request = message.ReadMessage<TapRequest>();
+                var owner = NetworkServer.FindLocalObject(request.owner);
+                var driver = owner ? owner.GetComponent<GazeFuelController>() : null;
+                if (driver) driver.ServerRequest(request.cast, request.sequence, message.conn);
+            }
+            catch (System.Exception error) { Warn("manual request receive failed", error); }
         }
 
         private static void Register(NetworkClient client)

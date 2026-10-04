@@ -92,8 +92,10 @@ namespace HollowSaint.FoundationKit.Vfx
             }
             // Socket local Y is the ring normal in the authored rest pose (see StormChargeHalo).
             Openness = 1f - Mathf.Abs(Vector3.Dot(Shape.Normal, socket.up));
-            if (Openness < 0.12f)
+            var gaze = body.GetComponent<Gaze.GazeBeam>();
+            if (Openness < 0.12f && (!gaze || gaze.Current == Gaze.GazeBeam.Phase.Idle))
             {
+                // A floating/pulsing Gaze crown must not redefine the rig's rest radius.
                 // Track the rest radius while upright, so RadiusScale follows the unfold.
                 restRadius = restRadius <= 0f ? Shape.Radius : Mathf.Lerp(restRadius, Shape.Radius, 0.05f);
             }

@@ -23,7 +23,7 @@ namespace HollowSaint
     {
         public const string Guid = "com.johnstonstu.hollowsaint";
         // Bump on every staged build; keep in sync with Package/manifest.json. 1.0.0 = first public release.
-        public const string Version = "1.1.1";
+        public const string Version = "1.2.0";
         // Two keywords describing what this build changed; shown in the top-left build tag (0.x builds only).
         public const string BuildKeywords = "release";
         private GUIStyle tagStyle;
@@ -100,6 +100,14 @@ namespace HollowSaint
                 Log.LogWarning("Hollow Saint content did not load; skipping catalog verification.");
                 return;
             }
+            try
+            {
+                bool masteryOk = AchievementManager.GetAchievementDef(FoundationMasteryUnlock.AchievementIdentifier) != null &&
+                    UnlockableCatalog.GetUnlockableDef(FoundationMasteryUnlock.UnlockableIdentifier) != null;
+                if (masteryOk) Log.LogInfo("HOLLOW_SAINT_MASTERY_CATALOG_VERIFIED");
+                else Log.LogWarning("Hollow Saint mastery achievement/unlock catalog entry missing.");
+            }
+            catch (Exception error) { Log.LogWarning("Hollow Saint mastery catalog check failed: " + error.Message); }
             try
             {
                 HollowSaint.FoundationKit.Storm.RoyalCapacitorFx.VerifyCatalog();

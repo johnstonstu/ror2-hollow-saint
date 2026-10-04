@@ -24,6 +24,7 @@ namespace HollowSaint.FoundationKit
             "HS_KEYWORD_STORM", "HS_KEYWORD_STATIC", "HS_KEYWORD_ELECTROCUTE", "HS_KEYWORD_SHOCKED",
             "HS_LORE", "HS_BODY_LORE",
             "HS_SKIN_DEFAULT_NAME", "HS_SKIN_OBSIDIAN_NAME", "HS_SKIN_VERDIGRIS_NAME", "HS_SKIN_SOLAR_NAME", "HS_SKIN_UMBRAL_NAME",
+            "HS_SKIN_CRIMSON_VOW_NAME", "ACHIEVEMENT_HOLLOWSAINTCLEARGAMEMONSOON_NAME", "ACHIEVEMENT_HOLLOWSAINTCLEARGAMEMONSOON_DESCRIPTION",
             "HS_OPTION_SPEAR_HAND_NAME", "HS_OPTION_SPEAR_HAND_DESC",
             "HS_OPTION_SPEAR_HAND_AUTO", "HS_OPTION_SPEAR_HAND_LEFT", "HS_OPTION_SPEAR_HAND_RIGHT"
         };
@@ -255,7 +256,7 @@ namespace HollowSaint.FoundationKit
             a["conductorSeconds"] = "3"; a["conductorTargets"] = "2"; a["conductorInterval"] = "0.75"; a["conductorTap"] = "20%"; a["conductorFull"] = "35%";
             a["stepStock"] = "2";
             a["circuitSeconds"] = "10"; a["radius"] = "8"; a["pulse"] = "60%"; a["interval"] = "0.5"; a["mult"] = "2.5";
-            a["gazeSeconds"] = "4"; a["dps"] = "500%"; a["armorOn"] = "yes"; a["armor"] = "30";
+            a["gazeSeconds"] = "4"; a["gazeMaxSeconds"] = "6"; a["pulseInterval"] = "0.25"; a["dps"] = "500%"; a["armorOn"] = "yes"; a["armor"] = "30";
             a["orbs"] = "5"; a["thunder"] = "1000%";
             a["decay"] = "2"; a["death"] = "partial"; a["deathPct"] = "50%"; a["jolt"] = "on"; a["stun"] = "0.5";
             a["bonus"] = "15%"; a["shocked"] = "3"; a["targets"] = "2"; a["pop"] = "150%"; a["immune"] = "4"; a["range"] = "30";
@@ -302,8 +303,9 @@ namespace HollowSaint.FoundationKit
                 Util(a["radius"] + "m") + " for " + Dmg(a["pulse"] + " damage") + " every " +
                 Util(a["interval"] + "s") + " and " + Dmg("Stormspear") + " charges " + Util(a["mult"] + "x faster") + ".";
             t["HS_SKILL_GAZE_DESC"] =
-                "Rise and fire a beam for " + Util(a["gazeSeconds"] + " seconds") + ", dealing " + Dmg(a["dps"] + " damage per second") +
-                (a["armorOn"] == "yes" ? ", with " + Util(a["armor"] + " bonus armor") : "") + ". Its " + Dmg("forks") + " reach further over time.";
+                "Rise and fire a beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + " seconds") + ", dealing " + Dmg(a["dps"] + " damage per second") +
+                (a["armorOn"] == "yes" ? ", with " + Util(a["armor"] + " bonus armor") : "") + ". Its " + Dmg("forks") + " reach further over time." +
+                " Once the beam fires, tap Special again to spend one entry orb on a pulse (minimum " + a["pulseInterval"] + "s between taps). Holding does not repeat. New orbs are saved for later. Arc Step ends the channel. Duration grows with level.";
             t["HS_PASSIVE_STORM_DESC"] =
                 "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy. Every " + a["orbs"] + " Electrocutes call down a " +
                 Dmg("Thunderbolt") + " for " + Dmg(a["thunder"] + " damage") + ".";

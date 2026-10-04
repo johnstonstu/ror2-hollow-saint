@@ -25,6 +25,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private bool captured, dirty;
         private Vector3 savedLocalPosition;
         private Quaternion savedLocalRotation;
+        private Vector3 savedLocalScale;
+        private readonly Vector3[] savedArcPositions = new Vector3[4], arcWorldPositions = new Vector3[4];
+        private bool dirtyArcs;
 
         public Vector3 Center { get; private set; }
         public Vector3 Normal { get; private set; }
@@ -39,6 +42,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
 
         public void Begin(CharacterBody owner)
         {
+            Restore();
             body = owner;
             captured = false;
             Resolve();
@@ -58,9 +62,14 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         {
             if (!dirty) return;
             dirty = false;
+            if (dirtyArcs)
+                for (int i = 0; i < arcs.Length; i++)
+                    if (arcs[i]) arcs[i].localPosition = savedArcPositions[i];
+            dirtyArcs = false;
             if (!haloRoot) return;
             haloRoot.localPosition = savedLocalPosition;
             haloRoot.localRotation = savedLocalRotation;
+            haloRoot.localScale = savedLocalScale;
         }
 
         private bool Resolve()
@@ -68,7 +77,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             var current = body && body.modelLocator ? body.modelLocator.modelTransform : null;
             if (!current) return false;
             if (current == model && haloRoot && socket) return true;
+            Restore(); // Restore the previous model before resolving a replacement.
             model = current;
+            captured = false;
             haloRoot = null;
             socket = KitUtil.ResolveSocket(body, "Halo");
             for (int i = 0; i < arcs.Length; i++) arcs[i] = null;
@@ -82,8 +93,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         }
 
         /// <summary>Called every frame while the skill is visible. weight 0 = animated pose.</summary>
-        public void Apply(Vector3 crownPoint, Vector3 beamDirection, float weight, bool firing, float dt)
+        public void Apply(Vector3 crownPoint, Vector3 beamDirection, float weight, bool firing, float dt, float pulseExpansion = 0f)
         {
+            Restore(); // Also safe if called twice before the next pre-Animator Update.
             Weight = weight;
             Center = crownPoint;
             Normal = beamDirection;
@@ -110,15 +122,36 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             if (reference.sqrMagnitude < 1e-3f) reference = Vector3.ProjectOnPlane(((Component)body).transform.forward, up);
             Quaternion socketTarget = Quaternion.AngleAxis(spin, up) * Quaternion.LookRotation(reference.normalized, up);
             Quaternion rootTarget = socketTarget * Quaternion.Inverse(socketInRoot);
-            Vector3 rootPosition = crownPoint - rootTarget * centerLocal;
-
             float w = weight * weight * (3f - 2f * weight);
+            // Pure presentation: move arc docks radially, preserving copper thickness and root scale.
+            float expansion = firing && !float.IsNaN(pulseExpansion) && !float.IsInfinity(pulseExpansion)
+                ? Mathf.Clamp01(pulseExpansion) : 0f;
+            Vector3 rootPosition = crownPoint - rootTarget * centerLocal;
             Vector3 arc = Vector3.up * Mathf.Sin(w * Mathf.PI) * 0.35f;
             savedLocalPosition = haloRoot.localPosition;
             savedLocalRotation = haloRoot.localRotation;
+            savedLocalScale = haloRoot.localScale;
             dirty = true;
             haloRoot.SetPositionAndRotation(Vector3.Lerp(animPosition, rootPosition, w) + arc,
                 Quaternion.Slerp(animRotation, rootTarget, w));
+            if (firing && w > 0.999f && arcs[0] && arcs[1] && arcs[2] && arcs[3])
+            {
+                // Recenter from live animated arc heads, including nonuniform rig scaling.
+                Vector3 center = (arcs[0].position + arcs[1].position + arcs[2].position + arcs[3].position) * 0.25f;
+                haloRoot.position += crownPoint - center;
+                if (expansion > 0f)
+                {
+                    for (int i = 0; i < arcs.Length; i++)
+                    {
+                        savedArcPositions[i] = arcs[i].localPosition;
+                        arcWorldPositions[i] = arcs[i].position;
+                    }
+                    dirtyArcs = true;
+                    for (int i = 0; i < arcs.Length; i++)
+                        arcs[i].position = arcWorldPositions[i] + Vector3.ProjectOnPlane(
+                            arcWorldPositions[i] - crownPoint, beamDirection.normalized) * (0.6f * expansion);
+                }
+            }
         }
     }
 }

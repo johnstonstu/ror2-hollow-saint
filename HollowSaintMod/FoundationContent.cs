@@ -28,6 +28,8 @@ namespace HollowSaint
                 bundle = AssetBundle.LoadFromFile(Path.Combine(Plugin.DirectoryPath, "hollowsaintassets"));
                 if (!bundle) throw new InvalidOperationException("Hollow Saint asset bundle could not be loaded");
                 FoundationLightMaps.Load(bundle);
+                try { CrimsonMasteryMaterials.Load(bundle); }
+                catch (Exception error) { Plugin.Log.LogWarning("Crimson Vow optional atlas unavailable; using material fallback: " + error.Message); }
                 var modelAsset = bundle.LoadAsset<GameObject>("mdlHollowSaint");
                 if (!modelAsset) throw new InvalidOperationException("Bundle lacks mdlHollowSaint");
                 SpearModel = bundle.LoadAsset<GameObject>("mdlConduitSpear");
@@ -80,6 +82,7 @@ namespace HollowSaint
             args.output.bodyPrefabs.Add(pack.bodyPrefabs.ToArray());
             args.output.masterPrefabs.Add(pack.masterPrefabs.ToArray());
             args.output.survivorDefs.Add(pack.survivorDefs.ToArray());
+            args.output.unlockableDefs.Add(new[] { FoundationMasteryUnlock.EnsureUnlockable() });
             HollowSaint.FoundationKit.KitContent.PopulateInto(args.output);
             args.ReportProgress(1);
             yield break;

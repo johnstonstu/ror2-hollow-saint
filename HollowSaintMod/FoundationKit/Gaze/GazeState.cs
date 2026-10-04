@@ -10,8 +10,8 @@ namespace HollowSaint.FoundationKit.Gaze
 {
     /// <summary>
     /// Gaze of the Hollow, on the "Crown" machine. Wind-up (launch to hover height while the halo
-    /// leaves the head and floats out in front), then a fixed-length beam. Runs on every machine:
-    /// the authority owns movement, aim and the early exits (recast, Arc Step, time up); the
+    /// leaves the head and floats out in front), then a duration-snapshotted beam. Runs on every machine:
+    /// the authority owns movement, aim and later discrete fuel taps; Arc Step/time end it. The
     /// server deals the damage from its own copy; GazeBeam draws the same beam everywhere.
     /// </summary>
     public class GazeState : BaseSkillState
@@ -20,19 +20,34 @@ namespace HollowSaint.FoundationKit.Gaze
         private EntityStateMachine weapon, spear, bodyMachine;
         private bool gravityHeld, ignited;
         private float targetFootY, tickTimer, forkTimer, armsRest;
-        private bool padCancel, armored;
+        private bool armored;
+        private bool endRequested;
+        private float beamDuration;
+        private readonly GazeTapEdges tapEdges = new GazeTapEdges();
         private GazeFuelController fuel;
         private GazeFuelEndReason fuelEndReason = GazeFuelEndReason.Interrupted;
 
-        private float BeamEnd => GazeTuning.WindupSeconds + GazeTuning.BeamSeconds;
+        private float BeamEnd => GazeTuning.WindupSeconds + beamDuration;
+        // EntityState.fixedAge is protected in the real engine. Read it legally
+        // inside this subclass rather than through the publicized build reference.
+        internal float AuthoritativeCastAge => fixedAge;
+        internal bool FuelAdmissionOpen => !endRequested && !GazeManualLifetime.StopBeforeWork(fixedAge, BeamEnd,
+            bodyMachine && bodyMachine.state is ArcStepState);
+        internal void ApplyServerDuration(float duration)
+        {
+            if (GazeDurationPolicy.ValidSnapshot(duration)) beamDuration = duration;
+        }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            beamDuration = GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
+            tapEdges.Begin(inputBank && inputBank.skill4.down);
             beam = GazeBeam.For(characterBody);
-            if (beam) beam.Begin(GetAimRay().direction);
+            if (beam) beam.Begin(GetAimRay().direction, beamDuration);
             fuel = characterBody ? characterBody.GetComponent<GazeFuelController>() : null;
-            if (fuel && NetworkServer.active) fuel.BeginCast();
+            if (fuel) fuel.BeginLocalCast();
+            if (fuel && NetworkServer.active) fuel.BeginCast(this, beamDuration);
             GazeFallGuard.Hold(characterBody);
             weapon = EntityStateMachine.FindByCustomName(gameObject, "Weapon");
             spear = EntityStateMachine.FindByCustomName(gameObject, StormspearRegistration.MachineName);
@@ -70,6 +85,22 @@ namespace HollowSaint.FoundationKit.Gaze
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            if (endRequested) return;
+            bool stepped = bodyMachine && bodyMachine.state is ArcStepState;
+            if (GazeManualLifetime.StopBeforeWork(fixedAge, BeamEnd, stepped))
+            {
+                // Cancellation wins a shared fixed-step boundary over intake spend,
+                // pulse arrival and baseline damage, including the remote server copy.
+                endRequested = true;
+                fuelEndReason = stepped ? GazeFuelEndReason.ArcStep : GazeFuelEndReason.Completed;
+                if (fuel && NetworkServer.active) fuel.EndCast(fuelEndReason);
+                if (isAuthority)
+                {
+                    if (stepped) KitLog.Event("GAZE_CANCELLED", "arc step");
+                    outer.SetNextState(new GazeEndState());
+                }
+                return;
+            }
             float dt = GetDeltaTime();
             if (beam) beam.Steer(GetAimRay().direction, dt, !ignited);
             if (characterBody) characterBody.SetAimTimer(1f);
@@ -90,56 +121,18 @@ namespace HollowSaint.FoundationKit.Gaze
             if (ignited && NetworkServer.active && fixedAge < BeamEnd && beam) ServerTick(dt);
             if (fuel && NetworkServer.active) fuel.Tick(fixedAge, beam);
 
-            if (!isAuthority) return;
-            bool timeUp = fixedAge >= BeamEnd;
-            bool recast = ignited && fixedAge >= GazeTuning.WindupSeconds + GazeTuning.RecastGraceSeconds &&
-                inputBank && inputBank.skill4.justPressed;
-            bool stepped = bodyMachine && bodyMachine.state is ArcStepState;
-            bool pad = padCancel && fixedAge >= 0.25f;
-            padCancel = false;
-            if (timeUp || recast || stepped || pad)
-            {
-                fuelEndReason = recast ? GazeFuelEndReason.Recast : stepped ? GazeFuelEndReason.ArcStep :
-                    pad ? GazeFuelEndReason.ControllerCancel : GazeFuelEndReason.Completed;
-                if (recast || stepped || pad) KitLog.Event("GAZE_CANCELLED", recast ? "recast" : pad ? "pad B" : "arc step");
-                // v0.9.9: the recast press is spent ending the beam, so a spare stock (Lysate Cell)
-                // does not also launch a new Gaze from the same press.
-                if (recast) inputBank.skill4.hasPressBeenClaimed = true;
-                outer.SetNextState(new GazeEndState());
-            }
         }
 
-        /// <summary>Per frame (button presses are per frame): latch B on a gamepad for FixedUpdate.</summary>
+        /// <summary>Claim every Special edge, even if empty/rejected, so extra stock
+        /// cannot restart Gaze. The original cast hold is seeded and never auto-fires.</summary>
         public override void Update()
         {
             base.Update();
-            if (isAuthority && GazeTuning.PadCancel && !padCancel && PadCancelPressed()) padCancel = true;
+            if (!isAuthority || !inputBank) return;
+            bool tap = tapEdges.Observe(inputBank.skill4.down);
+            if (tap || inputBank.skill4.justPressed) inputBank.skill4.hasPressBeenClaimed = true;
+            if (tap && fuel && !endRequested) fuel.RequestPulse();
         }
-
-        /// <summary>The "B" face button (Circle on PlayStation) of this player's gamepads, read through
-        /// Rewired's gamepad template so it is the same physical button on every pad.</summary>
-        private bool PadCancelPressed()
-        {
-            try
-            {
-                var master = characterBody ? characterBody.master : null;
-                var pcmc = master ? master.playerCharacterMasterController : null;
-                var user = pcmc && pcmc.networkUser ? pcmc.networkUser.localUser : null;
-                var player = user != null ? user.inputPlayer : null;
-                if (player == null) return false;
-                foreach (var joystick in player.controllers.Joysticks)
-                {
-                    var pad = joystick != null ? joystick.GetTemplate<Rewired.IGamepadTemplate>() : null;
-                    if (pad != null && pad.actionBottomRow2 != null && pad.actionBottomRow2.justPressed) return true;
-                }
-            }
-            catch (System.Exception error)
-            {
-                if (!warnedPad) { warnedPad = true; Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_PAD_CANCEL " + error.Message); }
-            }
-            return false;
-        }
-        private static bool warnedPad;
 
         private void Hover(float dt)
         {
@@ -179,7 +172,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         private void ServerTick(float dt)
         {
-            float progress = Mathf.Clamp01((fixedAge - GazeTuning.WindupSeconds) / Mathf.Max(0.1f, GazeTuning.BeamSeconds));
+            float progress = Mathf.Clamp01((fixedAge - GazeTuning.WindupSeconds) / Mathf.Max(0.1f, beamDuration));
             GazeServer.Reach = Mathf.Lerp(GazeTuning.ReachStart, GazeTuning.ReachEnd, progress);
             Vector3 origin = beam.Origin;
             Vector3 direction = beam.Direction;
@@ -222,14 +215,13 @@ namespace HollowSaint.FoundationKit.Gaze
             base.OnExit();
         }
 
-        // v0.9.9: was PrioritySkill, which let the Gaze skill interrupt itself whenever a spare stock
-        // existed (Lysate Cell): the recast press restarted the beam and spent the stock instead of
-        // ending it. Only death/freeze may cut it now; recast and Arc Step end it from FixedUpdate.
+        // Frozen prevents a later Special tap from spending another stock/restarting
+        // the state. Fuel taps are claimed above; Arc Step and natural expiry end it.
         public override InterruptPriority GetMinimumInterruptPriority() { return InterruptPriority.Frozen; }
     }
 
     /// <summary>The crown returns to the head. Separate state so an authority-side early end
-    /// (recast, Arc Step) reaches every machine through the networked transition.</summary>
+    /// (Arc Step) reaches every machine through the networked transition.</summary>
     public class GazeEndState : BaseState
     {
         public override void OnEnter()

@@ -22,10 +22,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 case 2: return new Color(0.64f, 0.25f, 1f); // Verdigris mint -> violet
                 case 3: return new Color(0.24f, 0.48f, 1f); // Solar gold -> cobalt
                 case 4: return new Color(0.16f, 0.82f, 1f); // Umbral violet -> ice blue
+                case 5: return CrimsonMasteryVisuals.Pulse;
                 default: return new Color(0.72f, 0.28f, 1f); // default cyan -> violet
             }
         }
-        public static Color Edge(int skin) { return Color.Lerp(Accent(skin), new Color(0.88f, 0.9f, 0.94f), 0.5f); }
+        public static Color Edge(int skin) { return skin == 5 ? CrimsonMasteryVisuals.PulseEdge : Color.Lerp(Accent(skin), new Color(0.88f, 0.9f, 0.94f), 0.5f); }
 
         public static void Load()
         {

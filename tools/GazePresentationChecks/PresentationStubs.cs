@@ -44,7 +44,7 @@ namespace UnityEngine
         public static float InverseLerp(float a,float b,float t)=>a==b?0:Clamp01((t-a)/(b-a));
         public static float SmoothStep(float a,float b,float t){t=Clamp01(t);return Lerp(a,b,t*t*(3-2*t));}
     }
-    public struct Color {public float r,g,b,a; public Color(float r,float g,float b,float a=1){this.r=r;this.g=g;this.b=b;this.a=a;} public static Color white=>new Color(1,1,1);public static Color Lerp(Color x,Color y,float t)=>new Color(Mathf.Lerp(x.r,y.r,t),Mathf.Lerp(x.g,y.g,t),Mathf.Lerp(x.b,y.b,t),Mathf.Lerp(x.a,y.a,t)); }
+    public struct Color {public float r,g,b,a; public Color(float r,float g,float b,float a=1){this.r=r;this.g=g;this.b=b;this.a=a;} public static Color white=>new Color(1,1,1);public static Color black=>new Color(0,0,0);public static Color operator *(Color c,float f)=>new Color(c.r*f,c.g*f,c.b*f,c.a*f);public static Color Lerp(Color x,Color y,float t)=>new Color(Mathf.Lerp(x.r,y.r,t),Mathf.Lerp(x.g,y.g,t),Mathf.Lerp(x.b,y.b,t),Mathf.Lerp(x.a,y.a,t)); }
     public class Shader:Object {public static Shader Find(string name)=>new Shader();}
     public class Material:Object {public string name="test";public int renderQueue;public Dictionary<string,Color> Colors=new Dictionary<string,Color>();public Dictionary<string,Texture2D> Textures=new Dictionary<string,Texture2D>();public Material(){}public Material(Material m){}public Material(Shader s){}public bool HasProperty(string p)=>true;public void SetColor(string p,Color c){Colors[p]=c;}public void SetTexture(string p,Texture2D t){Textures[p]=t;} }
     public enum TextureFormat {RGBA32}public enum TextureWrapMode {Clamp}

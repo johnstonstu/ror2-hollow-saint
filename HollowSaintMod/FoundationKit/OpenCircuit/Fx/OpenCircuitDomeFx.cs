@@ -87,7 +87,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                 var edge = new Edge { Unit = unit, World = new Vector3[unit.Length],
                     Lower = OpenCircuitDomeGeometry.IsLower(i) };
                 edges[i] = edge;
-                // Neutral narrow core remains readable on every skin; the wider edge carries hue.
+                // Sparse tapered ribbons, not closed latitude/meridian wires.
                 edge.Glow = MakeRenderer("Edge" + i + "Hue", unit.Length);
                 edge.Core = MakeRenderer("Edge" + i + "Core", unit.Length);
             }
@@ -105,6 +105,8 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             line.positionCount = count;
             line.numCapVertices = 0;
             line.numCornerVertices = 0;
+            line.widthCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.14f, 1f),
+                new Keyframe(0.86f, 1f), new Keyframe(1f, 0f));
             line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             line.receiveShadows = false;
             line.enabled = false;
@@ -131,6 +133,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             for (int path = 0; path < edges.Length; path++)
             {
                 var edge = edges[path];
+                OpenCircuitDomeGeometry.WriteUnitPath(path, time, edge.Unit);
                 for (int i = 0; i < edge.Unit.Length; i++)
                 {
                     var p = OpenCircuitDomeGeometry.ScaleTranslate(edge.Unit[i], origin, radius);
@@ -138,16 +141,18 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                 }
                 edge.Core.SetPositions(edge.World);
                 edge.Glow.SetPositions(edge.World);
-                float current = 0.92f + 0.08f * Mathf.Sin(time * 4f + path * 0.9f);
-                float strength = edge.Lower ? 0.24f : path == 0 ? 0.65f : 1f;
-                SetStyle(edge.Core, 0.025f, new Color(0.72f, 0.72f, 0.72f, 0.52f), strength * current);
-                SetStyle(edge.Glow, 0.085f, new Color(0.38f, 0.38f, 0.38f, 0.3f), strength * current);
+                float current = 0.88f + 0.12f * Mathf.Sin(time * 2f + path * 0.9f);
+                float strength = edge.Lower ? 0.18f : path < 4 ? 0.85f : 0.48f;
+                Color coreColor = palette.Arc; coreColor.a = 0.48f;
+                SetStyle(edge.Core, 0.018f, coreColor, strength * current);
+                SetStyle(edge.Glow, 0.065f, new Color(0.4f, 0.4f, 0.4f, 0.32f), strength * current);
             }
         }
 
         private static void SetStyle(LineRenderer line, float width, Color color, float strength)
         {
-            line.startWidth = line.endWidth = width;
+            // Keep the tapered widthCurve; startWidth/endWidth would rewrite its endpoints.
+            line.widthMultiplier = width;
             color *= strength;
             line.startColor = line.endColor = color;
         }

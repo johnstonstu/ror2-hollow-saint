@@ -19,8 +19,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
     public sealed class GazeBeamFx
     {
         private const int HelixCount = 2;
-        private const float HazeWidth = 3.2f, BodyWidth = 1.5f, SheathWidth = 2.3f, CoreWidth = 0.55f;
-        private const float HelixRadius = 0.95f;
+        private const float HazeWidth = 0.85f, BodyWidth = 0.36f, SheathWidth = 0.55f, CoreWidth = 0.095f;
+        private const float HelixRadius = 0.25f;
         private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
         private readonly GazeBeam owner;
@@ -33,6 +33,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private GazeTendrils tendrils;
         private GazeEmpowermentFx empowerment;
         private float focus;
+        private AnimationCurve beamWidthCurve;
         private readonly LightningLine[] arcs = new LightningLine[2];
         private Transform impact, muzzle;
         private Light impactLight, muzzleLight;
@@ -171,7 +172,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 {
                     tether.start = coreSocket ? coreSocket.position : body.corePosition;
                     tether.end = origin;
-                    tether.width = (0.35f + 0.25f * mount.Weight) * Mathf.Lerp(1f, 0.2f, focus);
+                    tether.width = (0.10f + 0.08f * mount.Weight) * Mathf.Lerp(1f, 0.2f, focus);
                     tether.Tick(dt);
                 }
             }
@@ -193,21 +194,30 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             float length = Vector3.Distance(origin, end);
             float sinceIgnite = Time.time - ignitedAt;
             float collapse = phase == GazeBeam.Phase.Ending ? 1f - Mathf.Clamp01((Time.time - endedAt) / 0.15f) : 1f;
-            float pop = 1f + 0.7f * Mathf.Clamp01(1f - sinceIgnite / 0.3f);
+            float pop = 1f + 0.2f * Mathf.Clamp01(1f - sinceIgnite / 0.18f);
             float grow = Mathf.Clamp01(sinceIgnite / 0.08f);
             float pulse = 1f + 0.07f * Mathf.Sin(Time.time * 38f) + 0.05f * (Mathf.PerlinNoise(Time.time * 9f, 0.3f) - 0.5f);
             float w = pop * grow * pulse * collapse;
 
             // Resource motion owns the accent. Duck the continuous decorative layers while
             // preserving the baseline damage beam and server-confirmed contacts.
-            FocusTint(haze, palette.Outer, 0.55f, Mathf.Lerp(1f, 0.16f, focus));
+            if (beamWidthCurve != null)
+            {
+                beamWidthCurve.MoveKey(0, new Keyframe(0f, 0.45f * (empowerment ? empowerment.CrownApertureScale : 1f)));
+                // Unity copies AnimationCurve values into the renderer on assignment.
+                if (haze) haze.widthCurve = beamWidthCurve;
+                if (beamBody) beamBody.widthCurve = beamWidthCurve;
+                if (sheath) sheath.widthCurve = beamWidthCurve;
+                if (core) core.widthCurve = beamWidthCurve;
+            }
+            FocusTint(haze, palette.Outer, 0.14f, Mathf.Lerp(1f, 0.16f, focus));
             FocusTint(beamBody, palette.Arc, 0.8f, Mathf.Lerp(1f, 0.5f, focus));
-            FocusTint(sheath, palette.Arc, 0.9f, Mathf.Lerp(1f, 0.24f, focus));
+            FocusTint(sheath, palette.Arc, 0.5f, Mathf.Lerp(1f, 0.24f, focus));
             FocusTint(core, palette.Core, 1f, Mathf.Lerp(1f, 0.38f, focus));
             foreach (var helix in helices) FocusTint(helix, palette.Core, 1f, Mathf.Lerp(1f, 0.12f, focus));
-            FocusEmitter(impactFlash, palette.Arc, 28f, Mathf.Lerp(1f, 0.12f, focus));
-            FocusEmitter(impactSparks, palette.Core, 80f, Mathf.Lerp(1f, 0.2f, focus));
-            FocusEmitter(muzzleFlash, palette.Arc, 30f, Mathf.Lerp(1f, 0.08f, focus));
+            FocusEmitter(impactFlash, palette.Arc, 5f, Mathf.Lerp(0.35f, 0.08f, focus));
+            FocusEmitter(impactSparks, palette.Arc, 18f, Mathf.Lerp(0.65f, 0.2f, focus));
+            FocusEmitter(muzzleFlash, palette.Arc, 8f, Mathf.Lerp(0.5f, 0.08f, focus));
             Line(haze, origin, end, HazeWidth * w * Mathf.Lerp(1f, 0.7f, focus), Time.time * -1.5f);
             Line(beamBody, origin, end, BodyWidth * w, Time.time * -6f);
             Line(sheath, origin, end, SheathWidth * w * (0.85f + 0.3f * Mathf.PerlinNoise(Time.time * 25f, 1.7f)), Time.time * -14f);
@@ -314,7 +324,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 }
                 line.positionCount = count;
                 line.SetPositions(helixPoints);
-                line.widthMultiplier = 0.11f * Mathf.Max(0.2f, w);
+                line.widthMultiplier = 0.035f * Mathf.Max(0.2f, w);
             }
         }
 
@@ -326,7 +336,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 if (!arc) continue;
                 arc.start = origin;
                 arc.end = end;
-                arc.width = 1.1f * w;
+                arc.width = 0.16f * w;
                 arc.Tick(dt);
             }
         }
@@ -335,17 +345,17 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         {
             snapTimer -= dt;
             if (snapTimer > 0f || w < 0.2f) return;
-            snapTimer = 0.045f;
+            snapTimer = 0.16f;
             Vector3 u = Vector3.Cross(dir, Mathf.Abs(dir.y) > 0.9f ? Vector3.right : Vector3.up).normalized;
             Vector3 v = Vector3.Cross(dir, u);
-            for (int k = 0; k < 2; k++)
+            for (int k = 0; k < 1; k++)
             {
                 float s = Random.Range(0.08f, 1f) * length;
                 float a = Random.value * Mathf.PI * 2f;
                 Vector3 radial = u * Mathf.Cos(a) + v * Mathf.Sin(a);
-                Vector3 from = origin + dir * s + radial * 0.7f;
-                Vector3 to = from + radial * Random.Range(0.7f, 2f) + dir * Random.Range(-0.6f, 1.2f);
-                LightningLine.Spawn(from, to, 0.12f, 0.5f, 0, 0.25f, palette: palette);
+                Vector3 from = origin + dir * s + radial * 0.2f;
+                Vector3 to = from + radial * Random.Range(0.2f, 0.5f) + dir * Random.Range(-0.2f, 0.4f);
+                LightningLine.Spawn(from, to, 0.08f, 0.1f, 0, 0.12f, palette: palette);
             }
         }
 
@@ -358,13 +368,13 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             if (impactLight)
             {
                 impactLight.enabled = true;
-                impactLight.intensity = (4.5f + 1.5f * Mathf.PerlinNoise(Time.time * 20f, 4.1f)) * Mathf.Clamp01(w);
+                impactLight.intensity = (1f + 0.3f * Mathf.PerlinNoise(Time.time * 20f, 4.1f)) * Mathf.Clamp01(w);
             }
             ringTimer -= dt;
             if (ringTimer <= 0f && w > 0.2f)
             {
-                ringTimer = 0.28f;
-                VfxParticles.Ring(hit.Point + normal * 0.08f, normal, 0.4f, GazeTuning.SplashRadius + 0.6f, 0.35f, 0.1f, palette.Material(VfxAssets.Trail), palette);
+                ringTimer = 0.7f;
+                VfxParticles.Ring(hit.Point + normal * 0.08f, normal, 0.15f, 0.65f, 0.22f, 0.035f, palette.Material(VfxAssets.Trail), palette);
             }
 
         }
@@ -378,7 +388,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             {
                 muzzleLight.enabled = true;
                 muzzleLight.range = 8f;
-                muzzleLight.intensity = 3.5f * Mathf.Clamp01(w);
+                muzzleLight.intensity = 1f * Mathf.Clamp01(w);
             }
         }
 
@@ -424,10 +434,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             if (impactFlash) Object.Destroy(impactFlash.gameObject);
             if (impactSparks) Object.Destroy(impactSparks.gameObject);
             if (muzzleFlash) Object.Destroy(muzzleFlash.gameObject);
-            impactFlash = VfxParticles.Loop(impact, palette.Material(VfxAssets.Flash), 28f, 0.16f, Vector2.zero, new Vector2(2.4f, 3.4f), palette.Arc);
-            impactSparks = VfxParticles.Loop(impact, palette.Material(VfxAssets.Spark), 80f, 0.45f, new Vector2(6f, 16f), new Vector2(0.08f, 0.18f), palette.Core, stretch: 0.09f, spreadAngle: 70f);
+            impactFlash = VfxParticles.Loop(impact, palette.Material(VfxAssets.Flash), 5f, 0.1f, Vector2.zero, new Vector2(0.35f, 0.55f), palette.Arc);
+            impactSparks = VfxParticles.Loop(impact, palette.Material(VfxAssets.Spark), 18f, 0.2f, new Vector2(3f, 7f), new Vector2(0.04f, 0.08f), palette.Arc, stretch: 0.05f, spreadAngle: 45f);
             // Small enough that the floating crown still frames the beam's root.
-            muzzleFlash = VfxParticles.Loop(muzzle, palette.Material(VfxAssets.Flash), 30f, 0.12f, Vector2.zero, new Vector2(0.8f, 1.1f), palette.Arc);
+            muzzleFlash = VfxParticles.Loop(muzzle, palette.Material(VfxAssets.Flash), 8f, 0.1f, Vector2.zero, new Vector2(0.2f, 0.35f), palette.Arc);
             SetEmitting(impactFlash, beamVisible);
             SetEmitting(impactSparks, beamVisible);
             SetEmitting(muzzleFlash, beamVisible);
@@ -479,8 +489,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private void SetWidthCurves()
         {
             // Pinched where it leaves the crown's aperture, full almost at once, slightly narrower at the impact.
-            var beamCurve = new AnimationCurve(new Keyframe(0f, 0.45f), new Keyframe(0.04f, 1f), new Keyframe(0.9f, 1f), new Keyframe(1f, 0.85f));
-            foreach (var line in new[] { haze, beamBody, sheath, core }) if (line) line.widthCurve = beamCurve;
+            beamWidthCurve = new AnimationCurve(new Keyframe(0f, 0.45f), new Keyframe(0.04f, 1f), new Keyframe(0.9f, 1f), new Keyframe(1f, 0.85f));
+            foreach (var line in new[] { haze, beamBody, sheath, core }) if (line) line.widthCurve = beamWidthCurve;
             var helixCurve = new AnimationCurve(new Keyframe(0f, 0.3f), new Keyframe(0.1f, 1f), new Keyframe(1f, 0.6f));
             foreach (var line in helices) if (line) line.widthCurve = helixCurve;
         }

@@ -3,5 +3,6 @@
   <ItemGroup>
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelSequence.cs" Link="GazeFuelSequence.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
   </ItemGroup>
 </Project>

@@ -21,9 +21,11 @@ namespace HollowSaint.FoundationKit.Gaze
         private readonly GazeFuelPulse[] pulses = new GazeFuelPulse[GazeFuelSchedule.MaxPhases];
         private readonly RaycastHit[] traceScratch = new RaycastHit[128];
         private readonly GazeFuelSequence receiver = new GazeFuelSequence();
-        private uint cast, sequence;
-        private float age, presentationRelease;
+        private readonly GazeManualRequestPolicy requests = new GazeManualRequestPolicy();
+        private uint cast, sequence, clientCast, clientRequestSequence;
+        private float age, presentationRelease, beamDuration, nextClientRequest;
         private bool presentationOwned;
+        private GazeState activeState;
 
         private void Awake()
         {
@@ -41,20 +43,71 @@ namespace HollowSaint.FoundationKit.Gaze
                 (beam && beam.Current != GazeBeam.Phase.Idle);
         }
 
-        internal void BeginCast()
+        internal void BeginLocalCast()
+        {
+            clientCast = clientRequestSequence = 0;
+            nextClientRequest = 0f;
+        }
+
+        internal void BeginCast(GazeState state, float duration)
         {
             if (!NetworkServer.active || !body || !meter) return;
             if (ledger.Active) EndCast(GazeFuelEndReason.Interrupted);
             cast = ++nextCast;
             if (cast == 0) cast = ++nextCast;
             sequence = 0; age = 0f;
+            activeState = state;
+            beamDuration = duration;
             meter.ClaimGazeFuel(ledger);
             var passive = body.GetComponent<ThunderboltDriver>();
             if (passive) passive.ClaimForGaze();
             schedule.Begin(ledger.Entry);
+            requests.Begin(cast);
             var packet = Packet(GazeFuelTransport.Kind.Begin);
             packet.count = (byte)ledger.Entry; packet.capacity = (byte)ledger.Capacity;
             packet.full = ledger.Entry == ledger.Capacity;
+            packet.beamDuration = beamDuration;
+            Send(packet);
+        }
+
+        /// <summary>Input edges request admission only; no client fuel or visuals
+        /// change until the server acknowledges intake.</summary>
+        internal void RequestPulse()
+        {
+            if (!body || !body.hasEffectiveAuthority || Time.unscaledTime < nextClientRequest) return;
+            nextClientRequest = Time.unscaledTime + GazeManualRequestPolicy.MinimumInterval;
+            uint id = NetworkServer.active ? cast : clientCast;
+            if (id == 0) return;
+            uint requestSequence = ++clientRequestSequence;
+            if (requestSequence == 0) requestSequence = ++clientRequestSequence;
+            if (NetworkServer.active) ServerRequest(id, requestSequence, null, true);
+            else GazeFuelTransport.Request(body, id, requestSequence);
+        }
+
+        internal void ServerRequest(uint id, uint requestSequence, NetworkConnection connection, bool localHost = false)
+        {
+            if (!NetworkServer.active || !body || !isActiveAndEnabled) return;
+            bool authenticated = localHost && body.hasEffectiveAuthority;
+            if (!localHost && connection != null && connection.isReady && body.master)
+            {
+                var controller = body.master.playerCharacterMasterController;
+                var user = controller ? controller.networkUser : null;
+                authenticated = user && user.connectionToClient == connection;
+            }
+            var machine = EntityStateMachine.FindByCustomName(gameObject, KitRegistration.CrownMachineName);
+            bool current = ledger.Active && activeState != null && machine && machine.state == activeState &&
+                activeState.FuelAdmissionOpen &&
+                body.healthComponent && body.healthComponent.alive;
+            float requestAge = activeState != null ? activeState.AuthoritativeCastAge : age;
+            if (!requests.TryAccept(id, requestSequence, authenticated, current, requestAge, GazeTuning.WindupSeconds,
+                GazeTuning.WindupSeconds + beamDuration, ledger.Unspent - schedule.PendingCount)) return;
+            int phase;
+            if (!schedule.QueueIntake(requestAge, out phase)) return;
+            age = requestAge;
+            var packet = Packet(GazeFuelTransport.Kind.Swallow);
+            packet.phase = packet.orbIndex = (byte)phase; packet.count = 1;
+            packet.unspent = (byte)ledger.Unspent; packet.reserve = (byte)ledger.Reserve;
+            packet.travel = GazeFuelSchedule.IntakeDuration;
             Send(packet);
         }
 
@@ -64,26 +117,22 @@ namespace HollowSaint.FoundationKit.Gaze
             age = elapsedSinceEntry;
             if (!body.healthComponent || !body.healthComponent.alive) { EndCast(GazeFuelEndReason.Death); return; }
             float beamAge = age - GazeTuning.WindupSeconds;
+            if (age >= GazeTuning.WindupSeconds + beamDuration) { EndCast(GazeFuelEndReason.Completed); return; }
             int phase;
-            while (schedule.TakeIntake(beamAge, out phase))
+            while (beam && schedule.TakeLaunch(age, out phase))
             {
-                var packet = Packet(GazeFuelTransport.Kind.Swallow);
-                packet.phase = (byte)phase; packet.count = (byte)schedule.Group(phase);
-                int orbIndex = 0;
-                for (int i = 0; i < phase; i++) orbIndex += schedule.Group(i);
-                packet.orbIndex = (byte)orbIndex;
-                packet.unspent = (byte)ledger.Unspent; packet.reserve = (byte)ledger.Reserve;
-                packet.travel = GazeFuelSchedule.IntakeDuration;
-                Send(packet);
-            }
-            while (beam && schedule.TakeLaunch(beamAge, out phase))
-            {
-                int group = schedule.Group(phase);
-                if (!ledger.TrySpend(group)) continue;
-                float radius = GazeFuelSchedule.SpreadRadius(beamAge, GazeTuning.BeamSeconds,
+                // A fixed-step hitch may defer an acknowledged intake. Keep its
+                // entry orb refundable instead of spending into an impossible arrival.
+                if (!GazeManualRequestPolicy.HasArrivalRoom(age, GazeTuning.WindupSeconds + beamDuration, false))
+                {
+                    KitLog.Event("GAZE_FUEL_LATE_INTAKE", "orb=" + phase);
+                    continue;
+                }
+                if (!ledger.TrySpend(1)) continue;
+                float radius = GazeFuelSchedule.SpreadRadius(beamAge, beamDuration,
                     GazeTuning.ForkRange, GazeTuning.ReachStart, GazeTuning.ReachEnd);
                 var pulse = pulses[phase];
-                pulse.Launch(body, beam.Origin, beam.Direction, phase, group, ledger.Capacity, age, radius, traceScratch);
+                pulse.Launch(body, beam.Origin, beam.Direction, phase, 1, ledger.Capacity, age, radius, traceScratch);
                 var packet = Packet(GazeFuelTransport.Kind.Launch);
                 packet.phase = (byte)phase; packet.origin = pulse.Origin; packet.impact = pulse.Impact;
                 packet.groundPoint = pulse.Ground; packet.normal = pulse.Normal; packet.ground = pulse.HasGround;
@@ -119,10 +168,12 @@ namespace HollowSaint.FoundationKit.Gaze
             packet.reserve = (byte)ledger.Reserve; packet.spent = (byte)ledger.Spent;
             int accepted = ledger.AcceptedGains, rejected = ledger.RejectedGains, entry = ledger.Entry;
             schedule.Cancel();
+            requests.Cancel();
             for (int i = 0; i < pulses.Length; i++) pulses[i].Clear();
             int retained = meter.ReleaseGazeFuel(alive);
             packet.retained = (byte)retained;
             Send(packet);
+            activeState = null;
             presentationRelease = Time.time + GazeTuning.EndSeconds;
             KitLog.Event("GAZE_FUEL_END", "cast=" + cast + " reason=" + reason + " entry=" + entry +
                 " accepted=" + accepted + " rejected=" + rejected + " spent=" + packet.spent + " retained=" + retained);
@@ -137,10 +188,20 @@ namespace HollowSaint.FoundationKit.Gaze
             if (!isActiveAndEnabled || !body || !body.healthComponent || !body.healthComponent.alive) return;
             if (!receiver.Accept(packet.cast, packet.sequence, packet.kind == GazeFuelTransport.Kind.Begin,
                 packet.kind == GazeFuelTransport.Kind.End)) return;
-            if (packet.kind == GazeFuelTransport.Kind.Begin) presentationOwned = true;
+            if (packet.kind == GazeFuelTransport.Kind.Begin)
+            {
+                presentationOwned = true;
+                clientCast = packet.cast;
+                var beam = GetComponent<GazeBeam>();
+                if (beam) beam.SetBeamDuration(packet.beamDuration);
+                var machine = EntityStateMachine.FindByCustomName(gameObject, KitRegistration.CrownMachineName);
+                var state = machine ? machine.state as GazeState : null;
+                if (state != null) state.ApplyServerDuration(packet.beamDuration);
+            }
             if (packet.kind == GazeFuelTransport.Kind.End)
             {
                 presentationOwned = false;
+                clientCast = 0;
                 presentationRelease = Time.time + GazeTuning.EndSeconds;
             }
             try

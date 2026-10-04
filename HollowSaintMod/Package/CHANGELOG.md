@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0 (private candidate)
+- Gaze fuel pulses now use fresh Special taps: one entry orb per tap, with a 0.25-second minimum interval. Holding does not repeat; new charges stay in reserve. Arc Step cancels. Unlaunched orbs return on living exits, and late taps are rejected before they can spend fuel without completing their travel.
+- Gaze channel duration is fixed at cast entry and grows by 0.1 seconds per level above 1, up to two extra seconds and a six-second total cap. The default grows from four to six seconds; longer channels also increase ordinary beam exposure and delay cooldown.
+- Gaze uses a thinner continuous beam, broad traveling pulses and physical radial crown expansion. Open Circuit now has moving tapered dome arcs. Effects reuse bounded geometry and clear on cancellation or teardown.
+- Added Crimson Vow as the sixth skin, with red conductors and gold-white Gaze pulse accents. It unlocks through the native survivor mastery condition: a qualifying winning ending on Monsoon-equivalent hard difficulty. Previous clears are not replayed for the new achievement.
+- Includes the accepted private prototype's faster, wider Arc Bolt; Stormspear recharge pause until throw; and a short, bounded conductor effect on a struck enemy. Existing direct damage and proc behavior are retained from that prototype.
+- Private source/build candidate only. Native visual, unlock, controller and multiplayer acceptance remain pending.
+
 ## 1.1.1
 - Gaze of the Hollow now has broad, branching ground tendrils throughout its channel, plus bright connectors at confirmed hit positions. The effects follow the skin palette and clear when the channel ends or is interrupted; damage and hit cadence are unchanged.
 - Stormspear keeps its original charge and crown form through flight and lodging. Damage-stat changes no longer shrink a charged spear's burst, and opening or closing Open Circuit after the throw no longer changes its crown bonus.

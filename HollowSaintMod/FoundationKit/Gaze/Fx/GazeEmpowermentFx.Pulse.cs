@@ -136,18 +136,23 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 {
                     float t = Mathf.Clamp01(age / p.travel);
                     float head = p.length * t;
-                    float tail = Mathf.Max(0f, head - Mathf.Min(5f, p.length * 0.3f));
+                    float tail = Mathf.Max(0f, head - Mathf.Min(7f, p.length * 0.45f));
                     for (int j = 0; j < p.line.Length; j++) p.line[j] = p.origin + p.direction * Mathf.Lerp(tail, head, j / (float)(p.line.Length - 1));
-                    float scale = p.finale ? 1.16f : 1f;
-                    p.outline.Draw(p.line, p.line.Length, 3.15f * scale, GazeContrastAssets.Ink, 0.36f);
-                    p.sleeve.Draw(p.line, p.line.Length, 2.85f * scale, accent, ReducedEffects ? 0.45f : 0.62f);
+                    float scale = (p.finale ? 1.16f : 1f) * Mathf.SmoothStep(0.35f, 1f, age / 0.1f);
+                    p.outline.Draw(p.line, p.line.Length, 4.2f * scale, GazeContrastAssets.Ink, 0.28f);
+                    p.sleeve.Draw(p.line, p.line.Length, 3.85f * scale, accent, ReducedEffects ? 0.4f : 0.55f);
                     p.spine.Draw(p.line, p.line.Length, 0.24f * scale, accentEdge, ReducedEffects ? 0.4f : 0.65f);
-                    if (p.finale) p.front.Diamond(p.origin + p.direction * head, p.direction, 1.22f * scale, 0.12f, accentEdge, 0.85f);
-                    else p.front.Loop(p.origin + p.direction * head, p.direction, 1.22f, 0.11f, accentEdge, 0.8f);
+                    if (p.finale) p.front.Diamond(p.origin + p.direction * head, p.direction, 1.72f * scale, 0.15f, accentEdge, 0.8f);
+                    else p.front.Loop(p.origin + p.direction * head, p.direction, 1.72f * scale, 0.14f, accentEdge, 0.75f);
                     continue;
                 }
                 p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
                 float spreadAge = age - p.travel;
+                // A short endpoint punctuation starts at supplied arrival time, never before.
+                // It is energy arrival; target-specific white-free strikes still require confirmation.
+                float arrival = 1f - Mathf.Clamp01(spreadAge / 0.18f);
+                if (arrival > 0f) p.front.Loop(p.end, p.direction, 0.35f + (1f - arrival) * 0.6f,
+                    0.12f, accentEdge, arrival * (ReducedEffects ? 0.45f : 0.75f));
                 float progress = Mathf.Clamp01(spreadAge / p.spread);
                 float fade = 1f - Mathf.Clamp01((spreadAge - p.spread * 0.6f) / (p.spread * 0.4f + 0.18f));
                 for (int i = 0; i < p.roots.Length; i++)

@@ -93,8 +93,8 @@ namespace HollowSaint.FoundationKit
             B(c, circuit, "Cooldown after crown", OpenCircuit.OpenCircuitTuning.CooldownAfterCrown, v => OpenCircuit.OpenCircuitTuning.CooldownAfterCrown = v, "The cooldown starts when the crown closes instead of on the cast, so cooldown items can't keep the crown up forever.");
 
             F(c, gaze, "Armor while channeling", Gaze.GazeTuning.Armor, v => Gaze.GazeTuning.Armor = v, 0f, 100f, 5f, "Bonus armor from the wind-up to the end of the beam (100 armor = half damage taken).");
-            B(c, gaze, "B cancels (controller)", Gaze.GazeTuning.PadCancel, v => Gaze.GazeTuning.PadCancel = v, "Pressing B (Circle on PlayStation) on a controller ends the beam early, like pressing the special again.");
-            F(c, gaze, "Beam seconds", Gaze.GazeTuning.BeamSeconds, v => Gaze.GazeTuning.BeamSeconds = v, 1f, 10f, 0.5f, "How long the beam fires.");
+            F(c, gaze, "Beam seconds", Gaze.GazeTuning.BeamSeconds, v => Gaze.GazeTuning.BeamSeconds = v, 1f, 6f, 0.5f,
+                "Base duration. Each level above 1 adds 0.1 seconds, up to 2 extra; total duration is capped at 6 seconds and fixed at cast entry.");
             F(c, gaze, "Damage per second", Gaze.GazeTuning.DamagePerSecond, v => Gaze.GazeTuning.DamagePerSecond = v, 1f, 20f, 0.5f, "Damage coefficient per second of the beam core at base attack speed. Attack speed adds ticks.");
             F(c, gaze, "Tick seconds", Gaze.GazeTuning.TickSeconds, v => Gaze.GazeTuning.TickSeconds = v, 0.1f, 0.5f, 0.05f, "Seconds between core damage ticks at base attack speed.");
             F(c, gaze, "Proc coefficient", Gaze.GazeTuning.ProcCoefficient, v => Gaze.GazeTuning.ProcCoefficient = v, 0f, 1f, 0.05f, "Item proc coefficient of each core tick (and so how much Static it builds).");

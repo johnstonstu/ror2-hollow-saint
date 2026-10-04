@@ -28,12 +28,15 @@ namespace HollowSaint.FoundationKit.Gaze
         private float nextContactFx;
         private readonly GazeCrownMount mount = new GazeCrownMount();
         private GazeBeamFx fx;
+        private GazeEmpowermentFx empowerment;
 
         public Phase Current { get; private set; }
         public float PhaseAge { get { return Time.time - phaseStart; } }
         public Vector3 Direction { get { return direction; } }
         public Vector3 Origin { get { return OriginFor(direction); } }
         public CharacterBody Body { get { return body; } }
+        /// <summary>Frozen, server-confirmed channel duration for presentation only.</summary>
+        public float BeamDuration { get; private set; }
 
         // Cosmetic network traffic is bounded independently of attack speed / damage cadence.
         internal bool ClaimContactFxTick()
@@ -64,6 +67,12 @@ namespace HollowSaint.FoundationKit.Gaze
 
         public void Begin(Vector3 aim)
         {
+            Begin(aim, GazeTuning.BeamSeconds);
+        }
+
+        public void Begin(Vector3 aim, float beamDuration)
+        {
+            SetBeamDuration(beamDuration);
             direction = aim.sqrMagnitude > 1e-4f ? aim.normalized : transform.forward;
             shownDirection = direction;
             Current = Phase.Windup;
@@ -71,6 +80,12 @@ namespace HollowSaint.FoundationKit.Gaze
             phaseStart = Time.time;
             mount.Begin(body);
             Presentation(f => f.Begin(SkinFxPalette.ForBody(body)));
+        }
+
+        public void SetBeamDuration(float duration)
+        {
+            if (!float.IsNaN(duration) && !float.IsInfinity(duration) && duration > 0f)
+                BeamDuration = duration;
         }
 
         /// <summary>Fixed step. Turns freely during the wind-up so the beam ignites where the
@@ -121,7 +136,9 @@ namespace HollowSaint.FoundationKit.Gaze
             }
             try
             {
-                mount.Apply(origin, shownDirection, weight, Current == Phase.Beam, dt);
+                if (!empowerment) empowerment = GetComponent<GazeEmpowermentFx>();
+                float expansion = empowerment && Current == Phase.Beam ? empowerment.CrownExpansion : 0f;
+                mount.Apply(origin, shownDirection, weight, Current == Phase.Beam, dt, expansion);
                 if (fx == null) fx = new GazeBeamFx(this);
                 fx.Render(Current, age, origin, shownDirection, mount, dt);
             }
@@ -147,6 +164,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         private void OnDestroy()
         {
+            mount.Release();
             if (fx != null) fx.Dispose();
             fx = null;
         }

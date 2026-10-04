@@ -53,7 +53,9 @@ namespace HollowSaint.FoundationKit
             args["pulse"] = Pct(KitTuning.OpenCircuitPulseDamageCoefficient);
             args["interval"] = Num(KitTuning.OpenCircuitPulseInterval);
             args["mult"] = Num(StormspearTuning.CrownChargeMultiplier);
-            args["gazeSeconds"] = Num(GazeTuning.BeamSeconds);
+            args["gazeSeconds"] = Num(GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, 1f));
+            args["gazeMaxSeconds"] = Num(GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, 21f));
+            args["pulseInterval"] = GazeManualRequestPolicy.MinimumInterval.ToString("0.##", CultureInfo.InvariantCulture);
             args["dps"] = Pct(GazeTuning.DamagePerSecond);
             args["armorOn"] = GazeTuning.Armor > 0.5f ? "yes" : "no";
             args["armor"] = Num(GazeTuning.Armor);

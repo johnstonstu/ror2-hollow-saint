@@ -2,7 +2,7 @@ namespace HollowSaint.FoundationKit.Gaze
 {
     /// <summary>
     /// Gaze of the Hollow (alternate special): the halo leaves the head, floats in front of the
-    /// Saint and fires a thick lightning beam for a fixed time while the Saint hovers above the
+    /// Saint and fires a continuous lightning beam while the Saint hovers above the
     /// fight. Fields, not constants: KitConfig binds them (section "7. Gaze of the Hollow").
     /// Cooldown is baked into the SkillDef at load (restart).
     /// </summary>
@@ -11,13 +11,10 @@ namespace HollowSaint.FoundationKit.Gaze
         // Timing.
         public static float Cooldown = 12f;                 // starts when the skill ends (v0.9.10: was 16)
         public static float WindupSeconds = 1.0f;           // launch + crown dismount, no damage
-        public static float BeamSeconds = 4f;
+        public static float BeamSeconds = 4f;              // base; cast-entry level policy caps total at six seconds
         // v0.9.13 (Stu): splash/fork/chain reach grows over the channel, from ReachStart to ReachEnd x the base ranges.
         public static float ReachStart = 0.4f;
         public static float ReachEnd = 1.6f;
-        public static float RecastGraceSeconds = 0.5f;      // beam age before a recast can end it early
-        // v0.9.15 (Stu): B on a controller (unbound in the default layout) ends the beam too.
-        public static bool PadCancel = true;
         // v0.9.15 (Stu): small armor bonus while channeling (wind-up and beam).
         public static float Armor = 30f;
         public const float EndSeconds = 0.4f;               // crown returns to the head

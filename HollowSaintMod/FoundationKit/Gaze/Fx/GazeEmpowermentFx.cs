@@ -20,8 +20,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private readonly HashSet<int> launches = new HashSet<int>();
         private readonly HashSet<int> strikes = new HashSet<int>();
         private readonly Orb[] fuel = new Orb[MaxCharges], reserve = new Orb[MaxCharges];
-        private readonly Pulse[] pulses = new Pulse[2];
-        private readonly Strike[] contacts = new Strike[12];
+        // .55 travel + .30 spread + .18 fade at .25s manual spacing needs five slots.
+        private readonly Pulse[] pulses = new Pulse[5];
+        // Three overlapping eight-victim arrival windows; contacts live .26 seconds.
+        private readonly Strike[] contacts = new Strike[24];
         private CharacterBody body;
         private GazeBeam beam;
         private SkinFxPalette palette;
@@ -38,6 +40,32 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         public bool EnableAudio { get; set; } = true;
         /// <summary>Adapter suppresses the ordinary charge halo while this is true.</summary>
         public bool OwnsChargePresentation { get { return active || ending; } }
+        /// <summary>Pose-owner hook, 0..1. Expand physical crown arcs radially about the live
+        /// crown center after the base pose; never scale the character or stack transforms.
+        /// Rises through the intake, peaks at launch, then returns within 0.22 seconds.
+        /// This component deliberately does not write any crown transforms.</summary>
+        public float CrownExpansion
+        {
+            get
+            {
+                if (!active || !body || !body.healthComponent || !body.healthComponent.alive) return 0f;
+                float expansion = 0f;
+                foreach (var orb in fuel)
+                    if (orb != null && orb.visible && orb.swallowing)
+                    {
+                        float t = Mathf.Clamp01((Time.time - orb.at) / orb.duration);
+                        expansion = Mathf.Max(expansion, Mathf.SmoothStep(0f, 1f, (t - 0.25f) / 0.75f));
+                    }
+                foreach (var p in pulses)
+                    if (p != null && p.active)
+                    {
+                        float age = Time.time - p.at;
+                        if (age >= 0f) expansion = Mathf.Max(expansion, 1f - Mathf.SmoothStep(0f, 1f, age / 0.22f));
+                    }
+                return expansion;
+            }
+        }
+        public float CrownApertureScale { get { return 1f + 0.6f * CrownExpansion; } }
         /// <summary>Read-only presentation envelope; baseline FX duck their decorations.
         /// Calculated from event clocks so render order cannot add a frame of delay.</summary>
         public float ReadabilityFocus

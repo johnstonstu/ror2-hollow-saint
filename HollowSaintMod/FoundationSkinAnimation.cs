@@ -113,6 +113,7 @@ namespace HollowSaint
 
         private static int Theme(string name)
         {
+            if (CrimsonMasteryVisuals.MatchesMaterial(name)) return 3;
             if (name.EndsWith(" (Verdigris)", StringComparison.Ordinal)) return 0;
             if (name.EndsWith(" (Solar)", StringComparison.Ordinal)) return 1;
             if (name.EndsWith(" (Umbral)", StringComparison.Ordinal)) return 2;
