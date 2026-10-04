@@ -12,7 +12,12 @@ static class Program
             Check(ledger.Entry+ledger.AcceptedGains==ledger.Spent+ledger.Unspent+ledger.Reserve,"launch conservation");
         }
     }
-    static void Main()
+    static int Main()
+    {
+        try { Run(); return 0; }
+        catch(Exception error) { Console.Error.WriteLine(error); return 1; }
+    }
+    static void Run()
     {
         foreach(int cap in new[]{2,5,6,20}) {
             for(int entry=0;entry<=cap;entry++) {
@@ -60,6 +65,7 @@ static class Program
         Check(Math.Abs(GazeFuelSchedule.SpreadRadius(0,4,8,.4f,1.6f)-3.2f)<.0001f&&Math.Abs(GazeFuelSchedule.SpreadRadius(4,4,8,.4f,1.6f)-12.8f)<.0001f,"radius in metres");
         Check(Math.Abs(GazeFuelSchedule.StrikeAt(1,.55f,8,8)-1.85f)<.0001f,"travel plus ground arrival");
         InputChecks();
+        ExtensionChecks();
         var seq=new GazeFuelSequence();Check(!seq.Accept(1,2,false,false),"orphan launch rejected");
         Check(seq.Accept(1,1,true,false)&&seq.Accept(1,2,false,false)&&!seq.Accept(1,2,false,false),"ordered and duplicate packets");
         Check(seq.Accept(1,4,false,true)&&!seq.Accept(1,5,false,false)&&!seq.Accept(1,1,true,false),"retired cannot resurrect");
@@ -67,6 +73,41 @@ static class Program
         Check(seq.Accept(3,1,true,false),"new cast starts");seq.Retire();Check(!seq.Accept(3,2,false,false),"disable rejects late traffic");
         Console.WriteLine("PASS manual edges, owner/cast/sequence/rate/deadline, duration, cancellation boundary and event retirement");
         Console.WriteLine("PASS "+checks+" production assertions");
+    }
+    static void ExtensionChecks()
+    {
+        foreach(float baseline in new[]{4f,5.9f,6f}) {
+            var bank=new GazeFuelLedger();bank.Begin(20,20);
+            Check(GazeLaunchDurationPolicy.Duration(baseline,bank.Spent)==baseline,"no entry/no launch grants no time");
+            for(int launch=1;launch<=20;launch++) {
+                Check(bank.TrySpend(1),"extension fixture spends one entry orb");
+                float duration=GazeLaunchDurationPolicy.Duration(baseline,bank.Spent);
+                Check(Math.Abs(duration-Math.Min(14,baseline+launch*2))<.0001f&&duration<=14,"successful launch earns two seconds up to fourteen");
+            }
+            float earned=GazeLaunchDurationPolicy.Duration(baseline,bank.Spent);
+            Check(!bank.TrySpend(1)&&GazeLaunchDurationPolicy.Duration(baseline,bank.Spent)==earned,"no ammunition cannot earn extension");
+        }
+        Check(GazeLaunchDurationPolicy.Duration(4,5)==14&&GazeLaunchDurationPolicy.Duration(6,4)==14,"default five and level twenty-one four pulses reach fourteen");
+        Check(GazeLaunchDurationPolicy.Progress(3,4)==.75f&&GazeLaunchDurationPolicy.Duration(4,1)==6&&GazeLaunchDurationPolicy.Progress(4,4)==1,"growth keeps frozen baseline while lifetime extends");
+        Check(GazeFuelSchedule.SpreadRadius(3,4,8,.4f,1.6f)==8* (.4f+1.2f*.75f),"spread retains frozen baseline radius at launch");
+        Check(GazeLaunchDurationPolicy.CanAdmit(4.6f,5,1,0)&&!GazeManualRequestPolicy.HasArrivalRoom(4.6f,5,true),"late intake can use own prospective grant");
+        Check(GazeLaunchDurationPolicy.CanAdmit(4.62f,5,1,0)&&!GazeLaunchDurationPolicy.CanAdmit(4.64f,5,1,0),"intake must finish before actual end with fixed-step safety");
+        Check(!GazeLaunchDurationPolicy.CanAdmit(4.9f,5,1,0),"prospective time cannot bridge intake beyond actual end");
+        Check(!GazeLaunchDurationPolicy.CanAdmit(12.6f,13,1,1)&&!GazeLaunchDurationPolicy.CanAdmit(10.6f,11,1,2),"queued intakes reserve headroom without supplying unearned time");
+        Check(!GazeLaunchDurationPolicy.CanAdmit(5,5,1,0)&&!GazeLaunchDurationPolicy.CanLaunch(5,5,1),"expired cast cannot revive via prospective extension");
+        Check(GazeLaunchDurationPolicy.CanLaunch(14.05f,14.9f,1)&&!GazeManualRequestPolicy.HasArrivalRoom(14.05f,14.9f,false)&&!GazeLaunchDurationPolicy.CanLaunch(14.11f,15,1),"fractional last grant can finish arrival cap grants none");
+        Check(Math.Abs(GazeLaunchDurationPolicy.Duration(5.9f,4)-13.9f)<.0001f&&GazeLaunchDurationPolicy.Duration(5.9f,5)==14,"fractional base receives final point-one second");
+        Check(GazeLaunchDurationPolicy.CanAdmit(13.75f,14.9f,1,0)&&!GazeLaunchDurationPolicy.CanAdmit(13.75f,14.9f,1,1),"fractional remaining headroom cannot be borrowed twice");
+        Check(GazeLaunchDurationPolicy.CanAdmit(13.77f,15,1,0)&&!GazeLaunchDurationPolicy.CanAdmit(13.79f,15,1,0),"at cap intake requires full unextended arrival horizon");
+        Check(!GazeLaunchDurationPolicy.CanLaunch(5.01f,5,1),"hitch past actual expiry cannot spend");
+        var pending=new GazeFuelSchedule();pending.Begin(5);var cancelled=new GazeFuelLedger();cancelled.Begin(5,5);pending.QueueIntake(3.9f,out _);
+        Check(GazeLaunchDurationPolicy.Duration(4,cancelled.Spent)==4,"acknowledged intake alone grants no time");pending.Cancel();
+        Check(!pending.TakeLaunch(4.3f,out _)&&cancelled.End(true)==5&&GazeLaunchDurationPolicy.Duration(4,cancelled.Spent)==4,"cancelled intake refunds without extension");
+        var hitched=new GazeFuelLedger();hitched.Begin(5,5);
+        if(GazeLaunchDurationPolicy.CanLaunch(5.1f,5,1))hitched.TrySpend(1);
+        Check(hitched.Spent==0&&hitched.End(true)==5&&GazeLaunchDurationPolicy.Duration(4,hitched.Spent)==4,"late hitch keeps orb refundable and duration unchanged");
+        Check(GazeDurationPolicy.ValidSnapshot(6)&&!GazeDurationPolicy.ValidSnapshot(14)&&GazeLaunchDurationPolicy.ValidActualDuration(14)&&!GazeLaunchDurationPolicy.ValidActualDuration(14.01f)&&!GazeLaunchDurationPolicy.ValidActualDuration(float.NaN),"frozen baseline six distinct from validated actual fourteen");
+        Console.WriteLine("PASS launch-only bounded extension, pending budget, cancellation and worst-arrival deadlines");
     }
     static void InputChecks()
     {

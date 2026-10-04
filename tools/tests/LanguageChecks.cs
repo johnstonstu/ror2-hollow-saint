@@ -306,7 +306,7 @@ namespace HollowSaint.FoundationKit
             t["HS_SKILL_GAZE_DESC"] =
                 "Rise and fire a beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + " seconds") + ", dealing " + Dmg(a["dps"] + " damage per second") +
                 (a["armorOn"] == "yes" ? ", with " + Util(a["armor"] + " bonus armor") : "") + ". Its " + Dmg("forks") + " reach further over time." +
-                " Once the beam fires, press Primary to spend one entry orb on a pulse (minimum " + a["pulseInterval"] + "s between presses). Holding does not repeat; release Primary first if already held. New orbs are saved for later. Other combat skills are unavailable until the channel ends. Duration grows with level.";
+                " Once the beam fires, press Primary to spend one entry orb on a pulse (minimum " + a["pulseInterval"] + "s between presses). Holding does not repeat; release Primary first if already held. New orbs are saved for later. Other combat skills are unavailable until the channel ends. Duration grows with level. Each launched pulse adds 2 seconds, up to 14 seconds of beam time.";
             t["HS_PASSIVE_STORM_DESC"] =
                 "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy. Every " + a["orbs"] + " Electrocutes call down a " +
                 Dmg("Thunderbolt") + " for " + Dmg(a["thunder"] + " damage") + ".";

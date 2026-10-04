@@ -30,6 +30,8 @@ namespace HollowSaint.FoundationKit.Gaze
             public Kind kind;
             public byte phase, count, capacity, reserve, unspent, spent, reason, orbIndex, retained;
             public bool full, ground;
+            // Begin carries the frozen baseline; Launch carries the earned actual
+            // duration. Reuse this reliable field without an extra event or snapshot.
             public float age, travel, spread, radius, sentAt, beamDuration;
             public Vector3 origin, impact, groundPoint, normal;
             public override void Serialize(NetworkWriter writer)

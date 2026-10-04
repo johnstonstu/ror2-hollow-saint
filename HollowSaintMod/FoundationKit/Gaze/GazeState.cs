@@ -21,7 +21,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private float targetFootY, tickTimer, forkTimer, armsRest;
         private bool armored;
         private bool endRequested;
-        private float beamDuration;
+        private float beamDuration, progressionDuration;
         private GazeSkillOverrides controls;
         private GazeFuelController fuel;
         private GazeFuelEndReason fuelEndReason = GazeFuelEndReason.Interrupted;
@@ -32,19 +32,25 @@ namespace HollowSaint.FoundationKit.Gaze
         internal float AuthoritativeCastAge => fixedAge;
         internal bool FuelAdmissionOpen => !endRequested && !GazeManualLifetime.StopBeforeWork(fixedAge, BeamEnd);
         internal bool PrimaryPulseReady => FuelAdmissionOpen && fixedAge >= GazeTuning.WindupSeconds &&
-            GazeManualRequestPolicy.HasArrivalRoom(fixedAge, BeamEnd, true);
+            fuel && fuel.CanAdmitPulse(fixedAge, BeamEnd);
         internal void ApplyServerDuration(float duration)
         {
-            if (!GazeDurationPolicy.ValidSnapshot(duration)) return;
+            if (!GazeLaunchDurationPolicy.ValidActualDuration(duration)) return;
             beamDuration = duration;
             if (beam) beam.SetBeamDuration(duration);
+        }
+        internal void ApplyServerBaseline(float duration)
+        {
+            if (!GazeDurationPolicy.ValidSnapshot(duration)) return;
+            progressionDuration = duration;
+            if (beam) beam.SetProgressionDuration(duration);
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
             ClaimOtherCombat();
-            beamDuration = GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
+            progressionDuration = beamDuration = GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
             beam = GazeBeam.For(characterBody);
             if (beam) beam.Begin(GetAimRay().direction, beamDuration);
             fuel = characterBody ? characterBody.GetComponent<GazeFuelController>() : null;
@@ -181,7 +187,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         private void ServerTick(float dt)
         {
-            float progress = Mathf.Clamp01((fixedAge - GazeTuning.WindupSeconds) / Mathf.Max(0.1f, beamDuration));
+            float progress = GazeLaunchDurationPolicy.Progress(fixedAge - GazeTuning.WindupSeconds, progressionDuration);
             GazeServer.Reach = Mathf.Lerp(GazeTuning.ReachStart, GazeTuning.ReachEnd, progress);
             Vector3 origin = beam.Origin;
             Vector3 direction = beam.Direction;

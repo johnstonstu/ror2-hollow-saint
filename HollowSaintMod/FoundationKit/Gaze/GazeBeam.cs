@@ -35,8 +35,10 @@ namespace HollowSaint.FoundationKit.Gaze
         public Vector3 Direction { get { return direction; } }
         public Vector3 Origin { get { return OriginFor(direction); } }
         public CharacterBody Body { get { return body; } }
-        /// <summary>Frozen, server-confirmed channel duration for presentation only.</summary>
+        /// <summary>Server-confirmed channel lifetime including earned extensions.</summary>
         public float BeamDuration { get; private set; }
+        /// <summary>Frozen level baseline; extending lifetime never shrinks growth.</summary>
+        public float ProgressionDuration { get; private set; }
 
         // Cosmetic network traffic is bounded independently of attack speed / damage cadence.
         internal bool ClaimContactFxTick()
@@ -72,6 +74,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         public void Begin(Vector3 aim, float beamDuration)
         {
+            SetProgressionDuration(beamDuration);
             SetBeamDuration(beamDuration);
             direction = aim.sqrMagnitude > 1e-4f ? aim.normalized : transform.forward;
             shownDirection = direction;
@@ -80,6 +83,10 @@ namespace HollowSaint.FoundationKit.Gaze
             phaseStart = Time.time;
             mount.Begin(body);
             Presentation(f => f.Begin(SkinFxPalette.ForBody(body)));
+        }
+        public void SetProgressionDuration(float duration)
+        {
+            if (GazeDurationPolicy.ValidSnapshot(duration)) ProgressionDuration = duration;
         }
 
         public void SetBeamDuration(float duration)

@@ -189,7 +189,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             KitSfx.Play(Beat.SpearThrow, gameObject, true);
             // v0.9.1: a charged or crown throw adds the sampled crackle so a 1400% throw sounds bigger than a tap.
             string heavy = KitSfx.SpearThrowHeavy;
-            if (!string.IsNullOrEmpty(heavy) && (charge01 >= 0.66f || crown))
+            if (!string.IsNullOrEmpty(heavy) && (charge01 >= 0.50f || crown))
                 RoR2.Util.PlaySound(heavy, gameObject);
         }
 

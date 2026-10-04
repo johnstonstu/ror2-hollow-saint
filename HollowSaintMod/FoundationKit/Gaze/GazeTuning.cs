@@ -11,7 +11,7 @@ namespace HollowSaint.FoundationKit.Gaze
         // Timing.
         public static float Cooldown = 12f;                 // starts when the skill ends (v0.9.10: was 16)
         public static float WindupSeconds = 1.0f;           // launch + crown dismount, no damage
-        public static float BeamSeconds = 4f;              // base; cast-entry level policy caps total at six seconds
+        public static float BeamSeconds = 4f;              // base; level baseline caps at six, launched pulses extend to fourteen
         // v0.9.13 (Stu): splash/fork/chain reach grows over the channel, from ReachStart to ReachEnd x the base ranges.
         public static float ReachStart = 0.4f;
         public static float ReachEnd = 1.6f;

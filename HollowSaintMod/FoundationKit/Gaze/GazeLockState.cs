@@ -11,7 +11,7 @@ namespace HollowSaint.FoundationKit.Gaze
     /// </summary>
     public class GazeLockState : BaseState
     {
-        private const float SafetySeconds = 10f;
+        private const float SafetySeconds = 17f;
         private EntityStateMachine crown;
 
         public override void OnEnter()

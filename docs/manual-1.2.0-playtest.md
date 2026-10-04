@@ -11,7 +11,7 @@ Status: source-reviewed candidate; the checks below are **pending native gamepla
 - An already committed spear throw finishes normally. An unthrown charge is interrupted and refunded before its slot is overridden; the native Secondary bank stays active until that handoff completes, with further Secondary input claimed.
 - Taps during windup, with no available entry fuel, too close together, or too late are rejected. Accepted taps are at least **0.25 seconds** apart; rejected taps are not deferred into an automatic burst.
 - An accepted tap starts **0.32 seconds of intake**, followed by **0.35–0.55 seconds of travel**, then up to **0.30 seconds of ground spread**. Aim is sampled at launch, after intake.
-- Admission requires **more than 1.22 seconds remaining** before beam end: intake + maximum travel + spread + 0.05 seconds safety. Equality is rejected. A delayed intake is checked again before spending, so a fixed-step hitch cannot spend fuel into an impossible arrival.
+- Admission requires intake plus 0.05 seconds safety to finish before the **current** beam end (more than 0.37 seconds remaining). Maximum travel, spread and safety must fit within the end including only this pulse's prospective extension. Pending intakes reserve extension headroom but do not provide unearned time. At the 14-second cap, admission again requires more than 1.22 seconds remaining. Equality is rejected. A delayed intake is checked again before spending; it cannot revive an expired cast.
 - **There is no manual cancel binding.** The channel ends naturally or through a real interruption, death or disable. Utility is unavailable, so Arc Step is not a channel cancel; neither Special nor a hidden physical B/Circle shortcut ends it.
 - Cancellation and natural end stop pending work. A launched pulse cancelled before impact has still spent its orb; there is no refund for a miss or an interrupted arrival.
 
@@ -21,13 +21,17 @@ Sources: [GazeState](../HollowSaintMod/FoundationKit/Gaze/GazeState.cs), [reques
 
 **Entry fuel** is the existing passive bank claimed when Gaze starts. Accepted intake reserves availability, but the orb is **spent only at launch**. New gains during the cast go into a separate **reserve** and cannot feed that cast's manual shots. Living exits return unlaunched entry fuel plus reserve; death/disable clears them. Returning a full bank must not automatically fire an end-of-cast Thunderbolt. Pulse visuals do not authorize damage or spend resources; the server does.
 
-Beam duration is frozen at cast entry:
+The baseline duration is frozen at cast entry:
 
 ```text
 min(6, clamp(configuredBaseSeconds, 1, 6) + 0.10 * clamp(level - 1, 0, 20))
 ```
 
 With the default base, this is **4 seconds at level 1**, **5 at level 11**, and **6 at level 21 and above**, after the windup. A configured base above six seconds is capped. Mid-cast level changes do not extend the current beam. Level scaling grants time, not free entry orbs or extra Special stocks.
+
+Each **successfully launched** entry-fuel pulse adds **2 seconds**, clamped to **14 seconds total beam time**. A final grant can be smaller when it reaches the cap. Four seconds reaches fourteen after five launches; six seconds reaches fourteen after four. Further entry-fuel pulses can still fire when arrival fits, but grant no time. Rejected taps, cancelled intakes and new reserve gains grant no time. The fourteen-second cap is the starting private playtest tuning, not a final balance commitment.
+
+Reach and ground-spread progression use the frozen baseline, so extending the channel cannot retract the beam or shrink later pulses. Extended time stays at the existing maximum reach. No movement root, defense buff or invulnerability was added.
 
 Longer duration also means more ordinary-beam exposure, longer hover/armor uptime, and a later cooldown start. Duration and manual-tap cadence do not scale with attack speed; the ordinary beam retains its existing attack-speed tick behavior without a second duration multiplier.
 
@@ -36,6 +40,10 @@ Longer duration also means more ordinary-beam exposure, longer hover/armor uptim
 The ordinary beam should read as a **thin baseline**, with a **fatter travelling pulse** for each launched orb. Intake should move an entry orb into the crown before that pulse travels out. Confirmed enemy connectors should agree with actual hits; the expanding ground pattern is not blanket area damage.
 
 The physical crown arcs expand **radially**, preserving their thickness, and return to their original pose on every exit. Open Circuit has a new lightning dome to inspect separately: it must follow its active state and clear when the effect ends. These are candidate visual expectations, not approval of the in-game result.
+
+Arc Bolt cast gains a short mage-lightning body layer; confirmed Arc Bolt and lodged spear impacts gain a captain-tazer accent. These additions run only alongside the loaded custom bank, avoiding doubled fallback cues, and are limited to one layer per beat/key per 0.25 seconds. Transient hit effects share a global beat limit; persistent body casts throttle independently. Saturated tracking skips extra layers. Spear's existing heavy throw crackle starts at 50% charge. Gaze audio, chain audio, sound assets and bank volume settings are unchanged. Audition high attack speed and simultaneous hits for clarity before accepting the mix.
+
+**Near-expiry multiplayer limitation:** duration is earned on the server and acknowledged by the existing reliable Launch packet. A remote owner can reach its old local deadline before a very late grant arrives and exit after the server spent the orb. This prototype retains the existing owner end policy; it has no speculative client extension. Test late pulses under latency before multiplayer acceptance.
 
 ## Later solo playtest
 
@@ -49,9 +57,10 @@ Record the candidate commit/DLL hash, game build, level, config, input device/bi
 | Windup / empty entry | Press Primary during windup and keep holding through ignition: no pulse. Release, then press again: one pulse. Presses while rate-limited or without entry fuel must likewise require a later release/press rather than firing when readiness returns. Zero entry allows the ordinary beam; reserve earned later stays unavailable for shots. | Pending |
 | Intake interruption | A real living interruption before launch returns the unlaunched orb; no pulse damage follows. | Pending |
 | In-flight interruption | An interruption after launch removes pending arrivals without refunding that spent orb. Repeat at a near-arrival boundary. | Pending |
-| Late admission | Taps with 1.22 s or less remaining do not intake or spend. Earlier accepted pulses finish before natural end; no post-end pulse damage. | Pending |
+| Late admission | With extension headroom, a tap with more than 0.37 s remaining can launch and earn its own extra time. Less time rejects before intake; hitches beyond actual expiry never revive it. At the cap, more than 1.22 s is required. Pending intakes cannot borrow each other's grants. | Pending |
 | Reserve / full merge | New gains remain separate; living exit returns the expected bank, with no automatic end-of-cast Thunderbolt. | Pending |
 | Duration bounds | Default levels 1/11/21 give 4/5/6 s of beam; higher levels and configured bases above 6 stay capped. Level-up during a cast does not extend it. | Pending |
+| Pulse extensions | Each successful launch adds 2 s up to 14 s total. Check 4 s + five launches and 6 s + four launches. Failed taps and cancelled intakes add zero. Reach never retracts at launch; unchanged DPS over longer time produces more total damage and later cooldown. | Pending |
 | Attack speed | Faster ordinary-beam ticks do not shorten manual admission spacing or extend duration. | Pending |
 | Aim and terrain | Steer during intake; verify launch aim, near/far travel, ground arrival, moving targets, walls, slopes and ledges. No invented ground strikes over voids. | Pending |
 | Input parity | Keyboard and physical controller honor mapped Special activation and fresh Primary edges. Holding Primary on entry produces no pulse until release/press. Default controller RB→RT and keyboard R→LMB are examples, not hardcoded bindings. | Pending |

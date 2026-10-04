@@ -105,10 +105,41 @@ namespace HollowSaint.FoundationKit.Vfx
             }
         }
 
-        /// <summary>Second sound layered on a beat (the Thunderbolt strike is two events).</summary>
+        /// <summary>Short existing-bank layers; fallback beats already use these sounds.</summary>
         private static string ExtraFor(Beat beat)
         {
+            if (CustomSoundBank.Ready)
+            {
+                switch (beat)
+                {
+                    case Beat.ArcBoltCast: return "Play_mage_m1_cast_lightning";
+                    case Beat.BoltImpact: case Beat.SpearStuck: return "Play_captain_m2_tazer_impact";
+                }
+            }
             return beat == Beat.ThunderStrike && !CustomSoundBank.Ready ? "Play_mage_R_lightningBlast" : null;
+        }
+
+        private static readonly Dictionary<long, float> lastExtra = new Dictionary<long, float>();
+        private static bool AllowExtra(Beat beat, GameObject source, bool persistentSource)
+        {
+            // Leave the established Thunderbolt sequence alone. New layers cannot
+            // stack with attack speed or simultaneous transient hit effects.
+            if (beat == Beat.ThunderStrike) return true;
+            long key = (long)(uint)beat;
+            if (persistentSource) key |= ((long)source.GetInstanceID()) << 8;
+            float now = Time.unscaledTime;
+            bool tracked = lastExtra.TryGetValue(key, out float last);
+            if (tracked && now >= last && now - last < 0.25f) return false;
+            if (!tracked && lastExtra.Count >= 64)
+            {
+                long expired = 0;
+                foreach (var entry in lastExtra)
+                    if (now < entry.Value || now - entry.Value >= 0.25f) { expired = entry.Key; break; }
+                if (expired == 0) return false;
+                lastExtra.Remove(expired);
+            }
+            lastExtra[key] = now;
+            return true;
         }
 
         /// <summary>Banks our placeholder events live in. Loading an already-loaded bank is harmless.</summary>
@@ -227,7 +258,7 @@ namespace HollowSaint.FoundationKit.Vfx
             }
             Util.PlaySound(name, source);
             string extra = ExtraFor(beat);
-            if (extra != null) Util.PlaySound(extra, source);
+            if (extra != null && AllowExtra(beat, source, persistentSource)) Util.PlaySound(extra, source);
         }
     }
 

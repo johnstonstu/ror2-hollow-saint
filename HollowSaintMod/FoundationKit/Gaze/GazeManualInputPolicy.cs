@@ -20,6 +20,29 @@ namespace HollowSaint.FoundationKit.Gaze
         public static bool StopBeforeWork(float age, float beamEnd) => age >= beamEnd;
     }
 
+    /// <summary>A successful entry launch earns time; an intake only reserves the
+    /// possibility of its own grant. Queued intakes never supply unearned time.</summary>
+    internal static class GazeLaunchDurationPolicy
+    {
+        public const float ExtraPerLaunch = 2f;
+        public const float MaximumActualSeconds = 14f;
+        public static float Duration(float frozenBase, int successfulLaunches) => Math.Min(MaximumActualSeconds,
+            frozenBase + ExtraPerLaunch * Math.Max(0, successfulLaunches));
+        public static float Progress(float beamAge, float frozenBase) =>
+            Math.Max(0f, Math.Min(1f, beamAge / Math.Max(0.1f, frozenBase)));
+        public static float ProspectiveEnd(float actualEnd, float windup, int pendingIntakes) => actualEnd +
+            Math.Max(0f, Math.Min(ExtraPerLaunch, MaximumActualSeconds - (actualEnd - windup) -
+                ExtraPerLaunch * Math.Max(0, pendingIntakes)));
+        public static bool CanAdmit(float age, float actualEnd, float windup, int pendingIntakes) =>
+            age + GazeFuelSchedule.IntakeDuration + GazeManualRequestPolicy.FixedStepSafety < actualEnd &&
+            GazeManualRequestPolicy.HasArrivalRoom(age, ProspectiveEnd(actualEnd, windup, pendingIntakes), true);
+        public static bool CanLaunch(float age, float actualEnd, float windup) =>
+            age < actualEnd && GazeManualRequestPolicy.HasArrivalRoom(age,
+                ProspectiveEnd(actualEnd, windup, 0), false);
+        public static bool ValidActualDuration(float seconds) => !float.IsNaN(seconds) && !float.IsInfinity(seconds) &&
+            seconds >= 1f && seconds <= MaximumActualSeconds;
+    }
+
     /// <summary>Seed from the cast press. Holding it never becomes a fueled tap;
     /// only a later release-to-press edge can request one orb.</summary>
     internal sealed class GazeTapEdges

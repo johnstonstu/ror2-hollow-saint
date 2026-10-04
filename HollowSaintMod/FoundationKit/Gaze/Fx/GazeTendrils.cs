@@ -57,7 +57,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             if (Time.time < refreshAt) return;
             refreshAt = Time.time + Refresh;
             float reach = Mathf.Lerp(GazeTuning.ReachStart, GazeTuning.ReachEnd,
-                Mathf.Clamp01(beam.PhaseAge / Mathf.Max(0.1f, GazeTuning.BeamSeconds)));
+                GazeLaunchDurationPolicy.Progress(beam.PhaseAge, beam.ProgressionDuration));
             // Impact arcs stay inside the splash footprint (including their half-width).
             // With no ground at the endpoint, a small dim caster splash signifies channel energy.
             Vector3 center;

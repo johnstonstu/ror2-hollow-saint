@@ -23,16 +23,19 @@ namespace HollowSaint.FoundationKit.Gaze
         private readonly GazeFuelSequence receiver = new GazeFuelSequence();
         private readonly GazeManualRequestPolicy requests = new GazeManualRequestPolicy();
         private uint cast, sequence, clientCast, clientRequestSequence;
-        private float age, presentationRelease, beamDuration, nextClientRequest;
+        private float age, presentationRelease, beamDuration, frozenBeamDuration, nextClientRequest;
         private bool presentationOwned;
         private GazeState activeState;
         private GazeState localState, acknowledgedState;
-        private int clientAvailableEntry, clientEntryCapacity;
-        private float clientBeamDuration;
+        private int clientAvailableEntry, clientEntryCapacity, clientPendingIntakes;
+        private float clientBeamDuration, clientProgressionDuration;
         internal int AvailableEntry => NetworkServer.active && ledger.Active ?
             Mathf.Max(0, ledger.Unspent - schedule.PendingCount) : clientAvailableEntry;
         internal int EntryCapacity => NetworkServer.active && ledger.Active ? ledger.Capacity : Mathf.Max(2, clientEntryCapacity);
         internal bool PulseRequestReady => Time.unscaledTime >= nextClientRequest;
+        internal bool CanAdmitPulse(float castAge, float actualEnd) => GazeLaunchDurationPolicy.CanAdmit(castAge, actualEnd,
+            GazeTuning.WindupSeconds,
+            NetworkServer.active ? schedule.PendingCount : clientPendingIntakes);
 
         private void Awake()
         {
@@ -61,7 +64,11 @@ namespace HollowSaint.FoundationKit.Gaze
                 clientAvailableEntry = 0;
             }
             acknowledgedState = clientCast != 0 ? state : null;
-            if (acknowledgedState != null) state.ApplyServerDuration(clientBeamDuration);
+            if (acknowledgedState != null)
+            {
+                state.ApplyServerBaseline(clientProgressionDuration);
+                state.ApplyServerDuration(clientBeamDuration);
+            }
             clientRequestSequence = 0;
             nextClientRequest = 0f;
         }
@@ -86,7 +93,7 @@ namespace HollowSaint.FoundationKit.Gaze
             if (cast == 0) cast = ++nextCast;
             sequence = 0; age = 0f;
             activeState = state;
-            beamDuration = duration;
+            frozenBeamDuration = beamDuration = duration;
             meter.ClaimGazeFuel(ledger);
             var passive = body.GetComponent<ThunderboltDriver>();
             if (passive) passive.ClaimForGaze();
@@ -128,8 +135,11 @@ namespace HollowSaint.FoundationKit.Gaze
                 activeState.FuelAdmissionOpen &&
                 body.healthComponent && body.healthComponent.alive;
             float requestAge = activeState != null ? activeState.AuthoritativeCastAge : age;
+            current = current && CanAdmitPulse(requestAge, GazeTuning.WindupSeconds + beamDuration);
+            float prospectiveEnd = GazeLaunchDurationPolicy.ProspectiveEnd(GazeTuning.WindupSeconds + beamDuration,
+                GazeTuning.WindupSeconds, schedule.PendingCount);
             if (!requests.TryAccept(id, requestSequence, authenticated, current, requestAge, GazeTuning.WindupSeconds,
-                GazeTuning.WindupSeconds + beamDuration, ledger.Unspent - schedule.PendingCount)) return;
+                prospectiveEnd, ledger.Unspent - schedule.PendingCount)) return;
             int phase;
             if (!schedule.QueueIntake(requestAge, out phase)) return;
             age = requestAge;
@@ -152,13 +162,18 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 // A fixed-step hitch may defer an acknowledged intake. Keep its
                 // entry orb refundable instead of spending into an impossible arrival.
-                if (!GazeManualRequestPolicy.HasArrivalRoom(age, GazeTuning.WindupSeconds + beamDuration, false))
+                if (!GazeLaunchDurationPolicy.CanLaunch(age, GazeTuning.WindupSeconds + beamDuration, GazeTuning.WindupSeconds))
                 {
                     KitLog.Event("GAZE_FUEL_LATE_INTAKE", "orb=" + phase);
                     continue;
                 }
                 if (!ledger.TrySpend(1)) continue;
-                float radius = GazeFuelSchedule.SpreadRadius(beamAge, beamDuration,
+                beamDuration = GazeLaunchDurationPolicy.Duration(frozenBeamDuration, ledger.Spent);
+                // Earned duration changes before any damage or cosmetic registration.
+                // The existing reliable Launch event acknowledges it to all peers.
+                if (activeState != null) activeState.ApplyServerDuration(beamDuration);
+                if (beam) beam.SetBeamDuration(beamDuration);
+                float radius = GazeFuelSchedule.SpreadRadius(beamAge, frozenBeamDuration,
                     GazeTuning.ForkRange, GazeTuning.ReachStart, GazeTuning.ReachEnd);
                 var pulse = pulses[phase];
                 pulse.Launch(body, beam.Origin, beam.Direction, phase, 1, ledger.Capacity, age, radius, traceScratch);
@@ -167,6 +182,7 @@ namespace HollowSaint.FoundationKit.Gaze
                 packet.groundPoint = pulse.Ground; packet.normal = pulse.Normal; packet.ground = pulse.HasGround;
                 packet.radius = pulse.Radius; packet.travel = pulse.Travel; packet.spread = GazeFuelSchedule.SpreadDuration;
                 packet.full = false; // Prototype deliberately has no finale bonus/presentation.
+                packet.beamDuration = beamDuration;
                 Send(packet);
             }
             for (int i = 0; i < schedule.Count; i++) pulses[i].Resolve(body, age, this);
@@ -223,8 +239,23 @@ namespace HollowSaint.FoundationKit.Gaze
                 clientCast = packet.cast;
                 clientAvailableEntry = packet.count;
                 clientEntryCapacity = packet.capacity;
-                clientBeamDuration = packet.beamDuration;
+                clientPendingIntakes = 0;
                 acknowledgedState = localState;
+                if (GazeDurationPolicy.ValidSnapshot(packet.beamDuration))
+                {
+                    clientProgressionDuration = packet.beamDuration;
+                    var beam = GetComponent<GazeBeam>();
+                    if (beam) beam.SetProgressionDuration(packet.beamDuration);
+                    var machine = EntityStateMachine.FindByCustomName(gameObject, KitRegistration.CrownMachineName);
+                    var state = machine ? machine.state as GazeState : null;
+                    if (state != null) state.ApplyServerBaseline(packet.beamDuration);
+                }
+            }
+            bool durationValid = packet.kind == GazeFuelTransport.Kind.Begin ?
+                GazeDurationPolicy.ValidSnapshot(packet.beamDuration) : GazeLaunchDurationPolicy.ValidActualDuration(packet.beamDuration);
+            if ((packet.kind == GazeFuelTransport.Kind.Begin || packet.kind == GazeFuelTransport.Kind.Launch) && durationValid)
+            {
+                clientBeamDuration = packet.beamDuration;
                 var beam = GetComponent<GazeBeam>();
                 if (beam) beam.SetBeamDuration(packet.beamDuration);
                 var machine = EntityStateMachine.FindByCustomName(gameObject, KitRegistration.CrownMachineName);
@@ -232,12 +263,20 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (state != null) state.ApplyServerDuration(packet.beamDuration);
             }
             if (packet.kind == GazeFuelTransport.Kind.Swallow)
+            {
                 clientAvailableEntry = Mathf.Max(0, clientAvailableEntry - packet.count);
+                clientPendingIntakes += packet.count;
+            }
+            if (packet.kind == GazeFuelTransport.Kind.Launch)
+            {
+                clientPendingIntakes = Mathf.Max(0, clientPendingIntakes - 1);
+            }
             if (packet.kind == GazeFuelTransport.Kind.End)
             {
                 presentationOwned = false;
                 clientCast = 0;
                 clientAvailableEntry = 0;
+                clientPendingIntakes = 0;
                 acknowledgedState = null;
                 presentationRelease = Time.time + GazeTuning.EndSeconds;
             }
@@ -284,6 +323,7 @@ namespace HollowSaint.FoundationKit.Gaze
         {
             receiver.Retire(); presentationOwned = false; presentationRelease = 0f;
             clientCast = 0; clientAvailableEntry = 0;
+            clientPendingIntakes = 0;
             localState = acknowledgedState = null;
             if (!presentation) return;
             try { presentation.Clear(); }
