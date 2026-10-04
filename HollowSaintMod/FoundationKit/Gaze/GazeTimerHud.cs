@@ -11,7 +11,10 @@ namespace HollowSaint.FoundationKit.Gaze
     {
         private CharacterBody body;
         private EntityStateMachine crown;
-        private GUIStyle labelStyle;
+        private GUIStyle titleStyle, secondsStyle;
+        private GazeState observedState;
+        private float lastDuration, gainUntil = -1f;
+        private string title, gainedTitle;
         private float shownSeconds = -1f;
         private string label;
         private bool warned;
@@ -41,7 +44,7 @@ namespace HollowSaint.FoundationKit.Gaze
             if (state == null || !state.TimerVisible) return;
             var hud = LocalHud();
             if (!hud) return;
-            try { Draw(hud.mainContainerCanvas.pixelRect, state.RemainingBeamSeconds); }
+            try { Sample(state); Draw(hud.mainContainerCanvas.pixelRect, state.RemainingBeamSeconds); }
             catch (System.Exception error)
             {
                 if (!warned) { warned = true; Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_TIMER " + error); }
@@ -49,30 +52,73 @@ namespace HollowSaint.FoundationKit.Gaze
             }
         }
 
+        private void Sample(GazeState state)
+        {
+            if (observedState != state)
+            {
+                observedState = state; lastDuration = state.ActualBeamSeconds; gainUntil = -1f;
+                title = Language.GetString("HS_GAZE_TIMER_LABEL").ToUpperInvariant();
+            }
+            float gained = state.ActualBeamSeconds - lastDuration;
+            if (gained > .001f)
+            {
+                gainedTitle = title + "  +" + gained.ToString("0.#", CultureInfo.InvariantCulture) + "s";
+                gainUntil = Time.unscaledTime + .85f;
+            }
+            lastDuration = state.ActualBeamSeconds;
+        }
+
         private void Draw(Rect viewport, float remaining)
         {
-            if (labelStyle == null)
-                labelStyle = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontSize = 13 };
+            float scale = Mathf.Clamp(viewport.height / 1080f, .8f, 1.3f);
+            EnsureStyles(scale);
             float tenths = Mathf.Ceil(remaining * 10f) / 10f;
             if (tenths != shownSeconds)
             {
                 shownSeconds = tenths;
-                label = Language.GetString("HS_GAZE_TIMER_LABEL") + " " + tenths.ToString("0.0", CultureInfo.InvariantCulture) + "s";
+                label = tenths.ToString("0.0", CultureInfo.InvariantCulture) + "s";
             }
-            float width = Mathf.Min(190f, viewport.width * 0.32f);
+            float width = Mathf.Min(168f * scale, viewport.width * .36f);
             float left = viewport.x + (viewport.width - width) * 0.5f;
-            float top = Screen.height - viewport.yMax + viewport.height * 0.81f;
+            float top = Screen.height - viewport.yMax + viewport.height * .745f;
             Color saved = GUI.color;
             try
             {
-                GUI.color = new Color(0f, 0f, 0f, 0.8f);
-                GUI.DrawTexture(new Rect(left - 3f, top - 21f, width + 6f, 33f), Texture2D.whiteTexture);
-                GUI.color = new Color(0.35f, 0.9f, 1f, 0.9f);
-                GUI.DrawTexture(new Rect(left, top + 2f, width * GazeTimerPolicy.Fill(remaining), 6f), Texture2D.whiteTexture);
+                Panel(left, top, width, scale, remaining);
+                bool gain = Time.unscaledTime < gainUntil;
+                GUI.color = gain ? new Color(.55f, 1f, 1f) : new Color(.78f, .84f, .87f);
+                GUI.Label(new Rect(left + 8f * scale, top + 2f * scale, width * .65f, 22f * scale), gain ? gainedTitle : title, titleStyle);
                 GUI.color = Color.white;
-                GUI.Label(new Rect(left, top - 21f, width, 23f), label, labelStyle);
+                GUI.Label(new Rect(left + width * .65f, top + scale, width * .35f - 8f * scale, 24f * scale), label, secondsStyle);
             }
             finally { GUI.color = saved; }
+        }
+
+        private void EnsureStyles(float scale)
+        {
+            if (titleStyle == null)
+            {
+                titleStyle = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold };
+                secondsStyle = new GUIStyle(titleStyle) { alignment = TextAnchor.MiddleRight };
+                titleStyle.normal.textColor = secondsStyle.normal.textColor = Color.white;
+            }
+            titleStyle.fontSize = Mathf.RoundToInt(11f * scale);
+            secondsStyle.fontSize = Mathf.RoundToInt(15f * scale);
+        }
+
+        private static void Panel(float left, float top, float width, float scale, float remaining)
+        {
+            GUI.color = new Color(.025f, .035f, .045f, .94f);
+            GUI.DrawTexture(new Rect(left, top, width, 30f * scale), Texture2D.whiteTexture);
+            GUI.color = new Color(.58f, .65f, .7f, .45f);
+            GUI.DrawTexture(new Rect(left, top, width, scale), Texture2D.whiteTexture);
+            GUI.color = new Color(.2f, .27f, .31f, 1f);
+            GUI.DrawTexture(new Rect(left + 8f * scale, top + 25f * scale, width - 16f * scale, 3f * scale), Texture2D.whiteTexture);
+            GUI.color = new Color(.52f, .94f, 1f, 1f);
+            GUI.DrawTexture(new Rect(left + 8f * scale, top + 25f * scale, (width - 16f * scale) * GazeTimerPolicy.Fill(remaining), 3f * scale), Texture2D.whiteTexture);
+            GUI.color = new Color(.025f, .035f, .045f, .9f);
+            for (int tick = 1; tick < 7; tick++)
+                GUI.DrawTexture(new Rect(left + 8f * scale + (width - 16f * scale) * tick / 7f, top + 25f * scale, scale, 3f * scale), Texture2D.whiteTexture);
         }
     }
 

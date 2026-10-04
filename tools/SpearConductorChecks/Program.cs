@@ -17,7 +17,7 @@ static class Program
             float directCoefficient = 3.5f + 10.5f * charge;
             var snapshot = new SpearConductorSchedule(shot.Charge, directCoefficient * 17f, directCoefficient);
             Check(Near(snapshot.Radius, 4f + 2f * charge), "charge radius");
-            Check(Near(snapshot.Damage, 17f * (0.2f + 0.15f * charge)), "damage frozen from projectile");
+            Check(Near(snapshot.Damage, 17f * (0.2f + 0.15f * charge) * 0.9f), "damage frozen from projectile");
             float ownerDamageAfterImpact = 10000f;
             Check(snapshot.Damage < ownerDamageAfterImpact * 0.2f, "owner stat change cannot alter snapshot");
             int tick = 0;
@@ -29,7 +29,7 @@ static class Program
                 Check(!SpearConductorSchedule.Due(tick, at), "no duplicate boundary");
             }
             Check(!SpearConductorSchedule.Due(tick, 999f), "no unbounded sustain");
-            Check(4f * snapshot.Damage <= 17f * 1.4001f, "per victim full window <=140% before captured crit");
+            Check(4f * snapshot.Damage <= 17f * 1.2601f, "per victim full window <=126% before captured crit");
         }
         Check(Near(new SpearConductorSchedule(-10f, 35f, 3.5f).Radius, 4f), "negative charge clamped");
         Check(Near(new SpearConductorSchedule(10f, 140f, 14f).Radius, 6f), "excess charge clamped");
@@ -41,7 +41,7 @@ static class Program
         var inFlight = new SpearConductorSchedule(frozenCharge, 17f * coefficientAtSpawn, coefficientAtSpawn);
         liveTap = 12f; liveFull = 30f;
         float coefficientAtImpact = liveTap + (liveFull - liveTap) * frozenCharge;
-        Check(Near(inFlight.Damage, 17f * 0.275f), "live tap/full edits during flight cannot change tick damage");
+        Check(Near(inFlight.Damage, 17f * 0.275f * 0.9f), "live tap/full edits during flight cannot change tick damage");
         Check(!Near(inFlight.Damage, new SpearConductorSchedule(frozenCharge, 17f * coefficientAtSpawn, coefficientAtImpact).Damage),
             "regression detects erroneous impact-time normalization");
         Check(Near(SpearConductorSchedule.TapCoefficient, 0.2f) && Near(SpearConductorSchedule.FullCoefficient, 0.35f) &&

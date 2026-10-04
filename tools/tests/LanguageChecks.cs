@@ -305,9 +305,8 @@ namespace HollowSaint.FoundationKit
                 Util(a["radius"] + "m") + " for " + Dmg(a["pulse"] + " damage") + " every " +
                 Util(a["interval"] + "s") + " and " + Dmg("Stormspear") + " charges " + Util(a["mult"] + "x faster") + ".";
             t["HS_SKILL_GAZE_DESC"] =
-                "Rise and fire a beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + " seconds") + ", dealing " + Dmg(a["dps"] + " damage per second") +
-                (a["armorOn"] == "yes" ? ", with " + Util(a["armor"] + " bonus armor") : "") + ". Its " + Dmg("forks") + " reach further over time." +
-                " Once the beam fires, press Primary to spend one entry orb on a pulse (minimum " + a["pulseInterval"] + "s between presses). Holding does not repeat; release Primary first if already held. New orbs are saved for later. Other combat skills are unavailable until the channel ends. Duration grows with level. Each launched pulse adds 2 seconds, up to 14 seconds of beam time. Each successful launch also widens the sustained beam and increases its ordinary beam, splash and fork/chain damage by 5%, up to five steps (+25%) this cast. Fueled pulse damage is unchanged. The next cast starts fresh.";
+                "Channel a " + Dmg(a["dps"] + " damage/s") + " beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + "s") +
+                ". Tap Primary to spend an entry charge: +2s (14s max) and +5% beam damage (5 stacks max). New charges stay saved.";
             t["HS_PASSIVE_STORM_DESC"] =
                 "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy and stores a Static Charge (up to " + a["orbs"] + "). A full bank empowers your next successful Stormspear throw with one " +
                 Dmg("Thunderbolt") + " for " + Dmg(a["thunder"] + " damage") + " on impact. Partial banks are kept. Gaze uses stored charges for manual pulses. Charges never discharge automatically.";

@@ -166,7 +166,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit
         private void Pulse()
         {
             if (body.healthComponent == null || !body.healthComponent.alive) return;
-            float damage = KitTuning.OpenCircuitPulseDamageCoefficient * body.damage;
+            float damage = KitDamagePolicy.Effective(KitTuning.OpenCircuitPulseDamageCoefficient) * body.damage;
             var result = new BlastAttack
             {
                 attacker = body.gameObject,

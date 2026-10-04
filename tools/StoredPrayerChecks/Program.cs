@@ -41,7 +41,7 @@ static class Program
         float ownerDamage=17,coefficient=10,fraction=.5f,radius=3;
         var launch=new PrayerStrikeSnapshot(ownerDamage,coefficient,fraction,radius,true);
         ownerDamage=1000;coefficient=1;fraction=0;radius=20;
-        Check(launch.Empowered&&launch.Damage==170&&launch.SplashDamage==85&&launch.SplashRadius==3&&launch.Crit,"launch damage crit splash snapshot unaffected by later stats/tuning");
+        Check(launch.Empowered&&Math.Abs(launch.Damage-153)<.0001f&&Math.Abs(launch.SplashDamage-76.5f)<.0001f&&launch.SplashRadius==3&&launch.Crit,"launch damage crit splash snapshot unaffected by later stats/tuning");
         Check(!default(PrayerStrikeSnapshot).Empowered,"unfunded projectile has no Prayer bonus");
         foreach(string landing in new[]{"enemy","world terrain"})
         {

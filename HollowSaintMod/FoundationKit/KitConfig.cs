@@ -47,7 +47,7 @@ namespace HollowSaint.FoundationKit
             F(c, move, "Arm idle sway", FoundationArmPose.IdleSwayIntensity, v => FoundationArmPose.IdleSwayIntensity = v, 0f, 2f, 0.05f, "Slow calm sway of the whole arm (0 = off, 1 = default).");
             F(c, move, "Arm follow-through", FoundationArmPose.FollowThrough, v => FoundationArmPose.FollowThrough = v, 0f, 2f, 0.05f, "How far elbow, wrist and fingers lag behind the shoulder in the reactions (0 = arm moves as one piece, 1 = default).");
 
-            F(c, bolt, "Damage", KitTuning.ArcBoltDamageCoefficient, v => KitTuning.ArcBoltDamageCoefficient = v, 0.2f, 4f, 0.05f, "Damage coefficient of the bolt.");
+            F(c, bolt, "Damage", KitTuning.ArcBoltDamageCoefficient, v => KitTuning.ArcBoltDamageCoefficient = v, 0.2f, 4f, 0.05f, "Damage coefficient of the bolt. Stored raw; effective native damage is 90% of this value. Inherited splash/chain fractions are applied afterward.");
             F(c, bolt, "Fire interval", KitTuning.ArcBoltInterval, v => KitTuning.ArcBoltInterval = v, 0.2f, 1.5f, 0.05f, "Seconds per shot at 1x attack speed.");
             F(c, bolt, "Aim assistance angle", KitTuning.ArcBoltAssistConeDegrees, v => KitTuning.ArcBoltAssistConeDegrees = v, 0f, 6f, 0.5f, "Degrees either side of the launch direction that can acquire one visible enemy for gentle homing. 0 disables assistance; applies to newly fired bolts.");
             F(c, bolt, "Proc coefficient", KitTuning.ArcBoltProcCoefficient, v => KitTuning.ArcBoltProcCoefficient = v, 0f, 1f, 0.05f, "Item proc coefficient of the direct hit (restart).", restart: true);
@@ -65,8 +65,8 @@ namespace HollowSaint.FoundationKit
             SpearHand.SettingChanged += (s, e) => SpearDischarge.SpearCarry.HandMode = SpearHand.Value;
             F(c, spear, "Off-hand Arc Bolt rate", Stormspear.StormspearTuning.OffHandRateMultiplier, v => Stormspear.StormspearTuning.OffHandRateMultiplier = v, 0.1f, 1f, 0.05f, "Arc Bolt fire-rate multiplier while charging in the hand (from the free hand only). No penalty in the crown.");
             F(c, spear, "Minimum throw interval", Stormspear.StormspearTuning.MinThrowInterval, v => Stormspear.StormspearTuning.MinThrowInterval = v, 0.05f, 1f, 0.05f, "Seconds between tap throws at 1x attack speed when dumping stocks.");
-            F(c, spear, "Tap damage", Stormspear.StormspearTuning.TapDamage, v => Stormspear.StormspearTuning.TapDamage = v, 0.5f, 12f, 0.1f, "Damage coefficient of an uncharged throw.");
-            F(c, spear, "Full damage", Stormspear.StormspearTuning.FullDamage, v => Stormspear.StormspearTuning.FullDamage = v, 1f, 30f, 0.5f, "Damage coefficient of a fully charged throw.");
+            F(c, spear, "Tap damage", Stormspear.StormspearTuning.TapDamage, v => Stormspear.StormspearTuning.TapDamage = v, 0.5f, 12f, 0.1f, "Damage coefficient of an uncharged throw. Stored raw; effective native damage is 90% of this value. Inherited splash/chain fractions are applied afterward.");
+            F(c, spear, "Full damage", Stormspear.StormspearTuning.FullDamage, v => Stormspear.StormspearTuning.FullDamage = v, 1f, 30f, 0.5f, "Damage coefficient of a fully charged throw. Stored raw; effective native damage is 90% of this value. Inherited splash/chain fractions are applied afterward.");
             F(c, spear, "Cooldown", Stormspear.StormspearTuning.Cooldown, v => Stormspear.StormspearTuning.Cooldown = v, 1f, 15f, 0.5f, "Seconds per stock (restart).", restart: true);
             F(c, spear, "Burst radius (tap)", Stormspear.StormspearTuning.BurstRadiusTap, v => Stormspear.StormspearTuning.BurstRadiusTap = v, 1f, 15f, 0.5f, "Metres, uncharged throw.");
             F(c, spear, "Burst radius (full)", Stormspear.StormspearTuning.BurstRadiusFull, v => Stormspear.StormspearTuning.BurstRadiusFull = v, 1f, 25f, 0.5f, "Metres, fully charged throw.");
@@ -85,7 +85,7 @@ namespace HollowSaint.FoundationKit
             I(c, step, "Charges", KitTuning.ArcStepMaxStock, v => KitTuning.ArcStepMaxStock = v, 1, 5, "Stock (restart).", restart: true);
             B(c, step, "Invulnerable while stepping", KitTuning.ArcStepGrantsIFrames, v => KitTuning.ArcStepGrantsIFrames = v, "Undecided design question; off by default.");
 
-            F(c, circuit, "Pulse damage", KitTuning.OpenCircuitPulseDamageCoefficient, v => KitTuning.OpenCircuitPulseDamageCoefficient = v, 0.1f, 3f, 0.05f, "Damage coefficient per pulse.");
+            F(c, circuit, "Pulse damage", KitTuning.OpenCircuitPulseDamageCoefficient, v => KitTuning.OpenCircuitPulseDamageCoefficient = v, 0.1f, 3f, 0.05f, "Damage coefficient per pulse. Stored raw; effective native damage is 90% of this value. Inherited splash/chain fractions are applied afterward.");
             F(c, circuit, "Pulse interval", KitTuning.OpenCircuitPulseInterval, v => KitTuning.OpenCircuitPulseInterval = v, 0.2f, 2f, 0.05f, "Seconds between pulses.");
             F(c, circuit, "Radius", KitTuning.OpenCircuitRadius, v => KitTuning.OpenCircuitRadius = v, 3f, 25f, 0.5f, "Metres.");
             F(c, circuit, "Duration", KitTuning.OpenCircuitBuffSeconds, v => KitTuning.OpenCircuitBuffSeconds = v, 2f, 20f, 0.5f, "Seconds the crown stays open.");
@@ -124,7 +124,7 @@ namespace HollowSaint.FoundationKit
             F(c, storm, "Electrocute stun", KitTuning.ElectrocuteStunSeconds, v => KitTuning.ElectrocuteStunSeconds = v, 0f, 5f, 0.25f, "Seconds of the Electrocute jolt (stun) on enemies that can be stunned (0 = none). Every Electrocuted enemy is also Shocked.");
             F(c, storm, "Shocked duration", KitTuning.ShockedSeconds, v => KitTuning.ShockedSeconds = v, 0.5f, 10f, 0.5f, "Seconds.");
             F(c, storm, "Shocked damage taken", KitTuning.ShockedDamageMultiplier, v => KitTuning.ShockedDamageMultiplier = v, 1f, 2f, 0.05f, "Multiplier on ALL damage a Shocked enemy takes.");
-            F(c, storm, "Pop damage", KitTuning.ElectrocutePopDamageCoefficient, v => KitTuning.ElectrocutePopDamageCoefficient = v, 0.5f, 10f, 0.1f, "Damage coefficient of the Electrocute arc burst.");
+            F(c, storm, "Pop damage", KitTuning.ElectrocutePopDamageCoefficient, v => KitTuning.ElectrocutePopDamageCoefficient = v, 0.5f, 10f, 0.1f, "Damage coefficient of the Electrocute arc burst. Stored raw; effective native damage is 90% of this value. Inherited splash/chain fractions are applied afterward.");
             F(c, storm, "Pop radius", KitTuning.ElectrocutePopRadius, v => KitTuning.ElectrocutePopRadius = v, 2f, 20f, 0.5f, "Metres.");
             I(c, storm, "Pop targets", KitTuning.ElectrocutePopTargets, v => KitTuning.ElectrocutePopTargets = v, 1, 10, "Enemies hit by one Electrocute burst.");
             F(c, storm, "Pop proc coefficient", KitTuning.ElectrocutePopProc, v => KitTuning.ElectrocutePopProc = v, 0f, 1f, 0.05f, "Proc coefficient of the burst.");
@@ -133,7 +133,7 @@ namespace HollowSaint.FoundationKit
             I(c, storm, "Electrocute cap per second", KitTuning.ElectrocutesPerSecondCap, v => KitTuning.ElectrocutesPerSecondCap = v, 1, 20, "Max Electrocutes per second per Saint (screen and performance guard).");
             F(c, storm, "Death discharge", KitTuning.DeathDischargeStatic, v => KitTuning.DeathDischargeStatic = v, 0f, 1f, 0.05f, "An enemy that dies holding at least this much Static (0.5 = half) Electrocutes as it dies: it lights an orb and arcs to its neighbours. 0 turns it off.");
             I(c, storm, "Charges per Thunderbolt", KitTuning.StormChargeMax, v => KitTuning.StormChargeMax = v, 2, 20, "Stored Static Charge capacity. A full bank empowers the next successful spear throw; Gaze claims entry charges. Charges never discharge automatically.");
-            F(c, storm, "Thunderbolt damage", KitTuning.ThunderboltDamageCoefficient, v => KitTuning.ThunderboltDamageCoefficient = v, 1f, 30f, 0.5f, "Damage coefficient of the strike (proc 1.0, can crit).");
+            F(c, storm, "Thunderbolt damage", KitTuning.ThunderboltDamageCoefficient, v => KitTuning.ThunderboltDamageCoefficient = v, 1f, 30f, 0.5f, "Damage coefficient of the strike (proc 1.0, can crit). Stored raw; effective native damage is 90% of this value. Inherited splash/chain fractions are applied afterward.");
             F(c, storm, "Thunderbolt splash", KitTuning.ThunderboltSplashFraction, v => KitTuning.ThunderboltSplashFraction = v, 0f, 1f, 0.05f, "Fraction of the strike damage dealt to nearby enemies.");
             F(c, storm, "Thunderbolt splash radius", KitTuning.ThunderboltSplashRadius, v => KitTuning.ThunderboltSplashRadius = v, 1f, 10f, 0.5f, "Metres.");
             F(c, storm, "Thunderbolt range", KitTuning.ThunderboltRange, v => KitTuning.ThunderboltRange = v, 10f, 60f, 1f, "Legacy automatic-target range, retained for config compatibility. Stored charges no longer search for targets automatically.");

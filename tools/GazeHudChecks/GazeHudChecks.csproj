@@ -2,6 +2,7 @@
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
   <ItemGroup>
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeTimerHud.cs" Link="GazeTimerHud.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazePulseAudio.cs" Link="GazePulseAudio.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeTimerPolicy.cs" Link="GazeTimerPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />

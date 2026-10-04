@@ -1,0 +1,15 @@
+{
+  "result": "FEEDBACK_AUDIO_PASS",
+  "bank_sha256": "80FE181AA5FF9910EA7D90D8684AE95B3DCB012F53DC17A3FC411D293F4F5E99",
+  "hierarchy_identical": true,
+  "changed_media": "HS_BoltImpact",
+  "unchanged_media_count": 34,
+  "impact_gain": 0.82,
+  "embedded_active_pcm_gain": 0.820000726785674,
+  "impact_active_seconds": 0.2,
+  "impact_padded_seconds": 0.28,
+  "pulse_event": "Play_HS_ThunderRelease",
+  "pulse_coalescing_seconds": 0.24,
+  "fallback_event": "Play_captain_m2_tazer_shoot",
+  "native_perceived_mix": "Pending"
+}

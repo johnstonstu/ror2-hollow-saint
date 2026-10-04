@@ -15,9 +15,10 @@ namespace HollowSaint.FoundationKit.Stormspear
         {
             float c = Math.Max(0f, Math.Min(1f, charge));
             Radius = TapRadius + (FullRadius - TapRadius) * c;
-            // Recover the projectile's frozen damage stat, never the owner's current stats.
+            // directCoefficient must include the launch policy, recovering the frozen
+            // damage stat without inheriting a second reduction from the direct hit.
             Damage = directCoefficient > 0f ? Math.Max(0f, directDamage) / directCoefficient *
-                (TapCoefficient + (FullCoefficient - TapCoefficient) * c) : 0f;
+                KitDamagePolicy.Effective(TapCoefficient + (FullCoefficient - TapCoefficient) * c) : 0f;
         }
 
         internal static bool Due(int completedTicks, float age)

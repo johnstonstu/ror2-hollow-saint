@@ -1,7 +1,7 @@
 {
   "bank_version": 150,
-  "bytes": 1806729,
-  "sha256": "c02ce392adb79f5f5b9a0990acfbde3371ba855c0d101415b1a5857f0560159e",
+  "bytes": 1828809,
+  "sha256": "80fe181aa5ff9910ea7d90d8684ae95b3dcb012f53dc17a3fc411d293f4f5e99",
   "events": 39,
   "local_stop_actions": 4,
   "infinite_loops": 3,
@@ -31,7 +31,7 @@
     },
     {
       "name": "BoltImpact",
-      "peak_pcm16": 7864,
+      "peak_pcm16": 4299,
       "clipped_samples": 0
     },
     {
@@ -126,7 +126,7 @@
     },
     {
       "name": "SpearBurst",
-      "peak_pcm16": 9235,
+      "peak_pcm16": 19517,
       "clipped_samples": 0
     },
     {
@@ -136,7 +136,7 @@
     },
     {
       "name": "SpearImpact",
-      "peak_pcm16": 9175,
+      "peak_pcm16": 20675,
       "clipped_samples": 0
     },
     {

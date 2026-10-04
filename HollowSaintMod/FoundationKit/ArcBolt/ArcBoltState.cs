@@ -110,7 +110,7 @@ namespace HollowSaint.FoundationKit.ArcBolt
                 position = launch.origin,
                 rotation = Util.QuaternionSafeLookRotation(launch.direction),
                 owner = gameObject,
-                damage = KitTuning.ArcBoltDamageCoefficient * damageStat,
+                damage = KitDamagePolicy.Effective(KitTuning.ArcBoltDamageCoefficient) * damageStat,
                 force = 0f,
                 crit = RollCrit(),
                 damageColorIndex = DamageColorIndex.Default,

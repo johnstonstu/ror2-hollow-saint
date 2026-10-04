@@ -62,8 +62,9 @@ namespace HollowSaint.FoundationKit.Vfx
             if (beat == Beat.ChainHop && ChainLightningFx.HasSound) return null;
             if (CustomSoundBank.Ready)
             {
-                // A shorter, quieter existing crackle replaces the loud impact cue.
-                if (beat == Beat.BoltImpact) return "Play_HS_ChainHop";
+                // Dedicated impact media reuses ChainHop's crackle at 0.82 source gain.
+                // Other ChainHop voices and the global SFX bus retain their original levels.
+                if (beat == Beat.BoltImpact) return "Play_HS_BoltImpact";
                 switch (beat)
                 {
                     case Beat.ArcBoltCast: case Beat.BoltImpact: case Beat.ChainHop:

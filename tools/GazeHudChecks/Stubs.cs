@@ -10,12 +10,15 @@ namespace UnityEngine
     public class Texture2D {public static Texture2D whiteTexture=new();}
     public enum EventType {Layout,Repaint}
     public class Event {public static Event current=new(){type=EventType.Repaint};public EventType type;}
-    public enum TextAnchor {MiddleCenter}
-    public class GUIStyle {public GUIStyle(){}public GUIStyle(GUIStyle style){}public TextAnchor alignment;public int fontSize;}
+    public enum TextAnchor {MiddleCenter,MiddleLeft,MiddleRight}
+    public enum FontStyle {Normal,Bold}
+    public class GUIStyleState {public Color textColor;}
+    public class GUIStyle {public GUIStyle(){}public GUIStyle(GUIStyle style){}public TextAnchor alignment;public int fontSize;public FontStyle fontStyle;public GUIStyleState normal=new();}
     public class GUISkin {public GUIStyle label=new();}
-    public static class GUI {public static GUISkin skin=new();public static Color color;public static List<Rect> Rects=new();public static string LastLabel;public static void DrawTexture(Rect rect,Texture2D texture)=>Rects.Add(rect);public static void Label(Rect rect,string text,GUIStyle style)=>LastLabel=text;}
+    public static class GUI {public static GUISkin skin=new();public static Color color;public static List<Rect> Rects=new();public static List<string> Labels=new();public static string LastLabel;public static void DrawTexture(Rect rect,Texture2D texture)=>Rects.Add(rect);public static void Label(Rect rect,string text,GUIStyle style){LastLabel=text;Labels.Add(text);}}
     public static class Screen {public static int height=800;}
-    public static class Mathf {public static float Ceil(float n)=>(float)Math.Ceiling(n);public static float Min(float a,float b)=>Math.Min(a,b);}
+    public static class Time {public static float unscaledTime;}
+    public static class Mathf {public static float Ceil(float n)=>(float)Math.Ceiling(n);public static float Min(float a,float b)=>Math.Min(a,b);public static float Clamp(float v,float min,float max)=>Math.Clamp(v,min,max);public static int RoundToInt(float v)=>(int)Math.Round(v);}
 }
 namespace RoR2
 {
@@ -24,6 +27,7 @@ namespace RoR2
     public class LocalUser {public CharacterBody cachedBody;}
     public class EntityStateMachine:UnityEngine.Object {public static EntityStateMachine Machine;public object state;public static EntityStateMachine FindByCustomName(UnityEngine.GameObject go,string name)=>Machine;}
     public static class Language {public static string GetString(string token)=>"Gaze";}
+    public static class Util {public static List<string> Sounds=new();public static void PlaySound(string name,UnityEngine.GameObject source)=>Sounds.Add(name);}
 }
 namespace RoR2.UI
 {
@@ -36,4 +40,5 @@ namespace HollowSaint
     public static class Plugin {public static Logger Log=new();}
     public class Logger {public void LogWarning(string message)=>Console.Error.WriteLine(message);}
 }
-namespace HollowSaint.FoundationKit.Gaze {internal class GazeState {internal bool TimerVisible;internal float RemainingBeamSeconds;}}
+namespace HollowSaint.FoundationKit.Gaze {internal class GazeState {internal bool TimerVisible;internal float RemainingBeamSeconds;internal float ActualBeamSeconds;}}
+namespace HollowSaint.FoundationKit.Vfx {internal static class CustomSoundBank {internal static bool Ready=true;}}

@@ -20,6 +20,12 @@ from import_samples import CUES
 ROLES = dict(SYNTH_ROLES)
 for _name, _cue in CUES.items():
     ROLES[_name] = (_cue[2],)
+# Retain the installed bank's one-second sampled burst. Its legacy import recipe
+# currently says 0.95 s; this feedback pass changes only BoltImpact media.
+ROLES['SpearBurst'] = (1.0,)
+# Existing v0.9.16 lodged impact is the authored 0.60-second cue, not the old
+# synth recipe's 0.42-second sound. Preserve it throughout this revision.
+ROLES['SpearImpact'] = (.60,)
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "art/audio/HollowSaintAudio"
@@ -89,7 +95,7 @@ def check():
     for source in sorted((ROOT / "art/audio/source").glob("*.wav")):
         with wave.open(str(source), "rb") as stream:
             assert stream.getnchannels() == 1 and stream.getframerate() == 48000
-            assert stream.getnframes() == round(ROLES[source.stem][0] * 48000)
+            assert stream.getnframes() == round(ROLES[source.stem][0] * 48000), (source.stem, stream.getnframes(), ROLES[source.stem][0])
             pcm = np.frombuffer(stream.readframes(stream.getnframes()), dtype="<i2")
         peak = int(np.abs(pcm.astype(np.int32)).max())
         assert peak < 32767

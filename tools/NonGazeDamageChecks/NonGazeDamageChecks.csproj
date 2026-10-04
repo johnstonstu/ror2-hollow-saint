@@ -3,8 +3,6 @@
   <ItemGroup>
     <Compile Include="../../HollowSaintMod/FoundationKit/KitDamagePolicy.cs" Link="KitDamagePolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearConductorSchedule.cs" Link="SpearConductorSchedule.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearConductorTargets.cs" Link="SpearConductorTargets.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearShot.cs" Link="StormspearShot.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearStuckEvent.cs" Link="SpearStuckEvent.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Storm/StoredPrayerPolicy.cs" Link="StoredPrayerPolicy.cs" />
   </ItemGroup>
 </Project>

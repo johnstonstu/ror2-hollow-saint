@@ -24,7 +24,8 @@ namespace HollowSaint.FoundationKit.Storm
         internal PrayerStrikeSnapshot(float ownerDamage, float coefficient, float splashFraction, float splashRadius, bool crit)
         {
             Empowered = true;
-            Damage = ownerDamage * coefficient;
+            // Both funded Prayer and the unfunded Crown bonus enter with raw tuning.
+            Damage = ownerDamage * KitDamagePolicy.Effective(coefficient);
             SplashDamage = Damage * Math.Max(0f, splashFraction);
             SplashRadius = Math.Max(0f, splashRadius);
             Crit = crit;

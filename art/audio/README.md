@@ -22,6 +22,7 @@ Use Python with numpy, then Wwise 2023.1.4.8496 at the path in the authoring scr
 ```powershell
 python tools/audio/synthesize_sfx.py
 python tools/audio/import_samples.py   # must follow synthesize: replaces ThunderStrike
+python tools/audio/quiet_arc_impact.py # dedicated BoltImpact: ChainHop crackle at 0.82 source gain
 python tools/audio/author_bank.py
 python tools/audio/check_bank.py
 ```
@@ -31,6 +32,14 @@ copies source WAVs into Originals, refreshes properties and events, and generate
 `HollowSaintAudio/GeneratedSoundBanks/Windows/HollowSaint.bnk` (format 150).
 Only that content bank is embedded. Never ship or load generated `Init.bnk`;
 the content references the game's existing SFX_BUS 213475909 and defines no bus.
+
+Private solo feedback: main Arc Bolt impact now uses `Play_HS_BoltImpact` with
+a copy of the established ChainHop electrical crackle at 0.82 PCM gain (about
+-1.72 dB), padded to its historical media duration. ChainHop itself is unchanged.
+The added Gaze pulse cue uses the existing 0.24-second `Play_HS_ThunderRelease`
+discharge, with the indexed `Play_captain_m2_tazer_shoot` fallback. Clustered
+launch acknowledgements coalesce for 0.24 seconds; original Gaze startup, loops
+and end events are unchanged. Native perceived mix still requires playtesting.
 
 All 33 sounds use positional spatialization with attenuation: 0 dB through 5 m,
 -9 dB at 12 m, -24 dB at 24 m, -60 dB at 40 m. GlideLoop and CircuitLoop are infinite

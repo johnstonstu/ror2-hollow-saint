@@ -120,7 +120,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             // Remote launches normalize with the server-at-spawn coefficient under config agreement;
             // the remote owner's private tuning is not part of the projectile transport.
             conductorShot = new SpearConductorSchedule(shot.Charge, projectileDamage != null ? projectileDamage.damage : 0f,
-                StormspearTuning.DamageAt(shot.Charge));
+                KitDamagePolicy.Effective(StormspearTuning.DamageAt(shot.Charge)));
             controller.onInitialized -= CaptureShot;
             if (!NetworkServer.active || !controller.owner) return;
             launchTeam = controller.teamFilter ? controller.teamFilter.teamIndex : TeamIndex.None;

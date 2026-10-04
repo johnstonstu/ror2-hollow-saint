@@ -32,6 +32,7 @@ namespace HollowSaint.FoundationKit.Gaze
         // inside this subclass rather than through the publicized build reference.
         internal float AuthoritativeCastAge => fixedAge;
         internal float RemainingBeamSeconds => Mathf.Max(0f, BeamEnd - fixedAge);
+        internal float ActualBeamSeconds => beamDuration;
         internal bool TimerVisible => ignited && !endRequested;
         internal bool FuelAdmissionOpen => !endRequested && !GazeManualLifetime.StopBeforeWork(fixedAge, BeamEnd);
         internal bool PrimaryPulseReady => FuelAdmissionOpen && fixedAge >= GazeTuning.WindupSeconds &&

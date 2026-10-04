@@ -22,6 +22,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private readonly RaycastHit[] traceScratch = new RaycastHit[128];
         private readonly GazeFuelSequence receiver = new GazeFuelSequence();
         private readonly GazeManualRequestPolicy requests = new GazeManualRequestPolicy();
+        private readonly GazePulseAudio pulseAudio = new GazePulseAudio();
         private uint cast, sequence, clientCast, clientRequestSequence;
         private float age, presentationRelease, beamDuration, frozenBeamDuration, nextClientRequest;
         private bool presentationOwned;
@@ -279,9 +280,9 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 clientPendingIntakes = Mathf.Max(0, clientPendingIntakes - 1);
                 ApplyReceivedRamp(packet.spent);
-                // Only the deduplicated, server-confirmed Launch replays the
-                // startup one-shot. Never restart Charge/Hum/Crackle loops.
-                try { RoR2.Util.PlaySound(GazeSfx.Launch, body.gameObject); }
+                // Only the added pulse cue changes. Use one electrical discharge;
+                // clustered delayed launches coalesce without restarting Gaze loops.
+                try { pulseAudio.Play(body.gameObject); }
                 catch (System.Exception error) { GazeFuelTransport.Warn("pulse launch sound failed", error); }
             }
             if (packet.kind == GazeFuelTransport.Kind.End)

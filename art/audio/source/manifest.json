@@ -76,8 +76,8 @@
     "event": "Play_HS_BoltImpact",
     "seconds": 0.28,
     "loop": false,
-    "peak_dbfs": -12.4,
-    "rms_dbfs": -29.09
+    "peak_dbfs": -17.64,
+    "rms_dbfs": -40.14
   },
   {
     "name": "ChainHop",
