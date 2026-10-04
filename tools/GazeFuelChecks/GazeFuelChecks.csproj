@@ -5,5 +5,7 @@
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelSequence.cs" Link="GazeFuelSequence.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeTimerPolicy.cs" Link="GazeTimerPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeRampPolicy.cs" Link="GazeRampPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeBeamWidthPolicy.cs" Link="GazeBeamWidthPolicy.cs" />
   </ItemGroup>
 </Project>

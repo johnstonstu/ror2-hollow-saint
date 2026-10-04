@@ -39,6 +39,9 @@ namespace HollowSaint.FoundationKit.Gaze
         public float BeamDuration { get; private set; }
         /// <summary>Frozen level baseline; extending lifetime never shrinks growth.</summary>
         public float ProgressionDuration { get; private set; }
+        /// <summary>Confirmed entry-pulse launches, capped at five for presentation.</summary>
+        public int RampSteps { get; private set; }
+        public void SetRampSteps(int successfulLaunches) { RampSteps = GazeRampPolicy.Steps(successfulLaunches); }
 
         // Cosmetic network traffic is bounded independently of attack speed / damage cadence.
         internal bool ClaimContactFxTick()
@@ -74,6 +77,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         public void Begin(Vector3 aim, float beamDuration)
         {
+            SetRampSteps(0);
             SetProgressionDuration(beamDuration);
             SetBeamDuration(beamDuration);
             direction = aim.sqrMagnitude > 1e-4f ? aim.normalized : transform.forward;
@@ -114,6 +118,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         public void End()
         {
+            SetRampSteps(0);
             if (Current == Phase.Idle || Current == Phase.Ending) return;
             Current = Phase.Ending;
             phaseStart = Time.time;
@@ -164,6 +169,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         private void OnDisable()
         {
+            SetRampSteps(0);
             if (fx != null) fx.Stop();
             mount.Release();
             Current = Phase.Idle;

@@ -81,7 +81,7 @@ namespace HollowSaint.FoundationKit.Gaze
         }
 
         /// <summary>Forks from the impact to up to ForkCount enemies, each chaining one hop.</summary>
-        public static void Forks(CharacterBody attacker, Impact impact)
+        public static void Forks(CharacterBody attacker, Impact impact, float damageMultiplier = 1f)
         {
             if (!NetworkServer.active || !attacker) return;
             var team = attacker.teamComponent ? attacker.teamComponent.teamIndex : TeamIndex.None;
@@ -96,7 +96,7 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (forked.Contains(health)) continue;
                 forked.Add(health);
                 bool crit = attacker.RollCrit();
-                float damage = attacker.damage * GazeTuning.ForkDamage;
+                float damage = attacker.damage * GazeTuning.ForkDamage * damageMultiplier;
                 Vector3 to = Center(box);
                 Hit(attacker, box, damage, crit, GazeTuning.ForkProc);
                 GazeEffect.Server(GazeEffect.Kind.Fork, to, impact.Point, attacker, sound: forks == 0, delay: forks * 0.06f);

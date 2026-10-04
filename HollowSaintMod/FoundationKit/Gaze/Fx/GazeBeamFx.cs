@@ -19,8 +19,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
     public sealed class GazeBeamFx
     {
         private const int HelixCount = 2;
-        // Broader body with restrained haze and narrow core beneath the 3.85m event sleeve.
-        private const float HazeWidth = 1.05f, BodyWidth = 0.8f, SheathWidth = 0.9f, CoreWidth = 0.095f;
+        // Confirmed launches gradually widen the settled beam beneath the 3.85m event sleeve.
+        private float shownRamp;
         private const float HelixRadius = 0.25f;
         private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
@@ -66,6 +66,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             if (!tendrils) tendrils = owner.GetComponent<GazeTendrils>() ?? owner.gameObject.AddComponent<GazeTendrils>();
             tendrils.Begin(owner, palette);
             gapsLit = 0;
+            shownRamp = 0f;
             ignitedAt = endedAt = -10f;
             streamTimer = snapTimer = ringTimer = 0f;
             SetBeamVisible(false);
@@ -199,6 +200,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             float grow = Mathf.Clamp01(sinceIgnite / 0.08f);
             float pulse = 1f + 0.07f * Mathf.Sin(Time.time * 38f) + 0.05f * (Mathf.PerlinNoise(Time.time * 9f, 0.3f) - 0.5f);
             float w = pop * grow * pulse * collapse;
+            shownRamp = GazeBeamWidthPolicy.Advance(shownRamp, owner.RampSteps, dt);
 
             // Resource motion owns the accent. Duck the continuous decorative layers while
             // preserving the baseline damage beam and server-confirmed contacts.
@@ -219,10 +221,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             FocusEmitter(impactFlash, palette.Arc, 5f, Mathf.Lerp(0.35f, 0.08f, focus));
             FocusEmitter(impactSparks, palette.Arc, 18f, Mathf.Lerp(0.65f, 0.2f, focus));
             FocusEmitter(muzzleFlash, palette.Arc, 8f, Mathf.Lerp(0.5f, 0.08f, focus));
-            Line(haze, origin, end, HazeWidth * w * Mathf.Lerp(1f, 0.7f, focus), Time.time * -1.5f);
-            Line(beamBody, origin, end, BodyWidth * w, Time.time * -6f);
-            Line(sheath, origin, end, SheathWidth * w * (0.85f + 0.3f * Mathf.PerlinNoise(Time.time * 25f, 1.7f)), Time.time * -14f);
-            Line(core, origin, end, CoreWidth * w, 0f);
+            Line(haze, origin, end, GazeBeamWidthPolicy.Haze(shownRamp, w * Mathf.Lerp(1f, 0.7f, focus), GazeTuning.Radius), Time.time * -1.5f);
+            Line(beamBody, origin, end, GazeBeamWidthPolicy.Body(shownRamp, w, GazeTuning.Radius), Time.time * -6f);
+            Line(sheath, origin, end, GazeBeamWidthPolicy.Sheath(shownRamp, w * (0.85f + 0.3f * Mathf.PerlinNoise(Time.time * 25f, 1.7f)), GazeTuning.Radius), Time.time * -14f);
+            Line(core, origin, end, GazeBeamWidthPolicy.Core(shownRamp, w, GazeTuning.Radius), 0f);
             Helices(origin, dir, length, w, dt);
             if (focus < 0.15f) Arcs(origin, end, w, dt);
             if (focus < 0.1f) Snaps(origin, dir, length, w, dt);

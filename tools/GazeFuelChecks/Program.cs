@@ -1,5 +1,6 @@
 using System;
 using HollowSaint.FoundationKit.Gaze;
+using HollowSaint.FoundationKit.Gaze.Fx;
 // Actual production policy/ledger/queue checks. Unity physics and delivery need playtesting.
 static class Program
 {
@@ -66,6 +67,8 @@ static class Program
         Check(Math.Abs(GazeFuelSchedule.StrikeAt(1,.55f,8,8)-1.85f)<.0001f,"travel plus ground arrival");
         InputChecks();
         ExtensionChecks();
+        RampChecks();
+        WidthChecks();
         Check(GazeTimerPolicy.Fill(0)==0 && GazeTimerPolicy.Fill(-1)==0 && GazeTimerPolicy.Fill(14)==1 && GazeTimerPolicy.Fill(30)==1,"timer clamps to actual fourteen-second scale");
         Check(GazeTimerPolicy.Fill(float.NaN)==0 && GazeTimerPolicy.Fill(float.PositiveInfinity)==0,"timer rejects nonfinite durations");
         Check(GazeTimerPolicy.Fill(6)>GazeTimerPolicy.Fill(4) && GazeTimerPolicy.Fill(3)<GazeTimerPolicy.Fill(4),"successful extension grows meter and elapsed time drains it");
@@ -80,6 +83,75 @@ static class Program
         Check(seq.Accept(3,1,true,false),"new cast starts");seq.Retire();Check(!seq.Accept(3,2,false,false),"disable rejects late traffic");
         Console.WriteLine("PASS manual edges, owner/cast/sequence/rate/deadline, duration, cancellation boundary and event retirement");
         Console.WriteLine("PASS "+checks+" production assertions");
+    }
+    static void WidthChecks()
+    {
+        Func<float,float,float,float>[] widths={GazeBeamWidthPolicy.Body,GazeBeamWidthPolicy.Haze,GazeBeamWidthPolicy.Sheath,GazeBeamWidthPolicy.Core};
+        float[] baseline={.55f,.8f,.7f,.075f},full={1.05f,1.3f,1.2f,.115f};
+        for(int layer=0;layer<widths.Length;layer++) {
+            var width=widths[layer];
+            Check(Math.Abs(width(0,1,1.5f)-baseline[layer])<.0001f&&Math.Abs(width(5,1,1.5f)-full[layer])<.0001f,"each settled layer matches baseline and five-step width");
+            for(int step=1;step<=5;step++)Check(width(step,1,1.5f)>width(step-1,1,1.5f),"each layer grows monotonically through five steps");
+            Check(width(20,1,1.5f)==width(5,1,1.5f)&&width(-1,1,1.5f)==width(0,1,1.5f),"width clamps absolute steps");
+            Check(width(2.5f,1,1.5f)>width(2,1,1.5f)&&width(2.5f,1,1.5f)<width(3,1,1.5f),"fractional shown steps interpolate continuously");
+            foreach(float radius in new[]{.5f,1.5f,4f})foreach(float envelope in new[]{1.32f,1.52f}) {
+                float previous=0;
+                for(int step=0;step<=5;step++) {
+                    float shown=width(step,envelope,radius);
+                    Check(shown>=previous&&shown<=radius*2&&shown>0&&!float.IsInfinity(shown),"all envelopes stay within configured hit diameter");
+                    previous=shown;
+                }
+            }
+            foreach(float invalid in new[]{-1f,0f,float.NaN,float.PositiveInfinity,float.NegativeInfinity})
+                Check(width(5,invalid,1.5f)==0&&width(5,1,invalid)==0,"invalid radius or envelope produces no width");
+            Check(width(float.NaN,1,1.5f)==baseline[layer]&&width(float.PositiveInfinity,1,1.5f)==baseline[layer],"invalid steps safely show baseline");
+        }
+        Check(GazeBeamWidthPolicy.Advance(0,5,.1f)==.4f&&GazeBeamWidthPolicy.Advance(4.9f,5,1)==5,"smooth rise rate and target clamp");
+        Check(GazeBeamWidthPolicy.Advance(5,0,.1f)==4.6f&&GazeBeamWidthPolicy.Advance(.1f,0,1)==0,"smooth fall without undershoot");
+        foreach(float dt in new[]{-1f,0f,float.NaN,float.PositiveInfinity})Check(GazeBeamWidthPolicy.Advance(2,5,dt)==2,"negative or invalid dt never advances width");
+        Check(GazeBeamWidthPolicy.Advance(float.NaN,5,.1f)==.4f&&GazeBeamWidthPolicy.Advance(99,20,1)==5&&GazeBeamWidthPolicy.Advance(-5,-1,1)==0,"invalid shown state and extreme targets bounded");
+        Console.WriteLine("PASS actual width policy endpoints, fractional smoothing, finite guards and diameter bounds at three radii");
+    }
+    static void RampChecks()
+    {
+        Check(GazeRampPolicy.Steps(-1)==0&&GazeRampPolicy.DamageMultiplier(0)==1,"uncharged cast starts without ramp");
+        Check(GazeRampPolicy.Steps(int.MaxValue)==5&&GazeRampPolicy.DamageMultiplier(20)==1.25f,"ramp bounded at twenty-five percent");
+        var bank=new GazeFuelLedger();bank.Begin(20,20);
+        var plan=new GazeFuelSchedule();plan.Begin(20);
+        for(int orb=0;orb<20;orb++) {
+            float tap=1+orb*.25f;
+            while(plan.TakeLaunch(tap,out _))Check(bank.TrySpend(1),"ramp fixture launch spends once");
+            int before=GazeRampPolicy.Steps(bank.Spent);
+            Check(plan.QueueIntake(tap,out _)&&GazeRampPolicy.Steps(bank.Spent)==before,"intake alone never grants ramp");
+            Check(GazeRampPolicy.Steps(bank.Spent)==Math.Min(5,bank.Spent),"absolute launch count saturates at five");
+        }
+        while(plan.TakeLaunch(7,out _))Check(bank.TrySpend(1),"remaining ramp fixture launches");
+        Check(bank.Spent==20&&GazeRampPolicy.DamageMultiplier(bank.Spent)==1.25f,"twenty successful pulses remain capped at five ramp steps");
+        Check(!bank.TrySpend(1)&&GazeRampPolicy.Steps(bank.Spent)==5,"empty launch cannot advance ramp");
+        for(int step=0;step<=5;step++) {
+            float multiplier=GazeRampPolicy.DamageMultiplier(step);
+            Check(Math.Abs(multiplier-(1+step*.05f))<.0001f,"five percent per confirmed launch");
+        }
+        Check(bank.Spent*GazeFuelSchedule.Coefficient(1,20)==2.5f,"full fuel damage remains normalized independently of ramp");
+        bank.End(true);bank.Begin(5,5);plan.Begin(5);
+        Check(bank.Spent==0&&GazeRampPolicy.Steps(bank.Spent)==0,"new cast resets successful count");
+        plan.QueueIntake(1,out _);plan.Cancel();
+        Check(!plan.TakeLaunch(2,out _)&&bank.End(true)==5&&GazeRampPolicy.Steps(bank.Spent)==0,"cancelled intake refunds without ramp");
+        bank.Begin(5,5);Check(bank.TrySpend(1)&&bank.TryGain(),"reserve ramp fixture");
+        Check(GazeRampPolicy.Steps(bank.Spent)==1&&bank.Reserve==1,"reserve gain does not grant a ramp step");
+        bank.End(false);bank.Begin(5,5);
+        Check(GazeRampPolicy.Steps(bank.Spent)==0,"death then new cast resets ramp");
+        var packets=new GazeFuelSequence();int acknowledged=0;
+        Check(packets.Accept(70,1,true,false),"ramp network begin");
+        if(packets.Accept(70,2,false,false))acknowledged=GazeRampPolicy.Steps(1);
+        Check(!packets.Accept(70,2,false,false)&&acknowledged==1,"duplicate launch cannot increment ramp");
+        if(packets.Accept(70,3,false,false))acknowledged=GazeRampPolicy.Steps(4);
+        Check(acknowledged==4,"absolute count catches up without per-packet increments");
+        Check(packets.Accept(70,4,false,true),"ramp network end");acknowledged=0;
+        Check(!packets.Accept(70,5,false,false)&&!packets.Accept(70,1,true,false)&&acknowledged==0,"retired launch cannot restore ramp");
+        Check(packets.Accept(71,1,true,false)&&acknowledged==0,"next cast begins at zero");packets.Retire();
+        Check(!packets.Accept(71,2,false,false),"disabled body cannot apply late ramp");
+        Console.WriteLine("PASS launch-only ramp, five-step cap, cancelled intake, reserve exclusion, reset and idempotent snapshots");
     }
     static void ExtensionChecks()
     {

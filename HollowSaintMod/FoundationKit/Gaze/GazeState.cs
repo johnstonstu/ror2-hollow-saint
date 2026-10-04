@@ -22,6 +22,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private bool armored;
         private bool endRequested;
         private float beamDuration, progressionDuration;
+        private int rampSteps;
         private GazeSkillOverrides controls;
         private GazeFuelController fuel;
         private GazeFuelEndReason fuelEndReason = GazeFuelEndReason.Interrupted;
@@ -47,10 +48,17 @@ namespace HollowSaint.FoundationKit.Gaze
             progressionDuration = duration;
             if (beam) beam.SetProgressionDuration(duration);
         }
+        internal void ApplyRampSteps(int successfulLaunches)
+        {
+            if (endRequested) return;
+            rampSteps = GazeRampPolicy.Steps(successfulLaunches);
+            if (beam) beam.SetRampSteps(rampSteps);
+        }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            rampSteps = 0;
             ClaimOtherCombat();
             progressionDuration = beamDuration = GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
             beam = GazeBeam.For(characterBody);
@@ -197,18 +205,20 @@ namespace HollowSaint.FoundationKit.Gaze
             if (tickTimer <= 0f)
             {
                 tickTimer += Mathf.Max(0.05f, GazeTuning.TickSeconds / Mathf.Max(0.1f, attackSpeedStat));
-                GazeServer.CoreTick(characterBody, origin, direction, GazeTuning.DamagePerSecond * GazeTuning.TickSeconds);
+                GazeServer.CoreTick(characterBody, origin, direction,
+                    GazeTuning.DamagePerSecond * GazeTuning.TickSeconds * GazeRampPolicy.DamageMultiplier(rampSteps));
             }
             forkTimer -= dt;
             if (forkTimer <= 0f)
             {
                 forkTimer += Mathf.Max(0.1f, GazeTuning.ForkInterval);
-                GazeServer.Forks(characterBody, GazeServer.Trace(origin, direction));
+                GazeServer.Forks(characterBody, GazeServer.Trace(origin, direction), GazeRampPolicy.DamageMultiplier(rampSteps));
             }
         }
 
         public override void OnExit()
         {
+            rampSteps = 0;
             if (controls) controls.End();
             if (fuel && NetworkServer.active)
             {

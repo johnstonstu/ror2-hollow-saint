@@ -61,7 +61,7 @@ Blink a short distance in any direction, even in the air. Follows your aim a lit
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="48" alt=""> Gaze of the Hollow <sub>Special</sub></h3>
 
-Rise into the air and send your halo out before you. The beam pierces and splashes, reaching further the longer it fires, with bonus armor while you channel. Recast or use Arc Step to end it early. The clip below shows an earlier effect pass; the opening HUD screenshot shows the updated Gaze presentation.
+Rise into the air and send your halo out before you. The beam pierces and splashes, reaching further the longer it fires, with bonus armor while you channel. Fresh Primary presses spend entry charges on pulses, each adding two seconds up to fourteen seconds total. Each successful launch settles the beam wider and adds 5% ordinary beam, splash and fork/chain damage, up to five steps (+25%) per cast; fueled pulse damage stays unchanged. A small local HUD meter shows remaining time. Other combat skills return at channel end; there is no manual cancel binding. The clip below shows an earlier effect pass; the opening HUD screenshot shows the updated Gaze presentation.
 
 <p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" width="100%" alt="Gaze of the Hollow sweeping a pack"></p>
 

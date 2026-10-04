@@ -43,7 +43,7 @@ Two charges of a short blink, usable on the ground or in the air. Look upward to
 
 **Gaze of the Hollow · Special**
 
-Rise and project your halo forward to channel a piercing lightning beam. Sweep it along a line of enemies as its reach grows. Ground tendrils surround the channel, while separate lightning connectors mark enemies actually hit. Fresh Primary presses spend entry charges on pulses, each adding two seconds up to fourteen seconds total. A small local HUD meter shows remaining time. Other combat skills return at channel end; there is no manual cancel binding.
+Rise and project your halo forward to channel a piercing lightning beam. Sweep it along a line of enemies as its reach grows. Ground tendrils surround the channel, while separate lightning connectors mark enemies actually hit. Fresh Primary presses spend entry charges on pulses, each adding two seconds up to fourteen seconds total. Each successful launch also settles the beam wider and adds 5% ordinary beam, splash and fork/chain damage, up to five steps (+25%) per cast; fueled pulse damage stays unchanged. A small local HUD meter shows remaining time. Other combat skills return at channel end; there is no manual cancel binding.
 
 **Open Circuit · Alternate special**
 
