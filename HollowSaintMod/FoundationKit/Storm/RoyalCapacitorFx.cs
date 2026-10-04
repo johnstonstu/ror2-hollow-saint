@@ -13,8 +13,8 @@ namespace HollowSaint.FoundationKit.Storm
     {
         private static GameObject impact;
         private static GameObject customImpact;
-        private static readonly GameObject[] tintedImpact = new GameObject[5];
-        private static readonly GameObject[] tintedCustomImpact = new GameObject[5];
+        private static readonly GameObject[] tintedImpact = new GameObject[6];
+        private static readonly GameObject[] tintedCustomImpact = new GameObject[6];
         private static bool loaded;
 
         internal static void Load()

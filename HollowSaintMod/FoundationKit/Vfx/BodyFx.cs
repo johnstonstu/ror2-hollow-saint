@@ -334,7 +334,7 @@ namespace HollowSaint.FoundationKit.Vfx
                 if (trailTimer <= 0f)
                 {
                     if (lastTrailPoint != Vector3.zero && (foot - lastTrailPoint).sqrMagnitude > 0.04f)
-                        LightningLine.Spawn(lastTrailPoint, foot, 0.5f, 0.5f, 0, 0.06f, palette: palette);
+                        LightningLine.Spawn(lastTrailPoint, foot, 0.5f, 0.5f, 1, 0.06f, palette: palette);
                     lastTrailPoint = foot;
                     trailTimer = 0.08f;
                 }

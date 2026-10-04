@@ -10,9 +10,16 @@ namespace HollowSaint.FoundationKit.Vfx
     {
         internal static void Verify()
         {
-            for (uint i = 0; i < 5; i++)
+            for (uint i = 0; i < 6; i++)
             {
                 var palette = SkinFxPalette.ForIndex(i);
+                // Warm the bounded complementary caches before abilities first render.
+                var secondary = palette.SecondaryMaterial(VfxAssets.ArcCore);
+                palette.SecondaryMaterial(VfxAssets.Spark);
+                Require(secondary && secondary != VfxAssets.ArcCore &&
+                    palette.SecondaryMaterial(secondary) == secondary, "secondary cache " + i);
+                Require(palette.Secondary.maxColorComponent <= 1f && palette.Core.maxColorComponent <= 1f,
+                    "bounded highlight energy " + i);
                 var sent = new EffectData { color = palette.NetworkColor, genericUInt = (uint)Beat.ChainHop,
                     start = new Vector3(1f, 2f, 3f), scale = 0.8f, genericFloat = 0.14f };
                 var writer = new NetworkWriter();
@@ -50,7 +57,7 @@ namespace HollowSaint.FoundationKit.Vfx
                 tintedGradients.gradientMin.Evaluate(0f).a == gradient.Evaluate(0f).a &&
                 tintedGradients.gradientMax.Evaluate(1f).a == gradient.Evaluate(1f).a &&
                 gradient.Evaluate(0f) == originalGradientStart, "two-gradient alpha/source isolation");
-            Plugin.Log.LogInfo("HOLLOW_SAINT_SKIN_FX_CHECK_PASS themes=5 packetRoundTrips=5 materialIsolation=true alphaModes=true");
+            Plugin.Log.LogInfo("HOLLOW_SAINT_SKIN_FX_CHECK_PASS themes=6 packetRoundTrips=6 materialIsolation=true secondaryCache=true alphaModes=true");
         }
 
         private static void Require(bool value, string message)

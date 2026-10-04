@@ -23,6 +23,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             internal readonly Vector3[] points = new Vector3[Points];
             internal int count;
             internal float until;
+            internal bool secondary;
         }
 
         public void Begin(GazeBeam owner, SkinFxPalette skin)
@@ -32,6 +33,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             for (int i = 0; i < ambient.Length; i++)
             {
                 if (ambient[i] == null) ambient[i] = Create(false);
+                ambient[i].secondary = i % 2 == 1;
                 Theme(ambient[i]);
             }
             for (int i = 0; i < hits.Length; i++)
@@ -70,20 +72,28 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 radius = 1.5f;
             }
             if (radius < 0.25f) { HideAmbient(); return; }
-            float spin = Time.time * 1.3f;
             for (int i = 0; i < AmbientCount; i++)
             {
-                float angle = spin + i * Mathf.PI * 2f / AmbientCount;
-                Vector3 direction = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+                // Staggered finite lashes, not six continuously lit rotating spokes.
+                float clock = Time.time * (2.2f + i * 0.17f) + i * 0.37f;
+                int cycle = (int)clock;
+                float progress = clock - cycle;
                 var main = ambient[i * 2];
-                GroundPath(main, center, center + direction * radius, center, radius);
-                Show(main, atImpact ? 1.3f : 0.75f, atImpact ? 0.65f : 0.3f, false);
                 var branch = ambient[i * 2 + 1];
+                if (progress > 0.9f) { Hide(main); Hide(branch); continue; }
+                float variation = 0.5f + 0.5f * Mathf.Sin(cycle * 2.71f + i * 7.13f);
+                float angle = i * Mathf.PI * 2f / AmbientCount + cycle * 0.37f + variation * 0.6f;
+                Vector3 direction = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+                float reachLength = radius * (0.62f + 0.38f * variation);
+                float head = Mathf.Clamp01(progress / 0.6f), tail = Mathf.Clamp01((progress - 0.25f) / 0.75f);
+                float flash = Mathf.Sin(progress * Mathf.PI);
+                GroundPath(main, center + direction * (reachLength * tail), center + direction * (reachLength * head), center, radius);
+                Show(main, atImpact ? 0.8f : 0.5f, (atImpact ? 0.65f : 0.3f) * flash, false);
                 if (main.count < 4) { Hide(branch); continue; }
                 Vector3 start = main.points[main.count / 2];
-                Vector3 side = new Vector3(-direction.z, 0f, direction.x);
-                GroundPath(branch, start, center + (direction * 0.7f + side * 0.55f) * radius, center, radius);
-                Show(branch, atImpact ? 0.8f : 0.45f, atImpact ? 0.35f : 0.2f, false);
+                Vector3 side = new Vector3(-direction.z, 0f, direction.x) * (variation < 0.5f ? -1f : 1f);
+                GroundPath(branch, start, center + (direction * 0.72f + side * 0.48f) * (reachLength * head), center, radius);
+                Show(branch, atImpact ? 0.5f : 0.3f, (atImpact ? 0.35f : 0.2f) * flash, false);
             }
         }
 
@@ -188,14 +198,14 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private void Theme(Stroke stroke)
         {
             stroke.glow.sharedMaterial = palette.Material(VfxAssets.ArcGlow);
-            if (stroke.core) stroke.core.sharedMaterial = palette.Material(VfxAssets.ArcCore);
+            if (stroke.core) stroke.core.sharedMaterial = stroke.secondary ? palette.SecondaryMaterial(VfxAssets.ArcCore) : palette.Material(VfxAssets.ArcCore);
         }
 
         private void Show(Stroke stroke, float width, float alpha, bool confirmed)
         {
             Draw(stroke.glow, stroke, width, confirmed ? palette.Arc : palette.Outer, alpha);
             if (stroke.core) Draw(stroke.core, stroke, width * (confirmed ? 0.24f : 0.16f),
-                confirmed ? palette.Core : palette.Arc, confirmed ? alpha : Mathf.Min(1f, alpha * 1.4f));
+                stroke.secondary ? Color.white : confirmed ? palette.Core : palette.Arc, confirmed ? alpha : Mathf.Min(1f, alpha * 1.4f));
         }
 
         private static void Draw(LineRenderer line, Stroke stroke, float width, Color color, float alpha)

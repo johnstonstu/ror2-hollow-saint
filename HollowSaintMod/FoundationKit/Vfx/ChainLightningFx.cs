@@ -14,7 +14,7 @@ namespace HollowSaint.FoundationKit.Vfx
         // the existing server beat still supplies its original 0.07s hop staggering.
         private const float Duration = 0.18f;
         private static GameObject prefab;
-        private static readonly GameObject[] variants = new GameObject[5];
+        private static readonly GameObject[] variants = new GameObject[6];
         private static bool loaded;
         private static bool catalogChecked;
         internal static bool HasSound => prefab && !string.IsNullOrEmpty(prefab.GetComponent<EffectComponent>().soundName);
@@ -83,7 +83,7 @@ namespace HollowSaint.FoundationKit.Vfx
             for (int i = 0; i < variants.Length; i++)
                 if (EffectCatalog.FindEffectIndexFromPrefab(variants[i]) == EffectIndex.Invalid)
                     throw new InvalidOperationException("Chain skin effect missing from catalog: " + i);
-            Plugin.Log.LogInfo("HOLLOW_SAINT_SKIN_CHAIN_READY variants=4 (house palette for skins 0/1)");
+            Plugin.Log.LogInfo("HOLLOW_SAINT_SKIN_CHAIN_READY variants=5 (house palette for skins 0/1; includes Crimson)");
         }
 
         internal static bool TryPlay(Vector3 from, Vector3 to, float scale, SkinFxPalette palette)

@@ -76,8 +76,11 @@ namespace HollowSaint.FoundationKit.Vfx
             if (spark)
             {
                 var palette = SkinFxPalette.ForMaterial(material);
+                // Small thrown sparks provide complementary contrast; broad flashes stay primary.
+                material = palette.SecondaryMaterial(material);
+                main.startColor = new Color(1f, 1f, 1f, color.a);
                 gradient.SetKeys(
-                    new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(palette.Arc, 0.55f), new GradientColorKey(palette.Outer, 1f) },
+                    new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(new Color(0.7f, 0.7f, 0.7f), 0.55f), new GradientColorKey(new Color(0.3f, 0.3f, 0.3f), 1f) },
                     new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(0.8f, 0.4f), new GradientAlphaKey(0f, 1f) });
 
                 var limit = ps.limitVelocityOverLifetime;

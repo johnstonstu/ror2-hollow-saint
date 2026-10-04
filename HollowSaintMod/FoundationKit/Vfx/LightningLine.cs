@@ -4,8 +4,8 @@ using UnityEngine;
 namespace HollowSaint.FoundationKit.Vfx
 {
     /// <summary>
-    /// Procedural lightning between two points: a thin white-hot core line over a wide
-    /// cyan glow line with optional forked branches. Per-point offsets persist and are
+    /// Procedural lightning between two points: a related coloured core over the skin's
+    /// primary glow, with thin complementary forks. Per-point offsets persist and are
     /// blended toward new random values every rejagInterval, so the bolt writhes instead
     /// of strobing; the points are rebuilt from start/end every frame so the bolt never
     /// lags behind moving anchors. The ends can follow transforms.
@@ -87,9 +87,13 @@ namespace HollowSaint.FoundationKit.Vfx
             var next = value ?? SkinFxPalette.ForIndex(0);
             if (next == palette) return;
             palette = next;
-            if (core) core.sharedMaterial = palette.Material(VfxAssets.ArcCore);
+            if (core)
+            {
+                core.sharedMaterial = palette.Material(VfxAssets.ArcCore);
+                core.startColor = core.endColor = palette.Core;
+            }
             if (glow) glow.sharedMaterial = palette.Material(VfxAssets.ArcGlow);
-            foreach (var fork in forks) if (fork) fork.sharedMaterial = palette.Material(VfxAssets.ArcCore);
+            foreach (var fork in forks) if (fork) fork.sharedMaterial = palette.SecondaryMaterial(VfxAssets.ArcCore);
         }
 
         private void Start()
@@ -105,6 +109,8 @@ namespace HollowSaint.FoundationKit.Vfx
             for (int i = 0; i < branches; i++)
             {
                 forks.Add(MakeRenderer("fork" + i, VfxAssets.ArcCore));
+                forks[i].sharedMaterial = palette.SecondaryMaterial(VfxAssets.ArcCore);
+                forks[i].startColor = forks[i].endColor = Color.white;
                 forkPoints[i] = new Vector3[4];
             }
             Rebuild(true, 1f);
@@ -117,6 +123,7 @@ namespace HollowSaint.FoundationKit.Vfx
             child.transform.SetParent(transform, false);
             var lr = child.AddComponent<LineRenderer>();
             lr.sharedMaterial = palette.Material(material);
+            if (material == VfxAssets.ArcCore) lr.startColor = lr.endColor = palette.Core;
             lr.useWorldSpace = true;
             lr.alignment = LineAlignment.View;
             lr.textureMode = LineTextureMode.Stretch;

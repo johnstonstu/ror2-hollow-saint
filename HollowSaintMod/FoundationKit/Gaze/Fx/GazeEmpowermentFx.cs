@@ -114,10 +114,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             EnsureBuilt();
             if (!root) return;
             palette = SkinFxPalette.ForBody(body);
-            // Keep primary skin energy throughout; secondary colour is outline-only.
+            // Primary energy carries identity; thin filaments and forks carry contrast.
             accent = palette.Arc;
-            outlineTint = Color.Lerp(GazeContrastAssets.Ink, GazeContrastAssets.Accent(palette.Index), 0.25f);
-            accentEdge = palette.Arc;
+            outlineTint = Color.Lerp(GazeContrastAssets.Ink, palette.Secondary, 0.25f);
+            accentEdge = palette.Core;
             capacity = Mathf.Clamp(max, 2, MaxCharges);
             entryCount = Mathf.Clamp(entryCount, 0, capacity);
             fullEntry = enteredFull;
@@ -292,27 +292,27 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                             points[j] += (u * Mathf.Sin(j * 2.4f + tick + i) +
                                 v * Mathf.Cos(j * 1.7f + tick + i)) * (jag * envelope);
                         }
-                        intakeFilaments[orb.intakeSlot].Draw(points, points.Length, 0.025f, accent, ReducedEffects ? 0.55f : 0.85f);
+                        intakeFilaments[orb.intakeSlot].Draw(points, points.Length, 0.025f, palette.Secondary, ReducedEffects ? 0.55f : 0.85f);
                     }
-                    // Preserve the round orb and its hue all the way into the aperture.
-                    orb.outline.Loop(p, direction, size, 0.14f, outlineTint, 0.9f);
-                    orb.stroke.Loop(p, direction, size, fullEntry ? 0.09f : 0.08f, accent, 0.95f);
+                    // Same compact energy knot and primary hue throughout consumption.
+                    orb.outline.Knot(p, direction, size, i * 2.4f, 0.095f, outlineTint, 0.8f, ReducedEffects);
+                    orb.stroke.Knot(p, direction, size, i * 2.4f, 0.045f, accent, 0.9f, ReducedEffects);
                     if (!ending && (!ReducedEffects || orb.swallowing))
                         orb.filament.Crawl(p, direction, size, Time.time * (orb.swallowing ? 9f : 4f) + i * 2.4f,
-                            accent, orb.swallowing ? 0.85f : 0.65f);
+                            palette.Secondary, orb.swallowing ? 0.85f : 0.65f);
                 }
                 if (reserve[i].visible && !ending)
                 {
-                    reserve[i].outline.Loop(ReservePosition(i), direction, 0.14f, 0.09f, outlineTint, 0.65f);
-                    reserve[i].stroke.Loop(ReservePosition(i), direction, 0.14f, 0.05f, accent, 0.8f);
+                    reserve[i].outline.Knot(ReservePosition(i), direction, 0.14f, i * 2.4f, 0.075f, outlineTint, 0.65f, ReducedEffects);
+                    reserve[i].stroke.Knot(ReservePosition(i), direction, 0.14f, i * 2.4f, 0.035f, accent, 0.8f, ReducedEffects);
                     if (!ReducedEffects) reserve[i].filament.Crawl(ReservePosition(i), direction, 0.14f,
-                        -Time.time * 3f + i * 2.4f, accent, 0.5f);
+                        -Time.time * 3f + i * 2.4f, palette.Secondary, 0.5f);
                 }
                 else { reserve[i].stroke.Hide(); reserve[i].outline.Hide(); }
             }
             float flash = 1f - Mathf.Clamp01((Time.time - flashAt) / (ReducedEffects ? 0.2f : 0.12f));
-            if (flash > 0f && !ending) crownRim.Loop(crown - direction * 0.07f, direction, 0.38f + flash * 0.1f,
-                0.05f + flash * 0.065f, ReducedEffects ? accent : accentEdge, flash * 0.85f);
+            if (flash > 0f && !ending) crownRim.Knot(crown - direction * 0.07f, direction, 0.38f + flash * 0.1f,
+                flashAt, 0.045f, accent, flash * 0.7f, ReducedEffects);
             else crownRim.Hide();
         }
 

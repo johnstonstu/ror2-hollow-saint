@@ -147,7 +147,8 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                 edge.Glow.SetPositions(edge.World);
                 float current = 0.88f + 0.12f * Mathf.Sin(time * 2f + path * 0.9f);
                 float strength = edge.Lower ? 0.18f : path < 4 ? 0.85f : 0.48f;
-                Color coreColor = palette.Arc; coreColor.a = 0.48f;
+                // Sparse complementary currents; the primary glow still defines the volume.
+                Color coreColor = path % 4 == 3 ? palette.Secondary : palette.Core; coreColor.a = 0.48f;
                 SetStyle(edge.Core, 0.018f, coreColor, strength * current);
                 SetStyle(edge.Glow, 0.065f, new Color(0.4f, 0.4f, 0.4f, 0.32f), strength * current);
             }

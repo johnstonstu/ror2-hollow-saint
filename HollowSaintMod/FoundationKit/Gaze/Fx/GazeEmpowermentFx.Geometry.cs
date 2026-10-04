@@ -38,7 +38,23 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Draw(loop, loop.Length, width, color, alpha);
             }
             internal void Hide() { line.enabled = false; }
-            // One short crawling filament; the separate circular silhouette stays intact.
+            // An open, irregular cluster of four crackling arms, not a closed ring/glyph.
+            // Outline and energy use the same seed and clock so their silhouettes agree.
+            internal void Knot(Vector3 center, Vector3 normal, float radius, float phase, float width, Color color, float alpha, bool reduced)
+            {
+                Vector3 u, v; Basis(normal, out u, out v);
+                int tick = (int)(Time.time * (reduced ? 6f : 12f));
+                for (int i = 0; i < loop.Length; i++)
+                {
+                    int arm = i / 4, step = i % 4;
+                    float a = phase + arm * 1.63f + 0.32f * Mathf.Sin(i * 2.7f + tick + phase);
+                    float r = (step == 0 ? 0.12f : step == 1 ? 0.5f : step == 2 ? 0.94f : 0.38f);
+                    r *= 0.84f + 0.16f * Mathf.Sin(i * 4.1f + tick + phase);
+                    loop[i] = center + (u * Mathf.Cos(a) + v * Mathf.Sin(a)) * (radius * r);
+                }
+                Draw(loop, loop.Length, width, color, alpha);
+            }
+            // One short crawling filament follows the energy knot.
             // Reuse this stroke's buffer, with bounded radial teeth and no random state.
             internal void Crawl(Vector3 center, Vector3 normal, float radius, float phase, Color color, float alpha)
             {
@@ -89,6 +105,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 pulse.sleeve.line.widthCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.5f, 0.18f), new Keyframe(0.8f, 0.9f), new Keyframe(0.95f, 1f), new Keyframe(1f, 0.1f));
                 pulse.spine.line.widthCurve = pulse.sleeve.line.widthCurve;
                 pulse.outline.line.widthCurve = pulse.sleeve.line.widthCurve;
+                for (int j = 0; j < pulse.forks.Length; j++) pulse.forks[j] = NewStroke("SurgeFork", true);
                 for (int j = 0; j < pulse.roots.Length; j++) pulse.roots[j] = new GroundStroke { stroke = NewStroke("GroundBranch", false), outline = NewOutline("GroundOutline") };
                 pulses[i] = pulse;
             }
@@ -115,6 +132,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             {
                 if (p == null) continue;
                 p.active = false; p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
+                foreach (var fork in p.forks) fork.Hide();
                 foreach (var g in p.roots) { g.stroke.Hide(); g.outline.Hide(); }
             }
             foreach (var s in contacts)

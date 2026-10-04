@@ -16,21 +16,60 @@ namespace HollowSaint.FoundationKit.Vfx
             new SkinFxPalette(5, CrimsonMasteryVisuals.Arc, CrimsonMasteryVisuals.Outer, CrimsonMasteryVisuals.Core)
         };
         public readonly int Index;
-        public readonly Color Arc, Outer, Core;
+        public readonly Color Arc, Outer, Core, Secondary;
         private readonly Dictionary<Material, Material> materials = new Dictionary<Material, Material>();
+        private readonly Dictionary<Material, Material> secondaryMaterials = new Dictionary<Material, Material>();
         private static readonly Dictionary<Material, Material> originals = new Dictionary<Material, Material>();
         private static readonly Dictionary<Material, SkinFxPalette> owners = new Dictionary<Material, SkinFxPalette>();
         private Texture2D ramp;
+        private Texture2D secondaryRamp;
 
         private SkinFxPalette(int index, Color arc)
         {
             Index = index; Arc = arc;
-            Core = index < 2 ? HsPalette.WhiteHot : Color.Lerp(arc, Color.white, 0.82f);
+            // A coloured highlight instead of a near-white centre; primary identity stays dominant.
+            Core = Color.Lerp(arc, Color.white, 0.28f);
+            switch (index)
+            {
+                case 2: Secondary = new Color(0.18f, 0.58f, 0.95f); break; // mint / blue
+                case 3: Secondary = new Color(0.62f, 0.32f, 0.92f); break; // gold / violet
+                case 4: Secondary = new Color(0.18f, 0.82f, 0.95f); break; // violet / ice
+                case 5: Secondary = new Color(1f, 0.56f, 0.16f); break; // crimson / amber
+                default: Secondary = new Color(0.62f, 0.38f, 0.95f); break; // cyan / lilac, house + Obsidian
+            }
             Color outer = index < 2 ? HsPalette.OuterCyan : arc * 0.65f;
             outer.a = 1f; Outer = outer;
         }
         private SkinFxPalette(int index, Color arc, Color outer, Color core) : this(index, arc)
-        { Outer = outer; Core = core; }
+        { Outer = outer; Core = Color.Lerp(arc, core, 0.28f); }
+
+        /// <summary>Cached complementary material for thin forks/sparks only. Neutral vertex
+        /// colour avoids multiplying the secondary hue by the primary skin ramp.</summary>
+        public Material SecondaryMaterial(Material source)
+        {
+            Material original;
+            if (source && originals.TryGetValue(source, out original)) source = original;
+            if (!source) return null;
+            Material result;
+            if (secondaryMaterials.TryGetValue(source, out result)) return result;
+            result = new Material(source) { name = source.name + "_HSSecondary" + Index };
+            foreach (string property in new[] { "_TintColor", "_Color", "_EmissionColor" })
+                if (result.HasProperty(property)) result.SetColor(property, Secondary);
+            if (!secondaryRamp)
+            {
+                secondaryRamp = new Texture2D(64, 1, TextureFormat.RGBA32, false) { name = "HS_SecondaryRamp" + Index, wrapMode = TextureWrapMode.Clamp };
+                for (int i = 0; i < 64; i++)
+                {
+                    float t = i / 63f;
+                    // Neutral ramp: the material tint supplies the hue exactly once.
+                    secondaryRamp.SetPixel(i, 0, new Color(t, t, t, t));
+                }
+                secondaryRamp.Apply(false, true);
+            }
+            if (result.HasProperty("_RemapTex")) result.SetTexture("_RemapTex", secondaryRamp);
+            secondaryMaterials.Add(source, result); originals.Add(result, source); owners.Add(result, this);
+            return result;
+        }
 
         public static SkinFxPalette ForBody(CharacterBody body) => ForIndex(KitUtil.IsHollowSaint(body) ? body.skinIndex : 0u);
         internal static SkinFxPalette ForModel(CharacterModel model)
@@ -114,20 +153,22 @@ namespace HollowSaint.FoundationKit.Vfx
             if (Index < 2 && !force) return;
             foreach (var renderer in clone.GetComponentsInChildren<Renderer>(true))
             {
+                bool secondary = renderer.name.IndexOf("spark", System.StringComparison.OrdinalIgnoreCase) >= 0;
                 var source = renderer.sharedMaterials;
-                for (int i = 0; i < source.Length; i++) source[i] = Material(source[i], force);
+                for (int i = 0; i < source.Length; i++) source[i] = secondary ? SecondaryMaterial(source[i]) : Material(source[i], force);
                 renderer.sharedMaterials = source;
                 var line = renderer as LineRenderer;
-                if (line) line.colorGradient = TintGradient(line.colorGradient);
+                if (line) line.colorGradient = secondary ? NeutralGradient(line.colorGradient) : TintGradient(line.colorGradient);
                 var trail = renderer as TrailRenderer;
-                if (trail) trail.colorGradient = TintGradient(trail.colorGradient);
+                if (trail) trail.colorGradient = secondary ? NeutralGradient(trail.colorGradient) : TintGradient(trail.colorGradient);
             }
             foreach (var system in clone.GetComponentsInChildren<ParticleSystem>(true))
             {
                 var main = system.main;
-                main.startColor = TintParticleColor(main.startColor);
+                bool secondary = system.name.IndexOf("spark", System.StringComparison.OrdinalIgnoreCase) >= 0;
+                main.startColor = secondary ? NeutralParticleColor(main.startColor) : TintParticleColor(main.startColor);
                 var fade = system.colorOverLifetime;
-                if (fade.enabled) fade.color = TintParticleColor(fade.color);
+                if (fade.enabled) fade.color = secondary ? NeutralParticleColor(fade.color) : TintParticleColor(fade.color);
             }
             foreach (var light in clone.GetComponentsInChildren<Light>(true)) light.color = Arc;
         }
@@ -136,6 +177,35 @@ namespace HollowSaint.FoundationKit.Vfx
         {
             Color result = Color.Lerp(Arc, Core, Mathf.Clamp01(source.grayscale));
             result.a = source.a;
+            return result;
+        }
+
+        private static ParticleSystem.MinMaxGradient NeutralParticleColor(ParticleSystem.MinMaxGradient source)
+        {
+            // Keep authored alpha and variation, while the secondary material owns RGB.
+            var result = source;
+            if (source.mode == ParticleSystemGradientMode.Color) result.color = new Color(1f, 1f, 1f, source.color.a);
+            else if (source.mode == ParticleSystemGradientMode.TwoColors)
+            {
+                result.colorMin = new Color(1f, 1f, 1f, source.colorMin.a);
+                result.colorMax = new Color(1f, 1f, 1f, source.colorMax.a);
+            }
+            else if (source.mode == ParticleSystemGradientMode.TwoGradients)
+            {
+                result.gradientMin = NeutralGradient(source.gradientMin);
+                result.gradientMax = NeutralGradient(source.gradientMax);
+            }
+            else result.gradient = NeutralGradient(source.gradient);
+            result.mode = source.mode;
+            return result;
+        }
+
+        private static Gradient NeutralGradient(Gradient source)
+        {
+            if (source == null) return null;
+            var result = new Gradient();
+            result.SetKeys(new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.white, 1f) }, source.alphaKeys);
+            result.mode = source.mode;
             return result;
         }
 

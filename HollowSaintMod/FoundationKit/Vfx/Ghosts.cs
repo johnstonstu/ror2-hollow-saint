@@ -111,7 +111,7 @@ namespace HollowSaint.FoundationKit.Vfx
                     line.transform.SetParent(transform, false);
                     line.loop = true;
                     line.width = KitTuning.ArcBoltRadius * 0.55f;
-                    line.branches = 0;
+                    line.branches = 1;
                     line.jag = 0.05f;
                     line.rejagInterval = 0.03f;
                     line.drawTime = 0f;
@@ -159,8 +159,9 @@ namespace HollowSaint.FoundationKit.Vfx
                 palette = next;
                 Ghosts.TintRoot(gameObject, palette);
                 foreach (var arc in arcs) if (arc) arc.SetPalette(palette);
-                // The central white-hot flash stays distinct across all skins. Only
-                // the contour, crackle and trail take the owner's arc color.
+                // A related coloured core, primary contour and complementary fork tips.
+                var main = core.main; main.startColor = palette.Core;
+                core.GetComponent<ParticleSystemRenderer>().sharedMaterial = palette.Material(VfxAssets.Flash);
                 foreach (var ring in contours)
                 {
                     ring.sharedMaterial = VfxAssets.ArcCore;
