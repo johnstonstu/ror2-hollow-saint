@@ -12,6 +12,14 @@ Arc Bolt's main impact uses its dedicated `Play_HS_BoltImpact` event with the es
 
 The local timer is a compact charcoal panel below the center view, with separate muted title and bright seconds, a cyan three-pixel meter and two-second divisions. A confirmed duration increase briefly shows its actual grant, including a fractional final grant. The fixed fourteen-second scale still makes grants visibly extend the bar. It follows the local native HUD canvas, hides for observers/hidden HUD/death/state exit, restores shared GUI color and creates no persistent HUD objects. Native font scale and positioning require inspection.
 
+## Integrated crown and Gaze visuals
+
+Astra visual commit f7481f6e48de869e483abd349187443fe06857e3 is integrated. The sustained body grows from 0.65 m to 2.65 m through the existing five launch steps; haze grows 0.90→2.95 m, sheath 0.80→2.80 m and core 0.09→0.17 m. Final animated widths remain capped to the configured hit diameter. The traveling sweep has a 2.95 m envelope capped to that diameter, with radial point bounds. Timing, targeting, damage radius and palette selection are unchanged.
+
+All three reserve display layers stay hidden during Gaze. Earned reserve counts still accumulate, remain unavailable as current-cast fuel and reconcile with retained entry fuel on exit. Reconciled charges appear at the crown rather than flying from an invisible reserve position.
+
+Open Circuit's dome is replaced by the actual four metal crown elements moving to the equator of its core-centred damage sphere, with four sparse perimeter hops and two intermittent upward arcs. There are six pooled strokes/twelve line renderers. Expansion takes 0.65 seconds and return 0.30 seconds; gameplay duration stays unchanged. Replicated buff state supports observers. Gaze takes crown ownership during all its non-idle phases; expiry, death, invisibility, model loss and disable restore the original pose. Bone dock centres reach the configured radius. Native metal mesh extents, animation ordering and appearance remain unmeasured.
+
 ## Non-Gaze native damage: exactly one 0.9 factor
 
 Saved config values remain **raw and unchanged**, including custom values. No defaults migration or config write is added. Gameplay applies 0.9 once at each independent native damage coefficient; descriptions show the effective coefficient, and relevant config help explains the factor. Editing a raw coefficient of 2.0 therefore yields 1.8 effective damage. Repeated setting changes and launches do not compound the factor.
@@ -44,6 +52,6 @@ Record the candidate commit and DLL hash. Use the normal solo profile and camera
 | Short description | Character-select Gaze description fits in English, Chinese, Russian and Portuguese; displayed base damage/duration match tuning. |
 | Non-Gaze damage | At fixed body damage/crit/config, compare Arc Bolt, spear direct/burst, conductor, Circuit, Prayer/Crown and passive pop to 9be97ff3: each is 90%, never 81%. |
 | Configs / Gaze | Custom raw coefficients remain saved; tooltips show 90% of them. Gaze's own ordinary and fueled damage match the installed baseline. |
-| Crown and reserves | Astra's separately owned physical crown/perimeter and Gaze buildup/reserve visibility changes require combined-candidate testing after integration. Reserve gains must stay mechanical, unavailable as current-cast fuel, and reconcile on exit. |
+| Crown and reserves | Verify the integrated physical crown/perimeter, more dramatic Gaze width ramp and hidden reserve display. Reserve gains must stay mechanical, unavailable as current-cast fuel, and reconcile on exit. |
 
 Near-expiry remote duration acknowledgement remains a known multiplayer limitation. The pulse audio coalescer limits clustered acknowledgement audio, but native host/client timing, observers and live performance are not accepted by solo source checks.

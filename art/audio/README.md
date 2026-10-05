@@ -41,7 +41,14 @@ discharge, with the indexed `Play_captain_m2_tazer_shoot` fallback. Clustered
 launch acknowledgements coalesce for 0.24 seconds; original Gaze startup, loops
 and end events are unchanged. Native perceived mix still requires playtesting.
 
-All 33 sounds use positional spatialization with attenuation: 0 dB through 5 m,
+For this narrow delta, missing sampled authoring WAVs were recovered from the
+installed bank. Headless Wwise reprocessed one unrelated SpearBurst source;
+`preserve_feedback_media.py <baseline-bank>` restores its original media slot.
+`check_feedback_audio.py <baseline-bank>` verifies all 34 unrelated media entries
+and the event hierarchy are byte-identical, and checks the embedded impact gain.
+Normal DLL builds embed the checked-in verified bank without audio authoring.
+
+All 35 sounds use positional spatialization with attenuation: 0 dB through 5 m,
 -9 dB at 12 m, -24 dB at 24 m, -60 dB at 40 m. GlideLoop and CircuitLoop are infinite
 two-second sources. Their Stop events target only the posting GameObject and
 fade over 120 ms. Post start and stop on the same emitter. Event names are listed

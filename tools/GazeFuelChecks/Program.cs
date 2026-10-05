@@ -87,7 +87,7 @@ static class Program
     static void WidthChecks()
     {
         Func<float,float,float,float>[] widths={GazeBeamWidthPolicy.Body,GazeBeamWidthPolicy.Haze,GazeBeamWidthPolicy.Sheath,GazeBeamWidthPolicy.Core};
-        float[] baseline={.55f,.8f,.7f,.075f},full={1.05f,1.3f,1.2f,.115f};
+        float[] baseline={.65f,.9f,.8f,.09f},full={2.65f,2.95f,2.8f,.17f};
         for(int layer=0;layer<widths.Length;layer++) {
             var width=widths[layer];
             Check(Math.Abs(width(0,1,1.5f)-baseline[layer])<.0001f&&Math.Abs(width(5,1,1.5f)-full[layer])<.0001f,"each settled layer matches baseline and five-step width");
@@ -110,6 +110,11 @@ static class Program
         Check(GazeBeamWidthPolicy.Advance(5,0,.1f)==4.6f&&GazeBeamWidthPolicy.Advance(.1f,0,1)==0,"smooth fall without undershoot");
         foreach(float dt in new[]{-1f,0f,float.NaN,float.PositiveInfinity})Check(GazeBeamWidthPolicy.Advance(2,5,dt)==2,"negative or invalid dt never advances width");
         Check(GazeBeamWidthPolicy.Advance(float.NaN,5,.1f)==.4f&&GazeBeamWidthPolicy.Advance(99,20,1)==5&&GazeBeamWidthPolicy.Advance(-5,-1,1)==0,"invalid shown state and extreme targets bounded");
+        Check(GazeBeamWidthPolicy.Sweep(1,1.5f)==2.95f,"full sweep uses new readable width");
+        foreach(float radius in new[]{.1f,.5f,1.5f,8f})foreach(float envelope in new[]{0f,.35f,1f,1.16f,8f})
+            Check(Math.Abs(GazeBeamWidthPolicy.Sweep(envelope,radius)-Math.Min(2*radius,2.95f*envelope))<.0001f,"sweep envelope capped at configured damage diameter");
+        foreach(float invalid in new[]{-1f,0f,float.NaN,float.PositiveInfinity,float.NegativeInfinity})
+            Check(GazeBeamWidthPolicy.Sweep(invalid,1.5f)==0&&GazeBeamWidthPolicy.Sweep(1,invalid)==0,"sweep rejects invalid radius or envelope");
         Console.WriteLine("PASS actual width policy endpoints, fractional smoothing, finite guards and diameter bounds at three radii");
     }
     static void RampChecks()

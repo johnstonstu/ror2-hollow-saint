@@ -7,7 +7,12 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
     {
         private static int checks;
         private static void Check(bool ok,string name){if(!ok)throw new Exception(name);checks++;}
-        public static void Main()
+        public static int Main()
+        {
+            try { Run(); return 0; }
+            catch(Exception error) { Console.Error.WriteLine(error); return 1; }
+        }
+        private static void Run()
         {
             var go=new GameObject();var body=go.AddComponent<CharacterBody>();var fx=go.AddComponent<GazeEmpowermentFx>();
             fx.EnableAudio=false;Time.time=0;
@@ -20,7 +25,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             Check(Vector3.Dot(end-fx.crown,fx.direction)<0,"rear intake endpoint");
             fx.Swallow(1,0,0,0,.32f);Check(fx.swallows.Count==1,"duplicate intake");
             Time.time=.33f;fx.LateUpdate();Check(!fx.fuel[0].visible,"swallowed orb removed");
-            fx.SetReserve(1,2);Check(fx.reserveCount==2&&fx.reserve[1].visible,"reserve visible");
+            fx.SetReserve(1,2);fx.LateUpdate();Check(fx.reserveCount==2&&fx.reserve[1].visible,"reserve logical count retained");
+            foreach(var bank in fx.reserve)Check(!bank.stroke.line.enabled&&!bank.outline.line.enabled&&!bank.filament.line.enabled,"all reserve render layers hidden during channel");
             Physics.Rays=Physics.Segments=0;
             fx.LaunchPulse(1,0,new Vector3(0,2,0),new Vector3(0,0,10),new Vector3(0,0,10),Vector3.up,true,0,.2f,4,.4f,false);
             Check(Physics.Rays<=108&&Physics.Segments<=96,"bounded terrain queries");
@@ -88,7 +94,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Check(Math.Abs(baseValue-accentValue)>.12f,"secondary value separation all skins");
                 Check(fx.fuel[0].stroke.line.positionCount==17&&fx.fuel[0].outline.line.enabled,"outlined energy knot");
                 fx.SetReserve(1004+skin,1);fx.LateUpdate();
-                Check(fx.reserve[0].stroke.line.positionCount==17,"reserve knot retains identity");
+                Check(fx.reserveCount==1 && !fx.reserve[0].stroke.line.enabled && !fx.reserve[0].outline.line.enabled && !fx.reserve[0].filament.line.enabled,"reserve retained but completely hidden during channel");
                 Check(fx.ReadabilityFocus==0f,"no focus at rest");
                 fx.Swallow(1004+skin,0,0,0,.32f);Time.time+=.1f;
                 Check(fx.ReadabilityFocus>.95f,"focus available before renderer update");
@@ -121,7 +127,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             Time.time+=.25f;fx.LateUpdate();
             var slow=fx.pulses[0];
             Check(Vector3.Distance(slow.line[11],Vector3.forward*10)<.01f,"caller supplied half-second travel stays synchronized");
-            Check(slow.sleeve.line.widthMultiplier>3.8f,"fat pulse geometry");
+            Check(slow.sleeve.line.widthMultiplier>2.7f && slow.sleeve.line.widthMultiplier<=3f,"clear sweep inside actual hit diameter");
             Check(fx.CrownExpansion==0f,"crown recovers while pulse travels");
             Check(!slow.roots[0].stroke.line.enabled,"ground burst waits for supplied arrival");
             Time.time+=.25f;fx.LateUpdate();Check(!slow.sleeve.line.enabled&&slow.front.line.enabled,"arrival punctuation begins at arrival");
@@ -185,6 +191,13 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 fx.LaunchPulse(5000+skin,0,new Vector3(0,2,0),new Vector3(0,0,20),new Vector3(0,0,20),Vector3.up,true,0,.55f,4,.4f,false);
                 var storm=fx.pulses[0]; Time.time=storm.at+.2f;fx.LateUpdate();
                 Check(storm.forks[0].line.enabled && storm.forks[1].line.enabled,"two pooled travelling forks");
+                foreach(var stroke in new[]{storm.sleeve,storm.outline,storm.spine,storm.front,storm.forks[0],storm.forks[1]})
+                    for(int n=0;n<stroke.line.positionCount;n++)
+                    {
+                        Vector3 offset=stroke.line.points[n]-storm.origin;
+                        Vector3 radial=offset-storm.direction*Vector3.Dot(offset,storm.direction);
+                        Check(radial.magnitude+stroke.line.widthMultiplier*.5f<=GazeTuning.Radius+.0001f,"travelling sweep geometry plus halfwidth fits beam radius for every skin");
+                    }
                 Check(Vector3.Distance(storm.forkPoints[0][0],storm.line[3])<.001f,"surge fork stays attached to main spine");
                 for(int n=0;n<storm.line.Length;n++)Check(Vector3.Dot(storm.line[n]-storm.origin,storm.direction)<=storm.length*(.2f/.55f)+.001f,"surge never jumps ahead of authoritative head");
                 int queries=Physics.Rays+Physics.Segments;
@@ -233,6 +246,14 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             Check(GC.GetAllocatedBytesForCurrentThread()==ambientBefore && GameObject.Created==ambientObjects,"ambient endpoint uses existing pool with no hot allocations");
             body.healthComponent.alive=false;tendrils.Render(impact);foreach(var stroke in ambient)Check(!((LineRenderer)glowField.GetValue(stroke)).enabled,"death clears baseline lashes");
             body.healthComponent.alive=true;tendrils.Clear();
+            fx.BeginCast(9000,2,5,false,0);fx.SetReserve(9000,3);fx.LateUpdate();
+            foreach(var bank in fx.reserve)Check(!bank.stroke.line.enabled&&!bank.outline.line.enabled&&!bank.filament.line.enabled,"no reserve visual layer during Gaze");
+            Check(fx.reserveCount==3,"hidden earned reserve count remains intact");
+            fx.EndCast(9000,2,3,5,EndReason.Completed);fx.LateUpdate();
+            Check(fx.mergedCount==5&&fx.fuel[4].visible,"earned reserve reconciles after channel");
+            for(int i=2;i<5;i++)Check(Vector3.Distance(fx.fuel[i].mergeFrom,fx.crown)<.001f,"hidden reserve returns from crown instead of behind player");
+            foreach(var bank in fx.reserve)Check(!bank.stroke.line.enabled&&!bank.outline.line.enabled&&!bank.filament.line.enabled,"end reconciliation does not expose reserve layers");
+            Check(GazeBeamWidthPolicy.Body(5,1,1.5f)>GazeBeamWidthPolicy.Body(0,1,1.5f)*4,"dramatic sustained progression");
             Console.WriteLine("PASS "+checks+" assertions; 1000 cast reuse; production presentation files with physics/render substitutes. Not Unity runtime validation.");
         }
     }

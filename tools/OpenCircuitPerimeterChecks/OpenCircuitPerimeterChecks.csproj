@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../HollowSaintMod/FoundationKit/OpenCircuit/Fx/OpenCircuitCrownPose.cs" Link="OpenCircuitCrownPose.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/OpenCircuit/Fx/OpenCircuitDomeFx.cs" Link="OpenCircuitDomeFx.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/OpenCircuit/Fx/OpenCircuitDomeGeometry.cs" Link="OpenCircuitDomeGeometry.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Vfx/HaloRingShape.cs" Link="HaloRingShape.cs" />
+  </ItemGroup>
+</Project>

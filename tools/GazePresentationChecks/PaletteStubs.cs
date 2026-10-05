@@ -13,7 +13,7 @@ namespace UnityEngine {
 namespace HollowSaint { public static class HsPalette {public static UnityEngine.Color ArcCyan=>new UnityEngine.Color(.3f,.92f,1); public static UnityEngine.Color OuterCyan=>new UnityEngine.Color(.1f,.5f,.8f);} }
 namespace HollowSaint.FoundationKit {public static class KitUtil { public static bool IsHollowSaint(RoR2.CharacterBody b)=>b!=null; } }
 namespace HollowSaint.FoundationKit.Gaze {
- public static class GazeTuning {public const float ReachStart=1,ReachEnd=1,SplashRadius=4;}
+ public static class GazeTuning {public const float ReachStart=1,ReachEnd=1,SplashRadius=4,Radius=1.5f;}
  public static class GazeLaunchDurationPolicy {public static float Progress(float age,float duration)=>UnityEngine.Mathf.Clamp01(age/duration);}
  public static class GazeServer {public struct Impact {public UnityEngine.Vector3 Point;}}
 }
