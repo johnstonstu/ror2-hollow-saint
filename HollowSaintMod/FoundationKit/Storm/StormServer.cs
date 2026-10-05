@@ -116,10 +116,6 @@ namespace HollowSaint.FoundationKit.Storm
                 if (!NetworkServer.active || stormDamageDepth > 0 || report == null || report.damageInfo == null) return;
                 var attacker = report.attackerBody;
                 if (!KitUtil.IsHollowSaint(attacker)) return;
-                // Healing orbs (including deferred Corpsebloom/N'kuhana chains) may
-                // deal their normal item damage, but cannot feed Static/death discharge
-                // back into Prayer fuel and then into another healing cast.
-                if (report.damageInfo.procChainMask.HasProc(ProcType.HealNova)) return;
                 var victim = report.victim;
                 var victimBody = report.victimBody;
                 if (victim == null || victimBody == null) return;

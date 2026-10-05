@@ -64,6 +64,33 @@ static class Program
         var frozen = new GazeRecoveryBudget(); frozen.Begin(100, retained.Capacity, retained.Entry);
         Near(frozen.Claim(1), .25f, "retained twenty normalizes by frozen twenty rather than configured two");
         frozen.Begin(float.NaN, 5, 5); Near(frozen.Claim(1), 0, "invalid health cannot create healing");
+        // Adversarial descendant awards are deliberately accepted, regardless of
+        // HealNova tag loss in native DoTs. This proves the resource/heal bounds,
+        // not whether a real Unity N'kuhana/bleed chain awards a charge.
+        foreach (int capacity in new[] { 2, 5, 6, 20 })
+        for (int entry = 0; entry <= capacity; entry++)
+        {
+            var ledger = new GazeFuelLedger(); ledger.Begin(entry, capacity);
+            var recovery = new GazeRecoveryBudget(); recovery.Begin(1000, ledger.Capacity, ledger.Entry);
+            int successfulSpends = 0; float totalHeal = 0;
+            while (ledger.TrySpend(1))
+            {
+                successfulSpends++;
+                totalHeal += recovery.Claim(ledger.Spent);
+                int unspent = ledger.Unspent;
+                for (int descendant = 0; descendant < 1000; descendant++) ledger.TryGain();
+                Check(ledger.Unspent == unspent, "heal/orb/untagged DoT descendant awards never become current entry");
+                Check(ledger.Unspent + ledger.Reserve <= capacity, "arbitrary descendant awards cannot overfill bank");
+                Near(recovery.Claim(ledger.Spent), 0, "descendant feedback cannot repeat spent-charge healing");
+            }
+            Check(successfulSpends == entry, "finite entry bounds launches even with immediate full reserve after each spend");
+            Near(totalHeal, 50f * entry / capacity, "adversarial feedback preserves five-percent base cast budget");
+            int futureBank = ledger.End(true);
+            Check(futureBank <= capacity, "future bank remains bounded");
+            Check(!ledger.TrySpend(1), "ended cast cannot consume returned reserve");
+            recovery.Clear();
+            Near(recovery.Claim(1), 0, "returned reserve cannot heal until a genuinely new cast and spend");
+        }
         foreach (bool owner in new[] { false, true }) foreach (bool stage in new[] { false, true })
         { var landing = new PrayerImpactClaim(); Check(landing.TryResolve(true, true, owner, stage) == (owner && stage), "owner/stage loss prevents ordinary and funded strike"); }
 
@@ -75,7 +102,7 @@ static class Program
         Check(driver.Contains("snapshot.Funded ? 1f : 0f") && driver.Contains("snapshot.Funded ? 0.5f : 0f") && driver.Contains("if (snapshot.Funded && victim"), "ordinary has no item proc or forced status");
         Check(gaze.IndexOf("if (!ledger.TrySpend(1)) continue;") < gaze.IndexOf("recovery.Claim(ledger.Spent)"), "recovery strictly after actual spend");
         Check(!gaze.Substring(gaze.IndexOf("internal void Receive(")).Contains(".Heal("), "observers cannot heal from received events");
-        Check(storm.IndexOf("HasProc(ProcType.HealNova)") < storm.IndexOf("TryDeathDischarge(victim"), "native healing-orb feedback blocked before hits and killing discharge");
+        Check(!storm.Contains("HasProc(ProcType.HealNova)"), "no broad healing-item Static/death-discharge nerf");
         Console.WriteLine("PASS " + checks + " landing/recovery assertions");
     }
 }
