@@ -62,6 +62,10 @@ namespace HollowSaint.FoundationKit
             args["orbs"] = KitTuning.StormChargeMax.ToString(CultureInfo.InvariantCulture);
             args["thunder"] = Pct(KitDamagePolicy.Effective(KitTuning.ThunderboltDamageCoefficient));
             args["fundedThunder"] = Pct(KitDamagePolicy.Effective(KitTuning.ThunderboltDamageCoefficient) * SpearFeedbackPolicy.FundedStrikeMultiplier);
+            args["ordinaryThunder"] = Pct(KitDamagePolicy.Effective(KitTuning.ThunderboltDamageCoefficient) * SpearFeedbackPolicy.OrdinaryStrikeMultiplier);
+            args["thunderRadius"] = Num(KitTuning.ThunderboltSplashRadius);
+            args["gazeRecoveryBank"] = Pct(GazeRecoveryBudget.FullBankFraction);
+            args["gazeRecoveryEach"] = Pct(GazeRecoveryBudget.FullBankFraction / Storm.StoredPrayerPolicy.Capacity(KitTuning.StormChargeMax));
             args["dwellSeconds"] = Num(OpenCircuit.CircuitDwellPolicy.RequiredSeconds);
             args["dwellZap"] = Pct(KitDamagePolicy.Effective(OpenCircuit.CircuitDwellPolicy.RawZapCoefficient));
             args["decay"] = Num(KitTuning.StaticDecayDelay);

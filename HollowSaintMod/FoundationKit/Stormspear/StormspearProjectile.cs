@@ -80,9 +80,9 @@ namespace HollowSaint.FoundationKit.Stormspear
     /// pipeline (FriendlyFire check, TakeDamage, OnHitEnemy/OnHitAll). The spear then lodges in what it
     /// hit (Beat.SpearStuck, drawn on every machine and riding the struck enemy), crackles for
     /// StickSeconds and bursts (SpearDetonation): on an enemy, every OTHER enemy in the radius takes
-    /// the burst; on terrain it is a weaker fizzle (GroundBurstScale). The crown Thunderbolt calls at
-    /// the burst on unfunded Crown shots. A full stored Prayer bank is claimed at server
-    /// initialization and adds one snapshotted strike at the first qualifying landing instead.
+    /// the burst; on terrain it is a weaker fizzle (GroundBurstScale). Every fully held spear calls
+    /// one smaller strike at its first qualifying landing. A full stored Prayer bank is claimed
+    /// at server initialization and upgrades that one strike (including funded taps).
     /// Charge and crown form are captured from the initialized projectile, not the
     /// owner's mutable damage stat or crown buff at impact. Enemy impacts also replace the owner's
     /// bounded three-second conductor; that weak secondary path is separate from this unchanged burst.
@@ -125,16 +125,18 @@ namespace HollowSaint.FoundationKit.Stormspear
             if (!NetworkServer.active || !controller.owner) return;
             launchTeam = controller.teamFilter ? controller.teamFilter.teamIndex : TeamIndex.None;
             launchOwner = controller.owner.GetComponent<CharacterBody>();
+            launchStage = Stage.instance;
+            if (!launchOwner) return;
             var meter = launchOwner ? launchOwner.GetComponent<DischargeMeter>() : null;
-            int spent;
+            int spent = 0;
             // The server has created and initialized this exact projectile, including
             // forwarded remote throws. Authority-side FireProjectile never spends.
-            if (!meter || !meter.TryClaimSpearPrayer(out spent)) return;
-            launchStage = Stage.instance;
+            bool funded = meter && meter.TryClaimSpearPrayer(out spent);
+            if (!funded && !shot.FullyHeld) return;
             prayer = new PrayerStrikeSnapshot(launchOwner.damage, KitTuning.ThunderboltDamageCoefficient,
                 KitTuning.ThunderboltSplashFraction, KitTuning.ThunderboltSplashRadius,
-                projectileDamage != null && projectileDamage.crit, funded: true);
-            KitLog.Event("ANSWERED_PRAYER_SPEAR_COMMITTED", "bank=" + spent);
+                projectileDamage != null && projectileDamage.crit, funded: funded);
+            if (funded) KitLog.Event("ANSWERED_PRAYER_SPEAR_COMMITTED", "bank=" + spent);
         }
 
         private void OnDestroy()
@@ -210,7 +212,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             if (conducts) SpearConductor.Begin(body, struck, anchor, point, crit, conductorShot);
             SpearDetonation.Begin(body, owner, gameObject, point, impactInfo.estimatedImpactNormal, anchor, directDamage, crit, shot, struck,
                 projectileController != null ? projectileController.procChainMask : default(ProcChainMask),
-                projectileDamage != null ? projectileDamage.damageType : new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary), prayer.Empowered);
+                projectileDamage != null ? projectileDamage.damageType : new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary));
             bool ownerValid = launchOwner && launchOwner == body && launchOwner.isActiveAndEnabled &&
                 launchOwner.healthComponent && launchOwner.healthComponent.alive &&
                 (!launchOwner.master || launchOwner.master.GetBody() == launchOwner);
@@ -238,10 +240,9 @@ namespace HollowSaint.FoundationKit.Stormspear
         private HealthComponent struck;
         private ProcChainMask procChainMask;
         private DamageTypeCombo damageType;
-        private bool prayerFunded;
 
         internal static void Begin(CharacterBody body, GameObject owner, GameObject inflictor, Vector3 point, Vector3 normal, Transform anchor,
-            float damage, bool crit, StormspearShot shot, HealthComponent struck, ProcChainMask mask, DamageTypeCombo damageType, bool prayerFunded = false)
+            float damage, bool crit, StormspearShot shot, HealthComponent struck, ProcChainMask mask, DamageTypeCombo damageType)
         {
             var d = new GameObject("HS_SpearDetonation").AddComponent<SpearDetonation>();
             d.body = body; d.owner = owner; d.anchor = anchor; d.point = point;
@@ -249,7 +250,6 @@ namespace HollowSaint.FoundationKit.Stormspear
             d.normal = normal.sqrMagnitude > 0.001f ? normal : Vector3.up;
             d.damage = damage; d.crit = crit; d.shot = shot; d.charge = shot.Charge; d.struck = struck;
             d.procChainMask = mask; d.damageType = damageType;
-            d.prayerFunded = prayerFunded;
             if (StormspearTuning.StickSeconds <= 0f) d.Detonate();
         }
 
@@ -277,16 +277,6 @@ namespace HollowSaint.FoundationKit.Stormspear
             KitLog.Event("STORMSPEAR_BURST", "radius=" + radius.ToString("0.0") + " hits=" + hits.Count + " onEnemy=" + onEnemy);
             Vfx.KitFx.Server(Vfx.Beat.SpearBurst, point, onEnemy ? Vector3.up : normal, radius, owner: body);
 
-            if (body != null && shot.CallsThunderbolt(StormspearTuning.CrownThunderbolt,
-                StormspearTuning.CrownThunderboltMinCharge, prayerFunded))
-            {
-                var driver = body.GetComponent<ThunderboltDriver>();
-                if (driver != null)
-                {
-                    KitLog.Event("STORMSPEAR_CROWN_THUNDERBOLT", "charge=" + charge.ToString("0.00"));
-                    driver.ServerStrikeAt(point, struck != null && struck.alive ? struck : null);
-                }
-            }
             Destroy(gameObject);
         }
     }

@@ -42,12 +42,11 @@ namespace HollowSaint.FoundationKit.Stormspear {
    var fullHand = Transport(1f,false);
    // Delayed detonation and overlapping throws must use the original shot, not latest owner form.
    var laterHand = Transport(.2f,false);
-   Check(fullCrown.CallsThunderbolt(true,1f),"crown throw lost bonus after crown closed / later hand throw");
-   Check(!fullHand.CallsThunderbolt(true,1f),"hand throw gained bonus after crown opened");
-   Check(!laterHand.CallsThunderbolt(true,1f),"partial hand throw gained bonus");
-   Check(!fullCrown.CallsThunderbolt(false,1f),"disabled bonus ignored");
-   Check(!Transport(.969f,true).CallsThunderbolt(true,1f),"undercharge bonus");
-   Check(Transport(.971f,true).CallsThunderbolt(true,1f),"existing charge tolerance lost");
+   Check(fullCrown.FullyHeld,"Crown full-hold lost landing strike after later throw");
+   Check(fullHand.FullyHeld,"hand full-hold landing strike missing");
+   Check(!laterHand.FullyHeld,"partial hand gained ordinary strike");
+   Check(!Transport(.969f,true).FullyHeld,"undercharge gained strike");
+   Check(!Transport(.971f,true).FullyHeld,"legacy near-full tolerance cannot grant full-hold strike");
    float launchedDamage = StormspearTuning.DamageAt(1f)*15f;
    foreach (float laterOwnerDamage in new[] {12f,17.4f,30f}) {
     Check(Near(fullCrown.Charge,1f),"owner stat change corrupted charge");
@@ -57,11 +56,11 @@ namespace HollowSaint.FoundationKit.Stormspear {
    }
    // Demonstrate the precise previous regression, so the scenario is not vacuous.
    Check(StormspearTuning.ChargeFromCoefficient(launchedDamage/17.4f) < .97f,"old level-up regression scenario no longer discriminates");
-   Check(fullCrown.CallsThunderbolt(true,1f),"level-up lost bonus");
+   Check(fullCrown.FullyHeld,"level-up lost landing eligibility");
    float savedTap = StormspearTuning.TapDamage, savedFull = StormspearTuning.FullDamage;
    StormspearTuning.TapDamage = 9f; StormspearTuning.FullDamage = 30f;
    Check(Near(fullCrown.Charge,1f) && Near(laterHand.Charge,.2f),"damage curve change corrupted in-flight charge");
-   Check(fullCrown.CallsThunderbolt(true,1f),"damage curve change lost crown eligibility");
+   Check(fullCrown.FullyHeld,"damage curve change lost landing eligibility");
    StormspearTuning.TapDamage = savedTap; StormspearTuning.FullDamage = savedFull;
    return "STORMSPEAR_SNAPSHOT_PASS: " + count + " behavioral assertions; transport precision, host/remote parity, overlapping forms, unchanged knockback, stat-change radius/burst, eligibility boundaries.";
   }
@@ -80,7 +79,7 @@ if ($init.IndexOf('component.force = fireProjectileInfo.force;') -gt $init.Index
 $impact = Get-Content (Join-Path $folder 'StormspearProjectile.cs') -Raw
 $throw = Get-Content (Join-Path $folder 'StormspearThrowState.cs') -Raw
 if ($impact.Contains('directDamage / body.damage') -or $impact.Contains('StormspearCharge.InCrown(body)')) { throw 'Impact still uses mutable owner state' }
-foreach ($pattern in @('onInitialized += CaptureShot','projectileDamage.force','controller.combo','crit, shot, struck','d.shot = shot','shot.CallsThunderbolt')) {
+foreach ($pattern in @('onInitialized += CaptureShot','projectileDamage.force','controller.combo','crit, shot, struck','d.shot = shot','shot.FullyHeld')) {
  if (!$impact.Contains($pattern)) { throw "Snapshot wiring missing: $pattern" }
 }
 if (!$impact.Contains('conductorShot = new SpearConductorSchedule(') -or

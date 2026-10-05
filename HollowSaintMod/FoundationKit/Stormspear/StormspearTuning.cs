@@ -36,10 +36,6 @@ namespace HollowSaint.FoundationKit.Stormspear
         public static float StickSeconds = 0.25f;            // lodged time before the burst
         public static float GroundBurstScale = 0.5f;         // damage and radius multiplier when the spear hits terrain
 
-        // Crown (Open Circuit) interaction
-        public static bool CrownThunderbolt = true;          // fully charged spear thrown in the crown calls a Thunderbolt
-        public static float CrownThunderboltMinCharge = 1f;  // charge fraction needed (1 = full only)
-
         // Visuals
         public static float HandSpearLength = 1.6f;          // metres at full charge in the hand
         public static float CrownSpearLength = 3.2f;         // metres at full charge above the crown

@@ -17,6 +17,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private DischargeMeter meter;
         private GazeEmpowermentFx presentation;
         private readonly GazeFuelLedger ledger = new GazeFuelLedger();
+        private readonly GazeRecoveryBudget recovery = new GazeRecoveryBudget();
         private readonly GazeFuelSchedule schedule = new GazeFuelSchedule();
         private readonly GazeFuelPulse[] pulses = new GazeFuelPulse[GazeFuelSchedule.MaxPhases];
         private readonly RaycastHit[] traceScratch = new RaycastHit[128];
@@ -101,6 +102,7 @@ namespace HollowSaint.FoundationKit.Gaze
             activeState.ApplyRampSteps(0);
             frozenBeamDuration = beamDuration = duration;
             meter.ClaimGazeFuel(ledger);
+            recovery.Begin(body.healthComponent ? body.healthComponent.fullHealth : 0f, ledger.Capacity, ledger.Entry);
             var passive = body.GetComponent<ThunderboltDriver>();
             if (passive) passive.ClaimForGaze();
             schedule.Begin(ledger.Entry);
@@ -174,6 +176,24 @@ namespace HollowSaint.FoundationKit.Gaze
                     continue;
                 }
                 if (!ledger.TrySpend(1)) continue;
+                float heal = recovery.Claim(ledger.Spent);
+                // Native Heal preserves healing items, Corpsebloom and healing-disabled
+                // behavior. Claim even at full health: no banked recovery or barrier farming.
+                if (heal > 0f && body.healthComponent && body.healthComponent.alive &&
+                    body.healthComponent.health < body.healthComponent.fullHealth)
+                {
+                    try
+                    {
+                        body.healthComponent.Heal(heal, default(ProcChainMask), true);
+                        KitLog.Event("GAZE_FUEL_RECOVERY", "spent=" + ledger.Spent + " base=" + heal.ToString("0.###"));
+                    }
+                    catch (System.Exception error)
+                    {
+                        // A third-party healing callback must not lose the already
+                        // spent pulse. Its base heal remains claimed, with no retry.
+                        Plugin.Log.LogError("HOLLOW_SAINT_GAZE_RECOVERY_ERROR " + error);
+                    }
+                }
                 if (activeState != null) activeState.ApplyRampSteps(ledger.Spent);
                 if (beam) beam.SetRampSteps(ledger.Spent);
                 beamDuration = GazeLaunchDurationPolicy.Duration(frozenBeamDuration, ledger.Spent);
@@ -222,6 +242,7 @@ namespace HollowSaint.FoundationKit.Gaze
             packet.reserve = (byte)ledger.Reserve; packet.spent = (byte)ledger.Spent;
             int accepted = ledger.AcceptedGains, rejected = ledger.RejectedGains, entry = ledger.Entry;
             schedule.Cancel();
+            recovery.Clear();
             requests.Cancel();
             for (int i = 0; i < pulses.Length; i++) pulses[i].Clear();
             int retained = meter.ReleaseGazeFuel(alive);

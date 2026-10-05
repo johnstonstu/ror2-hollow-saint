@@ -43,7 +43,7 @@ static class Program
         ownerDamage=1000;coefficient=1;fraction=0;radius=20;
         Check(launch.Empowered&&Math.Abs(launch.Damage-130.05f)<.0001f&&Math.Abs(launch.SplashDamage-65.025f)<.0001f&&launch.SplashRadius==3&&launch.Crit,"funded launch damage crit splash snapshot unaffected by later stats/tuning");
         var unfundedCrown=new PrayerStrikeSnapshot(17,10,.5f,3,true);
-        Check(Math.Abs(unfundedCrown.Damage-153)<.0001f&&Math.Abs(unfundedCrown.SplashDamage-76.5f)<.0001f,"unfunded Crown strike is exempt from targeted funded reduction");
+        Check(Math.Abs(unfundedCrown.Damage-65.025f)<.0001f&&Math.Abs(unfundedCrown.SplashDamage-32.5125f)<.0001f,"ordinary full-hold strike is half funded in both forms");
         Check(!default(PrayerStrikeSnapshot).Empowered,"unfunded projectile has no Prayer bonus");
         foreach(string landing in new[]{"enemy","world terrain"})
         {
@@ -60,9 +60,9 @@ static class Program
         }
         var expired=new PrayerImpactClaim();expired.Cancel();Check(!expired.TryResolve(true,true,true,true),"projectile lifetime expiry closes funded miss");
         var crown=new StormspearShot(StormspearShot.ForceForCharge(1),StormspearShot.CrownCombo);
-        Check(crown.CallsThunderbolt(true,1)&&!crown.CallsThunderbolt(true,1,true),"ordinary Crown bonus retained, funded Crown never doubles");
+        Check(crown.FullyHeld,"Crown full-hold landing eligible");
         var hand=new StormspearShot(StormspearShot.ForceForCharge(1),0);
-        Check(!hand.CallsThunderbolt(true,1)&&!hand.CallsThunderbolt(true,1,true),"ordinary hand spear gains no free strike");
+        Check(hand.FullyHeld,"hand full-hold landing equally eligible");
         Console.WriteLine("PASS "+checks+" production stored-Prayer assertions (bank, launch snapshot, impact idempotency and cleanup)");
     }
 }

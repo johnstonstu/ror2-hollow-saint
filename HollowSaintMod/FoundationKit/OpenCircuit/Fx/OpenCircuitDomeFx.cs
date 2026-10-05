@@ -137,8 +137,8 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
 
                     stroke.points[j] = body.corePosition + Vector3.ClampMagnitude(point - body.corePosition, Mathf.Max(0f, radius - 0.07f));
                 }
-                // Suppress the complete stroke at walls/ceilings; never draw a false connection.
-                if (!ClearPath(stroke.points, 0.065f)) { stroke.glow.enabled = stroke.core.enabled = false; continue; }
+                // Ground strokes keep only their checked prefix; upward strokes still suppress as a whole.
+                if (!(upward ? ClearPath(stroke.points, 0.065f) : ClearGroundPrefix(stroke))) { stroke.glow.enabled = stroke.core.enabled = false; continue; }
                 Draw(stroke.glow, stroke.points, upward ? 0.075f : 0.12f, palette.Arc, flash * expansion * 0.48f);
                 Draw(stroke.core, stroke.points, upward ? 0.025f : 0.04f, upward ? palette.Secondary : palette.Core, flash * expansion * 0.85f);
             }

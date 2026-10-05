@@ -75,8 +75,6 @@ namespace HollowSaint.FoundationKit
             F(c, spear, "Stick seconds", Stormspear.StormspearTuning.StickSeconds, v => Stormspear.StormspearTuning.StickSeconds = v, 0f, 1f, 0.05f, "How long the spear stays lodged in what it hit before it bursts.");
             F(c, spear, "Ground burst", Stormspear.StormspearTuning.GroundBurstScale, v => Stormspear.StormspearTuning.GroundBurstScale = v, 0f, 1f, 0.05f, "Damage and radius of the burst when the spear hits terrain instead of an enemy (1 = same as an enemy hit).");
             F(c, spear, "Burst proc coefficient", Stormspear.StormspearTuning.BurstProcCoefficient, v => Stormspear.StormspearTuning.BurstProcCoefficient = v, 0f, 1f, 0.05f, "Item proc coefficient of the burst (and so how much Static it builds).");
-            B(c, spear, "Crown Thunderbolt", Stormspear.StormspearTuning.CrownThunderbolt, v => Stormspear.StormspearTuning.CrownThunderbolt = v, "A fully charged Crown spear retains its independent Thunderbolt with a partial bank. A full stored bank funds one landing Thunderbolt and suppresses this extra strike.");
-            F(c, spear, "Crown Thunderbolt min charge", Stormspear.StormspearTuning.CrownThunderboltMinCharge, v => Stormspear.StormspearTuning.CrownThunderboltMinCharge = v, 0.1f, 1f, 0.05f, "Charge fraction needed for the crown Thunderbolt (1 = full).");
 
             F(c, step, "Look lift", KitTuning.ArcStepLookLift, v => KitTuning.ArcStepLookLift = v, 0f, 1f, 0.05f, "How much the step follows where you look, up or down (0 = flat; 0.35 lifts about 2 m looking 45 degrees up).");
             F(c, step, "Speed", KitTuning.ArcStepSpeed, v => KitTuning.ArcStepSpeed = v, 6f, 40f, 0.5f, "Dash speed in m/s at the start of the step.");

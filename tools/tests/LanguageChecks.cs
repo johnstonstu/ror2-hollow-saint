@@ -260,6 +260,7 @@ namespace HollowSaint.FoundationKit
             a["circuitSeconds"] = "10"; a["radius"] = "8"; a["pulse"] = "60%"; a["interval"] = "0.5"; a["mult"] = "2.5";
             a["gazeSeconds"] = "4"; a["gazeMaxSeconds"] = "6"; a["pulseInterval"] = "0.25"; a["dps"] = "500%"; a["armorOn"] = "yes"; a["armor"] = "30";
             a["orbs"] = "5"; a["thunder"] = "900%"; a["fundedThunder"] = "765%"; a["dwellSeconds"] = "3"; a["dwellZap"] = "270%";
+            a["ordinaryThunder"] = "382.5%"; a["thunderRadius"] = "3"; a["gazeRecoveryBank"] = "5%"; a["gazeRecoveryEach"] = "1%";
             a["decay"] = "2"; a["death"] = "partial"; a["deathPct"] = "50%"; a["jolt"] = "on"; a["stun"] = "0.5";
             a["bonus"] = "15%"; a["shocked"] = "3"; a["targets"] = "2"; a["pop"] = "150%"; a["immune"] = "4"; a["range"] = "30";
             return a;
@@ -295,7 +296,8 @@ namespace HollowSaint.FoundationKit
                 ". It " + Util("sticks") + ", then bursts for " + Dmg(a["burst"] + "-" + a["burstFull"] + " of its damage") + " around it." +
                 (spearStock > 1 ? " Holds " + Util(a["spearStock"] + " charges") + "." : "") +
                 " Enemies struck conduct lightning for " + a["conductorSeconds"] + "s, arcing to up to " + a["conductorTargets"] + " nearby enemies for " +
-                Dmg(a["conductorTap"] + "-" + a["conductorFull"] + " damage") + " every " + a["conductorInterval"] + "s. Recharge starts when thrown. With a full Static Charge bank, a successful throw spends it for one Thunderbolt on impact. Partial banks are kept.";
+                Dmg(a["conductorTap"] + "-" + a["conductorFull"] + " damage") + " every " + a["conductorInterval"] + "s. Recharge starts when thrown." +
+                " Fully charged throws land one lightning strike for " + Dmg(a["ordinaryThunder"] + " damage") + ", with splash within " + a["thunderRadius"] + "m. A full bank upgrades this strike to " + a["fundedThunder"] + ", including tap throws; it never adds a second strike.";
             int stepStock = int.Parse(a["stepStock"], CultureInfo.InvariantCulture);
             t["HS_SKILL_ARCSTEP_DESC"] =
                 Util("Blink") + " a short distance in any direction, even in the air. Jump out of it to keep the momentum. Holds " +
@@ -306,7 +308,8 @@ namespace HollowSaint.FoundationKit
                 Util(a["interval"] + "s") + " and " + Dmg("Stormspear") + " charges " + Util(a["mult"] + "x faster") + ". Enemies staying inside for " + a["dwellSeconds"] + "s receive one " + Dmg(a["dwellZap"] + " zap") + " per crown. Leaving resets buildup.";
             t["HS_SKILL_GAZE_DESC"] =
                 "Channel a " + Dmg(a["dps"] + " damage/s") + " beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + "s") +
-                ". Tap Primary to spend an entry charge: +2s (14s max) and +5% beam damage (5 stacks max). New charges stay saved. Special cancels; Utility exits and activates if ready.";
+                ". Tap Primary to spend an entry charge: +2s (14s max) and +5% beam damage (5 stacks max). New charges stay saved. Special cancels; Utility exits and activates if ready." +
+                " Each consumed entry charge heals <style=cIsHealing>" + a["gazeRecoveryEach"] + " of cast-entry maximum health</style> before healing items; a full entry bank heals " + a["gazeRecoveryBank"] + " total. Unspent charges and newly earned reserve do not heal.";
             t["HS_PASSIVE_STORM_DESC"] =
                 "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy and stores a Static Charge (up to " + a["orbs"] + "). A full bank empowers your next successful Stormspear throw with one " +
                 Dmg("Thunderbolt") + " for " + Dmg(a["fundedThunder"] + " damage") + " on impact. Partial banks are kept. Gaze uses stored charges for manual pulses. Charges never discharge automatically.";

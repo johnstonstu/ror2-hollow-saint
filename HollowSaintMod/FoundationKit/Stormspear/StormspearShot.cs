@@ -28,10 +28,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             return TapForce + ChargeForce * ClampCharge(charge);
         }
 
-        internal bool CallsThunderbolt(bool enabled, float minimumCharge, bool prayerFunded = false)
-        {
-            return !prayerFunded && enabled && FromCrown && Charge >= minimumCharge - 0.03f;
-        }
+        internal bool FullyHeld => Charge >= .999f;
 
         private static float ClampCharge(float value)
         {

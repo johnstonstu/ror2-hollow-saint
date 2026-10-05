@@ -33,8 +33,8 @@ static class Program
             {
                 Near(direct * fraction, stat * raw * fraction * .9f, "inherited burst/chain remains .9, not .81");
                 var prayer = new PrayerStrikeSnapshot(stat, raw, fraction, 3.5f, true);
-                Near(prayer.Damage, stat * raw * .9f, "funded and Crown Prayer snapshot once");
-                Near(prayer.SplashDamage, stat * raw * fraction * .9f, "Prayer splash inherits once");
+                Near(prayer.Damage, stat * raw * .9f * SpearFeedbackPolicy.OrdinaryStrikeMultiplier, "ordinary full-hold Prayer snapshot once");
+                Near(prayer.SplashDamage, stat * raw * fraction * .9f * SpearFeedbackPolicy.OrdinaryStrikeMultiplier, "ordinary splash inherits once");
                 Check(prayer.Crit && prayer.SplashRadius == 3.5f, "Prayer crit and radius unchanged");
             }
         }
@@ -52,8 +52,8 @@ static class Program
             Near(conductor.Radius, 4f + 2f * charge, "conductor radius unchanged");
         }
         var frozen = new PrayerStrikeSnapshot(17, 10, .5f, 3, false);
-        Near(frozen.Damage, 153, "default Prayer coefficient 10 becomes 9");
-        Near(frozen.SplashDamage, 76.5f, "default Prayer splash remains a fraction");
+        Near(frozen.Damage, 65.025f, "ordinary landing coefficient is 3.825");
+        Near(frozen.SplashDamage, 32.5125f, "ordinary landing splash remains a fraction");
         var funded = new PrayerStrikeSnapshot(17, 10, .5f, 3, true, funded: true);
         Near(funded.Damage, 130.05f, "funded strike has targeted 15% reduction");
         Near(funded.SplashDamage, 65.025f, "funded splash inherits targeted reduction once");
@@ -66,13 +66,13 @@ static class Program
         Has("ArcBolt/ArcBoltState.cs", "KitDamagePolicy.Effective(KitTuning.ArcBoltDamageCoefficient) * damageStat");
         Has("Stormspear/StormspearThrowState.cs", "SpearFeedbackPolicy.Direct(StormspearTuning.DamageAt(charge), charge) * damageStat");
         Has("Stormspear/StormspearProjectile.cs", "SpearFeedbackPolicy.Direct(StormspearTuning.DamageAt(shot.Charge), shot.Charge)");
-        Has("Stormspear/StormspearProjectile.cs", "projectileDamage != null && projectileDamage.crit, funded: true)");
+        Has("Stormspear/StormspearProjectile.cs", "projectileDamage != null && projectileDamage.crit, funded: funded)");
         Has("Stormspear/StormspearRegistration.cs", "SpearFeedbackPolicy.Recharge(StormspearTuning.Cooldown)");
         Has("OpenCircuit/OpenCircuitPulseDriver.cs", "KitDamagePolicy.Effective(KitTuning.OpenCircuitPulseDamageCoefficient) * body.damage");
         Has("Storm/StormServer.cs", "KitTuning.ElectrocutePopDamageCoefficient * attacker.damage");
         ExcludesPolicy("Storm/StormServer.cs");
         Has("KitConfig.cs", "Shared passive damage remains unchanged for every triggering skill.");
-        Has("Storm/ThunderboltDriver.cs", "new PrayerStrikeSnapshot(body.damage, KitTuning.ThunderboltDamageCoefficient,");
+        Has("Storm/ThunderboltDriver.cs", "snapshot.Funded ? 1f : 0f");
         Has("Stormspear/StormspearProjectile.cs", "new PrayerStrikeSnapshot(launchOwner.damage, KitTuning.ThunderboltDamageCoefficient,");
         Has("ArcBolt/ArcBoltChain.cs", "damage *= KitTuning.ArcBoltChainFalloff;");
         Has("Stormspear/StormspearProjectile.cs", "damage * fraction * scale");

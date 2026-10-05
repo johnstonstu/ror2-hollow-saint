@@ -16,7 +16,9 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
         private readonly Vector3[] pendingGround = new Vector3[8];
         private readonly float[] groundAt = new float[4];
         private Vector3 groundOrigin;
-        private bool pendingValid;
+        private int pendingCount;
+        private Vector3 pendingNormal;
+        private readonly int[] groundCount = new int[4];
         private sealed class Strike
         {
             internal readonly Stroke stroke = new Stroke();
@@ -81,28 +83,35 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             {
                 int index = terrainCursor++ % TerrainSamples;
                 int branch = index / 8, j = index % 8;
-                if (j == 0) { groundOrigin = body.corePosition; pendingValid = true; terrainGeneration++; }
+                if (j == 0) { groundOrigin = body.corePosition; pendingCount = 0; pendingNormal = Vector3.up; terrainGeneration++; }
                 float phase = terrainGeneration * 1.71f + branch * 2.13f;
                 float angle = branch * Mathf.PI * 0.5f + 0.22f * Mathf.Sin(phase);
                 Vector3 radial = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
                 Vector3 side = new Vector3(-radial.z, 0f, radial.x);
-                float t = j / 7f;
-                float reach = radius * (0.72f + 0.13f * Mathf.Sin(phase * 0.7f));
-                Vector3 sample = groundOrigin + radial * Mathf.Lerp(radius * 0.18f, reach, t) +
-                    side * (Mathf.Sin(t * Mathf.PI) * Mathf.Sin(j * 1.8f + phase) * radius * 0.085f);
-                float height = j == 0 ? Mathf.Min(3f, radius * 0.45f) : 0.65f;
-                sample.y = j == 0 ? groundOrigin.y : pendingGround[j - 1].y;
-                RaycastHit hit;
-                bool found = Physics.Raycast(sample + Vector3.up * height, Vector3.down, out hit,
-                    height * 2f, LayerIndex.world.mask, QueryTriggerInteraction.Ignore) && hit.normal.y > 0.35f;
-                Vector3 point = found ? hit.point + hit.normal * 0.10f : sample;
-                pendingGround[j] = point;
-                pendingValid &= found && Vector3.Distance(point, body.corePosition) < radius - 0.09f &&
-                    (j == 0 || Mathf.Abs(point.y - pendingGround[j - 1].y) <= 0.65f);
+                // Stay close to the projected foot and grow in short surface-tangent steps.
+                // A missed tip retires only the suffix, never the already grounded root.
+                if (j == pendingCount)
+                {
+                    Vector3 heading = (radial + side * (0.22f * Mathf.Sin(j * 1.8f + phase))).normalized;
+                    Vector3 tangent = Vector3.ProjectOnPlane(heading, pendingNormal).normalized;
+                    Vector3 sample = j == 0 ? groundOrigin + radial * 0.25f :
+                        pendingGround[j - 1] - pendingNormal * 0.10f + tangent * 0.35f;
+                    float height = j == 0 ? Mathf.Min(3f, radius * 0.75f) : 0.55f;
+                    RaycastHit hit;
+                    bool found = Physics.Raycast(sample + Vector3.up * height, Vector3.down, out hit,
+                        height * 2f, LayerIndex.world.mask, QueryTriggerInteraction.Ignore) && hit.normal.y > 0.35f;
+                    Vector3 point = found ? hit.point + hit.normal * 0.10f : sample;
+                    if (found && Vector3.Distance(point, body.corePosition) < radius - 0.09f &&
+                        (j == 0 || Vector3.Distance(point, pendingGround[j - 1]) <= 0.65f))
+                    {
+                        pendingGround[j] = point; pendingNormal = hit.normal; pendingCount++;
+                    }
+                }
                 if (j == 7)
                 {
                     // Publish an entire path atomically; never mix old and newly probed points.
-                    for (int k = 0; k < 8; k++) { terrain[branch * 8 + k] = pendingGround[k]; terrainValid[branch * 8 + k] = pendingValid; }
+                    for (int k = 0; k < 8; k++) { terrain[branch * 8 + k] = pendingGround[k]; terrainValid[branch * 8 + k] = k < pendingCount; }
+                    groundCount[branch] = pendingCount;
                     groundAt[branch] = Time.time;
                 }
             }
@@ -111,18 +120,40 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
         {
             int start = branch * 8;
             if (!terrainValid[start] || Time.time - groundAt[branch] > 0.7f) return false;
-            for (int k = 0; k < 8; k++)
-                if (Vector3.Distance(terrain[start + k], body.corePosition) > radius - 0.09f) return false;
-            // A short lit section runs outward along an irregular grounded path. Completed
-            // paths remain planted while walking; no horizontal circle dragged through scenery.
-            for (int j = 0; j < Points; j++)
-            {
-                float t = Mathf.Lerp(Mathf.Max(0f, travel - 0.55f), travel, j / (float)(Points - 1));
-                float at = t * 7f; int a = Mathf.Min(6, (int)at);
-                stroke.points[j] = Vector3.Lerp(terrain[start + a], terrain[start + a + 1], at - a);
-            }
+            int count = groundCount[branch];
+            int first = 0;
+            while (first < count && Vector3.Distance(terrain[start + first], body.corePosition) > radius - 0.09f) first++;
+            int last = first;
+            while (last < count && Vector3.Distance(terrain[start + last], body.corePosition) <= radius - 0.09f) last++;
+            if (last - first < 2) return false;
+            // Clip the moving window but preserve every original sampled corner inside it.
+            // Interpolating a fixed 17-point resample would cut across terrain crests.
+            float lo = first + Mathf.Max(0f, travel - 0.55f) * (last - first - 1);
+            float hi = first + travel * (last - first - 1);
+            if (hi - lo < 0.01f) return false;
+            int a = (int)lo, b = (int)hi;
+            int shown = 0;
+            stroke.points[shown++] = Vector3.Lerp(terrain[start + a], terrain[start + a + 1], lo - a);
+            for (int k = a + 1; k <= b; k++) stroke.points[shown++] = terrain[start + k];
+            if (hi > b) stroke.points[shown++] = Vector3.Lerp(terrain[start + b], terrain[start + b + 1], hi - b);
+            for (int k = shown; k < Points; k++) stroke.points[k] = stroke.points[shown - 1];
             return true;
-        }        private bool ClearSegment(Vector3 a, Vector3 b, float thickness)
+        }
+        private bool ClearGroundPrefix(Stroke stroke)
+        {
+            int valid = 1;
+            for (int j = 1; j < Points; j++)
+            {
+                if (Vector3.Distance(stroke.points[j - 1], stroke.points[j]) < 0.0001f) break;
+                if (!ClearSegment(stroke.points[j - 1], stroke.points[j], 0.065f)) break;
+                valid++;
+            }
+            if (valid < 2) return false;
+            // Every retained segment was checked this frame; never join past a blocked segment.
+            for (int j = valid; j < Points; j++) stroke.points[j] = stroke.points[valid - 1];
+            return true;
+        }
+        private bool ClearSegment(Vector3 a, Vector3 b, float thickness)
         {
             if (worldChecks >= MaxWorldChecks) return false;
             worldChecks++;

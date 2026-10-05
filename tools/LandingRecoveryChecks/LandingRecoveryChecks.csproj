@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../HollowSaintMod/FoundationKit/KitDamagePolicy.cs" Link="KitDamagePolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearFeedbackPolicy.cs" Link="SpearFeedbackPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearShot.cs" Link="StormspearShot.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Storm/StoredPrayerPolicy.cs" Link="StoredPrayerPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeRecoveryBudget.cs" Link="GazeRecoveryBudget.cs" />
+  </ItemGroup>
+</Project>

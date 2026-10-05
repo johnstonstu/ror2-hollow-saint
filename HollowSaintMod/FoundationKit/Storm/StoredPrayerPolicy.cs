@@ -19,20 +19,21 @@ namespace HollowSaint.FoundationKit.Storm
 
     internal readonly struct PrayerStrikeSnapshot
     {
-        internal readonly bool Empowered, Crit;
+        internal readonly bool Empowered, Funded, Crit;
         internal readonly float Damage, SplashDamage, SplashRadius;
         internal PrayerStrikeSnapshot(float ownerDamage, float coefficient, float splashFraction, float splashRadius, bool crit, bool funded = false)
         {
             Empowered = true;
-            // Both funded Prayer and the unfunded Crown bonus enter with raw tuning.
-            Damage = ownerDamage * KitDamagePolicy.Effective(coefficient) * (funded ? Stormspear.SpearFeedbackPolicy.FundedStrikeMultiplier : 1f);
+            Funded = funded;
+            // Ordinary full-hold landings are exactly half the funded upgrade.
+            Damage = ownerDamage * KitDamagePolicy.Effective(coefficient) * (funded ? Stormspear.SpearFeedbackPolicy.FundedStrikeMultiplier : Stormspear.SpearFeedbackPolicy.OrdinaryStrikeMultiplier);
             SplashDamage = Damage * Math.Max(0f, splashFraction);
             SplashRadius = Math.Max(0f, splashRadius);
             Crit = crit;
         }
     }
 
-    /// <summary>Landing, miss, owner loss or stage loss closes a funded projectile.
+    /// <summary>Landing, miss, owner loss or stage loss closes a strike-bearing projectile.
     /// Neither a second collider nor cleanup can create another strike or refund.</summary>
     internal struct PrayerImpactClaim
     {
