@@ -11,7 +11,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
     /// the real crown expands to the damage perimeter, with sparse open lightning sweeps.
     /// Runs after Gaze's pose owner (140), before HaloRing refits (150).</summary>
     [DefaultExecutionOrder(145), DisallowMultipleComponent]
-    public sealed class OpenCircuitDomeFx : MonoBehaviour
+    public sealed partial class OpenCircuitDomeFx : MonoBehaviour
     {
         private const int Points = 17;
         private static readonly string[] ArcNames = { "halo 1", "halo 2", "halo 3", "halo 4" };
@@ -43,13 +43,13 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
         }
         private void OnDisable() { Release(); DestroyVisuals(); }
         private void OnDestroy() { Release(); DestroyVisuals(); }
-        private void Release() { pose.Release(); expansion = 0f; SetVisible(false); }
+        private void Release() { pose.Release(); expansion = 0f; ResetEnvironment(); SetVisible(false); }
         private bool Resolve()
         {
             var current = body && body.modelLocator ? body.modelLocator.modelTransform : null;
             if (current == model && arcs[0] && arcs[1] && arcs[2] && arcs[3]) return true;
             if (current == model && Time.unscaledTime < nextResolve) return false;
-            pose.Release(); expansion = 0f; model = current; nextResolve = Time.unscaledTime + 1f;
+            pose.Release(); expansion = 0f; ResetEnvironment(); model = current; nextResolve = Time.unscaledTime + 1f;
             for (int i = 0; i < arcs.Length; i++) arcs[i] = null;
             if (!model) { pose.Bind(arcs); return false; }
             foreach (var t in model.GetComponentsInChildren<Transform>(true))
@@ -76,10 +76,13 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             float target = open ? Mathf.SmoothStep(0f, 1f, (flat - 0.45f) / 0.35f) : 0f;
             expansion = Mathf.MoveTowards(expansion, target, Time.deltaTime / (open ? 0.65f : 0.3f));
             if (!pose.Apply(body.corePosition, radius, expansion)) { Release(); return; }
-            if (expansion <= 0.02f) { SetVisible(false); return; }
+            if (expansion <= 0.02f) { ResetEnvironment(); SetVisible(false); return; }
             if (!visualRoot) Build();
             palette = SkinFxPalette.ForBody(body);
             visualRoot.SetActive(true);
+            worldChecks = 0;
+            RefreshTerrain(radius);
+            RenderStrikes();
             RenderPerimeter(radius);
         }
         private void Build()
@@ -93,6 +96,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                 stroke.glow = MakeLine("CrownLightningGlow", GazeContrastAssets.Glow);
                 stroke.core = MakeLine("CrownLightningCore", GazeContrastAssets.Core);
             }
+            BuildStrikes();
         }
         private LineRenderer MakeLine(string name, Material material)
         {
@@ -124,13 +128,16 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                     float t = j / (float)(Points - 1);
                     float sweep = upward ? t * 0.14f : Mathf.Lerp(Mathf.Max(0f, travel - 0.6f), travel, t) * Mathf.PI * 0.5f;
                     float angle = start + shape.Direction * sweep;
-                    float rise = upward ? Mathf.Min(1.8f, radius * 0.22f) * t : 0f;
+                    float rise = upward ? Mathf.Min(2.1f, radius * 0.26f) * t : 0f;
                     float r = Mathf.Max(0f, shape.Radius - 0.07f);
                     float radial = Mathf.Sqrt(Mathf.Max(0f, r * r - rise * rise));
                     float teeth = Mathf.Sin(t * Mathf.PI) * (0.025f + 0.025f * Mathf.Sin(j * 2.7f + (int)(Time.time * 16f) + i));
                     Vector3 point = shape.Center + shape.Direction3(angle) * Mathf.Max(0f, radial - teeth) + Vector3.up * rise;
+                    if (!upward) point = Contour(point, radius);
                     stroke.points[j] = body.corePosition + Vector3.ClampMagnitude(point - body.corePosition, Mathf.Max(0f, radius - 0.07f));
                 }
+                // Suppress the complete stroke at walls/ceilings; never draw a false connection.
+                if (!ClearPath(stroke.points, 0.065f)) { stroke.glow.enabled = stroke.core.enabled = false; continue; }
                 Draw(stroke.glow, stroke.points, upward ? 0.075f : 0.12f, palette.Arc, flash * expansion * 0.48f);
                 Draw(stroke.core, stroke.points, upward ? 0.025f : 0.04f, upward ? palette.Secondary : palette.Core, flash * expansion * 0.85f);
             }
@@ -146,6 +153,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             if (visualRoot) { visualRoot.SetActive(false); Destroy(visualRoot); }
             visualRoot = null;
             for (int i = 0; i < strokes.Length; i++) strokes[i] = null;
+            DestroyStrikes();
         }
     }
 }
