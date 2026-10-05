@@ -123,17 +123,18 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                 if (flash <= 0.001f) { stroke.glow.enabled = stroke.core.enabled = false; continue; }
                 float start = shape.Angle[i & 3];
                 float travel = i == (hop & 3) ? progress : 1f;
-                for (int j = 0; j < Points; j++)
+                if (!upward && !GroundBranch(stroke, i, radius, travel)) { stroke.glow.enabled = stroke.core.enabled = false; continue; }
+                for (int j = 0; upward && j < Points; j++)
                 {
                     float t = j / (float)(Points - 1);
-                    float sweep = upward ? t * 0.14f : Mathf.Lerp(Mathf.Max(0f, travel - 0.6f), travel, t) * Mathf.PI * 0.5f;
+                    float sweep = t * 0.14f;
                     float angle = start + shape.Direction * sweep;
-                    float rise = upward ? Mathf.Min(2.1f, radius * 0.26f) * t : 0f;
+                    float rise = Mathf.Min(2.1f, radius * 0.26f) * t;
                     float r = Mathf.Max(0f, shape.Radius - 0.07f);
                     float radial = Mathf.Sqrt(Mathf.Max(0f, r * r - rise * rise));
                     float teeth = Mathf.Sin(t * Mathf.PI) * (0.025f + 0.025f * Mathf.Sin(j * 2.7f + (int)(Time.time * 16f) + i));
                     Vector3 point = shape.Center + shape.Direction3(angle) * Mathf.Max(0f, radial - teeth) + Vector3.up * rise;
-                    if (!upward) point = Contour(point, radius);
+
                     stroke.points[j] = body.corePosition + Vector3.ClampMagnitude(point - body.corePosition, Mathf.Max(0f, radius - 0.07f));
                 }
                 // Suppress the complete stroke at walls/ceilings; never draw a false connection.

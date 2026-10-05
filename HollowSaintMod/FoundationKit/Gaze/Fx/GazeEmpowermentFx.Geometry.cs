@@ -38,6 +38,16 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Draw(loop, loop.Length, width, color, alpha);
             }
             internal void Hide() { line.enabled = false; }
+            // Center bolt follows buff_discharge_charge.png; a separate stroke avoids a ring connector.
+            internal void Bolt(Vector3 center, Vector3 normal, float radius, float width, Color color, float alpha)
+            {
+                Vector3 u, v; Basis(normal, out u, out v);
+                loop[0] = center + (u * 0.14f + v * 0.55f) * radius;
+                loop[1] = center + (-u * 0.24f - v * 0.04f) * radius;
+                loop[2] = center + (u * 0.22f + v * 0.04f) * radius;
+                loop[3] = center + (-u * 0.14f - v * 0.55f) * radius;
+                Draw(loop, 4, width, color, alpha);
+            }
             // An open, irregular cluster of four crackling arms, not a closed ring/glyph.
             // Outline and energy use the same seed and clock so their silhouettes agree.
             internal void Knot(Vector3 center, Vector3 normal, float radius, float phase, float width, Color color, float alpha, bool reduced)
@@ -100,7 +110,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             crownRim = NewStroke("AbsorptionRim", false);
             for (int i = 0; i < pulses.Length; i++)
             {
-                var pulse = new Pulse { sleeve = NewStroke("PulseSleeve", false), spine = NewStroke("PulseSpine", true), front = NewStroke("PulseFront", false), outline = NewOutline("PulseOutline") };
+                var pulse = new Pulse { sleeve = NewStroke("PulseSleeve", false), spine = NewStroke("PulseSpine", true), front = NewStroke("PulseFront", false), glyph = NewStroke("PulseChargeBolt", true), outline = NewOutline("PulseOutline") };
                 // A travelling tapered sleeve, not a uniform full-length beam flare.
                 pulse.sleeve.line.widthCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.5f, 0.18f), new Keyframe(0.8f, 0.9f), new Keyframe(0.95f, 1f), new Keyframe(1f, 0.1f));
                 pulse.spine.line.widthCurve = pulse.sleeve.line.widthCurve;
@@ -110,7 +120,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 pulses[i] = pulse;
             }
             for (int i = 0; i < contacts.Length; i++)
-                contacts[i] = new Strike { glow = NewStroke("WeakStrike", false), core = NewStroke("WeakStrikeCore", true), branch = NewStroke("WeakStrikeBranch", false), outline = NewOutline("StrikeOutline"), stamp = NewStroke("StrikeStamp", false) };
+                contacts[i] = new Strike { glow = NewStroke("WeakStrike", false), core = NewStroke("WeakStrikeCore", true), branch = NewStroke("WeakStrikeBranch", false), outline = NewOutline("StrikeOutline"), stamp = NewStroke("StrikeStamp", false), glyph = NewStroke("StrikeChargeBolt", true) };
         }
 
         private Stroke NewStroke(string name, bool core)
@@ -131,14 +141,14 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             foreach (var p in pulses)
             {
                 if (p == null) continue;
-                p.active = false; p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
+                p.active = false; p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.glyph.Hide(); p.outline.Hide();
                 foreach (var fork in p.forks) fork.Hide();
                 foreach (var g in p.roots) { g.stroke.Hide(); g.outline.Hide(); }
             }
             foreach (var s in contacts)
             {
                 if (s == null) continue;
-                s.active = false; s.glow.Hide(); s.core.Hide(); s.branch.Hide(); s.outline.Hide(); s.stamp.Hide();
+                s.active = false; s.glow.Hide(); s.core.Hide(); s.branch.Hide(); s.outline.Hide(); s.stamp.Hide(); s.glyph.Hide();
             }
         }
     }

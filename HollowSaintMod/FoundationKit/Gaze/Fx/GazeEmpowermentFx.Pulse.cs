@@ -18,7 +18,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             internal bool active, ground, finale;
             internal float at, travel, spread, radius, length;
             internal Vector3 origin, end, groundPoint, direction, normal;
-            internal Stroke sleeve, spine, front, outline;
+            internal Stroke sleeve, spine, front, outline, glyph;
             internal int seed;
             internal readonly Stroke[] forks = new Stroke[2];
             internal readonly Vector3[][] forkPoints = { new Vector3[7], new Vector3[7] };
@@ -29,7 +29,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         {
             internal bool active;
             internal float at;
-            internal Stroke glow, core, branch, outline, stamp;
+            internal Stroke glow, core, branch, outline, stamp, glyph;
             internal readonly Vector3[] path = new Vector3[9], fork = new Vector3[5];
         }
 
@@ -59,7 +59,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             p.radius = Mathf.Clamp(spreadRadius, 0f, 30f); // cosmetic ceiling only
             p.finale = finale && fullEntry;
             p.ground = hasGround && p.normal.y > 0.35f;
-            p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
+            p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.glyph.Hide(); p.outline.Hide();
             foreach (var fork in p.forks) fork.Hide();
             for (int i = 0; i < p.roots.Length; i++)
             {
@@ -188,18 +188,23 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                         }
                         p.forks[branch].Draw(points, points.Length, Mathf.Min(0.09f * scale, sweepWidth), palette.Secondary, 0.8f);
                     }
-                    p.front.Knot(p.origin + p.direction * head, p.direction, Mathf.Min(1.3f * scale, radialLimit), p.seed % 31,
-                        Mathf.Min(0.11f, sweepWidth), accentEdge, 0.9f, ReducedEffects);
+                    float tokenRadius = Mathf.Min(0.48f * scale, radialLimit);
+                    p.front.Loop(p.origin + p.direction * head, p.direction, tokenRadius, Mathf.Min(0.075f, sweepWidth), accent, 0.9f);
+                    p.glyph.Bolt(p.origin + p.direction * head, p.direction, tokenRadius, Mathf.Min(0.055f, sweepWidth), accentEdge, 0.95f);
                     continue;
                 }
-                p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.outline.Hide();
+                p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.glyph.Hide(); p.outline.Hide();
                 foreach (var fork in p.forks) fork.Hide();
                 float spreadAge = age - p.travel;
                 // A short endpoint punctuation starts at supplied arrival time, never before.
                 // It is energy arrival; target-specific white-free strikes still require confirmation.
                 float arrival = 1f - Mathf.Clamp01(spreadAge / 0.18f);
-                if (arrival > 0f) p.front.Knot(p.end, p.direction, 0.35f + (1f - arrival) * 0.6f,
-                    p.seed % 31, 0.065f, accentEdge, arrival * (ReducedEffects ? 0.4f : 0.65f), ReducedEffects);
+                if (arrival > 0f)
+                {
+                    float tokenRadius = 0.35f + (1f - arrival) * 0.3f;
+                    p.front.Loop(p.end, p.direction, tokenRadius, 0.045f, accent, arrival * 0.65f);
+                    p.glyph.Bolt(p.end, p.direction, tokenRadius, 0.035f, accentEdge, arrival * 0.7f);
+                }
                 float fade = 1f - Mathf.Clamp01((spreadAge - p.spread * 0.6f) / (p.spread * 0.4f + 0.18f));
                 for (int i = 0; i < p.roots.Length; i++)
                 {
@@ -239,7 +244,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 s.outline.Draw(s.path, s.path.Length, 0.5f, GazeContrastAssets.Ink, fade * 0.8f);
                 s.glow.Draw(s.path, s.path.Length, 0.3f, accent, fade * 0.8f);
                 s.core.Draw(s.path, s.path.Length, 0.07f, ReducedEffects ? accent : accentEdge, fade * (ReducedEffects ? 0.5f : 0.9f));
-                s.stamp.Knot(s.path[s.path.Length - 1], direction, 0.2f + 0.22f * (1f - fade), s.at, 0.04f, accentEdge, fade * 0.65f, ReducedEffects);
+                s.stamp.Loop(s.path[s.path.Length - 1], direction, 0.2f + 0.22f * (1f - fade), 0.04f, accent, fade * 0.65f);
+                s.glyph.Bolt(s.path[s.path.Length - 1], direction, 0.2f + 0.22f * (1f - fade), 0.03f, accentEdge, fade * 0.7f);
                 if (ReducedEffects) s.branch.Hide();
                 else s.branch.Draw(s.fork, s.fork.Length, 0.075f, accent, fade * 0.6f);
                 if (age >= 0.26f) s.active = false;

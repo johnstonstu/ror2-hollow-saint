@@ -293,19 +293,16 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                         }
                         intakeFilaments[orb.intakeSlot].Draw(points, points.Length, 0.025f, palette.Secondary, ReducedEffects ? 0.55f : 0.85f);
                     }
-                    // Same compact energy knot and primary hue throughout consumption.
-                    orb.outline.Knot(p, direction, size, i * 2.4f, 0.095f, outlineTint, 0.8f, ReducedEffects);
-                    orb.stroke.Knot(p, direction, size, i * 2.4f, 0.045f, accent, 0.9f, ReducedEffects);
-                    if (!ending && (!ReducedEffects || orb.swallowing))
-                        orb.filament.Crawl(p, direction, size, Time.time * (orb.swallowing ? 9f : 4f) + i * 2.4f,
-                            palette.Secondary, orb.swallowing ? 0.85f : 0.65f);
+                    // HUD charge identity persists through intake, without a hue or shape swap.
+                    orb.outline.Loop(p, direction, size, 0.095f, outlineTint, 0.8f);
+                    orb.stroke.Loop(p, direction, size, 0.045f, accent, 0.9f);
+                    orb.filament.Bolt(p, direction, size, 0.034f, accentEdge, 0.95f);
                 }
                 // Retain authoritative reserve counts, but only entry fuel is visible during Gaze.
                 reserve[i].stroke.Hide(); reserve[i].outline.Hide(); reserve[i].filament.Hide();
             }
             float flash = 1f - Mathf.Clamp01((Time.time - flashAt) / (ReducedEffects ? 0.2f : 0.12f));
-            if (flash > 0f && !ending) crownRim.Knot(crown - direction * 0.07f, direction, 0.38f + flash * 0.1f,
-                flashAt, 0.045f, accent, flash * 0.7f, ReducedEffects);
+            if (flash > 0f && !ending) crownRim.Loop(crown - direction * 0.07f, direction, 0.38f + flash * 0.1f, 0.045f, accent, flash * 0.7f);
             else crownRim.Hide();
         }
 
