@@ -474,6 +474,51 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_HS_SpearChargeLoop" ID="{7B3B58F0-875B-5F61-B4F0-7A0F4D556929}">
+					<ChildrenList>
+						<Action Name="" ID="{10532211-8C2B-59A9-AA2A-6FD980BE4C1B}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearChargeLoop" ID="{BF3FE2C4-9FAD-5E9D-B9B2-69EC801C3DA2}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_HS_SpearChargeLoop" ID="{5B3F886C-A1CC-551D-A7A1-F0462AB35EA7}">
+					<ChildrenList>
+						<Action Name="" ID="{6F1B3223-DE75-5D8B-91D6-C2BADD67DC9E}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+								<Property Name="Scope" Type="int16" Value="0" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearChargeLoop" ID="{BF3FE2C4-9FAD-5E9D-B9B2-69EC801C3DA2}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_SpearChargeStart" ID="{08530752-AA1C-5C23-99CA-4C508D1B4860}">
+					<ChildrenList>
+						<Action Name="" ID="{E81833CB-DD69-57FD-A222-18F326F3540C}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_SpearChargeStart" ID="{41592B4C-EDFC-5DE0-A5E0-E9AD217119AD}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 				<Event Name="Play_HS_SpearImpact" ID="{5F20ED18-664B-5554-934F-EB17AD05D456}">
 					<ChildrenList>
 						<Action Name="" ID="{9C09CE97-CEA0-525B-85FC-B4FF8D90668A}">

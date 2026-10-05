@@ -322,5 +322,23 @@
     "loop": false,
     "peak_dbfs": -9.9,
     "rms_dbfs": -32.03
+  },
+  {
+    "name": "SpearChargeStart",
+    "event": "Play_HS_SpearChargeStart",
+    "seconds": 0.2,
+    "loop": false,
+    "peak_pcm16": 6144,
+    "gain": 1.25,
+    "source": "Audited existing FanStart waveform"
+  },
+  {
+    "name": "SpearChargeLoop",
+    "event": "Play_HS_SpearChargeLoop",
+    "seconds": 2.0,
+    "loop": true,
+    "peak_pcm16": 5898,
+    "gain": 2.0,
+    "source": "Audited existing FanLoop waveform"
   }
 ]

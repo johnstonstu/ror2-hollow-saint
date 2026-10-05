@@ -1,11 +1,11 @@
 {
   "bank_version": 150,
-  "bytes": 1945042,
-  "sha256": "16813b4b13471635796beccbabd1aca75463f705ae3589350fb69de9e0e57524",
-  "events": 44,
-  "local_stop_actions": 4,
-  "infinite_loops": 3,
-  "embedded_pcm_sources": 40,
+  "bytes": 2156718,
+  "sha256": "efa769269a0a1a1546d872256b163a0c46172bc1e6d533dafe831929efe58f59",
+  "events": 47,
+  "local_stop_actions": 5,
+  "infinite_loops": 4,
+  "embedded_pcm_sources": 42,
   "bus_reference": 213475909,
   "owned_busses": 0,
   "source_clipping": [
@@ -157,6 +157,16 @@
     {
       "name": "SpearCatch",
       "peak_pcm16": 7864,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearChargeLoop",
+      "peak_pcm16": 5898,
+      "clipped_samples": 0
+    },
+    {
+      "name": "SpearChargeStart",
+      "peak_pcm16": 6144,
       "clipped_samples": 0
     },
     {

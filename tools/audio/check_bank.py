@@ -28,6 +28,8 @@ ROLES['SpearBurst'] = (1.0,)
 ROLES['SpearImpact'] = (.60,)
 for _step in range(1, 6):
     ROLES[f'GazeSurge{_step}'] = (.24,)
+ROLES['SpearChargeStart'] = (.2,)
+ROLES['SpearChargeLoop'] = (2.,)
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "art/audio/HollowSaintAudio"

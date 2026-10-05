@@ -87,8 +87,12 @@ namespace HollowSaint.FoundationKit.Gaze
             float left = viewport.x + (viewport.width - width) * 0.5f;
             float top = Screen.height - viewport.yMax + viewport.height * .745f;
             Color saved = GUI.color;
+            Matrix4x4 savedMatrix = GUI.matrix;
             try
             {
+                // Canvas.pixelRect is already in display pixels. Another OnGUI participant's
+                // scale/rotation must not scale those coordinates a second time.
+                GUI.matrix = Matrix4x4.identity;
                 Panel(left, top, width, scale, remaining);
                 bool gain = Time.unscaledTime < gainUntil;
                 GUI.color = gain ? new Color(.55f, 1f, 1f) : new Color(.78f, .84f, .87f);
@@ -96,7 +100,7 @@ namespace HollowSaint.FoundationKit.Gaze
                 GUI.color = Color.white;
                 GUI.Label(new Rect(left + width * .65f, top + scale, width * .35f - 8f * scale, 24f * scale), label, secondsStyle);
             }
-            finally { GUI.color = saved; }
+            finally { GUI.color = saved; GUI.matrix = savedMatrix; }
         }
 
         private void EnsureStyles(float scale)

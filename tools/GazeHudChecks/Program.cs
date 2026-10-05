@@ -38,6 +38,8 @@ static class Program
         Event.current.type=EventType.Layout;Draw(timer);Check(GUI.Rects.Count==0,"layout pass adds no drawings");Event.current.type=EventType.Repaint;
         hud.mainContainerCanvas.pixelRect=new Rect(500,0,500,400);Draw(timer);Check(GUI.Rects[0].x>=500 && GUI.Rects[0].x+GUI.Rects[0].width<=1000,"split viewport keeps timer within local canvas");
         GUI.color=new Color(.2f,.3f,.4f,.5f);Draw(timer);Check(GUI.color.r==.2f && GUI.color.a==.5f,"meter restores shared GUI color");
+        GUI.matrix=new Matrix4x4 {marker=42};GUI.DrawMatrices.Clear();Draw(timer);
+        Check(GUI.DrawMatrices.All(matrix=>matrix.marker==1) && GUI.matrix.marker==42,"pixel viewport renders with identity and restores another OnGUI participant's matrix");
         state.RemainingBeamSeconds=.01f;Draw(timer);Check(GUI.LastLabel=="0.1s","remaining label rounds upward at last tenth");
         state.RemainingBeamSeconds=0;Draw(timer);Check(GUI.Rects[3].width==0,"expired actual timer draws no fill");
         state.ActualBeamSeconds=6.1f;Draw(timer);Check(GUI.Labels[0]=="GAZE  +0.1s","fractional last grant remains visible and actual");

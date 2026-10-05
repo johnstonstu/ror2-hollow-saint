@@ -1,0 +1,11 @@
+{
+  "result": "SPEAR_CHARGE_AUDIO_PASS",
+  "bank_sha256": "EFA769269A0A1A1546D872256B163A0C46172BC1E6D533DAFE831929EFE58F59",
+  "baseline_sha256": "16813B4B13471635796BECCBABD1ACA75463F705AE3589350FB69DE9E0E57524",
+  "unchanged_media": 40,
+  "unchanged_routing_objects": 129,
+  "added_media": 2,
+  "added_loop": 1,
+  "loop_cleanup": "Per-playing-ID stop; emitter-local authored stop also provided",
+  "release": "Existing single SpearThrow or SpearThrowHeavy event; no duplicated throw layer"
+}

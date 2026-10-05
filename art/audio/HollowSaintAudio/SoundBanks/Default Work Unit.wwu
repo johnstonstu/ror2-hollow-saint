@@ -38,6 +38,9 @@
 						<ObjectRef Name="Play_HS_MeterFull" ID="{66650A09-566C-5E71-BAC3-7AF655E56C60}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_SpearBurst" ID="{79301C2D-213C-5483-8EAA-E8894A842CEA}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_SpearCatch" ID="{A2BCA050-DA6F-5F7C-AB77-280AD36B2064}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearChargeLoop" ID="{7B3B58F0-875B-5F61-B4F0-7A0F4D556929}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Stop_HS_SpearChargeLoop" ID="{5B3F886C-A1CC-551D-A7A1-F0462AB35EA7}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_SpearChargeStart" ID="{08530752-AA1C-5C23-99CA-4C508D1B4860}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_SpearImpact" ID="{5F20ED18-664B-5554-934F-EB17AD05D456}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_SpearPulse" ID="{1BD587FE-8D9A-513B-9DA0-473EEEA0E1A6}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_SpearRecall" ID="{15ADC23E-E565-5204-86C8-77081B1DD75C}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />

@@ -15,7 +15,8 @@ namespace UnityEngine
     public class GUIStyleState {public Color textColor;}
     public class GUIStyle {public GUIStyle(){}public GUIStyle(GUIStyle style){}public TextAnchor alignment;public int fontSize;public FontStyle fontStyle;public GUIStyleState normal=new();}
     public class GUISkin {public GUIStyle label=new();}
-    public static class GUI {public static GUISkin skin=new();public static Color color;public static List<Rect> Rects=new();public static List<string> Labels=new();public static string LastLabel;public static void DrawTexture(Rect rect,Texture2D texture)=>Rects.Add(rect);public static void Label(Rect rect,string text,GUIStyle style){LastLabel=text;Labels.Add(text);}}
+    public struct Matrix4x4 {public int marker;public static Matrix4x4 identity=>new(){marker=1};}
+    public static class GUI {public static GUISkin skin=new();public static Color color;public static Matrix4x4 matrix=Matrix4x4.identity;public static List<Matrix4x4> DrawMatrices=new();public static List<Rect> Rects=new();public static List<string> Labels=new();public static string LastLabel;public static void DrawTexture(Rect rect,Texture2D texture){Rects.Add(rect);DrawMatrices.Add(matrix);}public static void Label(Rect rect,string text,GUIStyle style){LastLabel=text;Labels.Add(text);}}
     public static class Screen {public static int height=800;}
     public static class Time {public static float unscaledTime;}
     public static class Mathf {public static float Ceil(float n)=>(float)Math.Ceiling(n);public static float Min(float a,float b)=>Math.Min(a,b);public static float Max(float a,float b)=>Math.Max(a,b);public static float Clamp(float v,float min,float max)=>Math.Clamp(v,min,max);public static int Clamp(int v,int min,int max)=>Math.Clamp(v,min,max);public static int RoundToInt(float v)=>(int)Math.Round(v);}

@@ -111,6 +111,12 @@ namespace HollowSaint
             catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_TIMER_REGISTRATION_FAILED " + error); }
             if (!bodyObject.GetComponent<SpearCarry>()) bodyObject.AddComponent<SpearCarry>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Stormspear.StormspearCharge>();
+            try
+            {
+                if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Stormspear.StormspearAudio>())
+                    bodyObject.AddComponent<HollowSaint.FoundationKit.Stormspear.StormspearAudio>();
+            }
+            catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_SPEAR_AUDIO_REGISTRATION_FAILED " + error); }
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Storm.ThunderboltDriver>();
             if (!bodyObject.GetComponent<OpenCircuitPulseDriver>()) bodyObject.AddComponent<OpenCircuitPulseDriver>();
             try

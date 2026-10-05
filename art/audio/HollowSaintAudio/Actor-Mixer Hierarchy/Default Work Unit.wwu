@@ -1249,6 +1249,70 @@
 						<ActiveSource Name="GazeSurge5" ID="{10D6F60D-E372-5A43-BA29-680C30D8BC64}" Platform="Linked" />
 					</ActiveSourceList>
 				</Sound>
+				<Sound Name="HS_SpearChargeLoop" ID="{BF3FE2C4-9FAD-5E9D-B9B2-69EC801C3DA2}" ShortID="1850786">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
+						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearChargeLoop" ID="{E642ECC9-B1BB-5144-B47F-6C7E627D04B6}">
+							<Language>SFX</Language>
+							<AudioFile>SpearChargeLoop.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="952119725" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearChargeLoop" ID="{E642ECC9-B1BB-5144-B47F-6C7E627D04B6}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_SpearChargeStart" ID="{41592B4C-EDFC-5DE0-A5E0-E9AD217119AD}" ShortID="561060269">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SpearChargeStart" ID="{9120EED8-3A76-526F-8E08-C07765817BA2}">
+							<Language>SFX</Language>
+							<AudioFile>SpearChargeStart.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="208416517" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="SpearChargeStart" ID="{9120EED8-3A76-526F-8E08-C07765817BA2}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

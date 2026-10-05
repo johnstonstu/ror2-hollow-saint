@@ -44,8 +44,17 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             Core = Neutral(VfxAssets.ArcCore);
             // Existing Unity alpha-blended shader gives the glyphs a dark silhouette.
             // Additive lightning cannot draw a dark outline, even when colored black.
-            var shader = Shader.Find("Sprites/Default");
-            if (shader) Outline = new Material(shader) { name = "HS_GazeInk", renderQueue = 3098 };
+            try
+            {
+                var shader = Shader.Find("Sprites/Default");
+                if (shader) Outline = new Material(shader) { name = "HS_GazeInk", renderQueue = 3098 };
+            }
+            catch (System.Exception error)
+            {
+                // Current LegacyShaderAPI can throw for unknown names. The optional ink
+                // silhouette must never discard already-built core/glow or abort a cast.
+                Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_OPTIONAL_OUTLINE " + error.Message);
+            }
         }
 
         private static Material Neutral(Material source)

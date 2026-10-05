@@ -1,0 +1,39 @@
+# Supplied-log diagnosis and next private candidate
+
+Source base is audited **ad8e8398454447054d6675defe03f2a1b2289bc2**, which was not installed for the supplied 04:15 playtest. The installed DLL identifies **1.2.0+a74445a16fb470dcdf4e336c95399d5752a069ea**, SHA-256 `CA732A10BAF23F4E0684106BC619D6DBAA6C7458F266F305BFEA7EA999871324`; its language, bundle and embedded bank match the previous installation receipt. Its MVID `d4e14457-4cf2-4d25-aa26-19555d694347` exactly matches the supplied Gaze exception stack. No claim that the newer candidate failed this playtest is supported.
+
+The old installed timer calls `Fill(remaining)` with the 14-second scale: a 4s start is about 29% and a 6s start about 43%. Audited ad8e839 already starts full and snapshots new remaining duration on actual extensions. Its draw path uses the local HUD Canvas pixel viewport, explicit texture rectangles and a cloned GUI skin label style. Fill does not come from GUI skin padding/layout. This candidate additionally uses identity `GUI.matrix` for those display-pixel coordinates and restores the previous matrix/color afterward; another OnGUI participant cannot scale the pixel coordinates a second time. Native HUD font/scale/placement acceptance is still pending.
+
+The confirmed Hollow Saint issue is `LegacyShaderAPI.Find` throwing for `Sprites/Default` inside `GazeContrastAssets.Load`, aborting `GazeEmpowermentFx.BeginCast`. This also remained in ad8e839. The optional outline lookup is now isolated: already-built core/glow and charge-token construction continue, and unavailable outline strokes suppress themselves. One optional-outline warning replaces an aborted Gaze presentation event; no repeated retry per cast. This does not alter gameplay or prove any earlier fuel/damage loss.
+
+Other supplied-log issues are separate: the missing `MoreStats` assembly occurs in `EnemiesReturns.ModCompats.MoreStatsCompat` reflection scanning; the other shader-loader exception names `Hidden/ProBuilder/EdgePicker`; duplicate-ready/player, CurrentSurvivor and EffectManager pool messages have game/network cleanup paths without a Hollow Saint stack. Those remain reported, without modifying other mods, profiles or game files.
+
+## Spear charge / held / release sound
+
+`StormspearAudio` is now the sole charge-contract sound owner. Existing StormspearFx geometry/pose stays intact while its old sound calls are retired. The body registers the audio component behind a cosmetic failure boundary; shader/material failures cannot prevent sound. It reads actual replicated `StormspearCharge` events, never physical controls, resource counts or damage.
+
+- Begin: one 0.20s static charge-start cue. The source is the audited FanStart waveform at 1.25 gain, peak PCM16 6144.
+- Charge and full hold: after that prefix, one sustained static voice using the audited 2s FanLoop waveform at 2.0 gain, peak PCM16 5898. It starts once per cast and remains one voice at full; release/cancel stops its exact playing ID with 30ms fade. The louder source still has more than 14dB peak headroom.
+- Thresholds: one finite tick per processed tier; an attack-speed jump crossing several thresholds uses only the highest cue for that frame. A new tier retires the previous tier voice. Full uses the existing MeterFull cue.
+- Release: retires all charge voices and plays exactly one existing SpearThrow or SpearThrowHeavy cue. Hand release waits the existing hand apex delay; crown release is immediate. The former layered normal+heavy throw is removed.
+- Cancel, death, disabled charge/audio component, destroy and stage change retire owned voices and pending delayed release. Dedicated server does not post audio. Rebinding/re-enabling a charging component resumes once. Without the custom bank, only finite existing Mage/railgunner/Captain fallbacks play; no substitute infinite loop.
+
+Two new media entries and three events provide the charge prefix, held loop and emitter-local authored Stop. All **40 previous audited media entries and 129 routing objects remain byte-identical**, including original Gaze startup/loops/end, all five surges, prior impact tuning and spear impact sounds. The bank now contains 42 PCM sources, 47 events, five local stops, four infinite loops and zero owned busses. Only this added held voice is new; no master/SFX bus gain change. Actual live sound quality/level remains to be accepted.
+
+## Integrated visual changes
+
+Astra source **76cfc470c4532e61f7f4fbf87d91a34666388084** inspects the actual charge buff icon `buff_discharge_charge.png` (circular enclosure with centered bolt) and distinct passive-menu icon `passive_discharge.png` (cyan circular glowing core). Gaze now retains the circle-and-bolt motif through crown, intake, traveling pulse and confirmed arrival. Images themselves and ordinary non-Gaze orb presentation are unchanged. This is a line-rendered motif, not an exact textured copy of the HUD pixels.
+
+Circuit uses four irregular interior ground branches instead of the angular .94R cache. Completed world-space paths stay planted during ordinary movement, refresh atomically, expire conservatively, and invalidate on radius change or teleport. This fixes the previous .25m movement invalidation starving the eight-step cache at walking speed. Existing physical copper perimeter, two sparse upward arcs, actual spherical damage footprint, confirmed-target connections, four-ray/96-capsule budget and pooled renderer count remain. No unsupported floating-ground fallback is invented.
+
+Damage, costs, target selection, durations, ramp, mapped cancels, Circuit dwell and spear balance are **frozen at audited ad8e839**. Its previously approved changes relative to installed a74445a1 remain; this feedback patch adds no coefficient/cadence/cooldown adjustment. Private version remains 1.2.0, with no new release version or public publication.
+
+## Later native acceptance
+
+- Confirm the installed ProductVersion/hash is this next candidate before comparing. Cast zero/partial/full fuel: timer begins full, drains on fixed scale and refills only actual +2/fraction; no false extension at cap. Check HUD size/font, resolution and local split viewport.
+- Verify Gaze no longer logs aborted fuel presentation on the legacy shader lookup; core/glow/token remains even without optional dark ink. Circle/bolt should match the buff identity through consumption, travel and actual contact; menu art remains its separate image.
+- Charge/tap/full-hold/throw spear in hand and crown forms: one charge prefix, one steady held voice, clear ready cue, one release at correct apex. Repeated casts, interruption into Gaze, death, disable and stage transitions must leave no sound running. Compare bank-missing fallbacks and observers.
+- Walk at normal speed with Circuit on slopes/ramps/cliffs and near walls: irregular grounded interior branches remain visible when supported, sparse vertical accents stay within the actual sphere, confirmed tethers end at actual victims. Conservative suppression at unsupported ground is expected.
+- Verify the previously approved mapped cancel/Utility restoration, pulse ramp and duration feedback. Compare damage to the ad8e839 table; no new damage change is intended.
+
+Source substitutes establish routing, failure isolation and bounded reuse, not actual Unity rendering, perceived audio, device input, live performance or multiplayer acceptance. Final Astra audit and fresh closed-game confirmation are required before installation. No game launch/focus/stop, screenshot, profile/save edits, installation or public push/merge/tag/upload is authorized for this source/build step. AH64 stays excluded.

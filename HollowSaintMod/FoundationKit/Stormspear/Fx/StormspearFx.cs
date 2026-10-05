@@ -10,7 +10,8 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
     /// v0.9 Stormspear presentation driver. One per Hollow Saint body on every machine; reads
     /// StormspearCharge (never input) and owns everything that is not the hand model or the arm
     /// pose: the halo dim and its snap-back, feed tendrils into the palm, the crown spear,
-    /// the point light, tick/ready/throw/crackle sounds. Lines are persistent loop lines (not
+    /// the point light. StormspearAudio owns sounds independently of material availability.
+    /// Lines are persistent loop lines (not
     /// counted against the one-shot budget) and are only touched while charging, so an idle body
     /// costs one null check per frame. No per-frame allocation.
     /// Runs after BodyCurrentFx (180) so the tendrils never trail the final pose.
@@ -34,7 +35,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
         private Transform core, chest, rUpper, rFore; // rUpper/rFore: the spear arm
         private bool armLeft;
         private float haloBrightness = 1f, haloKick, lockKick, readyFlash, cancelAt, lastBegin = -10f, nextGlowBurst;
-        private bool crackling, subscribed;
+        private bool subscribed;
 
         /// <summary>Halo/ring emission multiplier: 1 idle, down to 0.3 at full hand charge, a brief overshoot on release.</summary>
         public float HaloBrightness { get { return haloBrightness; } }
@@ -59,7 +60,6 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
         private void OnDisable()
         {
             Unsubscribe();
-            StopCrackle();
             HideAll();
             ShowCrownModel(false);
             haloBrightness = 1f; haloKick = lockKick = readyFlash = 0f;
@@ -118,7 +118,6 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 LightningLine.Spawn(palm, palm + Random.onUnitSphere * 0.3f, 0.1f, 0.25f, 0, palette: pal);
             }
             if (ring && ring.Valid) VfxParticles.Ring(ring.Shape.Center, ring.Shape.Normal, ring.Shape.Radius, ring.Shape.Radius * 1.5f, 0.22f, 0.04f, pal.Material(VfxAssets.Trail), palette: pal);
-            Sfx(FanStart(), Beat.ChargeTick);
         }
 
         private void OnTick(StormspearCharge c, int step)
@@ -131,11 +130,10 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             {
                 VfxParticles.Burst(at, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.14f, Vector2.zero, new Vector2(0.5f, 0.7f) * (0.7f + 0.3f * step), pal.Core);
                 VfxParticles.Burst(at, Quaternion.identity, pal.Material(VfxAssets.Spark), 10 + 6 * step, 0.25f, new Vector2(2f, 5f), new Vector2(0.05f, 0.1f), pal.Arc, stretch: 0.06f);
-                KitSfx.Play(Beat.ChargeTick, gameObject, true);
             }
             else
             {
-                // Full: ready flash and sound (the existing Meter Full cue), then the crackle loop.
+                // Full: ready flash; the separate charge-contract audio owner handles sound.
                 readyFlash = 1f;
                 // v0.9.1: a short sharp flash plus a ring along the shaft, instead of a 1.4 m white bloom.
                 VfxParticles.Burst(at, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.16f, Vector2.zero, new Vector2(0.7f, 0.9f), pal.Arc);
@@ -143,15 +141,12 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 if (c.Form == SpearForm.Hand && carry && carry.HandVisible)
                     VfxParticles.Ring(at, carry.ShaftDirection, 0.15f, 0.9f, 0.22f, 0.05f, pal.Material(VfxAssets.Trail), palette: pal);
                 VfxParticles.FlashLight(at, pal.Arc, 2.2f, 7f, 0.2f);
-                KitSfx.Play(Beat.MeterFull, gameObject, true);
-                StartCrackle();
             }
         }
 
         private void OnReleased(StormspearCharge c)
         {
             cancelAt = 0f;
-            StopCrackle();
             haloKick = 1f;
             lockKick = 1f;
             var pal = Palette();
@@ -179,19 +174,9 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 pendingHandCharge = c.LastReleaseCharge;
             }
             BodyCurrentFx.PulseCore(body, 0.25f);
-            if (c.LastReleaseForm == SpearForm.Crown) ThrowSounds(c.LastReleaseCharge, true);
         }
 
         private float pendingHandRelease = -1f, pendingHandCharge;
-
-        private void ThrowSounds(float charge01, bool crown)
-        {
-            KitSfx.Play(Beat.SpearThrow, gameObject, true);
-            // v0.9.1: a charged or crown throw adds the sampled crackle so a 1400% throw sounds bigger than a tap.
-            string heavy = KitSfx.SpearThrowHeavy;
-            if (!string.IsNullOrEmpty(heavy) && (charge01 >= 0.50f || crown))
-                RoR2.Util.PlaySound(heavy, gameObject);
-        }
 
         private void HandReleaseFx(float charge01)
         {
@@ -208,12 +193,10 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 Vector3 from = fresh ? carry.LastTip : palm;
                 LightningLine.Spawn(from, from + aim * 5f, 0.12f, 0.6f + 0.6f * charge01, 0, 0.02f, palette: pal);
             }
-            ThrowSounds(charge01, false);
         }
 
         private void OnCancelled(StormspearCharge c)
         {
-            StopCrackle();
             cancelAt = Time.time; // confirmed in LateUpdate: a state swap cancels and re-begins in one frame
         }
 
@@ -256,7 +239,6 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 if (anyShown) HideAll();
                 ShowCrownModel(false);
                 haloShown = haloBrightness + 0.45f * haloKick;
-                if (!alive) StopCrackle();
                 return;
             }
             haloShown = shown;
@@ -577,29 +559,5 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             for (int i = 0; i < lines.Length; i++) if (lines[i]) lines[i].gameObject.SetActive(false);
         }
 
-        private void Sfx(string custom, Beat fallback)
-        {
-            if (!string.IsNullOrEmpty(custom)) RoR2.Util.PlaySound(custom, gameObject);
-            else KitSfx.Play(fallback, gameObject, true);
-        }
-
-        private static string FanStart() { return KitSfx.FanStart; }
-
-        private void StartCrackle()
-        {
-            if (crackling) return;
-            string start = KitSfx.FanLoopStart;
-            if (string.IsNullOrEmpty(start)) return;
-            RoR2.Util.PlaySound(start, gameObject);
-            crackling = true;
-        }
-
-        private void StopCrackle()
-        {
-            if (!crackling) return;
-            crackling = false;
-            string stop = KitSfx.FanLoopStop;
-            if (!string.IsNullOrEmpty(stop) && gameObject) RoR2.Util.PlaySound(stop, gameObject);
-        }
     }
 }
