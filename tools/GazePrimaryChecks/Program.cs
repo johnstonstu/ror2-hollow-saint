@@ -131,7 +131,37 @@ static class Program {
         }
         var noAuthority=new Fixture();noAuthority.Begin();noAuthority.body.hasEffectiveAuthority=false;noAuthority.Press(true);
         Check(!noAuthority.skills[0].ExecuteIfReady()&&noAuthority.fuel.Requests==0,"observers never request pulses");
+        ExitChecks();
         Console.WriteLine("PASS "+checks+" production controls assertions using native adapter simulation");
+    }
+    static void ExitChecks()
+    {
+        var edges=new GazeExitEdges();edges.Begin(true,true);
+        for(int i=0;i<100;i++)Check(edges.Observe(true,true)==GazeExitAction.None,"initial held mapped actions never self-cancel");
+        Check(edges.Observe(false,false)==GazeExitAction.None,"release has no action");
+        Check(edges.Observe(true,false)==GazeExitAction.Special,"fresh mapped Special exits regardless of extended time");
+        Check(edges.Observe(true,false)==GazeExitAction.None,"held Special cannot repeat");
+        edges.Observe(false,false);Check(edges.Observe(true,true)==GazeExitAction.Utility,"simultaneous mapped actions choose Utility once");
+        foreach(string reason in new[]{"ready","empty","replaced","death","authority lost","disable","expiry"})
+        {
+            var f=new Fixture();f.Begin();f.Tick(1);f.controls.End();f.crown.state=new object();Time.unscaledTime=0;
+            int stock=f.skills[2].stock;float timer=f.skills[2].rechargeStopwatch;
+            if(reason=="empty")f.skills[2].stock=stock=0;
+            GazeUtilityExit.Queue(f.body);var driver=f.body.GetComponent<GazeUtilityExit>();
+            if(reason=="replaced")f.skills[2].skillDef=new ExternalDef();
+            if(reason=="death")f.body.healthComponent.alive=false;
+            if(reason=="authority lost")f.body.hasEffectiveAuthority=false;
+            if(reason=="disable")Invoke(driver,"OnDisable");
+            if(reason=="expiry")Time.unscaledTime=1;
+            Invoke(driver,"FixedUpdate");Invoke(driver,"FixedUpdate");
+            Check(f.originals[2].nativeExecutions==(reason=="ready"?1:0),reason+" equipped utility executes at most once through native definition");
+            Check(f.skills[2].stock==stock-(reason=="ready"?1:0)&&f.skills[2].rechargeStopwatch==timer,reason+" native stock/cooldown preserved");
+        }
+        var blocked=new Fixture();blocked.Begin();blocked.controls.End();Time.unscaledTime=0;
+        GazeUtilityExit.Queue(blocked.body);var queued=blocked.body.GetComponent<GazeUtilityExit>();
+        Invoke(queued,"FixedUpdate");Check(blocked.originals[2].nativeExecutions==0,"queued utility waits for Crown teardown");
+        blocked.crown.state=new GazeLockState();Invoke(queued,"FixedUpdate");Check(blocked.originals[2].nativeExecutions==0,"queued utility waits for actual machine unlock");
+        blocked.crown.state=new object();Invoke(queued,"FixedUpdate");Check(blocked.originals[2].nativeExecutions==1,"unlocked equipped utility activates once");
     }
     static void Invoke(object target,string method)=>target.GetType().GetMethod(method,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(target,null);
 }

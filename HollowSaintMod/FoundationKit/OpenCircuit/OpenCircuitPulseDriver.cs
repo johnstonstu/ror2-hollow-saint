@@ -19,10 +19,12 @@ namespace HollowSaint.FoundationKit.OpenCircuit
         private bool wasOpen;
         private bool firedFirstPulse;
         private float pulseTimer;
+        private CircuitDwellDriver dwell;
 
         private void Awake()
         {
             body = GetComponent<CharacterBody>();
+            dwell = GetComponent<CircuitDwellDriver>() ?? gameObject.AddComponent<CircuitDwellDriver>();
         }
 
         private void OnDestroy()
@@ -188,7 +190,10 @@ namespace HollowSaint.FoundationKit.OpenCircuit
             var points = new List<Vector3>();
             if (result.hitPoints != null)
                 for (int i = 0; i < result.hitCount && i < result.hitPoints.Length; i++)
+                {
                     points.Add(result.hitPoints[i].hitPosition);
+                    if (dwell) dwell.Confirm(result.hitPoints[i].hurtBox);
+                }
             OpenCircuitVfxHooks.RaisePulse(body, KitUtil.EyePosition(body), points.ToArray(), damage);
             Vfx.KitFx.Server(Vfx.Beat.CircuitPulse, body.footPosition, default(Vector3), KitTuning.OpenCircuitRadius, sound: true, owner: body);
             // Nearest first, so the six arcs go to the closest enemies; staggered so they read

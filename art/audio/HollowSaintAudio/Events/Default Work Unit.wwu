@@ -289,6 +289,76 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_HS_GazeSurge1" ID="{26884DDC-0EF9-52B1-A656-A108D5672323}">
+					<ChildrenList>
+						<Action Name="" ID="{302FF268-3B49-5AC8-A4FE-FB677FDB9C08}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurge1" ID="{7A36598B-6780-5C32-9E9F-7E9927EB07EC}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeSurge2" ID="{B63D0122-ECCD-5505-B543-D98479687DA4}">
+					<ChildrenList>
+						<Action Name="" ID="{67E61DBA-F4D9-5DAA-98FA-4FC41410A8EE}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurge2" ID="{FB9DD53C-5892-5027-A8C0-BDC58076CE3D}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeSurge3" ID="{1E4E9FE6-DB0C-5919-A912-39328D6A2BD1}">
+					<ChildrenList>
+						<Action Name="" ID="{BFB65C8A-A182-5ACD-8C80-E6ABB590CFFB}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurge3" ID="{9C3624DE-D78B-5D26-8E28-7569A28C5189}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeSurge4" ID="{3ADF39FB-2373-5F60-8680-762E0EE1F3EC}">
+					<ChildrenList>
+						<Action Name="" ID="{62ED7EC9-BC43-5436-BA24-FBD2E08B33E7}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurge4" ID="{1BAD1993-30DC-55AE-AE81-897C3979CCF4}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeSurge5" ID="{B968DBCA-A927-527E-AD4C-38C849760947}">
+					<ChildrenList>
+						<Action Name="" ID="{E4CC64F1-DA13-55DA-B606-07B269F70D12}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurge5" ID="{EF287B84-6163-50F6-A6CF-03A52E827474}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 				<Event Name="Play_HS_GlideEnter" ID="{A1B8DD7A-7993-55CD-9BA9-94C21B0FE296}">
 					<ChildrenList>
 						<Action Name="" ID="{8704CA0C-9D95-5871-8726-AA50D5621EAB}">

@@ -39,9 +39,11 @@ static class Program
         }
         Check(StoredPrayerPolicy.Capacity(-5)==2&&StoredPrayerPolicy.Capacity(5)==5&&StoredPrayerPolicy.Capacity(999)==20,"configured capacity clamped two to twenty, default five");
         float ownerDamage=17,coefficient=10,fraction=.5f,radius=3;
-        var launch=new PrayerStrikeSnapshot(ownerDamage,coefficient,fraction,radius,true);
+        var launch=new PrayerStrikeSnapshot(ownerDamage,coefficient,fraction,radius,true,funded:true);
         ownerDamage=1000;coefficient=1;fraction=0;radius=20;
-        Check(launch.Empowered&&Math.Abs(launch.Damage-153)<.0001f&&Math.Abs(launch.SplashDamage-76.5f)<.0001f&&launch.SplashRadius==3&&launch.Crit,"launch damage crit splash snapshot unaffected by later stats/tuning");
+        Check(launch.Empowered&&Math.Abs(launch.Damage-130.05f)<.0001f&&Math.Abs(launch.SplashDamage-65.025f)<.0001f&&launch.SplashRadius==3&&launch.Crit,"funded launch damage crit splash snapshot unaffected by later stats/tuning");
+        var unfundedCrown=new PrayerStrikeSnapshot(17,10,.5f,3,true);
+        Check(Math.Abs(unfundedCrown.Damage-153)<.0001f&&Math.Abs(unfundedCrown.SplashDamage-76.5f)<.0001f,"unfunded Crown strike is exempt from targeted funded reduction");
         Check(!default(PrayerStrikeSnapshot).Empowered,"unfunded projectile has no Prayer bonus");
         foreach(string landing in new[]{"enemy","world terrain"})
         {

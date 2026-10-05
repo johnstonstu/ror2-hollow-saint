@@ -48,7 +48,7 @@ installed bank. Headless Wwise reprocessed one unrelated SpearBurst source;
 and the event hierarchy are byte-identical, and checks the embedded impact gain.
 Normal DLL builds embed the checked-in verified bank without audio authoring.
 
-All 35 sounds use positional spatialization with attenuation: 0 dB through 5 m,
+All 40 sounds use positional spatialization with attenuation: 0 dB through 5 m,
 -9 dB at 12 m, -24 dB at 24 m, -60 dB at 40 m. GlideLoop and CircuitLoop are infinite
 two-second sources. Their Stop events target only the posting GameObject and
 fade over 120 ms. Post start and stop on the same emitter. Event names are listed
@@ -65,3 +65,11 @@ ArcBoltCast, ChainHop, and ChargeTick have clearer sparse crackles at their
 original peak ceilings. Footsteps, glide, and Circuit WAVs are unchanged.
 
 v08 additions: SpearRecall, SpearCatch, FanStart, FanEnd, SpearPulse (quiet, repeats), SpearStruck, and FanLoop (infinite 2 s loop with Stop_HS_FanLoop, same 120 ms emitter-local stop as the other loops). `hollow-saint-audition-v08.wav` (cues in `audition-cues-v08.json`) plays them plus the new ThunderStrike with half-second gaps.
+
+Channel follow-up adds GazeSurge1-5: finite 0.24-second discharge copies at
+1.0/1.15/1.30/1.45/1.60 source gain, with no new loops or master gain. Run
+`gaze_surges.py prepare <installed-80FE-bank>`, then `author_bank.py`, then
+`gaze_surges.py check <installed-80FE-bank>` and `check_bank.py`. The check
+preserves all 35 installed WEMs and all 114 old routing objects exactly, and
+verifies the five embedded monotonic unclipped levels. Historical feedback
+checks above compare the earlier F244 baseline and describe that earlier pass.

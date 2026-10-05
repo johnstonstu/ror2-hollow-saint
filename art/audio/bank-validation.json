@@ -1,11 +1,11 @@
 {
   "bank_version": 150,
-  "bytes": 1828809,
-  "sha256": "80fe181aa5ff9910ea7d90d8684ae95b3dcb012f53dc17a3fc411d293f4f5e99",
-  "events": 39,
+  "bytes": 1945042,
+  "sha256": "16813b4b13471635796beccbabd1aca75463f705ae3589350fb69de9e0e57524",
+  "events": 44,
   "local_stop_actions": 4,
   "infinite_loops": 3,
-  "embedded_pcm_sources": 35,
+  "embedded_pcm_sources": 40,
   "bus_reference": 213475909,
   "owned_busses": 0,
   "source_clipping": [
@@ -97,6 +97,31 @@
     {
       "name": "FootstepRun",
       "peak_pcm16": 3932,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurge1",
+      "peak_pcm16": 6553,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurge2",
+      "peak_pcm16": 7536,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurge3",
+      "peak_pcm16": 8519,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurge4",
+      "peak_pcm16": 9502,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurge5",
+      "peak_pcm16": 10485,
       "clipped_samples": 0
     },
     {

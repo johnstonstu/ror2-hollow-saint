@@ -23,6 +23,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private readonly GazeFuelSequence receiver = new GazeFuelSequence();
         private readonly GazeManualRequestPolicy requests = new GazeManualRequestPolicy();
         private readonly GazePulseAudio pulseAudio = new GazePulseAudio();
+        private readonly GazePulseKick pulseKick = new GazePulseKick();
         private uint cast, sequence, clientCast, clientRequestSequence;
         private float age, presentationRelease, beamDuration, frozenBeamDuration, nextClientRequest;
         private bool presentationOwned;
@@ -282,8 +283,10 @@ namespace HollowSaint.FoundationKit.Gaze
                 ApplyReceivedRamp(packet.spent);
                 // Only the added pulse cue changes. Use one electrical discharge;
                 // clustered delayed launches coalesce without restarting Gaze loops.
-                try { pulseAudio.Play(body.gameObject); }
+                try { pulseAudio.Play(body.gameObject, packet.spent); }
                 catch (System.Exception error) { GazeFuelTransport.Warn("pulse launch sound failed", error); }
+                try { pulseKick.Play(body, packet.spent); }
+                catch (System.Exception error) { GazeFuelTransport.Warn("pulse launch shake failed", error); }
             }
             if (packet.kind == GazeFuelTransport.Kind.End)
             {

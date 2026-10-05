@@ -26,6 +26,8 @@ ROLES['SpearBurst'] = (1.0,)
 # Existing v0.9.16 lodged impact is the authored 0.60-second cue, not the old
 # synth recipe's 0.42-second sound. Preserve it throughout this revision.
 ROLES['SpearImpact'] = (.60,)
+for _step in range(1, 6):
+    ROLES[f'GazeSurge{_step}'] = (.24,)
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "art/audio/HollowSaintAudio"

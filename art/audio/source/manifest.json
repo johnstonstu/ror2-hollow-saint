@@ -282,5 +282,45 @@
     "peak_dbfs": -15.0,
     "rms_dbfs": -30.21,
     "source": "sample:dragon-studio-lightning-strike-386161.mp3"
+  },
+  {
+    "name": "GazeSurge1",
+    "event": "Play_HS_GazeSurge1",
+    "seconds": 0.24,
+    "loop": false,
+    "peak_dbfs": -13.98,
+    "rms_dbfs": -36.12
+  },
+  {
+    "name": "GazeSurge2",
+    "event": "Play_HS_GazeSurge2",
+    "seconds": 0.24,
+    "loop": false,
+    "peak_dbfs": -12.77,
+    "rms_dbfs": -34.9
+  },
+  {
+    "name": "GazeSurge3",
+    "event": "Play_HS_GazeSurge3",
+    "seconds": 0.24,
+    "loop": false,
+    "peak_dbfs": -11.7,
+    "rms_dbfs": -33.84
+  },
+  {
+    "name": "GazeSurge4",
+    "event": "Play_HS_GazeSurge4",
+    "seconds": 0.24,
+    "loop": false,
+    "peak_dbfs": -10.75,
+    "rms_dbfs": -32.89
+  },
+  {
+    "name": "GazeSurge5",
+    "event": "Play_HS_GazeSurge5",
+    "seconds": 0.24,
+    "loop": false,
+    "peak_dbfs": -9.9,
+    "rms_dbfs": -32.03
   }
 ]

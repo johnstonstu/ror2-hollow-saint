@@ -4,6 +4,9 @@ They cover exact-radius bone docks, core-centred equator, 1000-cycle restoration
 same-frame reapply, invalid tuning/model replacement, buff-based observer startup,
 sparse lightning bounds including halfwidth, bounded pool reuse, native-pose
 ownership yielding to Gaze, expiry/death/disable and warmed managed allocations.
+The integrated environment partial adds terrain contour cache checks, vertical
+lift bounds, world capsule suppression/query budgets, four confirmed strike
+slots and exact source/victim endpoints with expiry and no automatic repeats.
 
 Run `dotnet run --project tools/OpenCircuitPerimeterChecks -c Release`.
 

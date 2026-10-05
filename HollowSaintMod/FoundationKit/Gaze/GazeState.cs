@@ -26,6 +26,8 @@ namespace HollowSaint.FoundationKit.Gaze
         private GazeSkillOverrides controls;
         private GazeFuelController fuel;
         private GazeFuelEndReason fuelEndReason = GazeFuelEndReason.Interrupted;
+        private readonly GazeExitEdges exitEdges = new GazeExitEdges();
+        private bool utilityExit;
 
         private float BeamEnd => GazeTuning.WindupSeconds + beamDuration;
         // EntityState.fixedAge is protected in the real engine. Read it legally
@@ -33,6 +35,7 @@ namespace HollowSaint.FoundationKit.Gaze
         internal float AuthoritativeCastAge => fixedAge;
         internal float RemainingBeamSeconds => Mathf.Max(0f, BeamEnd - fixedAge);
         internal float ActualBeamSeconds => beamDuration;
+        internal int SuccessfulLaunches => rampSteps;
         internal bool TimerVisible => ignited && !endRequested;
         internal bool FuelAdmissionOpen => !endRequested && !GazeManualLifetime.StopBeforeWork(fixedAge, BeamEnd);
         internal bool PrimaryPulseReady => FuelAdmissionOpen && fixedAge >= GazeTuning.WindupSeconds &&
@@ -59,6 +62,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public override void OnEnter()
         {
             base.OnEnter();
+            exitEdges.Begin(inputBank && inputBank.skill4.down, inputBank && inputBank.skill3.down);
             rampSteps = 0;
             ClaimOtherCombat();
             progressionDuration = beamDuration = GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
@@ -147,6 +151,14 @@ namespace HollowSaint.FoundationKit.Gaze
         {
             base.Update();
             if (!isAuthority || !inputBank) return;
+            var exit = exitEdges.Observe(inputBank.skill4.down, inputBank.skill3.down);
+            if (!endRequested && exit != GazeExitAction.None)
+            {
+                endRequested = true;
+                utilityExit = exit == GazeExitAction.Utility;
+                fuelEndReason = GazeFuelEndReason.Interrupted;
+                outer.SetNextState(new GazeEndState());
+            }
             if (controls) controls.ObservePrimary();
             ClaimOtherCombat();
             // A higher external override must not become another combat action.
@@ -237,11 +249,17 @@ namespace HollowSaint.FoundationKit.Gaze
                 gravityHeld = false;
             }
             if (isAuthority && characterMotor) characterMotor.walkSpeedPenaltyCoefficient = 1f;
+            if (isAuthority)
+            {
+                if (weapon && weapon.state is GazeLockState) weapon.SetNextStateToMain();
+                if (spear && spear.state is GazeLockState) spear.SetNextStateToMain();
+            }
             if (beam) beam.End();
             CrownGestureFlow.Cancel(characterBody);
             if (armored && NetworkServer.active && characterBody && GazeArmor.Def) characterBody.RemoveBuff(GazeArmor.Def);
             armored = false;
             GazeFallGuard.Release(characterBody);
+            if (utilityExit && isAuthority) GazeUtilityExit.Queue(characterBody);
             base.OnExit();
         }
 

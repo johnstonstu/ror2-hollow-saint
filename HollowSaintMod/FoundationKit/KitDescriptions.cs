@@ -38,7 +38,7 @@ namespace HollowSaint.FoundationKit
             args["boltDamage"] = Pct(KitDamagePolicy.Effective(KitTuning.ArcBoltDamageCoefficient));
             args["hops"] = hops.ToString(CultureInfo.InvariantCulture);
             args["tap"] = Pct(KitDamagePolicy.Effective(StormspearTuning.TapDamage));
-            args["full"] = Pct(KitDamagePolicy.Effective(StormspearTuning.FullDamage));
+            args["full"] = Pct(SpearFeedbackPolicy.Direct(StormspearTuning.FullDamage, 1f));
             args["burst"] = Pct(StormspearTuning.BurstDamageFraction);
             args["burstFull"] = Pct(StormspearTuning.BurstDamageFractionFull);
             args["spearStock"] = StormspearTuning.BaseStock.ToString(CultureInfo.InvariantCulture);
@@ -61,6 +61,9 @@ namespace HollowSaint.FoundationKit
             args["armor"] = Num(GazeTuning.Armor);
             args["orbs"] = KitTuning.StormChargeMax.ToString(CultureInfo.InvariantCulture);
             args["thunder"] = Pct(KitDamagePolicy.Effective(KitTuning.ThunderboltDamageCoefficient));
+            args["fundedThunder"] = Pct(KitDamagePolicy.Effective(KitTuning.ThunderboltDamageCoefficient) * SpearFeedbackPolicy.FundedStrikeMultiplier);
+            args["dwellSeconds"] = Num(OpenCircuit.CircuitDwellPolicy.RequiredSeconds);
+            args["dwellZap"] = Pct(KitDamagePolicy.Effective(OpenCircuit.CircuitDwellPolicy.RawZapCoefficient));
             args["decay"] = Num(KitTuning.StaticDecayDelay);
             args["death"] = death;
             args["deathPct"] = Pct(discharge);

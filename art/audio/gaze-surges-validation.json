@@ -1,0 +1,24 @@
+{
+  "result": "GAZE_SURGES_PASS",
+  "bank_sha256": "16813B4B13471635796BECCBABD1ACA75463F705AE3589350FB69DE9E0E57524",
+  "preserved_existing_media": 35,
+  "preserved_existing_objects": 114,
+  "restored_media": 1,
+  "added_media": 5,
+  "gains": [
+    1.0,
+    1.15,
+    1.3,
+    1.45,
+    1.6
+  ],
+  "embedded_peak_pcm16": [
+    6553,
+    7536,
+    8519,
+    9502,
+    10485
+  ],
+  "duration_seconds": 0.24,
+  "loops_added": 0
+}

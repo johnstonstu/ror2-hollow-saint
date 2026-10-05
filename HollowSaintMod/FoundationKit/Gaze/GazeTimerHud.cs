@@ -14,6 +14,8 @@ namespace HollowSaint.FoundationKit.Gaze
         private GUIStyle titleStyle, secondsStyle;
         private GazeState observedState;
         private float lastDuration, gainUntil = -1f;
+        private float displayScale;
+        private int energyTier;
         private string title, gainedTitle;
         private float shownSeconds = -1f;
         private string label;
@@ -57,6 +59,7 @@ namespace HollowSaint.FoundationKit.Gaze
             if (observedState != state)
             {
                 observedState = state; lastDuration = state.ActualBeamSeconds; gainUntil = -1f;
+                displayScale = Mathf.Max(.1f, state.RemainingBeamSeconds);
                 title = Language.GetString("HS_GAZE_TIMER_LABEL").ToUpperInvariant();
             }
             float gained = state.ActualBeamSeconds - lastDuration;
@@ -64,8 +67,10 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 gainedTitle = title + "  +" + gained.ToString("0.#", CultureInfo.InvariantCulture) + "s";
                 gainUntil = Time.unscaledTime + .85f;
+                displayScale = Mathf.Max(.1f, state.RemainingBeamSeconds);
             }
             lastDuration = state.ActualBeamSeconds;
+            energyTier = Mathf.Clamp(state.SuccessfulLaunches, 0, 5);
         }
 
         private void Draw(Rect viewport, float remaining)
@@ -106,19 +111,21 @@ namespace HollowSaint.FoundationKit.Gaze
             secondsStyle.fontSize = Mathf.RoundToInt(15f * scale);
         }
 
-        private static void Panel(float left, float top, float width, float scale, float remaining)
+        private void Panel(float left, float top, float width, float scale, float remaining)
         {
             GUI.color = new Color(.025f, .035f, .045f, .94f);
             GUI.DrawTexture(new Rect(left, top, width, 30f * scale), Texture2D.whiteTexture);
-            GUI.color = new Color(.58f, .65f, .7f, .45f);
+            GUI.color = Time.unscaledTime < gainUntil ? new Color(.65f, 1f, 1f, .85f) : new Color(.58f, .65f, .7f, .45f);
             GUI.DrawTexture(new Rect(left, top, width, scale), Texture2D.whiteTexture);
             GUI.color = new Color(.2f, .27f, .31f, 1f);
             GUI.DrawTexture(new Rect(left + 8f * scale, top + 25f * scale, width - 16f * scale, 3f * scale), Texture2D.whiteTexture);
-            GUI.color = new Color(.52f, .94f, 1f, 1f);
-            GUI.DrawTexture(new Rect(left + 8f * scale, top + 25f * scale, (width - 16f * scale) * GazeTimerPolicy.Fill(remaining), 3f * scale), Texture2D.whiteTexture);
-            GUI.color = new Color(.025f, .035f, .045f, .9f);
-            for (int tick = 1; tick < 7; tick++)
-                GUI.DrawTexture(new Rect(left + 8f * scale + (width - 16f * scale) * tick / 7f, top + 25f * scale, scale, 3f * scale), Texture2D.whiteTexture);
+            GUI.color = new Color(.45f + .035f * energyTier, .90f + .02f * energyTier, 1f, 1f);
+            GUI.DrawTexture(new Rect(left + 8f * scale, top + 25f * scale, (width - 16f * scale) * GazeTimerPolicy.Fill(remaining, displayScale), 3f * scale), Texture2D.whiteTexture);
+            for (int pip = 0; pip < 5; pip++)
+            {
+                GUI.color = pip < energyTier ? new Color(.65f, 1f, 1f) : new Color(.2f, .27f, .31f);
+                GUI.DrawTexture(new Rect(left + 8f * scale + pip * 5f * scale, top + 21f * scale, 3f * scale, 2f * scale), Texture2D.whiteTexture);
+            }
         }
     }
 

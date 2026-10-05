@@ -17,6 +17,7 @@ namespace UnityEngine {
         }
     }
     public static class Mathf { public static int Max(int a,int b)=>Math.Max(a,b); public static int Min(int a,int b)=>Math.Min(a,b); }
+    public static class Time {public static float unscaledTime;}
 }
 namespace EntityStates { public enum InterruptPriority { Any,Skill,Frozen } }
 namespace RoR2.Skills {

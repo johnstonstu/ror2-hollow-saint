@@ -18,13 +18,18 @@ namespace UnityEngine
     public static class GUI {public static GUISkin skin=new();public static Color color;public static List<Rect> Rects=new();public static List<string> Labels=new();public static string LastLabel;public static void DrawTexture(Rect rect,Texture2D texture)=>Rects.Add(rect);public static void Label(Rect rect,string text,GUIStyle style){LastLabel=text;Labels.Add(text);}}
     public static class Screen {public static int height=800;}
     public static class Time {public static float unscaledTime;}
-    public static class Mathf {public static float Ceil(float n)=>(float)Math.Ceiling(n);public static float Min(float a,float b)=>Math.Min(a,b);public static float Clamp(float v,float min,float max)=>Math.Clamp(v,min,max);public static int RoundToInt(float v)=>(int)Math.Round(v);}
+    public static class Mathf {public static float Ceil(float n)=>(float)Math.Ceiling(n);public static float Min(float a,float b)=>Math.Min(a,b);public static float Max(float a,float b)=>Math.Max(a,b);public static float Clamp(float v,float min,float max)=>Math.Clamp(v,min,max);public static int Clamp(int v,int min,int max)=>Math.Clamp(v,min,max);public static int RoundToInt(float v)=>(int)Math.Round(v);}
+    public struct Vector3 {}
+    public class Transform {public Vector3 position;}
 }
 namespace RoR2
 {
     public class HealthComponent:UnityEngine.Object {public bool alive=true;}
-    public class CharacterBody:UnityEngine.Object {public HealthComponent healthComponent=new();}
-    public class LocalUser {public CharacterBody cachedBody;}
+    public class CharacterBody:UnityEngine.Object {public HealthComponent healthComponent=new();public UnityEngine.GameObject gameObject=new();}
+    public class LocalUser {public CharacterBody cachedBody;public CameraRigController cameraRigController;}
+    public class CameraRigController:UnityEngine.Object {public CharacterBody targetBody;public UnityEngine.Transform transform=new();}
+    public static class LocalUserManager {public static List<LocalUser> readOnlyLocalUsersList=new();}
+    public static class ShakeEmitter {public static int Count;public static float Amplitude;public static void CreateSimpleShakeEmitter(UnityEngine.Vector3 p,Wave wave,float duration,float radius,bool decay){Count++;Amplitude=wave.amplitude;}}
     public class EntityStateMachine:UnityEngine.Object {public static EntityStateMachine Machine;public object state;public static EntityStateMachine FindByCustomName(UnityEngine.GameObject go,string name)=>Machine;}
     public static class Language {public static string GetString(string token)=>"Gaze";}
     public static class Util {public static List<string> Sounds=new();public static void PlaySound(string name,UnityEngine.GameObject source)=>Sounds.Add(name);}
@@ -40,5 +45,6 @@ namespace HollowSaint
     public static class Plugin {public static Logger Log=new();}
     public class Logger {public void LogWarning(string message)=>Console.Error.WriteLine(message);}
 }
-namespace HollowSaint.FoundationKit.Gaze {internal class GazeState {internal bool TimerVisible;internal float RemainingBeamSeconds;internal float ActualBeamSeconds;}}
-namespace HollowSaint.FoundationKit.Vfx {internal static class CustomSoundBank {internal static bool Ready=true;}}
+public struct Wave {public float amplitude,frequency,cycleOffset;}
+namespace HollowSaint.FoundationKit.Gaze {internal class GazeState {internal bool TimerVisible;internal bool FuelAdmissionOpen=true;internal float RemainingBeamSeconds;internal float ActualBeamSeconds;internal int SuccessfulLaunches;}}
+namespace HollowSaint.FoundationKit.Vfx {internal static class CustomSoundBank {internal static bool Ready=true;}internal static class ImpactFeelSettings {internal static bool Enabled=true;}}

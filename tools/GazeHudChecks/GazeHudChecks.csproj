@@ -3,6 +3,7 @@
   <ItemGroup>
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeTimerHud.cs" Link="GazeTimerHud.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazePulseAudio.cs" Link="GazePulseAudio.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazePulseKick.cs" Link="GazePulseKick.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeTimerPolicy.cs" Link="GazeTimerPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />

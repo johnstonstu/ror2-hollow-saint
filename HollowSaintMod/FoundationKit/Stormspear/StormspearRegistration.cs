@@ -31,7 +31,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             def.activationStateMachineName = MachineName;
             def.activationState = chargeType;
             def.interruptPriority = InterruptPriority.Skill;
-            def.baseRechargeInterval = StormspearTuning.Cooldown;
+            def.baseRechargeInterval = SpearFeedbackPolicy.Recharge(StormspearTuning.Cooldown);
             def.baseMaxStock = StormspearTuning.BaseStock;
             def.rechargeStock = 1;
             def.requiredStock = 1;

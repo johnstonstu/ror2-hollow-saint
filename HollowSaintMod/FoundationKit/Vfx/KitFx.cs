@@ -42,7 +42,8 @@ namespace HollowSaint.FoundationKit.Vfx
         SpearRecall = 38,    // spear flies back to the hand
         SpearStruck = 39,    // Arc Bolt struck the planted spear itself
         SpearBurst = 40,     // v0.9 Stormspear impact: AoE lightning spreading from origin; scale = burst radius (m)
-        SpearStuck = 41      // v0.9.10 spear lodged in an enemy or the ground; start = flight direction, scale = charge, float = seconds
+        SpearStuck = 41,     // v0.9.10 spear lodged in an enemy or the ground; start = flight direction, scale = charge, float = seconds
+        CircuitDwellZap = 42 // confirmed server dwell hit; owner and exact victim point, no independent damage
     }
 
     /// <summary>v0.8 impact feel: a brief attacker hit-pause (visual only) and positional camera
@@ -307,7 +308,7 @@ namespace HollowSaint.FoundationKit.Vfx
             };
             // Crown tendrils carry their owner so each client starts them from its own
             // live halo ring (start stays the server's ring point as the fallback).
-            if ((beat == Beat.CircuitArc || beat == Beat.SpearRecall) && owner) data.SetNetworkedObjectReference(owner.gameObject);
+            if ((beat == Beat.CircuitArc || beat == Beat.SpearRecall || beat == Beat.CircuitDwellZap) && owner) data.SetNetworkedObjectReference(owner.gameObject);
             EffectManager.SpawnEffect(NetworkedPrefab, data, true);
         }
 
@@ -392,6 +393,17 @@ namespace HollowSaint.FoundationKit.Vfx
             var data = component != null ? component.effectData : null;
             if (data == null) return;
             var beat = Stormspear.SpearStuckEvent.IsStuck(data.genericUInt) ? Beat.SpearStuck : (Beat)data.genericUInt;
+            if (beat == Beat.CircuitDwellZap)
+            {
+                try
+                {
+                    var owner = data.ResolveNetworkedObjectReference();
+                    var visual = owner ? owner.GetComponent<OpenCircuit.Fx.OpenCircuitDomeFx>() : null;
+                    if (visual) visual.ShowConfirmedStrike(data.origin);
+                }
+                catch (Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_CIRCUIT_ZAP_FX " + error); }
+                return;
+            }
             if (beat == Beat.ThunderGather || beat == Beat.ThunderRelease || beat == Beat.ThunderCancel)
             {
                 var owner = data.ResolveNetworkedObjectReference();

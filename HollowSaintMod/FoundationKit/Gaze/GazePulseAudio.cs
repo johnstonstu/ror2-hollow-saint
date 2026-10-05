@@ -8,7 +8,7 @@ namespace HollowSaint.FoundationKit.Gaze
     internal sealed class GazePulseAudio
     {
         private float lastPlayed = float.NegativeInfinity;
-        internal bool Play(GameObject source)
+        internal bool Play(GameObject source, int spent = 1)
         {
             float now = Time.unscaledTime;
             // The embedded discharge is 0.24 s. Coalesce clustered delayed acknowledgements
@@ -16,7 +16,8 @@ namespace HollowSaint.FoundationKit.Gaze
             if (!source || float.IsNaN(now) || float.IsInfinity(now) ||
                 (now >= lastPlayed && now - lastPlayed < .24f)) return false;
             lastPlayed = now;
-            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_ThunderRelease" : "Play_captain_m2_tazer_shoot", source);
+            int step = System.Math.Max(1, System.Math.Min(5, spent));
+            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurge" + step : "Play_captain_m2_tazer_shoot", source);
             return true;
         }
     }

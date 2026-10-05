@@ -120,7 +120,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             // Remote launches normalize with the server-at-spawn coefficient under config agreement;
             // the remote owner's private tuning is not part of the projectile transport.
             conductorShot = new SpearConductorSchedule(shot.Charge, projectileDamage != null ? projectileDamage.damage : 0f,
-                KitDamagePolicy.Effective(StormspearTuning.DamageAt(shot.Charge)));
+                SpearFeedbackPolicy.Direct(StormspearTuning.DamageAt(shot.Charge), shot.Charge));
             controller.onInitialized -= CaptureShot;
             if (!NetworkServer.active || !controller.owner) return;
             launchTeam = controller.teamFilter ? controller.teamFilter.teamIndex : TeamIndex.None;
@@ -133,7 +133,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             launchStage = Stage.instance;
             prayer = new PrayerStrikeSnapshot(launchOwner.damage, KitTuning.ThunderboltDamageCoefficient,
                 KitTuning.ThunderboltSplashFraction, KitTuning.ThunderboltSplashRadius,
-                projectileDamage != null && projectileDamage.crit);
+                projectileDamage != null && projectileDamage.crit, funded: true);
             KitLog.Event("ANSWERED_PRAYER_SPEAR_COMMITTED", "bank=" + spent);
         }
 

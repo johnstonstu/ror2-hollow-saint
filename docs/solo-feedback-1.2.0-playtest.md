@@ -1,3 +1,5 @@
+> Historical a74445a1 baseline. Current channel/Circuit follow-up, controls, timer, audio and targeted spear tuning are specified in [channel-circuit-1.2.0-playtest.md](channel-circuit-1.2.0-playtest.md).
+
 # Solo feedback revision from installed 9be97ff3
 
 Private source/build candidate. Installation waits for the final combined Astra audit and a separate parent go. Native rendering, perceived audio and HUD placement are pending playtest. No release-version bump: this remains the existing 1.2.0 private prototype.
