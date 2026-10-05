@@ -1,5 +1,6 @@
 using HollowSaint.FoundationKit.Vfx;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace HollowSaint.FoundationKit.Gaze.Fx
 {
@@ -42,17 +43,26 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             ramp.Apply(false, true);
             Glow = Neutral(VfxAssets.ArcGlow);
             Core = Neutral(VfxAssets.ArcCore);
-            // Existing Unity alpha-blended shader gives the glyphs a dark silhouette.
+            // Native alpha-blended shader gives the glyphs a dark silhouette.
             // Additive lightning cannot draw a dark outline, even when colored black.
             try
             {
-                var shader = Shader.Find("Sprites/Default");
-                if (shader) Outline = new Material(shader) { name = "HS_GazeInk", renderQueue = 3098 };
+                // This generated GUID and its ParticleSimpleAlpha asset path are verified in
+                // the installed game catalog. Bypass LegacyShaderAPI's unsupported name lookup.
+                var shader = Addressables.LoadAssetAsync<Shader>(
+                    RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Shaders.ParticleSimpleAlpha_switch_shader).WaitForCompletion();
+                if (shader)
+                {
+                    Outline = new Material(shader) { name = "HS_GazeInk", renderQueue = 3098 };
+                    if (Outline.HasProperty("_MainTex")) Outline.SetTexture("_MainTex", Texture2D.whiteTexture);
+                    if (Outline.HasProperty("_TintColor")) Outline.SetColor("_TintColor", Color.white);
+                    if (Outline.HasProperty("_Color")) Outline.SetColor("_Color", Color.white);
+                }
             }
             catch (System.Exception error)
             {
-                // Current LegacyShaderAPI can throw for unknown names. The optional ink
-                // silhouette must never discard already-built core/glow or abort a cast.
+                // An unavailable optional addressable must not discard already-built
+                // core/glow or abort a cast.
                 Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_OPTIONAL_OUTLINE " + error.Message);
             }
         }
