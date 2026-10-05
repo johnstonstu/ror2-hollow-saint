@@ -69,7 +69,7 @@ namespace HollowSaint.FoundationKit
             args["bonus"] = Bonus(KitTuning.ShockedDamageMultiplier);
             args["shocked"] = Num(KitTuning.ShockedSeconds);
             args["targets"] = KitTuning.ElectrocutePopTargets.ToString(CultureInfo.InvariantCulture);
-            args["pop"] = Pct(KitDamagePolicy.Effective(KitTuning.ElectrocutePopDamageCoefficient));
+            args["pop"] = Pct(KitTuning.ElectrocutePopDamageCoefficient);
             args["immune"] = Num(KitTuning.ElectrocuteImmuneSeconds);
             args["range"] = Num(KitTuning.ThunderboltRange);
             return args;

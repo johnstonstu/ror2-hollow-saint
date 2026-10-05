@@ -20,9 +20,9 @@ All three reserve display layers stay hidden during Gaze. Earned reserve counts 
 
 Open Circuit's dome is replaced by the actual four metal crown elements moving to the equator of its core-centred damage sphere, with four sparse perimeter hops and two intermittent upward arcs. There are six pooled strokes/twelve line renderers. Expansion takes 0.65 seconds and return 0.30 seconds; gameplay duration stays unchanged. Replicated buff state supports observers. Gaze takes crown ownership during all its non-idle phases; expiry, death, invisibility, model loss and disable restore the original pose. Bone dock centres reach the configured radius. Native metal mesh extents, animation ordering and appearance remain unmeasured.
 
-## Non-Gaze native damage: exactly one 0.9 factor
+## Non-Gaze ability damage: exactly one 0.9 factor
 
-Saved config values remain **raw and unchanged**, including custom values. No defaults migration or config write is added. Gameplay applies 0.9 once at each independent native damage coefficient; descriptions show the effective coefficient, and relevant config help explains the factor. Editing a raw coefficient of 2.0 therefore yields 1.8 effective damage. Repeated setting changes and launches do not compound the factor.
+Saved config values remain **raw and unchanged**, including custom values. No defaults migration or config write is added. Gameplay applies 0.9 once at each independent non-Gaze ability damage coefficient; descriptions show the effective coefficient, and relevant config help explains the factor. Editing a raw ability coefficient of 2.0 therefore yields 1.8 effective damage. The shared Electrocute passive is exempt and continues to use its raw coefficient. Repeated setting changes and launches do not compound the factor.
 
 | Damage source | Prior default | Effective default |
 |---|---:|---:|
@@ -31,13 +31,13 @@ Saved config values remain **raw and unchanged**, including custom values. No de
 | Conductor, tap/full per tick | 20% / 35% | 18% / 31.5% |
 | Open Circuit pulse | 60% | 54% |
 | Funded Prayer / unfunded Crown Thunderbolt | 1000% | 900% |
-| Shared Electrocute pop | 150% | 135% |
+| Shared Electrocute pop (exempt) | 150% | 150% |
 
 Arc Bolt chains inherit their already-reduced direct damage. Spear bursts inherit the reduced launch damage; default enemy splash at tap/full is 175%/1400% → 157.5%/1260%. Terrain burst retains its existing fraction. Thunderbolt splash remains 50% of the strike, giving 500% → 450% by default. Those inherited fractions are not multiplied by 0.9 again.
 
 Conductor recovers the frozen launch damage stat using the **effective** spear coefficient, then reduces its independent conductor coefficient once. This avoids an unintended 0.81 factor. Prayer snapshots reduce their coefficient once for both funded and unfunded Crown paths; landing/direct/splash paths do not reduce again.
 
-**Shared passive boundary:** Electrocute pop is a non-Gaze passive damage component and is reduced even when Gaze triggered the Static reaction. Gaze's own core, impact splash, automatic forks/chains and fueled pulse coefficients remain unchanged. Shocked's damage-taken multiplier, body damage, item coefficients and all proc coefficients remain unchanged. Items may naturally inherit a smaller triggering hit; no extra item reduction was added. Arc Step has no native damage to reduce.
+**Shared passive exception:** Electrocute pop stays unchanged globally, including when Gaze triggers the Static reaction. Its default coefficient remains 150%, and custom pop values remain fully effective. No damage attribution or trigger-context tracking is added. This preserves Gaze's passive damage consequences as well as its own core, impact splash, automatic forks/chains and fueled pulse coefficients. Shocked's damage-taken multiplier, body damage, item coefficients and all proc coefficients remain unchanged. Items may naturally inherit a smaller triggering non-Gaze ability hit; no extra item reduction was added. Arc Step has no native damage to reduce.
 
 ## Focused later playtest
 
@@ -50,8 +50,8 @@ Record the candidate commit and DLL hash. Use the normal solo profile and camera
 | Timer | Read seconds at normal resolution, bright/dark terrain and HUD scale. Launch grants visibly extend the bar and briefly show +2s or the actual final fraction. No crosshair/hotbar obstruction. |
 | Timer lifecycle | Hidden HUD, other-player view, death, disable, stage/body replacement and a new cast leave no stale timer or extension cue. |
 | Short description | Character-select Gaze description fits in English, Chinese, Russian and Portuguese; displayed base damage/duration match tuning. |
-| Non-Gaze damage | At fixed body damage/crit/config, compare Arc Bolt, spear direct/burst, conductor, Circuit, Prayer/Crown and passive pop to 9be97ff3: each is 90%, never 81%. |
-| Configs / Gaze | Custom raw coefficients remain saved; tooltips show 90% of them. Gaze's own ordinary and fueled damage match the installed baseline. |
+| Non-Gaze ability damage | At fixed body damage/crit/config, compare Arc Bolt, spear direct/burst, conductor, Circuit and Prayer/Crown to 9be97ff3: each is 90%, never 81%. |
+| Configs / Gaze / shared passive | Custom raw ability coefficients remain saved; tooltips show 90% of them. Gaze's ordinary/fueled damage and Electrocute pops triggered by Gaze or any other skill match the installed baseline. Custom pop coefficients remain fully effective. |
 | Crown and reserves | Verify the integrated physical crown/perimeter, more dramatic Gaze width ramp and hidden reserve display. Reserve gains must stay mechanical, unavailable as current-cast fuel, and reconcile on exit. |
 
 Near-expiry remote duration acknowledgement remains a known multiplayer limitation. The pulse audio coalescer limits clustered acknowledgement audio, but native host/client timing, observers and live performance are not accepted by solo source checks.

@@ -61,7 +61,9 @@ static class Program
         Has("Stormspear/StormspearThrowState.cs", "KitDamagePolicy.Effective(StormspearTuning.DamageAt(charge)) * damageStat");
         Has("Stormspear/StormspearProjectile.cs", "KitDamagePolicy.Effective(StormspearTuning.DamageAt(shot.Charge))");
         Has("OpenCircuit/OpenCircuitPulseDriver.cs", "KitDamagePolicy.Effective(KitTuning.OpenCircuitPulseDamageCoefficient) * body.damage");
-        Has("Storm/StormServer.cs", "KitDamagePolicy.Effective(KitTuning.ElectrocutePopDamageCoefficient) * attacker.damage");
+        Has("Storm/StormServer.cs", "KitTuning.ElectrocutePopDamageCoefficient * attacker.damage");
+        ExcludesPolicy("Storm/StormServer.cs");
+        Has("KitConfig.cs", "Shared passive damage remains unchanged for every triggering skill.");
         Has("Storm/ThunderboltDriver.cs", "new PrayerStrikeSnapshot(body.damage, KitTuning.ThunderboltDamageCoefficient,");
         Has("Stormspear/StormspearProjectile.cs", "new PrayerStrikeSnapshot(launchOwner.damage, KitTuning.ThunderboltDamageCoefficient,");
         Has("ArcBolt/ArcBoltChain.cs", "damage *= KitTuning.ArcBoltChainFalloff;");
@@ -71,8 +73,9 @@ static class Program
             ExcludesPolicy(path);
         foreach (string coefficient in new[] { "KitTuning.ArcBoltDamageCoefficient", "StormspearTuning.TapDamage", "StormspearTuning.FullDamage",
             "SpearConductorSchedule.TapCoefficient", "SpearConductorSchedule.FullCoefficient", "KitTuning.OpenCircuitPulseDamageCoefficient",
-            "KitTuning.ThunderboltDamageCoefficient", "KitTuning.ElectrocutePopDamageCoefficient" })
+            "KitTuning.ThunderboltDamageCoefficient" })
             Has("KitDescriptions.cs", "Pct(KitDamagePolicy.Effective(" + coefficient + "))");
+        Has("KitDescriptions.cs", "args[\"pop\"] = Pct(KitTuning.ElectrocutePopDamageCoefficient);");
         Has("KitDescriptions.cs", "Pct(GazeTuning.DamagePerSecond)");
         Has("KitDescriptions.cs", "Bonus(KitTuning.ShockedDamageMultiplier)");
         Has("KitDescriptions.cs", "Pct(StormspearTuning.BurstDamageFraction)");

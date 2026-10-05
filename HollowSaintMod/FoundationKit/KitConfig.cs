@@ -124,7 +124,7 @@ namespace HollowSaint.FoundationKit
             F(c, storm, "Electrocute stun", KitTuning.ElectrocuteStunSeconds, v => KitTuning.ElectrocuteStunSeconds = v, 0f, 5f, 0.25f, "Seconds of the Electrocute jolt (stun) on enemies that can be stunned (0 = none). Every Electrocuted enemy is also Shocked.");
             F(c, storm, "Shocked duration", KitTuning.ShockedSeconds, v => KitTuning.ShockedSeconds = v, 0.5f, 10f, 0.5f, "Seconds.");
             F(c, storm, "Shocked damage taken", KitTuning.ShockedDamageMultiplier, v => KitTuning.ShockedDamageMultiplier = v, 1f, 2f, 0.05f, "Multiplier on ALL damage a Shocked enemy takes.");
-            F(c, storm, "Pop damage", KitTuning.ElectrocutePopDamageCoefficient, v => KitTuning.ElectrocutePopDamageCoefficient = v, 0.5f, 10f, 0.1f, "Damage coefficient of the Electrocute arc burst. Stored raw; effective native damage is 90% of this value. Inherited splash/chain fractions are applied afterward.");
+            F(c, storm, "Pop damage", KitTuning.ElectrocutePopDamageCoefficient, v => KitTuning.ElectrocutePopDamageCoefficient = v, 0.5f, 10f, 0.1f, "Damage coefficient of the Electrocute arc burst. Shared passive damage remains unchanged for every triggering skill.");
             F(c, storm, "Pop radius", KitTuning.ElectrocutePopRadius, v => KitTuning.ElectrocutePopRadius = v, 2f, 20f, 0.5f, "Metres.");
             I(c, storm, "Pop targets", KitTuning.ElectrocutePopTargets, v => KitTuning.ElectrocutePopTargets = v, 1, 10, "Enemies hit by one Electrocute burst.");
             F(c, storm, "Pop proc coefficient", KitTuning.ElectrocutePopProc, v => KitTuning.ElectrocutePopProc = v, 0f, 1f, 0.05f, "Proc coefficient of the burst.");

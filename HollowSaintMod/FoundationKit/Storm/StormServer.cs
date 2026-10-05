@@ -367,7 +367,7 @@ namespace HollowSaint.FoundationKit.Storm
             var targets = FindEnemies(attacker, center, KitTuning.ElectrocutePopRadius, KitTuning.ElectrocutePopTargets, origin);
             if (targets.Count == 0) return;
             // This shared passive reaction scales even when Gaze supplied the Static.
-            float damage = KitDamagePolicy.Effective(KitTuning.ElectrocutePopDamageCoefficient) * attacker.damage;
+            float damage = KitTuning.ElectrocutePopDamageCoefficient * attacker.damage;
             Vector3 from = center;
             var hit = new List<HurtBox>();
             BeginStormDamage();
