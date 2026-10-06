@@ -62,6 +62,7 @@ namespace HollowSaint.FoundationKit.Vfx
             {
                 var end = PrefabAPI.InstantiateClone(orb.endEffect, name, false);
                 palette.TintHierarchy(end, force: true);
+                Calm(end);
                 if (end.GetComponent<EffectComponent>()) KitContent.AddEffect(end);
                 orb.endEffect = end;
             }
@@ -74,6 +75,26 @@ namespace HollowSaint.FoundationKit.Vfx
             }
             Plugin.Log.LogInfo("HOLLOW_SAINT_CHAIN_ENDS " + name + " end=" + (orb.endEffect ? orb.endEffect.name : "none") +
                 " start=" + (orb.startEffect ? orb.startEffect.name : "none"));
+        }
+
+        /// <summary>1.2: the vanilla hop impact is a big omni ring + white hitspark starburst
+        /// (Ukulele hits one enemy at a time; Arc Bolt and Static hop constantly). At full size
+        /// it buried enemies in white (full-kit review). Keep the flash, at a fraction of the size.</summary>
+        private static void Calm(GameObject effect)
+        {
+            int changed = 0;
+            foreach (var ps in effect.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                var main = ps.main;
+                main.startSizeMultiplier *= .45f;
+                main.startSpeedMultiplier *= .6f;
+                Color c = main.startColor.color; main.startColor = new Color(c.r * .75f, c.g * .75f, c.b * .75f, c.a);
+                var r = ps.GetComponent<ParticleSystemRenderer>();
+                if (r && r.renderMode == ParticleSystemRenderMode.Stretch) { r.velocityScale *= .4f; r.lengthScale *= .5f; }
+                changed++;
+            }
+            foreach (var light in effect.GetComponentsInChildren<Light>(true)) light.range *= .5f;
+            Plugin.Log.LogInfo("HOLLOW_SAINT_CHAIN_END_CALM " + effect.name + " systems=" + changed);
         }
 
         /// <summary>Called by the received ChainHop beat on each client. False requests fallback.</summary>

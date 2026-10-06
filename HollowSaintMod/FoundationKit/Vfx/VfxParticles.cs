@@ -17,7 +17,6 @@ namespace HollowSaint.FoundationKit.Vfx
                 // Hitspark sprites read as solid starbursts when large or dense: keep them as embers.
                 count = Mathf.Max(1, Mathf.RoundToInt(count * .7f));
                 size *= .65f;
-                color = Color.Lerp(color, new Color(color.r, color.g, color.b, color.a * .8f), 1f);
             }
             var ps = Configure(go, material, lifetime, speed, size, color, stretch, spreadAngle, looping: false);
             var emission = ps.emission;
@@ -110,6 +109,14 @@ namespace HollowSaint.FoundationKit.Vfx
             shrink.enabled = true;
             shrink.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0f, 1f, 1f, 0.2f));
 
+            bool hitspark = IsHitspark(material);
+            if (spark && hitspark)
+            {
+                // 1.2: hitspark sprites are spiky starbursts; at full white and full stretch each
+                // ember drew a ~1.6 m white spike and clusters blew out under bloom (full-kit review).
+                main.startColor = new Color(.72f, .72f, .72f, color.a);
+                stretch *= .35f;
+            }
             var renderer = go.GetComponent<ParticleSystemRenderer>();
             renderer.sharedMaterial = material;
             renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
