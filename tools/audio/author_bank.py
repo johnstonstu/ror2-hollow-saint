@@ -63,17 +63,22 @@ def add_missing_sounds(actor):
         children.append(sound)
 
 
+LOW_PRIORITY = {"HS_Footstep": 55, "HS_FootstepRun": 55, "HS_GlideLoop": 60, "HS_FanLoop": 60}
+
 MIX_TRIM_DB = {
     "HS_CircuitPulse": 4.0,   # rose ~1 dB over the Circuit loop: the 0.5 s damage rhythm was inaudible
     "HS_CircuitClose": 3.0,   # crown close masked (rise ~1.4 dB)
-    # Full-kit capture (claude120-audiofull01): fix inverted hierarchy, keep headroom (peak was -8 dBFS).
-    "HS_ArcBoltCast": 5.0,       # primary fire rose ~0.8 dB: inaudible at 2 shots/s
+    # Re-decided from time-aligned captures (claude120-cap-full / cap-gaze, recorder gap fix).
+    "HS_ArcBoltCast": 5.0,       # primary: present (+4 dB over the fight bed) without dominating
     "HS_BoltImpact": 4.0,        # rose ~1.6 dB
-    "HS_SpearChargeLoop": -5.0,  # loudest Saint sound (-25 short-term), masked its own throw/impact
-    "HS_SpearThrow": 4.0,        # -42 short-term under the charge loop
-    "HS_ArcStepStart": 4.0,      # 17 dB under ArcStepEnd
-    "HS_MeterFull": 6.0,         # Thunderbolt-ready cue buried (rise ~1.7 dB)
+    "HS_SpearChargeLoop": -5.0,  # keep the wind-up under its own throw and impact
+
+    "HS_ArcStepStart": 2.0,      # a touch over ArcStepEnd
+    "HS_MeterFull": 4.0,         # Thunderbolt-ready cue: keep clearly audible in combat
     "HS_ChargeTick": 3.0,        # storm charge gain inaudible (rise < 0)
+    # Load chimes play over Gaze's beam loops (~-20 dB short-term); with the gather duck
+    # (GazeReleaseFeel) they still need to sit near surge-hit level to read as ticks.
+    "HS_GazeLoad1": 7.0, "HS_GazeLoad2": 7.0, "HS_GazeLoad3": 7.0,
 }
 
 
@@ -128,6 +133,10 @@ def author():
         # per-sound Wwise volume trims in dB; source PCM stays untouched.
         if name in MIX_TRIM_DB:
             prop(node, "Volume", "Real64", MIX_TRIM_DB[name])
+        # 1.2: in-game probes showed the same cue dropping 10 dB or vanishing between identical
+        # plays (voice culling while vanilla enemies fill the voice budget). Gameplay feedback
+        # outranks ambient chatter; footsteps and long beds stay lower.
+        prop(node, "Priority", "int16", LOW_PRIORITY.get(name, 85))
         if name.endswith("Loop"):
             prop(node, "IsLoopingEnabled", "bool", "True")
             prop(node, "IsLoopingInfinite", "bool", "True")

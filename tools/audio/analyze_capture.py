@@ -15,7 +15,7 @@ audio = np.frombuffer(raw[data_at:], dtype='<f4').reshape(-1, meta['channels'])
 mono = np.abs(audio).max(axis=1)
 power = (audio ** 2).mean(axis=1)
 rate, t0 = meta['rate'], meta['first_ms']
-LAT = float(sys.argv[2]) if len(sys.argv) > 2 else 0.0  # extra output latency, s
+LAT = float(sys.argv[2]) if len(sys.argv) > 2 else None  # manual offset, s; default auto-calibrated
 
 src = Path(__file__).resolve().parents[2] / 'art/audio/source'
 durations = {}
@@ -37,6 +37,27 @@ for line in (run / 'audio-events.txt').read_text(encoding='utf-8', errors='repla
     if p[0] == 'SND' and len(p) >= 6: events.append((int(p[1]), p[2], p[3], float(p[4]), p[5]))
     elif p[0] == 'MARK': marks.append((int(p[1]), ' '.join(p[2:])))
 
+# The recorder's first-callback timestamp can be off by hundreds of ms (WASAPI start-up
+# buffering). Calibrate: the offset that maximises summed onset energy at logged cue times.
+sync = [ms for ms, label in marks if label == 'SYNC']
+if LAT is None and sync:
+    # Deterministic: the sharpest onset within +-2 s of the SYNC cue (SpearImpact after 1 s of quiet).
+    s = (sync[0] - t0) / 1000.0
+    hop = int(rate * .005)
+    env = 10 * np.log10(np.convolve(power, np.ones(int(rate * .01)) / (rate * .01), mode='same')[::hop] + 1e-12)
+    lo, hi = max(1, int((s - 2.0) * rate / hop)), min(len(env) - 1, int((s + 2.0) * rate / hop))
+    rise = env[lo:hi] - env[lo - 1:hi - 1]
+    LAT = (lo + int(np.argmax(rise))) * hop / rate - s
+if LAT is None:
+    env = 10 * np.log10(np.convolve(power, np.ones(int(rate * .02)) / (rate * .02), mode='same') + 1e-12)
+    hop = int(rate * .01); e = env[::hop]; onset = np.maximum(0, np.diff(e, prepend=e[0]))
+    times = np.array([(ms - t0) / 1000.0 for ms, name, *_ in events if name.startswith('Play_')])
+    best, LAT = -1, 0.0
+    for off in np.arange(-2.0, 2.0001, 0.01):
+        idx = ((times + off) / .01).astype(int); idx = idx[(idx >= 0) & (idx < len(onset) - 3)]
+        score = onset[idx].sum() + onset[idx + 1].sum() + onset[idx + 2].sum()
+        if score > best: best, LAT = score, float(off)
+print(f"alignment offset {LAT*1000:+.0f} ms")
 stats = collections.defaultdict(list); failed = collections.Counter()
 for ms, name, emitter, dist, status in events:
     if status == 'FAILED': failed[name] += 1

@@ -447,6 +447,18 @@ namespace HollowSaint
         private IEnumerator Script()
         {
             scripting = true;
+            // Audio sync: one sharp known cue after a quiet second, so loopback captures can be
+            // aligned to the event log exactly (tools/audio/analyze_capture.py looks for SYNC).
+            yield return Wait(1.0f);
+            AudioMark("SYNC");
+            if (pilot) Util.PlaySound("Play_HS_SpearImpact", pilot.gameObject);
+            yield return Wait(1.2f);
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "audio-probe")
+            {
+                yield return AudioProbe();
+                scripting = false;
+                yield break;
+            }
             if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "circuit-terrain")
             {
                 yield return CircuitTerrainSegments();

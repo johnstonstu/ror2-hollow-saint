@@ -62,6 +62,7 @@ namespace HollowSaint.FoundationKit.Gaze
             }
             if (packet.kind == GazeFuelTransport.Kind.End)
             {
+                releaseFeel.End();
                 presentationOwned = false;
                 clientCast = 0;
                 clientAvailableEntry = 0;

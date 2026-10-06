@@ -298,6 +298,7 @@ namespace HollowSaint.FoundationKit.Gaze
         }
         private void OnDisable()
         {
+            releaseFeel.End();
             if (ledger.Active) EndCast(GazeFuelEndReason.Disabled);
             ClearPresentation();
             GazeFuelTransport.Forget(body);

@@ -9,6 +9,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -41,6 +42,7 @@
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
 						<Property Name="Volume" Type="Real64" Value="5.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -72,6 +74,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -103,7 +106,8 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
-						<Property Name="Volume" Type="Real64" Value="4.0" />
+						<Property Name="Volume" Type="Real64" Value="2.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -136,6 +140,7 @@
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
 						<Property Name="Volume" Type="Real64" Value="4.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -167,6 +172,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -199,6 +205,7 @@
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
 						<Property Name="Volume" Type="Real64" Value="3.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -231,6 +238,7 @@
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
 						<Property Name="Volume" Type="Real64" Value="3.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -262,6 +270,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
 						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
 					</PropertyList>
@@ -295,6 +304,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -327,6 +337,7 @@
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
 						<Property Name="Volume" Type="Real64" Value="4.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -358,6 +369,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -389,6 +401,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -420,6 +433,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="55" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -451,6 +465,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="55" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -482,6 +497,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -513,6 +529,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -544,6 +561,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="60" />
 						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
 						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
 					</PropertyList>
@@ -577,6 +595,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -608,7 +627,8 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
-						<Property Name="Volume" Type="Real64" Value="6.0" />
+						<Property Name="Volume" Type="Real64" Value="4.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -640,6 +660,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -667,11 +688,12 @@
 				</Sound>
 				<Sound Name="HS_SpearThrow" ID="{CF678599-4AA6-41E9-A1B0-6A04DE9A8977}" ShortID="278648339">
 					<PropertyList>
+						<Property Name="Volume" Type="Real64" Value="4.0" />
 						<Property Name="OverridePositioning" Type="bool" Value="True" />
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
-						<Property Name="Volume" Type="Real64" Value="4.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -703,6 +725,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -734,6 +757,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -765,6 +789,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -796,6 +821,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -827,6 +853,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -858,6 +885,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="60" />
 						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
 						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
 					</PropertyList>
@@ -891,6 +919,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -922,6 +951,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -953,6 +983,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -984,6 +1015,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1015,6 +1047,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1046,6 +1079,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1077,6 +1111,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1108,6 +1143,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1139,6 +1175,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1170,6 +1207,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1201,6 +1239,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1232,6 +1271,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1264,6 +1304,7 @@
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
 						<Property Name="Volume" Type="Real64" Value="-5.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
 						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
 					</PropertyList>
@@ -1297,6 +1338,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1328,6 +1370,8 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Volume" Type="Real64" Value="7.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1359,6 +1403,8 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Volume" Type="Real64" Value="7.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1390,6 +1436,8 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Volume" Type="Real64" Value="7.0" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1421,6 +1469,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1452,6 +1501,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -1483,6 +1533,7 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
 						<Property Name="3DSpatialization" Type="int16" Value="1" />
 						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
