@@ -66,6 +66,14 @@ def add_missing_sounds(actor):
 MIX_TRIM_DB = {
     "HS_CircuitPulse": 4.0,   # rose ~1 dB over the Circuit loop: the 0.5 s damage rhythm was inaudible
     "HS_CircuitClose": 3.0,   # crown close masked (rise ~1.4 dB)
+    # Full-kit capture (claude120-audiofull01): fix inverted hierarchy, keep headroom (peak was -8 dBFS).
+    "HS_ArcBoltCast": 5.0,       # primary fire rose ~0.8 dB: inaudible at 2 shots/s
+    "HS_BoltImpact": 4.0,        # rose ~1.6 dB
+    "HS_SpearChargeLoop": -5.0,  # loudest Saint sound (-25 short-term), masked its own throw/impact
+    "HS_SpearThrow": 4.0,        # -42 short-term under the charge loop
+    "HS_ArcStepStart": 4.0,      # 17 dB under ArcStepEnd
+    "HS_MeterFull": 6.0,         # Thunderbolt-ready cue buried (rise ~1.7 dB)
+    "HS_ChargeTick": 3.0,        # storm charge gain inaudible (rise < 0)
 }
 
 

@@ -28,12 +28,17 @@ namespace HollowSaint.FoundationKit
             "HS_SKILL_GAZE_PULSE_NAME", "HS_SKILL_GAZE_PULSE_DESC", "HS_SKILL_GAZE_LOCK_NAME", "HS_SKILL_GAZE_LOCK_DESC",
             "HS_GAZE_TIMER_LABEL",
             "HS_OPTION_SPEAR_HAND_NAME", "HS_OPTION_SPEAR_HAND_DESC",
-            "HS_OPTION_SPEAR_HAND_AUTO", "HS_OPTION_SPEAR_HAND_LEFT", "HS_OPTION_SPEAR_HAND_RIGHT"
+            "HS_OPTION_SPEAR_HAND_AUTO", "HS_OPTION_SPEAR_HAND_LEFT", "HS_OPTION_SPEAR_HAND_RIGHT",
+            // 1.2 hold/release Gaze variants (KitDescriptions swaps them in while the trial is active).
+            "HS_DESCRIPTION_RELEASE", "HS_SKILL_GAZE_DESC_RELEASE", "HS_PASSIVE_STORM_DESC_RELEASE", "HS_KEYWORD_STORM_RELEASE",
+            "HS_SKILL_GAZE_PULSE_NAME_RELEASE", "HS_SKILL_GAZE_PULSE_DESC_RELEASE"
         };
         static readonly string[] Dynamic = {
             "HS_SKILL_ARCBOLT_DESC", "HS_SKILL_SPEAR_DESC", "HS_SKILL_ARCSTEP_DESC", "HS_SKILL_CIRCUIT_DESC",
             "HS_SKILL_GAZE_DESC", "HS_PASSIVE_STORM_DESC",
-            "HS_KEYWORD_STORM", "HS_KEYWORD_STATIC", "HS_KEYWORD_ELECTROCUTE", "HS_KEYWORD_SHOCKED"
+            "HS_KEYWORD_STORM", "HS_KEYWORD_STATIC", "HS_KEYWORD_ELECTROCUTE", "HS_KEYWORD_SHOCKED",
+            "HS_DESCRIPTION_RELEASE", "HS_SKILL_GAZE_DESC_RELEASE", "HS_PASSIVE_STORM_DESC_RELEASE", "HS_KEYWORD_STORM_RELEASE",
+            "HS_SKILL_GAZE_PULSE_NAME_RELEASE", "HS_SKILL_GAZE_PULSE_DESC_RELEASE"
         };
 
         public static string Run(string path)
@@ -216,6 +221,7 @@ namespace HollowSaint.FoundationKit
             var legacy = Legacy(args);
             foreach (string token in Dynamic)
             {
+                if (!legacy.ContainsKey(token)) continue; // 1.2 release variants have no legacy sentence
                 string formatted = LangFormat.Apply(english[token], "en", args);
                 Check(formatted == legacy[token], label + " " + token + "\n--- formatted ---\n" + formatted + "\n--- legacy ---\n" + legacy[token]);
             }
@@ -263,6 +269,7 @@ namespace HollowSaint.FoundationKit
             a["ordinaryThunder"] = "382.5%"; a["thunderRadius"] = "3"; a["gazeRecoveryBank"] = "5%"; a["gazeRecoveryEach"] = "1%";
             a["decay"] = "2"; a["death"] = "partial"; a["deathPct"] = "50%"; a["jolt"] = "on"; a["stun"] = "0.5";
             a["bonus"] = "15%"; a["shocked"] = "3"; a["targets"] = "2"; a["pop"] = "150%"; a["immune"] = "4"; a["range"] = "30";
+            a["releaseSeconds"] = "7"; a["surgeDamage"] = "400%"; a["surgeMax"] = "3"; a["chargeStep"] = "0.28";
             return a;
         }
 

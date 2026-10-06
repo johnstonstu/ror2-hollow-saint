@@ -19,6 +19,11 @@ namespace HollowSaint.FoundationKit
     {
         private static bool subscribed;
 
+        private static readonly string[] ReleaseTokens =
+        {
+            "HS_DESCRIPTION", GazeRegistration.DescToken, KitTokens.StormDesc, KitTokens.KeywordStorm,
+            "HS_SKILL_GAZE_PULSE_NAME", "HS_SKILL_GAZE_PULSE_DESC",
+        };
         private static string Pct(float coefficient) { return Num(coefficient * 100f) + "%"; }
         private static string Bonus(float multiplier) { return Num((multiplier - 1f) * 100f) + "%"; }
 
@@ -57,6 +62,10 @@ namespace HollowSaint.FoundationKit
             args["gazeMaxSeconds"] = Num(GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, 21f));
             args["pulseInterval"] = GazeManualRequestPolicy.MinimumInterval.ToString("0.##", CultureInfo.InvariantCulture);
             args["dps"] = Pct(GazeTuning.DamagePerSecond);
+            args["releaseSeconds"] = Num(GazeReleaseTuning.BeamSeconds);
+            args["surgeDamage"] = Pct(GazeReleaseTuning.DamagePerCharge);
+            args["surgeMax"] = GazeReleaseTuning.MaximumLoaded.ToString(CultureInfo.InvariantCulture);
+            args["chargeStep"] = GazeReleaseTuning.SecondsPerExtraCharge.ToString("0.##", CultureInfo.InvariantCulture);
             args["armorOn"] = GazeTuning.Armor > 0.5f ? "yes" : "no";
             args["armor"] = Num(GazeTuning.Armor);
             args["orbs"] = KitTuning.StormChargeMax.ToString(CultureInfo.InvariantCulture);
@@ -111,17 +120,16 @@ namespace HollowSaint.FoundationKit
                     }
                     if (GazeReleaseTuning.Enabled)
                     {
-                        map[GazeRegistration.DescToken] = "<style=cIsUtility>Private trial.</style> Hover and channel a " +
-                            Pct(GazeTuning.DamagePerSecond) + " damage beam for " + Num(GazeReleaseTuning.BeamSeconds) +
-                            "s. Hold Primary to prepare up to three stored charges; release to fire " +
-                            Pct(GazeReleaseTuning.DamagePerCharge) + " damage per charge. Unspent charges return on exit. " +
-                            "Each charge restores " + args["gazeRecoveryEach"] + " maximum health.";
-                        map["HS_SKILL_GAZE_PULSE_NAME"] = "Gaze Surge";
-                        map["HS_SKILL_GAZE_PULSE_DESC"] = "Hold Primary to prepare up to three stored charges. " +
-                            "Release early to spend fewer. Each spent charge deals " + Pct(GazeReleaseTuning.DamagePerCharge) +
-                            " damage and restores " + args["gazeRecoveryEach"] + " of cast-entry maximum health before healing items. " +
-                            "New charges stay in reserve. Preparing spends nothing; unspent charges return on exit. " +
-                            "Surges do not extend Gaze or increase its continuous damage. Special or UI Cancel exits; Utility exits and activates if ready.";
+                        // Hold/release Gaze: every affected token has a <TOKEN>_RELEASE template in
+                        // each language (falling back to English), so both A/B modes read correctly.
+                        foreach (string token in ReleaseTokens)
+                        {
+                            string releaseTemplate, englishRelease;
+                            if (!english.TryGetValue(token + "_RELEASE", out englishRelease)) continue;
+                            if (!lang.Value.TryGetValue(token + "_RELEASE", out releaseTemplate) || releaseTemplate.Length == 0)
+                                releaseTemplate = englishRelease;
+                            map[token] = Format(releaseTemplate, rules, args, englishRelease, code, token);
+                        }
                     }
                     formatted[code] = map;
                 }
