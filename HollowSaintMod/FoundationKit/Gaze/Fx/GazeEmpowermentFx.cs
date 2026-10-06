@@ -35,10 +35,18 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private float started, ended, flashAt = -100f, nextSound;
         private Vector3 crown, direction = Vector3.forward, reserveCenter;
         private Stroke crownRim;
-        // .32-second intake at .25-second admission spacing overlaps at most twice.
-        private readonly Stroke[] intakeTrails = new Stroke[2], intakeOutlines = new Stroke[2];
-        private readonly Stroke[] intakeFilaments = new Stroke[2];
-        private readonly Vector3[][] trailPoints = { new Vector3[12], new Vector3[12] };
+        // A release can draw three entry orbs at once.
+        private readonly Stroke[] intakeTrails = new Stroke[3], intakeOutlines = new Stroke[3];
+        private readonly Stroke[] intakeFilaments = new Stroke[3];
+        private readonly Vector3[][] trailPoints = { new Vector3[12], new Vector3[12], new Vector3[12] };
+        private int prepared;
+        public void SetPrepared(uint id, int count)
+        {
+            if (!active || id != castId) return;
+            chargeFrom = ChargeExpansion;
+            prepared = Mathf.Clamp(count, 0, 3);
+            chargeChanged = Time.time;
+        }
         public bool ReducedEffects { get; set; }
         public bool EnableAudio { get; set; } = true;
         /// <summary>Adapter suppresses the ordinary charge halo while this is true.</summary>
@@ -52,7 +60,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             get
             {
                 if (!active || !body || !body.healthComponent || !body.healthComponent.alive) return 0f;
-                float expansion = 0f;
+                if (crownDriven) return ChargeExpansion;
+                float expansion = prepared * .18f;
                 foreach (var orb in fuel)
                     if (orb != null && orb.visible && orb.swallowing)
                     {
@@ -106,10 +115,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             internal Vector3 p0, p1, mergeFrom;
         }
 
-        public void BeginCast(uint id, int entryCount, int max, bool enteredFull, float elapsed)
+        public void BeginCast(uint id, int entryCount, int max, bool enteredFull, float elapsed, bool animateCrown = false)
         {
             if (!Finite(elapsed) || (seenCast && unchecked((int)(id - castId)) <= 0)) return;
             Clear();
+            crownDriven = animateCrown;
             seenCast = true; castId = id;
             EnsureBuilt();
             if (!root) return;
@@ -192,6 +202,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         public void Clear()
         {
             active = ending = externalAnchors = false;
+            prepared = 0;
+            chargeFrom = chargeChanged = 0f;
             flashAt = -100f;
             if (root) root.gameObject.SetActive(false);
             HideTransient();
@@ -261,7 +273,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         }
         private void RenderOrbs()
         {
+            if (crownDriven) { RenderChargingCrown(); return; }
             for (int slot = 0; slot < intakeTrails.Length; slot++) { intakeTrails[slot].Hide(); intakeOutlines[slot].Hide(); intakeFilaments[slot].Hide(); }
+            int preparedIndex = 0;
             for (int i = 0; i < MaxCharges; i++)
             {
                 var orb = fuel[i];
@@ -270,6 +284,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 else
                 {
                     Vector3 p = FuelPosition(i); float size = fullEntry ? 0.22f : 0.20f;
+                    if (!ending && !orb.swallowing && preparedIndex++ < prepared)
+                    {
+                        p = Vector3.Lerp(p, crown - direction * .12f, .3f);
+                        size *= 1.35f;
+                    }
                     if (ending) p = Vector3.Lerp(orb.mergeFrom, p, Mathf.SmoothStep(0f, 1f, (Time.time - ended) / 0.4f));
                     else if (orb.swallowing)
                     {

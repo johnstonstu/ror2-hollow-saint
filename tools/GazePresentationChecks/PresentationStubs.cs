@@ -48,7 +48,7 @@ namespace UnityEngine
     public class Shader:Object {public static Shader Find(string name)=>new Shader();}
     public class Material:Object {public string name="test";public int renderQueue;public Dictionary<string,Color> Colors=new Dictionary<string,Color>();public Dictionary<string,Texture2D> Textures=new Dictionary<string,Texture2D>();public Material(){}public Material(Material m){}public Material(Shader s){}public Color GetColor(string p)=>Colors.TryGetValue(p,out var c)?c:Color.white;public bool HasProperty(string p)=>true;public void SetColor(string p,Color c){Colors[p]=c;}public void SetTexture(string p,Texture2D t){Textures[p]=t;} }
     public enum TextureFormat {RGBA32}public enum TextureWrapMode {Clamp}
-    public class Texture2D:Object {public string name;public TextureWrapMode wrapMode;public readonly Color[] pixels;public Texture2D(int w,int h,TextureFormat f,bool m){pixels=new Color[w*h];}public void SetPixel(int x,int y,Color c){pixels[x]=c;}public void Apply(bool x,bool y){} }
+    public class Texture2D:Object {public static Texture2D whiteTexture=new Texture2D(1,1,TextureFormat.RGBA32,false);public string name;public TextureWrapMode wrapMode;public readonly Color[] pixels;public Texture2D(int w,int h,TextureFormat f,bool m){pixels=new Color[w*h];}public void SetPixel(int x,int y,Color c){pixels[x]=c;}public void Apply(bool x,bool y){} }
     public enum LineAlignment { View } public enum LineTextureMode { Stretch }
     public class LineRenderer:Renderer { public bool useWorldSpace,receiveShadows,enabled; public LineAlignment alignment; public LineTextureMode textureMode; public Material sharedMaterial; public Rendering.ShadowCastingMode shadowCastingMode; public int numCapVertices,numCornerVertices,positionCount; public float widthMultiplier; public Color startColor,endColor; public AnimationCurve widthCurve; public readonly Vector3[] points=new Vector3[32]; public void SetPosition(int i,Vector3 p){points[i]=p;} }
     namespace Rendering {public enum ShadowCastingMode { Off }}
@@ -78,7 +78,16 @@ namespace HollowSaint.FoundationKit.Vfx
 {
     using UnityEngine;using RoR2;
     public static class VfxAssets {public static Material ArcCore=new Material(),ArcGlow=new Material(),Spark=new Material();public static void Load(){} }
-    public class HaloRing:Object {public bool Valid=true;public float RadiusScale=1;public ShapeData Shape=new ShapeData();public class ShapeData {public Vector3 Center,Axis=Vector3.forward,Binormal=Vector3.right;}public static HaloRing For(CharacterBody b)=>null;}
+    public class HaloRing:Object {public bool Valid=true;public float RadiusScale=1;public ShapeData Shape=new ShapeData();public class ShapeData {public float Radius=.5f;public Vector3 Center,Axis=Vector3.forward,Binormal=Vector3.right;}public static HaloRing For(CharacterBody b)=>null;}
 }
 namespace HollowSaint.FoundationKit.Gaze {public class GazeBeam:UnityEngine.MonoBehaviour {public enum Phase {Beam} public Phase Current; public RoR2.CharacterBody Body;public float PhaseAge,ProgressionDuration=1;public UnityEngine.Vector3 Origin,Direction=UnityEngine.Vector3.forward;}}
 namespace HollowSaint.FoundationKit.Gaze.Fx {public static class GazeSfx {public const string ForkHit="hit";}}
+namespace UnityEngine.AddressableAssets
+{
+    public static class Addressables { public static Operation<T> LoadAssetAsync<T>(string key) where T:new() => new Operation<T>(); }
+    public class Operation<T> where T:new() { public T WaitForCompletion() => new T(); }
+}
+namespace RoR2BepInExPack.GameAssetPathsBetter
+{ public static class RoR2_Base_Shaders { public const string ParticleSimpleAlpha_switch_shader = "94d33eec5bbd5c141b95960873e4d0cc"; } }
+namespace HollowSaint
+{ public static class Plugin { public static Logger Log = new Logger(); } public class Logger { public void LogWarning(string message) => System.Console.Error.WriteLine(message); } }

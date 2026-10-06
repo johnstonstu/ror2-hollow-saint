@@ -59,7 +59,8 @@ namespace HollowSaint.FoundationKit.Gaze
                 LayerIndex.world.mask, QueryTriggerInteraction.Ignore) && terrain.normal.y >= 0.35f;
             Ground = HasGround ? terrain.point : Impact;
             if (HasGround) Normal = terrain.normal;
-            damage = body.damage * GazeFuelSchedule.Coefficient(group, capacity);
+            damage = body.damage * (GazeReleaseTuning.Enabled ?
+                GazeReleaseTuning.DamagePerCharge * group : GazeFuelSchedule.Coefficient(group, capacity));
             crit = body.RollCrit();
             if (primary) Add(primary, Impact, age + Travel, true);
             if (!HasGround) return;

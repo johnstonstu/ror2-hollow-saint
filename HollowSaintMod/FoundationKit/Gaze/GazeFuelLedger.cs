@@ -67,28 +67,34 @@ namespace HollowSaint.FoundationKit.Gaze
         public const float SpreadDuration = 0.30f;
         public const float MaximumTravel = 0.55f;
         private readonly float[] launchAt = new float[MaxPhases];
-        private int entry, launches;
+        private readonly int[] groups = new int[MaxPhases], orbStarts = new int[MaxPhases];
+        private int entry, launches, reserved, launchedOrbs;
         public int Count { get; private set; }
-        public int PendingCount => Count - launches;
+        public int PendingCount => reserved - launchedOrbs;
+        public int GroupSize(int phase) => groups[phase];
+        public int OrbStart(int phase) => orbStarts[phase];
         public bool Active { get; private set; }
         public void Begin(int entryCount)
         {
             entry = Math.Max(0, Math.Min(MaxPhases, entryCount));
-            Count = launches = 0;
+            Count = launches = reserved = launchedOrbs = 0;
             Active = true;
         }
         public bool QueueIntake(float castAge, out int phase)
+            => QueueIntake(castAge, 1, IntakeDuration, out phase);
+        public bool QueueIntake(float castAge, int count, float intake, out int phase)
         {
             phase = Count;
-            if (!Active || Count >= entry) return false;
-            launchAt[Count++] = castAge + IntakeDuration;
+            if (!Active || Count >= MaxPhases || count < 1 || reserved + count > entry) return false;
+            groups[Count] = count; orbStarts[Count] = reserved; reserved += count;
+            launchAt[Count++] = castAge + intake;
             return true;
         }
         public bool TakeLaunch(float castAge, out int phase)
         {
             phase = launches;
             if (!Active || launches >= Count || castAge < launchAt[launches]) return false;
-            launches++;
+            launchedOrbs += groups[launches++];
             return true;
         }
         public void Cancel() { Active = false; }

@@ -100,8 +100,9 @@ static class Program
         Check(impact.Contains("!funded && !shot.FullyHeld") && !impact.Contains("ServerStrikeAt("), "all full-holds and no legacy duplicate");
         Check(impact.IndexOf("launchStage = Stage.instance") < impact.IndexOf("TryClaimSpearPrayer"), "ordinary stage snapshot captured even without bank");
         Check(driver.Contains("snapshot.Funded ? 1f : 0f") && driver.Contains("snapshot.Funded ? 0.5f : 0f") && driver.Contains("if (snapshot.Funded && victim"), "ordinary has no item proc or forced status");
-        Check(gaze.IndexOf("if (!ledger.TrySpend(1)) continue;") < gaze.IndexOf("recovery.Claim(ledger.Spent)"), "recovery strictly after actual spend");
-        Check(!gaze.Substring(gaze.IndexOf("internal void Receive(")).Contains(".Heal("), "observers cannot heal from received events");
+        int spendAt = gaze.IndexOf("if (!ledger.TrySpend(group)) continue;"), healAt = gaze.IndexOf("recovery.Claim(spent)");
+        Check(spendAt >= 0 && healAt > spendAt, "recovery strictly after actual grouped spend");
+        Check(!Read("Gaze/GazeFuelController.Presentation.cs").Contains(".Heal("), "observers cannot heal from received events");
         Check(!storm.Contains("HasProc(ProcType.HealNova)"), "no broad healing-item Static/death-discharge nerf");
         Console.WriteLine("PASS " + checks + " landing/recovery assertions");
     }

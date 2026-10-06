@@ -164,6 +164,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
 
             if (!empowerment) empowerment = owner.GetComponent<GazeEmpowermentFx>();
             focus = empowerment ? empowerment.ReadabilityFocus : 0f;
+            if (GazeReleaseTuning.Enabled) focus *= .45f;
 
             // Tether: chest core to the floating crown, while the crown is away.
             bool away = mount.Weight > 0.05f;
@@ -200,7 +201,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             float grow = Mathf.Clamp01(sinceIgnite / 0.08f);
             float pulse = 1f + 0.07f * Mathf.Sin(Time.time * 38f) + 0.05f * (Mathf.PerlinNoise(Time.time * 9f, 0.3f) - 0.5f);
             float w = pop * grow * pulse * collapse;
-            shownRamp = GazeBeamWidthPolicy.Advance(shownRamp, owner.RampSteps, dt);
+            shownRamp = GazeBeamWidthPolicy.Advance(shownRamp, GazeReleaseTuning.Enabled ? 2 : owner.RampSteps, dt);
 
             // Resource motion owns the accent. Duck the continuous decorative layers while
             // preserving the baseline damage beam and server-confirmed contacts.

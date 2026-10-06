@@ -27,7 +27,7 @@ namespace HollowSaint.FoundationKit.Gaze
         {
             get
             {
-                if (!Active || !body || !body.inputBank) return false;
+                if (GazeReleaseTuning.Enabled || !Active || !body || !body.inputBank) return false;
                 // Native HandleSkill retries held, unclaimed mustKeyPress inputs.
                 // Observe even when unavailable so that hold cannot become a later tap.
                 return taps.Observe(body.inputBank.skill1.down, PulseReady && body.hasEffectiveAuthority);

@@ -159,10 +159,18 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             Check(fx.intakeTrails[0].line.enabled&&fx.intakeTrails[1].line.enabled,"overlapping intakes keep both trails");
             Check(Vector3.Distance(fx.intakeTrails[0].line.points[11],fx.intakeTrails[1].line.points[11])>.1f,"intake paths independently follow different orbs");
             Time.time+=.25f;fx.Swallow(3001,60,2,0,.32f);fx.LateUpdate();
-            Check(!fx.fuel[0].visible&&fx.intakeTrails[0].line.enabled&&fx.intakeTrails[1].line.enabled,"expired intake slot reused while neighbour remains");
+            Check(!fx.fuel[0].visible&&!fx.intakeTrails[0].line.enabled&&fx.intakeTrails[1].line.enabled&&fx.intakeTrails[2].line.enabled,"expired intake hidden while neighbouring intakes remain independent");
             Check(GameObject.Created==allocated,"intake overlap allocates no new geometry");
             fx.Clear();foreach(var trail in fx.intakeTrails)Check(!trail.line.enabled,"clear hides every intake trail");
             foreach(var outline in fx.intakeOutlines)Check(!outline.line.enabled,"clear hides every intake outline");
+            fx.BeginCast(3002,3,5,false,0);fx.SetPrepared(3002,3);
+            Check(fx.CrownExpansion>.5f,"acknowledged preparation expands crown without spending");
+            for(int i=0;i<3;i++)fx.Swallow(3002,100+i,i,0,.08f);
+            fx.SetPrepared(3002,0);Time.time+=.03f;fx.LateUpdate();
+            foreach(var trail in fx.intakeTrails)Check(trail.line.enabled,"three simultaneous charges keep separate trails");
+            fx.LaunchPulse(3002,0,Vector3.up,Vector3.forward*20,Vector3.forward*20,Vector3.up,true,0,.55f,4,.3f,true,3);
+            Check(fx.pulses[0].finale,"three-charge accent works with a partial entry bank");
+            Check(GameObject.Created==allocated,"grouped release reuses bounded geometry");fx.Clear();
             for(uint skin=0;skin<6;skin++)
             {
                 body.skinIndex=skin; fx.ReducedEffects=false; fx.BeginCast(5000+skin,5,5,true,0); fx.SetReserve(5000+skin,2); fx.LateUpdate();
@@ -180,11 +188,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Check(GC.GetAllocatedBytesForCurrentThread()==cachedBefore,"material cache adds no warmed allocations");
                 var orb=fx.fuel[0]; var knots=orb.stroke.line;
                 Vector3 center=fx.FuelPosition(0);
-                Check(Vector3.Distance(knots.points[0],knots.points[2])>.07f,"knot has irregular radial depth");
-                Check(Vector3.Distance(knots.points[0],knots.points[16])>.0001f,"knot is not a closed ring");
+                Check(Vector3.Distance(knots.points[0],knots.points[2])>.07f,"charge symbol has visible radius");
+                Check(Vector3.Distance(knots.points[0],knots.points[16])<.0001f,"charge ring stays closed like the bank icon");
                 var secondaryColor=orb.filament.line.startColor;
-                Check(Math.Abs(secondaryColor.r-pal.Secondary.r)<.001f && Math.Abs(secondaryColor.g-pal.Secondary.g)<.001f,"fine filament uses shared complementary colour");
-                Vector3 oldKnot=knots.points[2]; Time.time+=.09f;fx.LateUpdate();Check(Vector3.Distance(oldKnot,knots.points[2])>.001f,"knot crackles");
+                Check(Math.Abs(secondaryColor.r-pal.Core.r)<.001f && Math.Abs(secondaryColor.g-pal.Core.g)<.001f,"bolt glyph uses the palette core colour");
+                Vector3 oldKnot=knots.points[2]; Time.time+=.09f;fx.LateUpdate();Check(Vector3.Distance(oldKnot,knots.points[2])>.001f,"charge orbit remains animated");
                 fx.Swallow(5000+skin,1,0,0,.32f); Time.time+=.15f;fx.LateUpdate();
                 var trail=fx.intakeFilaments[0].line; var smooth=fx.intakeTrails[0].line;
                 Check(trail.enabled && Vector3.Distance(trail.points[11],smooth.points[11])<.001f,"intake electric trail stays attached");
@@ -219,7 +227,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 fx.ReducedEffects=true;Time.time+=.1f;fx.LateUpdate();Check(fx.pulses[1].forks[0].line.enabled && !fx.pulses[1].forks[1].line.enabled,"reduced effects use one surge fork");
                 fx.EndCast(5000+skin,4,1,5,EndReason.Cancelled);fx.LateUpdate();
                 foreach(var pulse in fx.pulses)foreach(var fork in pulse.forks)Check(!fork.line.enabled,"cancellation hides every surge fork");
-                foreach(var charge in fx.fuel)Check(!charge.filament.line.enabled,"return merge hides charge crawl");
+                foreach(var charge in fx.fuel)Check(charge.filament.line.enabled==charge.visible,"return merge shows glyphs only on retained charges");
                 fx.OnDisable();foreach(var filament in fx.intakeFilaments)Check(!filament.line.enabled,"disable clears intake electricity");
                 Check(GameObject.Created==allocated,"six-skin storm reuses bounded renderer pool");
             }
@@ -254,7 +262,46 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             for(int i=2;i<5;i++)Check(Vector3.Distance(fx.fuel[i].mergeFrom,fx.crown)<.001f,"hidden reserve returns from crown instead of behind player");
             foreach(var bank in fx.reserve)Check(!bank.stroke.line.enabled&&!bank.outline.line.enabled&&!bank.filament.line.enabled,"end reconciliation does not expose reserve layers");
             Check(GazeBeamWidthPolicy.Body(5,1,1.5f)>GazeBeamWidthPolicy.Body(0,1,1.5f)*4,"dramatic sustained progression");
+            CheckCrownFeedback(fx);
             Console.WriteLine("PASS "+checks+" assertions; 1000 cast reuse; production presentation files with physics/render substitutes. Not Unity runtime validation.");
+        }
+        // Success: smooth crown growth, no floating icons, one bounded travelling crown,
+        // no manufactured hit cue, and no lingering geometry after cancellation.
+        static void CheckCrownFeedback(GazeEmpowermentFx fx)
+        {
+            Time.time=100f;fx.BeginCast(10000,5,5,true,0,true);fx.SetPrepared(10000,1);
+            Check(fx.CrownExpansion==0f,"charge pose does not jump on acknowledgement");
+            Time.time+=.2f;float first=fx.CrownExpansion;
+            Check(first>.32f&&first<.34f,"first charge opens one third");
+            fx.SetPrepared(10000,2);Time.time+=.2f;float second=fx.CrownExpansion;
+            fx.SetPrepared(10000,3);Time.time+=.2f;fx.LateUpdate();
+            Check(second>first&&fx.CrownExpansion>.99f,"successive charges visibly grow the crown to full");
+            foreach(var orb in fx.fuel)Check(!orb.stroke.line.enabled&&!orb.outline.line.enabled&&!orb.filament.line.enabled,"trial has no floating ammunition icons");
+            foreach(var arc in fx.chargingArcs)Check(arc.line.enabled,"four crown arcs communicate preparation");
+            fx.LaunchPulse(10000,0,Vector3.zero,Vector3.forward*20,Vector3.forward*20,Vector3.up,false,0,.5f,4,.3f,true,3);
+            fx.SetPrepared(10000,0);Time.time+=.1f;fx.LateUpdate();var pulse=fx.pulses[0];
+            foreach(var wave in pulse.wave)
+            {
+                Check(wave.line.enabled,"release projects crown geometry");
+                for(int n=0;n<wave.line.positionCount;n++)
+                {
+                    Vector3 point=wave.line.points[n];float distance=Vector3.Dot(point-pulse.origin,pulse.direction);
+                    Check(Math.Abs(distance-4f)<.002f,"wave advances only as far as authoritative travel time");
+                    Vector3 radial=point-pulse.origin-pulse.direction*distance;
+                    Check(radial.magnitude+wave.line.widthMultiplier*.5f<=GazeTuning.Radius,"crown wave stays inside damage corridor");
+                }
+            }
+            Check(!pulse.glyph.line.enabled&&!pulse.front.line.enabled,"travelling crown replaces icon front");
+            Check(!pulse.sleeve.line.enabled&&!pulse.outline.line.enabled,"wide pulse sheets cannot obscure released crown");
+            foreach(var fork in pulse.forks)Check(!fork.line.enabled,"old broad forks do not cover the released crown");
+            Time.time+=.1f;fx.LateUpdate();Check(fx.CrownExpansion==0f,"release settles physical crown");
+            int allocated=GameObject.Created;long memory=GC.GetAllocatedBytesForCurrentThread();
+            for(int i=0;i<20;i++){Time.time+=.001f;fx.LateUpdate();}
+            Check(GameObject.Created==allocated&&GC.GetAllocatedBytesForCurrentThread()==memory,"crown animation reuses pooled geometry");
+            fx.EndCast(10000,2,0,2,EndReason.Cancelled);fx.LateUpdate();
+            foreach(var wave in pulse.wave)Check(!wave.line.enabled,"cancellation clears every travelling arc");
+            foreach(var arc in fx.chargingArcs)Check(!arc.line.enabled,"cancellation clears crown charge corona");
+            foreach(var orb in fx.fuel)Check(!orb.stroke.line.enabled&&!orb.filament.line.enabled,"return does not reintroduce Gaze charge icons");
         }
     }
 }

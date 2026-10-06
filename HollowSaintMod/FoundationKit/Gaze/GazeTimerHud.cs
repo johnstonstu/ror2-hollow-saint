@@ -38,6 +38,8 @@ namespace HollowSaint.FoundationKit.Gaze
 
         private void OnGUI()
         {
+            // The release trial communicates preparation through the crown and beam.
+            if (GazeReleaseTuning.Enabled) return;
             // Repaint only; this adds no input controls or persistent UI objects.
             if (Event.current.type != EventType.Repaint || !body || !body.healthComponent ||
                 !body.healthComponent.alive || !HUD.cvHudEnable.value) return;
@@ -46,7 +48,10 @@ namespace HollowSaint.FoundationKit.Gaze
             if (state == null || !state.TimerVisible) return;
             var hud = LocalHud();
             if (!hud) return;
-            try { Sample(state); Draw(hud.mainContainerCanvas.pixelRect, state.RemainingBeamSeconds); }
+            try
+            {
+                Sample(state); Draw(hud.mainContainerCanvas.pixelRect, state.RemainingBeamSeconds);
+            }
             catch (System.Exception error)
             {
                 if (!warned) { warned = true; Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_TIMER " + error); }

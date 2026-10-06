@@ -38,6 +38,18 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Draw(loop, loop.Length, width, color, alpha);
             }
             internal void Hide() { line.enabled = false; }
+            internal void Arc(Vector3 center, Vector3 normal, float radius, float angle, float sweep, float width, Color color, float alpha)
+            {
+                Vector3 u, v; Basis(normal, out u, out v);
+                for (int i = 0; i < loop.Length; i++)
+                {
+                    float t = i / (float)(loop.Length - 1), a = angle + sweep * t;
+                    float r = radius * (1f - .025f * Mathf.Sin(t * Mathf.PI) * Mathf.Sin(i * 2.7f + angle));
+                    r = Mathf.Min(radius, r);
+                    loop[i] = center + (u * Mathf.Cos(a) + v * Mathf.Sin(a)) * r;
+                }
+                Draw(loop, loop.Length, width, color, alpha);
+            }
             // Center bolt follows buff_discharge_charge.png; a separate stroke avoids a ring connector.
             internal void Bolt(Vector3 center, Vector3 normal, float radius, float width, Color color, float alpha)
             {
@@ -108,9 +120,11 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 intakeFilaments[i] = NewStroke("RearIntakeFilament", true);
             }
             crownRim = NewStroke("AbsorptionRim", false);
+            for (int i = 0; i < chargingArcs.Length; i++) chargingArcs[i] = NewStroke("ChargingCrownArc", false);
             for (int i = 0; i < pulses.Length; i++)
             {
                 var pulse = new Pulse { sleeve = NewStroke("PulseSleeve", false), spine = NewStroke("PulseSpine", true), front = NewStroke("PulseFront", false), glyph = NewStroke("PulseChargeBolt", true), outline = NewOutline("PulseOutline") };
+                for (int j = 0; j < pulse.wave.Length; j++) pulse.wave[j] = NewStroke("ReleasedCrownArc", false);
                 // A travelling tapered sleeve, not a uniform full-length beam flare.
                 pulse.sleeve.line.widthCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.5f, 0.18f), new Keyframe(0.8f, 0.9f), new Keyframe(0.95f, 1f), new Keyframe(1f, 0.1f));
                 pulse.spine.line.widthCurve = pulse.sleeve.line.widthCurve;
@@ -138,11 +152,13 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             foreach (var orb in fuel) if (orb != null) orb.filament.Hide();
             foreach (var orb in reserve) if (orb != null) orb.filament.Hide();
             if (crownRim != null) crownRim.Hide();
+            foreach (var arc in chargingArcs) if (arc != null) arc.Hide();
             foreach (var p in pulses)
             {
                 if (p == null) continue;
                 p.active = false; p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.glyph.Hide(); p.outline.Hide();
                 foreach (var fork in p.forks) fork.Hide();
+                foreach (var wave in p.wave) wave.Hide();
                 foreach (var g in p.roots) { g.stroke.Hide(); g.outline.Hide(); }
             }
             foreach (var s in contacts)

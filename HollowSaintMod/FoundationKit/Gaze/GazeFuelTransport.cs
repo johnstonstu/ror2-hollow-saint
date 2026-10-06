@@ -12,6 +12,7 @@ namespace HollowSaint.FoundationKit.Gaze
     {
         private const short MessageId = 29037;
         private const short RequestMessageId = 29038;
+        private const short ReleaseRequestMessageId = 29039;
         private static bool installed, warned;
         private const int MaxPendingOwners = 16, MaxPendingPackets = 256;
         private const float PendingLifetime = 2f;
@@ -22,7 +23,7 @@ namespace HollowSaint.FoundationKit.Gaze
         }
         private static readonly Dictionary<NetworkInstanceId, Pending> pending = new Dictionary<NetworkInstanceId, Pending>();
         private static readonly List<NetworkInstanceId> expired = new List<NetworkInstanceId>(MaxPendingOwners);
-        internal enum Kind : byte { Begin, Swallow, Launch, Strike, Reserve, End }
+        internal enum Kind : byte { Begin, Swallow, Launch, Strike, Reserve, End, Load }
         internal sealed class Packet : MessageBase
         {
             public NetworkInstanceId owner;
@@ -66,6 +67,15 @@ namespace HollowSaint.FoundationKit.Gaze
             public override void Deserialize(NetworkReader reader) { owner = reader.ReadNetworkId(); cast = reader.ReadUInt32(); sequence = reader.ReadUInt32(); }
         }
 
+        internal sealed class ReleaseRequest : MessageBase
+        {
+            public NetworkInstanceId owner;
+            public uint cast, sequence;
+            public GazeReleaseEdge edge;
+            public override void Serialize(NetworkWriter w) { w.Write(owner); w.Write(cast); w.Write(sequence); w.Write((byte)edge); }
+            public override void Deserialize(NetworkReader r) { owner = r.ReadNetworkId(); cast = r.ReadUInt32(); sequence = r.ReadUInt32(); edge = (GazeReleaseEdge)r.ReadByte(); }
+        }
+
         public static void Install()
         {
             if (installed) return;
@@ -82,6 +92,8 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 if (NetworkServer.handlers.ContainsKey(RequestMessageId)) { Warn("manual request id already registered", null); return; }
                 NetworkServer.RegisterHandler(RequestMessageId, ReceiveRequest);
+                if (NetworkServer.handlers.ContainsKey(ReleaseRequestMessageId)) { Warn("release request id already registered", null); return; }
+                NetworkServer.RegisterHandler(ReleaseRequestMessageId, ReceiveReleaseRequest);
             }
             catch (System.Exception error) { Warn("manual request registration failed", error); }
         }
@@ -107,6 +119,30 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (driver) driver.ServerRequest(request.cast, request.sequence, message.conn);
             }
             catch (System.Exception error) { Warn("manual request receive failed", error); }
+        }
+
+        internal static void RequestRelease(CharacterBody body, uint castId, uint sequence, GazeReleaseEdge edge)
+        {
+            if (!body || !body.hasEffectiveAuthority || NetworkServer.active) return;
+            var identity = body.GetComponent<NetworkIdentity>();
+            var connection = ClientScene.readyConnection;
+            if (!identity || connection == null) return;
+            try { connection.Send(ReleaseRequestMessageId, new ReleaseRequest { owner = identity.netId, cast = castId, sequence = sequence, edge = edge }); }
+            catch (System.Exception error) { Warn("release request send failed", error); }
+        }
+
+        private static void ReceiveReleaseRequest(NetworkMessage message)
+        {
+            try
+            {
+                if (!NetworkServer.active || message.conn == null) return;
+                var request = message.ReadMessage<ReleaseRequest>();
+                if (request.edge != GazeReleaseEdge.Begin && request.edge != GazeReleaseEdge.Release && request.edge != GazeReleaseEdge.Cancel) return;
+                var owner = NetworkServer.FindLocalObject(request.owner);
+                var driver = owner ? owner.GetComponent<GazeFuelController>() : null;
+                if (driver) driver.ServerReleaseRequest(request.cast, request.sequence, request.edge, message.conn);
+            }
+            catch (System.Exception error) { Warn("release request receive failed", error); }
         }
 
         private static void Register(NetworkClient client)

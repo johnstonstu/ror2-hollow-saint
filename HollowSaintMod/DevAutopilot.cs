@@ -403,6 +403,12 @@ namespace HollowSaint
         private IEnumerator Script()
         {
             scripting = true;
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "gaze-release")
+            {
+                yield return GazeReleaseSegments();
+                scripting = false;
+                yield break;
+            }
             if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "javelin")
             {
                 yield return JavelinSegments();

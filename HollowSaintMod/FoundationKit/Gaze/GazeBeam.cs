@@ -90,7 +90,7 @@ namespace HollowSaint.FoundationKit.Gaze
         }
         public void SetProgressionDuration(float duration)
         {
-            if (GazeDurationPolicy.ValidSnapshot(duration)) ProgressionDuration = duration;
+            if ((GazeReleaseTuning.Enabled && duration == GazeReleaseTuning.BeamSeconds) || GazeDurationPolicy.ValidSnapshot(duration)) ProgressionDuration = duration;
         }
 
         public void SetBeamDuration(float duration)

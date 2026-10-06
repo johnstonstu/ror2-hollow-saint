@@ -49,7 +49,7 @@ namespace HollowSaint.FoundationKit.Gaze
         }
         internal void ApplyServerBaseline(float duration)
         {
-            if (!GazeDurationPolicy.ValidSnapshot(duration)) return;
+            if (!(GazeReleaseTuning.Enabled && duration == GazeReleaseTuning.BeamSeconds) && !GazeDurationPolicy.ValidSnapshot(duration)) return;
             progressionDuration = duration;
             if (beam) beam.SetProgressionDuration(duration);
         }
@@ -67,7 +67,8 @@ namespace HollowSaint.FoundationKit.Gaze
             mappedCancel.Begin(characterBody);
             rampSteps = 0;
             ClaimOtherCombat();
-            progressionDuration = beamDuration = GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
+            progressionDuration = beamDuration = GazeReleaseTuning.Enabled ? GazeReleaseTuning.BeamSeconds :
+                GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
             beam = GazeBeam.For(characterBody);
             if (beam) beam.Begin(GetAimRay().direction, beamDuration);
             fuel = characterBody ? characterBody.GetComponent<GazeFuelController>() : null;
@@ -162,7 +163,10 @@ namespace HollowSaint.FoundationKit.Gaze
                 fuelEndReason = GazeFuelEndReason.Interrupted;
                 outer.SetNextState(new GazeEndState());
             }
-            if (controls) controls.ObservePrimary();
+            if (GazeReleaseTuning.Enabled && fuel)
+                fuel.ObserveReleaseInput(inputBank.skill1.down, PrimaryPulseReady,
+                    !endRequested && controls && controls.OwnsPrimary);
+            else if (controls) controls.ObservePrimary();
             ClaimOtherCombat();
             // A higher external override must not become another combat action.
             if (!controls || !controls.OwnsPrimary) inputBank.skill1.hasPressBeenClaimed = true;
@@ -179,7 +183,7 @@ namespace HollowSaint.FoundationKit.Gaze
         {
             var motor = characterMotor;
             if (!motor || !characterBody) return;
-            motor.walkSpeedPenaltyCoefficient = GazeTuning.DriftSpeedMultiplier;
+            motor.walkSpeedPenaltyCoefficient = GazeTuning.DriftSpeedMultiplier * (GazeReleaseTuning.Enabled ? 1.1f : 1f);
             characterBody.isSprinting = false;
             motor.jumpCount = characterBody.maxJumpCount;
             if (ignited) targetFootY -= GazeTuning.SinkPerSecond * dt;

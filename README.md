@@ -1,5 +1,7 @@
 <p align="center"><b>English</b> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.zh-CN.md">简体中文</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.ru.md">Русский</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.pt-BR.md">Português (BR)</a></p>
 
+> **Private development branch:** [Current 1.2 hold/release Gaze trial](docs/dev/1.2-gaze-release-trial.md) · [Development map](docs/dev/README.md). The player-facing descriptions below document the prior candidate; trial behavior and verification are tracked separately.
+
 <p align="center">
   <img src="docs/media/banner.jpg" alt="Hollow Saint, a storm survivor for Risk of Rain 2" width="100%">
 </p>

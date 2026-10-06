@@ -22,6 +22,12 @@ static class Program
         EntityStateMachine.Machine=new EntityStateMachine {state=state};
         var hud=new HUD {localUserViewer=new LocalUser {cachedBody=body}};
         HUD.readOnlyInstanceList.Add(hud);var timer=new GazeTimerHud();Call(timer,"Awake");
+        if (GazeReleaseTuning.Enabled)
+        {
+            Draw(timer);
+            Check(GUI.Rects.Count==0 && GUI.Labels.Count==0,"release trial adds no text, charge pips or timer panel");
+            PulseAudio(); PulseKick(body); return;
+        }
         Draw(timer);Check(GUI.Rects.Count==9 && GUI.LastLabel=="4.0s" && GUI.Labels[0]=="GAZE","local owner draws compact actual seconds and five energy pips");
         Check(GUI.Rects[0].width<150 && GUI.Rects[0].height<=30,"compact responsive timer panel");
         float width=GUI.Rects[3].width;state.RemainingBeamSeconds=6;state.ActualBeamSeconds=6;Draw(timer);

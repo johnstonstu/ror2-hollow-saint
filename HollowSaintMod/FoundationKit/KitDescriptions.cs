@@ -109,6 +109,20 @@ namespace HollowSaint.FoundationKit
                             template = english[token];
                         map[token] = Format(template, rules, args, english[token], code, token);
                     }
+                    if (GazeReleaseTuning.Enabled)
+                    {
+                        map[GazeRegistration.DescToken] = "<style=cIsUtility>Private trial.</style> Hover and channel a " +
+                            Pct(GazeTuning.DamagePerSecond) + " damage beam for " + Num(GazeReleaseTuning.BeamSeconds) +
+                            "s. Hold Primary to prepare up to three stored charges; release to fire " +
+                            Pct(GazeReleaseTuning.DamagePerCharge) + " damage per charge. Unspent charges return on exit. " +
+                            "Each charge restores " + args["gazeRecoveryEach"] + " maximum health.";
+                        map["HS_SKILL_GAZE_PULSE_NAME"] = "Gaze Surge";
+                        map["HS_SKILL_GAZE_PULSE_DESC"] = "Hold Primary to prepare up to three stored charges. " +
+                            "Release early to spend fewer. Each spent charge deals " + Pct(GazeReleaseTuning.DamagePerCharge) +
+                            " damage and restores " + args["gazeRecoveryEach"] + " of cast-entry maximum health before healing items. " +
+                            "New charges stay in reserve. Preparing spends nothing; unspent charges return on exit. " +
+                            "Surges do not extend Gaze or increase its continuous damage. Special or UI Cancel exits; Utility exits and activates if ready.";
+                    }
                     formatted[code] = map;
                 }
                 KitLanguage.PushOverlay(formatted);
