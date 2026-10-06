@@ -271,8 +271,10 @@ namespace HollowSaint.FoundationKit.Stormspear
             float fraction = Mathf.Lerp(StormspearTuning.BurstDamageFraction, StormspearTuning.BurstDamageFractionFull, Mathf.Clamp01(charge));
             if (body != null && fraction > 0f && scale > 0f)
             {
-                hits = KitUtil.CappedBlast(body, point, radius, 64, damage * fraction * scale, crit,
-                    StormspearTuning.BurstProcCoefficient, damageType, DamageColorIndex.Default, false, struck, procChainMask);
+                // Offset from terrain contact towards its free side before world LOS.
+                Vector3 blastOrigin = onEnemy ? point : point + normal.normalized * 0.05f;
+                hits = SpearBurstDamage.Apply(body, point, blastOrigin, radius, damage * fraction * scale, crit,
+                    StormspearTuning.BurstProcCoefficient, damageType, struck, procChainMask);
             }
             KitLog.Event("STORMSPEAR_BURST", "radius=" + radius.ToString("0.0") + " hits=" + hits.Count + " onEnemy=" + onEnemy);
             Vfx.KitFx.Server(Vfx.Beat.SpearBurst, point, onEnemy ? Vector3.up : normal, radius, owner: body);

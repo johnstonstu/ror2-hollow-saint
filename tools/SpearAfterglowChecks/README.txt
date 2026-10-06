@@ -1,0 +1,2 @@
+Run: dotnet run --project tools/SpearAfterglowChecks -c Release -p:NuGetAudit=false
+Links actual SpearAfterglowFx source. Synthetic plane, true-normal slope, ridge, dip, step, ledge and rolling surfaces; geometry-aware capsule approximation. Verifies near-surface gating, supplied-radius bounds, all six palette selections, fade/expiry, bounded event queries and four-slot saturation, plus 1000 warmed reuse cycles. This is not Unity runtime or native appearance validation.

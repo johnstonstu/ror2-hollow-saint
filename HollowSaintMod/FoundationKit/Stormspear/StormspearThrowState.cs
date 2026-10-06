@@ -119,6 +119,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             if (Util.CharacterRaycast(gameObject, aim, out hit, 1000f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask, QueryTriggerInteraction.Ignore))
                 target = hit.point;
             Vector3 origin = (hand - aim.origin).sqrMagnitude < 16f ? hand : aim.origin;
+            origin = ProjectileWorldClearance.LaunchOrigin(aim.origin, origin, StormspearProjectile.Radius);
             Vector3 dir = target - origin;
             if (dir.sqrMagnitude < 0.01f || Vector3.Dot(dir, aim.direction) <= 0f) dir = aim.direction;
             return new Ray(origin, dir.normalized);

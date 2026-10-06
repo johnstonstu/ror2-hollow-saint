@@ -7,8 +7,8 @@ using UnityEngine.Networking;
 namespace HollowSaint.FoundationKit.Stormspear
 {
     /// <summary>
-    /// Stormspear charge. Runs on the "Spear" machine on every machine, so Arc Bolt on "Weapon"
-    /// keeps firing. The authority holds while secondary is down and hands off to
+    /// Stormspear charge. Runs on the "Spear" machine; Arc Bolt on "Weapon" is
+    /// suppressed in hand form and remains parallel during Open Circuit. The authority hands off to
     /// StormspearThrowState (carrying the exact charge) on release. Every machine integrates the
     /// charge locally and mirrors it into StormspearCharge, which drives all presentation.
     /// No animation, sound or VFX is played here.

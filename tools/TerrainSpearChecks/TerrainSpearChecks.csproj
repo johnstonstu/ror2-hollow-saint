@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../HollowSaintMod/FoundationKit/ProjectileWorldClearance.cs" Link="ProjectileWorldClearance.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ProjectileAimForgiveness.cs" Link="ProjectileAimForgiveness.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/AimForgivenessRules.cs" Link="AimForgivenessRules.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearBurstPolicy.cs" Link="SpearBurstPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearBurstDamage.cs" Link="SpearBurstDamage.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearPrimaryInputPolicy.cs" Link="SpearPrimaryInputPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearPrimaryGate.cs" Link="SpearPrimaryGate.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ArcBolt/ArcBoltInputSkillDef.cs" Link="ArcBoltInputSkillDef.cs" />
+  </ItemGroup>
+</Project>

@@ -17,6 +17,9 @@ namespace HollowSaint.FoundationKit
         public bool isSpear;
         private HurtBox target;
         private TeamIndex attackerTeam;
+        private SphereCollider sphere;
+        private ProjectileSimple flight;
+        private Rigidbody motion;
         private float remainingTurn = AimForgivenessRules.TotalTurnDegrees;
         internal HurtBox LockedTarget => target;
         internal float TurnUsed => AimForgivenessRules.TotalTurnDegrees - remainingTurn;
@@ -24,6 +27,11 @@ namespace HollowSaint.FoundationKit
         private void Start()
         {
             if (!NetworkServer.active) { enabled = false; return; }
+            sphere = GetComponent<SphereCollider>();
+            flight = GetComponent<ProjectileSimple>();
+            motion = GetComponent<Rigidbody>();
+            // Do not attempt radius-blind correction if a template loses its collider.
+            if (!sphere || !flight) { enabled = false; return; }
             var controller = GetComponent<ProjectileController>();
             float cone = isSpear ? Stormspear.StormspearTuning.AssistConeDegrees : KitTuning.ArcBoltAssistConeDegrees;
             if (!controller || !controller.teamFilter || cone <= 0f) { enabled = false; return; }
@@ -71,6 +79,18 @@ namespace HollowSaint.FoundationKit
             if (step <= 0f) return;
             Vector3 direction = Vector3.RotateTowards(transform.forward, offset.normalized,
                 step * Mathf.Deg2Rad, 0f);
+            Vector3 scale = transform.lossyScale;
+            float radius = sphere.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Max(Mathf.Abs(scale.y), Mathf.Abs(scale.z)));
+            float speed = Mathf.Max(Mathf.Abs(flight.desiredForwardSpeed), motion ? motion.velocity.magnitude : 0f);
+            Vector3 center = transform.TransformPoint(sphere.center);
+            if (!ProjectileWorldClearance.TryCorrection(center, transform.forward, direction,
+                speed * Time.fixedDeltaTime, radius, out direction))
+            {
+                // Keep the current unassisted heading and budget. Native collision owns
+                // an obstruction on either path; never steer around or through a wall.
+                enabled = false;
+                return;
+            }
             transform.rotation = Util.QuaternionSafeLookRotation(direction);
             remainingTurn -= step;
         }

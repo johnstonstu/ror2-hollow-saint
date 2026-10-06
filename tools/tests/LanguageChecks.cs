@@ -297,7 +297,7 @@ namespace HollowSaint.FoundationKit
                 (spearStock > 1 ? " Holds " + Util(a["spearStock"] + " charges") + "." : "") +
                 " Enemies struck conduct lightning for " + a["conductorSeconds"] + "s, arcing to up to " + a["conductorTargets"] + " nearby enemies for " +
                 Dmg(a["conductorTap"] + "-" + a["conductorFull"] + " damage") + " every " + a["conductorInterval"] + "s. Recharge starts when thrown." +
-                " Fully charged throws land one lightning strike for " + Dmg(a["ordinaryThunder"] + " damage") + ", with splash within " + a["thunderRadius"] + "m. A full bank upgrades this strike to " + a["fundedThunder"] + ", including tap throws; it never adds a second strike.";
+                " Fully charged throws land one lightning strike for " + Dmg(a["ordinaryThunder"] + " damage") + ", with splash within " + a["thunderRadius"] + "m. A full bank upgrades this strike to " + a["fundedThunder"] + ", including tap throws; it never adds a second strike. The burst cannot pass through terrain and deals half damage at the outer edge.";
             int stepStock = int.Parse(a["stepStock"], CultureInfo.InvariantCulture);
             t["HS_SKILL_ARCSTEP_DESC"] =
                 Util("Blink") + " a short distance in any direction, even in the air. Jump out of it to keep the momentum. Holds " +

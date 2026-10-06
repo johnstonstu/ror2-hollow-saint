@@ -21,7 +21,7 @@ namespace HollowSaint.FoundationKit.ArcBolt
             if (KitContent.AddProjectile(ArcBoltProjectile.EnsurePrefab()) == null)
                 Plugin.Log.LogError("Arc Bolt: no projectile prefab; the skill will animate but fire nothing.");
 
-            var def = ScriptableObject.CreateInstance<SkillDef>();
+            var def = ScriptableObject.CreateInstance<ArcBoltInputSkillDef>();
             def.skillName = SkillName;
             ((ScriptableObject)def).name = SkillName;
             def.skillNameToken = KitTokens.ArcBoltName;
@@ -55,4 +55,5 @@ namespace HollowSaint.FoundationKit.ArcBolt
             return SkillDef;
         }
     }
+
 }

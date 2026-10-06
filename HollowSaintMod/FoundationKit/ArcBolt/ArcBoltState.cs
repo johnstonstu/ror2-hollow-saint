@@ -39,43 +39,37 @@ namespace HollowSaint.FoundationKit.ArcBolt
         private int handCounter;
 
         private float duration;
-        private bool hasFired, guideCast;
+        private bool hasFired;
         private uint currentToken;
 
         public override void OnEnter()
         {
             base.OnEnter();
             duration = KitTuning.ArcBoltInterval / attackSpeedStat;
-            // While a Stormspear charges in the hand, Arc Bolt keeps firing from the off hand (the right
-            // one since v0.9.14, the spear is in the left) at a reduced rate. The alternation counter
-            // does not advance while forced.
-            bool offHand = Stormspear.StormspearCharge.OffHand(characterBody);
-            if (offHand) duration /= Mathf.Max(0.05f, Stormspear.StormspearTuning.OffHandRateMultiplier);
             if (characterBody) characterBody.SetAimTimer(2f);
             if (isAuthority) AddRecoil(-0.35f, -0.7f, -0.25f, 0.25f); // v0.8: light per-bolt kick
-            handCounter = offHand ? (SpearDischarge.SpearCarry.SpearInLeft(characterBody) ? 0 : 1) : NextHand(gameObject);
+            handCounter = NextHand(gameObject);
             currentToken = Vfx.BodyCurrentFx.BeginArm(characterBody, handCounter != 0,
                 duration, KitTuning.ArcBoltReleaseNormalizedTime);
             // bundle06: arms-only layer while moving/airborne, UpperBody when standing.
-            // v0.9.8: while a hand spear charges, the off hand is already held out in front (SpearCarry's
-            // guide arm) and the bolt just leaves it with a recoil kick, so no arm gesture plays.
-            guideCast = offHand && SpearDischarge.SpearCarry.HoldingFor(characterBody);
-            if (!guideCast)
-                // v0.9.10: the gesture never plays faster than ArcBoltMinGestureSeconds. At 3.6x attack
-                // speed the 0.14 s clip snapped each hand 20 cm in a frame; now the next bolt's gesture
-                // crossfades in over the tail of the previous one instead.
-                KitAnim.PlayGesture(characterBody, GetModelAnimator(),
-                    handCounter == 0 ? StateRight : StateLeft, Mathf.Max(duration, KitTuning.ArcBoltMinGestureSeconds));
+            KitAnim.PlayGesture(characterBody, GetModelAnimator(),
+                handCounter == 0 ? StateRight : StateLeft, Mathf.Max(duration, KitTuning.ArcBoltMinGestureSeconds));
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            // A pending shot can overlap a secondary press, or Circuit can close
+            // during a charge. Cancel its presentation before any discharge.
+            if (!hasFired && !Stormspear.SpearPrimaryGate.Allows(characterBody))
+            {
+                if (isAuthority) outer.SetNextStateToMain();
+                return;
+            }
             if (!hasFired && fixedAge >= duration * KitTuning.ArcBoltReleaseNormalizedTime)
             {
                 hasFired = true;
                 Vfx.BodyCurrentFx.ReleaseArm(characterBody, handCounter != 0, currentToken);
-                if (guideCast) SpearDischarge.SpearCarry.OffHandShot(characterBody);
                 CastFx();
                 if (isAuthority) Fire();
             }
@@ -129,6 +123,7 @@ namespace HollowSaint.FoundationKit.ArcBolt
             if (Util.CharacterRaycast(gameObject, aim, out hit, 1000f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask, QueryTriggerInteraction.Ignore))
                 target = hit.point;
             Vector3 origin = (hand - aim.origin).sqrMagnitude < 9f ? hand : aim.origin;
+            origin = ProjectileWorldClearance.LaunchOrigin(aim.origin, origin, KitTuning.ArcBoltRadius);
             Vector3 dir = target - origin;
             if (dir.sqrMagnitude < 0.01f || Vector3.Dot(dir, aim.direction) <= 0f) dir = aim.direction;
             return new Ray(origin, dir.normalized);
