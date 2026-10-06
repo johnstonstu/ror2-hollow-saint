@@ -34,10 +34,12 @@ namespace HollowSaint.FoundationKit.Stormspear
             var bank = body.inputBank;
             bool action = spear && (spear.state is StormspearChargeState || spear.state is StormspearThrowState);
             // Native input processing may consider primary before secondary in the same tick.
-            // Anticipate a ready spear press without changing either input or stock.
+            // GenericSkill.CanExecute does not include the native input claim check.
+            // A refunded mustKeyPress spear cannot restart from its claimed held press.
             var secondary = body.skillLocator ? body.skillLocator.secondary : null;
             if (!action && bank && bank.skill2.down && secondary &&
-                secondary.skillDef is StormspearSkillDef && secondary.CanExecute()) action = true;
+                secondary.skillDef is StormspearSkillDef &&
+                (!secondary.skillDef.mustKeyPress || !bank.skill2.hasPressBeenClaimed) && secondary.CanExecute()) action = true;
             return input.Observe(action, StormspearCharge.InCrown(body), bank && bank.skill1.down);
         }
         private void FixedUpdate() { Observe(); }

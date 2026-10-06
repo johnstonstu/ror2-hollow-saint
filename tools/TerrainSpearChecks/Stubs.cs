@@ -94,7 +94,7 @@ namespace RoR2
     public static class LayerIndex { public static (int mask,int unused) world=(1,0); }
     public enum TeamIndex { None, Player, Monster }
     public class TeamComponent : Component { public TeamIndex teamIndex=TeamIndex.Player; }
-    public class InputBankTest : Object { public Button skill1,skill2; public struct Button { public bool down; } }
+    public class InputBankTest : Object { public Button skill1,skill2; public struct Button { public bool down,hasPressBeenClaimed; } }
     public class CharacterBody : Component
     {
         public HealthComponent healthComponent; public SkillLocator skillLocator; public InputBankTest inputBank=new();
@@ -149,6 +149,7 @@ namespace RoR2.Skills
 {
     public class SkillDef
     {
+        public bool mustKeyPress;
         public virtual bool IsReady(RoR2.GenericSkill slot)=>slot.stock>0;
         public virtual bool CanExecute(RoR2.GenericSkill slot)=>IsReady(slot);
     }
@@ -168,6 +169,6 @@ namespace HollowSaint.FoundationKit.Stormspear
     public static class StormspearTuning {public static float AssistConeDegrees=3;}
     public class StormspearChargeState : EntityStates.EntityState { }
     public class StormspearThrowState : EntityStates.EntityState { }
-    public class StormspearSkillDef : RoR2.Skills.SkillDef { }
+    public class StormspearSkillDef : RoR2.Skills.SkillDef { public StormspearSkillDef(){mustKeyPress=true;} }
     public static class StormspearCharge { public static bool InCrown(RoR2.CharacterBody b)=>b.circuit; }
 }

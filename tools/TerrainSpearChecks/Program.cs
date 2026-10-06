@@ -137,4 +137,27 @@ var late=Body();var lateSlot=new GenericSkill{characterBody=late,skillDef=new Ar
 Check(lateSlot.skillDef.IsReady(lateSlot),"initial body without spear machine remains usable");
 var lateMachine=late.gameObject.AddComponent<EntityStateMachine>();lateMachine.customName="Spear";lateMachine.state=new StormspearChargeState();
 late.inputBank.skill1.down=true;Check(!lateSlot.ExecuteIfReady(),"late native machine initialization cannot bypass gate");
+// Native mustKeyPress checks claim status outside GenericSkill.CanExecute.
+// Interruption refunds stock without releasing or unclaiming the held secondary.
+var interrupted=Body();var interruptedMachine=interrupted.gameObject.AddComponent<EntityStateMachine>();
+interruptedMachine.customName="Spear";interruptedMachine.state=new StormspearChargeState();
+var refunded=new GenericSkill{characterBody=interrupted,skillDef=new StormspearSkillDef(),stock=0,rechargeStopwatch=2};
+interrupted.skillLocator.secondary=refunded;interrupted.inputBank.skill2.down=true;interrupted.inputBank.skill2.hasPressBeenClaimed=true;
+interrupted.inputBank.skill1.down=true;
+var recoveredPrimary=new GenericSkill{characterBody=interrupted,skillDef=new ArcBoltInputSkillDef(),stock=1,rechargeStopwatch=3};
+Check(!recoveredPrimary.ExecuteIfReady(),"actual charge blocks despite claimed secondary");
+interruptedMachine.state=new EntityStates.EntityState();refunded.stock=1;
+Check(!recoveredPrimary.ExecuteIfReady(),"interrupted blocked primary hold still requires release");
+interrupted.inputBank.skill1.down=false;
+Check(recoveredPrimary.skillDef.IsReady(recoveredPrimary),"primary release rearms while refunded secondary stays held and claimed");
+interrupted.inputBank.skill1.down=true;
+Check(recoveredPrimary.ExecuteIfReady(),"primary repress fires without requiring secondary release");
+Check(refunded.stock==1 && refunded.rechargeStopwatch==2 && interrupted.inputBank.skill2.down &&
+    interrupted.inputBank.skill2.hasPressBeenClaimed,"gate preserves refunded secondary stock/progress and native claim");
+recoveredPrimary.stock=1;interrupted.inputBank.skill2.hasPressBeenClaimed=false;
+Check(!recoveredPrimary.ExecuteIfReady() && recoveredPrimary.stock==1,"genuine unclaimed ready spear press still suppresses simultaneous primary before spend");
+interrupted.inputBank.skill1.down=false;interrupted.inputBank.skill2.hasPressBeenClaimed=true;
+Check(recoveredPrimary.skillDef.IsReady(recoveredPrimary),"claimed hold does not relatch after a second primary release");
+refunded.skillDef.mustKeyPress=false;interrupted.inputBank.skill1.down=true;
+Check(!recoveredPrimary.ExecuteIfReady(),"native hold-eligible secondary still anticipated when mustKeyPress is disabled");
 Console.WriteLine($"Terrain/spear/source-input checks: {checks} assertions passed (synthetic world/native input adapters; no runtime claim).");

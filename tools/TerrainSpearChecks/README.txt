@@ -6,6 +6,9 @@ and native-slot adapters exercise flat/up/down terrain, finite sphere edge conta
 wall-clamped muzzle origins, preserved heading/budget, primary exclusion, falloff,
 LOS, target cap, unchanged crit/proc/mask, mapped input, no blocked stock/cooldown
 consumption, Circuit parallelism/closure, cancellation/repress, and death/disable.
+Interrupted/refunded charge keeps a held secondary press claimed: Primary can
+release/repress while secondary remains held; an unclaimed eligible secondary
+press still suppresses simultaneous Primary before stock consumption.
 Existing GazePrimaryChecks separately covers Gaze override restoration.
 
 No Unity PhysX, network state ordering, controller hardware, item balance,
