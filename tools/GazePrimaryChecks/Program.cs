@@ -1,6 +1,7 @@
 using System.Reflection;
 using HollowSaint.FoundationKit.Gaze;
 using HollowSaint.FoundationKit.Stormspear;
+using HollowSaint.FoundationKit.ArcBolt;
 using RoR2; using RoR2.Skills; using UnityEngine;
 
 static class Program {
@@ -132,6 +133,8 @@ static class Program {
         var noAuthority=new Fixture();noAuthority.Begin();noAuthority.body.hasEffectiveAuthority=false;noAuthority.Press(true);
         Check(!noAuthority.skills[0].ExecuteIfReady()&&noAuthority.fuel.Requests==0,"observers never request pulses");
         ExitChecks();
+        MappedCancelChecks();
+        LysateChecks();
         Console.WriteLine("PASS "+checks+" production controls assertions using native adapter simulation");
     }
     static void ExitChecks()
@@ -162,6 +165,70 @@ static class Program {
         Invoke(queued,"FixedUpdate");Check(blocked.originals[2].nativeExecutions==0,"queued utility waits for Crown teardown");
         blocked.crown.state=new GazeLockState();Invoke(queued,"FixedUpdate");Check(blocked.originals[2].nativeExecutions==0,"queued utility waits for actual machine unlock");
         blocked.crown.state=new object();Invoke(queued,"FixedUpdate");Check(blocked.originals[2].nativeExecutions==1,"unlocked equipped utility activates once");
+    }
+    static void MappedCancelChecks()
+    {
+        var f=new Fixture();var local=f.body.master.playerCharacterMasterController.networkUser.localUser;
+        var cancel=new GazeMappedCancel();local.inputPlayer.cancel=true;cancel.Begin(f.body);
+        Check(!cancel.Observe(f.body),"held UI-cancel on entry cannot cancel");
+        local.inputPlayer.cancel=false;Check(!cancel.Observe(f.body),"cancel release is inert");
+        local.inputPlayer.cancel=true;Check(cancel.Observe(f.body),"fresh mapped UI-cancel exits channel");
+        Check(local.inputPlayer.lastAction==RewiredConsts.Action.UICancel,"mapped semantic action read rather than hardware button");
+        Check(!cancel.Observe(f.body),"held cancel cannot repeat");
+        foreach(string blocked in new[]{"menu/chat","camera","authority","death","disconnected"})
+        {
+            var g=new Fixture();var user=g.body.master.playerCharacterMasterController.networkUser;
+            var edge=new GazeMappedCancel();edge.Begin(g.body);
+            user.localUser.inputPlayer.cancel=true;
+            if(blocked=="menu/chat")user.localUser.isUIFocused=true;
+            if(blocked=="camera")user.cameraRigController.isControlAllowed=false;
+            if(blocked=="authority")g.body.hasEffectiveAuthority=false;
+            if(blocked=="death")g.body.healthComponent.alive=false;
+            var saved=user.localUser;if(blocked=="disconnected")user.localUser=null;
+            Check(!edge.Observe(g.body),blocked+" blocks contextual cancel");
+            user.localUser=saved;saved.isUIFocused=false;user.cameraRigController.isControlAllowed=true;
+            g.body.hasEffectiveAuthority=true;g.body.healthComponent.alive=true;
+            Check(!edge.Observe(g.body),blocked+" closing while held cannot leak cancellation");
+            saved.inputPlayer.cancel=false;edge.Observe(g.body);saved.inputPlayer.cancel=true;
+            Check(edge.Observe(g.body),blocked+" later fresh press works");
+            Check(g.skills.All(s=>s.stock==1)&&g.originals.All(d=>d.nativeExecutions==0),"cancel input consumes no skill stock or activation");
+        }
+    }
+    static void LysateChecks()
+    {
+        // Installed 1.4.1 adds one Special stock/stack and multiplies cooldown by
+        // .67 once if any stack exists. Native execution queues state entry before
+        // consuming one base stock, so Gaze installs overrides after that spend.
+        foreach(int stacks in new[]{0,1,3})foreach(string ending in new[]{"cancel","expiry","death","disable"})
+        {
+            var f=new Fixture();var special=f.skills[3];var def=f.originals[3];
+            def.baseMaxStock=1;def.baseRechargeInterval=20;special.SetBonusStockFromBody(stacks);
+            special.cooldownScale=stacks>0?.67f:1f;special.stock=special.maxStock;special.rechargeStopwatch=0;
+            int before=special.stock;Check(special.ExecuteIfReady()&&special.stock==before-1,"Lysate activation spends exactly one stock");
+            f.Begin();Check(special.stock==0&&special.maxStock==1&&special.baseStock==stacks,"locked HUD hides spare stock without deleting base bank");
+            for(int i=0;i<5;i++)
+            {
+                f.Press(false);f.Press(true);Check(f.skills[0].ExecuteIfReady(),"pulse available with any Lysate count");
+                Check(special.baseStock==stacks&&def.nativeExecutions==1,"Primary pulse never consumes extra Special stock");
+                f.Tick(3);Check(special.baseRechargeStopwatch==0,"Special cooldown held through extended channel");
+                Check(!special.ExecuteIfReady()&&def.nativeExecutions==1,"held Special cannot cast again while channel override active");
+            }
+            if(ending=="death"){f.body.healthComponent.alive=false;Invoke(f.controls,"FixedUpdate");}
+            else if(ending=="disable")Invoke(f.controls,"OnDisable");else f.controls.End();
+            f.crown.state=new object();
+            Check(special.stock==stacks&&special.maxStock==1+stacks&&special.rechargeStopwatch==0,"all exits restore actual Lysate bank/max/progress");
+            float interval=20*(stacks>0?.67f:1);
+            special.RechargeBaseSkill(interval-.01f);Check(special.stock==stacks,"native scaled cooldown cannot refill early");
+            special.RechargeBaseSkill(.02f);Check(special.stock==stacks+1,"native scaled cooldown refills one stock");
+            f.body.healthComponent.alive=true;f.crown.state=f.state;
+            Check(special.ExecuteIfReady()&&special.stock==stacks,"subsequent cast again spends exactly one");
+            f.fuel.AvailableEntry=2;f.fuel.EntryCapacity=2;f.Begin();
+            Check(f.skills[0].stock==2&&special.baseStock==stacks,"subsequent channel has fresh entry HUD independent of Special bank");f.controls.End();
+        }
+        var benign=new Fixture();var primary=new ArcBoltInputSkillDef{baseMaxStock=1,baseRechargeInterval=0,fullRestockOnAssign=true};
+        benign.skills[0]=new GenericSkill(benign.body,primary,benign.crown);benign.body.skillLocator.primary=benign.skills[0];
+        benign.skills[0].stock=0;var data=benign.skills[0].skillInstanceData;benign.Begin();benign.Tick(.02f);benign.controls.End();
+        Check(benign.skills[0].stock==1&&ReferenceEquals(data,benign.skills[0].skillInstanceData),"benign input-gated Primary preserves native recharge/data during Gaze");
     }
     static void Invoke(object target,string method)=>target.GetType().GetMethod(method,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(target,null);
 }

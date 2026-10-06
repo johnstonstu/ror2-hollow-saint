@@ -308,7 +308,7 @@ namespace HollowSaint.FoundationKit
                 Util(a["interval"] + "s") + " and " + Dmg("Stormspear") + " charges " + Util(a["mult"] + "x faster") + ". Enemies staying inside for " + a["dwellSeconds"] + "s receive one " + Dmg(a["dwellZap"] + " zap") + " per crown. Leaving resets buildup.";
             t["HS_SKILL_GAZE_DESC"] =
                 "Channel a " + Dmg(a["dps"] + " damage/s") + " beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + "s") +
-                ". Tap Primary to spend an entry charge: +2s (14s max) and +5% beam damage (5 stacks max). New charges stay saved. Special cancels; Utility exits and activates if ready." +
+                ". Tap Primary to spend an entry charge: +2s (14s max) and +5% beam damage (5 stacks max). New charges stay saved. UI Cancel or Special cancels without spending skill stock; Utility exits even when empty and activates if ready." +
                 " Each consumed entry charge heals <style=cIsHealing>" + a["gazeRecoveryEach"] + " of cast-entry maximum health</style> before healing items; a full entry bank heals " + a["gazeRecoveryBank"] + " total. Unspent charges and newly earned reserve do not heal.";
             t["HS_PASSIVE_STORM_DESC"] =
                 "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy and stores a Static Charge (up to " + a["orbs"] + "). A full bank empowers your next successful Stormspear throw with one " +

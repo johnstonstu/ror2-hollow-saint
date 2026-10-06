@@ -2,13 +2,12 @@ namespace HollowSaint.FoundationKit.Stormspear
 {
     internal sealed class SpearPrimaryInputPolicy
     {
-        private bool requireRelease;
         internal bool Observe(bool spearAction, bool circuit, bool primaryDown)
         {
-            if (!primaryDown || circuit) requireRelease = false;
-            if (spearAction && !circuit && primaryDown) requireRelease = true;
-            return circuit || (!spearAction && !requireRelease);
+            // Native held-primary polling resumes once the actual spear action ends.
+            // Nothing is queued here and native stock/cadence still owns execution.
+            return circuit || !spearAction;
         }
-        internal void Reset() { requireRelease = false; }
+        internal void Reset() { }
     }
 }

@@ -296,32 +296,32 @@
     "event": "Play_HS_GazeSurge2",
     "seconds": 0.24,
     "loop": false,
-    "peak_dbfs": -12.77,
-    "rms_dbfs": -34.9
+    "peak_dbfs": -12.82,
+    "rms_dbfs": -33.59
   },
   {
     "name": "GazeSurge3",
     "event": "Play_HS_GazeSurge3",
     "seconds": 0.24,
     "loop": false,
-    "peak_dbfs": -11.7,
-    "rms_dbfs": -33.84
+    "peak_dbfs": -11.8,
+    "rms_dbfs": -30.99
   },
   {
     "name": "GazeSurge4",
     "event": "Play_HS_GazeSurge4",
     "seconds": 0.24,
     "loop": false,
-    "peak_dbfs": -10.75,
-    "rms_dbfs": -32.89
+    "peak_dbfs": -10.43,
+    "rms_dbfs": -28.8
   },
   {
     "name": "GazeSurge5",
     "event": "Play_HS_GazeSurge5",
     "seconds": 0.24,
     "loop": false,
-    "peak_dbfs": -9.9,
-    "rms_dbfs": -32.03
+    "peak_dbfs": -9.07,
+    "rms_dbfs": -26.98
   },
   {
     "name": "SpearChargeStart",

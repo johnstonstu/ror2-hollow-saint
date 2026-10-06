@@ -8,7 +8,7 @@ using UnityEngine;
 // Success: proposed correction cannot turn a clear physical path into a world hit;
 // muzzle relocation cannot cross a wall; spear burst excludes primary/occluded/out-of-range
 // victims, falls off without changing proc/crit/mask; native mapped input rejects before
-// stock/cooldown use and requires release after blocked holds, with Circuit exception.
+// stock/cooldown use and resumes held input after blocked holds, with Circuit exception.
 int checks=0;
 void Check(bool yes,string why) {checks++;if(!yes)throw new Exception(why);}
 void Near(float a,float b,string why)=>Check(Math.Abs(a-b)<0.0002f,why+$" ({a} vs {b})");
@@ -102,7 +102,9 @@ foreach(bool throwing in new[]{false,true})
     for(int i=0;i<8;i++)Check(!slot.ExecuteIfReady(),"normal charge/throw blocks mapped held/pressed primary");
     Check(slot.stock==1 && slot.rechargeStopwatch==2 && slot.executions==0,"blocked input consumes nothing");
     machine.state=new EntityStates.EntityState();
-    Check(!slot.ExecuteIfReady(),"no queued primary on action exit/cancel");
+    Check(slot.ExecuteIfReady(),"held primary resumes through native activation after action exit");
+    Check(!slot.ExecuteIfReady() && slot.executions==1,"no duplicate or synthetic stock after resumed shot");
+    slot.stock=1;
     b.inputBank.skill1.down=false;Check(slot.skillDef.IsReady(slot),"release rearms outside action");
     b.inputBank.skill1.down=true;Check(slot.ExecuteIfReady(),"fresh repress fires normally");
     slot.stock=1;Check(slot.ExecuteIfReady(),"normal held-primary cadence resumes");
@@ -111,8 +113,8 @@ var circuit=Body();var spearMachine=circuit.gameObject.AddComponent<EntityStateM
 var primarySlot=new GenericSkill {characterBody=circuit,skillDef=new ArcBoltInputSkillDef()};circuit.circuit=true;circuit.inputBank.skill1.down=true;
 for(int i=0;i<6;i++){primarySlot.stock=1;Check(primarySlot.ExecuteIfReady(),"Circuit permits parallel primary");}
 circuit.circuit=false;primarySlot.stock=1;Check(!primarySlot.ExecuteIfReady(),"Circuit ending during charge blocks pending primary");
-spearMachine.state=new EntityStates.EntityState();Check(!primarySlot.ExecuteIfReady(),"closing Circuit cannot queue release shot");
-circuit.inputBank.skill1.down=false;Check(primarySlot.skillDef.IsReady(primarySlot),"release clears closing-Circuit latch");
+spearMachine.state=new EntityStates.EntityState();Check(primarySlot.ExecuteIfReady(),"held primary resumes natively after Circuit closes and action ends");
+primarySlot.stock=1;circuit.inputBank.skill1.down=false;Check(primarySlot.skillDef.IsReady(primarySlot),"release clears closing-Circuit latch");
 circuit.inputBank.skill1.down=true;circuit.skillLocator.secondary=new GenericSkill{characterBody=circuit,skillDef=new StormspearSkillDef()};circuit.inputBank.skill2.down=true;
 Check(!primarySlot.ExecuteIfReady() && circuit.skillLocator.secondary.stock==1,"simultaneous ready spear blocks before primary stock use");
 circuit.inputBank.skill2.down=false;circuit.inputBank.skill1.down=false;primarySlot.skillDef.IsReady(primarySlot);
@@ -130,13 +132,28 @@ foreach(var action in new EntityStates.EntityState[]{new StormspearChargeState()
     var p=new GenericSkill{characterBody=b,skillDef=new ArcBoltInputSkillDef()};b.circuit=true;b.inputBank.skill1.down=true;
     Check(p.ExecuteIfReady(),"Circuit exception applies to charge and release states");
     p.stock=1;b.circuit=false;Check(!p.ExecuteIfReady(),"closing Circuit during either phase suppresses primary");
-    m.state=new EntityStates.EntityState();Check(!p.ExecuteIfReady(),"closed-Circuit hold cannot queue a shot");
-    b.inputBank.skill1.down=false;Check(p.skillDef.IsReady(p),"release restores readiness after either phase");
+    m.state=new EntityStates.EntityState();Check(p.ExecuteIfReady(),"closed-Circuit held primary resumes once action ends");
+    p.stock=1;b.inputBank.skill1.down=false;Check(p.skillDef.IsReady(p),"release restores readiness after either phase");
 }
 var late=Body();var lateSlot=new GenericSkill{characterBody=late,skillDef=new ArcBoltInputSkillDef()};
 Check(lateSlot.skillDef.IsReady(lateSlot),"initial body without spear machine remains usable");
 var lateMachine=late.gameObject.AddComponent<EntityStateMachine>();lateMachine.customName="Spear";lateMachine.state=new StormspearChargeState();
 late.inputBank.skill1.down=true;Check(!lateSlot.ExecuteIfReady(),"late native machine initialization cannot bypass gate");
+var cycle=Body();var cycleMachine=cycle.gameObject.AddComponent<EntityStateMachine>();cycleMachine.customName="Spear";
+var cyclePrimary=new GenericSkill{characterBody=cycle,skillDef=new ArcBoltInputSkillDef()};
+cycle.inputBank.skill1.down=true;
+for(int repeat=0;repeat<3;repeat++)
+{
+    cyclePrimary.stock=1;cycleMachine.state=new EntityStates.EntityState();
+    Check(cyclePrimary.ExecuteIfReady(),"RT hold fires before LT squeeze");
+    cyclePrimary.stock=1;cycleMachine.state=new StormspearChargeState();cycle.inputBank.skill2.down=true;
+    Check(!cyclePrimary.ExecuteIfReady()&&cyclePrimary.stock==1,"LT charge pauses held RT without spend");
+    cycleMachine.state=new StormspearThrowState();cycle.inputBank.skill2.down=false;
+    Check(!cyclePrimary.ExecuteIfReady()&&cyclePrimary.stock==1,"LT release still suppresses during actual throw");
+    cycleMachine.state=new EntityStates.EntityState();
+    Check(cyclePrimary.ExecuteIfReady(),"still-held RT resumes after actual throw ends");
+    Check(!cyclePrimary.ExecuteIfReady(),"normal stock prevents duplicate resumed shot");
+}
 // Native mustKeyPress checks claim status outside GenericSkill.CanExecute.
 // Interruption refunds stock without releasing or unclaiming the held secondary.
 var interrupted=Body();var interruptedMachine=interrupted.gameObject.AddComponent<EntityStateMachine>();
@@ -147,7 +164,8 @@ interrupted.inputBank.skill1.down=true;
 var recoveredPrimary=new GenericSkill{characterBody=interrupted,skillDef=new ArcBoltInputSkillDef(),stock=1,rechargeStopwatch=3};
 Check(!recoveredPrimary.ExecuteIfReady(),"actual charge blocks despite claimed secondary");
 interruptedMachine.state=new EntityStates.EntityState();refunded.stock=1;
-Check(!recoveredPrimary.ExecuteIfReady(),"interrupted blocked primary hold still requires release");
+Check(recoveredPrimary.ExecuteIfReady(),"held primary resumes after interruption despite claimed refunded secondary");
+recoveredPrimary.stock=1;
 interrupted.inputBank.skill1.down=false;
 Check(recoveredPrimary.skillDef.IsReady(recoveredPrimary),"primary release rearms while refunded secondary stays held and claimed");
 interrupted.inputBank.skill1.down=true;

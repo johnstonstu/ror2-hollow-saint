@@ -1,6 +1,7 @@
 using RoR2;
 using RoR2.Skills;
 using HollowSaint.FoundationKit.Stormspear;
+using HollowSaint.FoundationKit.ArcBolt;
 using UnityEngine;
 
 namespace HollowSaint.FoundationKit.Gaze
@@ -121,7 +122,8 @@ namespace HollowSaint.FoundationKit.Gaze
             }
         }
         private static bool KnownKitDefinition(SkillDef def) => def &&
-            (def.GetType() == typeof(SkillDef) || def.GetType() == typeof(StormspearSkillDef));
+            (def.GetType() == typeof(SkillDef) || def.GetType() == typeof(StormspearSkillDef) ||
+             def.GetType() == typeof(ArcBoltInputSkillDef));
         private static bool CooldownHeld(Slot slot)
         {
             var original = slot.original;

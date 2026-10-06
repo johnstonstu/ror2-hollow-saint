@@ -27,6 +27,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private GazeFuelController fuel;
         private GazeFuelEndReason fuelEndReason = GazeFuelEndReason.Interrupted;
         private readonly GazeExitEdges exitEdges = new GazeExitEdges();
+        private readonly GazeMappedCancel mappedCancel = new GazeMappedCancel();
         private bool utilityExit;
 
         private float BeamEnd => GazeTuning.WindupSeconds + beamDuration;
@@ -63,6 +64,7 @@ namespace HollowSaint.FoundationKit.Gaze
         {
             base.OnEnter();
             exitEdges.Begin(inputBank && inputBank.skill4.down, inputBank && inputBank.skill3.down);
+            mappedCancel.Begin(characterBody);
             rampSteps = 0;
             ClaimOtherCombat();
             progressionDuration = beamDuration = GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, characterBody ? characterBody.level : 1f);
@@ -152,7 +154,8 @@ namespace HollowSaint.FoundationKit.Gaze
             base.Update();
             if (!isAuthority || !inputBank) return;
             var exit = exitEdges.Observe(inputBank.skill4.down, inputBank.skill3.down);
-            if (!endRequested && exit != GazeExitAction.None)
+            bool cancel = mappedCancel.Observe(characterBody);
+            if (!endRequested && (exit != GazeExitAction.None || cancel))
             {
                 endRequested = true;
                 utilityExit = exit == GazeExitAction.Utility;

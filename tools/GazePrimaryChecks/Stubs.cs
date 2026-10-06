@@ -49,7 +49,12 @@ namespace RoR2 {
     public readonly struct SerializableEntityStateType { public Type stateType{get;} public SerializableEntityStateType(Type type)=>stateType=type; }
     public class InputBankTest:Object { public class Button { public bool down; } public Button skill1=new(); }
     public class HealthComponent:Object { public bool alive=true; }
-    public class CharacterBody:MonoBehaviour { public bool hasEffectiveAuthority=true; public HealthComponent healthComponent=new();public InputBankTest inputBank=new();public SkillLocator skillLocator=new(); }
+    public class CharacterBody:MonoBehaviour { public bool hasEffectiveAuthority=true; public HealthComponent healthComponent=new();public InputBankTest inputBank=new();public SkillLocator skillLocator=new();public CharacterMaster master=new(); }
+    public class CharacterMaster:Object { public PlayerCharacterMasterController playerCharacterMasterController=new(); }
+    public class PlayerCharacterMasterController:Object { public NetworkUser networkUser=new(); }
+    public class NetworkUser:Object { public LocalUser localUser=new();public CameraRigController cameraRigController=new(); }
+    public class LocalUser { public bool isUIFocused;public Rewired.Player inputPlayer=new(); }
+    public class CameraRigController:Object { public bool isControlAllowed=true; }
     public class SkillLocator:Object { public GenericSkill primary,secondary,utility,special; }
     public class EntityStateMachine:MonoBehaviour {
         public string customName;public object state;
@@ -62,7 +67,7 @@ namespace RoR2 {
         public CharacterBody characterBody;public EntityStateMachine stateMachine;
         public SkillDef skillDef,baseSkill;
         public SkillDef.BaseSkillInstanceData skillInstanceData;
-        public int baseStock,maxStock;public float baseRechargeStopwatch;
+        public int baseStock,maxStock,bonusStockFromBody;public float baseRechargeStopwatch,cooldownScale=1;
         public bool isCooldownBlocked;
         public int stock { get=>current==null?baseStock:current.stock;set {if(current==null)baseStock=value;else current.stock=value;} }
         public float rechargeStopwatch { get=>current==null?baseRechargeStopwatch:current.timer;set {if(current==null)baseRechargeStopwatch=value;else current.timer=value;} }
@@ -81,14 +86,17 @@ namespace RoR2 {
             var next=overrides.OrderBy(x=>x.priority).LastOrDefault();var def=next?.def??baseSkill;
             if(def==skillDef){current=next;return;}
             skillDef.OnUnassigned(this);current=next;skillDef=def;
-            skillInstanceData=def.OnAssigned(this);maxStock=def.GetMaxStock(this);
+            skillInstanceData=def.OnAssigned(this);RecalculateMaxStock();
             if(def.fullRestockOnAssign&&stock<maxStock)stock=maxStock;
             if(def.dontAllowPastMaxStocks)stock=Math.Min(stock,maxStock);
         }
         public void OverrideMaxStock(int count)=>maxStock=count;
-        public int GetBaseMaxStock()=>baseSkill.baseMaxStock;
+        public int GetBaseMaxStock()=>baseSkill.GetMaxStock(this)+bonusStockFromBody;
+        public void SetBonusStockFromBody(int value){bonusStockFromBody=value;RecalculateMaxStock();}
+        public void RecalculateMaxStock()=>maxStock=skillDef.GetMaxStock(this)+(skillDef.dontAllowPastMaxStocks?0:bonusStockFromBody);
         public void RechargeBaseSkill(float dt) {
-            float interval=baseSkill.baseRechargeInterval;
+            float original=baseSkill.baseRechargeInterval;
+            float interval=Math.Min(original,Math.Max(.5f,original*cooldownScale));
             if(interval==0){baseStock=GetBaseMaxStock();baseRechargeStopwatch=0;return;}
             baseRechargeStopwatch+=dt;
             int gained=(int)(baseRechargeStopwatch/interval)*baseSkill.rechargeStock;
@@ -121,3 +129,6 @@ namespace HollowSaint.FoundationKit.Stormspear {
     public class StormspearChargeState {}
     public class StormspearThrowState { public bool CooldownReleased; }
 }
+namespace HollowSaint.FoundationKit.ArcBolt { public class ArcBoltInputSkillDef:RoR2.Skills.SkillDef {} }
+public static class RewiredConsts { public static class Action { public const int UICancel=15; } }
+namespace Rewired { public class Player { public bool cancel;public int lastAction=-1;public bool GetButton(int action){lastAction=action;return cancel;} } }

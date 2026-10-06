@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "baseline_sha256": "EFA769269A0A1A1546D872256B163A0C46172BC1E6D533DAFE831929EFE58F59",
+  "bank_sha256": "1E6133F9B76FB5F115EE880B205B3943BF4B8B41E3DB3CBAD1CF178F24B698A9",
+  "preserved_media": 38,
+  "modified_media": 4,
+  "hierarchy_objects": 137,
+  "bank_layout_and_routing_unchanged": true,
+  "first_pulse_unchanged": true,
+  "duration_seconds": 0.24,
+  "loops_added": 0,
+  "master_volume_changes": 0,
+  "stages": [
+    {
+      "peak_pcm16": 6553,
+      "peak_dbfs": -13.98,
+      "rms_dbfs": -36.12
+    },
+    {
+      "peak_pcm16": 7488,
+      "peak_dbfs": -12.82,
+      "rms_dbfs": -33.59
+    },
+    {
+      "peak_pcm16": 8423,
+      "peak_dbfs": -11.8,
+      "rms_dbfs": -30.99
+    },
+    {
+      "peak_pcm16": 9861,
+      "peak_dbfs": -10.43,
+      "rms_dbfs": -28.8
+    },
+    {
+      "peak_pcm16": 11527,
+      "peak_dbfs": -9.07,
+      "rms_dbfs": -26.98
+    }
+  ]
+}
