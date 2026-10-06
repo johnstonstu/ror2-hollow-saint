@@ -15,6 +15,7 @@ namespace HollowSaint.FoundationKit.Storm
         private static GameObject customImpact;
         private static readonly GameObject[] tintedImpact = new GameObject[6];
         private static readonly GameObject[] tintedCustomImpact = new GameObject[6];
+        private static readonly GameObject[] splashImpact = new GameObject[6];
         private static bool loaded;
 
         internal static void Load()
@@ -37,7 +38,7 @@ namespace HollowSaint.FoundationKit.Storm
                 // royal blue). Index 1 shares index 0's copies.
                 for (uint i = 0; i < tintedImpact.Length; i++)
                 {
-                    if (i == 1) { tintedImpact[1] = tintedImpact[0]; tintedCustomImpact[1] = tintedCustomImpact[0]; continue; }
+                    if (i == 1) { tintedImpact[1] = tintedImpact[0]; tintedCustomImpact[1] = tintedCustomImpact[0]; splashImpact[1] = splashImpact[0]; continue; }
                     tintedImpact[i] = PrefabAPI.InstantiateClone(impact, "HS_ThunderTheme" + i, false);
                     SkinFxPalette.ForIndex(i).TintHierarchy(tintedImpact[i], force: true);
                     if (i == 0) DescribeOnce(tintedImpact[0]);
@@ -46,6 +47,7 @@ namespace HollowSaint.FoundationKit.Storm
                     tintedCustomImpact[i] = PrefabAPI.InstantiateClone(tintedImpact[i], "HS_ThunderCustomTheme" + i, false);
                     tintedCustomImpact[i].GetComponent<EffectComponent>().soundName = "Play_HS_ThunderStrike";
                     KitContent.AddEffect(tintedCustomImpact[i]);
+                    splashImpact[i] = MakeSplash(tintedImpact[i], "HS_SpearSplashTheme" + i);
                 }
                 Plugin.Log.LogInfo("HOLLOW_SAINT_CAPACITOR_FX_READY prefab=" + impact.name +
                     " fallbackSound=" + effect.soundName + " customSound=" + customImpact.GetComponent<EffectComponent>().soundName);
@@ -111,6 +113,45 @@ namespace HollowSaint.FoundationKit.Storm
             if (!loggedScreenFlash) { loggedScreenFlash = true; Plugin.Log.LogInfo("HOLLOW_SAINT_THUNDER_SCREENFLASH " + (log.Length > 0 ? log.ToString() : "none")); }
         }
         private const float ScreenFlashScale = 0.3f;
+
+        /// <summary>1.2: the Stormspear burst borrows the strike's 3D body. Silent (the spear beat owns
+        /// audio), no sky ribbon (that is the Thunderbolt's signature), no screen flash, and scalable
+        /// so the bloom matches the burst radius.</summary>
+        private static GameObject MakeSplash(GameObject source, string name)
+        {
+            var splash = PrefabAPI.InstantiateClone(source, name, false);
+            var effect = splash.GetComponent<EffectComponent>();
+            effect.soundName = "";
+            effect.applyScale = true;
+            foreach (var system in splash.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                var main = system.main;
+                main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+                // Keep the sphere, ring and distortion; drop the sky ribbon and the radial flash
+                // lines (the Thunderbolt's signatures) so the spear reads as its own strike.
+                if (system.name != "LightningRibbon" && system.name != "Flash Lines") continue;
+                var renderer = system.GetComponent<ParticleSystemRenderer>();
+                if (renderer) renderer.enabled = false;
+                var emission = system.emission;
+                emission.enabled = false;
+            }
+            foreach (var component in splash.GetComponentsInChildren<Component>(true))
+            {
+                if (!component || !component.GetType().Name.Contains("PostProcess")) continue;
+                if (component is Behaviour behaviour) behaviour.enabled = false;
+            }
+            KitContent.AddEffect(splash);
+            return splash;
+        }
+
+        /// <summary>Local-only cosmetic (runs on each client from the SpearBurst beat).</summary>
+        internal static void Splash(Vector3 position, SkinFxPalette palette, float scale)
+        {
+            if (palette == null) return;
+            var prefab = splashImpact[palette.Index];
+            if (!prefab || EffectCatalog.FindEffectIndexFromPrefab(prefab) == EffectIndex.Invalid) return;
+            EffectManager.SpawnEffect(prefab, new EffectData { origin = position, scale = scale }, false);
+        }
         private static bool loggedScreenFlash;
 
         internal static void VerifyCatalog()

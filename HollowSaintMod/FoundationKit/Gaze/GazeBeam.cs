@@ -150,6 +150,9 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 if (!empowerment) empowerment = GetComponent<GazeEmpowermentFx>();
                 float expansion = empowerment && Current == Phase.Beam ? empowerment.CrownExpansion : 0f;
+                // Opening recoil: crown and beam root kick back toward the body together.
+                float recoil = empowerment && Current == Phase.Beam ? empowerment.CrownRecoil : 0f;
+                if (recoil != 0f && !float.IsNaN(recoil)) origin -= shownDirection * Mathf.Clamp(recoil, -1f, 1f);
                 mount.Apply(origin, shownDirection, weight, Current == Phase.Beam, dt, expansion);
                 if (fx == null) fx = new GazeBeamFx(this);
                 fx.Render(Current, age, origin, shownDirection, mount, dt);
@@ -181,6 +184,9 @@ namespace HollowSaint.FoundationKit.Gaze
             if (fx != null) fx.Dispose();
             fx = null;
         }
+
+        /// <summary>1.2 opening pulse: the bulge down the beam (presentation only).</summary>
+        internal void OpeningWave(int count, float travel) => Presentation(f => f.Wave(count, travel));
 
         /// <summary>Presentation never breaks the skill: errors are logged once per kind and skipped.</summary>
         private void Presentation(System.Action<GazeBeamFx> action)

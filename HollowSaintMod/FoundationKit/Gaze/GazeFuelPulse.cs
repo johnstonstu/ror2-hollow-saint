@@ -28,7 +28,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public void Clear() { count = 0; Array.Clear(victims, 0, victims.Length); Array.Clear(boxes, 0, boxes.Length); }
 
         public void Launch(CharacterBody body, Vector3 origin, Vector3 direction, int phase,
-            int group, int capacity, float age, float spreadRadius, RaycastHit[] scratch)
+            int group, int capacity, float age, float spreadRadius, RaycastHit[] scratch, float travelExtra = 0f)
         {
             Clear();
             Phase = phase;
@@ -55,6 +55,8 @@ namespace HollowSaint.FoundationKit.Gaze
             }
             Travel = GazeReleaseTuning.Enabled ? GazeReleaseTuning.Travel(Vector3.Distance(origin, Impact)) :
                 GazeFuelSchedule.Travel(Vector3.Distance(origin, Impact));
+            // The opening pulse rides a visible wave down the beam; damage lands when it arrives.
+            Travel += travelExtra;
             spreadSeconds = GazeReleaseTuning.Enabled ? GazeReleaseTuning.SpreadSeconds : GazeFuelSchedule.SpreadDuration;
             this.group = group;
             proc = GazeReleaseTuning.Enabled ? GazeReleaseTuning.Proc(group) : 0f;
@@ -97,7 +99,7 @@ namespace HollowSaint.FoundationKit.Gaze
             if (!GazeReleaseTuning.Enabled) return Vector3.zero;
             Vector3 away = point - (HasGround ? Ground : Impact); away.y = 0f;
             away = away.sqrMagnitude > .01f ? away.normalized : Vector3.zero;
-            return (away + Vector3.up * .35f).normalized * GazeReleaseTuning.ForcePerCharge * group;
+            return (away + Vector3.up * .35f).normalized * GazeReleaseTuning.ForcePerCharge * Math.Min(group, 3);
         }
 
         private static bool Eligible(HealthComponent health, CharacterBody body, TeamIndex team) =>

@@ -78,7 +78,8 @@ MIX_TRIM_DB = {
     "HS_ChargeTick": 3.0,        # storm charge gain inaudible (rise < 0)
     # Load chimes play over Gaze's beam loops (~-20 dB short-term); with the gather duck
     # (GazeReleaseFeel) they still need to sit near surge-hit level to read as ticks.
-    "HS_GazeLoad1": 7.0, "HS_GazeLoad2": 7.0, "HS_GazeLoad3": 7.0,
+    # 1.2b: power-up redesign (GazeLoad1-5 are hotter at the source than the old chimes).
+    "HS_GazeLoad1": 2.0, "HS_GazeLoad2": 2.0, "HS_GazeLoad3": 2.0, "HS_GazeLoad4": 2.0, "HS_GazeLoad5": 2.0,
 }
 
 

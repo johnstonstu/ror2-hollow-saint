@@ -125,7 +125,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             float w = weight * weight * (3f - 2f * weight);
             // Pure presentation: move arc docks radially, preserving copper thickness and root scale.
             float expansion = firing && !float.IsNaN(pulseExpansion) && !float.IsInfinity(pulseExpansion)
-                ? Mathf.Clamp01(pulseExpansion) : 0f;
+                ? (pulseExpansion < 0f ? 0f : pulseExpansion > 3f ? 3f : pulseExpansion) : 0f;
             Vector3 rootPosition = crownPoint - rootTarget * centerLocal;
             Vector3 arc = Vector3.up * Mathf.Sin(w * Mathf.PI) * 0.35f;
             savedLocalPosition = haloRoot.localPosition;

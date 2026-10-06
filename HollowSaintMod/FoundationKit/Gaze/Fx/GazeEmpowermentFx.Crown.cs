@@ -23,13 +23,66 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         }
         private float surgeAt = -100f;
         private int surgeTier;
+
+        // 1.2 charge-up: charges drawn in before the beam sit primed in the crown (held open and
+        // breathing) until the first Primary press fires them; then a big swell and a recoil.
+        private int primed, openingTier;
+        private float primedAt = -100f, openingAt = -100f;
+        public int PrimedCharges => crownDriven && active ? primed : 0;
+        public void SetPrimed(uint id, int count)
+        {
+            if (!active || id != castId) return;
+            primed = Mathf.Clamp(count, 0, 20); primedAt = Time.time;
+        }
+        public void NoteOpening(uint id, int count)
+        {
+            if (!active || id != castId) return;
+            primed = 0;
+            openingTier = Mathf.Clamp(count, 1, 5); openingAt = Time.time;
+            NoteSurge(1); // light beam flare; the crown swell and the wave carry the size
+        }
+        private float PrimedHold
+        {
+            get
+            {
+                if (primed <= 0) return 0f;
+                float settle = Mathf.Clamp01((Time.time - primedAt) / .18f);
+                return settle * (.3f + .09f * (primed < 5 ? primed : 5) + .06f * Mathf.Sin(Time.time * 9f));
+            }
+        }
+        /// <summary>Opening swell: snaps the crown far open (up to ~2.7x the load expansion), then settles.</summary>
+        private float OpeningSwell
+        {
+            get
+            {
+                float age = Time.time - openingAt;
+                if (openingTier <= 0 || age < 0f || age > .7f) return 0f;
+                float amp = 1.2f + .3f * openingTier;
+                float rise = Mathf.Clamp01(age / .05f);
+                float fall = 1f - Mathf.Clamp01((age - .05f) / .65f);
+                return amp * rise * fall * fall;
+            }
+        }
+        /// <summary>Crown recoil (m, back toward the body) on the opening: a hard kick that springs back.</summary>
+        public float CrownRecoil
+        {
+            get
+            {
+                float age = Time.time - openingAt;
+                if (!crownDriven || !active || openingTier <= 0 || age < 0f || age > .45f) return 0f;
+                float decay = 1f - age / .45f;
+                return (.35f + .08f * openingTier) * decay * decay * Mathf.Cos(age * 16f);
+            }
+        }
+        /// <summary>0..1 energy of the opening for beam-side readouts.</summary>
+        public float OpeningEnergy => crownDriven && active ? Mathf.Clamp01(OpeningSwell / 2f) : 0f;
         // Beam-side readouts for the default (behind) camera, where the crown is hidden by the body.
         /// <summary>Loaded charges, 0..3 (hold/release mode only).</summary>
         public int PreparedCharges => crownDriven && active ? prepared : 0;
         public float LoadFlash => crownDriven && active ? ChargeFlash : 0f;
         /// <summary>Release flare: tier-scaled spike that decays over ~0.4 s.</summary>
         public float SurgeFlare => crownDriven ? surgeTier * Mathf.Pow(1f - Mathf.Clamp01((Time.time - surgeAt) / (.25f + .07f * surgeTier)), 2f) : 0f;
-        private void NoteSurge(int tier) { surgeAt = Time.time; surgeTier = Mathf.Clamp(tier, 1, 3); }
+        private void NoteSurge(int tier) { surgeAt = Time.time; surgeTier = Mathf.Clamp(tier, 1, 5); }
         // 0..1 flash right after a charge loads; decays in 0.2 s.
         private float ChargeFlash => prepared > 0 ? 1f - Mathf.Clamp01((Time.time - chargeChanged) / .2f) : 0f;
 

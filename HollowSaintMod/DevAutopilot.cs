@@ -453,6 +453,18 @@ namespace HollowSaint
             AudioMark("SYNC");
             if (pilot) Util.PlaySound("Play_HS_SpearImpact", pilot.gameObject);
             yield return Wait(1.2f);
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "spear-splash")
+            {
+                yield return SpearSplashSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "gaze-charge")
+            {
+                yield return GazeChargeSegments();
+                scripting = false;
+                yield break;
+            }
             if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "audio-probe")
             {
                 yield return AudioProbe();

@@ -48,6 +48,9 @@ namespace HollowSaint.FoundationKit.Gaze
                 clientAvailableEntry = Mathf.Max(0, clientAvailableEntry - packet.count);
                 clientPendingIntakes += packet.count;
             }
+            if (packet.kind == GazeFuelTransport.Kind.Launch && localPrimed > 0 && GazeReleaseTuning.Enabled)
+                try { LocalOpeningLaunch(packet.count, packet.travel, packet.origin, packet.impact); }
+                catch (System.Exception error) { localPrimed = 0; GazeFuelTransport.Warn("opening launch cue failed", error); }
             if (packet.kind == GazeFuelTransport.Kind.Launch)
             {
                 clientPendingIntakes = Mathf.Max(0, clientPendingIntakes - Mathf.Max(1, packet.count));
@@ -62,6 +65,7 @@ namespace HollowSaint.FoundationKit.Gaze
             }
             if (packet.kind == GazeFuelTransport.Kind.End)
             {
+                localPrimed = 0;
                 releaseFeel.End();
                 presentationOwned = false;
                 clientCast = 0;

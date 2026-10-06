@@ -331,6 +331,34 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_HS_GazeLoad4" ID="{CE502C6E-46EC-57B3-A596-78292FF668D3}">
+					<ChildrenList>
+						<Action Name="" ID="{BBA391AD-FF46-5142-9C49-BB054C4E7A00}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeLoad4" ID="{036B91C0-4A1B-545F-AADD-EE961551D587}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeLoad5" ID="{D6DEB24E-56BE-5E7E-8DF2-21E3970559DA}">
+					<ChildrenList>
+						<Action Name="" ID="{A715462A-2557-5722-A2C2-E0070E5B6D02}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeLoad5" ID="{12765136-9DB5-5EE7-8DF6-660B424B8A0C}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 				<Event Name="Play_HS_GazeSurge1" ID="{26884DDC-0EF9-52B1-A656-A108D5672323}">
 					<ChildrenList>
 						<Action Name="" ID="{302FF268-3B49-5AC8-A4FE-FB677FDB9C08}">

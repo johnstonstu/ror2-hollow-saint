@@ -69,15 +69,34 @@ namespace HollowSaint.FoundationKit.Gaze
             Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + tier : "Play_HS_ChargeTick", Emitter(source));
         }
 
+        private float suppressHitUntil = -1f;
+
+        /// <summary>Charge-up opening blast: the boom always lands where the beam meets the
+        /// world, hit or miss. The strike-confirmed cue for the same surge is suppressed.</summary>
+        internal void Opening(CharacterBody body, int count) { suppressHitUntil = Time.time + 0.7f; }
+
         internal bool Hit(CharacterBody body, uint cast, int phase, int group)
         {
+            if (Time.time < suppressHitUntil) return false;
             if (!body || (cast == hitCast && phase == hitPhase)) return false;
             hitCast = cast; hitPhase = phase;
             KitLog.Event("GAZE_SURGE_HIT", "tier=" + group + " phase=" + phase);
-            int tier = Mathf.Clamp(group, 1, 3);
-            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + tier : "Play_HS_SpearBurst", Emitter(body.gameObject));
+            int tier = Mathf.Clamp(group, 1, 5);
+            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_HS_SpearBurst", Emitter(body.gameObject));
+            // 4-5 charge opening blasts add the Thunderbolt's clap on top.
+            if (tier >= 4) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_ThunderStrike" : "Play_captain_shift_impact", Emitter(body.gameObject));
             Kick(body, tier);
             return true;
+        }
+
+        internal void PlayBoom(CharacterBody body, int count)
+        {
+            if (!body) return;
+            int tier = Mathf.Clamp(count, 1, 5);
+            KitLog.Event("GAZE_OPENING_BOOM", "charges=" + count);
+            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_HS_SpearBurst", Emitter(body.gameObject));
+            if (tier >= 4) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_ThunderStrike" : "Play_captain_shift_impact", Emitter(body.gameObject));
+            Kick(body, tier);
         }
 
         private static void Kick(CharacterBody body, int tier)
@@ -86,8 +105,8 @@ namespace HollowSaint.FoundationKit.Gaze
             var local = LocalUserManager.readOnlyLocalUsersList[0];
             var camera = local.cameraRigController;
             if (local.cachedBody != body || !camera || camera.targetBody != body) return;
-            float amplitude = tier == 1 ? .30f : tier == 2 ? .55f : .90f;
-            float duration = tier == 1 ? .16f : tier == 2 ? .22f : .32f;
+            float amplitude = tier == 1 ? .30f : tier == 2 ? .55f : tier == 3 ? .90f : tier == 4 ? 1.2f : 1.5f;
+            float duration = tier == 1 ? .16f : tier == 2 ? .22f : tier == 3 ? .32f : tier == 4 ? .40f : .48f;
             ShakeEmitter.CreateSimpleShakeEmitter(camera.transform.position,
                 new Wave { amplitude = amplitude, frequency = 18f, cycleOffset = 0f }, duration, 1f, true);
         }

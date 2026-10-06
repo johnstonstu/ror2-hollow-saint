@@ -60,7 +60,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             get
             {
                 if (!active || !body || !body.healthComponent || !body.healthComponent.alive) return 0f;
-                if (crownDriven) return ChargeExpansion;
+                if (crownDriven) return Mathf.Max(ChargeExpansion, Mathf.Max(PrimedHold, OpeningSwell));
                 float expansion = prepared * .18f;
                 foreach (var orb in fuel)
                     if (orb != null && orb.visible && orb.swallowing)
@@ -205,7 +205,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         public void Clear()
         {
             active = ending = externalAnchors = false;
-            prepared = 0;
+            prepared = 0; primed = 0; openingTier = 0;
             chargeFrom = chargeChanged = 0f;
             flashAt = -100f;
             if (root) root.gameObject.SetActive(false);

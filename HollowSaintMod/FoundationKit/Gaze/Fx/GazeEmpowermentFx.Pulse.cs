@@ -60,7 +60,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             p.travel = travel; p.spread = spread;
             p.radius = Mathf.Clamp(spreadRadius, 0f, 30f); // cosmetic ceiling only
             p.finale = finale && (fullEntry || chargeCount >= 3);
-            p.strength = 1f + .16f * (Mathf.Clamp(chargeCount, 1, 3) - 1);
+            p.strength = 1f + .16f * (Mathf.Clamp(chargeCount, 1, 5) - 1);
             p.crownRadius = LiveCrownRadius(); p.rotation = Time.time * 4.54f;
             if (elapsed < .15f) NoteSurge(chargeCount);
             p.ground = hasGround && p.normal.y > 0.35f;

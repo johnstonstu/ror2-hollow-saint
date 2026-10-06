@@ -100,6 +100,7 @@ namespace HollowSaint.FoundationKit.Gaze
         {
             if (!NetworkServer.active || !body || !meter) return;
             if (ledger.Active) EndCast(GazeFuelEndReason.Interrupted);
+            openingPhase = -1; primedOpening = 0;
             cast = ++nextCast;
             if (cast == 0) cast = ++nextCast;
             sequence = 0; age = 0f;
@@ -218,8 +219,11 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (beam) beam.SetBeamDuration(beamDuration);
                 float radius = GazeFuelSchedule.SpreadRadius(beamAge, frozenBeamDuration,
                     GazeTuning.ForkRange, GazeTuning.ReachStart, GazeTuning.ReachEnd);
+                // The charge-up's opening blast hits a wider area that grows with its charges.
+                if (phase == openingPhase) radius = Mathf.Max(radius, GazeReleaseTuning.OpeningRadius(group));
                 var pulse = pulses[phase];
-                pulse.Launch(body, beam.Origin, beam.Direction, phase, group, ledger.Capacity, age, radius, traceScratch);
+                pulse.Launch(body, beam.Origin, beam.Direction, phase, group, ledger.Capacity, age, radius, traceScratch,
+                    phase == openingPhase ? GazeReleaseTuning.OpeningTravelExtra : 0f);
                 var packet = Packet(GazeFuelTransport.Kind.Launch);
                 packet.phase = (byte)phase; packet.origin = pulse.Origin; packet.impact = pulse.Impact;
                 packet.groundPoint = pulse.Ground; packet.normal = pulse.Normal; packet.ground = pulse.HasGround;
@@ -246,7 +250,7 @@ namespace HollowSaint.FoundationKit.Gaze
         internal void ConfirmStrike(int phase, int group, Vector3 point, float elapsed)
         {
             var packet = Packet(GazeFuelTransport.Kind.Strike);
-            packet.phase = (byte)phase; packet.count = (byte)System.Math.Max(1, System.Math.Min(3, group)); packet.impact = point; packet.age = elapsed;
+            packet.phase = (byte)phase; packet.count = (byte)System.Math.Max(1, System.Math.Min(20, group)); packet.impact = point; packet.age = elapsed;
             Send(packet);
         }
 

@@ -13,7 +13,7 @@ namespace HollowSaint.FoundationKit.Gaze
     /// the authority owns movement and aim; a native Primary override requests discrete fuel taps. The
     /// server deals the damage from its own copy; GazeBeam draws the same beam everywhere.
     /// </summary>
-    public class GazeState : BaseSkillState
+    public partial class GazeState : BaseSkillState
     {
         private GazeBeam beam;
         private EntityStateMachine weapon, spear;
@@ -63,6 +63,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public override void OnEnter()
         {
             base.OnEnter();
+            if (BeginChargePhase()) return;
             exitEdges.Begin(inputBank && inputBank.skill4.down, inputBank && inputBank.skill3.down);
             mappedCancel.Begin(characterBody);
             rampSteps = 0;
@@ -112,6 +113,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            if (charging) { ChargeFixedUpdate(); return; }
             if (endRequested) return;
             if (GazeManualLifetime.StopBeforeWork(fixedAge, BeamEnd))
             {
@@ -141,6 +143,10 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 ignited = true;
                 if (beam) beam.Ignite();
+                // 1.2 charge-up: the absorbed charges open the beam as one big blast.
+                // 1.2 charge-up: the absorbed charges wait in the crown for the first Primary press.
+                if (NetworkServer.active && fuel && OpeningCharges > 0) fuel.ServerPrime(OpeningCharges);
+                if (fuel && OpeningCharges > 0) fuel.LocalPrime(OpeningCharges);
                 KitLog.Event("GAZE_IGNITE");
             }
             if (ignited && NetworkServer.active && fixedAge < BeamEnd && beam) ServerTick(dt);
@@ -153,6 +159,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public override void Update()
         {
             base.Update();
+            if (charging) { ChargeUpdate(); return; }
             if (!isAuthority || !inputBank) return;
             var exit = exitEdges.Observe(inputBank.skill4.down, inputBank.skill3.down);
             bool cancel = mappedCancel.Observe(characterBody);
@@ -238,6 +245,7 @@ namespace HollowSaint.FoundationKit.Gaze
 
         public override void OnExit()
         {
+            if (charging) { ChargeExit(); base.OnExit(); return; }
             rampSteps = 0;
             if (controls) controls.End();
             if (fuel && NetworkServer.active)

@@ -29,6 +29,9 @@ static class Program {
         internal void Press(bool down) {body.inputBank.skill1.down=down;controls.ObservePrimary();}
     }
     static void Main() {
+        // These assertions cover the legacy tap-pulse path (Mod Options A/B); hold/release
+        // Primary is covered by GazeReleaseChecks.
+        GazeReleaseTuning.UseLegacyTapPulses(true);
         GazeChannelSkillDefs.Register();
         Check(!GazeChannelSkillDefs.Pulse.fullRestockOnAssign&&GazeChannelSkillDefs.Pulse.stockToConsume==0&&GazeChannelSkillDefs.Pulse.mustKeyPress,"pulse definition uses custom stockless execution");
         foreach(bool nativeFirst in new[]{false,true})foreach(string unavailable in new[]{"windup","rate interval","empty bank"}) {

@@ -21,11 +21,15 @@ namespace HollowSaint.FoundationKit.Gaze
         // lands with the button release (was 0.35-0.55 s travel + 0.30 s ground spread).
         internal const float TravelBase = .06f, TravelPerRange = .10f, MaximumTravel = TravelBase + TravelPerRange;
         internal const float SpreadSeconds = .14f;
+        internal const float OpeningTravelExtra = .16f;      // the opening wave is slowed so it can be seen
         // Surges now proc items and shove: 0.4 / 0.8 / 1.0 proc, light knockback per charge.
         internal static float ProcPerCharge = .4f;
         internal const float ForcePerCharge = 450f;
         internal static float Travel(float distance) =>
             TravelBase + TravelPerRange * Math.Max(0f, Math.Min(1f, distance / 60f));
+        // 1.2 charge-up opening blast: up to the full bank, wider with every charge.
+        internal const int MaximumOpening = 20;
+        internal static float OpeningRadius(int group) => 3f + 1.2f * Math.Max(1, group);
         internal static float Proc(int group) => Math.Min(1f, ProcPerCharge * Math.Max(1, group));
         internal static bool ArrivalFits(float age, float end) =>
             !float.IsNaN(age) && !float.IsInfinity(age) &&

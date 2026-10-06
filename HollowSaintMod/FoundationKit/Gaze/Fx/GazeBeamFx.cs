@@ -47,6 +47,26 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private int gapsLit;
         private bool humming, beamVisible = true;
         private Vector3[] linePoints = new Vector3[0];
+        // 1.2 opening pulse: a bulge rides down the beam from the crown to the target.
+        private float waveAt = -100f, waveTravel = .2f, primedSparkTimer, lineSpacing = 4f;
+        private int waveTier;
+        private AnimationCurve waveCurve;
+        private readonly Keyframe[] waveKeys = new Keyframe[40];
+        private Vector3 lastOrigin, lastDirection;
+
+        /// <summary>The opening pulse leaves the crown: big muzzle flash, then the wave.</summary>
+        public void Wave(int count, float travel)
+        {
+            waveAt = Time.time; waveTravel = Mathf.Max(.08f, travel); waveTier = Mathf.Clamp(count, 1, 5);
+            if (!root || lastDirection == Vector3.zero) return;
+            float t = waveTier;
+            VfxParticles.Burst(lastOrigin, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .22f + .03f * t,
+                Vector2.zero, Vector2.one * (1.4f + .35f * t), palette.Core);
+            VfxParticles.Burst(lastOrigin, Quaternion.LookRotation(lastDirection), palette.Material(VfxAssets.Spark), 14 + 6 * waveTier,
+                .35f, new Vector2(8f, 16f + 3f * t), new Vector2(.06f, .13f), palette.Arc, stretch: .09f, spreadAngle: 28f);
+            VfxParticles.Ring(lastOrigin, lastDirection, .4f, 1.6f + .45f * t, .26f, .2f + .03f * t, VfxAssets.Trail, palette);
+            VfxParticles.FlashLight(lastOrigin, palette.Arc, 5f + 1.5f * t, 10f + t, .3f);
+        }
         private Vector3[] helixPoints = new Vector3[0];
         private Vector2[] helixJitter = new Vector2[0];
 
@@ -208,22 +228,43 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 // each load, and a hard tier-scaled flare on release.
                 int loaded = empowerment.PreparedCharges;
                 float flare = empowerment.SurgeFlare;
-                w *= 1f + .12f * loaded + .22f * empowerment.LoadFlash + .30f * flare;
+                w *= 1f + .12f * loaded + .22f * empowerment.LoadFlash + .30f * Mathf.Min(flare, 4f);
                 charge = Mathf.Clamp01(loaded / 3f * .5f + .35f * empowerment.LoadFlash + .4f * flare);
             }
             else charge = 0f;
+            int primedNow = empowerment && phase == GazeBeam.Phase.Beam ? empowerment.PrimedCharges : 0;
+            if (primedNow > 0)
+            {
+                // Primed: the beam runs fat and hot and the crown spits arcs until RT fires it.
+                int p = Mathf.Min(primedNow, 5);
+                w *= 1f + .07f * p;
+                charge = Mathf.Max(charge, .3f + .1f * p);
+                PrimedSparks(mount, p, dt);
+            }
+            float waveAge = Time.time - waveAt;
+            bool waving = waveTier > 0 && waveAge >= 0f && waveAge < waveTravel + .3f && phase == GazeBeam.Phase.Beam;
+            float waveEnergy = waving ? 1f - Mathf.Clamp01((waveAge - waveTravel) / .3f) : 0f;
+            if (waving)
+            {
+                charge = Mathf.Max(charge, waveEnergy);
+            }
+            lineSpacing = waving ? .3f : 4f;
+            lastOrigin = origin; lastDirection = dir;
             shownRamp = GazeBeamWidthPolicy.Advance(shownRamp, GazeReleaseTuning.Enabled ? 2 : owner.RampSteps, dt);
 
             // Resource motion owns the accent. Duck the continuous decorative layers while
             // preserving the baseline damage beam and server-confirmed contacts.
             if (beamWidthCurve != null)
             {
-                beamWidthCurve.MoveKey(0, new Keyframe(0f, 0.45f * (empowerment ? empowerment.CrownApertureScale : 1f)));
+                // The opening swell can open the crown ~2.6x; the beam root follows only to 1.5x so
+                // it never becomes a slab in front of the behind camera.
+                beamWidthCurve.MoveKey(0, new Keyframe(0f, 0.45f * (empowerment ? Mathf.Min(empowerment.CrownApertureScale, 1.5f) : 1f)));
+                var shownCurve = waving ? WaveCurve(waveAge / waveTravel, waveEnergy) : beamWidthCurve;
                 // Unity copies AnimationCurve values into the renderer on assignment.
-                if (haze) haze.widthCurve = beamWidthCurve;
-                if (beamBody) beamBody.widthCurve = beamWidthCurve;
-                if (sheath) sheath.widthCurve = beamWidthCurve;
-                if (core) core.widthCurve = beamWidthCurve;
+                if (haze) haze.widthCurve = beamWidthCurve; // the wide soft haze never carries the wave
+                if (beamBody) beamBody.widthCurve = shownCurve;
+                if (sheath) sheath.widthCurve = shownCurve;
+                if (core) core.widthCurve = shownCurve;
             }
             FocusTint(haze, palette.Outer, 0.14f, Mathf.Lerp(1f, 0.16f, focus));
             FocusTint(beamBody, palette.Arc, 0.72f, Mathf.Lerp(1f, 0.72f, focus));
@@ -242,6 +283,39 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             if (focus < 0.1f) Snaps(origin, dir, length, w, dt);
             Impact(hit, origin, dir, w * Mathf.Lerp(1f, 0.12f, focus), dt);
             Muzzle(origin, dir, w * Mathf.Lerp(1f, 0.12f, focus));
+        }
+
+        /// <summary>Base width profile times a travelling bulge (front at u, 0 = crown, 1 = target)
+        /// with a bright tail behind it; past the target the bulge pools at the end and fades.</summary>
+        private AnimationCurve WaveCurve(float u, float energy)
+        {
+            float amp = (.7f + .2f * waveTier) * energy;
+            const float sigma = .05f;
+            float front = Mathf.Min(u, 1f);
+            int n = waveKeys.Length;
+            for (int i = 0; i < n; i++)
+            {
+                float t = i / (float)(n - 1);
+                float d = (t - front) / sigma;
+                float tail = t < front ? Mathf.Exp(-((front - t) / .22f) * ((front - t) / .22f)) * .35f : 0f;
+                float bump = Mathf.Exp(-d * d) + tail;
+                // Near the crown the camera is right behind it: keep the bulge modest there so it
+                // reads as a pulse leaving the crown instead of a wall filling the screen.
+                float near = .3f + .7f * Mathf.SmoothStep(0f, 1f, t / .3f);
+                waveKeys[i] = new Keyframe(t, beamWidthCurve.Evaluate(t) * (1f + amp * near * bump));
+            }
+            if (waveCurve == null) waveCurve = new AnimationCurve(waveKeys);
+            else waveCurve.keys = waveKeys;
+            return waveCurve;
+        }
+
+        private void PrimedSparks(GazeCrownMount mount, int primed, float dt)
+        {
+            primedSparkTimer -= dt;
+            if (primedSparkTimer > 0f) return;
+            primedSparkTimer = Mathf.Lerp(.11f, .05f, (primed - 1) / 4f);
+            int a = Random.Range(0, 4), b = (a + Random.Range(1, 3)) % 4;
+            LightningLine.Spawn(mount.ArcPoint(a), mount.ArcPoint(b), .08f, .12f + .03f * primed, 0, .3f, palette: palette);
         }
 
         private static void FocusTint(LineRenderer line, Color color, float alpha, float gain)
@@ -295,7 +369,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private void Line(LineRenderer line, Vector3 from, Vector3 to, float width, float scroll)
         {
             if (!line) return;
-            int count = Mathf.Clamp(Mathf.CeilToInt(Vector3.Distance(from, to) / 4f) + 1, 2, 16);
+            int count = Mathf.Clamp(Mathf.CeilToInt(Vector3.Distance(from, to) / lineSpacing) + 1, 2, lineSpacing < 1f ? 128 : 16);
             if (linePoints.Length != count) linePoints = new Vector3[count];
             for (int i = 0; i < count; i++) linePoints[i] = Vector3.Lerp(from, to, i / (float)(count - 1));
             line.positionCount = count;
