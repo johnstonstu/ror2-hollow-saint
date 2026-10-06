@@ -66,6 +66,7 @@ namespace HollowSaint
         private void OnEnable()
         {
             Application.logMessageReceived += OnLog;
+            HookAudio();
             On.RoR2.PlayerCharacterMasterController.FixedUpdate += AfterPlayerInput;
             On.RoR2.PlayerCharacterMasterController.Update += AfterPlayerUpdate;
         }
@@ -73,6 +74,7 @@ namespace HollowSaint
         private void OnDisable()
         {
             Application.logMessageReceived -= OnLog;
+            UnhookAudio();
             On.RoR2.PlayerCharacterMasterController.FixedUpdate -= AfterPlayerInput;
             On.RoR2.PlayerCharacterMasterController.Update -= AfterPlayerUpdate;
         }
@@ -301,6 +303,29 @@ namespace HollowSaint
 
         private void Shot(string name) { lastShotReal = Time.realtimeSinceStartup; StartCoroutine(ShotRoutine(name)); }
 
+        /// <summary>Dev diagnostic: every enabled line/trail renderer in the scene with its owner and extent.</summary>
+        private void DumpLines(string label)
+        {
+            var sb = new System.Text.StringBuilder("LINE_DUMP " + label);
+            foreach (var r in UnityEngine.Object.FindObjectsOfType<Renderer>())
+            {
+                if (!r.enabled || !r.gameObject.activeInHierarchy) continue;
+                if (!(r is LineRenderer) && !(r is TrailRenderer)) continue;
+                var lr = r as LineRenderer; var tr = r as TrailRenderer;
+                int n = lr ? lr.positionCount : tr.positionCount;
+                if (n < 2) continue;
+                Vector3 a = lr ? lr.GetPosition(0) : tr.GetPosition(0), b = lr ? lr.GetPosition(n - 1) : tr.GetPosition(n - 1);
+                if (lr && !lr.useWorldSpace) { a = lr.transform.TransformPoint(a); b = lr.transform.TransformPoint(b); }
+                string path = r.name; var t = r.transform.parent; for (int d = 0; t && d < 4; d++, t = t.parent) path = t.name + "/" + path;
+                sb.Append("\n  ").Append(path).Append(' ').Append(r.GetType().Name).Append(" n=").Append(n)
+                  .Append(" len=").Append(Vector3.Distance(a, b).ToString("0.0")).Append(" size=").Append(r.bounds.size.magnitude.ToString("0.0"))
+                  .Append(" mat=").Append(r.sharedMaterial ? r.sharedMaterial.name : "-")
+                  .Append(" w=").Append((lr ? lr.widthMultiplier : tr.widthMultiplier).ToString("0.000"))
+                  .Append(" from=").Append(a.ToString("0")).Append(" to=").Append(b.ToString("0"));
+            }
+            trace.AppendLine(sb.ToString());
+        }
+
         /// <summary>Dev diagnostic: lists visible renderers near a point (name, type, material,
         /// world size) so stray or oversized effects can be traced to their source.</summary>
         private void DumpEffects(string label, Vector3 center, float radius)
@@ -386,6 +411,7 @@ namespace HollowSaint
             segment = name;
             if (pilot && pilot.skillLocator) pilot.skillLocator.ResetSkills();
             trace.AppendLine(scriptTime.ToString("000.00") + " SEGMENT " + name);
+            AudioMark("SEGMENT " + name);
             ResetToMark();
             yield return Wait(0.6f);
         }
@@ -421,6 +447,12 @@ namespace HollowSaint
         private IEnumerator Script()
         {
             scripting = true;
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "circuit-terrain")
+            {
+                yield return CircuitTerrainSegments();
+                scripting = false;
+                yield break;
+            }
             if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "gaze-release")
             {
                 yield return GazeReleaseSegments();
@@ -732,6 +764,7 @@ namespace HollowSaint
         {
             scripting = false;
             Time.timeScale = 1f;
+            WriteAudioLog();
             IOFile.WriteAllText(IOPath.Combine(output, "trace.txt"), "outcome=" + outcome + " errors=" + errors + " pops=" + pops + " version=" + Plugin.Version + "\n" + trace);
             Plugin.Log.LogWarning("HOLLOW_SAINT_AUTOPILOT finished: " + outcome);
             StartCoroutine(Quit());

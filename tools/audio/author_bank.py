@@ -63,6 +63,12 @@ def add_missing_sounds(actor):
         children.append(sound)
 
 
+MIX_TRIM_DB = {
+    "HS_CircuitPulse": 4.0,   # rose ~1 dB over the Circuit loop: the 0.5 s damage rhythm was inaudible
+    "HS_CircuitClose": 3.0,   # crown close masked (rise ~1.4 dB)
+}
+
+
 def author():
     # Parse every existing document before modifying it.
     files = {name: PROJECT / name / "Default Work Unit.wwu" for name in
@@ -110,6 +116,10 @@ def author():
         reference.clear()
         reference.set("Name", "Attenuation")
         ET.SubElement(reference, "ObjectRef", Name="HS_Spatial", ID=guid("attenuation"), WorkUnitID=atten_unit.get("ID"))
+        # 1.2 in-game mix pass (tools/audio/analyze_capture.py on loopback captures):
+        # per-sound Wwise volume trims in dB; source PCM stays untouched.
+        if name in MIX_TRIM_DB:
+            prop(node, "Volume", "Real64", MIX_TRIM_DB[name])
         if name.endswith("Loop"):
             prop(node, "IsLoopingEnabled", "bool", "True")
             prop(node, "IsLoopingInfinite", "bool", "True")

@@ -400,6 +400,9 @@ namespace HollowSaint.FoundationKit.Vfx
                     var owner = data.ResolveNetworkedObjectReference();
                     var visual = owner ? owner.GetComponent<OpenCircuit.Fx.OpenCircuitDomeFx>() : null;
                     if (visual) visual.ShowConfirmedStrike(data.origin);
+                    // 1.2 audio pass: the dwell zap (Circuit's strongest hit) was silent. Short,
+                    // punchy and spatial at the victim, distinct from the 0.5 s pulse tick.
+                    Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_SpearStruck" : "Play_loader_R_shock", gameObject);
                 }
                 catch (Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_CIRCUIT_ZAP_FX " + error); }
                 return;

@@ -192,7 +192,7 @@ def metrics(x):
             20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-12), (S * f).sum() / S.sum())
 
 
-MIX_LOAD_GAIN = 10 ** (-10 / 20)
+MIX_LOAD_GAIN = 10 ** (-2 / 20)  # was -10: in-game capture showed loads buried under the beam loops (rise ~0 dB)
 MIX_HIT_GAIN = {1: 10 ** (-4.5 / 20), 2: 10 ** (-5.0 / 20), 3: 10 ** (-6.0 / 20)}
 
 

@@ -108,6 +108,10 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             line.widthCurve = new AnimationCurve(new Keyframe(0f, 0.25f), new Keyframe(0.2f, 1f), new Keyframe(0.8f, 1f), new Keyframe(1f, 0.25f));
             line.enabled = false; return line;
         }
+        private int sparkedHop = -1;
+        // Runtime-only presentation (OpenCircuitDomeFx.Sparks.cs); compiled out in test builds.
+        partial void GroundTipContact(Vector3 tip, Vector3 previous);
+
         private void RenderPerimeter(float radius)
         {
             var shape = pose.Shape;
@@ -139,6 +143,13 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                 }
                 // Ground strokes keep only their checked prefix; upward strokes still suppress as a whole.
                 if (!(upward ? ClearPath(stroke.points, 0.065f) : ClearGroundPrefix(stroke))) { stroke.glow.enabled = stroke.core.enabled = false; continue; }
+                // Once per crawl: spark where the tip lands on the surface.
+                if (!upward && i == (hop & 3) && progress > 0.85f && sparkedHop != hop)
+                {
+                    sparkedHop = hop;
+                    int tip = Points - 1;
+                    GroundTipContact(stroke.points[tip], stroke.points[tip >= 2 ? tip - 2 : 0]);
+                }
                 Draw(stroke.glow, stroke.points, upward ? 0.075f : 0.12f, palette.Arc, flash * expansion * 0.48f);
                 Draw(stroke.core, stroke.points, upward ? 0.025f : 0.04f, upward ? palette.Secondary : palette.Core, flash * expansion * 0.85f);
             }

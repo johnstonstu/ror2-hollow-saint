@@ -6,14 +6,16 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
 {
     public sealed partial class OpenCircuitDomeFx
     {
-        private const int TerrainSamples = 32, MaxWorldChecks = 96, StrikeSlots = 4;
+        // 1.2 (Stu: "how the lightning reacts with the terrain"): 16 surface steps per branch sized to
+        // the radius, so ground lightning crawls ~92% of the way to the damage edge (was 8 x 0.35 m = 2.7 m).
+        private const int BranchSamples = 16, TerrainSamples = 4 * BranchSamples, MaxWorldChecks = 160, StrikeSlots = 4;
         private readonly Vector3[] terrain = new Vector3[TerrainSamples];
         private readonly bool[] terrainValid = new bool[TerrainSamples];
         private readonly Strike[] strikes = new Strike[StrikeSlots];
         private Vector3 terrainCenter;
         private float terrainRadius, nextTerrain;
         private int terrainCursor, worldChecks, terrainGeneration;
-        private readonly Vector3[] pendingGround = new Vector3[8];
+        private readonly Vector3[] pendingGround = new Vector3[BranchSamples];
         private readonly float[] groundAt = new float[4];
         private Vector3 groundOrigin;
         private int pendingCount;
@@ -79,10 +81,11 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
             terrainCenter = body.corePosition;
             if (Time.time < nextTerrain) return;
             nextTerrain = Time.time + 0.025f;
-            for (int n = 0; n < 4; n++)
+            float step = Mathf.Min(0.6f, Mathf.Max(0.3f, radius * 0.92f / BranchSamples));
+            for (int n = 0; n < 8; n++)
             {
                 int index = terrainCursor++ % TerrainSamples;
-                int branch = index / 8, j = index % 8;
+                int branch = index / BranchSamples, j = index % BranchSamples;
                 if (j == 0) { groundOrigin = body.corePosition; pendingCount = 0; pendingNormal = Vector3.up; terrainGeneration++; }
                 float phase = terrainGeneration * 1.71f + branch * 2.13f;
                 float angle = branch * Mathf.PI * 0.5f + 0.22f * Mathf.Sin(phase);
@@ -95,30 +98,48 @@ namespace HollowSaint.FoundationKit.OpenCircuit.Fx
                     Vector3 heading = (radial + side * (0.22f * Mathf.Sin(j * 1.8f + phase))).normalized;
                     Vector3 tangent = Vector3.ProjectOnPlane(heading, pendingNormal).normalized;
                     Vector3 sample = j == 0 ? groundOrigin + radial * 0.25f :
-                        pendingGround[j - 1] - pendingNormal * 0.10f + tangent * 0.35f;
-                    float height = j == 0 ? Mathf.Min(3f, radius * 0.75f) : 0.55f;
+                        pendingGround[j - 1] - pendingNormal * 0.10f + tangent * step;
+                    // Probe from high enough to climb a knee-high rock or step, never a wall.
+                    float height = j == 0 ? Mathf.Min(3f, radius * 0.75f) : step * 1.6f + 0.3f;
                     RaycastHit hit;
                     bool found = Physics.Raycast(sample + Vector3.up * height, Vector3.down, out hit,
                         height * 2f, LayerIndex.world.mask, QueryTriggerInteraction.Ignore) && hit.normal.y > 0.35f;
                     Vector3 point = found ? hit.point + hit.normal * 0.10f : sample;
+                    // Gaps, cliff drops and walls end the crawl: bounded step length and a
+                    // clear line from the previous contact (lifted off the surface).
                     if (found && Vector3.Distance(point, body.corePosition) < radius - 0.09f &&
-                        (j == 0 || Vector3.Distance(point, pendingGround[j - 1]) <= 0.65f))
+                        (j == 0 || (Vector3.Distance(point, pendingGround[j - 1]) <= step * 1.9f &&
+                         !Physics.CheckCapsule(pendingGround[j - 1] + pendingNormal * 0.12f, point + hit.normal * 0.12f, 0.04f,
+                            LayerIndex.world.mask, QueryTriggerInteraction.Ignore))))
                     {
                         pendingGround[j] = point; pendingNormal = hit.normal; pendingCount++;
                     }
                 }
-                if (j == 7)
+                if (j == BranchSamples - 1)
                 {
                     // Publish an entire path atomically; never mix old and newly probed points.
-                    for (int k = 0; k < 8; k++) { terrain[branch * 8 + k] = pendingGround[k]; terrainValid[branch * 8 + k] = k < pendingCount; }
+                    for (int k = 0; k < BranchSamples; k++) { terrain[branch * BranchSamples + k] = pendingGround[k]; terrainValid[branch * BranchSamples + k] = k < pendingCount; }
                     groundCount[branch] = pendingCount;
                     groundAt[branch] = Time.time;
                 }
             }
         }
+        /// <summary>Dev diagnostic: grounded steps and tip reach per branch.</summary>
+        internal string DebugBranches()
+        {
+            var sb = new System.Text.StringBuilder();
+            for (int b = 0; b < 4; b++)
+            {
+                int n = groundCount[b];
+                float reach = n > 0 && body ? Vector3.Distance(terrain[b * BranchSamples + n - 1], body.corePosition) : 0f;
+                sb.Append(b).Append(':').Append(n).Append('/').Append(BranchSamples).Append('@').Append(reach.ToString("0.0")).Append("m ");
+            }
+            return sb.ToString();
+        }
+
         private bool GroundBranch(Stroke stroke, int branch, float radius, float travel)
         {
-            int start = branch * 8;
+            int start = branch * BranchSamples;
             if (!terrainValid[start] || Time.time - groundAt[branch] > 0.7f) return false;
             int count = groundCount[branch];
             int first = 0;

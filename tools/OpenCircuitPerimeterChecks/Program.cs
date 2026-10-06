@@ -29,7 +29,7 @@ static class Program {
   pose.Apply(center,8,1);pose.Restore();long before=GC.GetAllocatedBytesForCurrentThread();for(int i=0;i<1000;i++){pose.Apply(center,8,1);pose.Restore();}Check(GC.GetAllocatedBytesForCurrentThread()==before,"pose hot path has no managed allocations");
   body.corePosition=center;body.buff=true;var gaze=body.gameObject.AddComponent<GazeBeam>();var fx=body.gameObject.AddComponent<OpenCircuitDomeFx>();
   var awake=Method(fx,"Awake");var update=Method(fx,"Update");var late=Method(fx,"LateUpdate");var disable=Method(fx,"OnDisable");awake();
-  void Frame(){Physics.Rays=Physics.Capsules=0;Time.time+=.02f;Time.unscaledTime=Time.time;update();late();Check(Physics.Rays<=4&&Physics.Capsules<=96,"bounded per-frame world queries");}
+  void Frame(){Physics.Rays=Physics.Capsules=0;Time.time+=.02f;Time.unscaledTime=Time.time;update();late();Check(Physics.Rays<=8&&Physics.Capsules<=168,"bounded per-frame world queries (1.2 crawl: 8 probes/tick, 160 capsule budget + 8 crawl checks)");}
   for(int frame=0;frame<40;frame++)Frame();Check(fx.Expansion>.999f,"late-join buff opens physical perimeter without cast event");
   var strokes=(Array)typeof(OpenCircuitDomeFx).GetField("strokes",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(fx);
   Check(strokes.Length==6,"four perimeter hops plus only two upward arcs");
@@ -53,7 +53,7 @@ static class Program {
   var terrainField=typeof(OpenCircuitDomeFx).GetField("terrain",BindingFlags.Instance|BindingFlags.NonPublic);
   var validField=typeof(OpenCircuitDomeFx).GetField("terrainValid",BindingFlags.Instance|BindingFlags.NonPublic);
   var samples=(Vector3[])terrainField.GetValue(fx);var valid=(bool[])validField.GetValue(fx);
-  for(int i=0;i<32;i++)Check(valid[i]&&Math.Abs(samples[i].y-(Physics.GroundY+.1f))<.001f,"cached samples follow supplied ground");
+  for(int i=0;i<64;i++)Check(valid[i]&&Math.Abs(samples[i].y-(Physics.GroundY+.1f))<.001f,"cached samples follow supplied ground");
   bool contours=false;for(int frame=0;frame<60;frame++){Frame();for(int i=0;i<4;i++){var line=(LineRenderer)glowField.GetValue(strokes.GetValue(i));if(line.enabled)foreach(var p in line.points)if(p.y<center.y-.5f)contours=true;}}
   Check(contours,"electrical sweeps acquire terrain height while physical docks remain equatorial");
   int walkingVisible=0;
@@ -65,10 +65,10 @@ static class Program {
   }
   Check(walkingVisible>80,"6m/s walking does not continually erase terrain branches");
   body.corePosition=center;for(int frame=0;frame<40;frame++)Frame();
-  samples=(Vector3[])terrainField.GetValue(fx);float shortest=100,longest=0;for(int i=0;i<32;i++){float d=Vector3.Distance(samples[i],center);shortest=Math.Min(shortest,d);longest=Math.Max(longest,d);}Check(longest-shortest>1,"short ground paths branch across interior instead of tracing a rigid ring");
+  samples=(Vector3[])terrainField.GetValue(fx);float shortest=100,longest=0;for(int i=0;i<64;i++){float d=Vector3.Distance(samples[i],center);shortest=Math.Min(shortest,d);longest=Math.Max(longest,d);}Check(longest-shortest>1,"short ground paths branch across interior instead of tracing a rigid ring");
   Physics.Slope=.1f;for(int frame=0;frame<80;frame++)Frame();
   samples=(Vector3[])terrainField.GetValue(fx);valid=(bool[])validField.GetValue(fx);int validRamp=0;
-  for(int i=0;i<32;i++)if(valid[i]){validRamp++;Check(Math.Abs((samples[i].y-Physics.Height(samples[i].x,samples[i].z))*Physics.Normal(samples[i].x,samples[i].z).y-.1f)<.003f,"branch probes follow ramp elevation");}Check(validRamp>=16,"ramp retains usable grounded branches");
+  for(int i=0;i<64;i++)if(valid[i]){validRamp++;Check(Math.Abs((samples[i].y-Physics.Height(samples[i].x,samples[i].z))*Physics.Normal(samples[i].x,samples[i].z).y-.1f)<.003f,"branch probes follow ramp elevation");}Check(validRamp>=16,"ramp retains usable grounded branches");
   Physics.Ground=false;for(int frame=0;frame<80;frame++)Frame();for(int i=0;i<4;i++)Check(!((LineRenderer)glowField.GetValue(strokes.GetValue(i))).enabled,"no ground never invents floating horizontal branch");
   Physics.Ground=true;Physics.Slope=0;for(int frame=0;frame<80;frame++)Frame();
   var reset=Method(fx,"ResetEnvironment");
@@ -80,8 +80,8 @@ static class Program {
    for(int frame=0;frame<120;frame++){
     Frame();samples=(Vector3[])terrainField.GetValue(fx);var counts=(int[])countField.GetValue(fx);
     for(int branch=0;branch<4;branch++){
-     int n=counts[branch];if(n>=2&&n<8)prefix++;
-     for(int k=1;k<n;k++)Check(Vector3.Distance(samples[branch*8+k],samples[branch*8+k-1])<=.65f,"bounded source spacing on nonflat terrain");
+     int n=counts[branch];if(n>=2&&n<16)prefix++;
+     for(int k=1;k<n;k++)Check(Vector3.Distance(samples[branch*16+k],samples[branch*16+k-1])<=.88f,"bounded source spacing on nonflat terrain");
      var line=(LineRenderer)glowField.GetValue(strokes.GetValue(branch));if(!line.enabled)continue;visible++;
      for(int k=1;k<17;k++)for(int m=0;m<=8;m++){
       var p=Vector3.Lerp(line.points[k-1],line.points[k],m/8f);
@@ -101,7 +101,7 @@ static class Program {
     var stroke=strokes.GetValue(branch);
     bool builtPath=(bool)groundMethod.Invoke(fx,new object[]{stroke,branch,KitTuning.OpenCircuitRadius,1f});
     if(!builtPath)continue;var points=(Vector3[])pointsField.GetValue(stroke);
-    for(int k=(int)Math.Ceiling(.45f*(n-1));k<n;k++){bool retained=false;foreach(var p in points)retained|=Near(p,samples[branch*8+k]);Check(retained,"window retains exact sampled corners");}
+    for(int k=(int)Math.Ceiling(.45f*(n-1));k<n;k++){bool retained=false;foreach(var p in points)retained|=Near(p,samples[branch*16+k]);Check(retained,"window retains exact sampled corners");}
    }
   }
   Physics.Profile=6;reset();body.corePosition=new Vector3(0,1,0);int unevenMovingVisible=0;
@@ -121,7 +121,7 @@ static class Program {
   Physics.Blocked=false;for(int i=0;i<15;i++)Frame();for(int i=0;i<4;i++)Check(!StrikeLine(i).enabled,"event TTL expires without automatic repeats");
   Check(fx.ShowConfirmedStrike(victim),"pool reusable");body.buff=false;for(int i=0;i<20;i++)Frame();Check(!fx.ShowConfirmedStrike(victim),"closed crown rejects events");body.buff=true;for(int i=0;i<40;i++)Frame();for(int i=0;i<4;i++)Check(!StrikeLine(i).enabled,"reopening cannot replay prior events");
   before=GC.GetAllocatedBytesForCurrentThread();for(int i=0;i<1000;i++){fx.ShowConfirmedStrike(victim);Frame();}Check(GC.GetAllocatedBytesForCurrentThread()==before&&GameObject.Created==built,"confirmed-event hot path is allocation-free and pooled");
-  Physics.Ground=false;body.corePosition+=new Vector3(10,0,0);Frame();valid=(bool[])validField.GetValue(fx);for(int i=0;i<32;i++)Check(!valid[i],"teleport invalidates old terrain cache");body.corePosition=center;
+  Physics.Ground=false;body.corePosition+=new Vector3(10,0,0);Frame();valid=(bool[])validField.GetValue(fx);for(int i=0;i<64;i++)Check(!valid[i],"teleport invalidates old terrain cache");body.corePosition=center;
   body.buff=false;for(int frame=0;frame<20;frame++)Frame();Check(fx.Expansion==0,"normal expiry finishes return");for(int i=0;i<4;i++)Check(Near(heads[i].localPosition,saved[i]),"expiry leaves animator pose intact");
   body.buff=true;for(int frame=0;frame<40;frame++)Frame();update();gaze.Current=GazeBeam.Phase.Beam;heads[0].localPosition=saved[0]+Vector3.up;late();Check(Near(heads[0].localPosition,saved[0]+Vector3.up)&&fx.Expansion==0,"yield cannot overwrite Gaze pose applied earlier that LateUpdate");heads[0].localPosition=saved[0];gaze.Current=GazeBeam.Phase.Idle;
   for(int frame=0;frame<40;frame++)Frame();body.healthComponent.alive=false;late();Check(fx.Expansion==0&&Near(heads[0].localPosition,saved[0]),"death restores pose immediately");body.healthComponent.alive=true;
