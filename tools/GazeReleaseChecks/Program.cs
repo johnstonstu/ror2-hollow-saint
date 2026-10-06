@@ -27,10 +27,11 @@ static class Program
         input.Observe(true, true, true);
         Check(input.Observe(false, true, false) == GazeReleaseEdge.Cancel, "exit beats simultaneous release");
     }
+    static readonly float Step = GazeReleaseTuning.SecondsPerExtraCharge;
     static void Holds()
     {
         foreach (int bank in new[] { 0, 1, 2, 3, 5, 20 })
-        foreach (var sample in new[] { (0f, 1), (.44f, 1), (.45f, 2), (.89f, 2), (.90f, 3), (3f, 3) })
+        foreach (var sample in new[] { (0f, 1), (Step - .01f, 1), (Step, 2), (2 * Step - .01f, 2), (2 * Step, 3), (3f, 3) })
         {
             var hold = new GazeReleaseHold(); var ledger = new GazeFuelLedger(); ledger.Begin(bank, Math.Max(5, bank));
             Check(hold.Begin(1f, bank) == (bank > 0), "empty holds rejected");
@@ -47,7 +48,7 @@ static class Program
         }
         var invalid = new GazeReleaseHold();
         Check(!invalid.Begin(float.NaN, 5) && !invalid.Begin(float.PositiveInfinity, 5), "invalid times rejected");
-        Check(GazeReleaseTuning.ArrivalFits(2f, 8f) && !GazeReleaseTuning.ArrivalFits(7.1f, 8f), "late arrival rejected");
+        Check(GazeReleaseTuning.ArrivalFits(2f, 8f) && !GazeReleaseTuning.ArrivalFits(7.7f, 8f), "late arrival rejected");
         Check(!GazeReleaseTuning.ArrivalFits(float.NaN, 8f), "invalid admission rejected");
     }
     static void Groups()

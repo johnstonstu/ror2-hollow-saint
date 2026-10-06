@@ -27,7 +27,7 @@ namespace HollowSaint
                 aimTarget = DummyChest(0);
                 yield return Press(4); yield return Wait(1.3f);
                 ReleaseCheck(fuel.AvailableEntry == 5, "entry bank five");
-                fire1 = true; yield return Wait(tier == 1 ? .12f : tier == 2 ? .58f : 1.05f);
+                fire1 = true; yield return Wait(.12f + (tier - 1) * GazeReleaseTuning.SecondsPerExtraCharge);
                 ReleaseCheck(fuel.LoadedCharges == tier && fuel.AvailableEntry == 5, "holding tier=" + tier + " spends nothing");
                 if (tier == 3)
                 {
@@ -35,7 +35,9 @@ namespace HollowSaint
                     Shot("release-loaded");
                     yield return Wait(.15f);
                 }
-                fire1 = false; yield return Wait(.20f);
+                fire1 = false; yield return Wait(.09f);
+                WideShot("release-impact-" + tier); Shot("release-impact-" + tier);
+                yield return Wait(.11f);
                 ReleaseCheck(fuel.AvailableEntry == 5 - tier && fuel.LoadedCharges == 0, "release spends tier=" + tier);
                 WideShot("release-surge-" + tier);
                 yield return Wait(.8f);
@@ -48,9 +50,9 @@ namespace HollowSaint
             pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
             aimTarget = DummyChest(0);
             yield return Press(4); yield return Wait(1.3f);
-            fire1 = true; yield return Wait(1.05f); fire1 = false; yield return Wait(.8f);
+            fire1 = true; yield return Wait(.15f + 2 * GazeReleaseTuning.SecondsPerExtraCharge); fire1 = false; yield return Wait(.8f);
             ReleaseCheck(fuel.AvailableEntry == 2, "first batch leaves two available");
-            fire1 = true; yield return Wait(.58f);
+            fire1 = true; yield return Wait(.12f + GazeReleaseTuning.SecondsPerExtraCharge);
             ReleaseCheck(fuel.LoadedCharges == 2 && fuel.AvailableEntry == 2, "second batch prepares remaining two");
             fire1 = false; yield return Wait(.8f);
             ReleaseCheck(fuel.AvailableEntry == 0 && fuel.LoadedCharges == 0, "second batch spends remaining two");
@@ -98,9 +100,9 @@ namespace HollowSaint
             var ring = FoundationKit.Vfx.HaloRing.For(pilot);
             float restingRadius = ring.Shape.Radius;
             Shot("crown-00-idle");yield return Wait(.2f);
-            fire1=true;yield return Wait(.25f);Shot("crown-01-loading");
-            yield return Wait(.4f);Shot("crown-02-loading");
-            yield return Wait(.55f);Shot("crown-03-full");
+            fire1=true;yield return Wait(.12f);Shot("crown-01-loading");
+            yield return Wait(GazeReleaseTuning.SecondsPerExtraCharge);Shot("crown-02-loading");
+            yield return Wait(GazeReleaseTuning.SecondsPerExtraCharge+.25f);Shot("crown-03-full");
             ReleaseCheck(ring.Shape.Radius>restingRadius*1.45f,"physical crown grows while preparing");
             trace.AppendLine("CROWN_RADIUS idle="+restingRadius+" full="+ring.Shape.Radius);
             ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(output,"crown-no-charge-hud.png"));

@@ -25,11 +25,17 @@
 						<ObjectRef Name="Play_HS_FanStart" ID="{9ED1832C-EE41-5931-9356-7FF9B927DE8D}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_Footstep" ID="{3D159989-157D-5754-A63F-A6AC73DA3C05}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_FootstepRun" ID="{651E7888-EEC7-59D7-BB4F-9D5E18639FD2}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GazeLoad1" ID="{46270889-D4C5-58AA-B825-64F4CE4AFD3B}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GazeLoad2" ID="{EEE0D1D4-AC8A-5D37-9A12-2C94161C813D}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GazeLoad3" ID="{B4ACA908-D97D-534B-915D-F86D73319E0D}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GazeSurge1" ID="{26884DDC-0EF9-52B1-A656-A108D5672323}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GazeSurge2" ID="{B63D0122-ECCD-5505-B543-D98479687DA4}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GazeSurge3" ID="{1E4E9FE6-DB0C-5919-A912-39328D6A2BD1}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GazeSurge4" ID="{3ADF39FB-2373-5F60-8680-762E0EE1F3EC}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GazeSurge5" ID="{B968DBCA-A927-527E-AD4C-38C849760947}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GazeSurgeHit1" ID="{12024F4D-089E-5D3B-9AD6-C12E52478828}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GazeSurgeHit2" ID="{92B9A1A8-ACFB-516C-B23D-26421214D60B}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_GazeSurgeHit3" ID="{7730CE5D-0167-537E-BF90-1511A68DC769}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GlideEnter" ID="{A1B8DD7A-7993-55CD-9BA9-94C21B0FE296}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GlideExit" ID="{8643706B-61BD-5070-896F-3021415F0E1C}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_GlideLoop" ID="{18559C74-2EF5-54BF-B8B3-171F8CAF92CA}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />

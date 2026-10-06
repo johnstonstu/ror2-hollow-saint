@@ -62,6 +62,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             p.finale = finale && (fullEntry || chargeCount >= 3);
             p.strength = 1f + .16f * (Mathf.Clamp(chargeCount, 1, 3) - 1);
             p.crownRadius = LiveCrownRadius(); p.rotation = Time.time * 4.54f;
+            if (elapsed < .15f) NoteSurge(chargeCount);
             p.ground = hasGround && p.normal.y > 0.35f;
             p.sleeve.Hide(); p.spine.Hide(); p.front.Hide(); p.glyph.Hide(); p.outline.Hide();
             foreach (var fork in p.forks) fork.Hide();

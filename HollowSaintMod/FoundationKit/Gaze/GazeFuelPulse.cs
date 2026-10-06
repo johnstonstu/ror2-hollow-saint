@@ -17,7 +17,8 @@ namespace HollowSaint.FoundationKit.Gaze
         private readonly bool[] resolved = new bool[MaxVictims];
         private readonly bool[] direct = new bool[MaxVictims];
         private int count;
-        private float damage;
+        private float damage, spreadSeconds, proc;
+        private int group;
         private bool crit;
         public int Phase { get; private set; }
         public Vector3 Origin, Impact, Ground, Normal;
@@ -52,7 +53,11 @@ namespace HollowSaint.FoundationKit.Gaze
                 primary = box;
                 Impact = hit.point;
             }
-            Travel = GazeFuelSchedule.Travel(Vector3.Distance(origin, Impact));
+            Travel = GazeReleaseTuning.Enabled ? GazeReleaseTuning.Travel(Vector3.Distance(origin, Impact)) :
+                GazeFuelSchedule.Travel(Vector3.Distance(origin, Impact));
+            spreadSeconds = GazeReleaseTuning.Enabled ? GazeReleaseTuning.SpreadSeconds : GazeFuelSchedule.SpreadDuration;
+            this.group = group;
+            proc = GazeReleaseTuning.Enabled ? GazeReleaseTuning.Proc(group) : 0f;
             Radius = Mathf.Max(0.1f, spreadRadius);
             RaycastHit terrain;
             HasGround = Physics.Raycast(Impact + Vector3.up * 2f, Vector3.down, out terrain, 8f,
@@ -83,8 +88,16 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (!GroundRoute(Ground, point, out targetGround)) continue;
                 float distance = Vector3.Distance(Ground, targetGround);
                 if (distance > Radius) continue;
-                Add(box, point, GazeFuelSchedule.StrikeAt(age, Travel, distance, Radius));
+                Add(box, point, GazeFuelSchedule.StrikeAt(age, Travel, distance, Radius, spreadSeconds));
             }
+        }
+
+        private Vector3 Shove(Vector3 point)
+        {
+            if (!GazeReleaseTuning.Enabled) return Vector3.zero;
+            Vector3 away = point - (HasGround ? Ground : Impact); away.y = 0f;
+            away = away.sqrMagnitude > .01f ? away.normalized : Vector3.zero;
+            return (away + Vector3.up * .35f).normalized * GazeReleaseTuning.ForcePerCharge * group;
         }
 
         private static bool Eligible(HealthComponent health, CharacterBody body, TeamIndex team) =>
@@ -147,14 +160,19 @@ namespace HollowSaint.FoundationKit.Gaze
                 var info = new DamageInfo
                 {
                     damage = damage, crit = crit, attacker = body.gameObject, inflictor = body.gameObject,
-                    position = point, force = Vector3.zero, procCoefficient = 0f,
+                    position = point, force = Shove(point), procCoefficient = proc,
                     damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Special),
                     damageColorIndex = DamageColorIndex.Electrocution, inflictedHurtbox = boxes[i]
                 };
                 StormServer.BeginStormDamage();
-                try { victim.TakeDamage(info); }
+                try
+                {
+                    victim.TakeDamage(info);
+                    // Same pattern as Electrocute: on-hit items under the storm guard.
+                    if (proc > 0f) KitUtil.ReportHit(info, victim.gameObject);
+                }
                 finally { StormServer.EndStormDamage(); }
-                if (!info.rejected) controller.ConfirmStrike(Phase, point, age);
+                if (!info.rejected) controller.ConfirmStrike(Phase, group, point, age);
             }
         }
     }

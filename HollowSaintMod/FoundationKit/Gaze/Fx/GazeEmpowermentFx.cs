@@ -85,6 +85,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             get
             {
                 if (!active) return 0f;
+                // 1.2 hold/release: never duck the beam for charge or surge cues; the beam
+                // itself carries the charge level and the release flare (see GazeBeamFx).
+                if (crownDriven) return 0f;
                 float focus = 0f;
                 foreach (var orb in fuel)
                     if (orb != null && orb.visible && orb.swallowing)

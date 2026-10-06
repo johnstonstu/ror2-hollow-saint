@@ -289,6 +289,48 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_HS_GazeLoad1" ID="{46270889-D4C5-58AA-B825-64F4CE4AFD3B}">
+					<ChildrenList>
+						<Action Name="" ID="{76651A41-B991-55FD-B854-D3DF16A57398}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeLoad1" ID="{112C7360-6369-5E42-9B03-2F5740735AD6}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeLoad2" ID="{EEE0D1D4-AC8A-5D37-9A12-2C94161C813D}">
+					<ChildrenList>
+						<Action Name="" ID="{DAFD0017-47EA-5C52-BEAB-A7E90D5779C1}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeLoad2" ID="{4AEAE8B8-181E-50E1-BD63-1BE55AA38395}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeLoad3" ID="{B4ACA908-D97D-534B-915D-F86D73319E0D}">
+					<ChildrenList>
+						<Action Name="" ID="{7BAFDAA2-79E2-5BD1-AB86-95F3595F802D}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeLoad3" ID="{D647A062-5559-5FA4-9512-546787EC0744}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 				<Event Name="Play_HS_GazeSurge1" ID="{26884DDC-0EF9-52B1-A656-A108D5672323}">
 					<ChildrenList>
 						<Action Name="" ID="{302FF268-3B49-5AC8-A4FE-FB677FDB9C08}">
@@ -354,6 +396,48 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="HS_GazeSurge5" ID="{EF287B84-6163-50F6-A6CF-03A52E827474}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeSurgeHit1" ID="{12024F4D-089E-5D3B-9AD6-C12E52478828}">
+					<ChildrenList>
+						<Action Name="" ID="{9C548EA6-921F-5D3D-99A5-B0BFC04E818A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurgeHit1" ID="{5A1F58FA-DE0B-5288-846D-9622A82158EE}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeSurgeHit2" ID="{92B9A1A8-ACFB-516C-B23D-26421214D60B}">
+					<ChildrenList>
+						<Action Name="" ID="{F9B5DF08-0220-55BD-9566-9B195B6F8B9A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurgeHit2" ID="{CF7C1619-880A-5E8C-9F22-4447F22822A3}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_GazeSurgeHit3" ID="{7730CE5D-0167-537E-BF90-1511A68DC769}">
+					<ChildrenList>
+						<Action Name="" ID="{A339F576-4A35-591E-B6A2-4A404292A213}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_GazeSurgeHit3" ID="{7B24558A-2F56-5D83-A661-E47F102805B8}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
 								</Reference>
 							</ReferenceList>
 						</Action>

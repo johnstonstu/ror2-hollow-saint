@@ -35,6 +35,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private GazeEmpowermentFx empowerment;
         private float focus;
         private AnimationCurve beamWidthCurve;
+        private float charge;
         private readonly LightningLine[] arcs = new LightningLine[2];
         private Transform impact, muzzle;
         private Light impactLight, muzzleLight;
@@ -201,6 +202,16 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             float grow = Mathf.Clamp01(sinceIgnite / 0.08f);
             float pulse = 1f + 0.07f * Mathf.Sin(Time.time * 38f) + 0.05f * (Mathf.PerlinNoise(Time.time * 9f, 0.3f) - 0.5f);
             float w = pop * grow * pulse * collapse;
+            if (empowerment && phase == GazeBeam.Phase.Beam)
+            {
+                // Hold/release readout from behind: +12% width per loaded charge, a snap on
+                // each load, and a hard tier-scaled flare on release.
+                int loaded = empowerment.PreparedCharges;
+                float flare = empowerment.SurgeFlare;
+                w *= 1f + .12f * loaded + .22f * empowerment.LoadFlash + .30f * flare;
+                charge = Mathf.Clamp01(loaded / 3f * .5f + .35f * empowerment.LoadFlash + .4f * flare);
+            }
+            else charge = 0f;
             shownRamp = GazeBeamWidthPolicy.Advance(shownRamp, GazeReleaseTuning.Enabled ? 2 : owner.RampSteps, dt);
 
             // Resource motion owns the accent. Duck the continuous decorative layers while
@@ -216,8 +227,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             }
             FocusTint(haze, palette.Outer, 0.14f, Mathf.Lerp(1f, 0.16f, focus));
             FocusTint(beamBody, palette.Arc, 0.72f, Mathf.Lerp(1f, 0.72f, focus));
-            FocusTint(sheath, palette.Arc, 0.5f, Mathf.Lerp(1f, 0.24f, focus));
-            FocusTint(core, palette.Core, 1f, Mathf.Lerp(1f, 0.38f, focus));
+            FocusTint(sheath, palette.Arc, Mathf.Lerp(0.5f, 0.85f, charge), Mathf.Lerp(1f, 0.24f, focus));
+            FocusTint(core, Color.Lerp(palette.Core, Color.white, charge), 1f, Mathf.Lerp(1f, 0.38f, focus));
             foreach (var helix in helices) FocusTint(helix, palette.Core, 1f, Mathf.Lerp(1f, 0.12f, focus));
             FocusEmitter(impactFlash, palette.Arc, 5f, Mathf.Lerp(0.35f, 0.08f, focus));
             FocusEmitter(impactSparks, palette.Arc, 18f, Mathf.Lerp(0.65f, 0.2f, focus));

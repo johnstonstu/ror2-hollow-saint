@@ -108,6 +108,8 @@ namespace HollowSaint.FoundationKit.Gaze
         public static float Coefficient(int orbs, int capacity) => 0.5f * orbs * 5f / Clamp(capacity);
         private static int Clamp(int capacity) => GazeFuelLedger.ClampCapacity(capacity);
         public static float StrikeAt(float launchAge, float travel, float groundDistance, float radius) =>
-            launchAge + travel + Math.Max(0f, Math.Min(1f, groundDistance / Math.Max(0.01f, radius))) * SpreadDuration;
+            StrikeAt(launchAge, travel, groundDistance, radius, SpreadDuration);
+        public static float StrikeAt(float launchAge, float travel, float groundDistance, float radius, float spread) =>
+            launchAge + travel + Math.Max(0f, Math.Min(1f, groundDistance / Math.Max(0.01f, radius))) * spread;
     }
 }

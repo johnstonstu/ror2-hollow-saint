@@ -1313,6 +1313,192 @@
 						<ActiveSource Name="SpearChargeStart" ID="{9120EED8-3A76-526F-8E08-C07765817BA2}" Platform="Linked" />
 					</ActiveSourceList>
 				</Sound>
+				<Sound Name="HS_GazeLoad1" ID="{112C7360-6369-5E42-9B03-2F5740735AD6}" ShortID="7559894">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GazeLoad1" ID="{89D75803-F7BB-53BB-BA61-324E866481E4}">
+							<Language>SFX</Language>
+							<AudioFile>GazeLoad1.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="838280120" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GazeLoad1" ID="{89D75803-F7BB-53BB-BA61-324E866481E4}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GazeLoad2" ID="{4AEAE8B8-181E-50E1-BD63-1BE55AA38395}" ShortID="446923669">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GazeLoad2" ID="{92C510EB-E97D-5C5D-9843-6D77D4E7FAC9}">
+							<Language>SFX</Language>
+							<AudioFile>GazeLoad2.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="572433835" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GazeLoad2" ID="{92C510EB-E97D-5C5D-9843-6D77D4E7FAC9}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GazeLoad3" ID="{D647A062-5559-5FA4-9512-546787EC0744}" ShortID="132908868">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GazeLoad3" ID="{4FB750A8-4F3E-5F97-9F6B-2A7357122A69}">
+							<Language>SFX</Language>
+							<AudioFile>GazeLoad3.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="529804258" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GazeLoad3" ID="{4FB750A8-4F3E-5F97-9F6B-2A7357122A69}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GazeSurgeHit1" ID="{5A1F58FA-DE0B-5288-846D-9622A82158EE}" ShortID="673274094">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GazeSurgeHit1" ID="{6EFD4F90-6382-586B-9803-BBD9AE59E31B}">
+							<Language>SFX</Language>
+							<AudioFile>GazeSurgeHit1.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="267011020" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GazeSurgeHit1" ID="{6EFD4F90-6382-586B-9803-BBD9AE59E31B}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GazeSurgeHit2" ID="{CF7C1619-880A-5E8C-9F22-4447F22822A3}" ShortID="841491107">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GazeSurgeHit2" ID="{8108517D-2A3A-570D-BA1B-FEA8FCD4FC5E}">
+							<Language>SFX</Language>
+							<AudioFile>GazeSurgeHit2.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="327053749" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GazeSurgeHit2" ID="{8108517D-2A3A-570D-BA1B-FEA8FCD4FC5E}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_GazeSurgeHit3" ID="{7B24558A-2F56-5D83-A661-E47F102805B8}" ShortID="271058360">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="GazeSurgeHit3" ID="{DE325DC4-FC61-5AC9-9438-3B22F1046EB4}">
+							<Language>SFX</Language>
+							<AudioFile>GazeSurgeHit3.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="502056706" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="GazeSurgeHit3" ID="{DE325DC4-FC61-5AC9-9438-3B22F1046EB4}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

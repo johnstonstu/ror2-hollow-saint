@@ -15,6 +15,7 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 presentationOwned = true;
                 clientCast = packet.cast;
+                releaseFeel.Begin();
                 clientAvailableEntry = packet.count;
                 clientEntryCapacity = packet.capacity;
                 clientPendingIntakes = 0;
@@ -70,7 +71,23 @@ namespace HollowSaint.FoundationKit.Gaze
                 presentationRelease = Time.time + GazeTuning.EndSeconds;
                 clientLoaded = 0;
             }
-            if (packet.kind == GazeFuelTransport.Kind.Load) clientLoaded = packet.count;
+            if (packet.kind == GazeFuelTransport.Kind.Load)
+            {
+                clientLoaded = packet.count;
+                if (GazeReleaseTuning.Enabled)
+                    try { releaseFeel.Loaded(body.gameObject, packet.count); }
+                    catch (System.Exception error) { GazeFuelTransport.Warn("load cue failed", error); }
+            }
+            if (packet.kind == GazeFuelTransport.Kind.Strike && GazeReleaseTuning.Enabled)
+                try
+                {
+                    if (releaseFeel.Hit(body, packet.cast, packet.phase, packet.count))
+                    {
+                        if (!presentation) presentation = GetComponent<GazeEmpowermentFx>() ?? gameObject.AddComponent<GazeEmpowermentFx>();
+                        presentation.SurgeImpact(packet.cast, packet.impact, packet.count);
+                    }
+                }
+                catch (System.Exception error) { GazeFuelTransport.Warn("surge hit cue failed", error); }
             try
             {
                 if (!presentation) presentation = GetComponent<GazeEmpowermentFx>() ?? gameObject.AddComponent<GazeEmpowermentFx>();

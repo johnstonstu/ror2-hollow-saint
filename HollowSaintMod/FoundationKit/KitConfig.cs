@@ -111,6 +111,9 @@ namespace HollowSaint.FoundationKit
             F(c, gaze, "Chain damage", Gaze.GazeTuning.ChainFraction, v => Gaze.GazeTuning.ChainFraction = v, 0f, 1.5f, 0.05f, "Fraction of the fork's damage dealt by the chain hop.");
             F(c, gaze, "Launch height", Gaze.GazeTuning.LaunchHeight, v => Gaze.GazeTuning.LaunchHeight = v, 0f, 15f, 0.5f, "Metres above the ground the cast lifts you to.");
             F(c, gaze, "Drift speed", Gaze.GazeTuning.DriftSpeedMultiplier, v => Gaze.GazeTuning.DriftSpeedMultiplier = v, 0f, 1f, 0.05f, "Move speed multiplier while hovering.");
+            F(c, gaze, "Charge seconds", Gaze.GazeReleaseTuning.SecondsPerExtraCharge, v => Gaze.GazeReleaseTuning.SecondsPerExtraCharge = v, 0.1f, 1f, 0.02f, "Hold Primary while beaming: seconds to load each extra charge (up to three).");
+            F(c, gaze, "Surge damage per charge", Gaze.GazeReleaseTuning.DamagePerCharge, v => Gaze.GazeReleaseTuning.DamagePerCharge = v, 0.5f, 10f, 0.25f, "Damage coefficient of a released surge, per charge spent.");
+            F(c, gaze, "Surge proc per charge", Gaze.GazeReleaseTuning.ProcPerCharge, v => Gaze.GazeReleaseTuning.ProcPerCharge = v, 0f, 1f, 0.05f, "Item proc coefficient of a released surge, per charge spent (capped at 1).");
             F(c, gaze, "Cooldown", Gaze.GazeTuning.Cooldown, v => Gaze.GazeTuning.Cooldown = v, 4f, 40f, 0.5f, "Seconds, counted from the end of the beam (restart).", restart: true);
 
             F(c, storm, "Static threshold", KitTuning.StaticThreshold, v => KitTuning.StaticThreshold = v, 0.05f, 1f, 0.05f, "Fraction of the target's max health a full-proc hit needs to deal to fill Static from 0 to 100%.");
@@ -224,6 +227,12 @@ namespace HollowSaint.FoundationKit
                 // Reliability pass: migrate only the exact prior default; preserve custom speeds.
                 Migrate(bolt, "Projectile speed", 80f, 120f, v => KitTuning.ArcBoltProjectileSpeed = v, matchExactly: true);
             }
+            if (defaultsVersion.Value < 14)
+            {
+                // 1.2 Gaze pass: 7 s beam means more ticks and fork volleys; preserve custom values.
+                Migrate(gaze, "Proc coefficient", 0.5f, 0.3f, v => Gaze.GazeTuning.ProcCoefficient = v, matchExactly: true);
+                Migrate(gaze, "Fork damage", 1f, 0.7f, v => Gaze.GazeTuning.ForkDamage = v, matchExactly: true);
+            }
             if (defaultsVersion.Value < CurrentDefaultsVersion) defaultsVersion.Value = CurrentDefaultsVersion;
             KitDescriptions.Refresh();
 
@@ -236,7 +245,7 @@ namespace HollowSaint.FoundationKit
             if (logVersion.Value < 1) { if (EventLog.Value) EventLog.Value = false; logVersion.Value = 1; }
         }
 
-        private const int CurrentDefaultsVersion = 13;
+        private const int CurrentDefaultsVersion = 14;
 
         private static void MigrateBool(string section, string key, bool oldDefault, bool newDefault, Action<bool> set)
         {

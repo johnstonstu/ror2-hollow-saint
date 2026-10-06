@@ -30,20 +30,20 @@ namespace HollowSaint.FoundationKit.Gaze
         // Core beam.
         public static float DamagePerSecond = 5f;           // coefficient per second at 1x attack speed
         public static float TickSeconds = 0.2f;             // attack speed shortens it (more ticks)
-        public static float ProcCoefficient = 0.5f;
+        public static float ProcCoefficient = 0.3f;         // 1.2: was 0.5 (7 s beam = 75% more ticks)
         public static float Range = 60f;
         public static float Radius = 1.5f;                  // half the beam's hit width
 
         // Impact splash (enemies near the impact the core did not hit this tick).
         public static float SplashRadius = 3f;
         public static float SplashFraction = 0.5f;          // of one core tick
-        public const float SplashProc = 0.3f;
+        public const float SplashProc = 0.2f;               // 1.2: was 0.3
 
         // Ground forks.
         public static float ForkInterval = 0.5f;
         public static int ForkCount = 2;
         public static float ForkRange = 8f;
-        public static float ForkDamage = 1f;
+        public static float ForkDamage = 0.7f;              // 1.2: was 1.0 (14 volleys per cast, not 8)
         public const float ForkProc = 0.3f;
         public static float ChainRange = 6f;
         public static float ChainFraction = 0.6f;           // of the fork's damage

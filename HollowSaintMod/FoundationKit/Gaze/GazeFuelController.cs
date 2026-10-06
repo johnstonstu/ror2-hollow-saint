@@ -25,6 +25,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private readonly GazeManualRequestPolicy requests = new GazeManualRequestPolicy();
         private readonly GazePulseAudio pulseAudio = new GazePulseAudio();
         private readonly GazePulseKick pulseKick = new GazePulseKick();
+        private readonly GazeReleaseFeel releaseFeel = new GazeReleaseFeel();
         private uint cast, sequence, clientCast, clientRequestSequence;
         private float age, presentationRelease, beamDuration, frozenBeamDuration, nextClientRequest;
         private bool presentationOwned;
@@ -178,8 +179,8 @@ namespace HollowSaint.FoundationKit.Gaze
             {
                 // A fixed-step hitch may defer an acknowledged intake. Keep its
                 // entry orb refundable instead of spending into an impossible arrival.
-                bool fits = GazeReleaseTuning.Enabled ? age + GazeFuelSchedule.MaximumTravel +
-                    GazeFuelSchedule.SpreadDuration + .05f < GazeTuning.WindupSeconds + beamDuration :
+                bool fits = GazeReleaseTuning.Enabled ? age + GazeReleaseTuning.MaximumTravel +
+                    GazeReleaseTuning.SpreadSeconds + .05f < GazeTuning.WindupSeconds + beamDuration :
                     GazeLaunchDurationPolicy.CanLaunch(age, GazeTuning.WindupSeconds + beamDuration, GazeTuning.WindupSeconds);
                 if (!fits)
                 {
@@ -222,7 +223,8 @@ namespace HollowSaint.FoundationKit.Gaze
                 var packet = Packet(GazeFuelTransport.Kind.Launch);
                 packet.phase = (byte)phase; packet.origin = pulse.Origin; packet.impact = pulse.Impact;
                 packet.groundPoint = pulse.Ground; packet.normal = pulse.Normal; packet.ground = pulse.HasGround;
-                packet.radius = pulse.Radius; packet.travel = pulse.Travel; packet.spread = GazeFuelSchedule.SpreadDuration;
+                packet.radius = pulse.Radius; packet.travel = pulse.Travel;
+                packet.spread = GazeReleaseTuning.Enabled ? GazeReleaseTuning.SpreadSeconds : GazeFuelSchedule.SpreadDuration;
                 packet.count = (byte)group;
                 packet.full = GazeReleaseTuning.Enabled && group >= GazeReleaseTuning.MaximumLoaded;
                 packet.beamDuration = beamDuration;
@@ -241,10 +243,10 @@ namespace HollowSaint.FoundationKit.Gaze
             Send(packet);
         }
 
-        internal void ConfirmStrike(int phase, Vector3 point, float elapsed)
+        internal void ConfirmStrike(int phase, int group, Vector3 point, float elapsed)
         {
             var packet = Packet(GazeFuelTransport.Kind.Strike);
-            packet.phase = (byte)phase; packet.impact = point; packet.age = elapsed;
+            packet.phase = (byte)phase; packet.count = (byte)System.Math.Max(1, System.Math.Min(3, group)); packet.impact = point; packet.age = elapsed;
             Send(packet);
         }
 

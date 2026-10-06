@@ -8,14 +8,25 @@ namespace HollowSaint.FoundationKit.Gaze
     {
         internal static readonly bool Enabled = Environment.GetEnvironmentVariable("HS_GAZE_BASELINE") != "1";
         internal const float BeamSeconds = 7f;
-        internal const float SecondsPerExtraCharge = .45f;
+        // 1.2 "snap" pass (Stu: charge too slow, release lacks punch, tiers hard to read).
+        internal static float SecondsPerExtraCharge = .28f;   // was .45: full at 0.56 s
         internal const int MaximumLoaded = 3;
-        internal const float RecoverySeconds = .65f;
-        internal const float ReleaseIntake = .06f;
-        internal const float DamagePerCharge = 4f;
+        internal const float RecoverySeconds = .40f;         // was .65
+        internal const float ReleaseIntake = .03f;           // was .06
+        internal static float DamagePerCharge = 4f;
+        // The surge is a lightning strike, not a projectile: near-instant arrival so the hit
+        // lands with the button release (was 0.35-0.55 s travel + 0.30 s ground spread).
+        internal const float TravelBase = .06f, TravelPerRange = .10f, MaximumTravel = TravelBase + TravelPerRange;
+        internal const float SpreadSeconds = .14f;
+        // Surges now proc items and shove: 0.4 / 0.8 / 1.0 proc, light knockback per charge.
+        internal static float ProcPerCharge = .4f;
+        internal const float ForcePerCharge = 450f;
+        internal static float Travel(float distance) =>
+            TravelBase + TravelPerRange * Math.Max(0f, Math.Min(1f, distance / 60f));
+        internal static float Proc(int group) => Math.Min(1f, ProcPerCharge * Math.Max(1, group));
         internal static bool ArrivalFits(float age, float end) =>
             !float.IsNaN(age) && !float.IsInfinity(age) &&
-            age + ReleaseIntake + GazeFuelSchedule.MaximumTravel + GazeFuelSchedule.SpreadDuration + .05f < end;
+            age + ReleaseIntake + MaximumTravel + SpreadSeconds + .05f < end;
     }
 
     internal enum GazeReleaseEdge { None, Begin, Release, Cancel }
