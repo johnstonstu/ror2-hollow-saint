@@ -115,7 +115,7 @@ namespace HollowSaint.FoundationKit.Vfx
             Material result;
             if (materials.TryGetValue(source, out result)) return result;
             result = new Material(source) { name = source.name + "_HSTheme" + Index };
-            bool core = source == VfxAssets.ArcCore || source == VfxAssets.Spark;
+            bool core = source == VfxAssets.ArcCore;
             Color color = core ? Core : Arc;
             foreach (string property in new[] { "_TintColor", "_Color", "_EmissionColor" })
                 if (result.HasProperty(property))

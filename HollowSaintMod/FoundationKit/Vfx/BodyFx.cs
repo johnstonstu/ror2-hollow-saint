@@ -401,8 +401,10 @@ namespace HollowSaint.FoundationKit.Vfx
                 age += Time.deltaTime;
                 float t = age / duration;
                 if (t >= 1f) { Destroy(gameObject); return; }
-                Color c = tint * (1.2f * (1f - t));
-                c.a = 1f - t;
+                // 1.2: was 1.2x linear, which read as a solid flat magenta cut-out. Ghostlier now.
+                float fade = (1f - t) * (1f - t);
+                Color c = tint * (.65f * fade);
+                c.a = .7f * fade;
                 block.SetColor("_TintColor", c);
                 foreach (var r in renderers) if (r) r.SetPropertyBlock(block);
             }

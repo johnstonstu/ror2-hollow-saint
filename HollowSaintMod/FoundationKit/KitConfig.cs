@@ -111,6 +111,9 @@ namespace HollowSaint.FoundationKit
             F(c, gaze, "Chain damage", Gaze.GazeTuning.ChainFraction, v => Gaze.GazeTuning.ChainFraction = v, 0f, 1.5f, 0.05f, "Fraction of the fork's damage dealt by the chain hop.");
             F(c, gaze, "Launch height", Gaze.GazeTuning.LaunchHeight, v => Gaze.GazeTuning.LaunchHeight = v, 0f, 15f, 0.5f, "Metres above the ground the cast lifts you to.");
             F(c, gaze, "Drift speed", Gaze.GazeTuning.DriftSpeedMultiplier, v => Gaze.GazeTuning.DriftSpeedMultiplier = v, 0f, 1f, 0.05f, "Move speed multiplier while hovering.");
+            // Dev A/B for the 1.2 hold/release trial; read once (restart). Remove before release.
+            Gaze.GazeReleaseTuning.UseLegacyTapPulses(c.Bind(gaze, "Legacy tap pulses (A/B, restart)", false,
+                "Dev comparison: use the 1.1-style tap-to-spend Gaze pulses instead of hold/release. Restart the game after changing.").Value);
             F(c, gaze, "Charge seconds", Gaze.GazeReleaseTuning.SecondsPerExtraCharge, v => Gaze.GazeReleaseTuning.SecondsPerExtraCharge = v, 0.1f, 1f, 0.02f, "Hold Primary while beaming: seconds to load each extra charge (up to three).");
             F(c, gaze, "Surge damage per charge", Gaze.GazeReleaseTuning.DamagePerCharge, v => Gaze.GazeReleaseTuning.DamagePerCharge = v, 0.5f, 10f, 0.25f, "Damage coefficient of a released surge, per charge spent.");
             F(c, gaze, "Surge proc per charge", Gaze.GazeReleaseTuning.ProcPerCharge, v => Gaze.GazeReleaseTuning.ProcPerCharge = v, 0f, 1f, 0.05f, "Item proc coefficient of a released surge, per charge spent (capped at 1).");

@@ -12,6 +12,13 @@ namespace HollowSaint.FoundationKit.Vfx
         {
             var go = new GameObject("HS_Burst");
             go.transform.SetPositionAndRotation(position, rotation);
+            if (IsHitspark(material))
+            {
+                // Hitspark sprites read as solid starbursts when large or dense: keep them as embers.
+                count = Mathf.Max(1, Mathf.RoundToInt(count * .7f));
+                size *= .65f;
+                color = Color.Lerp(color, new Color(color.r, color.g, color.b, color.a * .8f), 1f);
+            }
             var ps = Configure(go, material, lifetime, speed, size, color, stretch, spreadAngle, looping: false);
             var emission = ps.emission;
             emission.rateOverTime = 0f;
@@ -20,6 +27,9 @@ namespace HollowSaint.FoundationKit.Vfx
             Object.Destroy(go, lifetime + 0.5f);
             return ps;
         }
+
+        private static bool IsHitspark(Material material) =>
+            material && material.name.IndexOf("Hitspark", System.StringComparison.OrdinalIgnoreCase) >= 0;
 
         /// <summary>Looping emitter parented to a transform (caller controls lifetime).</summary>
         public static ParticleSystem Loop(Transform parent, Material material, float rate, float lifetime,
@@ -161,7 +171,11 @@ namespace HollowSaint.FoundationKit.Vfx
             go.transform.position = center;
             go.transform.rotation = Quaternion.FromToRotation(Vector3.up, normal);
             palette = palette ?? SkinFxPalette.ForIndex(0);
-            go.AddComponent<ExpandingRing>().Init(startRadius, endRadius, duration, width, palette.Material(material), palette.Arc);
+            // 1.2: large ground rings hug the terrain. A flat 8 m circle on a slope floats on one
+            // side and sinks on the other, and from the gameplay camera reads as stray straight
+            // hairlines across the screen.
+            bool conform = Vector3.Dot(normal.normalized, Vector3.up) > .95f && Mathf.Max(startRadius, endRadius) > 1.8f;
+            go.AddComponent<ExpandingRing>().Init(startRadius, endRadius, duration, width, palette.Material(material), palette.Arc, conform);
         }
 
         private sealed class ExpandingRing : MonoBehaviour
@@ -171,13 +185,16 @@ namespace HollowSaint.FoundationKit.Vfx
             private const int Points = 48;
             private Color color;
 
-            public void Init(float startRadius, float endRadius, float seconds, float lineWidth, Material material, Color tint)
+            private bool conform;
+            private float[] heights;
+            public void Init(float startRadius, float endRadius, float seconds, float lineWidth, Material material, Color tint, bool conformToGround = false)
             {
                 color = tint;
+                conform = conformToGround;
                 r0 = startRadius; r1 = endRadius; duration = Mathf.Max(0.01f, seconds); width = lineWidth;
                 line = gameObject.AddComponent<LineRenderer>();
                 line.sharedMaterial = material;
-                line.useWorldSpace = false;
+                line.useWorldSpace = conform;
                 line.loop = true;
                 line.positionCount = Points;
                 line.alignment = LineAlignment.View;
@@ -198,10 +215,20 @@ namespace HollowSaint.FoundationKit.Vfx
             {
                 float eased = 1f - (1f - t) * (1f - t);
                 float r = Mathf.Lerp(r0, r1, eased);
+                Vector3 center = transform.position;
+                if (conform && heights == null) { heights = new float[Points]; for (int i = 0; i < Points; i++) heights[i] = center.y; }
                 for (int i = 0; i < Points; i++)
                 {
                     float a = i / (float)Points * Mathf.PI * 2f;
-                    line.SetPosition(i, new Vector3(Mathf.Cos(a) * r, 0f, Mathf.Sin(a) * r));
+                    var local = new Vector3(Mathf.Cos(a) * r, 0f, Mathf.Sin(a) * r);
+                    if (!conform) { line.SetPosition(i, local); continue; }
+                    Vector3 p = center + local;
+                    RaycastHit hit;
+                    // Keep the last good height over gaps, so a cliff edge doesn't spike the line.
+                    if (Physics.Raycast(new Vector3(p.x, center.y + 4f, p.z), Vector3.down, out hit, 10f,
+                        RoR2.LayerIndex.world.mask, QueryTriggerInteraction.Ignore)) heights[i] = hit.point.y + .12f;
+                    p.y = heights[i];
+                    line.SetPosition(i, p);
                 }
                 float w = width * (1f - t);
                 line.startWidth = w;

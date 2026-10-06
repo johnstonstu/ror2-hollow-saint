@@ -192,13 +192,19 @@ def metrics(x):
             20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-12), (S * f).sum() / S.sum())
 
 
+MIX_LOAD_GAIN = 10 ** (-10 / 20)
+MIX_HIT_GAIN = {1: 10 ** (-4.5 / 20), 2: 10 ** (-5.0 / 20), 3: 10 ** (-6.0 / 20)}
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     clips = {}
     for k in (1, 2, 3):
-        clips[f"GazeLoad{k}"] = write(OUT / f"GazeLoad{k}.wav", load_cue(k))
+        # Mix trim (1.2 loudness pass): loads repeat every 0.28 s; keep them near ChargeTick/ArcStep.
+        clips[f"GazeLoad{k}"] = write(OUT / f"GazeLoad{k}.wav", load_cue(k) * MIX_LOAD_GAIN)
     for k in (1, 2, 3):
-        clips[f"GazeSurgeHit{k}"] = write(OUT / f"GazeSurgeHit{k}.wav", surge_hit(k))
+        # Tier 3 lands around SpearBurst; tiers keep ~3-4 dB steps.
+        clips[f"GazeSurgeHit{k}"] = write(OUT / f"GazeSurgeHit{k}.wav", surge_hit(k) * MIX_HIT_GAIN[k])
     # audition: Load1..3 at 0.28 s, 0.3 s gap, Hit3; 1 s gap; Hit1, 0.5, Hit2, 0.5, Hit3
     L = [clips[f"GazeLoad{k}"] for k in (1, 2, 3)]
     H = [clips[f"GazeSurgeHit{k}"] for k in (1, 2, 3)]

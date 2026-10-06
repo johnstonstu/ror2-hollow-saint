@@ -301,6 +301,24 @@ namespace HollowSaint
 
         private void Shot(string name) { lastShotReal = Time.realtimeSinceStartup; StartCoroutine(ShotRoutine(name)); }
 
+        /// <summary>Dev diagnostic: lists visible renderers near a point (name, type, material,
+        /// world size) so stray or oversized effects can be traced to their source.</summary>
+        private void DumpEffects(string label, Vector3 center, float radius)
+        {
+            var sb = new System.Text.StringBuilder("FX_DUMP " + label + " ");
+            foreach (var r in UnityEngine.Object.FindObjectsOfType<Renderer>())
+            {
+                if (!r.enabled || !r.gameObject.activeInHierarchy || r.gameObject.isStatic) continue;
+                if (r.GetComponentInParent<CharacterModel>() != null && r.sharedMaterials.Length < 2 && !(r is ParticleSystemRenderer) && !(r is LineRenderer)) continue;
+                var b = r.bounds;
+                if ((b.center - center).sqrMagnitude > radius * radius && b.size.magnitude < 20f) continue;
+                Transform root = r.transform; while (root.parent) root = root.parent;
+                sb.Append('\n').Append("  ").Append(root.name).Append('/').Append(r.name).Append(' ').Append(r.GetType().Name)
+                  .Append(" mat=").Append(r.sharedMaterial ? r.sharedMaterial.name : "-").Append(" size=").Append(b.size.magnitude.ToString("0.0"));
+            }
+            trace.AppendLine(sb.ToString());
+        }
+
         private IEnumerator ShotRoutine(string name)
         {
             float at = scriptTime;
@@ -514,7 +532,7 @@ namespace HollowSaint
             yield return Wait(0.65f); Shot("d-charge-66");
             yield return Wait(0.8f); Shot("d-charge-full");
             fire2 = false; yield return Wait(0.04f); Shot("d-throw-05"); yield return Wait(0.06f); Shot("d-throw"); yield return Wait(0.06f); Shot("d-throw-12"); fire1 = false;
-            yield return Wait(0.4f); Shot("d-burst");
+            yield return Wait(0.4f); Shot("d-burst"); DumpEffects("d-burst", DummyChest(0), 12f);
             yield return Wait(5.4f);
             aimTarget = DummyChest(1);
             yield return Press(2); yield return Wait(0.3f); Shot("d-tap");
@@ -556,7 +574,7 @@ namespace HollowSaint
             yield return Segment("crown-combo");
             yield return Press(4); yield return Wait(1.4f);
             aimTarget = DummyChest(0); fire1 = true; yield return Wait(0.6f); Shot("f-crown-bolts");
-            fire2 = true; yield return Wait(0.4f); Shot("f-crown-charge"); yield return Wait(0.5f); Shot("f-crown-full");
+            fire2 = true; yield return Wait(0.4f); Shot("f-crown-charge"); yield return Wait(0.5f); Shot("f-crown-full"); DumpEffects("f-crown-full", DummyChest(0), 12f);
             fire2 = false; yield return Wait(0.05f); Shot("f-crown-throw-05"); yield return Wait(0.07f); Shot("f-crown-throw"); yield return Wait(0.45f); Shot("f-crown-thunder"); fire1 = false;
             yield return Wait(0.6f);
             move = facing; yield return Press(3); yield return Wait(0.5f); move = Vector3.zero;

@@ -45,7 +45,9 @@ namespace HollowSaint.FoundationKit.Vfx
             ArcGlow = Make(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common_VFX.matLightningLongBlue_mat, HsPalette.ArcCyan, 1f);
             Flash = Make(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common_VFX.matGenericFlash_mat, HsPalette.ArcCyan, 1.1f);
             Ring = Make(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Huntress.matOmniRing2Huntress_mat, HsPalette.ArcCyan, 1.2f);
-            Spark = Make(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Huntress.matOmniHitspark1Huntress_mat, HsPalette.WhiteHot, 1.2f);
+            // 1.2: arc-tinted, not white-hot. The hitspark texture is a big spiky starburst; white,
+            // it blew out into opaque white splats that hid the enemy (full-kit review).
+            Spark = Make(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Huntress.matOmniHitspark1Huntress_mat, HsPalette.ArcCyan, 1.0f);
             Trail = Make(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common_VFX.matTracerBright_mat, HsPalette.ArcCyan, 1f);
             Afterimage = Make(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common_VFX.matTracerBrightTransparent_mat, HsPalette.OuterCyan, 0.8f);
             Plugin.Log.LogInfo("Hollow Saint VFX materials ready.");

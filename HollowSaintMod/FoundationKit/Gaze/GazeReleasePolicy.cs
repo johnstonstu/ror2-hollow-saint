@@ -6,7 +6,10 @@ namespace HollowSaint.FoundationKit.Gaze
     /// never a config migration or a change to the stored public tuning.</summary>
     internal static class GazeReleaseTuning
     {
-        internal static readonly bool Enabled = Environment.GetEnvironmentVariable("HS_GAZE_BASELINE") != "1";
+        internal static bool Enabled { get; private set; } = Environment.GetEnvironmentVariable("HS_GAZE_BASELINE") != "1";
+        /// <summary>Dev A/B only (config "Legacy tap pulses", read once at startup). Never
+        /// flipped mid-session: packets and casts assume one mode per process.</summary>
+        internal static void UseLegacyTapPulses(bool legacy) { if (legacy) Enabled = false; }
         internal const float BeamSeconds = 7f;
         // 1.2 "snap" pass (Stu: charge too slow, release lacks punch, tiers hard to read).
         internal static float SecondsPerExtraCharge = .28f;   // was .45: full at 0.56 s
