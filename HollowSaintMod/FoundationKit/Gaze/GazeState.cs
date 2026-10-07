@@ -147,6 +147,8 @@ namespace HollowSaint.FoundationKit.Gaze
                 // 1.2 charge-up: the absorbed charges wait in the crown for the first Primary press.
                 if (NetworkServer.active && fuel && OpeningCharges > 0) fuel.ServerPrime(OpeningCharges);
                 if (fuel && OpeningCharges > 0) fuel.LocalPrime(OpeningCharges);
+                // The opening fires at once; it lands a moment later with the wave.
+                if (NetworkServer.active && fuel && OpeningCharges > 0) fuel.ServerFireOpeningNow(fixedAge, GazeTuning.WindupSeconds + beamDuration);
                 KitLog.Event("GAZE_IGNITE");
             }
             if (ignited && NetworkServer.active && fixedAge < BeamEnd && beam) ServerTick(dt);

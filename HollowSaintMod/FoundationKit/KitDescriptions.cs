@@ -64,6 +64,8 @@ namespace HollowSaint.FoundationKit
             args["dps"] = Pct(GazeTuning.DamagePerSecond);
             args["releaseSeconds"] = Num(GazeReleaseTuning.BeamSeconds);
             args["surgeDamage"] = Pct(GazeReleaseTuning.DamagePerCharge);
+            args["openingDamage"] = Pct(GazeReleaseTuning.DamagePerCharge * GazeReleaseTuning.OpeningDamageScale);
+            args["underDamage"] = Pct(GazeReleaseTuning.DamagePerCharge * GazeReleaseTuning.UnderStrikeDamageScale);
             args["surgeMax"] = GazeReleaseTuning.MaximumLoaded.ToString(CultureInfo.InvariantCulture);
             args["chargeStep"] = GazeReleaseTuning.SecondsPerExtraCharge.ToString("0.##", CultureInfo.InvariantCulture);
             args["armorOn"] = GazeTuning.Armor > 0.5f ? "yes" : "no";

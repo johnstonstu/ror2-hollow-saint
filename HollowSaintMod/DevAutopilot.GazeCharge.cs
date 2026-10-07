@@ -33,17 +33,22 @@ namespace HollowSaint
                 fire4 = false;
                 string h = hold.ToString("0.0");
                 yield return Wait(0.05f); Shot("gc-release-" + h);
-                // Beam is up with the charges primed in the crown; RT fires the opening pulse.
-                yield return Wait(1.0f); Shot("gc-primed-" + h);
-                fire1 = true; yield return Wait(0.03f);
+                // The opening fires on its own at ignition (windup 0.7 s after the hand-off).
+                yield return Wait(0.66f);
                 Time.timeScale = 0.25f;
                 yield return Wait(0.03f); Shot("gc-fire-" + h);
                 yield return Wait(0.06f); Shot("gc-wave1-" + h);
                 yield return Wait(0.07f); Shot("gc-wave2-" + h);
                 yield return Wait(0.1f); Shot("gc-boom-" + h); WideShot("gc-boom-wide-" + h);
                 Time.timeScale = 1f;
-                fire1 = false;
-                yield return Wait(2.5f);
+                // A minor surge aimed far away: the under-strike should hit the dummies below.
+                yield return Wait(1.0f);
+                aimTarget = null; aimPitch = 6f;
+                yield return Wait(0.3f);
+                fire1 = true; yield return Wait(0.6f); fire1 = false;
+                yield return Wait(0.22f); Shot("gc-under-" + h); WideShot("gc-under-wide-" + h);
+                aimPitch = 0f; aimTarget = DummyChest(0);
+                yield return Wait(2.0f);
                 trace.AppendLine("GAZE_CHARGE_RESULT hold=" + hold + " bankBefore=" + before + " bankNow=" + (meter ? meter.Charge : -1));
                 yield return Press(4); yield return Wait(1.5f);
             }

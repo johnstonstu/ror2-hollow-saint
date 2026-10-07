@@ -28,7 +28,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public void Clear() { count = 0; Array.Clear(victims, 0, victims.Length); Array.Clear(boxes, 0, boxes.Length); }
 
         public void Launch(CharacterBody body, Vector3 origin, Vector3 direction, int phase,
-            int group, int capacity, float age, float spreadRadius, RaycastHit[] scratch, float travelExtra = 0f)
+            int group, int capacity, float age, float spreadRadius, RaycastHit[] scratch, float travelExtra = 0f, float damageScale = 1f)
         {
             Clear();
             Phase = phase;
@@ -67,7 +67,7 @@ namespace HollowSaint.FoundationKit.Gaze
             Ground = HasGround ? terrain.point : Impact;
             if (HasGround) Normal = terrain.normal;
             damage = body.damage * (GazeReleaseTuning.Enabled ?
-                GazeReleaseTuning.DamagePerCharge * group : GazeFuelSchedule.Coefficient(group, capacity));
+                GazeReleaseTuning.DamagePerCharge * group : GazeFuelSchedule.Coefficient(group, capacity)) * damageScale;
             crit = body.RollCrit();
             if (primary) Add(primary, Impact, age + Travel, true);
             if (!HasGround) return;

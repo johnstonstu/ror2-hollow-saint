@@ -269,7 +269,7 @@ namespace HollowSaint.FoundationKit
             a["ordinaryThunder"] = "382.5%"; a["thunderRadius"] = "3"; a["gazeRecoveryBank"] = "5%"; a["gazeRecoveryEach"] = "1%";
             a["decay"] = "2"; a["death"] = "partial"; a["deathPct"] = "50%"; a["jolt"] = "on"; a["stun"] = "0.5";
             a["bonus"] = "15%"; a["shocked"] = "3"; a["targets"] = "2"; a["pop"] = "150%"; a["immune"] = "4"; a["range"] = "30";
-            a["releaseSeconds"] = "7"; a["surgeDamage"] = "400%"; a["surgeMax"] = "3"; a["chargeStep"] = "0.28";
+            a["releaseSeconds"] = "7"; a["surgeDamage"] = "400%"; a["openingDamage"] = "600%"; a["underDamage"] = "200%"; a["surgeMax"] = "3"; a["chargeStep"] = "0.28";
             return a;
         }
 

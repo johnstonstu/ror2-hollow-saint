@@ -223,7 +223,9 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (phase == openingPhase) radius = Mathf.Max(radius, GazeReleaseTuning.OpeningRadius(group));
                 var pulse = pulses[phase];
                 pulse.Launch(body, beam.Origin, beam.Direction, phase, group, ledger.Capacity, age, radius, traceScratch,
-                    phase == openingPhase ? GazeReleaseTuning.OpeningTravelExtra : 0f);
+                    phase == openingPhase ? GazeReleaseTuning.OpeningTravelExtra : 0f,
+                    phase == openingPhase ? GazeReleaseTuning.OpeningDamageScale : 1f);
+                if (phase != openingPhase) UnderStrike(group, pulse.Ground, beam.Origin);
                 var packet = Packet(GazeFuelTransport.Kind.Launch);
                 packet.phase = (byte)phase; packet.origin = pulse.Origin; packet.impact = pulse.Impact;
                 packet.groundPoint = pulse.Ground; packet.normal = pulse.Normal; packet.ground = pulse.HasGround;
@@ -280,6 +282,8 @@ namespace HollowSaint.FoundationKit.Gaze
         private GazeFuelTransport.Packet Packet(GazeFuelTransport.Kind kind) =>
             new GazeFuelTransport.Packet { cast = cast, sequence = ++sequence, kind = kind, age = age };
         private void Send(GazeFuelTransport.Packet packet) => GazeFuelTransport.Send(body, packet);
+        /// <summary>1.2: a minor surge also strikes the ground under the Saint (runtime partial).</summary>
+        partial void UnderStrike(int group, Vector3 impactGround, Vector3 crown);
 
         private void FixedUpdate()
         {

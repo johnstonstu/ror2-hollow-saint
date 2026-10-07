@@ -89,6 +89,15 @@ namespace HollowSaint.FoundationKit.Gaze
             if (primedOpening > 0) KitLog.Event("GAZE_OPENING_PRIMED", "absorbed=" + absorbed + " primed=" + primedOpening);
         }
 
+        /// <summary>Server, at ignition: the charged opening fires straight away (Stu: you aim while
+        /// charging, so the big burst should land at once; RT then drives the minor surges).</summary>
+        internal void ServerFireOpeningNow(float castAge, float end)
+        {
+            if (!GazeReleaseTuning.Enabled || !NetworkServer.active || !ledger.Active || primedOpening < 1) return;
+            age = castAge;
+            ServerFireOpening(castAge, end);
+        }
+
         private bool ServerFireOpening(float castAge, float end)
         {
             int count = Mathf.Min(primedOpening, Mathf.Min(AvailableEntry, GazeReleaseTuning.MaximumOpening));

@@ -47,6 +47,8 @@ namespace HollowSaint.FoundationKit.Gaze
                 chargeGravityHeld = true;
             }
             GazeFallGuard.Hold(characterBody);
+            // Standing still to gather: the channel's armor covers the charge-up too.
+            if (NetworkServer.active && characterBody && GazeArmor.Def) { characterBody.AddBuff(GazeArmor.Def); armored = true; }
             try { chargeFx = Fx.GazeChargeUpFx.Begin(characterBody, chargeAvailable); }
             catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_CHARGE_FX " + error.Message); }
             KitLog.Event("GAZE_CHARGE_START", "available=" + chargeAvailable + " authority=" + isAuthority);
@@ -107,6 +109,8 @@ namespace HollowSaint.FoundationKit.Gaze
                 chargeGravityHeld = false;
             }
             if (chargeFx) chargeFx.End(chargeAbsorbed, chargeHandedOff);
+            if (armored && NetworkServer.active && characterBody && GazeArmor.Def) characterBody.RemoveBuff(GazeArmor.Def);
+            armored = false;
             // The beam phase re-holds the fall guard; a Utility back-out releases it here.
             GazeFallGuard.Release(characterBody);
         }

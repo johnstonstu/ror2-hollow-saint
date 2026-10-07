@@ -22,6 +22,9 @@ namespace HollowSaint.FoundationKit.Gaze
         internal const float TravelBase = .06f, TravelPerRange = .10f, MaximumTravel = TravelBase + TravelPerRange;
         internal const float SpreadSeconds = .14f;
         internal const float OpeningTravelExtra = .16f;      // the opening wave is slowed so it can be seen
+        internal const float OpeningDamageScale = 1.5f;      // the charged opening hits harder per charge than a minor surge
+        // Minor surges also strike the ground under the Saint (for enemies closing in underneath).
+        internal const float UnderStrikeRadius = 6f, UnderStrikeDamageScale = .5f, UnderStrikeProc = .3f;
         // Surges now proc items and shove: 0.4 / 0.8 / 1.0 proc, light knockback per charge.
         internal static float ProcPerCharge = .4f;
         internal const float ForcePerCharge = 450f;
