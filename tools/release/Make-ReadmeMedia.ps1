@@ -20,14 +20,14 @@ New-Item -ItemType Directory -Force $media, $videos | Out-Null
 # The two full-width clips at the top of the README (gaze-hero, crown) are encoded larger than the per-skill clips.
 $wide = '1280:720:0:0'; $near = '1040:585:120:110'
 $cuts = @(
-    @('gaze-hero',    'gaze-e',      1.4, 4.6, '1280:720:0:0', 1280, 'hq'),
+    @('gaze-hero',    'gaze-f',      0.0, 4.8, '1280:720:0:0', 1280, 'hq'),
     @('crown',        'hero',        0.8, 5.2, '1120:630:80:40', 960),
     @('arc-bolt',     'arcbolt',     0.6, 4.8, $near, 640),
     @('stormspear',   'stormspear',  0.5, 5.5, $near, 640),
     @('arc-step',     'arcstep',     0.0, 4.6, $wide, 640),
-    @('gaze',         'gaze-d',      0.4, 6.0, '1120:630:80:40', 640),
+    @('gaze',         'gaze-d',      4.2, 5.4, '1120:630:80:40', 640),
     @('open-circuit', 'opencircuit', 1.5, 6.5, $near, 640),
-    @('storm',        'storm',       8.5, 7.0, $near, 640)
+    @('storm',        'storm',       0.3, 6.6, $near, 640)
 )
 $inv = [Globalization.CultureInfo]::InvariantCulture
 $raw = Join-Path $repo ("artifacts\" + $Name + "\raw.mp4")
@@ -70,15 +70,16 @@ foreach ($c in $cuts) {
 }
 
 # Skin lineup: the Saint cropped from each front-facing still, side by side, names underneath.
-$names = 'Cracked Icon', 'Obsidian Saint', 'Verdigris Relic', 'Solar Vespers', 'Umbral Choir'
+$names = 'Cracked Icon', 'Obsidian Saint', 'Verdigris Relic', 'Solar Vespers', 'Umbral Choir', 'Crimson Vow'
 if (-not $Only -and (Test-Path (Join-Path $stills 'skin0.png'))) {
     $font = 'C\:/Windows/Fonts/segoeuib.ttf'
     $inputs = @(); $parts = @()
-    for ($i = 0; $i -lt 5; $i++) {
+    for ($i = 0; $i -lt $names.Count; $i++) {
         $inputs += '-i'; $inputs += (Join-Path $stills ("skin$i.png"))
         $parts += "[${i}:v]crop=440:660:740:360,scale=330:495,pad=330:560:0:0:color=0x16172a,drawtext=fontfile='$font':text='" + $names[$i] + "':fontcolor=0xe4e4ee:fontsize=24:x=(w-text_w)/2:y=513[s$i]"
     }
-    $filter = ($parts -join ';') + ';' + ((0..4 | ForEach-Object { "[s$_]" }) -join '') + 'hstack=inputs=5'
+    $n = $names.Count
+    $filter = ($parts -join ';') + ';' + ((0..($n - 1) | ForEach-Object { "[s$_]" }) -join '') + "hstack=inputs=$n"
     & ffmpeg -hide_banner -loglevel error -y @inputs -filter_complex $filter -frames:v 1 (Join-Path $media 'skin-lineup.png')
     "skin-lineup.png " + [int]((Get-Item (Join-Path $media 'skin-lineup.png')).Length / 1KB) + " KB"
 }

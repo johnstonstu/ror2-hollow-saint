@@ -2,7 +2,7 @@
   "name": "Hollow_Saint",
   "version_number": "1.2.0",
   "website_url": "https://github.com/johnstonstu/ror2-hollow-saint",
-  "description": "A storm-saint survivor: chain lightning, a sticking Stormspear and Thunderbolts that answer your hits.",
+  "description": "A storm-saint survivor: chain lightning, a sticking Stormspear, and a Gaze beam you charge with every Electrocute.",
   "dependencies": [
     "bbepis-BepInExPack-5.4.2122",
     "RiskofThunder-HookGenPatcher-1.2.9",

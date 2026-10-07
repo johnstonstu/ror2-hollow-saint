@@ -1,83 +1,147 @@
 <p align="center"><b>English</b> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.zh-CN.md">简体中文</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.ru.md">Русский</a> | <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/README.pt-BR.md">Português (BR)</a></p>
 
-> **Private development branch:** [Current 1.2 hold/release Gaze trial](docs/dev/1.2-gaze-release-trial.md) · [Development map](docs/dev/README.md). The player-facing descriptions below document the prior candidate; trial behavior and verification are tracked separately.
-
 <p align="center">
   <img src="docs/media/banner.jpg" alt="Hollow Saint, a storm survivor for Risk of Rain 2" width="100%">
 </p>
 
 <p align="center">
   <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fthunderstore.io%2Fapi%2Fv1%2Fpackage-metrics%2FJohnstonStu%2FHollow_Saint%2F&query=%24.latest_version&label=thunderstore&prefix=v&color=4fd2ff&style=for-the-badge" alt="Thunderstore version"></a>
+  <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fthunderstore.io%2Fapi%2Fv1%2Fpackage-metrics%2FJohnstonStu%2FHollow_Saint%2F&query=%24.downloads&label=downloads&color=7b5cff&style=for-the-badge" alt="Thunderstore downloads"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-6ee1e1?style=for-the-badge" alt="MIT licence"></a>
 </p>
 
-<p align="center"><b>A cracked devotional icon that answers only to the storm.</b></p>
+<h3 align="center">A cracked devotional icon that answers only to the storm.</h3>
 
-Hollow Saint is an original **Risk of Rain 2 survivor** who turns a crowded fight into a gathering storm. Chain lightning through a pack, charge a spear in your other hand, and store Static Charges from Electrocutes, then spend a full bank on a spear-borne Thunderbolt or use entry charges for Gaze pulses.
+<p align="center">Chain lightning through a pack, pin the biggest threat with a spear of lightning, and bank every Electrocute as a Static Charge.<br>Then spend the bank: on a Thunderbolt that rides your next spear, or on a charged Gaze that opens with a blast.</p>
 
-**Keep the pressure on. Choose your moment to commit. Blink to a better angle.** Arc Bolt and Stormspear work together; your special changes how you approach the fight. Rise above a line of enemies with **Gaze of the Hollow**, or carry **Open Circuit** into close range and keep attacking beneath a striking crown.
+<p align="center"><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/"><b>Install</b></a> · <a href="#whats-new-in-12"><b>What's new in 1.2</b></a> · <a href="#the-kit"><b>Skills</b></a> · <a href="#how-the-storm-works"><b>The storm</b></a> · <a href="https://github.com/johnstonstu/ror2-hollow-saint/issues"><b>Feedback</b></a></p>
 
-**[Install on Thunderstore](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/)** · **[Skills](#the-kit)** · **[Combos](#put-it-together)** · **[Feedback](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+<p align="center"><img src="docs/media/gaze-hero.webp" alt="Gaze of the Hollow: charges spiral into the crown, then the beam opens with a blast" width="100%"></p>
 
-> **Early access:** Hollow Saint is still being tuned. Expect balance changes and the occasional bug; your feedback helps shape the next patch. In-game skill descriptions show the numbers for your current configuration.
+## What's new in 1.2
 
-<p align="center"><img src="docs/media/gaze-player-view.png" alt="Gaze of the Hollow from the normal gameplay camera, with the HUD visible and lightning connecting to enemies ahead" width="100%"></p>
+**Gaze of the Hollow is rebuilt around your Static Charges.**
 
-*Gaze from the player's view: the halo projects ahead of the Saint, with lightning connecting to struck enemies. Captured in a development encounter with the normal gameplay camera and HUD.*
+- **Charge it up.** Hold Special and your stored charges spiral into the crown one at a time, each with a rising power-up sound. Aim while you gather.
+- **Open with a blast.** The beam opens by firing every charge you drew in at once. The crown flares and kicks back, a wave rides down the beam and the hit grows bigger and wider with every charge (600% per charge).
+- **Surge on demand.** During the beam, hold Primary to load up to three charges and release to fire them as one surge (400% per charge).
+- **Watch your feet.** Every surge also drops a bolt onto the closest enemy within 14 m, so whatever closes in under the hover gets hit while you aim elsewhere.
+
+**Also in 1.2:** a 3D Stormspear impact that grows with charge, Static Charges that wait for you instead of discharging on their own, an Open Circuit crown whose lightning crawls over the terrain, a new mastery skin (**Crimson Vow**), a sound and visual cleanup and shorter, clearer skill text. Full list in the [changelog](HollowSaintMod/Package/CHANGELOG.md).
+
+<p align="center"><img src="docs/media/gaze.webp" alt="A Gaze surge with a lock-on bolt striking an enemy below" width="49%"> <img src="docs/media/stormspear.webp" alt="A charged Stormspear sticking and bursting" width="49%"></p>
+
+> **Early access:** Hollow Saint is still being tuned, so expect balance changes and the occasional bug. Your feedback shapes the next patch. In-game skill descriptions always show the numbers for your current settings.
 
 ## The kit
 
-**Answered Prayer · Passive**
+| | Skill | Slot | In short |
+|:-:|---|---|---|
+| <img src="docs/media/icon-discharge.png" width="40" alt=""> | **Answered Prayer** | Passive | Hits build Static; Electrocutes bank Static Charges. |
+| <img src="docs/media/icon-arc_bolt.png" width="40" alt=""> | **Arc Bolt** | Primary | A fast bolt that chains through a pack. |
+| <img src="docs/media/icon-conduit_spear.png" width="40" alt=""> | **Stormspear** | Secondary | Hold, throw, stick, burst. |
+| <img src="docs/media/icon-arc_step.png" width="40" alt=""> | **Arc Step** | Utility | Two blinks, on the ground or in the air. |
+| <img src="docs/media/icon-gaze.png" width="40" alt=""> | **Gaze of the Hollow** | Special | Charge up, hover, burn a line through them. |
+| <img src="docs/media/icon-open_circuit.png" width="40" alt=""> | **Open Circuit** | Alt. special | A striking crown while you keep fighting. |
 
-Your hits build **Static** on enemies. Full Static triggers an **Electrocute**, spreading the storm and storing one **Static Charge**. Charges stay stored until you use them. A full bank empowers your next successful Stormspear throw with one **Thunderbolt** on impact; partial banks stay intact. Gaze claims the entry bank for manual pulses. The default capacity remains five, and configured capacity is respected.
+<h3><img src="docs/media/icon-discharge.png" width="40" alt=""> Answered Prayer <sub>Passive</sub></h3>
 
-**Arc Bolt · Primary**
+Your hits build **Static** on enemies. Full Static **Electrocutes**: the enemy is shocked and the arc jumps to its neighbours. Every Electrocute stores a **Static Charge** (up to five). A full bank turns your next Stormspear throw into a **Thunderbolt**, and Gaze spends charges on its blasts and surges. Charges never go off on their own.
 
-Your steady attack: snap lightning into a target and let it chain to nearby enemies. Keep firing while you charge Stormspear to build pressure between throws.
+<p align="center"><img src="docs/media/storm.webp" alt="Electrocutes filling the bank, then a Thunderbolt" width="70%"></p>
 
-**Stormspear · Secondary**
+<h3><img src="docs/media/icon-arc_bolt.png" width="40" alt=""> Arc Bolt <sub>Primary</sub></h3>
 
-Hold to form a spear of lightning, then release to throw. The spear sticks and bursts around its impact; aim into a group to catch its neighbours. A longer charge makes the throw stronger, while Arc Bolt stays available in your other hand. A full Static Charge bank is claimed when the server creates a successful throw and produces one Thunderbolt at a qualifying landing. Partial banks are preserved.
+Snap a bolt that chains to up to three more enemies. It is your steady pressure and the fastest way to spread Static across a group.
 
-**Arc Step · Utility**
+<p align="center"><img src="docs/media/arc-bolt.webp" alt="Arc Bolt chaining through a pack" width="70%"></p>
 
-Two charges of a short blink, usable on the ground or in the air. Look upward to gain height, or jump out of a step to carry its momentum. Spend a charge to find a firing angle; keep the other for an escape.
+<h3><img src="docs/media/icon-conduit_spear.png" width="40" alt=""> Stormspear <sub>Secondary</sub></h3>
 
-**Gaze of the Hollow · Special**
+Hold to form a spear of lightning, release to throw. It sticks in what it hits, then bursts in a dome of lightning that grows with charge. A full charge also calls a lightning strike, and a full Static bank turns it into a Thunderbolt.
 
-Rise and project your halo forward to channel a piercing lightning beam. Sweep it along a line of enemies as its reach grows. Ground tendrils surround the channel, while separate lightning connectors mark enemies actually hit. Fresh Primary presses spend entry charges on pulses, each adding two seconds up to fourteen seconds total. Each successful launch also settles the beam wider and adds 5% ordinary beam, splash and fork/chain damage, up to five steps (+25%) per cast; fueled pulse damage stays unchanged. A small local HUD meter shows remaining time. Other combat skills return at channel end; there is no manual cancel binding.
+<p align="center"><img src="docs/media/stormspear.webp" alt="A charged Stormspear sticking and bursting" width="70%"></p>
 
-**Open Circuit · Alternate special**
+<h3><img src="docs/media/icon-arc_step.png" width="40" alt=""> Arc Step <sub>Utility</sub></h3>
 
-Open the halo into a crown that repeatedly strikes nearby enemies while you keep fighting. Stormspear forms overhead and charges faster; a fully charged crown spear calls a Thunderbolt. Choose it when you want to fight close and keep your other attacks flowing.
+Blink a short way in any direction, even mid-air. Look up to climb, and jump out of a step to keep its momentum. Two charges: one to find an angle, one to get out.
+
+<p align="center"><img src="docs/media/arc-step.webp" alt="Arc Step left, right and up" width="70%"></p>
+
+<h3><img src="docs/media/icon-gaze.png" width="40" alt=""> Gaze of the Hollow <sub>Special</sub></h3>
+
+Hold to draw your Static Charges into the crown, then rise and channel a piercing beam for seven seconds. The beam opens by firing everything you gathered in one blast. While it burns, hold and release Primary for surges, each with a lock-on bolt at the nearest enemy. You take less damage while you gather and channel. Tap Special to skip the charge-up; Special or UI Cancel ends the beam early, and Utility exits straight into your Arc Step.
+
+<p align="center"><img src="docs/media/gaze.webp" alt="Gaze of the Hollow sweeping a pack with a surge" width="70%"></p>
+
+<h3><img src="docs/media/icon-open_circuit.png" width="40" alt=""> Open Circuit <sub>Alternate special</sub></h3>
+
+Open the halo into a crown that strikes everything around you for ten seconds while you keep fighting. Stormspear charges much faster under it, and a fully charged crown spear calls a Thunderbolt. Enemies that stay inside for three seconds take an extra zap.
+
+<p align="center"><img src="docs/media/crown.webp" alt="Open Circuit striking a ring of enemies" width="70%"></p>
+
+## How the storm works
+
+1. **Static.** Every hit charges the enemy. Bigger hits, critical strikes and high-proc items charge it faster. It fades if you stop hitting.
+2. **Electrocute.** At full Static the enemy is jolted (not bosses) and **Shocked**, taking extra damage for a moment. The arc jumps to nearby enemies and charges them too.
+3. **Static Charges.** Each Electrocute banks one charge. Spend a full bank on a spear-borne Thunderbolt, or pour charges into Gaze.
+
+Keep hitting the same pack and the storm feeds itself.
 
 ## Put it together
 
-- **Bolts into spear.** Keep Arc Bolt firing while you charge Stormspear. Release into the centre of the pack, then keep landing hits as the spear bursts and Static spreads.
-- **Step into Gaze.** Blink to an angle that lines enemies up, channel across them, then use fresh Primary presses for fueled pulses. Other combat skills return when the channel ends. Gaze grants bonus armor during the channel, but positioning still matters.
-- **Crown into pressure.** Activate Open Circuit near a group. Fire Arc Bolt and use the faster spear charge while the crown strikes around you; Arc Step helps you adjust your distance.
+- **Bolts into spear.** Arc Bolt the pack to spread Static, then charge Stormspear and throw it into the middle.
+- **Bank, then Gaze.** Fill your bank, Arc Step to an angle that lines enemies up, then hold Special and open the beam on the whole line.
+- **Crown into pressure.** Open Circuit near a group, keep Arc Bolt firing and throw fast-charged spears while the crown strikes around you.
 
 ## Skins
 
-Five skins give the Saint a different halo and lightning colour: **Cracked Icon**, **Obsidian Saint**, **Verdigris Relic**, **Solar Vespers** and **Umbral Choir**.
+Six skins, each with its own halo and lightning colour. **Crimson Vow** is the mastery skin: win or obliterate on Monsoon as Hollow Saint.
 
-![The five Hollow Saint skins](docs/media/skin-lineup.png)
+<p align="center"><img src="docs/media/skin-lineup.png" alt="The six Hollow Saint skins: Cracked Icon, Obsidian Saint, Verdigris Relic, Solar Vespers, Umbral Choir and Crimson Vow" width="100%"></p>
 
-## Install and support
+## Install
 
-Install with [r2modman or the Thunderstore Mod Manager](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/) to get the dependencies automatically. The [full player guide](HollowSaintMod/Package/README.md#install) includes manual installation, options, skill footage and bug-report instructions. See the [release notes](HollowSaintMod/Package/CHANGELOG.md) for changes.
+**Mod manager (recommended):** install with [r2modman](https://thunderstore.io/c/riskofrain2/p/ebkr/r2modman/) or the Thunderstore Mod Manager; the dependencies come with it.
 
-Balance and presentation options are available in **Settings > Mod Options > Hollow Saint** and `BepInEx/config/com.johnstonstu.hollowsaint.cfg`.
+**Manual:** install the dependencies listed on this page, then copy the package's `plugins/HollowSaint` folder into `BepInEx/plugins/`. Keep `HollowSaint.dll`, `hollowsaintassets` and `HollowSaint.language` together in that folder.
 
-**Playtest status:** multiplayer has not had a real playtest yet, and physical controller acceptance remains unverified. Every multiplayer participant should use the same mod version and config.
+## Options
 
-**Also by JohnstonStu:** [AH64](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/), an Apache attack helicopter survivor.
+Every balance number is in **Settings → Mod Options → Hollow Saint** ([Risk Of Options](https://thunderstore.io/c/riskofrain2/p/Rune580/Risk_Of_Options/), installed with the mod) and in `BepInEx/config/com.johnstonstu.hollowsaint.cfg`, along with presentation toggles: spear hand, item displays, arm motion and impact feel.
 
 ## Languages
 
-Hollow Saint follows the language you set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese ship with the mod; any other language shows the English text. The Mod Options menu stays in English. The Chinese, Russian and Brazilian Portuguese text is machine-translated, and corrections are welcome in a [translation issue](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md). See [docs/TRANSLATING.md](docs/TRANSLATING.md).
+The mod follows the language you set in Risk of Rain 2. Simplified Chinese, Russian and Brazilian Portuguese are included (machine-translated; corrections are welcome in a [translation issue](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md)). Any other language shows English. The Mod Options menu stays in English.
 
-## Repo
+## Feedback and known limitations
+
+Bugs and balance notes are welcome on [GitHub issues](https://github.com/johnstonstu/ror2-hollow-saint/issues). For a bug report, turn on **Verbose log** (Mod Options → 6. Misc), reproduce it and attach `BepInEx/LogOutput.log` with the stage and what you were doing.
+
+- **Multiplayer has not had a real playtest yet.** Skills are server-authoritative and networked, but expect rough edges. Every player should run the same version and config.
+- **Physical controller acceptance is unverified.** Mention your controller and input setup with input reports.
+- Item displays borrow Commando's placements, so a few items sit slightly off.
+
+## Also by JohnstonStu
+
+<table>
+  <tr>
+    <td><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/"><img src="docs/media/ah64-icon.png" alt="AH64" width="96"></a></td>
+    <td><b><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/">AH64</a></b>: an Apache attack helicopter survivor. It hovers and never lands, with a chain gun, Hydra rockets, Hellfire and Longbow missiles, and evasive rolls.</td>
+  </tr>
+</table>
+
+## Credits and license
+
+- Created by JohnstonStu: design, code, model, animation and effects.
+- Lightning strike sounds built from Pixabay samples (Pixabay Content License). Other sounds are original.
+- Built with BepInEx, R2API and Risk Of Options.
+
+[MIT](LICENSE) © 2026 JohnstonStu.
+
+## For developers
+
+### Repo
 
 | Path | Contents |
 |---|---|
@@ -91,7 +155,7 @@ Hollow Saint follows the language you set in Risk of Rain 2. Simplified Chinese,
 
 Older model generations, concepts and Blender sources are kept out of this repo to keep clones small.
 
-## Build and test
+### Build and test
 
 Risk Of Options is not on NuGet. The build looks for `RiskOfOptions.dll` in `HollowSaintMod/lib/` (git-ignored), then in the `Hollow Saint Dev` r2modman profile; or pass `-p:RiskOfOptionsDll=<path>`.
 
@@ -114,17 +178,14 @@ powershell -ExecutionPolicy Bypass -File tools\dev-profile\Run-Autopilot.ps1 -Na
 
 Set `HS_SEGMENTS` first to run one script (`items`, `storm`, `gaze`, `polish`, `showcase`, ...). The autopilot only runs when the launcher sets `HS_AUTOPILOT`; players never see it.
 
-## Release
+### Release
 
 1. Bump `Plugin.Version`, the project `<Version>`, and `Package/manifest.json` together, and add a `CHANGELOG.md` entry.
 2. `tools\release\Make-Package.ps1` builds `artifacts\release\JohnstonStu-Hollow_Saint-<version>.zip` from the Release DLL and the playtested bundle.
 3. `tools\release\New-CleanProfile.ps1 -Package artifacts\release\JohnstonStu-Hollow_Saint-<version>` builds a `Hollow Saint Clean` profile with only the declared dependencies and no config (`-NoRiskOfOptions` tests the soft-dependency path); play it once to catch missing dependencies or default-config problems.
 4. README footage: `tools\release\Record-Showcase.ps1 -Name showcaseNN` records the showcase script (game window only), then `tools\release\Make-ReadmeMedia.ps1 -Name showcaseNN` writes the animated WebP clips and the skin lineup to `docs/media` (the showcase hides the HUD, and films the skins and the hero shot from the front). The Thunderstore README loads them from `main` on GitHub, so push before uploading.
 
-## License
-
-Code and original art: [MIT](LICENSE). The sound effects in `HollowSaint.bnk` are built from Pixabay samples (Pixabay Content License); the samples themselves are not in this repo.
-
-## Logging
+### Logging
 
 A normal session writes one line to the BepInEx log ("Hollow Saint <version> loaded.") plus any real warnings or errors. Config `6. Misc` > `Verbose log` turns the load diagnostics back on for bug reports; `Event log` adds the first occurrences of each gameplay event.
+

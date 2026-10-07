@@ -210,7 +210,7 @@ namespace HollowSaint
                 cameraWant = FrontLook(18f, -0.02f);
                 yield return Wait(1.5f);
                 Clip("skins", true);
-                for (int skin = 0; skin < 5; skin++)
+                for (int skin = 0; skin < Mathf.Min(6, skins.skins.Length); skin++)
                 {
                     pilot.skinIndex = (uint)skin; skins.ApplySkin(skin);
                     yield return Wait(1.1f);
@@ -251,12 +251,19 @@ namespace HollowSaint
             yield return Wait(0.8f);
             trace.AppendLine(scriptTime.ToString("000.00") + " GAZE " + name + " skill=" + (special.skillDef ? special.skillDef.skillName : "none") +
                 " stock=" + special.stock + " cooldown=" + special.cooldownRemaining.ToString("0.0"));
+            // 1.2: hold Special to draw three charges into the crown, the beam opens with the
+            // charged blast, sweep, then an RT surge while two enemies close in underneath (lock-on).
+            pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, KitTuning.StormChargeMax);
             Clip(name, true);
             aimTarget = LiveCentre();
-            fire4 = true; yield return Wait(0.25f); fire4 = false;
-            yield return AimAtLive(1.0f, centre: true);
-            yield return SweepLive(3.4f);
-            yield return Wait(1.6f);
+            fire4 = true; yield return AimAtLive(0.95f, centre: true); fire4 = false;
+            yield return AimAtLive(1.5f, centre: true);
+            yield return SweepLive(2.0f);
+            SpawnLive("BeetleMaster", 2, 3.0f);
+            yield return AimAtLive(0.5f, centre: true);
+            fire1 = true; yield return Wait(0.35f); fire1 = false;
+            yield return SweepLive(1.6f);
+            yield return Wait(1.4f);
             Clip(name, false);
             yield return Wait(1.0f);
         }

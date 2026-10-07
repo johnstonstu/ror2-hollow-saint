@@ -3,7 +3,7 @@
 > Этот текст переведён машиной. Поправки приветствуются: [сообщение о переводе](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md).
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/banner.jpg" alt="Полый Святой, выживший бури для Risk of Rain 2" width="100%">
+  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/banner.jpg" alt="Полый Святой, выживший-буря для Risk of Rain 2" width="100%">
 </p>
 
 <p align="center">
@@ -12,118 +12,124 @@
   <a href="https://github.com/johnstonstu/ror2-hollow-saint/blob/main/LICENSE"><img src="https://img.shields.io/badge/licence-MIT-6ee1e1?style=for-the-badge" alt="Лицензия MIT"></a>
 </p>
 
-<p align="center"><b>Треснувший молитвенный образ, который слушает только бурю.</b></p>
+<h3 align="center">Треснувший образ, который отвечает только буре.</h3>
 
-<p align="center">Нравится? Поставьте <a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/">лайк Полому Святому на Thunderstore</a>, чтобы его нашли другие игроки.</p>
+<p align="center">Пускайте цепную молнию сквозь стаю, пригвождайте самую опасную цель копьём молнии и откладывайте каждый Электрошок в запас как заряд Статики.<br>А потом тратьте запас: на Удар молнии, который летит на вашем следующем копье, или на заряженный Взор, открывающийся взрывом.</p>
 
-> **Ранний доступ:** Полый Святой ещё настраивается, поэтому ждите изменений баланса и редких ошибок. Ваши отзывы напрямую определяют следующий патч баланса.
->
-> **[Сообщить об ошибке или о балансе](https://github.com/johnstonstu/ror2-hollow-saint/issues)**
+<p align="center"><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/"><b>Установить</b></a> · <a href="#что-нового-в-12"><b>Что нового в 1.2</b></a> · <a href="#набор"><b>Навыки</b></a> · <a href="#как-устроена-буря"><b>Буря</b></a> · <a href="https://github.com/johnstonstu/ror2-hollow-saint/issues"><b>Отзывы</b></a></p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Взор Полого: Святой поднимается и ведёт ветвящийся луч молнии по стае" width="100%">
-</p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Взор Полого: заряды по спирали втягиваются в корону, затем луч открывается взрывом" width="100%"></p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/crown.webp" alt="Размыкание: корона раскрывается над Святым и бьёт каждого врага вокруг" width="100%">
-</p>
+## Что нового в 1.2
 
-<h3 align="center">Цепная молния. Копьё молнии. Буря, которая отвечает.</h3>
+**Взор Полого перестроен вокруг ваших зарядов Статики.**
 
-Полый Святой — оригинальный выживший, построенный вокруг цепной молнии. Пускайте стрелы, что прыгают между врагами, собирайте в руке копьё молнии и вгоняйте его в стаю, и бейте, пока буря не ответит Грозовым ударом.
+- **Зарядите его.** Удерживайте особое умение, и накопленные заряды по одному втягиваются по спирали в корону, каждый с нарастающим звуком зарядки. Целиться можно, пока вы собираете заряды.
+- **Откройте взрывом.** Луч открывается тем, что выпускает разом все втянутые заряды. Корона вспыхивает и отдаёт назад, по лучу идёт волна, а удар становится сильнее и шире с каждым зарядом (600% за заряд).
+- **Волна по требованию.** Пока луч горит, удерживайте основной навык, чтобы зарядить до трёх зарядов, и отпустите, чтобы выпустить их одной волной (400% за заряд).
+- **Следите за ногами.** Каждая волна ещё и роняет молнию на ближайшего врага в пределах 14 м, так что тот, кто подбирается к вам под парящим Святым, получает удар, пока вы целитесь в другое место.
 
-**[Сообщить об ошибке](https://github.com/johnstonstu/ror2-hollow-saint/issues)** · **[Список изменений](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md)** · **[Исходный код](https://github.com/johnstonstu/ror2-hollow-saint)** · **[Ещё от меня: AH64](https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/)**
+**Также в 1.2:** объёмный 3D-удар Громового копья, растущий с зарядом, заряды Статики, которые ждут вас и не разряжаются сами, корона Размыкания, чья молния ползёт по рельефу, новый облик за мастерство (**Багровый обет**), чистка звуков и эффектов и более короткие и понятные описания навыков. Полный список в [списке изменений](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md).
 
-## Языки
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" alt="Волна Взора с молнией-наводкой, бьющей врага внизу" width="49%"> <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" alt="Заряженное Громовое копьё вонзается и взрывается" width="49%"></p>
 
-Полый Святой следует языку, выбранному в Risk of Rain 2. С модом идут упрощённый китайский, русский и бразильский португальский; на любом другом языке текст английский. Меню параметров мода остаётся на английском. Китайский, русский и португальский переведены машиной; поправки можно прислать [сообщением о переводе](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md). Как устроены строки: [TRANSLATING.md](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/docs/TRANSLATING.md).
+> **Ранний доступ:** Полый Святой ещё настраивается, так что ждите изменений баланса и редких ошибок. Ваши отзывы определяют следующий патч. Описания навыков в игре всегда показывают числа для ваших текущих настроек.
 
 ## Набор
 
-<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="48" alt=""> Услышанная молитва <sub>Пассив</sub></h3>
+| | Навык | Слот | Коротко |
+|:-:|---|---|---|
+| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="40" alt=""> | **Услышанная молитва** | Пассив | Попадания копят Статику; Электрошоки откладывают заряды Статики. |
+| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_bolt.png" width="40" alt=""> | **Дуговая стрела** | Основной | Быстрая стрела, прыгающая по стае. |
+| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="40" alt=""> | **Громовое копьё** | Дополнительный | Удерживать, бросить, вонзить, взорвать. |
+| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="40" alt=""> | **Дуговой шаг** | Вспомогательный | Два рывка, на земле или в воздухе. |
+| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="40" alt=""> | **Взор Полого** | Особый | Зарядиться, зависнуть, прожечь в них линию. |
+| <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="40" alt=""> | **Размыкание** | Особый, вариант | Бьющая корона, пока вы продолжаете бой. |
 
-Попадания копят **Статику**. Полная Статика вызывает **Электрошок**: короткий толчок, несколько секунд враг получает больше урона, и дуга прыгает на соседей. Каждый Электрошок зажигает сферу на нимбе; когда горят все пять, **Грозовой удар** бьёт сильного врага на 1000% урона.
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="40" alt=""> Услышанная молитва <sub>Пассив</sub></h3>
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm.webp" width="640" alt="Зажигаются последние сферы, и Грозовой удар бьёт по стае"></p>
+Ваши попадания копят **Статику** на врагах. Полная Статика вызывает **Электрошок**: враг получает шок, а дуга перескакивает на соседей. Каждый Электрошок откладывает **заряд Статики** (до пяти). Полный запас превращает ваш следующий бросок Громового копья в **Удар молнии**, а Взор тратит заряды на свои взрывы и волны. Заряды сами не пропадают.
 
-<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_bolt.png" width="48" alt=""> Дуговая стрела <sub>Основной</sub></h3>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm.webp" alt="Электрошоки наполняют запас, затем Удар молнии" width="70%"></p>
 
-Стрела на 100% урона, которая перескакивает ещё максимум на 3 врага.
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_bolt.png" width="40" alt=""> Дуговая стрела <sub>Основной</sub></h3>
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-bolt.webp" width="640" alt="Дуговая стрела перескакивает по стае"></p>
+Выпускает стрелу, которая перескакивает ещё максимум на трёх врагов. Это ваш ровный напор и самый быстрый способ распространить Статику по группе.
 
-<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="48" alt=""> Громовое копьё <sub>Дополнительный</sub></h3>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-bolt.webp" alt="Дуговая стрела прыгает по стае" width="70%"></p>
 
-Удерживайте, чтобы собрать в руке копьё молнии, отпустите, чтобы бросить его на 400–1600% урона. Оно вонзается и взрывается по всему вокруг. Пока копьё заряжается, Дуговая стрела бьёт из другой руки. Перезарядка 5 с.
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="40" alt=""> Громовое копьё <sub>Дополнительный</sub></h3>
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" width="640" alt="Заряженное Громовое копьё вонзается и взрывается"></p>
+Удерживайте, чтобы сформировать копьё молнии, отпустите, чтобы бросить. Оно вонзается в цель, затем взрывается куполом молний, который растёт с зарядом. Полный заряд ещё и вызывает удар молнии с неба, а при полном запасе Статики он становится Ударом молнии.
 
-<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="48" alt=""> Дуговой шаг <sub>Вспомогательный</sub></h3>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" alt="Заряженное Громовое копьё вонзается и взрывается" width="70%"></p>
 
-Рывок на короткую дистанцию в любую сторону, даже в воздухе. Немного следует за прицелом: смотрите вверх, чтобы подняться. Два заряда, по 5 с; прыжок из шага сохраняет импульс.
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="40" alt=""> Дуговой шаг <sub>Вспомогательный</sub></h3>
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-step.webp" width="640" alt="Дуговой шаг влево, вправо и вверх"></p>
+Рывок на короткую дистанцию в любую сторону, даже в воздухе. Смотрите вверх, чтобы подняться, и прыгайте из шага, чтобы сохранить его импульс. Два заряда: один, чтобы найти угол, другой, чтобы уйти.
 
-<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="48" alt=""> Взор Полого <sub>Особый</sub></h3>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/arc-step.webp" alt="Дуговой шаг влево, вправо и вверх" width="70%"></p>
 
-Поднимитесь в воздух и пошлите нимб перед собой: луч молнии на 4 секунды, 500% урона в секунду. Он пронзает, бьёт по площади и ветвится по земле, и чем дольше горит, тем дальше достаёт. Пока канал держится, есть дополнительная броня. Повтор, Дуговой шаг или кнопка B на геймпаде обрывают его раньше. Перезарядка 12 с.
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="40" alt=""> Взор Полого <sub>Особый</sub></h3>
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" width="640" alt="Взор Полого ведёт луч по стае"></p>
+Удерживайте, чтобы втянуть заряды Статики в корону, затем поднимитесь и направляйте пронзающий луч семь секунд. Луч открывается тем, что выпускает всё собранное одним взрывом. Пока он горит, удерживайте и отпускайте основной навык для волн, каждая с молнией-наводкой на ближайшего врага. Пока вы собираете заряды и направляете луч, вы получаете меньше урона. Короткое нажатие особого умения пропускает зарядку; особое умение или отмена интерфейса обрывает луч раньше, а вспомогательный навык сразу выходит в ваш Дуговой шаг.
 
-<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="48" alt=""> Размыкание <sub>Особый, вариант</sub></h3>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" alt="Взор Полого прочёсывает стаю волной" width="70%"></p>
 
-Раскройте нимб в корону на 10 секунд. Пока вы сражаетесь, она дважды в секунду бьёт каждого врага в 8 м, копьё собирается над головой и заряжается в 2,5 раза быстрее, а полностью заряженное копьё короны зовёт Грозовой удар. Перезарядка 8 с, отсчёт с момента, когда корона закрывается.
+<h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="40" alt=""> Размыкание <sub>Особый, вариант</sub></h3>
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/open-circuit.webp" width="640" alt="Размыкание бьёт по стае, затем копьё короны"></p>
+Раскройте нимб в корону, которая десять секунд бьёт всё вокруг, пока вы продолжаете сражаться. Под ней Громовое копьё заряжается гораздо быстрее, а полностью заряженное копьё короны вызывает Удар молнии. Враги, пробывшие внутри три секунды, получают ещё один разряд.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/crown.webp" alt="Размыкание бьёт кольцо врагов" width="70%"></p>
 
 ## Как устроена буря
 
-1. **Статика.** Каждое попадание заряжает врага, в которого вы попали. Сильные удары, критические и предметы с высоким коэффициентом срабатывания заряжают быстрее. Если перестать бить, заряд спадает.
-2. **Электрошок.** При полной Статике враг получает толчок (кроме боссов) и **Шок**: 3 секунды он получает на 15% больше урона. Дуга прыгает на двух ближайших и заряжает их тоже. Враг, погибший с половиной Статики или больше, вызывает Электрошок, падая.
-3. **Грозовой удар.** Каждый Электрошок зажигает сферу на нимбе. Когда горят все пять, они сходятся, поднимаются с короны, чертят небо и бьют сильного врага в поле зрения.
+1. **Статика.** Каждое попадание заряжает врага. Сильные удары, критические и предметы с высоким коэффициентом срабатывания заряжают быстрее. Если перестать бить, заряд спадает.
+2. **Электрошок.** При полной Статике враг получает толчок (кроме боссов) и **Шок**, из-за которого ненадолго получает дополнительный урон. Дуга перескакивает на ближайших врагов и заряжает их тоже.
+3. **Заряды Статики.** Каждый Электрошок откладывает один заряд. Тратьте полный запас на Удар молнии, летящий на копье, или вливайте заряды во Взор.
 
-Бейте одну и ту же стаю, и цепь кормит сама себя.
+Бейте одну и ту же стаю, и буря кормит сама себя.
 
-### Советы
+## Соберите всё вместе
 
-- Бросайте Громовое копьё в середину стаи: взрыв бьёт всех вокруг того, в ком оно застряло. Полный заряд взрывается на весь свой урон.
-- Зарядка копья не останавливает Дуговую стрелу. Продолжайте стрелять другой рукой.
-- Взор Полого поднимает вас вне досягаемости. Ведите луч вдоль ряда врагов.
-- Из Дугового шага можно выпрыгнуть и сохранить скорость. Смотрите вверх в шаге, чтобы забраться на уступ.
+- **Стрелы в копьё.** Бейте стаю Дуговой стрелой, чтобы распространить Статику, затем зарядите Громовое копьё и бросьте его в самую гущу.
+- **Запас, затем Взор.** Наполните запас, сделайте Дуговой шаг под угол, при котором враги выстраиваются в линию, затем удерживайте особое умение и откройте луч по всей линии.
+- **Корона как напор.** Откройте Размыкание рядом с группой, продолжайте стрелять Дуговой стрелой и бросайте быстро заряжающиеся копья, пока корона бьёт вокруг вас.
 
 ## Облики
 
-Пять обликов, у каждого свой нимб и цвет молнии: Треснувший образ, Обсидиановый святой, Медный реликт, Солнечная вечерня и Сумрачный хор.
+Шесть обликов, у каждого свой нимб и цвет молнии. **Багровый обет** это облик за мастерство: завершите забег победой или уничтожением на Муссоне за Полого Святого.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/skin-lineup.png" alt="Пять обликов Полого Святого: Треснувший образ, Обсидиановый святой, Медный реликт, Солнечная вечерня и Сумрачный хор" width="100%">
-</p>
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/skin-lineup.png" alt="Шесть обликов Полого Святого: Треснувший образ, Обсидиановый святой, Медный реликт, Солнечная вечерня, Сумрачный хор и Багровый обет" width="100%"></p>
 
 ## Установка
 
 **Менеджер модов (рекомендуется):** ставьте через [r2modman](https://thunderstore.io/c/riskofrain2/p/ebkr/r2modman/) или Thunderstore Mod Manager. Зависимости ставятся сами.
 
-**Вручную:** установите зависимости с этой страницы, затем скопируйте папку `plugins/HollowSaint` из пакета в `BepInEx/plugins/`. `HollowSaint.dll`, `hollowsaintassets` и `HollowSaint.language` должны лежать в одной папке. Если языковой файл не рядом с DLL, игра не загрузит переводы.
+**Вручную:** установите зависимости с этой страницы, затем скопируйте папку `plugins/HollowSaint` из пакета в `BepInEx/plugins/`. `HollowSaint.dll`, `hollowsaintassets` и `HollowSaint.language` должны лежать в одной папке.
 
 ## Параметры
 
-Все числа баланса — в меню **Настройки → Параметры модов → Hollow Saint** ([Risk Of Options](https://thunderstore.io/c/riskofrain2/p/Rune580/Risk_Of_Options/), ставится вместе с модом) и в `BepInEx/config/com.johnstonstu.hollowsaint.cfg`. Есть и переключатели вида: рука с копьём, отображение предметов, движение рук и ощущение удара. Подписи этого меню остаются на английском.
+Все числа баланса находятся в меню **Настройки → Параметры модов → Hollow Saint** ([Risk Of Options](https://thunderstore.io/c/riskofrain2/p/Rune580/Risk_Of_Options/), ставится вместе с модом) и в `BepInEx/config/com.johnstonstu.hollowsaint.cfg`, а также переключатели вида: рука с копьём, отображение предметов, движение рук и ощущение удара.
 
-## Отзывы
+## Языки
 
-Ошибки и замечания по балансу можно присылать в [GitHub issues](https://github.com/johnstonstu/ror2-hollow-saint/issues). Для отчёта включите **Verbose log** (Параметры модов → 6. Misc), воспроизведите проблему и приложите `BepInEx/LogOutput.log`, указав уровень и что вы делали.
+Мод следует языку, выбранному в Risk of Rain 2. В комплекте упрощённый китайский, русский и бразильский португальский (машинный перевод; поправки можно прислать [сообщением о переводе](https://github.com/johnstonstu/ror2-hollow-saint/issues/new?template=translation.md)). На любом другом языке текст английский. Меню параметров мода остаётся на английском.
 
-## Известные ограничения
+## Отзывы и известные ограничения
 
-- **Сетевую игру ещё не проверяли всерьёз.** Навыки считает сервер, эффекты передаются по сети, но шероховатости вероятны. У всех игроков должны быть одна версия и одни настройки. Отчёты очень кстати.
-- Отображение предметов берёт точки Коммандо на тех же креплениях, поэтому некоторые предметы сидят чуть криво.
+Ошибки и замечания по балансу можно присылать в [GitHub issues](https://github.com/johnstonstu/ror2-hollow-saint/issues). Для отчёта об ошибке включите **Verbose log** (Параметры модов → 6. Misc), воспроизведите проблему и приложите `BepInEx/LogOutput.log`, указав уровень и что вы делали.
+
+- **Сетевую игру ещё не проверяли всерьёз.** Навыки считает сервер, эффекты передаются по сети, но шероховатости вероятны. У всех игроков должны быть одна версия и одни настройки.
+- **Работа с физическим геймпадом не проверена.** Указывайте свой геймпад и настройки ввода в отчётах о управлении.
+- Отображение предметов берёт точки Коммандо, поэтому некоторые предметы сидят чуть криво.
 
 ## Ещё от JohnstonStu
 
 <table>
   <tr>
     <td><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/ah64-icon.png" alt="AH64" width="96"></a></td>
-    <td><b><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/">AH64</a></b>: выживший — ударный вертолёт Apache. Он зависает и не садится: пушка, ракеты Hydra, ракеты Hellfire и Longbow, уклоняющиеся бочки.</td>
+    <td><b><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/">AH64</a></b>: выживший, ударный вертолёт Apache. Он зависает и не садится: пушка, ракеты Hydra, ракеты Hellfire и Longbow, уклоняющиеся бочки.</td>
   </tr>
 </table>
 

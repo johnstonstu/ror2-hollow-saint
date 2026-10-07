@@ -1,22 +1,31 @@
 # Changelog
 
-## 1.2.0 (private candidate)
-- Latest channel feedback: fresh mapped Special cancels Gaze; mapped Utility exits and attempts the equipped native skill, retaining stock/cooldown semantics. Initial holds cannot self-cancel. Living exits retain unlaunched entry fuel/reserve; launched pulses never refund.
-- Gaze timer starts full for current duration, snapshots a new scale on actual extensions, shows exact seconds/actual grant and five small energy pips. Five bounded electrical surge cues grow with confirmed spends; restrained owner-only native shake respects Impact Feel and native screen-shake scaling. No Gaze damage or duration tuning changes.
-- Open Circuit admits at most 64 actual pulse-hit victims per crown. Three seconds inside its real sphere earns one 270% zap per enemy; leaving resets buildup and spent victims cannot rearm until a new crown. Normal item procs remain; the new burst cannot directly build Static/refuel Prayer. Terrain contours and bounded confirmed victim connections replace flat ambient strokes where world visibility permits.
-- Targeted spear follow-up: charge-weighted extra reduction reaches 10% at full charge, funded Prayer strike/splash lose 15%, and recharge is 120% of raw seconds (default 5 to 6). Tap damage, independent conductor tuning and unfunded Crown strike remain. Raw configs are preserved. See channel-circuit-1.2.0-playtest.md for exact composition and limits.
-- Latest solo feedback: non-Gaze native ability damage is reduced 10% once at independent coefficients. Raw custom configs remain saved; tooltips show effective values. Chains and splash inherit once. Gaze's damage, body stats, item proc coefficients and Shocked multiplier are unchanged. Shared Electrocute pop is exempt and stays at its existing coefficient for every triggering skill, preserving Gaze's passive damage consequences.
-- Answered Prayer now stores Static Charges deliberately, with no automatic discharge. A successful full-bank spear launch spends the configured bank and snapshots one Thunderbolt for its first qualifying landing. Partial banks remain intact; a funded Crown spear suppresses its separate free bonus strike. Spear and conductor mechanics remain; damage follows the latest non-Gaze reduction above.
-- Gaze has a small local-player remaining-time meter that grows with acknowledged launched-pulse extensions. Successful pulse launches use the existing electrical discharge one-shot, coalescing clustered acknowledgements without restarting the established Gaze startup, charge, hum or crackle loops. The timer is compact, with clear seconds and a brief actual-extension readout; character-select Gaze text is shortened in all four languages.
-- Arc Bolt's main impact sound uses the shorter existing crackle at an additional 0.82 PCM source gain, with a 0.22-second shared impact gap and no extra impact accent. Impact spark, arc and flash intensity is reduced.
-- Gaze charges use irregular crackling clusters, energized intake trails, branching surges and varied moving ground lashes. All six palettes add restrained complementary forks/sparks across the lightning kit. Native chain and Thunderbolt variants now include Crimson. Geometry remains pooled and clears on teardown.
-- Special starts Gaze; fresh Primary presses send one entry orb per pulse, with a 0.25-second minimum interval. Holding does not repeat; new charges stay in reserve. Primary shows the pulse icon and available entry count, and other combat skills are unavailable until the channel ends. Original skills and cooldown progress return on exit. Unlaunched orbs return on living exits, and late presses are rejected before they can spend fuel without completing their travel.
-- Gaze's baseline duration grows from four to six seconds with level. Each launched entry-fuel pulse adds two seconds, up to fourteen seconds total beam time. Rejected taps and cancelled intakes add none. Reach progression keeps its frozen baseline; longer channels increase total ordinary-beam output and delay cooldown. Successful launches add 5% ordinary beam, splash and fork/chain damage per step, capped at five steps (+25%), resetting per cast. Fueled pulse damage is unchanged.
-- Gaze starts with a focused continuous beam that settles wider with each of the first five confirmed launches, bounded by the existing hit diameter, alongside broad traveling pulses and physical radial crown expansion. Charges retain primary skin energy through intake and travel. Open Circuit now expands its real metal crown to the damage sphere perimeter with sparse lightning, replacing the prior dome. Effects reuse bounded geometry and clear on cancellation or teardown.
-- Added Crimson Vow as the sixth skin, with red conductors and primary red Gaze energy. It unlocks through the native survivor mastery condition: a qualifying winning ending on Monsoon-equivalent hard difficulty. Previous clears are not replayed for the new achievement.
-- Includes the accepted private prototype's faster, wider Arc Bolt; Stormspear recharge pause until throw; and a short, bounded conductor effect on a struck enemy. Reliability, cadence and proc behavior remain; damage follows the latest non-Gaze reduction above.
-- Arc Bolt cast and Stormspear retain bounded accents from existing loaded banks. Stormspear's charged throw crackle starts at half charge. Only the dedicated Arc Bolt impact media changes; all other bank media and the event hierarchy remain byte-identical.
-- Private source/build candidate only. Native visual, unlock, controller and multiplayer acceptance remain pending.
+## 1.2.0
+**Gaze of the Hollow, reworked**
+- **Charge-up.** Hold Special to pull your stored Static Charges into the crown, one at a time, each with its own rising power-up sound. Aim while you gather. Tap Special to skip it.
+- **Opening blast.** The beam opens by firing every charge you drew in at once: the crown flares wide and kicks back, a wave rides down the beam and lands with a blast for 600% damage per charge that grows wider with every charge.
+- **Surges.** During the 7-second beam, hold Primary to load up to 3 stored charges and release to fire them as one surge for 400% damage per charge. Surges proc items, knock enemies back and heal 1% of max health per charge. Unspent charges return when the beam ends.
+- **Lock-on strike.** Each surge also drops a bolt onto the closest enemy within 14 m (200% per charge, small splash), so anything closing in under the hover gets hit while you aim elsewhere.
+- Gaze armor now covers the charge-up too. Special or UI Cancel ends the channel; Utility exits and activates if ready.
+- Gaze balance: beam proc coefficient 0.5 to 0.3, fork damage 100% to 70%, splash proc 0.3 to 0.2 (the beam lasts longer than before). Saved default values migrate; custom values are kept.
+- New Mod Options for Gaze: charge speed, surge damage and surge proc.
+
+**Kit**
+- **Stormspear impact** now bursts in 3D: a dome of lightning, a lance of light out of the impact, a shockwave ring at the real damage radius and a spark fountain, all scaling with charge. Uncharged throws still splash.
+- **Answered Prayer** stores Static Charges instead of discharging automatically. A full bank turns your next successful Stormspear throw into a Thunderbolt on impact; partial banks are kept.
+- **Open Circuit**: the crown opens to the edge of its damage area and its lightning crawls across the ground almost to that edge, climbing rocks and stopping at walls and drops. Enemies that stay inside for 3 seconds take one 270% zap.
+- Non-Gaze skill damage reduced 10%. Stormspear recharge 5 to 6 seconds.
+
+**New skin**
+- **Crimson Vow**, a mastery skin: win or obliterate on Monsoon as Hollow Saint.
+
+**Presentation**
+- Smaller chain-lightning hit flashes that no longer hide enemies, ground rings that follow slopes, tinted sparks, a softer Arc Step afterimage.
+- Audio mix pass: Arc Bolt, spear throw, Arc Step and the Thunderbolt-ready cue are easier to hear; the spear charge loop is quieter.
+- Shorter, clearer character select and skill descriptions in all four languages.
+
+**Known limitations**
+- Multiplayer has not had a real playtest yet. Physical controller acceptance remains unverified.
 
 ## 1.1.1
 - Gaze of the Hollow now has broad, branching ground tendrils throughout its channel, plus bright connectors at confirmed hit positions. The effects follow the skin palette and clear when the channel ends or is interrupted; damage and hit cadence are unchanged.

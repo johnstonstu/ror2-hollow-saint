@@ -299,12 +299,10 @@ namespace HollowSaint.FoundationKit
                 "Each hit builds " + Dmg("Static") + ".";
             int spearStock = int.Parse(a["spearStock"], CultureInfo.InvariantCulture);
             t["HS_SKILL_SPEAR_DESC"] =
-                Util("Agile.") + " Charge a spear of lightning for " + Dmg(a["tap"] + "-" + a["full"] + " damage") +
-                ". It " + Util("sticks") + ", then bursts for " + Dmg(a["burst"] + "-" + a["burstFull"] + " of its damage") + " around it." +
+                Util("Agile.") + " Charge and throw a spear of lightning for " + Dmg(a["tap"] + "-" + a["full"] + " damage") +
+                ". It " + Util("sticks") + ", then bursts around it." +
                 (spearStock > 1 ? " Holds " + Util(a["spearStock"] + " charges") + "." : "") +
-                " Enemies struck conduct lightning for " + a["conductorSeconds"] + "s, arcing to up to " + a["conductorTargets"] + " nearby enemies for " +
-                Dmg(a["conductorTap"] + "-" + a["conductorFull"] + " damage") + " every " + a["conductorInterval"] + "s. Recharge starts when thrown." +
-                " Fully charged throws land one lightning strike for " + Dmg(a["ordinaryThunder"] + " damage") + ", with splash within " + a["thunderRadius"] + "m. A full bank upgrades this strike to " + a["fundedThunder"] + ", including tap throws; it never adds a second strike. The burst cannot pass through terrain and deals half damage at the outer edge.";
+                " A full charge also calls a lightning strike.";
             int stepStock = int.Parse(a["stepStock"], CultureInfo.InvariantCulture);
             t["HS_SKILL_ARCSTEP_DESC"] =
                 Util("Blink") + " a short distance in any direction, even in the air. Jump out of it to keep the momentum. Holds " +
