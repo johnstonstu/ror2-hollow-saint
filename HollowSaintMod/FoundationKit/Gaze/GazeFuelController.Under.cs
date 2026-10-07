@@ -8,18 +8,38 @@ namespace HollowSaint.FoundationKit.Gaze
 {
     internal sealed partial class GazeFuelController
     {
-        /// <summary>1.2 (Stu): each minor surge also drops a small strike on the ground under the
-        /// Saint, so enemies running in underneath the hover take a hit. Skipped when the surge is
-        /// already landing there. Server only; visuals ride the networked spear beats.</summary>
+        /// <summary>1.2 (Stu): each minor surge also locks a bolt onto the closest enemy near or
+        /// under the Saint, so whatever is closing in takes a hit while you aim the beam elsewhere.
+        /// Skipped when that enemy is already in the surge's landing zone. Server only; visuals
+        /// ride the networked spear beats.</summary>
         partial void UnderStrike(int group, Vector3 impactGround, Vector3 crown)
         {
             if (!NetworkServer.active || !body || group < 1) return;
             try
             {
-                RaycastHit floor;
-                if (!Physics.Raycast(body.corePosition, Vector3.down, out floor, 14f, LayerIndex.world.mask, QueryTriggerInteraction.Ignore)) return;
+                var team = body.teamComponent ? body.teamComponent.teamIndex : TeamIndex.None;
+                var search = new BullseyeSearch
+                {
+                    searchOrigin = body.corePosition, searchDirection = Vector3.down, minAngleFilter = 0f, maxAngleFilter = 180f,
+                    minDistanceFilter = 0f, maxDistanceFilter = GazeReleaseTuning.UnderStrikeSeek,
+                    teamMaskFilter = TeamMask.GetEnemyTeams(team), filterByLoS = true, filterByDistinctEntity = true,
+                    sortMode = BullseyeSearch.SortMode.Distance
+                };
+                search.RefreshCandidates();
+                HurtBox target = null;
+                foreach (var box in search.GetResults())
+                {
+                    if (!box || !box.healthComponent || !box.healthComponent.alive) continue;
+                    target = box; break;
+                }
+                if (!target) return;
+                Vector3 hit = target.healthComponent.body ? target.healthComponent.body.corePosition : target.transform.position;
                 float radius = GazeReleaseTuning.UnderStrikeRadius;
-                if (Vector3.Distance(floor.point, impactGround) < radius + 1f) return;
+                if (Vector3.Distance(hit, impactGround) < radius + 1f) return; // the surge is landing there already
+                Vector3 ground = hit, normal = Vector3.up;
+                RaycastHit floor;
+                if (Physics.Raycast(hit + Vector3.up * 0.5f, Vector3.down, out floor, 6f, LayerIndex.world.mask, QueryTriggerInteraction.Ignore))
+                { ground = floor.point; normal = floor.normal; }
                 float damage = body.damage * GazeReleaseTuning.DamagePerCharge * group * GazeReleaseTuning.UnderStrikeDamageScale;
                 StormServer.BeginStormDamage();
                 BlastAttack.Result result;
@@ -27,10 +47,9 @@ namespace HollowSaint.FoundationKit.Gaze
                 {
                     result = new BlastAttack
                     {
-                        attacker = body.gameObject, inflictor = body.gameObject,
-                        teamIndex = body.teamComponent ? body.teamComponent.teamIndex : TeamIndex.None,
+                        attacker = body.gameObject, inflictor = body.gameObject, teamIndex = team,
                         attackerFiltering = AttackerFiltering.NeverHitSelf,
-                        position = floor.point + Vector3.up * 0.5f, radius = radius,
+                        position = hit, radius = radius,
                         falloffModel = BlastAttack.FalloffModel.None, baseDamage = damage, baseForce = 600f,
                         crit = body.RollCrit(),
                         damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Special),
@@ -39,10 +58,10 @@ namespace HollowSaint.FoundationKit.Gaze
                     }.Fire();
                 }
                 finally { StormServer.EndStormDamage(); }
-                // A bolt from the crown down to the ground, then the small splash.
-                KitFx.Server(Beat.SpearSpread, floor.point, crown, 1f, sound: true, owner: body);
-                KitFx.Server(Beat.SpearBurst, floor.point, floor.normal, radius, owner: body);
-                KitLog.Event("GAZE_UNDER_STRIKE", "group=" + group + " hits=" + result.hitCount);
+                // A bolt from the crown onto the target, then the splash on the ground beneath it.
+                KitFx.Server(Beat.SpearSpread, hit, crown, 1f, sound: true, owner: body);
+                KitFx.Server(Beat.SpearBurst, ground, normal, radius, owner: body);
+                KitLog.Event("GAZE_UNDER_STRIKE", "group=" + group + " target=" + target.healthComponent.name + " hits=" + result.hitCount);
             }
             catch (System.Exception error) { Plugin.Log.LogError("HOLLOW_SAINT_GAZE_UNDER_STRIKE " + error); }
         }
