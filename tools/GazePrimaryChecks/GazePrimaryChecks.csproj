@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeSkillOverrides.cs" Link="GazeSkillOverrides.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeExitInput.cs" Link="GazeExitInput.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeMappedCancel.cs" Link="GazeMappedCancel.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeChannelSkillDefs.cs" Link="GazeChannelSkillDefs.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeSkillOverrides.cs" Link="GazeSkillOverrides.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeExitInput.cs" Link="GazeExitInput.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeMappedCancel.cs" Link="GazeMappedCancel.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeChannelSkillDefs.cs" Link="GazeChannelSkillDefs.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearCooldownPolicy.cs" Link="StormspearCooldownPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeReleasePolicy.cs" Link="GazeReleasePolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeReleasePolicy.cs" Link="GazeReleasePolicy.cs" />
   </ItemGroup>
 </Project>

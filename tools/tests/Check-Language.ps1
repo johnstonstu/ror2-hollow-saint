@@ -7,8 +7,8 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 # Compiled as separate files: each file has its own using directives, which can't follow
 # code from another file in one concatenated source.
 Add-Type -Path @(
-    (Join-Path $repo 'HollowSaintMod\FoundationKit\LanguageJson.cs'),
-    (Join-Path $repo 'HollowSaintMod\FoundationKit\LangFormat.cs'),
+    (Join-Path $repo 'HollowSaintMod\Localization\LanguageJson.cs'),
+    (Join-Path $repo 'HollowSaintMod\Localization\LangFormat.cs'),
     (Join-Path $repo 'tools\tests\LanguageChecks.cs')
 )
 [HollowSaint.FoundationKit.LanguageChecks]::Run((Join-Path $repo 'HollowSaintMod\Language\HollowSaint.language'))

@@ -4,6 +4,7 @@ param([ValidateSet('11','12','13')][string]$Bundle = '13')
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 & (Join-Path $PSScriptRoot 'Prepare-FxValidation.ps1')
+if ($LASTEXITCODE -ne 0) { throw 'Preview preparation failed or is unavailable; Unity was not launched.' }
 $unity = 'C:\Program Files\Unity 2021.3.33f1\Editor\Unity.exe'
 $blender = 'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe'
 $folder = if ($Bundle -eq '13') { 'grip-flow03' } elseif ($Bundle -eq '12') { 'grip-flow02' } else { 'grip-flow01' }

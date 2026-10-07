@@ -6,6 +6,7 @@
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 & (Join-Path $PSScriptRoot 'Prepare-FxValidation.ps1')
+if ($LASTEXITCODE -ne 0) { throw 'Preview preparation failed or is unavailable; Unity was not launched.' }
 $unity = 'C:\Program Files\Unity 2021.3.33f1\Editor\Unity.exe'
 if (-not (Test-Path -LiteralPath $unity)) { throw 'Unity 2021.3.33f1 not found' }
 $project = Join-Path $repo 'HollowSaintUnityProject'

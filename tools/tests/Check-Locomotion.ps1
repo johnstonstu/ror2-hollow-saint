@@ -2,7 +2,7 @@
 # diagonals/reversals stay finite/continuous; contacts follow actual clip phase.
 $ErrorActionPreference = 'Stop'
 $repo = Resolve-Path (Join-Path $PSScriptRoot '..\..')
-$source = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationLocomotionMath.cs'))
+$source = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\Character\Animation\FoundationLocomotionMath.cs'))
 $checks = @'
 namespace HollowSaint
 {

@@ -4,7 +4,7 @@
 # Windows PowerShell 5 compatible (Add-Type compiles C# 5).
 $ErrorActionPreference = 'Stop'
 $repo = Resolve-Path (Join-Path $PSScriptRoot '..\..')
-$source = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationArmLifeMath.cs'))
+$source = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\Character\Animation\FoundationArmLifeMath.cs'))
 $checks = @'
 namespace HollowSaint
 {

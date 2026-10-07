@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit></PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelSequence.cs" Link="GazeFuelSequence.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeTimerPolicy.cs" Link="GazeTimerPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeRampPolicy.cs" Link="GazeRampPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeBeamWidthPolicy.cs" Link="GazeBeamWidthPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelSequence.cs" Link="GazeFuelSequence.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeManualInputPolicy.cs" Link="GazeManualInputPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeTimerPolicy.cs" Link="GazeTimerPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeRampPolicy.cs" Link="GazeRampPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeBeamWidthPolicy.cs" Link="GazeBeamWidthPolicy.cs" />
   </ItemGroup>
 </Project>

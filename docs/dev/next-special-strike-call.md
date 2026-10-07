@@ -14,12 +14,12 @@ Target: a point release after 1.2 (Stu said "1.21 or 1.25"; Thunderstore needs t
 - Bosses and stronger targets need thought; how hard a full five-bolt cast should hit a single boss is to be tuned in play.
 
 ## What already exists to build on
-- Charge phase: `HollowSaintMod/FoundationKit/Gaze/GazeState.Charge.cs` (absorb timing 0.12 s then 0.30 s each, armor, hover, Utility backs out, count serialized to the server) and `HollowSaintMod/FoundationKit/Gaze/Fx/GazeChargeUpFx.cs` (orbs spiral into the crown, `Play_HS_GazeLoad1`-`5` sounds). Could be lifted into a shared charge-up state used by both specials.
+- Charge phase: `HollowSaintMod/FoundationKit/Gaze/Runtime/GazeState.Charge.cs` (absorb timing 0.12 s then 0.30 s each, armor, hover, Utility backs out, count serialized to the server) and `HollowSaintMod/FoundationKit/Gaze/Presentation/GazeChargeUpFx.cs` (orbs spiral into the crown, `Play_HS_GazeLoad1`-`5` sounds). Could be lifted into a shared charge-up state used by both specials.
 - Strike presentation: `HollowSaintMod/FoundationKit/Storm/RoyalCapacitorFx.cs`, `Strike(position, owner)` spawns the palette-tinted Thunderbolt with the `Play_HS_ThunderStrike` sound. `ThunderboltDriver` owns damage, procs and splash for the passive's strikes.
-- Targeting references: the Gaze lock-on bolt (`HollowSaintMod/FoundationKit/Gaze/GazeFuelController.Under.cs`, BullseyeSearch with line of sight) and Arc Bolt's small aim-assist cone.
+- Targeting references: the Gaze lock-on bolt (`HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelController.Under.cs`, BullseyeSearch with line of sight) and Arc Bolt's small aim-assist cone.
 - Static Charges: `DischargeMeter` (bank of 5 by default, `KitTuning.StormChargeMax`).
 - Audio: the Wwise bank is authored by `tools/audio/author_bank.py` from WAVs in `art/audio/source` (mix trims in `MIX_TRIM_DB`). ThunderStrike is built from a Pixabay sample and kept out of git. A rolling-thunder layer would be a new cue (sample or synth).
-- Test harness: `HollowSaintMod/DevAutopilot*.cs` segments via `HS_SEGMENTS` (see `DevAutopilot.GazeCharge.cs` for a charge-up test pattern); `tools/dev-profile/Stage-Build.ps1` stages into the `Hollow Saint Dev` profile.
+- Test harness: `HollowSaintMod/Development/DevAutopilot*.cs` segments via `HS_SEGMENTS` (see `DevAutopilot.GazeCharge.cs` for a charge-up test pattern); `tools/dev-profile/Stage-Build.ps1` stages into the `Hollow Saint Dev` profile.
 
 ## Design sketch
 - **Targeting:** BullseyeSearch from the aim ray with a view cone (about 40 to 60 degrees), line of sight on. Pick up to N targets (N = charges, max 5) by angle to the crosshair, then sort the **strike order by distance from the Saint, near to far**. Lock targets at release; a marker over each during the charge-up reads well from the default camera (right behind the player).

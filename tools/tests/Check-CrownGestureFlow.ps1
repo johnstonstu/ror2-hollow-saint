@@ -4,7 +4,7 @@
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $crown = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\OpenCircuit\CrownGestureFlow.cs'))
-$shared = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\KitShared.cs'))
+$shared = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\Character\Animation\KitAnim.cs'))
 $first = $shared.IndexOf('public static bool MoveGesture(')
 $last = $shared.IndexOf('public static Animator AnimatorOf(', $first)
 if ($first -lt 0 -or $last -lt 0) { throw 'Gesture method boundaries changed' }

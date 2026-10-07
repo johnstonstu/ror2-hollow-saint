@@ -4,7 +4,7 @@ Written 2026-09-27 (PT). Author: read-only agent pass. Every frame number, marke
 file name and pipeline behavior below was **read from the repo**, not remembered. Sources: `art/anim/v31/catalog.json`
 (65 clips, parsed programmatically), `HollowSaintUnityProject/Assets/HollowSaint/Editor/FoundationBundleBuilder.cs`,
 `Editor/ProbeAssets.cs`, `GameFoundation01/Foundation.controller` (YAML inspected directly),
-`HollowSaintMod/FoundationMounts.cs`, `FoundationBody.cs`, `FoundationMaterials.cs`, `FoundationPresentation.cs`,
+`HollowSaintMod/Character/Rig/FoundationMounts.cs`, `FoundationBody.cs`, `FoundationMaterials.cs`, `FoundationPresentation.cs`,
 `KitRegistration.cs`, `art/vfx/assets/fbx/fbx_manifest.json`, `art/vfx/assets/README.md`, `art/vfx/VFX-ABILITY-PLAN.md`,
 `docs/kit-contract-20260927.md`, `docs/next-agent-handoff-20260927.md`, `art/MASTER-PLAN.md`,
 `tools/blender/export_unity_probe.py`. Unity/Blender were NOT launched; nothing under

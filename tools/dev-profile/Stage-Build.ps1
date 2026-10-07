@@ -13,6 +13,11 @@ $built = Join-Path $repo 'HollowSaintMod\bin\Release\netstandard2.1\HollowSaint.
 
 if (Get-Process 'Risk of Rain 2' -ErrorAction SilentlyContinue) { throw 'Risk of Rain 2 is running. Close it before staging.' }
 if (-not (Test-Path $pluginDir)) { throw "Plugin folder not found: $pluginDir" }
+$langSource = Join-Path $repo 'HollowSaintMod\Language\HollowSaint.language'
+if (-not (Test-Path -LiteralPath $langSource)) { throw "Missing $langSource; nothing staged." }
+if ($Bundle) { $bundleSource = (Resolve-Path -LiteralPath (Join-Path $repo $Bundle)).Path }
+& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repo 'tools\verify.ps1')
+if ($LASTEXITCODE -ne 0) { throw 'Source verification failed; nothing staged.' }
 
 if (-not $SkipBuild) {
     & dotnet build (Join-Path $repo 'HollowSaintMod\HollowSaint.csproj') -c Release --no-restore -nologo -v q

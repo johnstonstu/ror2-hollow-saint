@@ -2,7 +2,7 @@
 # Usage: powershell -ExecutionPolicy Bypass -File tools\release\Make-Package.ps1 [-Bundle <path to hollowsaintassets>] [-SkipBuild]
 # Default bundle: artifacts\foundation\bundle15\hollowsaintassets (the bundle Stu playtested; SHA256 pinned below).
 # Passing -Bundle skips the hash pin, so only do that on purpose for a new bundle (then update $BundleSha256).
-# Output: artifacts\release\JohnstonStu-Hollow_Saint-<version>.zip (+ an unpacked folder for inspection).
+# Output: a unique artifacts\candidates\<timestamp> directory; existing releases are retained.
 # Nothing is uploaded. Publish to Thunderstore by hand.
 param([string]$Bundle, [switch]$SkipBuild)
 $ErrorActionPreference = 'Stop'
@@ -26,6 +26,8 @@ if ($manifest.description.Length -gt 250) { Fail "manifest description is $($man
 $plugin = Get-Content (Join-Path $repo 'HollowSaintMod\Plugin.cs') -Raw
 if ($plugin -notmatch 'const string Version = "([^"]+)"') { Fail 'Plugin.cs Version constant not found' }
 if ($Matches[1] -ne $version) { Fail "Plugin.cs Version $($Matches[1]) does not match manifest $version (NetworkCompatibility rejects mismatched lobbies)" }
+& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repo 'tools\verify.ps1')
+if ($LASTEXITCODE -ne 0) { Fail 'Source verification failed; no package created.' }
 
 if ($Bundle) { Write-Warning "Using -Bundle $Bundle (hash pin skipped)" }
 else {
@@ -52,11 +54,17 @@ if (-not $SkipBuild) {
     if ($LASTEXITCODE -ne 0) { Fail "dotnet build -c Release failed (exit $LASTEXITCODE)" }
 }
 if (-not (Test-Path -LiteralPath $dll -PathType Leaf)) { Fail "Missing $dll" }
+& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repo 'tools\dev-profile\Check-Access.ps1') -Dll $dll
+if ($LASTEXITCODE -ne 0) { Fail 'Native access verification failed or was incomplete; no package created.' }
+$assemblyVersion = [Reflection.AssemblyName]::GetAssemblyName($dll).Version
+if ("$($assemblyVersion.Major).$($assemblyVersion.Minor).$($assemblyVersion.Build)" -ne $version) {
+    Fail "Built assembly version $assemblyVersion differs from package $version"
+}
 
 # --- 3. stage (allowlist only) -----------------------------------------------
-$out = Join-Path $repo 'artifacts\release'
+$out = Join-Path $repo ('artifacts\candidates\' + (Get-Date -Format 'yyyyMMdd-HHmmss-fffffff'))
 $stage = Join-Path $out ("JohnstonStu-Hollow_Saint-" + $version)
-if (Test-Path $stage) { Remove-Item $stage -Recurse -Force }
+if (Test-Path -LiteralPath $stage) { Fail "Candidate destination already exists: $stage" }
 $files = [ordered]@{
     'manifest.json' = (Join-Path $pkg 'manifest.json')
     'README.md' = (Join-Path $pkg 'README.md')
@@ -81,7 +89,7 @@ foreach ($e in $files.GetEnumerator()) {
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $zip = $stage + '.zip'
-if (Test-Path $zip) { Remove-Item $zip -Force }
+if (Test-Path -LiteralPath $zip) { Fail "Candidate zip already exists: $zip" }
 $archive = [System.IO.Compression.ZipFile]::Open($zip, [System.IO.Compression.ZipArchiveMode]::Create)
 try {
     foreach ($e in $files.GetEnumerator()) {

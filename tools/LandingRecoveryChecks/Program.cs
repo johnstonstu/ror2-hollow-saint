@@ -96,13 +96,13 @@ static class Program
 
         string root = args.Length > 0 ? args[0] : Directory.GetCurrentDirectory();
         string Read(string relative) => File.ReadAllText(Path.Combine(root, "HollowSaintMod/FoundationKit", relative));
-        string impact = Read("Stormspear/StormspearProjectile.cs"), driver = Read("Storm/ThunderboltDriver.cs"), gaze = Read("Gaze/GazeFuelController.cs"), storm = Read("Storm/StormServer.cs");
+        string impact = Read("Stormspear/StormspearProjectile.cs"), driver = Read("Storm/ThunderboltDriver.cs"), gaze = Read("Gaze/Runtime/GazeFuelController.cs"), storm = Read("Storm/StormServer.cs");
         Check(impact.Contains("!funded && !shot.FullyHeld") && !impact.Contains("ServerStrikeAt("), "all full-holds and no legacy duplicate");
         Check(impact.IndexOf("launchStage = Stage.instance") < impact.IndexOf("TryClaimSpearPrayer"), "ordinary stage snapshot captured even without bank");
         Check(driver.Contains("snapshot.Funded ? 1f : 0f") && driver.Contains("snapshot.Funded ? 0.5f : 0f") && driver.Contains("if (snapshot.Funded && victim"), "ordinary has no item proc or forced status");
         int spendAt = gaze.IndexOf("if (!ledger.TrySpend(group)) continue;"), healAt = gaze.IndexOf("recovery.Claim(spent)");
         Check(spendAt >= 0 && healAt > spendAt, "recovery strictly after actual grouped spend");
-        Check(!Read("Gaze/GazeFuelController.Presentation.cs").Contains(".Heal("), "observers cannot heal from received events");
+        Check(!Read("Gaze/Runtime/GazeFuelController.Presentation.cs").Contains(".Heal("), "observers cannot heal from received events");
         Check(!storm.Contains("HasProc(ProcType.HealNova)"), "no broad healing-item Static/death-discharge nerf");
         Console.WriteLine("PASS " + checks + " landing/recovery assertions");
     }

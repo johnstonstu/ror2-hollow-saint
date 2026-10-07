@@ -3,7 +3,8 @@
 # In-memory adapter only; no installed config is read or written.
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$config = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\KitConfig.cs'))
+# These legacy fixtures compile selected blocks; the full runtime build also validates all partials.
+$config = (Get-ChildItem (Join-Path $repo 'HollowSaintMod\FoundationKit\Configuration\KitConfig*.cs') | Sort-Object Name | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join "`n"
 function Get-Block([string]$source, [string]$start) {
     $index = $source.IndexOf($start, [StringComparison]::Ordinal)
     if ($index -lt 0) { throw "Missing source block: $start" }
@@ -65,7 +66,7 @@ public static class StormspearDefaultsChecks {
   Check(Stormspear.StormspearTuning.TapDamage==6f && Stormspear.StormspearTuning.FullDamage==20f,"live callbacks"); cases++;
  }
  public static string Run() {
-  Check(CurrentDefaultsVersion==13,"migration version");
+  Check(CurrentDefaultsVersion==14,"migration version");
   Case(null,null,1,3.5f,14f); Case(4f,14f,1,3.5f,14f);
   Case(4f,16f,10,3.5f,14f); Case(4f,16f,11,3.5f,14f);
   Case(4f,20f,11,3.5f,20f); Case(6f,16f,11,6f,14f);

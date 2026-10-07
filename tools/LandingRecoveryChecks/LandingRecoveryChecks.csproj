@@ -5,7 +5,7 @@
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearFeedbackPolicy.cs" Link="SpearFeedbackPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearShot.cs" Link="StormspearShot.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Storm/StoredPrayerPolicy.cs" Link="StoredPrayerPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeRecoveryBudget.cs" Link="GazeRecoveryBudget.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelLedger.cs" Link="GazeFuelLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeRecoveryBudget.cs" Link="GazeRecoveryBudget.cs" />
   </ItemGroup>
 </Project>

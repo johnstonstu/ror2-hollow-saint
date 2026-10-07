@@ -2,8 +2,9 @@
 # and adjacent values, stays stable on rerun and retains production bind callbacks.
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$shared = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\KitShared.cs'))
-$config = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\KitConfig.cs'))
+$shared = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\Configuration\KitTuning.cs'))
+# These legacy fixtures compile selected blocks; the full runtime build also validates all partials.
+$config = (Get-ChildItem (Join-Path $repo 'HollowSaintMod\FoundationKit\Configuration\KitConfig*.cs') | Sort-Object Name | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join "`n"
 function Block([string]$source, [string]$marker) {
     $start = $source.IndexOf($marker, [StringComparison]::Ordinal)
     if ($start -lt 0) { throw "Missing production source: $marker" }
@@ -66,7 +67,7 @@ public static class ArcBoltFlightDefaultsChecks {
     }
     public static string Run(){
         Check(FreshDefault==120f&&KitTuning.ArcBoltRadius==.75f,"wrong static flight defaults");
-        Check(CurrentDefaultsVersion==13,"wrong migration marker");
+        Check(CurrentDefaultsVersion==14,"wrong migration marker");
         Case(null,12,120f);Case(80f,12,120f);Case(80f,0,120f);
         foreach(float custom in new[]{30f,79.99999f,80.00001f,100f,120f,150f,200f})Case(custom,12,custom);
         Case(80f,13,80f);Case(80f,14,80f);

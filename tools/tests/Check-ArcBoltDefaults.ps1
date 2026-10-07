@@ -4,8 +4,9 @@
 # config adapter. This is an offline config check, not BepInEx persistence or gameplay QA.
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
-$shared = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\KitShared.cs'))
-$config = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\KitConfig.cs'))
+$shared = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationKit\Configuration\KitTuning.cs'))
+# These legacy fixtures compile selected blocks; the full runtime build also validates all partials.
+$config = (Get-ChildItem (Join-Path $repo 'HollowSaintMod\FoundationKit\Configuration\KitConfig*.cs') | Sort-Object Name | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join "`n"
 function Get-Block([string]$source, [string]$start) {
     $index = $source.IndexOf($start, [StringComparison]::Ordinal)
     if ($index -lt 0) { throw "Missing source block: $start" }
@@ -73,7 +74,7 @@ public static class ArcBoltDefaultsChecks {
     }
     private static readonly float FreshDefault = KitTuning.ArcBoltDamageCoefficient;
     public static string Run() {
-        Check(FreshDefault == 1.2f && CurrentDefaultsVersion == 13, "Incorrect new defaults");
+        Check(FreshDefault == 1.2f && CurrentDefaultsVersion == 14, "Incorrect new defaults");
         Case(null, 1, 1.2f, CurrentDefaultsVersion);
         Case(1f, 1, 1.2f, CurrentDefaultsVersion);
         Case(1f, 10, 1.2f, CurrentDefaultsVersion);

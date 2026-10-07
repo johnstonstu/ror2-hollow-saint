@@ -1,0 +1,34 @@
+{
+  "projects": [
+    "tools/ConfigMigrationChecks/ConfigMigrationChecks.csproj",
+    "tools/ArcBoltReliabilityChecks/ArcBoltReliabilityChecks.csproj",
+    "tools/CircuitDwellChecks/CircuitDwellChecks.csproj",
+    "tools/CrimsonVisualChecks/CrimsonVisualChecks.csproj",
+    "tools/CrownMountChecks/CrownMountChecks.csproj",
+    "tools/GazeAssetFailureChecks/GazeAssetFailureChecks.csproj",
+    "tools/GazeFuelChecks/GazeFuelChecks.csproj",
+    "tools/GazeHudChecks/GazeHudChecks.csproj",
+    "tools/GazePresentationChecks/GazePresentationChecks.csproj",
+    "tools/GazePrimaryChecks/GazePrimaryChecks.csproj",
+    "tools/GazeReleaseChecks/GazeReleaseChecks.csproj",
+    "tools/LandingRecoveryChecks/LandingRecoveryChecks.csproj",
+    "tools/NonGazeDamageChecks/NonGazeDamageChecks.csproj",
+    "tools/OpenCircuitDomeChecks/OpenCircuitDomeChecks.csproj",
+    "tools/OpenCircuitPerimeterChecks/OpenCircuitPerimeterChecks.csproj",
+    "tools/SpearAfterglowChecks/SpearAfterglowChecks.csproj",
+    "tools/SpearAudioChecks/SpearAudioChecks.csproj",
+    "tools/SpearConductorChecks/SpearConductorChecks.csproj",
+    "tools/SpearCooldownChecks/SpearCooldownChecks.csproj",
+    "tools/StoredPrayerChecks/StoredPrayerChecks.csproj",
+    "tools/TerrainSpearChecks/TerrainSpearChecks.csproj"
+  ],
+  "scripts": [
+    "tools/tests/Check-Language.ps1",
+    "tools/tests/Check-Stormspear.ps1",
+    "tools/tests/Check-AimForgiveness.ps1",
+    "tools/tests/Check-ArcBoltDefaults.ps1",
+    "tools/tests/Check-ArcBoltFlightDefaults.ps1",
+    "tools/tests/Check-StormspearDefaults.ps1",
+    "tools/tests/Check-CrownGestureFlow.ps1"
+  ]
+}

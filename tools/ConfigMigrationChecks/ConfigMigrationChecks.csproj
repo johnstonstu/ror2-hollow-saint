@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../HollowSaintMod/FoundationKit/Configuration/*.cs" Exclude="../../HollowSaintMod/FoundationKit/Configuration/KitConfig.Options.cs" Link="Production/%(Filename)%(Extension)" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearTuning.cs" Link="Production/StormspearTuning.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeTuning.cs" Link="Production/GazeTuning.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeReleasePolicy.cs" Link="Production/GazeReleasePolicy.cs" />
+  </ItemGroup>
+</Project>

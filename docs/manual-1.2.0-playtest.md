@@ -15,7 +15,7 @@ Status: source-reviewed candidate; the checks below are **pending native gamepla
 - **Fresh mapped Special cancels; mapped Utility cancels into its equipped native skill if ready.** Initial held actions are ignored until release/press. No hidden physical B/Circle or keyboard Alt binding is used. Natural expiry, death and disable still end the channel.
 - Cancellation and natural end stop pending work. A launched pulse cancelled before impact has still spent its orb; there is no refund for a miss or an interrupted arrival.
 
-Sources: [GazeState](../HollowSaintMod/FoundationKit/Gaze/GazeState.cs), [request and duration policies](../HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs), [fuel controller](../HollowSaintMod/FoundationKit/Gaze/GazeFuelController.cs), [schedule](../HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs).
+Sources: [GazeState](../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeState.cs), [request and duration policies](../HollowSaintMod/FoundationKit/Gaze/Rules/GazeManualInputPolicy.cs), [fuel controller](../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelController.cs), [schedule](../HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelLedger.cs).
 
 ## Fuel and duration
 

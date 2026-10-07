@@ -2,6 +2,7 @@ param([switch]$AuditOnly)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 & (Join-Path $PSScriptRoot 'Prepare-FxValidation.ps1')
+if ($LASTEXITCODE -ne 0) { throw 'Preview preparation failed or is unavailable; Unity was not launched.' }
 $output = Join-Path $repo 'artifacts\skin-light01'
 New-Item -ItemType Directory -Force $output | Out-Null
 $project = Join-Path $repo 'HollowSaintUnityProject'

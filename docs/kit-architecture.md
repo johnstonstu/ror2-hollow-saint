@@ -1,19 +1,28 @@
 # Hollow Saint kit architecture
 
-How the survivor's code is put together, and the rules any change must keep.
-Replaces `archive/kit-contract-20260927.md` and `archive/kit-wiring-api-20260927.md`,
-which described an approach that did not survive contact with the game code.
+Current source map for the local refactor of released 1.2.0. The runtime still
+ships as one `HollowSaint.dll`; folder moves preserve namespaces and identities.
+See [development workflow](dev/README.md) for commands and evidence limits.
 
 ## Layout
 
 | Path | Role |
 |---|---|
 | `HollowSaintMod/Plugin.cs` | BepInEx entry. Tokens, server hooks, post-load verification. |
-| `HollowSaintMod/FoundationContent.cs` | The mod's one `IContentPackProvider`. Loads the bundle, registers kit content, builds body/display/survivor, fills the ContentPack. |
-| `HollowSaintMod/Foundation*.cs` | Body construction, skin, materials, mesh split, mounts, locomotion presentation. |
-| `HollowSaintMod/KitRegistration.cs` | Registers every skill and installs the kit on the body. |
-| `HollowSaintMod/FoundationKit/KitShared.cs` | `KitTuning`, `KitContent`, `DischargeMeter`, `KitAnim`, `KitUtil`, `KitLog`, `KitTokens`. |
+| `HollowSaintMod/Content/FoundationContent.cs` | The mod's one `IContentPackProvider`. Loads the bundle, registers kit content, builds body/display/survivor, fills the ContentPack. |
+| `HollowSaintMod/Character/` | Animation, appearance and rig responsibilities. |
+| `HollowSaintMod/Content/KitRegistration.cs` | Registers every skill and installs the kit on the body. |
+| `HollowSaintMod/FoundationKit/Configuration/` | Feature binding partials, ordered migration history, tuning and options UI. |
+| `HollowSaintMod/FoundationKit/Shared/` | Shared damage-source identity and gameplay utilities. |
 | `HollowSaintMod/FoundationKit/<Skill>/` | One folder per skill: registration, EntityState, projectile or driver, VFX hooks. |
+| `HollowSaintMod/FoundationKit/Gaze/` | `Rules` (offline policies), `Runtime` (game integration), `Networking`, `Presentation`. |
+| `HollowSaintMod/Audio/`, `Localization/`, `Diagnostics/` | Soundbank and beat audio; tokens/descriptions; logs/audits. |
+| `HollowSaintMod/Development/` | Existing opt-in autopilot, kept in the single assembly. |
+
+The former `KitShared.cs` types now live with their owners: `KitContent` in
+Content, `DischargeMeter` in Storm, `KitAnim` in Character/Animation, `KitLog`
+in Diagnostics and `KitTokens` in Localization. [Move inventory](dev/refactor-map.json)
+records old/new paths and the pre-move reference checklist.
 
 ## Content registration
 
@@ -26,7 +35,7 @@ Order inside `FoundationContent.LoadStaticContentAsync`:
 2. `FoundationBody.Build()` clones CommandoBody and swaps in the model.
 3. `KitRegistration.InstallOnBody()` creates one `SkillFamily` per slot, points each
    `GenericSkill._skillFamily` at it (reflection), sets the passive, and adds
-   `DischargeMeter` and `OpenCircuitPulseDriver` to the body.
+   `DischargeMeter`, Gaze controllers/HUD and Open Circuit components to the body.
 4. `GenerateContentPackAsync` calls `KitContent.PopulateInto(args.output)`.
 
 **Why families and not `SetSkillInternal`:** `GenericSkill.Awake` runs
@@ -54,28 +63,31 @@ Two mistakes the earlier code made, both invisible in single player:
 - Gating server work on `hasEffectiveAuthority` means the host never runs it for a
   remote player's body.
 
-State that clients need to see is stored in **buffs**, because `CharacterBody`
-already replicates them. The Discharge meter is the stack count of the hidden
-`HollowSaintDischargeCharge` buff; Open Circuit's window is the
-`HollowSaintOpenCircuit` buff. Custom `NetworkBehaviour`s are avoided because the
-plain `dotnet build` does not run the UNet weaver.
+Buffs replicate stored charge and the Open Circuit window. Gaze also has an
+explicit request/state/pulse transport in `Gaze/Networking/GazeFuelTransport.cs`.
+Preserve its message IDs, field order, ownership checks and cast sequencing.
+The ledger separates frozen entry charges from newly earned reserves; presentation
+must not authorize resource spending or healing. Custom `NetworkBehaviour`s are
+avoided because plain `dotnet build` does not run the UNet weaver.
 
 ## State machines and input overlap
 
 | Machine | Skills | Why |
 |---|---|---|
-| `Weapon` (vanilla) | Arc Bolt, Conduit Spear | The spear (PrioritySkill) can cut a bolt at any time; bolts (Any) wait for the spear. |
+| `Weapon` (vanilla) | Arc Bolt | Native primary input, with skill policies controlling spear/Gaze overlap. |
+| `Spear` (added) | Stormspear | Charge/throw lifecycle and native stock/recharge behavior. |
 | `Body` (vanilla) | Arc Step | Owns movement while dashing; weapon skills keep firing. Jump cancels into a momentum jump. |
-| `Crown` (added) | Open Circuit | Its 1.2 s cast never blocks firing and cannot be cancelled after the cooldown is spent. Networked and reset on death and stun. |
+| `Crown` (added) | Gaze or alternate Open Circuit | Special ownership; Gaze temporarily maps primary input to hold/release surges. |
 
 ## VFX and SFX
 
-Every audiovisual moment is a `Beat` (`FoundationKit/Vfx/KitFx.cs`). Local beats are raised
+Shared audiovisual events use `Beat` (`FoundationKit/Vfx/Beat.cs`). Local beats are raised
 by EntityStates or replicated buff edges and run on every machine; server beats
 (impacts, chain hops, pulses, discharge) go through one networked effect prefab
 (`VFXAttributes.DoNotPool`) so every client sees and hears them. Visuals are built in
-code from vanilla FX materials re-ramped to the kit-v2 palette (`VfxAssets`). Sounds
-are vanilla Wwise events in `KitSfx.For`, the single place to swap in a custom bank.
+code from FX materials (`VfxAssets`). `Audio/KitSfx.cs` maps beat sounds and
+`Audio/CustomSoundBank.cs` owns the embedded custom bank. Gaze also has feature-local
+presentation/audio. Keep the explicit Beat values and server/local routing stable.
 
 Anything that sits on the halo reads `HaloRing` (`FoundationKit/Vfx/HaloRing.cs`), never the
 `Halo` socket alone. Open Circuit makes the crown by swinging the four arc bones
@@ -87,21 +99,25 @@ against the v34 rig by `tools/tests/Check-HaloRing.ps1`). Charge orbs (`StormCha
 
 ## Damage hooks
 
-- **Conductor Mark** multiplies damage in an `On.RoR2.HealthComponent.TakeDamageProcess`
-  hook, before health is subtracted. `GlobalEventManager.onServerDamageDealt` fires
-  after health is already reduced, so changing damage there does nothing.
-- **Discharge** listens on `onServerDamageDealt` (it reacts to a hit, it does not
-  change it). It consumes the meter first, then fires a capped burst through
-  `KitUtil.CappedBlast` (distinct entities, nearest first).
-- Our hits carry `DamageSource.Primary/Secondary/Special`. `KitUtil.SourceOf` maps
-  those back to a skill; item procs arrive as `NoneSpecified` and are ignored.
+- `StormServer` owns Static, Electrocute, stored charge and its server hooks.
+- `KitDamagePolicy`, spear snapshots and feature policies distinguish raw config
+  coefficients from effective damage. Inherited splash/chain damage must not be
+  scaled twice; `NonGazeDamageChecks` and `LandingRecoveryChecks` cover this boundary.
+- Gaze admission, spend, pulse and recovery policies bound casts independently of
+  presentation events. Keep server ownership, stale/duplicate rejection and owner/stage-loss behavior.
 
 ## Animation
 
 `KitAnim.Play` checks the layer and state exist before playing, and logs
-`HOLLOW_SAINT_ANIM_PENDING` once per missing state. The current bundle has one layer
-(`Body`), so skill gestures are skipped until the controller described in
-`unity-vfx-anim-spec-20260927.md` is built. State names use spaces (`Arc Bolt right`).
+`HOLLOW_SAINT_ANIM_PENDING` once per missing state. The released controller uses
+body and gesture layers; preserve layer names, pending-cast ownership, playback
+parameters and state names such as `Arc Bolt right`. `FoundationPresentation`,
+`FoundationArmPose` and `SpearCarry` remain substantial controllers; splitting their
+state transitions is a later phase requiring native pose/input acceptance.
+
+The active package pins bundle15, with earlier numbered assets as dependencies.
+See [asset inputs](dev/asset-inputs.json). Historical animation design documents
+do not replace the released controller contract.
 
 ## Verifying a build in game
 
@@ -109,9 +125,9 @@ Log lines in `...\Hollow Saint Dev\BepInEx\LogOutput.log`:
 
 | Line | Meaning |
 |---|---|
-| `HOLLOW_SAINT_KIT_CONTENT states=4 skillDefs=4 families=4 buffs=3 projectiles=2 effects=1` | Content reached the pack |
-| `HOLLOW_SAINT_ANIM_CONTRACT_DONE driven=15 missing=0` | Body-layer presentation found every state it drives |
-| `HOLLOW_SAINT_SFX_BANK <bank> result=` | Placeholder sound banks loaded |
+| `HOLLOW_SAINT_KIT_CONTENT ...` | Registered content counts; compare with the tested baseline |
+| `HOLLOW_SAINT_ANIM_CONTRACT_DONE ... missing=0` | Presentation found the states checked by its contract |
+| `HOLLOW_SAINT_SFX_BANK ... result=` | Soundbank load result |
 | `HOLLOW_SAINT_KIT_INSTALLED slots=4` | Families installed on the prefab |
 | `HOLLOW_SAINT_KIT_VERIFIED` / `_VERIFY_FAILED` | After catalogs load: each slot resolves to our SkillDef |
 | `HOLLOW_SAINT_BODY_STARTED ... skills=...` | A live body spawned with these skills |

@@ -1,0 +1,406 @@
+{
+  "baseline": "e44d582964bf7e69fb6e410e9eeaf2748b443197",
+  "moves": {
+    "HollowSaintMod/FoundationContent.cs": "HollowSaintMod/Content/FoundationContent.cs",
+    "HollowSaintMod/FoundationBody.cs": "HollowSaintMod/Content/FoundationBody.cs",
+    "HollowSaintMod/KitRegistration.cs": "HollowSaintMod/Content/KitRegistration.cs",
+    "HollowSaintMod/FoundationAimPose.cs": "HollowSaintMod/Character/Animation/FoundationAimPose.cs",
+    "HollowSaintMod/FoundationArmLifeMath.cs": "HollowSaintMod/Character/Animation/FoundationArmLifeMath.cs",
+    "HollowSaintMod/FoundationArmPose.cs": "HollowSaintMod/Character/Animation/FoundationArmPose.cs",
+    "HollowSaintMod/FoundationAnimRules.cs": "HollowSaintMod/Character/Animation/FoundationAnimRules.cs",
+    "HollowSaintMod/FoundationLayerWeights.cs": "HollowSaintMod/Character/Animation/FoundationLayerWeights.cs",
+    "HollowSaintMod/FoundationLocomotionMath.cs": "HollowSaintMod/Character/Animation/FoundationLocomotionMath.cs",
+    "HollowSaintMod/FoundationMotionPose.cs": "HollowSaintMod/Character/Animation/FoundationMotionPose.cs",
+    "HollowSaintMod/FoundationPresentation.cs": "HollowSaintMod/Character/Animation/FoundationPresentation.cs",
+    "HollowSaintMod/FoundationSkinAnimation.cs": "HollowSaintMod/Character/Animation/FoundationSkinAnimation.cs",
+    "HollowSaintMod/FoundationSkin.cs": "HollowSaintMod/Character/Appearance/FoundationSkin.cs",
+    "HollowSaintMod/FoundationHopoo.cs": "HollowSaintMod/Character/Appearance/FoundationHopoo.cs",
+    "HollowSaintMod/FoundationMaterials.cs": "HollowSaintMod/Character/Appearance/FoundationMaterials.cs",
+    "HollowSaintMod/FoundationLightMaps.cs": "HollowSaintMod/Character/Appearance/FoundationLightMaps.cs",
+    "HollowSaintMod/FoundationEliteTint.cs": "HollowSaintMod/Character/Appearance/FoundationEliteTint.cs",
+    "HollowSaintMod/CrimsonMasteryMaterials.cs": "HollowSaintMod/Character/Appearance/CrimsonMasteryMaterials.cs",
+    "HollowSaintMod/CrimsonMasteryVisuals.cs": "HollowSaintMod/Character/Appearance/CrimsonMasteryVisuals.cs",
+    "HollowSaintMod/FoundationMasteryUnlock.cs": "HollowSaintMod/Character/Appearance/FoundationMasteryUnlock.cs",
+    "HollowSaintMod/FoundationMeshSplitter.cs": "HollowSaintMod/Character/Rig/FoundationMeshSplitter.cs",
+    "HollowSaintMod/FoundationMounts.cs": "HollowSaintMod/Character/Rig/FoundationMounts.cs",
+    "HollowSaintMod/FoundationRagdoll.cs": "HollowSaintMod/Character/Rig/FoundationRagdoll.cs",
+    "HollowSaintMod/FoundationAudit.cs": "HollowSaintMod/Diagnostics/FoundationAudit.cs",
+    "HollowSaintMod/HsLog.cs": "HollowSaintMod/Diagnostics/HsLog.cs",
+    "HollowSaintMod/DevAutopilot.AimAssist.cs": "HollowSaintMod/Development/DevAutopilot.AimAssist.cs",
+    "HollowSaintMod/DevAutopilot.Audio.cs": "HollowSaintMod/Development/DevAutopilot.Audio.cs",
+    "HollowSaintMod/DevAutopilot.CircuitTerrain.cs": "HollowSaintMod/Development/DevAutopilot.CircuitTerrain.cs",
+    "HollowSaintMod/DevAutopilot.cs": "HollowSaintMod/Development/DevAutopilot.cs",
+    "HollowSaintMod/DevAutopilot.Effects.cs": "HollowSaintMod/Development/DevAutopilot.Effects.cs",
+    "HollowSaintMod/DevAutopilot.GazeCharge.cs": "HollowSaintMod/Development/DevAutopilot.GazeCharge.cs",
+    "HollowSaintMod/DevAutopilot.GazeRelease.cs": "HollowSaintMod/Development/DevAutopilot.GazeRelease.cs",
+    "HollowSaintMod/DevAutopilot.Heads.cs": "HollowSaintMod/Development/DevAutopilot.Heads.cs",
+    "HollowSaintMod/DevAutopilot.Items.cs": "HollowSaintMod/Development/DevAutopilot.Items.cs",
+    "HollowSaintMod/DevAutopilot.Javelin.cs": "HollowSaintMod/Development/DevAutopilot.Javelin.cs",
+    "HollowSaintMod/DevAutopilot.Lobby.cs": "HollowSaintMod/Development/DevAutopilot.Lobby.cs",
+    "HollowSaintMod/DevAutopilot.Polish.cs": "HollowSaintMod/Development/DevAutopilot.Polish.cs",
+    "HollowSaintMod/DevAutopilot.Showcase.cs": "HollowSaintMod/Development/DevAutopilot.Showcase.cs",
+    "HollowSaintMod/DevAutopilot.SpearSplash.cs": "HollowSaintMod/Development/DevAutopilot.SpearSplash.cs",
+    "HollowSaintMod/DevAutopilot.Storm.cs": "HollowSaintMod/Development/DevAutopilot.Storm.cs",
+    "HollowSaintMod/DevAutopilot.Thunder.cs": "HollowSaintMod/Development/DevAutopilot.Thunder.cs",
+    "HollowSaintMod/FoundationKit/KitLanguage.cs": "HollowSaintMod/Localization/KitLanguage.cs",
+    "HollowSaintMod/FoundationKit/KitDescriptions.cs": "HollowSaintMod/Localization/KitDescriptions.cs",
+    "HollowSaintMod/FoundationKit/LanguageJson.cs": "HollowSaintMod/Localization/LanguageJson.cs",
+    "HollowSaintMod/FoundationKit/LangFormat.cs": "HollowSaintMod/Localization/LangFormat.cs",
+    "HollowSaintMod/FoundationKit/KitIcons.cs": "HollowSaintMod/Content/KitIcons.cs",
+    "HollowSaintMod/FoundationKit/SpearDischarge/SpearCarry.cs": "HollowSaintMod/FoundationKit/Stormspear/SpearCarry.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeArmor.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeArmor.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeBeam.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeBeam.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeChannelSkillDefs.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeChannelSkillDefs.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeExitInput.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeExitInput.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFallGuard.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFallGuard.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelController.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.Presentation.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelController.Presentation.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.Release.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelController.Release.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.Under.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelController.Under.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelLedger.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelPulse.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelPulse.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelSequence.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelSequence.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelTransport.cs": "HollowSaintMod/FoundationKit/Gaze/Networking/GazeFuelTransport.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeLockState.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeLockState.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeManualInputPolicy.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeMappedCancel.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeMappedCancel.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazePulseAudio.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazePulseAudio.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazePulseKick.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazePulseKick.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeRampPolicy.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeRampPolicy.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeRecoveryBudget.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeRecoveryBudget.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeRegistration.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeRegistration.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeReleaseFeel.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeReleaseFeel.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeReleasePolicy.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeReleasePolicy.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeServer.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeServer.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeSkillOverrides.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeSkillOverrides.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeState.Charge.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeState.Charge.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeState.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeState.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeTimerHud.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeTimerHud.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeTimerPolicy.cs": "HollowSaintMod/FoundationKit/Gaze/Rules/GazeTimerPolicy.cs",
+    "HollowSaintMod/FoundationKit/Gaze/GazeTuning.cs": "HollowSaintMod/FoundationKit/Gaze/Runtime/GazeTuning.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeAssets.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeAssets.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeBeamFx.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeBeamFx.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeBeamWidthPolicy.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeBeamWidthPolicy.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeChargeUpFx.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeChargeUpFx.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeContrastAssets.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeContrastAssets.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeCrownMount.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeCrownMount.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEffect.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEffect.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Crown.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.Crown.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Geometry.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.Geometry.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Impact.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.Impact.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Pulse.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.Pulse.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeForkFx.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeForkFx.cs",
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeTendrils.cs": "HollowSaintMod/FoundationKit/Gaze/Presentation/GazeTendrils.cs",
+    "HollowSaintMod/FoundationKit/Vfx/CustomSoundBank.cs": "HollowSaintMod/Audio/CustomSoundBank.cs",
+    "HollowSaintMod/FoundationKit/KitConfig.cs": "HollowSaintMod/FoundationKit/Configuration/KitConfig.cs"
+  },
+  "splits": {
+    "HollowSaintMod/FoundationKit/KitShared.cs": {
+      "KitTuning": "FoundationKit/Configuration",
+      "HsDamageSource": "FoundationKit/Shared",
+      "KitContent": "Content",
+      "DischargeMeter": "FoundationKit/Storm",
+      "KitAnim": "Character/Animation",
+      "KitUtil": "FoundationKit/Shared",
+      "KitLog": "Diagnostics",
+      "KitTokens": "Localization"
+    },
+    "HollowSaintMod/FoundationKit/Vfx/KitFx.cs": {
+      "Beat": "FoundationKit/Vfx",
+      "ImpactFeelSettings": "FoundationKit/Vfx",
+      "KitSfx": "Audio",
+      "KitFx": "FoundationKit/Vfx",
+      "BeatEffect": "FoundationKit/Vfx",
+      "BeatVisuals": "FoundationKit/Vfx"
+    }
+  },
+  "identities": "No namespace, type, content, config, packet or Unity GUID renames.",
+  "references": {
+    "HollowSaintMod/FoundationContent.cs": [
+      "docs/kit-architecture.md:12",
+      "docs/unity-vfx-anim-spec-20260927.md:362"
+    ],
+    "HollowSaintMod/FoundationBody.cs": [
+      "docs/dev/1.2-balance-review.md:9",
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/unity-vfx-anim-spec-20260927.md:7"
+    ],
+    "HollowSaintMod/KitRegistration.cs": [
+      "docs/kit-architecture.md:14",
+      "docs/unity-vfx-anim-spec-20260927.md:8"
+    ],
+    "HollowSaintMod/FoundationAimPose.cs": [],
+    "HollowSaintMod/FoundationArmLifeMath.cs": [
+      "tools/tests/Check-ArmLife.ps1:3",
+      "tools/tests/Check-ArmLife.ps1:7"
+    ],
+    "HollowSaintMod/FoundationArmPose.cs": [],
+    "HollowSaintMod/FoundationAnimRules.cs": [
+      "tools/tests/Check-AnimRules.ps1:3",
+      "tools/tests/Check-AnimRules.ps1:6"
+    ],
+    "HollowSaintMod/FoundationLayerWeights.cs": [],
+    "HollowSaintMod/FoundationLocomotionMath.cs": [
+      "tools/tests/Check-Locomotion.ps1:5"
+    ],
+    "HollowSaintMod/FoundationMotionPose.cs": [
+      "tools/tests/Prepare-FxValidation.ps1:25"
+    ],
+    "HollowSaintMod/FoundationPresentation.cs": [
+      "docs/unity-vfx-anim-spec-20260927.md:7",
+      "docs/unity-vfx-anim-spec-20260927.md:149",
+      "docs/unity-vfx-anim-spec-20260927.md:320",
+      "docs/unity-vfx-anim-spec-20260927.md:358",
+      "docs/unity-vfx-anim-spec-20260927.md:557",
+      "tools/tests/Prepare-FxValidation.ps1:36"
+    ],
+    "HollowSaintMod/FoundationSkinAnimation.cs": [],
+    "HollowSaintMod/FoundationSkin.cs": [
+      "tools/tests/Prepare-FxValidation.ps1:45"
+    ],
+    "HollowSaintMod/FoundationHopoo.cs": [],
+    "HollowSaintMod/FoundationMaterials.cs": [
+      "docs/unity-vfx-anim-spec-20260927.md:7"
+    ],
+    "HollowSaintMod/FoundationLightMaps.cs": [],
+    "HollowSaintMod/FoundationEliteTint.cs": [],
+    "HollowSaintMod/CrimsonMasteryMaterials.cs": [],
+    "HollowSaintMod/CrimsonMasteryVisuals.cs": [
+      "tools/CrimsonVisualChecks/CrimsonVisualChecks.csproj:3",
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:4"
+    ],
+    "HollowSaintMod/FoundationMasteryUnlock.cs": [],
+    "HollowSaintMod/FoundationMeshSplitter.cs": [],
+    "HollowSaintMod/FoundationMounts.cs": [
+      "docs/unity-vfx-anim-spec-20260927.md:7",
+      "docs/unity-vfx-anim-spec-20260927.md:395",
+      "docs/unity-vfx-anim-spec-20260927.md:420",
+      "docs/unity-vfx-anim-spec-20260927.md:568"
+    ],
+    "HollowSaintMod/FoundationRagdoll.cs": [],
+    "HollowSaintMod/FoundationAudit.cs": [
+      "docs/unity-vfx-anim-spec-20260927.md:360"
+    ],
+    "HollowSaintMod/HsLog.cs": [],
+    "HollowSaintMod/DevAutopilot.AimAssist.cs": [],
+    "HollowSaintMod/DevAutopilot.Audio.cs": [],
+    "HollowSaintMod/DevAutopilot.CircuitTerrain.cs": [],
+    "HollowSaintMod/DevAutopilot.cs": [],
+    "HollowSaintMod/DevAutopilot.Effects.cs": [],
+    "HollowSaintMod/DevAutopilot.GazeCharge.cs": [],
+    "HollowSaintMod/DevAutopilot.GazeRelease.cs": [
+      "docs/dev/README.md:7"
+    ],
+    "HollowSaintMod/DevAutopilot.Heads.cs": [],
+    "HollowSaintMod/DevAutopilot.Items.cs": [
+      "docs/dev/1.2-gaze-research.md:76",
+      "docs/dev/1.2-gaze-research.md:115"
+    ],
+    "HollowSaintMod/DevAutopilot.Javelin.cs": [],
+    "HollowSaintMod/DevAutopilot.Lobby.cs": [],
+    "HollowSaintMod/DevAutopilot.Polish.cs": [],
+    "HollowSaintMod/DevAutopilot.Showcase.cs": [],
+    "HollowSaintMod/DevAutopilot.SpearSplash.cs": [],
+    "HollowSaintMod/DevAutopilot.Storm.cs": [],
+    "HollowSaintMod/DevAutopilot.Thunder.cs": [],
+    "HollowSaintMod/FoundationKit/KitLanguage.cs": [],
+    "HollowSaintMod/FoundationKit/KitDescriptions.cs": [
+      "tools/NonGazeDamageChecks/Program.cs:85",
+      "tools/NonGazeDamageChecks/Program.cs:86",
+      "tools/NonGazeDamageChecks/Program.cs:87",
+      "tools/NonGazeDamageChecks/Program.cs:88",
+      "tools/NonGazeDamageChecks/Program.cs:89",
+      "tools/NonGazeDamageChecks/Program.cs:90",
+      "tools/NonGazeDamageChecks/Program.cs:91"
+    ],
+    "HollowSaintMod/FoundationKit/LanguageJson.cs": [
+      "tools/tests/Check-Language.ps1:10",
+      "tools/tests/LanguageChecks.cs:10"
+    ],
+    "HollowSaintMod/FoundationKit/LangFormat.cs": [
+      "tools/tests/Check-Language.ps1:11",
+      "tools/tests/LanguageChecks.cs:11"
+    ],
+    "HollowSaintMod/FoundationKit/KitIcons.cs": [],
+    "HollowSaintMod/FoundationKit/SpearDischarge/SpearCarry.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeArmor.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeBeam.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeChannelSkillDefs.cs": [
+      "tools/GazePrimaryChecks/GazePrimaryChecks.csproj:7"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeExitInput.cs": [
+      "tools/GazePrimaryChecks/GazePrimaryChecks.csproj:5"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFallGuard.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.cs": [
+      "docs/dev/1.2-gaze-research.md:115",
+      "docs/manual-1.2.0-playtest.md:18",
+      "tools/LandingRecoveryChecks/Program.cs:99",
+      "tools/analysis/Measure-Gaze120.ps1:24",
+      "tools/audio/check_feedback_audio.py:70"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.Presentation.cs": [
+      "tools/LandingRecoveryChecks/Program.cs:105"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.Release.cs": [
+      "docs/dev/1.2-gaze-release-trial.md:21"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelController.Under.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelLedger.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/dev/1.2-gaze-research.md:115",
+      "docs/manual-1.2.0-playtest.md:18",
+      "tools/GazeFuelChecks/GazeFuelChecks.csproj:4",
+      "tools/GazeHudChecks/GazeHudChecks.csproj:9",
+      "tools/GazePrimaryChecks/GazePrimaryChecks.csproj:9",
+      "tools/GazeReleaseChecks/GazeReleaseChecks.csproj:5",
+      "tools/LandingRecoveryChecks/LandingRecoveryChecks.csproj:8",
+      "tools/NonGazeDamageChecks/Program.cs:80",
+      "tools/analysis/Measure-Gaze120.ps1:20"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelPulse.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/dev/1.2-gaze-research.md:115",
+      "tools/NonGazeDamageChecks/Program.cs:80"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelSequence.cs": [
+      "tools/GazeFuelChecks/GazeFuelChecks.csproj:5"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeFuelTransport.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeLockState.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeManualInputPolicy.cs": [
+      "docs/dev/1.2-gaze-research.md:115",
+      "docs/manual-1.2.0-playtest.md:18",
+      "tools/GazeFuelChecks/GazeFuelChecks.csproj:6",
+      "tools/GazeHudChecks/GazeHudChecks.csproj:8",
+      "tools/GazePrimaryChecks/GazePrimaryChecks.csproj:8",
+      "tools/analysis/Measure-Gaze120.ps1:21"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeMappedCancel.cs": [
+      "tools/GazePrimaryChecks/GazePrimaryChecks.csproj:6"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazePulseAudio.cs": [
+      "tools/GazeHudChecks/GazeHudChecks.csproj:5"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazePulseKick.cs": [
+      "tools/GazeHudChecks/GazeHudChecks.csproj:6"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeRampPolicy.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/dev/1.2-gaze-research.md:115",
+      "tools/GazeFuelChecks/GazeFuelChecks.csproj:8",
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:12",
+      "tools/analysis/Measure-Gaze120.ps1:22"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeRecoveryBudget.cs": [
+      "tools/GazeReleaseChecks/GazeReleaseChecks.csproj:6",
+      "tools/LandingRecoveryChecks/LandingRecoveryChecks.csproj:9"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeRegistration.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeReleaseFeel.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeReleasePolicy.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/dev/1.2-gaze-release-trial.md:21",
+      "tools/GazeHudChecks/GazeHudChecks.csproj:10",
+      "tools/GazePrimaryChecks/GazePrimaryChecks.csproj:11",
+      "tools/GazeReleaseChecks/GazeReleaseChecks.csproj:4"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeServer.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/dev/GAZE-VFX-CANDIDATE.md:22",
+      "tools/NonGazeDamageChecks/Program.cs:80"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeSkillOverrides.cs": [
+      "tools/GazePrimaryChecks/GazePrimaryChecks.csproj:4"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeState.Charge.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/GazeState.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/dev/1.2-gaze-research.md:115",
+      "docs/manual-1.2.0-playtest.md:18",
+      "tools/NonGazeDamageChecks/Program.cs:80",
+      "tools/analysis/Measure-Gaze120.ps1:23"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeTimerHud.cs": [
+      "docs/dev/1.2-gaze-research.md:115",
+      "tools/GazeHudChecks/GazeHudChecks.csproj:4"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeTimerPolicy.cs": [
+      "tools/GazeFuelChecks/GazeFuelChecks.csproj:7",
+      "tools/GazeHudChecks/GazeHudChecks.csproj:7"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/GazeTuning.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "tools/analysis/Measure-Gaze120.ps1:19"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeAssets.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeBeamFx.cs": [
+      "docs/dev/1.2-gaze-research.md:115"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeBeamWidthPolicy.cs": [
+      "tools/GazeFuelChecks/GazeFuelChecks.csproj:9",
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:11"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeChargeUpFx.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeContrastAssets.cs": [
+      "tools/GazeAssetFailureChecks/GazeAssetFailureChecks.csproj:3",
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:8"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeCrownMount.cs": [
+      "tools/CrownMountChecks/CrownMountChecks.csproj:3"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEffect.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Crown.cs": [
+      "docs/dev/1.2-gaze-crown-feedback.md:17",
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:13"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.cs": [
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:5"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Geometry.cs": [
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:6"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Impact.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Pulse.cs": [
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:7"
+    ],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeForkFx.cs": [],
+    "HollowSaintMod/FoundationKit/Gaze/Fx/GazeTendrils.cs": [
+      "docs/dev/GAZE-VFX-CANDIDATE.md:23",
+      "tools/GazePresentationChecks/GazePresentationChecks.csproj:10"
+    ],
+    "HollowSaintMod/FoundationKit/Vfx/CustomSoundBank.cs": [],
+    "HollowSaintMod/FoundationKit/KitConfig.cs": [
+      "docs/dev/1.2-balance-review.md:211",
+      "tools/NonGazeDamageChecks/Program.cs:74",
+      "tools/tests/Check-ArcBoltDefaults.ps1:8",
+      "tools/tests/Check-ArcBoltFlightDefaults.ps1:6",
+      "tools/tests/Check-StormspearDefaults.ps1:6"
+    ],
+    "HollowSaintMod/FoundationKit/KitShared.cs": [
+      "HollowSaintMod/FoundationKit/ArcStep/ArcStepState.cs:12",
+      "HollowSaintMod/FoundationKit/ArcStep/ArcStepState.cs:139",
+      "HollowSaintMod/FoundationKit/OpenCircuit/OpenCircuitTuning.cs:5",
+      "docs/dev/1.2-balance-review.md:211",
+      "docs/kit-architecture.md:15",
+      "docs/unity-vfx-anim-spec-20260927.md:195",
+      "tools/NonGazeDamageChecks/Program.cs:80",
+      "tools/tests/Check-ArcBoltDefaults.ps1:7",
+      "tools/tests/Check-ArcBoltFlightDefaults.ps1:5",
+      "tools/tests/Check-CrownGestureFlow.ps1:7",
+      "tools/tests/Prepare-FxValidation.ps1:39"
+    ],
+    "HollowSaintMod/FoundationKit/Vfx/KitFx.cs": [
+      "docs/kit-architecture.md:73"
+    ]
+  },
+  "dynamic_paths_to_update": [
+    "tools/tests/Prepare-FxValidation.ps1 name lists and interpolated paths",
+    "tools/tests Check-* source arrays",
+    "Unity preview runtime copies",
+    "tools/*Checks relative source integration paths",
+    "docs current architecture/navigation",
+    "Config Bind local section constants become private constants on the same partial type; values unchanged"
+  ]
+}

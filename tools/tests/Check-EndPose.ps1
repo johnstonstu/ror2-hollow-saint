@@ -5,6 +5,7 @@ param([switch]$Baseline)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 & (Join-Path $PSScriptRoot 'Prepare-FxValidation.ps1')
+if ($LASTEXITCODE -ne 0) { throw 'Preview preparation failed or is unavailable; Unity was not launched.' }
 $output = Join-Path $repo $(if ($Baseline) { 'artifacts\end-pose-baseline' } else { 'artifacts\end-pose02' })
 New-Item -ItemType Directory -Force $output | Out-Null
 $previous = $env:HS_END_POSE_BASELINE

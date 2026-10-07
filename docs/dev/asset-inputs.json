@@ -1,0 +1,20 @@
+{
+  "baseline": "v1.2.0/e44d582964bf7e69fb6e410e9eeaf2748b443197",
+  "shippingBundle": {
+    "path": "artifacts/foundation/bundle15/hollowsaintassets",
+    "sha256": "7238F181B17B011A0BCC0BF13AB8C7D951CAA7930A24DB4F5B83F278BEA111B4",
+    "builder": "HollowSaintUnityProject/Assets/HollowSaint/Editor/FoundationBundleBuilder15.cs"
+  },
+  "embeddedSoundbank": "art/audio/HollowSaintAudio/GeneratedSoundBanks/Windows/HollowSaint.bnk",
+  "generatedUnityAtlasFolder": "Assets/HollowSaint/GameFoundation15/ (builder15 recreates this only when absent)",
+  "directUnityInputs": [
+    "Assets/HollowSaint/GameFoundation14/mdlHollowSaint.prefab",
+    "Assets/HollowSaint/GameFoundation11/mdlConduitSpear.prefab",
+    "Assets/HollowSaint/Source/v31_probe03/"
+  ],
+  "rebuildDependencies": [
+    "FoundationBundleBuilder14 uses Assets/HollowSaint/GameFoundation13/mdlHollowSaint.prefab and HS_Body*.asset",
+    "Earlier builders and their referenced assets remain needed until an end-to-end rebuild proves otherwise"
+  ],
+  "limits": "Direct inputs audited from builders 14/15; not a complete Unity serialized dependency closure. Preserve folders and .meta GUIDs. Folder age is not evidence that an asset is unused."
+}

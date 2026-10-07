@@ -3,7 +3,7 @@
 # (FoundationAnimRules.cs, no Unity dependency).
 $ErrorActionPreference = 'Stop'
 $repo = Resolve-Path (Join-Path $PSScriptRoot '..\..')
-$source = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\FoundationAnimRules.cs'))
+$source = [IO.File]::ReadAllText((Join-Path $repo 'HollowSaintMod\Character\Animation\FoundationAnimRules.cs'))
 $checks = @'
 namespace HollowSaint
 {

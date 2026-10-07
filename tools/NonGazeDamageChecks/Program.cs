@@ -71,24 +71,24 @@ static class Program
         Has("OpenCircuit/OpenCircuitPulseDriver.cs", "KitDamagePolicy.Effective(KitTuning.OpenCircuitPulseDamageCoefficient) * body.damage");
         Has("Storm/StormServer.cs", "KitTuning.ElectrocutePopDamageCoefficient * attacker.damage");
         ExcludesPolicy("Storm/StormServer.cs");
-        Has("KitConfig.cs", "Shared passive damage remains unchanged for every triggering skill.");
+        Has("Configuration/KitConfig.Storm.cs", "Shared passive damage remains unchanged for every triggering skill.");
         Has("Storm/ThunderboltDriver.cs", "snapshot.Funded ? 1f : 0f");
         Has("Stormspear/StormspearProjectile.cs", "new PrayerStrikeSnapshot(launchOwner.damage, KitTuning.ThunderboltDamageCoefficient,");
         Has("ArcBolt/ArcBoltChain.cs", "damage *= KitTuning.ArcBoltChainFalloff;");
         Has("Stormspear/StormspearProjectile.cs", "damage * fraction * scale");
         foreach (string path in new[] { "ArcBolt/ArcBoltChain.cs", "ArcBolt/ArcBoltProjectile.cs", "Storm/ThunderboltDriver.cs",
-            "Stormspear/SpearConductor.cs", "Gaze/GazeState.cs", "Gaze/GazeServer.cs", "Gaze/GazeFuelPulse.cs", "Gaze/GazeFuelLedger.cs", "KitShared.cs" })
+            "Stormspear/SpearConductor.cs", "Gaze/Runtime/GazeState.cs", "Gaze/Runtime/GazeServer.cs", "Gaze/Runtime/GazeFuelPulse.cs", "Gaze/Rules/GazeFuelLedger.cs", "Shared/KitUtil.cs" })
             ExcludesPolicy(path);
         foreach (string coefficient in new[] { "KitTuning.ArcBoltDamageCoefficient", "StormspearTuning.TapDamage",
             "SpearConductorSchedule.TapCoefficient", "SpearConductorSchedule.FullCoefficient", "KitTuning.OpenCircuitPulseDamageCoefficient",
             "KitTuning.ThunderboltDamageCoefficient" })
-            Has("KitDescriptions.cs", "Pct(KitDamagePolicy.Effective(" + coefficient + "))");
-        Has("KitDescriptions.cs", "Pct(SpearFeedbackPolicy.Direct(StormspearTuning.FullDamage, 1f))");
-        Has("KitDescriptions.cs", "args[\"pop\"] = Pct(KitTuning.ElectrocutePopDamageCoefficient);");
-        Has("KitDescriptions.cs", "Pct(GazeTuning.DamagePerSecond)");
-        Has("KitDescriptions.cs", "Bonus(KitTuning.ShockedDamageMultiplier)");
-        Has("KitDescriptions.cs", "Pct(StormspearTuning.BurstDamageFraction)");
-        Has("KitDescriptions.cs", "Pct(StormspearTuning.BurstDamageFractionFull)");
+            Has("../Localization/KitDescriptions.cs", "Pct(KitDamagePolicy.Effective(" + coefficient + "))");
+        Has("../Localization/KitDescriptions.cs", "Pct(SpearFeedbackPolicy.Direct(StormspearTuning.FullDamage, 1f))");
+        Has("../Localization/KitDescriptions.cs", "args[\"pop\"] = Pct(KitTuning.ElectrocutePopDamageCoefficient);");
+        Has("../Localization/KitDescriptions.cs", "Pct(GazeTuning.DamagePerSecond)");
+        Has("../Localization/KitDescriptions.cs", "Bonus(KitTuning.ShockedDamageMultiplier)");
+        Has("../Localization/KitDescriptions.cs", "Pct(StormspearTuning.BurstDamageFraction)");
+        Has("../Localization/KitDescriptions.cs", "Pct(StormspearTuning.BurstDamageFractionFull)");
         Console.WriteLine("PASS " + checks + " native damage policy/inheritance and source-integration assertions");
     }
 }

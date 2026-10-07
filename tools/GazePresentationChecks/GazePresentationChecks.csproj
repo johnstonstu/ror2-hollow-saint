@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit></PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../HollowSaintMod/CrimsonMasteryVisuals.cs" Link="CrimsonMasteryVisuals.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.cs" Link="GazeEmpowermentFx.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Geometry.cs" Link="GazeEmpowermentFx.Geometry.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Pulse.cs" Link="GazeEmpowermentFx.Pulse.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeContrastAssets.cs" Link="GazeContrastAssets.cs" />
+    <Compile Include="../../HollowSaintMod/Character/Appearance/CrimsonMasteryVisuals.cs" Link="CrimsonMasteryVisuals.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.cs" Link="GazeEmpowermentFx.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.Geometry.cs" Link="GazeEmpowermentFx.Geometry.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.Pulse.cs" Link="GazeEmpowermentFx.Pulse.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeContrastAssets.cs" Link="GazeContrastAssets.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Vfx/SkinFxPalette.cs" Link="SkinFxPalette.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeTendrils.cs" Link="GazeTendrils.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeBeamWidthPolicy.cs" Link="GazeBeamWidthPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/GazeRampPolicy.cs" Link="GazeRampPolicy.cs" />
-    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Fx/GazeEmpowermentFx.Crown.cs" Link="GazeEmpowermentFx.Crown.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeTendrils.cs" Link="GazeTendrils.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeBeamWidthPolicy.cs" Link="GazeBeamWidthPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeRampPolicy.cs" Link="GazeRampPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Presentation/GazeEmpowermentFx.Crown.cs" Link="GazeEmpowermentFx.Crown.cs" />
   </ItemGroup>
 </Project>

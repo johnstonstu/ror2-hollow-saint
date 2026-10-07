@@ -67,7 +67,7 @@ def check(baseline):
     assert len(prior_pcm) == 9600 and len(final_pcm) == 13440
     ratio = math.sqrt(sum(value*value for value in final_pcm[:9600]) / sum(value*value for value in prior_pcm))
     assert .81 < ratio < .83, ('Embedded active PCM gain differs',ratio)
-    controller = (ROOT / 'HollowSaintMod/FoundationKit/Gaze/GazeFuelController.cs').read_text()
+    controller = (ROOT / 'HollowSaintMod/FoundationKit/Gaze/Runtime/GazeFuelController.Presentation.cs').read_text()
     receive = controller.split('internal void Receive(',1)[1]
     assert receive.index('receiver.Accept(') < receive.index('pulseAudio.Play(')
     assert receive.count('pulseAudio.Play(') == 1 and 'PlaySound(GazeSfx.Launch' not in receive
