@@ -1,10 +1,18 @@
 # Development map after 1.2.0
 
-Start with [architecture](../kit-architecture.md), the root [agent guide](../../AGENTS.md), and the [refactor record](refactor-120-results.md). The baseline is tag `v1.2.0`, commit `e44d582964bf7e69fb6e410e9eeaf2748b443197`. This local refactor does not change the release version or publish anything.
+For the current uncommitted 1.3 candidate, start with the
+[independent audit handoff](audit-handoff-1.3.md). It supersedes older audit briefs
+as the current design contract and indexes final versus historical evidence.
 
-The next feature idea is preserved in [charge-up strike-call design notes](next-special-strike-call.md); implementation has not started.
+Start with [architecture](../kit-architecture.md), the root [agent guide](../../AGENTS.md), and the [refactor record](refactor-120-results.md). The baseline is tag `v1.2.0`, commit `e44d582964bf7e69fb6e410e9eeaf2748b443197`. The historical refactor preserved that release version; the new charge abilities advance the local candidate to 1.3.0.
+
+The active local candidate is deliberately versioned **1.3.0**. Stuart authorized private staging and gameplay on October 6, 2026. The first-playtest [refinement plan](orb-refinement-1.3-plan.md) and [result](orb-refinement-1.3-results.md) cover optional Orb fuel, easier aiming, body energy feeds, free hands during overhead gathering, and charge-powered Open Circuit. The earlier [acceptance record](charge-build-1.3-acceptance.md) and [Astra high audit](charge-build-1.3-astra-audit.md) retain their candidate identities and evidence limits. The [balance and implementation plan](charge-build-1.3-plan.md) records the initial prototype, whose metadata was still 1.2.0. Public publishing remains a separate approval.
 
 ## Normal edit loop
+
+The latest [Orb VFX result](orb-vfx-1.3-results.md) records surface crackle,
+flight trails, hit bursts and audio, with its own candidate identity and focused
+Astra high review. Its [plan](orb-vfx-1.3-plan.md) states visual acceptance criteria.
 
 1. Read the feature owner and its check suite in [tools/checks.json](../../tools/checks.json).
 2. Make a focused change with explicit behavioral acceptance criteria.
@@ -23,6 +31,7 @@ Build additionally needs restored packages, the LFS soundbank and a RiskOfOption
 | Gaze execution and packets | `FoundationKit/Gaze/Runtime`, `Networking` | GazeFuel; native host/client acceptance for packet changes |
 | Gaze HUD, crown, effects | `FoundationKit/Gaze/Presentation` | GazeHud, GazePresentation, GazeAssetFailure, CrownMount |
 | Stormspear and Stored Prayer | `FoundationKit/Stormspear`, `Storm` | StoredPrayer, TerrainSpear, SpearCooldown, SpearConductor, LandingRecovery |
+| Shared stored-charge casts, Thundercloud, Hollowed Orb | `FoundationKit/ChargedStorm`, `Thundercloud`, `HollowedOrb` | ChargedStorm; native pose, collision and host/client acceptance |
 | Configuration/default migrations | `FoundationKit/Configuration` | ConfigMigration plus ArcBolt/Stormspear default scripts |
 | Pose, skin, rig | `Character` | CrimsonVisual, CrownGesture; native pose acceptance |
 | Tokens and descriptions | `Localization`, `Language` | Check-Language, NonGazeDamage |
@@ -43,3 +52,13 @@ The legacy Unity preview fixtures reference `SpearAimPose`, absent from the rele
 [Asset inputs](asset-inputs.json) records the active bundle pin and direct builder dependencies; it is not a complete Unity dependency closure. Preserve earlier numbered folders and `.meta` files until an end-to-end rebuild proves independence.
 
 [Refactor plan](refactor-plan-1.2.md) records the original review. Lifecycle teardown, deeper pose decomposition and a portable Unity build remain follow-up phases with native gates. The 1.2 research/trial notes, `TODO`, `PLAYTEST` and older candidate documents are historical evidence, not current task instructions or fresh acceptance results.
+
+## 1.3 early-game balance and player relay
+
+The subsequent [storm pacing and Orb reach plan](storm-reach-1.3-plan.md) and
+[results](storm-reach-1.3-results.md) cover the slower cloud, repeated cosmetic
+return strokes and charge-dependent 18–36 m bounces. `HS_SEGMENTS=storm-reach`
+records once-only cloud damage, four visual strokes per victim, and a clear
+26 m enemy gap with free versus fully empowered Orbs.
+
+See [the scoped plan](early-balance-1.3-plan.md) and [final results](early-balance-1.3-results.md) for the itemless Titan comparison, harmless owner relay, exact-default migration15, native videos and Astra audit. `early-13` tests native range, finite hits, vulnerable-owner health and ABAB alternation. `review-13` records all ability presentations; `early-balance` measures the paired Primary coefficients. `tools/release/Record-Review.ps1` captures the game window and calibrated loopback audio into local review clips. These controlled solo fixtures do not certify ordinary boss survival or multiplayer.

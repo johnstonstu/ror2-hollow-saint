@@ -130,5 +130,9 @@ namespace HollowSaint.FoundationKit.Stormspear {
     public class StormspearThrowState { public bool CooldownReleased; }
 }
 namespace HollowSaint.FoundationKit.ArcBolt { public class ArcBoltInputSkillDef:RoR2.Skills.SkillDef {} }
+namespace HollowSaint.FoundationKit.ChargedStorm {
+    public class StoredChargeCompatibleSkillDef:RoR2.Skills.SkillDef {}
+    public class StoredChargeSkillDef:RoR2.Skills.SkillDef {}
+}
 public static class RewiredConsts { public static class Action { public const int UICancel=15; } }
 namespace Rewired { public class Player { public bool cancel;public int lastAction=-1;public bool GetButton(int action){lastAction=action;return cancel;} } }

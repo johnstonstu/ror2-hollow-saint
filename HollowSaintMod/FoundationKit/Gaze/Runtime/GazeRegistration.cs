@@ -29,7 +29,7 @@ namespace HollowSaint.FoundationKit.Gaze
             try { Fx.GazeEffect.Register(); }
             catch (System.Exception error) { Plugin.Log.LogError("HOLLOW_SAINT_GAZE_FX_REGISTER_FAILED: " + error); }
 
-            var def = ScriptableObject.CreateInstance<SkillDef>();
+            var def = ScriptableObject.CreateInstance<ChargedStorm.StoredChargeCompatibleSkillDef>();
             def.skillName = SkillName;
             ((ScriptableObject)def).name = SkillName;
             def.skillNameToken = NameToken;

@@ -36,6 +36,7 @@ namespace HollowSaint.FoundationKit.Storm
             public float lastHit;
             public float immuneUntil;
             public int tier;
+            public bool primed; // left by a charge spender; cleared on Electrocute or full decay
         }
 
         private static readonly Dictionary<HealthComponent, StaticState> states = new Dictionary<HealthComponent, StaticState>();
@@ -142,6 +143,9 @@ namespace HollowSaint.FoundationKit.Storm
                 float full = victim.fullCombinedHealth * Mathf.Max(0.01f, KitTuning.StaticThreshold);
                 float gain = Mathf.Clamp(report.damageDealt / Mathf.Max(1f, full), KitTuning.StaticMinGain, 1f) * proc;
                 if (info.crit) gain *= KitTuning.StaticCritMultiplier;
+                // Stormspear is the Secondary finisher: its hits on primed enemies build extra Static.
+                if (KitUtil.SourceOf(info) == HsDamageSource.Stormspear && IsPrimed(victim))
+                    gain *= Mathf.Clamp(ChargedStorm.ChargedStormTuning.SpearPrimedMultiplier, 1f, 5f);
 
                 StormTelemetry.RecordHit();
                 AddStatic(victim, victimBody, attacker, gain, true);
@@ -167,6 +171,75 @@ namespace HollowSaint.FoundationKit.Storm
             else SetTier(s);
         }
 
+        /// <summary>Server only. Charge-spending hits (Hollowed Orb, Thundercloud) prime Static up to
+        /// a cap below full. They never Electrocute or award a charge by themselves; an ordinary
+        /// follow-up hit or a primed death completes the storm. Immunity is respected.</summary>
+        internal static void PrimeStatic(HealthComponent victim, CharacterBody attacker, float amount)
+        {
+            if (!NetworkServer.active || victim == null || !victim.alive || victim.body == null || attacker == null || amount <= 0f) return;
+            var victimBody = victim.body;
+            float now = Time.time;
+            StaticState s = GetState(victim, victimBody);
+            if (now < s.immuneUntil) return;
+            float next = StaticPrimePolicy.Apply(s.value, amount, ChargedStorm.ChargedStormTuning.StaticPrimeCap);
+            if (next <= s.value) return;
+            s.attacker = attacker;
+            VictimFxTheme.Remember(victimBody, attacker);
+            s.value = next;
+            s.primed = true;
+            StormTelemetry.RecordPrime();
+            // Hold the primed value briefly past the normal decay delay so the follow-up has time to land.
+            s.lastHit = Mathf.Max(s.lastHit, now + Mathf.Clamp(ChargedStorm.ChargedStormTuning.StaticPrimeHold, 0f, 3f));
+            SetTier(s);
+        }
+
+        /// <summary>Server only. True while a charge spender's priming is still on the victim.</summary>
+        internal static bool IsPrimed(HealthComponent victim)
+        {
+            StaticState s;
+            return victim != null && states.TryGetValue(victim, out s) && s.primed && s.value > 0f;
+        }
+
+        /// <summary>Server only. A primed enemy killed by a finisher hit that ran inside the storm
+        /// scope (empowered Circuit pulses) gets the same death discharge as an ordinary kill.</summary>
+        internal static void FinishPrimedDeath(HealthComponent victim, CharacterBody attacker)
+        {
+            if (!NetworkServer.active || victim == null || victim.alive || victim.body == null || attacker == null) return;
+            if (!IsPrimedDead(victim)) return;
+            TryDeathDischarge(victim, victim.body, attacker);
+        }
+        private static bool IsPrimedDead(HealthComponent victim)
+        {
+            StaticState s;
+            return states.TryGetValue(victim, out s) && s.primed && s.value > 0f;
+        }
+
+        /// <summary>Server only. Current Static (0..1) on a victim; 0 when none is tracked.</summary>
+        internal static float StaticOf(HealthComponent victim)
+        {
+            StaticState s;
+            return victim != null && states.TryGetValue(victim, out s) ? s.value : 0f;
+        }
+
+        /// <summary>Server only. A hit that normally builds no Static (empowered Circuit pulses)
+        /// still finishes enemies that are already primed, using the ordinary gain formula.</summary>
+        internal static void FeedPrimed(HealthComponent victim, CharacterBody attacker, float damage, float proc)
+        {
+            if (!NetworkServer.active || victim == null || !victim.alive || victim.body == null || attacker == null || proc <= 0f) return;
+            StaticState s;
+            if (!states.TryGetValue(victim, out s) || !s.primed || s.value <= 0f) return;
+            float full = victim.fullCombinedHealth * Mathf.Max(0.01f, KitTuning.StaticThreshold);
+            float gain = Mathf.Clamp(damage / Mathf.Max(1f, full), KitTuning.StaticMinGain, 1f) * proc;
+            AddStatic(victim, victim.body, attacker, gain, true);
+        }
+
+        /// <summary>Server only. Thundercloud strikes leave their victims Shocked.</summary>
+        internal static void Shock(CharacterBody victimBody)
+        {
+            if (!NetworkServer.active || victimBody == null || ShockedBuff == null || KitTuning.ShockedSeconds <= 0f) return;
+            victimBody.AddTimedBuff(ShockedBuff, KitTuning.ShockedSeconds);
+        }
+
         /// <summary>v0.9.16 (playtest: Thunderbolts too rare; harness storm-a: 52 s of packs gave 4
         /// Electrocutes, 0 Thunderbolts): an enemy that dies holding at least
         /// KitTuning.DeathDischargeStatic of Static discharges. It counts as an Electrocute for the storm
@@ -180,7 +253,7 @@ namespace HollowSaint.FoundationKit.Storm
             float now = Time.time;
             if (s.value < KitTuning.DeathDischargeStatic || now < s.immuneUntil) return;
             if (cascadeDepth >= MaxCascadeDepth || !UnderRateCap(attacker, now)) return;
-            s.value = 0f;
+            s.value = 0f; s.primed = false;
             s.immuneUntil = now + KitTuning.ElectrocuteImmuneSeconds;
             Queue<float> q;
             if (electrocuteTimes.TryGetValue(attacker, out q)) q.Enqueue(now);
@@ -194,8 +267,10 @@ namespace HollowSaint.FoundationKit.Storm
                 int before = meter.Charge;
                 meter.AddCharge();
                 addedCharge = meter.Charge > before;
+                if (!addedCharge) StormTelemetry.RecordUnbanked(meter.LastIncomeLimited);
             }
             StormTelemetry.RecordElectrocute(true, addedCharge);
+            OpenCircuit.ClosedCircuitDriver.OnElectrocute(attacker, center);
             Pop(attacker, victim, center);
         }
 
@@ -249,7 +324,7 @@ namespace HollowSaint.FoundationKit.Storm
                 if (s.value > 0f && now - s.lastHit >= KitTuning.StaticDecayDelay)
                 {
                     s.value -= KitTuning.StaticDecayPerSecond * dt;
-                    if (s.value <= 0f) { s.value = 0f; SetTier(s); if (now >= s.immuneUntil) removeScratch.Add(key0); }
+                    if (s.value <= 0f) { s.value = 0f; s.primed = false; SetTier(s); if (now >= s.immuneUntil) removeScratch.Add(key0); }
                     else SetTier(s);
                 }
                 else if (s.value <= 0f && now >= s.immuneUntil) removeScratch.Add(key0);
@@ -310,7 +385,7 @@ namespace HollowSaint.FoundationKit.Storm
             float now = Time.time;
             var victim = s.health;
             var body = s.body;
-            s.value = 0f;
+            s.value = 0f; s.primed = false;
             s.lastHit = now;
             s.immuneUntil = now + KitTuning.ElectrocuteImmuneSeconds;
             SetTier(s);
@@ -334,9 +409,11 @@ namespace HollowSaint.FoundationKit.Storm
                     int before = meter.Charge;
                     meter.AddCharge();
                     addedCharge = meter.Charge > before;
+                    if (!addedCharge) StormTelemetry.RecordUnbanked(meter.LastIncomeLimited);
                 }
             }
             StormTelemetry.RecordElectrocute(awardCharge, addedCharge);
+            if (awardCharge && attacker != null) OpenCircuit.ClosedCircuitDriver.OnElectrocute(attacker, center);
             if (pop && attacker != null) Pop(attacker, victim, center);
         }
 

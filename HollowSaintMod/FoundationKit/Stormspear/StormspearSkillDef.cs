@@ -7,6 +7,10 @@ namespace HollowSaint.FoundationKit.Stormspear
     /// Keep its queue untouched until the projectile is actually released, then use vanilla scaling.</summary>
     public sealed class StormspearSkillDef : SkillDef
     {
+        public override bool IsReady(GenericSkill slot)
+            => !ChargedStorm.StoredChargeState.IsGathering(slot.characterBody) && base.IsReady(slot);
+        public override bool CanExecute(GenericSkill slot)
+            => !ChargedStorm.StoredChargeState.IsGathering(slot.characterBody) && base.CanExecute(slot);
         public override void OnFixedUpdate(GenericSkill skillSlot, float deltaTime)
         {
             var state = skillSlot.stateMachine ? skillSlot.stateMachine.state : null;

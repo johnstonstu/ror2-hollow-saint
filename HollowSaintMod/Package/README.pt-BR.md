@@ -16,24 +16,34 @@
 
 <p align="center">Encadeie relâmpagos por um bando, prenda a maior ameaça com uma lança de relâmpago e guarde cada Eletrocussão como uma Carga Estática.<br>Depois gaste o estoque: em um Raio que viaja na sua próxima lança, ou em um Olhar carregado que abre com uma explosão.</p>
 
-<p align="center"><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/"><b>Instalar</b></a> · <a href="#novidades-da-12"><b>Novidades da 1.2</b></a> · <a href="#o-kit"><b>Habilidades</b></a> · <a href="#como-a-tempestade-funciona"><b>A tempestade</b></a> · <a href="https://github.com/johnstonstu/ror2-hollow-saint/issues"><b>Feedback</b></a></p>
+<p align="center"><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/Hollow_Saint/"><b>Instalar</b></a> · <a href="#novidades-da-13"><b>Novidades da 1.3</b></a> · <a href="#o-kit"><b>Habilidades</b></a> · <a href="#como-a-tempestade-funciona"><b>A tempestade</b></a> · <a href="https://github.com/johnstonstu/ror2-hollow-saint/issues"><b>Feedback</b></a></p>
 
 <p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze-hero.webp" alt="Olhar do Oco: as cargas giram em espiral para dentro da coroa, e então o feixe abre com uma explosão" width="100%"></p>
 
-## Novidades da 1.2
+## Novidades da 1.3
 
-**O Olhar do Oco foi reconstruído em torno das suas Cargas Estáticas.**
+**Atualizado para o patch do jogo de outubro de 2026.** Atualize as dependências principais (BepInExPack, R2API, HookGenPatcher) no seu gerenciador de mods junto com o Hollow Saint.
 
-- **Carregue.** Segure o Especial e as cargas guardadas giram em espiral para dentro da coroa, uma de cada vez, cada uma com um som de energia crescente. Mire enquanto reúne.
-- **Abra com uma explosão.** O feixe abre disparando de uma vez todas as cargas que você puxou. A coroa lampeja e recua, uma onda desce pelo feixe e o golpe fica maior e mais largo a cada carga (600% por carga).
-- **Surto sob demanda.** Durante o feixe, segure a primária para carregar até três cargas e solte para dispará-las como um único surto (400% por carga).
-- **Cuidado com os pés.** Cada surto também derruba um raio sobre o inimigo mais próximo em até 14 m, então quem se aproxima por baixo do Santo flutuante leva dano enquanto você mira em outro lugar.
+Nova Secundária alternativa, **Orbe Oco**, e terceira Especial, **Nuvem Trovejante**. O orbe funciona sem Estática: lançamentos curtos preservam o estoque; segurar por mais de 0,5s reúne cargas para fortalecer. A nuvem também é gratuita: um toque cria uma pequena tempestade e segurar despeja cargas. Soltar cedo mantém o restante; a Utilidade cancela e ativa o Passo de Arco.
 
-**Também na 1.2:** um impacto 3D da Lança da Tempestade que cresce com a carga, Cargas Estáticas que esperam por você em vez de descarregar sozinhas, uma coroa do Circuito Aberto cujo relâmpago rasteja pelo terreno, uma nova aparência de maestria (**Voto Carmesim**), uma limpeza de som e visual e textos de habilidade mais curtos e claros. Lista completa no [changelog](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/HollowSaintMod/Package/CHANGELOG.md).
+Orbe básico: 0,6 m, 297% de dano por acerto e três acertos, com energia visível vindo do corpo e braços. Circuito Aberto lança o orbe acima da cabeça e mantém a Primária disponível. **Circuito Aberto** agora reúne pelo menos uma carga ao segurar a Especial; 1/3/5 cargas dão 1/1,5/2 vezes a densidade de pulsos e mais arcos. Pulsos extras não aceleram a Estática; raio, duração e dano por pulso permanecem iguais. Sua coroa agora é um Circuito Fechado: veja a nota do ciclo da tempestade abaixo.
 
-<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" alt="Um surto do Olhar com um raio de mira atingindo um inimigo abaixo" width="49%"> <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" alt="Uma Lança da Tempestade carregada cravando e explodindo" width="49%"></p>
+- **Orbe Oco:** reúna uma grande bola elétrica entre as duas mãos e lance à frente. O toque gratuito dá 297% de dano por acerto e 3 acertos; cada carga reunida soma dano (até 657% por acerto com 5 cargas) e mais um acerto (até 8), com diâmetro de 0,6–1 m. Alcance de 70 m e saltos de 18–36 m conforme as cargas. Prioriza alvos novos; cada revisita ao mesmo alvo mantém 75% do dano anterior. Sem mais nada ao alcance, o orbe se fixa no alvo e descarrega ali os acertos restantes; ao se esgotar, explode numa pequena área (3 m sem cargas, +0,8 m por carga) com 60% do dano do acerto. Todo acerto prepara Estática. Circuito Aberto reúne e lança o Orbe acima da cabeça.
+- **Nuvem Trovejante:** uma tempestade persistente, gratuita com o estoque vazio: um toque cria uma pequena tempestade e segurar despeja cargas na coroa. Ela sobe rápido e dura 3 s sem cargas, +1 s por carga (8 s com 5 cargas). A cada 0,75 s atinge todo inimigo sob ela dentro do raio (12 m sem cargas, 16 m com uma, 30 m com cinco) com 81% de dano sem cargas, até 162% por raio com cinco, deixando-os Eletrizados e preparados. Mira até 80 m; também pode ser posicionada numa área vazia.
+
+Recargas após terminar o lançamento: Orbe 7 s, Nuvem 12 s. Lança, Olhar e Circuito Aberto continuam disponíveis. As opções ajustam as novas habilidades e seus textos. Multijogador real e controle físico ainda não foram verificados.
+
+**Refinamento da tempestade e dos saltos:** a nuvem agora é uma tempestade persistente que ataca a cada 0,75 s enquanto dura (3–8 segundos), com descargas visuais ramificadas em cada alvo. O alcance dos saltos cresce com as cargas: 18 m sem cargas/com uma, 27 m com três e 36 m com cinco.
 
 > **Acesso antecipado:** o Santo Oco ainda está sendo ajustado, então espere mudanças de balanceamento e um bug ocasional. Seu feedback molda o próximo patch. As descrições de habilidades no jogo sempre mostram os números das suas configurações atuais.
+
+**Dano inicial:** a Seta em Arco causa 144% por acerto direto, antes 108%, com a mesma cadência e coeficientes de proc. Apenas o valor anterior exato é migrado; ajustes pessoais são preservados.
+
+**Orbe fixado:** sem outro inimigo ao alcance, o Orbe Oco se fixa no alvo e descarrega ali os acertos restantes; ao se esgotar, explode numa pequena área (3 m sem cargas, +0,8 m por carga) com 60% do dano do acerto. Novos inimigos continuam tendo prioridade.
+
+**Bola de relâmpagos:** arcos se movem pela superfície ao carregar e voar. Impactos ganham raios ramificados, faíscas, anéis de choque e sons elétricos nas cores da aparência.
+
+**Ciclo da tempestade:** toda habilidade que gasta Cargas Estáticas agora prepara Estática no que atinge (Orbe Oco, Nuvem Trovejante, explosões e surtos do Olhar, o respingo do Raio), até 95%, mas nunca cheio, e a Nuvem Trovejante também deixa os alvos Eletrizados. Os finalizadores (Seta em Arco, Lança da Tempestade, o feixe do Olhar e o Circuito Aberto) levam inimigos preparados à Eletrocussão e devolvem as cargas ao estoque. A Lança da Tempestade acumula o dobro de Estática em inimigos preparados, e um estoque cheio agora só é usado em um arremesso totalmente carregado. O Circuito Aberto é um **Circuito Fechado**: Eletrocussões a até 12 m devolvem as cargas que você colocou nele, e as que ainda estiverem na coroa quando ela se fecha explodem dela como uma onda de choque da coroa (12 m, 150% de dano por carga restante, preparando o que atinge). Uma proteção leve de ganho (2 cargas por segundo) impede que bandos do fim de jogo inundem o estoque. Reunir cargas leva 0,25 segundo por carga.
 
 ## O kit
 
@@ -45,6 +55,8 @@
 | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="40" alt=""> | **Passo em Arco** | Utilitária | Dois teleportes, no chão ou no ar. |
 | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="40" alt=""> | **Olhar do Oco** | Especial | Carregue, flutue, queime uma linha através deles. |
 | <img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="40" alt=""> | **Circuito Aberto** | Especial alternativa | Uma coroa que golpeia enquanto você continua lutando. |
+| | **Orbe Oco** | Secundária alternativa | Gratuito; cargas opcionais; novos alvos primeiro e fixa-se no alvo quando não há mais nada ao alcance. |
+| | **Nuvem Trovejante** | Terceira Especial | Tempestade persistente e gratuita sobre a área visada. |
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-discharge.png" width="40" alt=""> Prece Atendida <sub>Passiva</sub></h3>
 
@@ -60,9 +72,19 @@ Dispare uma seta que salta para até mais três inimigos. É a sua pressão cons
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-conduit_spear.png" width="40" alt=""> Lança da Tempestade <sub>Secundária</sub></h3>
 
-Segure para formar uma lança de relâmpago e solte para arremessar. Ela se crava no que atinge e depois explode em uma cúpula de relâmpagos que cresce com a carga. Uma carga completa também chama um raio do céu, e um estoque de Estática cheio a transforma em um Raio.
+Segure para formar uma lança de relâmpago e solte para arremessar. Ela se crava no que atinge e depois explode em uma cúpula de relâmpagos que cresce com a carga. Uma carga completa também chama um raio do céu; um arremesso totalmente carregado com o estoque de Estática cheio a transforma em um Raio que prepara o bando ao redor. Os acertos da lança acumulam o dobro de Estática em inimigos preparados, o que a torna a Secundária para finalizar o que sua Especial prepara.
 
 <p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/stormspear.webp" alt="Uma Lança da Tempestade carregada cravando e explodindo" width="70%"></p>
+
+### Orbe Oco — Secundária alternativa
+
+Toque e solte para lançar sem cargas: bola de 0,6 m, 297% de dano por acerto e três acertos. Segurar por mais de 0,5 s reúne cargas uma a uma; cada carga soma dano (até 657% por acerto com 5 cargas) e mais um acerto (até 8), com diâmetro até 1 m. Alcance 70 m, saltos de 18–36 m conforme as cargas. Cada revisita ao mesmo inimigo mantém 75% do dano anterior naquele alvo; um alvo novo recebe o dano inicial completo. A assistência favorece a mira e respeita paredes. Todo acerto prepara Estática, o que torna o toque gratuito a Secundária para armar sua Especial e a Seta em Arco.
+
+Alvos novos vêm primeiro. Sem mais nada ao alcance, o orbe se fixa no alvo e descarrega ali os acertos restantes, o que o torna útil contra um chefe sozinho por perto, sem gastar as cargas que você guarda para a Especial. Ao se esgotar, explode numa pequena área (3 m sem cargas, +0,8 m por carga) com 60% do dano do acerto. A Utilidade cancela a reunião e devolve cargas e uso. Circuito Aberto lança acima da cabeça, mantendo a Primária disponível. Recarga 7 s após o fim do lançamento.
+
+### Nuvem Trovejante — terceira Especial
+
+Gratuita com o estoque vazio: um toque cria uma pequena tempestade; ou segure a Especial para despejar cargas na coroa e solte sobre a área visada. A coroa sobe rápido e a tempestade permanece 3 s sem cargas, +1 s por carga (8 s com cinco). A cada 0,75 s ataca todo inimigo sob ela dentro do raio (12 m sem cargas, 16 m com uma, 30 m com cinco) com 81% de dano sem cargas, até 162% por raio com cinco, deixando-os Eletrizados e preparados. Mira até 80 m e pode ser posicionada numa área vazia. A Utilidade cancela a reunião. Recarga 12 s após o fim da tempestade.
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-arc_step.png" width="40" alt=""> Passo em Arco <sub>Utilitária</sub></h3>
 
@@ -72,29 +94,50 @@ Teleporte-se uma curta distância em qualquer direção, até no ar. Olhe para c
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-gaze.png" width="40" alt=""> Olhar do Oco <sub>Especial</sub></h3>
 
-Segure para atrair suas Cargas Estáticas para a coroa, depois suba e canalize um feixe perfurante por sete segundos. O feixe abre disparando tudo o que você reuniu em uma única explosão. Enquanto ele queima, segure e solte a primária para surtos, cada um com um raio de mira no inimigo mais próximo. Você recebe menos dano enquanto reúne e canaliza. Toque no Especial para pular a carga; Especial ou Cancelar interface encerra o feixe mais cedo, e a utilitária sai direto para o seu Passo em Arco.
+Segure para atrair suas Cargas Estáticas para a coroa, depois suba e canalize um feixe perfurante por sete segundos. O feixe abre disparando tudo o que você reuniu em uma única explosão (400% por carga). Enquanto ele queima, segure e solte a primária para surtos, cada um com um raio de mira (100% por carga) no inimigo mais próximo, a até 8 m. Você recebe menos dano enquanto reúne e canaliza. Toque no Especial para pular a carga; Especial ou Cancelar interface encerra o feixe mais cedo, e a utilitária sai direto para o seu Passo em Arco. A explosão inicial, os surtos e os raios de mira preparam o que atingem, então o feixe termina o serviço.
 
 <p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/gaze.webp" alt="Olhar do Oco varrendo um bando com um surto" width="70%"></p>
 
 <h3><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/icon-open_circuit.png" width="40" alt=""> Circuito Aberto <sub>Especial alternativa</sub></h3>
 
-Abra o nimbo em uma coroa que golpeia tudo ao seu redor por dez segundos enquanto você continua lutando. A Lança da Tempestade carrega muito mais rápido sob ela, e uma lança da coroa totalmente carregada chama um Raio. Inimigos que ficam dentro por três segundos levam um choque extra.
+Segure a Especial para alimentar a coroa com pelo menos uma Carga Estática e solte. A coroa ataca inimigos ao redor por dez segundos; mais cargas aumentam a frequência dos pulsos. A Lança da Tempestade carrega mais rápido, e o estoque cheio fortalece seu raio. O Orbe Oco é reunido e lançado acima da cabeça, mantendo a Primária disponível. Inimigos que ficam dentro por três segundos levam um choque extra. **Circuito Fechado:** cada Eletrocussão a até 12 m devolve uma carga colocada; as que ainda estiverem na coroa quando ela se fecha explodem da coroa como uma única onda de choque de 12 m, com 150% de dano por carga restante, preparando o que atinge, ou voltam ao seu estoque se não houver inimigo na onda.
 
 <p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/crown.webp" alt="Circuito Aberto golpeando um círculo de inimigos" width="70%"></p>
 
 ## Como a tempestade funciona
 
-1. **Estática.** Cada acerto carrega o inimigo. Acertos maiores, críticos e itens de alto proc carregam mais rápido. Ela se esvai se você parar de acertar.
-2. **Eletrocussão.** Com Estática cheia, o inimigo é sacudido (exceto chefes) e fica **Eletrizado**, recebendo dano extra por um instante. O arco salta para inimigos próximos e os carrega também.
-3. **Cargas Estáticas.** Cada Eletrocussão armazena uma carga. Gaste um estoque cheio em um Raio levado pela lança, ou despeje as cargas no Olhar.
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm-loop.png" alt="O ciclo da tempestade: finalizar, Eletrocutar, guardar, gastar, preparar" width="100%"></p>
 
-Continue acertando o mesmo bando e a tempestade se alimenta sozinha.
+O Santo Oco funciona com um único ciclo: os **finalizadores** rendem Cargas Estáticas, os **gastadores** as usam, e tudo o que um gastador atinge fica **preparado** para o próximo finalizador.
 
-## Junte tudo
+1. **Estática.** Acertos elegíveis carregam o inimigo. Acertos maiores, críticos e itens de alto proc carregam mais rápido. Ela se esvai se você parar de acertar.
+2. **Eletrocussão.** Com Estática cheia, o inimigo é sacudido (exceto chefes) e fica **Eletrizado**, recebendo dano extra por um instante. O arco salta para inimigos próximos e os carrega também. Cada Eletrocussão guarda uma **Carga Estática**, até cinco.
+3. **Gastar e preparar.** Toda habilidade que gasta cargas também prepara o que atinge, deixando-o com até 95% de Estática. Ela nunca enche a barra sozinha, então um gastador jamais paga a si mesmo.
+4. **Finalizar.** A Seta em Arco, a Lança da Tempestade, o feixe do Olhar e os pulsos do Circuito Aberto levam os inimigos preparados ao limite. Um bando preparado Eletrocuta em um ou dois golpes e seu estoque se reabastece.
 
-- **Setas na lança.** Acerte o bando com a Seta em Arco para espalhar Estática, depois carregue a Lança da Tempestade e arremesse no meio.
-- **Estoque, depois Olhar.** Encha o estoque, faça um Passo em Arco até um ângulo que alinhe os inimigos, então segure o Especial e abra o feixe sobre a fila inteira.
-- **Coroa como pressão.** Use o Circuito Aberto perto de um grupo, mantenha a Seta em Arco disparando e arremesse lanças de carga rápida enquanto a coroa golpeia ao seu redor.
+| Papel | Habilidades | No ciclo |
+|---|---|---|
+| Finalizador | Seta em Arco, Lança da Tempestade, feixe do Olhar, pulsos do Circuito Aberto | Acumulam Estática, Eletrocutam, guardam cargas. A Lança da Tempestade acumula o dobro de Estática em inimigos preparados. |
+| Gastador | Orbe Oco (segurado), Nuvem Trovejante, explosões e surtos do Olhar, Raio com estoque cheio | Transformam cargas em dano e deixam os alvos preparados. A Nuvem Trovejante também Eletriza. |
+| Preparador gratuito | Orbe Oco (toque), Nuvem Trovejante (gratuita) | Ambos preparam sem gastar nada: a forma mais fácil de iniciar o ciclo. |
+| Retorno | Circuito Aberto | As cargas colocadas voltam das Eletrocussões a até 12 m; as sobras explodem como uma onda de choque da coroa no fechamento. |
+
+Nada leva suas cargas a menos que você tenha segurado uma habilidade para isso: arremessos rápidos da lança e toques rápidos do Orbe nunca mexem no estoque. Uma proteção leve de ganho (2 cargas por segundo, ajustável) impede que bandos enormes do fim de jogo inundem o estoque.
+
+## Combinações
+
+A Secundária decide como você começa e termina o ciclo; a Especial decide como você o gasta.
+
+<p align="center"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/storm-builds.png" alt="Seis combinações: Lança da Tempestade ou Orbe Oco com Olhar, Circuito Aberto ou Nuvem Trovejante" width="100%"></p>
+
+| Combinação | Equipamento | Como o ciclo funciona | Atenção |
+|---|---|---|---|
+| **Evocador de Tempestades** | Lança da Tempestade + Olhar | A Seta em Arco espalha Estática e o estoque enche. Abra o Olhar sobre o bando: explosões e surtos preparam, o feixe e suas lanças finalizam. | Lança e Olhar dividem um só estoque; só arremessos totalmente carregados o gastam. |
+| **Lanceiro** | Lança da Tempestade + Circuito Aberto | Sob a coroa a Lança da Tempestade carrega muito mais rápido. Arremesse em inimigos preparados enquanto os pulsos cuidam do resto; cada Eletrocussão próxima reembolsa a coroa. | Fique a até 12 m da luta para receber reembolsos. |
+| **Cerco** | Lança da Tempestade + Nuvem Trovejante | Solte uma nuvem sobre um grupo distante para prepará-lo e Eletrizá-lo, depois finalize à distância com lanças e saltos da Seta em Arco. | Uma tempestade gratuita ainda prepara; guarde cargas para a grande ou para uma lança totalmente carregada. |
+| **Vidente** | Orbe Oco + Olhar | Orbes gratuitos preparam o bando, e então as explosões do Olhar e o feixe cobram a conta. | Orbes nunca finalizam sozinhos; quem finaliza são o feixe e a Seta em Arco. |
+| **Condutor** | Orbe Oco + Circuito Aberto | Orbes gratuitos preparam, coloque cargas na coroa e lute dentro dela. Os pulsos finalizam inimigos preparados os reembolsos mantêm o estoque cheio e as sobras explodem como uma onda de choque da coroa. A combinação mais autossustentável. | Orbes lançados acima da cabeça mantêm a Primária livre durante a coroa. |
+| **Tempestade** | Orbe Oco + Nuvem Trovejante | Tudo prepara: nuvem e orbes acendem o bando, e os saltos da Seta em Arco fazem todo o trabalho de finalizar. Alto risco, alta recompensa. | Tempestades gratuitas mantêm o ciclo; tempestades carregadas esvaziam o estoque rápido. |
 
 ## Aparências
 
@@ -104,7 +147,7 @@ Seis aparências, cada uma com seu próprio nimbo e cor de relâmpago. **Voto Ca
 
 ## Instalação
 
-**Gerenciador de mods (recomendado):** instale com o [r2modman](https://thunderstore.io/c/riskofrain2/p/ebkr/r2modman/) ou o Thunderstore Mod Manager. As dependências são instaladas automaticamente.
+**Gerenciador de mods (recomendado):** instale com o [r 2modman](https://thunderstore.io/c/riskofrain2/p/ebkr/r2modman/) ou o Thunderstore Mod Manager. As dependências são instaladas automaticamente.
 
 **Manual:** instale as dependências listadas nesta página e copie a pasta `plugins/HollowSaint` do pacote para `BepInEx/plugins/`. Mantenha `HollowSaint.dll`, `hollowsaintassets` e `HollowSaint.language` juntos nessa pasta.
 
@@ -128,8 +171,8 @@ Bugs e comentários de balanceamento são bem-vindos nas [issues do GitHub](http
 
 <table>
   <tr>
-    <td><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/ah64-icon.png" alt="AH64" width="96"></a></td>
-    <td><b><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/">AH64</a></b>: um sobrevivente helicóptero de ataque Apache. Ele paira e nunca pousa, com metralhadora, foguetes Hydra, mísseis Hellfire e Longbow, e rolamentos evasivos.</td>
+    <td><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/"><img src="https://raw.githubusercontent.com/johnstonstu/ror2-hollow-saint/main/docs/media/ah64-icon.png" alt="AH 64" width="96"></a></td>
+    <td><b><a href="https://thunderstore.io/c/riskofrain2/p/JohnstonStu/AH64/">AH 64</a></b>: um sobrevivente helicóptero de ataque Apache. Ele paira e nunca pousa, com metralhadora, foguetes Hydra, mísseis Hellfire e Longbow, e rolamentos evasivos.</td>
   </tr>
 </table>
 
@@ -137,6 +180,6 @@ Bugs e comentários de balanceamento são bem-vindos nas [issues do GitHub](http
 
 - Criado por JohnstonStu: design, código, modelo, animação e efeitos.
 - Sons de raio feitos a partir de amostras do Pixabay (Pixabay Content License). Os outros sons são originais.
-- Feito com BepInEx, R2API e Risk Of Options.
+- Feito com BepInEx, R 2API e Risk Of Options.
 
 [MIT](https://github.com/johnstonstu/ror2-hollow-saint/blob/main/LICENSE) © 2026 JohnstonStu.

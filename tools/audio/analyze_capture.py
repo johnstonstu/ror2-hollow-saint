@@ -94,3 +94,7 @@ for i in range(len(ts)):
     if j - i > worst: worst, at = j - i, ts[i]
 if len(ts): print(f"\nworst stacking: {worst} cues within 250 ms at +{(at - t0)/1000:.1f}s: " +
                   ', '.join(e[1] for e in events if at <= e[0] < at + 250))
+summary = {'latency_s': float(LAT), 'seconds': meta['seconds'], 'peak_dbfs': db(mono.max()),
+           'overs': int((mono >= 1.0).sum()), 'near_clip': int((mono > .891).sum()),
+           'failed_posts': sum(failed.values()), 'events': len(events), 'worst_250ms_cues': int(worst)}
+(run / 'audio-analysis.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')

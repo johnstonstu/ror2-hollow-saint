@@ -25,7 +25,7 @@ namespace HollowSaint
                 yield return Segment("gaze-release-" + tier);
                 pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
                 aimTarget = DummyChest(0);
-                yield return Press(4); yield return Wait(1.3f);
+                yield return GazeTap(); yield return Wait(1.3f);
                 ReleaseCheck(fuel.AvailableEntry == 5, "entry bank five");
                 fire1 = true; yield return Wait(.12f + (tier - 1) * GazeReleaseTuning.SecondsPerExtraCharge);
                 ReleaseCheck(fuel.LoadedCharges == tier && fuel.AvailableEntry == 5, "holding tier=" + tier + " spends nothing");
@@ -42,14 +42,14 @@ namespace HollowSaint
                 WideShot("release-surge-" + tier);
                 yield return Wait(.8f);
                 ReleaseCheck(fuel.AvailableEntry == 5 - tier, "no repeated release");
-                yield return Press(4); yield return Wait(1.3f);
+                yield return GazeTap(); yield return Wait(1.3f);
                 ReleaseCheck(meter.Charge == 5 - tier, "unspent bank restored tier=" + tier);
                 ReleaseCheck(pilot.skillLocator.primary.skillDef == originalPrimary, "primary restored");
             }
             yield return Segment("gaze-release-three-then-two");
             pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
             aimTarget = DummyChest(0);
-            yield return Press(4); yield return Wait(1.3f);
+            yield return GazeTap(); yield return Wait(1.3f);
             fire1 = true; yield return Wait(.15f + 2 * GazeReleaseTuning.SecondsPerExtraCharge); fire1 = false; yield return Wait(.8f);
             ReleaseCheck(fuel.AvailableEntry == 2, "first batch leaves two available");
             fire1 = true; yield return Wait(.12f + GazeReleaseTuning.SecondsPerExtraCharge);
@@ -58,13 +58,13 @@ namespace HollowSaint
             ReleaseCheck(fuel.AvailableEntry == 0 && fuel.LoadedCharges == 0, "second batch spends remaining two");
             fire1 = true; yield return Wait(.6f); fire1 = false; yield return Wait(.2f);
             ReleaseCheck(fuel.AvailableEntry == 0 && fuel.LoadedCharges == 0, "empty bank hold cannot create fuel");
-            yield return Press(4); yield return Wait(1.3f);
+            yield return GazeTap(); yield return Wait(1.3f);
             ReleaseCheck(meter.Charge == 0, "full bank cannot return spent fuel");
 
             yield return Segment("gaze-release-cancel");
             pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
             aimTarget = DummyChest(0);
-            yield return Press(4); yield return Wait(1.3f);
+            yield return GazeTap(); yield return Wait(1.3f);
             fire1 = true; yield return Wait(1.05f);
             yield return Press(3); fire1 = false; yield return Wait(1.5f);
             ReleaseCheck(meter.Charge == 5, "Arc Step while preparing refunds all five");
@@ -72,19 +72,29 @@ namespace HollowSaint
 
             yield return Segment("gaze-release-entry-held");
             pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
-            fire1 = true; yield return Press(4); yield return Wait(1.7f);
+            fire1 = true; yield return GazeTap(); yield return Wait(1.7f);
             ReleaseCheck(fuel.LoadedCharges == 0 && fuel.AvailableEntry == 5, "held-on-entry never prepares");
             fire1 = false; yield return Wait(.2f);
             ReleaseCheck(fuel.AvailableEntry == 5, "entry-held release never fires");
-            yield return Press(4); yield return Wait(1.3f);
+            yield return GazeTap(); yield return Wait(1.3f);
 
             yield return Segment("gaze-release-expiry");
             pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
-            yield return Press(4); yield return Wait(1.3f);
+            yield return GazeTap(); yield return Wait(1.3f);
             fire1 = true; yield return Wait(7f); fire1 = false; yield return Wait(1.3f);
             ReleaseCheck(meter.Charge == 5, "expiry while holding refunds all five");
             ReleaseCheck(pilot.skillLocator.primary.skillDef == originalPrimary, "expiry restores primary");
             slot.UnsetSkillOverride(this, GazeRegistration.SkillDef, GenericSkill.SkillOverridePriority.Replacement);
+        }
+        // Two native ticks stay below the 120 ms opening-charge threshold.
+        // Frame-timed 100 ms taps can cross it when a capture hitches a frame.
+        private IEnumerator GazeTap()
+        {
+            fire4 = true;
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+            fire4 = false;
+            yield return Wait(.04f);
         }
         private void ReleaseCheck(bool success, string criterion)
         {
@@ -96,7 +106,7 @@ namespace HollowSaint
             yield return Segment("gaze-crown-animation");
             pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
             aimTarget = DummyChest(0);
-            yield return Press(4); yield return Wait(1.3f);
+            yield return GazeTap(); yield return Wait(1.3f);
             var ring = FoundationKit.Vfx.HaloRing.For(pilot);
             float restingRadius = ring.Shape.Radius;
             Shot("crown-00-idle");yield return Wait(.2f);
@@ -111,7 +121,7 @@ namespace HollowSaint
             yield return Wait(.15f);Shot("crown-05-wave");
             yield return Wait(.7f);
             ReleaseCheck(ring.Shape.Radius<restingRadius*1.1f,"physical crown settles after release");
-            yield return Press(4);yield return Wait(1.3f);
+            yield return GazeTap();yield return Wait(1.3f);
         }
     }
 }

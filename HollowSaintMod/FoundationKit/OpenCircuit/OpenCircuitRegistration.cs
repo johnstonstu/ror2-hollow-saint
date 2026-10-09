@@ -18,8 +18,9 @@ namespace HollowSaint.FoundationKit.OpenCircuit
             if (SkillDef != null) return SkillDef;
             OpenCircuitStateType = KitContent.AddState(typeof(OpenCircuitState));
             OpenCircuitBuff.Register();
+            ClosedCircuitDriver.Install();
 
-            var def = ScriptableObject.CreateInstance<SkillDef>();
+            var def = ScriptableObject.CreateInstance<ChargedStorm.StoredChargeSkillDef>();
             def.skillName = SkillDefName;
             ((ScriptableObject)def).name = SkillDefName;
             def.skillNameToken = KitTokens.OpenCircuitName;
@@ -35,7 +36,10 @@ namespace HollowSaint.FoundationKit.OpenCircuit
             def.requiredStock = 1;
             def.stockToConsume = 1;
             def.resetCooldownTimerOnUse = false;
-            def.beginSkillCooldownOnSkillEnd = false;
+            // Gathering must not refill stock before the paid crown opens,
+            // including with heavy cooldown reduction. The buff driver then
+            // holds recharge at zero until the crown closes.
+            def.beginSkillCooldownOnSkillEnd = true;
             def.cancelSprintingOnActivation = false;
             def.forceSprintDuringState = false;
             def.canceledFromSprinting = false;

@@ -20,6 +20,8 @@ namespace HollowSaint.FoundationKit
             "HS_SKILL_ARCSTEP_NAME", "HS_SKILL_ARCSTEP_DESC",
             "HS_SKILL_CIRCUIT_NAME", "HS_SKILL_CIRCUIT_DESC",
             "HS_SKILL_GAZE_NAME", "HS_SKILL_GAZE_DESC",
+            "HS_SKILL_THUNDERCLOUD_NAME", "HS_SKILL_THUNDERCLOUD_DESC",
+            "HS_SKILL_HOLLOWED_ORB_NAME", "HS_SKILL_HOLLOWED_ORB_DESC",
             "HS_PASSIVE_STORM_NAME", "HS_PASSIVE_STORM_DESC",
             "HS_KEYWORD_STORM", "HS_KEYWORD_STATIC", "HS_KEYWORD_ELECTROCUTE", "HS_KEYWORD_SHOCKED",
             "HS_LORE", "HS_BODY_LORE",
@@ -36,6 +38,7 @@ namespace HollowSaint.FoundationKit
         static readonly string[] Dynamic = {
             "HS_SKILL_ARCBOLT_DESC", "HS_SKILL_SPEAR_DESC", "HS_SKILL_ARCSTEP_DESC", "HS_SKILL_CIRCUIT_DESC",
             "HS_SKILL_GAZE_DESC", "HS_PASSIVE_STORM_DESC",
+            "HS_SKILL_THUNDERCLOUD_DESC", "HS_SKILL_HOLLOWED_ORB_DESC",
             "HS_KEYWORD_STORM", "HS_KEYWORD_STATIC", "HS_KEYWORD_ELECTROCUTE", "HS_KEYWORD_SHOCKED",
             "HS_DESCRIPTION_RELEASE", "HS_SKILL_GAZE_DESC_RELEASE", "HS_PASSIVE_STORM_DESC_RELEASE", "HS_KEYWORD_STORM_RELEASE",
             "HS_SKILL_GAZE_PULSE_NAME_RELEASE", "HS_SKILL_GAZE_PULSE_DESC_RELEASE"
@@ -266,6 +269,12 @@ namespace HollowSaint.FoundationKit
             a["circuitSeconds"] = "10"; a["radius"] = "8"; a["pulse"] = "60%"; a["interval"] = "0.5"; a["mult"] = "2.5";
             a["gazeSeconds"] = "4"; a["gazeMaxSeconds"] = "6"; a["pulseInterval"] = "0.25"; a["dps"] = "500%"; a["armorOn"] = "yes"; a["armor"] = "30";
             a["orbs"] = "5"; a["thunder"] = "900%"; a["fundedThunder"] = "765%"; a["dwellSeconds"] = "3"; a["dwellZap"] = "270%";
+            a["cloudMinRadius"] = "16"; a["cloudMaxRadius"] = "30"; a["cloudMinDamage"] = "270%"; a["cloudMaxDamage"] = "720%";
+            a["orbMinDamage"] = "157.5%"; a["orbMaxDamage"] = "495%"; a["orbMinHits"] = "2"; a["orbMaxHits"] = "7";
+            a["circuitMaxInterval"] = a["interval"];
+            int circuitLimit = Math.Min(5, Math.Max(2, int.Parse(a["orbs"], CultureInfo.InvariantCulture)));
+            a["circuitMinInterval"] = (double.Parse(a["interval"], CultureInfo.InvariantCulture) / (1 + .25 * (circuitLimit - 1))).ToString("0.##", CultureInfo.InvariantCulture);
+            a["orbRange"] = "70"; a["orbBounceRange"] = "18-36"; a["refundReach"] = "12"; a["novaRadius"] = "12"; a["cloudMinSeconds"] = "3"; a["cloudMaxSeconds"] = "8"; a["cloudInterval"] = "0.75"; a["spearPrimed"] = "2"; a["closingDamage"] = "150%";
             a["ordinaryThunder"] = "382.5%"; a["thunderRadius"] = "3"; a["gazeRecoveryBank"] = "5%"; a["gazeRecoveryEach"] = "1%";
             a["decay"] = "2"; a["death"] = "partial"; a["deathPct"] = "50%"; a["jolt"] = "on"; a["stun"] = "0.5";
             a["bonus"] = "15%"; a["shocked"] = "3"; a["targets"] = "2"; a["pop"] = "150%"; a["immune"] = "4"; a["range"] = "30";
@@ -302,38 +311,43 @@ namespace HollowSaint.FoundationKit
                 Util("Agile.") + " Charge and throw a spear of lightning for " + Dmg(a["tap"] + "-" + a["full"] + " damage") +
                 ". It " + Util("sticks") + ", then bursts around it." +
                 (spearStock > 1 ? " Holds " + Util(a["spearStock"] + " charges") + "." : "") +
-                " A full charge also calls a lightning strike.";
+                " A full charge also calls a lightning strike. Hits on primed enemies build " + Dmg(a["spearPrimed"] + "x Static") + ".";
             int stepStock = int.Parse(a["stepStock"], CultureInfo.InvariantCulture);
             t["HS_SKILL_ARCSTEP_DESC"] =
                 Util("Blink") + " a short distance in any direction, even in the air. Jump out of it to keep the momentum. Holds " +
                 Util(a["stepStock"] + (stepStock == 1 ? " charge" : " charges")) + ".";
             t["HS_SKILL_CIRCUIT_DESC"] =
-                Util("Agile.") + " For " + Util(a["circuitSeconds"] + " seconds") + ", your crown strikes enemies within " +
-                Util(a["radius"] + "m") + " for " + Dmg(a["pulse"] + " damage") + " every " +
-                Util(a["interval"] + "s") + " and " + Dmg("Stormspear") + " charges " + Util(a["mult"] + "x faster") + ". Enemies staying inside for " + a["dwellSeconds"] + "s receive one " + Dmg(a["dwellZap"] + " zap") + " per crown. Leaving resets buildup.";
+                Util("Agile.") + " Requires a Static Charge. Hold to feed charges into your crown, then release. For " + Util(a["circuitSeconds"] + " seconds") +
+                ", it strikes enemies within " + Util(a["radius"] + "m") + " for " + Dmg(a["pulse"] + " damage") + " every " +
+                Util(a["circuitMinInterval"] + "-" + a["circuitMaxInterval"] + "s") + ", faster with more charges, and " + Dmg("Stormspear") + " charges " +
+                Util(a["mult"] + "x faster") + ". Enemies that stay inside for " + a["dwellSeconds"] + "s take one " + Dmg(a["dwellZap"] + " zap") +
+                ". " + Util("Closed Circuit:") + " each Electrocute within " + a["refundReach"] + "m returns a fed charge while your bank has room; charges still in the crown when it closes burst out in a " + a["novaRadius"] + "m nova for " +
+                Dmg(a["closingDamage"] + " damage") + " per charge.";
             t["HS_SKILL_GAZE_DESC"] =
                 "Channel a " + Dmg(a["dps"] + " damage/s") + " beam for " + Util(a["gazeSeconds"] + "-" + a["gazeMaxSeconds"] + "s") +
                 ". Tap Primary to spend an entry charge: +2s (14s max) and +5% beam damage (5 stacks max). New charges stay saved. UI Cancel or Special cancels without spending skill stock; Utility exits even when empty and activates if ready." +
                 " Each consumed entry charge heals <style=cIsHealing>" + a["gazeRecoveryEach"] + " of cast-entry maximum health</style> before healing items; a full entry bank heals " + a["gazeRecoveryBank"] + " total. Unspent charges and newly earned reserve do not heal.";
             t["HS_PASSIVE_STORM_DESC"] =
-                "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy and stores a Static Charge (up to " + a["orbs"] + "). A full bank empowers your next successful Stormspear throw with one " +
-                Dmg("Thunderbolt") + " for " + Dmg(a["fundedThunder"] + " damage") + " on impact. Partial banks are kept. Gaze uses stored charges for manual pulses. Charges never discharge automatically.";
+                "Hits build " + Dmg("Static") + ". Full Static " + Dmg("Electrocutes") + " an enemy and stores a Static Charge (up to " + a["orbs"] + "). A full bank empowers your next successful fully charged Stormspear throw with one " +
+                Dmg("Thunderbolt") + " for " + Dmg(a["fundedThunder"] + " damage") + " on impact. Partial banks are kept. Gaze uses stored charges for manual pulses. Charges never discharge automatically." +
+                " Hits that spend charges (Hollowed Orb, Thundercloud, Gaze blasts and surges, Thunderbolt splash, Circuit's closing nova) prime Static but never fill it.";
 
             string jolt = a["jolt"] == "on" ? " is jolted for " + Seconds(a["stun"]) + " (not bosses) and" : "";
             string death = "";
             if (a["death"] == "full") death = " An enemy that dies at full Static Electrocutes as it falls.";
             else if (a["death"] == "partial") death = " An enemy that dies with " + a["deathPct"] + " Static or more Electrocutes as it falls.";
-            string staticLine = Dmg("Static") + ": every hit charges the enemy. Bigger hits and critical strikes charge it faster. It fades after " +
+            string staticLine = Dmg("Static") + ": eligible hits charge the enemy. Bigger hits and critical strikes charge it faster. It fades after " +
                 Seconds(a["decay"]) + " without a hit." + death;
             string shockLine = Dmg("Electrocute") + ": at full Static the enemy" + jolt + " is " + Dmg("Shocked") + ", taking " +
                 Dmg(a["bonus"] + " more damage") + " for " + Seconds(a["shocked"]) + ". The arc jumps to " +
                 Enemies(a["targets"]) + " nearby for " + Dmg(a["pop"] + " damage") +
                 " and charges them too. That enemy can't build Static again for " + Seconds(a["immune"]) + ".";
             string boltLine = Dmg("Static Charges") + ": each Electrocute stores one charge, up to " + a["orbs"] +
-                ". A full bank is spent by the next successful Stormspear throw for one Thunderbolt on impact, dealing " +
+                ". A full bank is spent by the next successful fully charged Stormspear throw for one Thunderbolt on impact, dealing " +
                 Dmg(a["fundedThunder"] + " damage") + ". Partial banks stay stored; Gaze claims entry charges for manual pulses. No automatic discharge.";
-            t["HS_KEYWORD_STORM"] = "<style=cKeywordName>The Storm</style><style=cSub>" + staticLine + "\n" + shockLine + "\n" + boltLine + "</style>";
-            t["HS_KEYWORD_STATIC"] = "<style=cKeywordName>Static</style><style=cSub>" + staticLine.Substring(staticLine.IndexOf(':') + 2) + " At full Static the enemy is " + Dmg("Electrocuted") + ".</style>";
+            const string staticException = " Hits that spend charges (Hollowed Orb, Thundercloud, Gaze blasts and surges, Thunderbolt splash, Circuit's closing nova) prime Static but never fill it.";
+            t["HS_KEYWORD_STORM"] = "<style=cKeywordName>The Storm</style><style=cSub>" + staticLine + "\n" + shockLine + "\n" + boltLine + staticException + "</style>";
+            t["HS_KEYWORD_STATIC"] = "<style=cKeywordName>Static</style><style=cSub>" + staticLine.Substring(staticLine.IndexOf(':') + 2) + " At full Static the enemy is " + Dmg("Electrocuted") + "." + staticException + "</style>";
             t["HS_KEYWORD_ELECTROCUTE"] = "<style=cKeywordName>Electrocute</style><style=cSub>" + shockLine.Substring(shockLine.IndexOf(':') + 2) + "</style>";
             t["HS_KEYWORD_SHOCKED"] = "<style=cKeywordName>Shocked</style><style=cSub>The enemy takes " + Dmg(a["bonus"] + " more damage") + " from all sources for " + Seconds(a["shocked"]) + ".</style>";
             return t;

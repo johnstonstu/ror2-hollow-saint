@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720" font-family="Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c1422"/><stop offset="1" stop-color="#070b13"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#4debff"/>
+    </marker>
+    <marker id="cu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#d6955a"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="720" rx="18" fill="url(#bg)"/>
+
+  <text x="60" y="64" fill="#efe9dc" font-size="30" font-weight="700" letter-spacing="1">The storm loop</text>
+  <text x="60" y="94" fill="#9fb3c8" font-size="17">Spend charges to prime enemies. Finish primed enemies to earn the charges back.</text>
+
+  <!-- arrows (drawn under nodes) -->
+  <g fill="none" stroke="#4debff" stroke-width="3" filter="url(#glow)">
+    <path d="M362 230 H446" marker-end="url(#arc)"/>
+    <path d="M752 230 H836" marker-end="url(#arc)"/>
+    <path d="M940 304 V394" marker-end="url(#arc)"/>
+    <path d="M838 480 H754" marker-end="url(#arc)"/>
+    <path d="M448 480 H210 V306" marker-end="url(#arc)"/>
+  </g>
+  <path d="M1060 396 V308" fill="none" stroke="#d6955a" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#cu)"/>
+
+  <g font-size="14" fill="#8fdcf0" font-weight="600" text-anchor="middle">
+    <text x="404" y="218">Static fills</text>
+    <text x="794" y="218">+1 charge</text>
+    <text x="928" y="355" text-anchor="end">hold, release</text>
+    <text x="796" y="468">hits</text>
+    <text x="330" y="468">follow up</text>
+  </g>
+  <g fill="#e0a774" font-size="14" font-weight="600"><text x="1072" y="338">Closed</text><text x="1072" y="355">Circuit</text><text x="1072" y="372">refund</text></g>
+
+  <!-- node: finish -->
+  <g>
+    <rect x="60" y="152" width="300" height="152" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".55" stroke-width="2"/>
+    <text x="80" y="184" fill="#4debff" font-size="13" font-weight="700" letter-spacing="2">1  FINISH</text>
+    <text x="80" y="212" fill="#efe9dc" font-size="18" font-weight="600">Hits build Static</text>
+    <text x="80" y="240" fill="#b8c6d6" font-size="14">Arc Bolt, Gaze beam, Circuit pulses,</text>
+    <text x="80" y="260" fill="#b8c6d6" font-size="14">Stormspear (2x Static on primed).</text>
+    <text x="80" y="286" fill="#7f93a8" font-size="13">Primed enemies pop in a hit or two.</text>
+  </g>
+  <!-- node: electrocute -->
+  <g>
+    <rect x="450" y="152" width="300" height="152" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".55" stroke-width="2"/>
+    <text x="470" y="184" fill="#4debff" font-size="13" font-weight="700" letter-spacing="2">2  ELECTROCUTE</text>
+    <text x="470" y="212" fill="#efe9dc" font-size="18" font-weight="600">Full Static snaps</text>
+    <text x="470" y="240" fill="#b8c6d6" font-size="14">Jolt and Shocked (+15% damage).</text>
+    <text x="470" y="260" fill="#b8c6d6" font-size="14">The arc jumps and charges neighbours.</text>
+    <text x="470" y="286" fill="#7f93a8" font-size="13">Enemies dying at 50%+ Static count too.</text>
+  </g>
+  <!-- node: bank -->
+  <g>
+    <rect x="840" y="152" width="300" height="152" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".55" stroke-width="2"/>
+    <text x="860" y="184" fill="#4debff" font-size="13" font-weight="700" letter-spacing="2">3  BANK</text>
+    <text x="860" y="212" fill="#efe9dc" font-size="18" font-weight="600">Static Charges, up to 5</text>
+    <g fill="#4debff" filter="url(#glow)">
+      <circle cx="878" cy="246" r="10"/><circle cx="912" cy="246" r="10"/><circle cx="946" cy="246" r="10"/>
+    </g>
+    <g fill="none" stroke="#4debff" stroke-opacity=".6" stroke-width="2">
+      <circle cx="980" cy="246" r="9"/><circle cx="1014" cy="246" r="9"/>
+    </g>
+    <text x="860" y="286" fill="#7f93a8" font-size="13">They never discharge on their own.</text>
+  </g>
+  <!-- node: spend -->
+  <g>
+    <rect x="840" y="398" width="300" height="164" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".55" stroke-width="2"/>
+    <text x="860" y="430" fill="#4debff" font-size="13" font-weight="700" letter-spacing="2">4  SPEND</text>
+    <text x="860" y="458" fill="#efe9dc" font-size="18" font-weight="600">Pour charges in</text>
+    <text x="860" y="484" fill="#b8c6d6" font-size="14">Hollowed Orb (held), Thundercloud,</text>
+    <text x="860" y="504" fill="#b8c6d6" font-size="14">Gaze blasts and surges,</text>
+    <text x="860" y="524" fill="#b8c6d6" font-size="14">full-charge spear Thunderbolt,</text>
+    <text x="860" y="544" fill="#e0a774" font-size="14">Open Circuit's crown.</text>
+  </g>
+  <!-- node: prime -->
+  <g>
+    <rect x="450" y="398" width="300" height="164" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".55" stroke-width="2"/>
+    <text x="470" y="430" fill="#4debff" font-size="13" font-weight="700" letter-spacing="2">5  PRIME</text>
+    <text x="470" y="458" fill="#efe9dc" font-size="18" font-weight="600">Enemies left crackling</text>
+    <rect x="470" y="474" width="260" height="12" rx="6" fill="#1b2a40"/>
+    <rect x="470" y="474" width="247" height="12" rx="6" fill="#4debff" opacity=".85"/>
+    <line x1="717" y1="468" x2="717" y2="492" stroke="#efe9dc" stroke-width="2"/>
+    <text x="470" y="512" fill="#b8c6d6" font-size="14">Up to 95% Static, never full:</text>
+    <text x="470" y="532" fill="#b8c6d6" font-size="14">a spender can't refund itself.</text>
+    <text x="470" y="552" fill="#7f93a8" font-size="13">Cloud Shocks. Orb taps and free storms prime.</text>
+  </g>
+
+  <!-- closed circuit callout -->
+  <g>
+    <rect x="60" y="598" width="1080" height="96" rx="14" fill="#1a1510" stroke="#d6955a" stroke-opacity=".7" stroke-width="2" stroke-dasharray="9 7"/>
+    <text x="84" y="628" fill="#e0a774" font-size="13" font-weight="700" letter-spacing="2">CLOSED CIRCUIT</text>
+    <text x="84" y="655" fill="#efe9dc" font-size="15">Charges fed into Open Circuit come home: each Electrocute within 12 m returns one. Whatever is still in the crown when</text>
+    <text x="84" y="678" fill="#efe9dc" font-size="15">it closes bursts out as a 12 m crown nova, 150% per charge. Nobody in range? The charges return to your bank.</text>
+  </g>
+</svg>

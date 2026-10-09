@@ -123,7 +123,9 @@ namespace HollowSaint.FoundationKit.Gaze
         }
         private static bool KnownKitDefinition(SkillDef def) => def &&
             (def.GetType() == typeof(SkillDef) || def.GetType() == typeof(StormspearSkillDef) ||
-             def.GetType() == typeof(ArcBoltInputSkillDef));
+             def.GetType() == typeof(ArcBoltInputSkillDef) ||
+             def.GetType() == typeof(ChargedStorm.StoredChargeCompatibleSkillDef) ||
+             def.GetType() == typeof(ChargedStorm.StoredChargeSkillDef));
         private static bool CooldownHeld(Slot slot)
         {
             var original = slot.original;

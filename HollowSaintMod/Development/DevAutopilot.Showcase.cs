@@ -300,7 +300,8 @@ namespace HollowSaint
                 var master = new MasterSummon
                 {
                     masterPrefab = prefab, position = at, rotation = Quaternion.LookRotation(-dir),
-                    teamIndexOverride = TeamIndex.Monster, ignoreTeamMemberLimit = true
+                    teamIndexOverride = TeamIndex.Monster, ignoreTeamMemberLimit = true,
+                    preSpawnSetupCallback = master => isolatedMasters.Add(master)
                 }.Perform();
                 if (!master) continue;
                 foreach (var ai in master.GetComponents<BaseAI>()) ai.enabled = false;
@@ -314,24 +315,27 @@ namespace HollowSaint
                 " utc=" + DateTime.UtcNow.ToString("o") + " alive=" + Alive().Count);
         }
 
-        private void SpawnLive(string masterName, int count, float distance)
+        private void SpawnLive(string masterName, int count, float distance, float spacing = 2.2f)
         {
             var prefab = MasterCatalog.FindMasterPrefab(masterName);
             if (!prefab) { trace.AppendLine("SHOWCASE missing " + masterName); return; }
             Vector3 centre = pilot.footPosition + facing * distance;
             for (int i = 0; i < count; i++)
             {
-                float side = (i % 2 == 0 ? 1f : -1f) * (1.5f + 2.2f * ((i + 1) / 2));
+                float side = (i % 2 == 0 ? 1f : -1f) * (1.5f + spacing * ((i + 1) / 2));
                 Vector3 at = TopGround(centre + Right * side + facing * ((i % 3) - 1) * 1.5f);
                 if (i == 0) trace.AppendLine(scriptTime.ToString("000.00") + " SHOWCASE spawn " + masterName + " x" + count + " at " + at.ToString("F1") + " saint=" + pilot.footPosition.ToString("F1"));
                 var master = new MasterSummon
                 {
                     masterPrefab = prefab, position = at, rotation = Quaternion.LookRotation(-facing),
-                    teamIndexOverride = TeamIndex.Monster, ignoreTeamMemberLimit = true
+                    teamIndexOverride = TeamIndex.Monster, ignoreTeamMemberLimit = true,
+                    preSpawnSetupCallback = master => isolatedMasters.Add(master)
                 }.Perform();
                 if (!master) continue;
-                // AI off: a crowding melee pack hides the Saint from the camera.
+                // The AI state machine ticks independently of BaseAI.enabled.
+                // Stop both before the body spawns; these are stationary fixtures.
                 foreach (var ai in master.GetComponents<BaseAI>()) ai.enabled = false;
+                foreach (var machine in master.GetComponents<EntityStateMachine>()) machine.enabled = false;
                 StartCoroutine(TrackLive(master, at));
             }
         }
@@ -344,7 +348,16 @@ namespace HollowSaint
             live.Add(body);
             while (body && body.healthComponent && body.healthComponent.alive && scripting)
             {
+                // OnBodyStart re-enables AI after MasterSummon; disable it after discovery.
+                foreach (var ai in master.GetComponents<BaseAI>()) ai.SetBaseAIEnabled(false);
                 if (body.inputBank) body.inputBank.moveVector = Vector3.zero;
+                if (body.inputBank)
+                {
+                    body.inputBank.skill1.PushState(false); body.inputBank.skill2.PushState(false);
+                    body.inputBank.skill3.PushState(false); body.inputBank.skill4.PushState(false);
+                    body.inputBank.jump.PushState(false); body.inputBank.sprint.PushState(false);
+                    body.inputBank.activateEquipment.PushState(false);
+                }
                 if ((body.footPosition - spot).sqrMagnitude > 4f) TeleportHelper.TeleportBody(body, spot);
                 yield return new WaitForSeconds(0.2f);
             }

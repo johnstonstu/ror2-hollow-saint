@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.3.0
+**Updated for the October 2026 Risk of Rain 2 patch.** Update your mod manager's core dependencies (BepInExPack, R2API, HookGenPatcher) along with this release.
+
+**New skills**
+- **Hollowed Orb** (alternate Secondary): a two-handed lightning ball that bounces through the pack. A free tap deals 297% per hit for 3 hits; hold past 0.5 s to gather charges, up to 657% per hit and 8 hits at five charges. Bounce reach grows from 18 m to 36 m. With nothing else in reach it latches onto its target, zaps its remaining hits, then bursts. Every hit primes Static.
+- **Thundercloud** (third Special): a lingering storm, free to cast. It lasts 3 s free, +1 s per charge, and every 0.75 s strikes everything beneath it (12 m free up to 30 m at five charges) for 81% to 162%, Shocking and priming.
+
+**The storm loop**
+- Spenders prime, finishers cash in. Hollowed Orb, Thundercloud, Gaze blasts, surges and lock-on strikes and the Thunderbolt's splash prime Static up to 95% (never a full Electrocute on their own). Arc Bolt, Stormspear, the Gaze beam and Open Circuit tip primed enemies into Electrocutes and bank the charges back.
+- **Stormspear** builds 2x Static on primed enemies. A full bank only goes into a fully charged throw, with a flash and chime when it will spend.
+- **Closed Circuit:** Open Circuit takes at least one charge, and Electrocutes within 12 m return what you fed it. Leftovers burst as a 12 m crown nova (150% per charge) when it closes. More charges mean denser pulses.
+- Income guard: at most 2 Static Charges bank per second, so late-game packs can't flood the bank.
+- See the loop diagram and build-outs in the README.
+
+**Balance**
+- Arc Bolt 108% to 144% per direct hit (only the exact old default migrates).
+- Gaze opening blast 600% to 400% per charge; lock-on bolt 200% to 100% per charge, reach 14 m to 8 m.
+- Charge gathering ticks every 0.25 s (was 0.30 s).
+
+**Other**
+- New icons, skin-colored effects and charge sounds for the new skills; descriptions rewritten in all four languages.
+- Every new value is adjustable in Mod Options.
+- Solo-tested. Multiplayer is still untested.
+
 ## 1.2.0
 **Gaze of the Hollow, reworked**
 - **Charge-up.** Hold Special to pull your stored Static Charges into the crown, one at a time, each with its own rising power-up sound. Aim while you gather. Tap Special to skip it.

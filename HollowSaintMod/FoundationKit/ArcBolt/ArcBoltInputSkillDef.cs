@@ -8,8 +8,8 @@ namespace HollowSaint.FoundationKit.ArcBolt
     internal sealed class ArcBoltInputSkillDef : SkillDef
     {
         public override bool CanExecute(GenericSkill slot)
-            => Stormspear.SpearPrimaryGate.Allows(slot.characterBody) && base.CanExecute(slot);
+            => !ChargedStorm.StoredChargeState.BlocksPrimary(slot.characterBody) && Stormspear.SpearPrimaryGate.Allows(slot.characterBody) && base.CanExecute(slot);
         public override bool IsReady(GenericSkill slot)
-            => Stormspear.SpearPrimaryGate.Allows(slot.characterBody) && base.IsReady(slot);
+            => !ChargedStorm.StoredChargeState.BlocksPrimary(slot.characterBody) && Stormspear.SpearPrimaryGate.Allows(slot.characterBody) && base.IsReady(slot);
     }
 }

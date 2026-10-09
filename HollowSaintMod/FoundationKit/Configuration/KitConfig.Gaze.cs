@@ -11,7 +11,7 @@ namespace HollowSaint.FoundationKit
         {
             F(c, gaze, "Armor while channeling", Gaze.GazeTuning.Armor, v => Gaze.GazeTuning.Armor = v, 0f, 100f, 5f, "Bonus armor from the wind-up to the end of the beam (100 armor = half damage taken).");
             F(c, gaze, "Beam seconds", Gaze.GazeTuning.BeamSeconds, v => Gaze.GazeTuning.BeamSeconds = v, 1f, 6f, 0.5f,
-                "Base duration. Each level above 1 adds 0.1 seconds, up to 2 extra; total duration is capped at 6 seconds and fixed at cast entry.");
+                "Legacy tap-pulse mode only: base duration gains 0.1 seconds per level above 1, capped at 6 seconds at entry. Default hold/release Gaze lasts a fixed 7 seconds.");
             F(c, gaze, "Damage per second", Gaze.GazeTuning.DamagePerSecond, v => Gaze.GazeTuning.DamagePerSecond = v, 1f, 20f, 0.5f, "Damage coefficient per second of the beam core at base attack speed. Attack speed adds ticks.");
             F(c, gaze, "Tick seconds", Gaze.GazeTuning.TickSeconds, v => Gaze.GazeTuning.TickSeconds = v, 0.1f, 0.5f, 0.05f, "Seconds between core damage ticks at base attack speed.");
             F(c, gaze, "Proc coefficient", Gaze.GazeTuning.ProcCoefficient, v => Gaze.GazeTuning.ProcCoefficient = v, 0f, 1f, 0.05f, "Item proc coefficient of each core tick (and so how much Static it builds).");

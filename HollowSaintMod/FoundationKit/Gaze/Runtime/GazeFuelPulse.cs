@@ -174,6 +174,9 @@ namespace HollowSaint.FoundationKit.Gaze
                     if (proc > 0f) KitUtil.ReportHit(info, victim.gameObject);
                 }
                 finally { StormServer.EndStormDamage(); }
+                // Spenders prime: Gaze blasts and surges leave Static for the beam core and Arc Bolt to finish.
+                if (!info.rejected && victim.alive)
+                    StormServer.PrimeStatic(victim, body, StaticPrimePolicy.Amount(ChargedStorm.ChargedStormTuning.GazeStaticPrime, 1f));
                 if (!info.rejected) controller.ConfirmStrike(Phase, group, point, age);
             }
         }

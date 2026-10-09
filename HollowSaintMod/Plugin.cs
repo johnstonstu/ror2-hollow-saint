@@ -23,9 +23,9 @@ namespace HollowSaint
     {
         public const string Guid = "com.johnstonstu.hollowsaint";
         // Bump on every staged build; keep in sync with Package/manifest.json. 1.0.0 = first public release.
-        public const string Version = "1.2.0";
+        public const string Version = "1.3.0";
         // Two keywords describing what this build changed; shown in the top-left build tag (0.x builds only).
-        public const string BuildKeywords = "release";
+        public const string BuildKeywords = "storm flow";
         private GUIStyle tagStyle;
 
         /// <summary>Set by the dev showcase recording.</summary>
@@ -154,6 +154,7 @@ namespace HollowSaint
             RoR2Application.onLoad -= VerifyCatalog;
             CharacterBody.onBodyStartGlobal -= ReportBody;
             HollowSaint.FoundationKit.Storm.StormServer.Uninstall();
+            HollowSaint.FoundationKit.ChargedStorm.StoredChargeTransport.Uninstall();
             HollowSaint.FoundationKit.Vfx.CustomSoundBank.Unload();
         }
     }

@@ -26,6 +26,31 @@ namespace HollowSaint.FoundationKit
         private CharacterBody owner;
         private int lastSeen;
         private Gaze.GazeFuelLedger gazeFuel;
+        private readonly ChargedStorm.StoredChargeCastLedger chargeCast = new ChargedStorm.StoredChargeCastLedger();
+        private readonly Storm.ChargeIncomeBucket income = new Storm.ChargeIncomeBucket();
+        /// <summary>True when one more charge would bank now (not full, income guard ready).</summary>
+        internal bool CanBank => !IsFull && income.Ready(ChargedStorm.ChargedStormTuning.ChargeIncomePerSecond, Time.time);
+        /// <summary>Last AddCharge was refused by the income guard rather than a full bank.</summary>
+        internal bool LastIncomeLimited { get; private set; }
+        internal bool StoredCastGathering => chargeCast.Active;
+        internal bool GazeOwnsBank => gazeFuel != null && gazeFuel.Active;
+
+        internal bool BeginStoredCast(uint token, bool allowEmpty = false) => UnityEngine.Networking.NetworkServer.active &&
+            !GazeOwnsBank && chargeCast.Begin(token, Charge, allowEmpty);
+        internal int StoredCastEntry => chargeCast.Entry;
+        internal void CancelStoredCast(uint token) { if (NetworkServer.active) chargeCast.Cancel(token); }
+        internal bool SpendStoredCast(uint token, int count, float age, out int spent,
+            bool allowEmpty = false, float firstChargeAt = ChargedStorm.StoredChargeCastLedger.FirstChargeAt)
+        {
+            spent = 0;
+            if (!NetworkServer.active || !owner || !owner.isActiveAndEnabled || !ChargeBuff ||
+                !owner.healthComponent || !owner.healthComponent.alive || (owner.master && owner.master.GetBody() != owner)) return false;
+            int bank = Charge;
+            if (!chargeCast.Spend(token, count, age, ref bank, out spent, allowEmpty, firstChargeAt)) return false;
+            AutoHeldFromMerge = false;
+            owner.SetBuffCount(ChargeBuff.buffIndex, bank);
+            return true;
+        }
         // Historical merge marker; every bank is now stored until an explicit claim.
         public bool AutoHeldFromMerge { get; private set; }
 
@@ -50,10 +75,13 @@ namespace HollowSaint.FoundationKit
         /// <summary>Server only. Adds one charge. Returns true if this filled the meter.</summary>
         public bool AddCharge()
         {
+            LastIncomeLimited = false;
             if (!NetworkServer.active || owner == null || ChargeBuff == null) return false;
             if (gazeFuel != null && gazeFuel.Active)
             {
+                if (!income.Ready(ChargedStorm.ChargedStormTuning.ChargeIncomePerSecond, Time.time)) { LastIncomeLimited = true; return false; }
                 bool accepted = gazeFuel.TryGain();
+                if (accepted) income.TryTake(ChargedStorm.ChargedStormTuning.ChargeIncomePerSecond, Time.time);
                 if (accepted)
                 {
                     owner.SetBuffCount(ChargeBuff.buffIndex, gazeFuel.Reserve);
@@ -64,13 +92,25 @@ namespace HollowSaint.FoundationKit
                 return accepted && gazeFuel.Unspent + gazeFuel.Reserve == gazeFuel.Capacity;
             }
             if (IsFull) return false;
+            if (!income.TryTake(ChargedStorm.ChargedStormTuning.ChargeIncomePerSecond, Time.time)) { LastIncomeLimited = true; return false; }
             owner.AddBuff(ChargeBuff);
             return IsFull;
+        }
+
+        /// <summary>Server only. Returns charges a skill still held (not new income): bypasses
+        /// the income guard, still respects the bank cap.</summary>
+        internal void ReturnCharges(int count)
+        {
+            if (!NetworkServer.active || owner == null || ChargeBuff == null || (gazeFuel != null && gazeFuel.Active)) return;
+            for (int i = 0; i < count && !IsFull; i++) owner.AddBuff(ChargeBuff);
         }
 
         internal void ClaimGazeFuel(Gaze.GazeFuelLedger ledger)
         {
             if (!NetworkServer.active || !owner || !ChargeBuff) return;
+            // A forced Gaze transition supersedes an uncommitted new-skill gather.
+            // The bank is untouched until launch, so Gaze can safely claim it here.
+            chargeCast.Cancel();
             ledger.Begin(Charge, KitTuning.StormChargeMax);
             gazeFuel = ledger;
             AutoHeldFromMerge = false;
@@ -91,7 +131,7 @@ namespace HollowSaint.FoundationKit
         public void Consume()
         {
             if (!NetworkServer.active || owner == null || ChargeBuff == null) return;
-            if (gazeFuel != null && gazeFuel.Active) return;
+            if ((gazeFuel != null && gazeFuel.Active) || chargeCast.Active) return;
             AutoHeldFromMerge = false;
             owner.SetBuffCount(ChargeBuff.buffIndex, 0);
         }
@@ -103,7 +143,7 @@ namespace HollowSaint.FoundationKit
             spent = 0;
             bool alive = owner && owner.isActiveAndEnabled && owner.healthComponent && owner.healthComponent.alive &&
                 (!owner.master || owner.master.GetBody() == owner);
-            bool reserved = gazeFuel != null && gazeFuel.Active;
+            bool reserved = (gazeFuel != null && gazeFuel.Active) || chargeCast.Active;
             int bank = Charge;
             if (!ChargeBuff || !Storm.StoredPrayerPolicy.TrySpend(ref bank, KitTuning.StormChargeMax,
                 NetworkServer.active, true, alive, reserved, out spent)) return false;
@@ -115,7 +155,7 @@ namespace HollowSaint.FoundationKit
         {
             if (owner == null) return;
             int now = Charge;
-            if (Gaze.GazeFuelController.OwnsPresentation(owner)) { lastSeen = now; return; }
+            if (Gaze.GazeFuelController.OwnsPresentation(owner) || ChargedStorm.StoredChargeState.IsGathering(owner)) { lastSeen = now; return; }
             if (now == lastSeen) return;
             int max = KitTuning.StormChargeMax;
             if (now >= max && lastSeen < max)
@@ -131,5 +171,6 @@ namespace HollowSaint.FoundationKit
             }
             lastSeen = now;
         }
+        private void OnDisable() { if (NetworkServer.active) chargeCast.Cancel(); }
     }
 }

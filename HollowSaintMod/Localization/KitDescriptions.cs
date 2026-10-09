@@ -57,7 +57,14 @@ namespace HollowSaint.FoundationKit
             args["radius"] = Num(KitTuning.OpenCircuitRadius);
             args["pulse"] = Pct(KitDamagePolicy.Effective(KitTuning.OpenCircuitPulseDamageCoefficient));
             args["interval"] = Num(KitTuning.OpenCircuitPulseInterval);
+            // Shortest interval (most charges) first: "every 0.25-0.5s".
+            args["circuitMinInterval"] = Num(OpenCircuit.CircuitChargePolicy.Interval(KitTuning.OpenCircuitPulseInterval, ChargedStorm.ChargedStormTuning.DescriptionChargeLimit));
+            args["circuitMaxInterval"] = Num(OpenCircuit.CircuitChargePolicy.Interval(KitTuning.OpenCircuitPulseInterval, 1));
             args["mult"] = Num(StormspearTuning.CrownChargeMultiplier);
+            args["spearPrimed"] = Num(Math.Max(1f, Math.Min(5f, ChargedStorm.ChargedStormTuning.SpearPrimedMultiplier)));
+            args["refundReach"] = Num(Math.Max(KitTuning.OpenCircuitRadius, ChargedStorm.ChargedStormTuning.ClosedCircuitReach));
+            args["closingDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.ClosingNovaDamage));
+            args["novaRadius"] = Num(ChargedStorm.ChargedStormTuning.Bound(ChargedStorm.ChargedStormTuning.ClosingNovaRadius, 4f, 30f));
             args["gazeSeconds"] = Num(GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, 1f));
             args["gazeMaxSeconds"] = Num(GazeDurationPolicy.ForLevel(GazeTuning.BeamSeconds, 21f));
             args["pulseInterval"] = GazeManualRequestPolicy.MinimumInterval.ToString("0.##", CultureInfo.InvariantCulture);
@@ -90,6 +97,21 @@ namespace HollowSaint.FoundationKit
             args["pop"] = Pct(KitTuning.ElectrocutePopDamageCoefficient);
             args["immune"] = Num(KitTuning.ElectrocuteImmuneSeconds);
             args["range"] = Num(KitTuning.ThunderboltRange);
+            args["cloudMinRadius"] = Num(ChargedStorm.ChargedStormTuning.Radius(ChargedStorm.ChargedStormTuning.CloudFreeCast ? 0 : 1));
+            args["cloudMaxRadius"] = Num(ChargedStorm.ChargedStormTuning.Radius(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit));
+            int cloudMin = ChargedStorm.ChargedStormTuning.CloudFreeCast ? 0 : 1;
+            args["cloudMinDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.CloudCoefficient(cloudMin)));
+            args["cloudMinSeconds"] = Num(ChargedStorm.ChargedStormTuning.CloudDuration(cloudMin));
+            args["cloudMaxSeconds"] = Num(ChargedStorm.ChargedStormTuning.CloudDuration(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit));
+            args["cloudInterval"] = Thundercloud.ThundercloudSchedule.Interval.ToString("0.##", CultureInfo.InvariantCulture);
+            args["cloudMaxDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.CloudCoefficient(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit)));
+            args["orbMinDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.OrbCoefficient(0)));
+            args["orbMaxDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.OrbCoefficient(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit)));
+            args["orbMinHits"] = ChargedStorm.ChargedStormTuning.HitBudget(0).ToString(CultureInfo.InvariantCulture);
+            args["orbMaxHits"] = ChargedStorm.ChargedStormTuning.HitBudget(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit).ToString(CultureInfo.InvariantCulture);
+            args["orbRange"] = Num(ChargedStorm.ChargedStormTuning.Bound(ChargedStorm.ChargedStormTuning.OrbRange, 10f, 100f));
+            args["orbBounceRange"] = Num(ChargedStorm.ChargedStormTuning.BounceRange(0)) + "-" +
+                Num(ChargedStorm.ChargedStormTuning.BounceRange(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit));
             return args;
         }
 

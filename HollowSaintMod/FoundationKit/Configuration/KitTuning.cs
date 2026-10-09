@@ -25,7 +25,7 @@ namespace HollowSaint.FoundationKit
     {
         // Arc Bolt: approved. One shot every 0.5 s at 1x attack speed.
         public static float ArcBoltInterval = 0.5f;
-        public static float ArcBoltDamageCoefficient = 1.2f;
+        public static float ArcBoltDamageCoefficient = 1.6f;
         public static int ArcBoltMaxChainTargets = 4;
         public static float ArcBoltChainRange = 12f;
         public static float ArcBoltChainFalloff = 0.75f;

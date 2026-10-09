@@ -61,7 +61,8 @@ namespace HollowSaint.FoundationKit.ArcBolt
             base.FixedUpdate();
             // A pending shot can overlap a secondary press, or Circuit can close
             // during a charge. Cancel its presentation before any discharge.
-            if (!hasFired && !Stormspear.SpearPrimaryGate.Allows(characterBody))
+            if (!hasFired && (ChargedStorm.StoredChargeState.BlocksPrimary(characterBody) ||
+                !Stormspear.SpearPrimaryGate.Allows(characterBody)))
             {
                 if (isAuthority) outer.SetNextStateToMain();
                 return;

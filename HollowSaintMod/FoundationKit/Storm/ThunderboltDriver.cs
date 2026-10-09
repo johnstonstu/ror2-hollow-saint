@@ -34,6 +34,7 @@ namespace HollowSaint.FoundationKit.Storm
             catch (System.Exception error) { Plugin.Log.LogError("HOLLOW_SAINT_PRAYER_STRIKE_FX_ERROR " + error); }
             StormTelemetry.RecordStrike();
             KitLog.Event("THUNDERBOLT", "spear damage=" + snapshot.Damage.ToString("0.0") + " crit=" + snapshot.Crit + " funded=" + snapshot.Funded);
+            var primedSplash = new System.Collections.Generic.List<HealthComponent>();
             StormServer.BeginStormDamage();
             try
             {
@@ -61,11 +62,15 @@ namespace HollowSaint.FoundationKit.Storm
                         var splash = StormServer.MakeInfo(body, others[i], snapshot.SplashDamage, snapshot.Crit, snapshot.Funded ? 0.5f : 0f);
                         health.TakeDamage(splash);
                         if (snapshot.Funded) KitUtil.ReportHit(splash, health.gameObject);
+                        if (snapshot.Funded) primedSplash.Add(health);
                     }
                 }
             }
             finally { StormServer.EndStormDamage(); }
             if (snapshot.Funded && victim && victim.alive && victimBody) StormServer.ElectrocuteFromStrike(victim, victimBody, body);
+            // The full-bank Thunderbolt primes the pack around its Electrocuted target.
+            foreach (var health in primedSplash)
+                if (health && health.alive) StormServer.PrimeStatic(health, body, StaticPrimePolicy.Amount(ChargedStorm.ChargedStormTuning.ThunderboltSplashPrime, 1f));
         }
     }
 }

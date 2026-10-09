@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" font-family="Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1422"/><stop offset="1" stop-color="#070b13"/></linearGradient>
+  </defs>
+  <rect width="1200" height="600" rx="18" fill="url(#bg)"/>
+  <text x="60" y="64" fill="#efe9dc" font-size="30" font-weight="700" letter-spacing="1">Build-outs</text>
+  <text x="60" y="94" fill="#9fb3c8" font-size="17">Your Secondary decides how you start and finish the loop. Your Special decides how you spend it.</text>
+
+  <g font-size="13" font-weight="700" letter-spacing="2" fill="#4debff">
+    <text x="345" y="146">GAZE OF THE HOLLOW</text>
+    <text x="630" y="146">OPEN CIRCUIT</text>
+    <text x="915" y="146">THUNDERCLOUD</text>
+  </g>
+  <g>
+    <text x="60" y="226" fill="#efe9dc" font-size="19" font-weight="700">Stormspear</text>
+    <text x="60" y="250" fill="#4debff" font-size="13" font-weight="700" letter-spacing="2">FINISHER</text>
+    <text x="60" y="274" fill="#7f93a8" font-size="13">2x Static on primed</text>
+    <text x="60" y="292" fill="#7f93a8" font-size="13">enemies; full bank only</text>
+    <text x="60" y="310" fill="#7f93a8" font-size="13">on a full-charge throw.</text>
+    <text x="60" y="416" fill="#efe9dc" font-size="19" font-weight="700">Hollowed Orb</text>
+    <text x="60" y="440" fill="#d6955a" font-size="13" font-weight="700" letter-spacing="2">PRIMER</text>
+    <text x="60" y="464" fill="#7f93a8" font-size="13">A free tap primes all</text>
+    <text x="60" y="482" fill="#7f93a8" font-size="13">it bounces through; hold</text>
+    <text x="60" y="500" fill="#7f93a8" font-size="13">to spend for a bigger orb.</text>
+  </g>
+
+  <g font-size="14">
+    <!-- row 1 -->
+    <rect x="330" y="166" width="270" height="168" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".5" stroke-width="2"/>
+    <text x="350" y="200" fill="#efe9dc" font-size="20" font-weight="700">Stormcaller</text>
+    <text x="350" y="230" fill="#b8c6d6">Blasts and surges prime the</text>
+    <text x="350" y="250" fill="#b8c6d6">pack; spears and the beam</text>
+    <text x="350" y="270" fill="#b8c6d6">finish it.</text>
+    <rect x="350" y="296" width="74" height="22" rx="11" fill="#173049"/><text x="387" y="312" fill="#8fdcf0" font-size="12" font-weight="700" text-anchor="middle">BURST</text>
+
+    <rect x="615" y="166" width="270" height="168" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".5" stroke-width="2"/>
+    <text x="635" y="200" fill="#efe9dc" font-size="20" font-weight="700">Lancer</text>
+    <text x="635" y="230" fill="#b8c6d6">Spears charge fast under the</text>
+    <text x="635" y="250" fill="#b8c6d6">crown; every Electrocute</text>
+    <text x="635" y="270" fill="#b8c6d6">nearby refunds it.</text>
+    <rect x="635" y="296" width="116" height="22" rx="11" fill="#173049"/><text x="693" y="312" fill="#8fdcf0" font-size="12" font-weight="700" text-anchor="middle">CLOSE RANGE</text>
+
+    <rect x="900" y="166" width="240" height="168" rx="14" fill="#101b2c" stroke="#4debff" stroke-opacity=".5" stroke-width="2"/>
+    <text x="920" y="200" fill="#efe9dc" font-size="20" font-weight="700">Siege</text>
+    <text x="920" y="230" fill="#b8c6d6">Cloud primes and Shocks a</text>
+    <text x="920" y="250" fill="#b8c6d6">far group; spears finish</text>
+    <text x="920" y="270" fill="#b8c6d6">from range.</text>
+    <rect x="920" y="296" width="108" height="22" rx="11" fill="#173049"/><text x="974" y="312" fill="#8fdcf0" font-size="12" font-weight="700" text-anchor="middle">LONG RANGE</text>
+
+    <!-- row 2 -->
+    <rect x="330" y="356" width="270" height="168" rx="14" fill="#14161b" stroke="#d6955a" stroke-opacity=".55" stroke-width="2"/>
+    <text x="350" y="390" fill="#efe9dc" font-size="20" font-weight="700">Seer</text>
+    <text x="350" y="420" fill="#b8c6d6">Free Orbs prime the pack;</text>
+    <text x="350" y="440" fill="#b8c6d6">Gaze blasts and the beam</text>
+    <text x="350" y="460" fill="#b8c6d6">cash it in.</text>
+    <rect x="350" y="486" width="104" height="22" rx="11" fill="#2b2117"/><text x="402" y="502" fill="#e0a774" font-size="12" font-weight="700" text-anchor="middle">EASY START</text>
+
+    <rect x="615" y="356" width="270" height="168" rx="14" fill="#14161b" stroke="#d6955a" stroke-opacity=".55" stroke-width="2"/>
+    <text x="635" y="390" fill="#efe9dc" font-size="20" font-weight="700">Conductor</text>
+    <text x="635" y="420" fill="#b8c6d6">Orbs prime, pulses finish,</text>
+    <text x="635" y="440" fill="#b8c6d6">and the crown pays your</text>
+    <text x="635" y="460" fill="#b8c6d6">charges back.</text>
+    <rect x="635" y="486" width="142" height="22" rx="11" fill="#2b2117"/><text x="706" y="502" fill="#e0a774" font-size="12" font-weight="700" text-anchor="middle">SELF-SUSTAINING</text>
+
+    <rect x="900" y="356" width="240" height="168" rx="14" fill="#14161b" stroke="#d6955a" stroke-opacity=".55" stroke-width="2"/>
+    <text x="920" y="390" fill="#efe9dc" font-size="20" font-weight="700">Tempest</text>
+    <text x="920" y="420" fill="#b8c6d6">Everything primes; Arc</text>
+    <text x="920" y="440" fill="#b8c6d6">Bolt chains do all the</text>
+    <text x="920" y="460" fill="#b8c6d6">finishing.</text>
+    <rect x="920" y="486" width="98" height="22" rx="11" fill="#2b2117"/><text x="969" y="502" fill="#e0a774" font-size="12" font-weight="700" text-anchor="middle">HIGH RISK</text>
+  </g>
+  <text x="60" y="566" fill="#7f93a8" font-size="14">Arc Bolt is in every build: it spreads Static and finishes primed enemies whatever else you carry.</text>
+</svg>

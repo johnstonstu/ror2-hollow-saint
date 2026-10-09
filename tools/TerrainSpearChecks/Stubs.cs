@@ -1,4 +1,8 @@
 using System.Reflection;
+// ChargedStorm behavior is exercised by its linked production suite. This legacy
+// spear adapter has no charged-storm cast and preserves that baseline condition.
+namespace HollowSaint.FoundationKit.ChargedStorm
+{ internal static class StoredChargeState { internal static bool BlocksPrimary(RoR2.CharacterBody body) => false; } }
 namespace UnityEngine
 {
     [AttributeUsage(AttributeTargets.Class)] public class DisallowMultipleComponent : Attribute { }

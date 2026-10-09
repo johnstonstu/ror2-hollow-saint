@@ -138,7 +138,20 @@ static class Program {
         ExitChecks();
         MappedCancelChecks();
         LysateChecks();
+        NewKitCooldownChecks();
         Console.WriteLine("PASS "+checks+" production controls assertions using native adapter simulation");
+    }
+    static void NewKitCooldownChecks()
+    {
+        // New kit subclasses must retain underlying recharge/stock through Gaze's
+        // native contextual override, including an Orb equipped beside Gaze.
+        foreach(SkillDef def in new SkillDef[]{new HollowSaint.FoundationKit.ChargedStorm.StoredChargeSkillDef(),new HollowSaint.FoundationKit.ChargedStorm.StoredChargeCompatibleSkillDef()})
+        {
+            var f=new Fixture();def.baseMaxStock=2;def.baseRechargeInterval=10;
+            var slot=new GenericSkill(f.body,def,new EntityStateMachine{state=new GazeLockState()});slot.stock=0;slot.rechargeStopwatch=2;
+            f.skills[1]=slot;f.body.skillLocator.secondary=slot;f.Begin();f.Tick(4);f.controls.End();
+            Check(slot.stock==0 && slot.rechargeStopwatch==6 && slot.skillDef==def,"new kit definition recharge and empty stock preserved across Gaze override");
+        }
     }
     static void ExitChecks()
     {

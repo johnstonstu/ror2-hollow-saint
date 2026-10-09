@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/ChargedStormTuning.cs" Link="Production/ChargedStormTuning.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Configuration/*.cs" Exclude="../../HollowSaintMod/FoundationKit/Configuration/KitConfig.Options.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearTuning.cs" Link="Production/StormspearTuning.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeTuning.cs" Link="Production/GazeTuning.cs" />

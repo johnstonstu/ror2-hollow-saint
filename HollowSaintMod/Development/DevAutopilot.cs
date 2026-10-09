@@ -38,6 +38,8 @@ namespace HollowSaint
         private CharacterBody pilot;
         private Vector3 mark; private float markYaw; private Vector3 facing;
         private readonly List<CharacterBody> dummies = new List<CharacterBody>();
+        private bool chargeDummyMoving;
+        private CharacterBody chargeMotionVictim;
         private Camera shotCamera; private RenderTexture shotTarget;
         private float scriptTime;
         private string segment = "-";
@@ -274,7 +276,7 @@ namespace HollowSaint
             while (body && scriptingOrSetup)
             {
                 if (body.inputBank) body.inputBank.moveVector = Vector3.zero;
-                if ((body.footPosition - spot).sqrMagnitude > 0.25f) TeleportHelper.TeleportBody(body, spot);
+                if ((!chargeDummyMoving || body != chargeMotionVictim) && (body.footPosition - spot).sqrMagnitude > 0.25f) TeleportHelper.TeleportBody(body, spot);
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -453,6 +455,73 @@ namespace HollowSaint
             AudioMark("SYNC");
             if (pilot) Util.PlaySound("Play_HS_SpearImpact", pilot.gameObject);
             yield return Wait(1.2f);
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "storm-reach")
+            {
+                yield return StormReachSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "review-13")
+            {
+                yield return ReviewShowcaseSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "early-13")
+            {
+                yield return EarlyAcceptanceSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "early-balance")
+            {
+                yield return EarlyBalanceSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "orb-vfx")
+            {
+                yield return OrbVfxSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "orb-refinement")
+            {
+                yield return OrbRefinementSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "charge-presentation")
+            {
+                yield return ChargedStormPresentationSegments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "charge-13" ||
+                Environment.GetEnvironmentVariable("HS_SEGMENTS") == "charge-gaze")
+            {
+                if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "charge-13")
+                    yield return ChargedStormSegments();
+                foreach (var dummy in dummies) dummy.healthComponent.godMode = true;
+                var orbSlot = pilot.skillLocator.secondary;
+                var originalSecondary = orbSlot.baseSkill;
+                // Equip the base bank, as a player loadout does. A temporary external
+                // override intentionally freezes its own bank during Gaze.
+                orbSlot.SetBaseSkill(FoundationKit.ChargedStorm.ChargedStormRegistration.Orb);
+                try
+                {
+                    yield return GazeReleaseSegments();
+                    yield return Segment("gaze-orb-recharge");
+                    pilot.SetBuffCount(DischargeMeter.ChargeBuff.buffIndex, 5);
+                    orbSlot.stock = 0; orbSlot.rechargeStopwatch = 0f;
+                    yield return GazeTap(); yield return Wait(9f);
+                    ReleaseCheck(orbSlot.skillDef == FoundationKit.ChargedStorm.ChargedStormRegistration.Orb && orbSlot.stock == 1,
+                        "native Gaze restores equipped Orb and its elapsed recharge");
+                }
+                finally { orbSlot.SetBaseSkill(originalSecondary); }
+                scripting = false;
+                yield break;
+            }
             if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "spear-splash")
             {
                 yield return SpearSplashSegments();

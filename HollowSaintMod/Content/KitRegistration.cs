@@ -60,6 +60,7 @@ namespace HollowSaint
             arcStep = ArcStepRegistration.RegisterArcStep();
             openCircuit = OpenCircuitRegistration.RegisterOpenCircuit();
             gaze = HollowSaint.FoundationKit.Gaze.GazeRegistration.Register();
+            FoundationKit.ChargedStorm.ChargedStormRegistration.Register();
         }
 
         /// <summary>Points the body's four slots at Hollow Saint families, sets the
@@ -83,10 +84,10 @@ namespace HollowSaint
 
             int installed = 0;
             installed += Install(bodyObject, locator.primary, arcBolt, "Primary", s => locator.primary = s);
-            installed += Install(bodyObject, locator.secondary, spear, "Secondary", s => locator.secondary = s);
+            installed += Install(bodyObject, locator.secondary, spear, "Secondary", s => locator.secondary = s, FoundationKit.ChargedStorm.ChargedStormRegistration.Orb);
             installed += Install(bodyObject, locator.utility, arcStep, "Utility", s => locator.utility = s);
             // v0.9.8 (Stu): Gaze of the Hollow is the default Special; Open Circuit is the alternate.
-            installed += Install(bodyObject, locator.special, gaze ?? openCircuit, "Special", s => locator.special = s, gaze != null ? openCircuit : null);
+            installed += Install(bodyObject, locator.special, gaze ?? openCircuit, "Special", s => locator.special = s, gaze != null ? openCircuit : null, FoundationKit.ChargedStorm.ChargedStormRegistration.Cloud);
 
             locator.passiveSkill = new SkillLocator.PassiveSkill
             {
@@ -102,6 +103,7 @@ namespace HollowSaint
             if (body && portrait) body.portraitIcon = portrait;
 
             if (!bodyObject.GetComponent<DischargeMeter>()) bodyObject.AddComponent<DischargeMeter>();
+            if (!bodyObject.GetComponent<FoundationKit.ChargedStorm.StoredChargeDriver>()) bodyObject.AddComponent<FoundationKit.ChargedStorm.StoredChargeDriver>();
             if (!bodyObject.GetComponent<HollowSaint.FoundationKit.Gaze.GazeFuelController>()) bodyObject.AddComponent<HollowSaint.FoundationKit.Gaze.GazeFuelController>();
             try
             {
@@ -226,9 +228,13 @@ namespace HollowSaint
             var locator = bodyPrefab != null ? bodyPrefab.GetComponent<SkillLocator>() : null;
             if (locator == null) { detail = "no SkillLocator"; return false; }
             bool ok = Is(locator.primary, arcBolt) && Is(locator.secondary, spear) &&
-                      Is(locator.utility, arcStep) && Is(locator.special, gaze ?? openCircuit);
+                      Is(locator.utility, arcStep) && Is(locator.special, gaze ?? openCircuit) &&
+                      HasVariant(locator.secondary, FoundationKit.ChargedStorm.ChargedStormRegistration.Orb) &&
+                      HasVariant(locator.special, FoundationKit.ChargedStorm.ChargedStormRegistration.Cloud);
             detail = "primary=" + Describe(locator.primary) + " secondary=" + Describe(locator.secondary) +
-                     " utility=" + Describe(locator.utility) + " special=" + Describe(locator.special);
+                     " utility=" + Describe(locator.utility) + " special=" + Describe(locator.special) +
+                     " secondaryVariants=" + (locator.secondary?.skillFamily?.variants?.Length ?? 0) +
+                     " specialVariants=" + (locator.special?.skillFamily?.variants?.Length ?? 0);
             return ok;
         }
 
@@ -236,6 +242,13 @@ namespace HollowSaint
         {
             return slot != null && slot.skillFamily != null && def != null &&
                    slot.skillFamily.defaultSkillDef == def && def.skillIndex >= 0;
+        }
+
+        private static bool HasVariant(GenericSkill slot, SkillDef def)
+        {
+            if (!slot || !slot.skillFamily || !def || def.skillIndex < 0) return false;
+            foreach (var variant in slot.skillFamily.variants) if (variant.skillDef == def) return true;
+            return false;
         }
 
         private static void RegisterTokens()

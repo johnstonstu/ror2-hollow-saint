@@ -32,6 +32,8 @@ namespace HollowSaint.FoundationKit
             KitTokens.ArcStepDesc,
             KitTokens.OpenCircuitDesc,
             GazeRegistration.DescToken,
+            "HS_SKILL_THUNDERCLOUD_DESC",
+            "HS_SKILL_HOLLOWED_ORB_DESC",
             KitTokens.StormDesc,
             KitTokens.KeywordStorm,
             KitTokens.KeywordStatic,

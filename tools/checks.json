@@ -1,5 +1,6 @@
 {
   "projects": [
+    "tools/ChargedStormChecks/ChargedStormChecks.csproj",
     "tools/ConfigMigrationChecks/ConfigMigrationChecks.csproj",
     "tools/ArcBoltReliabilityChecks/ArcBoltReliabilityChecks.csproj",
     "tools/CircuitDwellChecks/CircuitDwellChecks.csproj",

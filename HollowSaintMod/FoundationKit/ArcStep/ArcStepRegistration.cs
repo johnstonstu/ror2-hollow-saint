@@ -19,7 +19,7 @@ namespace HollowSaint.FoundationKit.ArcStep
             if (SkillDef != null) return SkillDef;
             ArcStepStateType = KitContent.AddState(typeof(ArcStepState));
 
-            var def = ScriptableObject.CreateInstance<SkillDef>();
+            var def = ScriptableObject.CreateInstance<ChargedStorm.StoredChargeCompatibleSkillDef>();
             def.skillName = SkillDefName;
             ((ScriptableObject)def).name = SkillDefName;
             def.skillNameToken = KitTokens.ArcStepName;

@@ -7,7 +7,8 @@
 #        add -CutOnly to re-cut an existing recording (raw.mp4 + trace.txt) without launching the game.
 #        -Quick gaze -Skin 4 records only the Gaze takes, on skin 4 (Umbral).
 param([Parameter(Mandatory=$true)][string]$Name, [int]$TimeoutSeconds = 300, [double]$Pad = 0.4,
-      [string]$ProfileName = 'Hollow Saint Dev', [switch]$CutOnly, [string]$Quick, [string]$Skin)
+      [string]$ProfileName = 'Hollow Saint Dev', [switch]$CutOnly, [string]$Quick, [string]$Skin,
+      [string]$Segments = 'showcase', [switch]$SkipGifs)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $out = Join-Path $repo ("artifacts\" + $Name)
@@ -20,13 +21,22 @@ $roundtrip = [Globalization.DateTimeStyles]::RoundtripKind
 $recStart = $null
 
 if (-not $CutOnly) {
-    foreach ($f in $raw, $progress) { if (Test-Path $f) { Remove-Item $f -Force } }
+    if (Test-Path -LiteralPath $raw) { throw 'Recording already exists; use a fresh Name or -CutOnly to preserve previous footage.' }
     $game = 'C:/Program Files (x86)/Steam/steamapps/common/Risk of Rain 2'
     $profile = Join-Path $env:APPDATA ('r2modmanPlus-local/RiskOfRain2/profiles/' + $ProfileName)
     $preloader = Join-Path $profile 'BepInEx/core/BepInEx.Preloader.dll'
+    $identity = Join-Path $out 'build.json'
+    if (Test-Path -LiteralPath $identity) { throw 'Build identity already exists; preserve it and choose a fresh recording Name.' }
+    $pluginFiles = Join-Path $profile 'BepInEx/plugins/JohnstonStu-HollowSaint'
+    [ordered]@{
+        capturedBeforeLaunchUtc = [DateTime]::UtcNow.ToString('o'); profile = $ProfileName; segments = $Segments
+        dllSha256 = (Get-FileHash (Join-Path $pluginFiles 'HollowSaint.dll')).Hash
+        languageSha256 = (Get-FileHash (Join-Path $pluginFiles 'HollowSaint.language')).Hash
+        bundleSha256 = (Get-FileHash (Join-Path $pluginFiles 'hollowsaintassets')).Hash
+    } | ConvertTo-Json | Set-Content -LiteralPath $identity -Encoding UTF8
     if (Get-Process -Name 'Risk of Rain 2' -ErrorAction SilentlyContinue) { throw 'A game is already running; close it first' }
     $env:HS_AUTOPILOT = $out
-    $env:HS_SEGMENTS = 'showcase'
+    $env:HS_SEGMENTS = $Segments
     if ($Quick) { $env:HS_SHOWCASE_QUICK = $Quick }
     if ($Skin) { $env:HS_SHOWCASE_SKIN = $Skin }
     $arguments = '--doorstop-enabled true --doorstop-target-assembly "' + $preloader + '" --r2profile "' + $ProfileName + '"'
@@ -50,6 +60,7 @@ if (-not $CutOnly) {
         '-vf "fps=30,scale=1920:1080:force_original_aspect_ratio=decrease:flags=lanczos,pad=1920:1080:-1:-1,format=yuv420p" -c:v libx264 -preset veryfast -crf 18 ' +
         '-progress "' + $progress + '" "' + $raw + '"'
     $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
     $psi.RedirectStandardInput = $true
     $psi.RedirectStandardError = $true
     $ff = [System.Diagnostics.Process]::Start($psi)
@@ -94,6 +105,8 @@ foreach ($line in Get-Content (Join-Path $out 'yavg.txt')) {
 }
 if ($null -eq $flash) { throw 'sync flash not found in the recording' }
 $recStart = $syncUtc.AddSeconds(-$flash)
+[ordered]@{ videoStartUtc = $recStart.ToString('o'); syncUtc = $syncUtc.ToString('o'); syncFrameSeconds = $flash } |
+    ConvertTo-Json | Set-Content -LiteralPath (Join-Path $out 'recording.json') -Encoding UTF8
 "sync flash at " + $flash.ToString('0.000', $inv) + "s"
 
 $stills = Join-Path $out 'stills'
@@ -121,7 +134,9 @@ foreach ($line in Get-Content $trace) {
         Add-Content -Path $offsets -Value ($Matches[1] + ' ' + $ss + ' ' + $tt) -Encoding ASCII
         $mp4 = Join-Path $clips ($Matches[1] + '.mp4'); $gif = Join-Path $clips ($Matches[1] + '.gif')
         & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $raw -vf 'scale=1280:720:flags=lanczos' -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart -an $mp4
-        & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $raw -vf 'fps=15,scale=640:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle' $gif
-        "{0,-12} at {1,8}s  {2,5:0.0}s  mp4={3:0} KB  gif={4:0} KB" -f $Matches[1], $ss, $len, ((Get-Item $mp4).Length / 1KB), ((Get-Item $gif).Length / 1KB)
+        if (-not $SkipGifs) {
+            & ffmpeg -hide_banner -loglevel error -y -ss $ss -t $tt -i $raw -vf 'fps=15,scale=640:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle' $gif
+        }
+        "{0,-12} at {1,8}s  {2,5:0.0}s  mp4={3:0} KB" -f $Matches[1], $ss, $len, ((Get-Item $mp4).Length / 1KB)
     }
 }

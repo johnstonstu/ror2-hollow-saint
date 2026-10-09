@@ -11,12 +11,32 @@ namespace HollowSaint.FoundationKit.OpenCircuit
         public const string BuffName = "HollowSaintOpenCircuit";
 
         public static BuffDef Def { get; private set; }
+        internal static BuffDef Empowerment { get; private set; }
 
         internal static void Register()
         {
             if (Def != null) return;
             Def = KitContent.MakeBuff(BuffName, new Color(0.3f, 0.92f, 1f),
                 canStack: false, isDebuff: false, hidden: false, icon: "buff_open_circuit");
+            Empowerment = KitContent.MakeBuff("bdHsCircuitEmpowerment", new Color(0.3f, 0.92f, 1f),
+                canStack: true, isDebuff: false, hidden: true);
+        }
+        /// <summary>Server: raised after a paid crown opens, with the charges fed into it.</summary>
+        internal static System.Action<CharacterBody, int> Opened;
+        internal static int Charges(CharacterBody body) => body && Empowerment ? 1 + body.GetBuffCount(Empowerment) : 1;
+        internal static void Open(CharacterBody body, int charges)
+        {
+            if (!UnityEngine.Networking.NetworkServer.active || !body || !Def || !body.healthComponent || !body.healthComponent.alive) return;
+            if (Empowerment)
+            {
+                body.ClearTimedBuffs(Empowerment.buffIndex);
+                body.SetBuffCount(Empowerment.buffIndex, 0);
+                for (int i = 1; i < Mathf.Clamp(charges, 1, 20); i++) body.AddTimedBuff(Empowerment, KitTuning.OpenCircuitBuffSeconds);
+            }
+            body.ClearTimedBuffs(Def.buffIndex);
+            body.AddTimedBuff(Def, KitTuning.OpenCircuitBuffSeconds);
+            try { Opened?.Invoke(body, charges); }
+            catch (System.Exception error) { Plugin.Log.LogError("HOLLOW_SAINT_CLOSED_CIRCUIT_OPEN " + error); }
         }
     }
 }

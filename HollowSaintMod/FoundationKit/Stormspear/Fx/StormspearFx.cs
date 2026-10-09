@@ -120,6 +120,14 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             if (ring && ring.Valid) VfxParticles.Ring(ring.Shape.Center, ring.Shape.Normal, ring.Shape.Radius, ring.Shape.Radius * 1.5f, 0.22f, 0.04f, pal.Material(VfxAssets.Trail), palette: pal);
         }
 
+        /// <summary>A full bank waiting on a fully charged throw (the funded Thunderbolt).</summary>
+        private bool BankArmed()
+        {
+            if (!ChargedStorm.ChargedStormTuning.ThunderboltNeedsFullCharge || !body) return false;
+            var meter = body.GetComponent<DischargeMeter>();
+            return meter && meter.IsFull && !meter.GazeOwnsBank && !Gaze.GazeFuelController.OwnsPresentation(body);
+        }
+
         private void OnTick(StormspearCharge c, int step)
         {
             lockKick = 1f;
@@ -135,6 +143,14 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             {
                 // Full: ready flash; the separate charge-contract audio owner handles sound.
                 readyFlash = 1f;
+                if (BankArmed())
+                {
+                    // This throw will spend the full Static bank on a Thunderbolt: say so.
+                    VfxParticles.Burst(at, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.22f, Vector2.zero, new Vector2(1.3f, 1.6f), pal.Core);
+                    VfxParticles.Ring(at, Vector3.up, 0.2f, 1.4f, 0.3f, 0.06f, pal.Material(VfxAssets.Trail), palette: pal);
+                    try { KitFx.Local(Beat.MeterFull, body, at); }
+                    catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_SPEAR_BANK_CUE " + error); }
+                }
                 // v0.9.1: a short sharp flash plus a ring along the shaft, instead of a 1.4 m white bloom.
                 VfxParticles.Burst(at, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.16f, Vector2.zero, new Vector2(0.7f, 0.9f), pal.Arc);
                 VfxParticles.Burst(at, Quaternion.identity, pal.Material(VfxAssets.Spark), 16, 0.35f, new Vector2(3f, 7f), new Vector2(0.06f, 0.12f), pal.Arc, stretch: 0.08f);
@@ -303,8 +319,9 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 }
                 if (full && now >= nextTipSpark)
                 {
-                    nextTipSpark = now + 0.14f;
-                    VfxParticles.Burst(tip, Quaternion.identity, pal.Material(VfxAssets.Spark), 3, 0.18f, new Vector2(2f, 5f), new Vector2(0.04f, 0.08f), pal.Core, stretch: 0.06f);
+                    bool armed = BankArmed();
+                    nextTipSpark = now + (armed ? 0.07f : 0.14f);
+                    VfxParticles.Burst(tip, Quaternion.identity, pal.Material(VfxAssets.Spark), armed ? 6 : 3, 0.18f, new Vector2(2f, 5f), new Vector2(0.04f, 0.08f), pal.Core, stretch: 0.06f);
                 }
             }
 

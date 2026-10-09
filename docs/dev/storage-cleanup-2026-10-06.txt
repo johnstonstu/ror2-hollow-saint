@@ -1,0 +1,67 @@
+Storage cleanup and retained development lessons - 2026-10-06
+
+Scope: retire only .worktrees/anim35, armlife, balance, circuit, spear,
+v09-fx, v09-gameplay, and v09-javelin. Keep the main checkout, claude-120,
+external worktrees, all existing Git branches, and the v1.2.0 release tag.
+The retirement outcome and preservation manifest are recorded under
+artifacts/storage-cleanup-2026-10-06/.
+
+Completed: all eight worktrees were removed and their original branch tips
+were verified. Observed free space increased by 96.5 GB (89.9 GiB), after
+retaining the 1.3 GiB preservation archive. The project now occupies about
+52.5 GiB across 125,095 files, compared with 142.6 GiB before cleanup.
+Main tracked files and HEAD, v1.2.0, the pinned asset bundle, retained duplicate
+files, and the 1.2.0 release ZIP all passed the final integrity checks.
+
+Recovery
+- The preservation.json file records each original branch and commit.
+- Branch history retains tracked source and assets. Git LFS storage is retained;
+  no LFS prune or Git history rewrite is part of this cleanup.
+- retired-worktree-local-files.zip preserves unique ignored non-cache files
+  and older Markdown notes that differ from the main checkout. Its contents
+  were checked by CRC and SHA256 before removal was allowed.
+- Files identical to the main checkout are recorded in the manifest instead
+  of copied again. bin, obj, __pycache__, .cache, Library, Temp, and exact
+  RuntimeCopies validation outputs are classified as regenerable caches.
+- Recreate a checkout later with:
+  git worktree add <new-local-directory> <retained-branch>
+  Restore the relevant branch-named archive entries if local evidence is needed.
+
+Lessons to carry forward
+1. Retire temporary worktrees after a release instead of keeping complete
+   copies of the art and Unity asset tree. The eight old checkouts occupied
+   about 91.3 GiB; only about 0.4 GiB of the main Unity project was Library cache.
+2. Keep iteration evidence compact. Main animation WIP occupied 12.2 GiB,
+   including 6.2 GiB of transition renders; 6.6 GiB of WIP was Git-tracked.
+   Future render sequences should use local ignored output folders, with a
+   selected review clip and numerical verification report retained as evidence.
+   Existing tracked render data is left unchanged in this cleanup.
+3. Preserve source animation checks, not just pictures. The archived v10
+   animation-pass criteria call for complete transform keys, matching loop
+   endpoints, neutral recovery, fixed cameras/lights, valid weights, and
+   verification after reopening the saved file. Those remain useful criteria.
+4. Separate local math/API checks from in-game evidence. Early ability result
+   reports explicitly distinguish decompile/build checks from game validation.
+   A successful compile should never be presented as a gameplay acceptance test.
+5. Preserve server-side re-entrancy rules. The historical spear/discharge
+   result explains consuming stored charge before firing the damage event,
+   with an additional firing guard to prevent recursive burst chains. This is
+   a historical design lesson, not an instruction to restore the old ability.
+6. Evaluate effective proc output with accuracy and overlapping targets.
+   docs/proc-balance-audit.md records how improved shot accuracy increases
+   practical item output and how beam, splash, and fork hits overlap. Its
+   numbers describe the dated audit, not necessarily the 1.2 release defaults.
+7. Keep the pinned bundle as an explicit release input. The current checkout's
+   tools/release/Make-Package.ps1 requires artifacts/foundation/bundle15/
+   hollowsaintassets with its pinned hash. Do not delete artifacts wholesale.
+8. Old branch history is not proof of missing release features: these branches
+   have commits outside v1.2.0. Keep them for reference rather than treating
+   an ancestry count as a reason to merge obsolete prototypes into the release.
+
+Sources reviewed: docs/archive/animation-pass-v10.md,
+docs/archive/result-speardischarge.md, docs/archive/result-opencircuit.md,
+docs/proc-balance-audit.md, tools/release/Make-Package.ps1, and the retained
+worktrees' branch logs and development notes.
+
+No gameplay or art refactor, package publication, push, or deployment is part
+of this storage cleanup.

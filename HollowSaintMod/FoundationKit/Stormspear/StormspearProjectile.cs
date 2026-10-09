@@ -131,7 +131,9 @@ namespace HollowSaint.FoundationKit.Stormspear
             int spent = 0;
             // The server has created and initialized this exact projectile, including
             // forwarded remote throws. Authority-side FireProjectile never spends.
-            bool funded = meter && meter.TryClaimSpearPrayer(out spent);
+            // Spending the bank is a choice: only a fully charged throw claims the full-bank Thunderbolt.
+            bool funded = (shot.FullyHeld || !ChargedStorm.ChargedStormTuning.ThunderboltNeedsFullCharge) &&
+                meter && meter.TryClaimSpearPrayer(out spent);
             if (!funded && !shot.FullyHeld) return;
             prayer = new PrayerStrikeSnapshot(launchOwner.damage, KitTuning.ThunderboltDamageCoefficient,
                 KitTuning.ThunderboltSplashFraction, KitTuning.ThunderboltSplashRadius,

@@ -100,11 +100,16 @@ namespace HollowSaint.FoundationKit
                 Migrate(gaze, "Proc coefficient", 0.5f, 0.3f, v => Gaze.GazeTuning.ProcCoefficient = v, matchExactly: true);
                 Migrate(gaze, "Fork damage", 1f, 0.7f, v => Gaze.GazeTuning.ForkDamage = v, matchExactly: true);
             }
+            if (defaultsVersion.Value < 15)
+            {
+                // 1.3 itemless boss pass: migrate only the exact prior default.
+                Migrate(bolt, "Damage", 1.2f, 1.6f, v => KitTuning.ArcBoltDamageCoefficient = v, matchExactly: true);
+            }
             if (defaultsVersion.Value < CurrentDefaultsVersion) defaultsVersion.Value = CurrentDefaultsVersion;
             KitDescriptions.Refresh();
         }
 
-        private const int CurrentDefaultsVersion = 14;
+        private const int CurrentDefaultsVersion = 15;
 
         private static void MigrateBool(string section, string key, bool oldDefault, bool newDefault, Action<bool> set)
         {

@@ -69,7 +69,7 @@ namespace HollowSaint.FoundationKit.Storm
         private void LateUpdate()
         {
             if (!body || !meter || !halo) return;
-            if (Gaze.GazeFuelController.OwnsPresentation(body))
+            if (Gaze.GazeFuelController.OwnsPresentation(body) || ChargedStorm.StoredChargeState.IsGathering(body) || Thundercloud.ThundercloudCrownPose.OwnsPresentation(body))
             {
                 StopGatherSound();
                 if (orbitRoot && orbitRoot.gameObject.activeSelf) orbitRoot.gameObject.SetActive(false);

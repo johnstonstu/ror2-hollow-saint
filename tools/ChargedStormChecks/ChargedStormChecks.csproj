@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><NuGetAudit>false</NuGetAudit></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../HollowSaintMod/FoundationKit/OpenCircuit/OpenCircuitState.cs" Link="Production/OpenCircuitState.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/OpenCircuit/OpenCircuitBuff.cs" Link="Production/OpenCircuitBuff.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/OpenCircuit/CircuitChargePolicy.cs" Link="Production/CircuitChargePolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/OpenCircuit/ClosedCircuitLedger.cs" Link="Production/ClosedCircuitLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/OrbCastFlow.cs" Link="Production/OrbCastFlow.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/OrbAimTargeting.cs" Link="Production/OrbAimTargeting.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/OrbFlightMotion.cs" Link="Production/OrbFlightMotion.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/OrbCastGeometry.cs" Link="Production/OrbCastGeometry.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ProjectileWorldClearance.cs" Link="Production/ProjectileWorldClearance.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeCompatibleSkillDef.cs" Link="Production/StoredChargeCompatibleSkillDef.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeUtilityExit.cs" Link="Production/StoredChargeUtilityExit.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearSkillDef.cs" Link="Production/StormspearSkillDef.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearCooldownPolicy.cs" Link="Production/StormspearCooldownPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ArcBolt/ArcBoltInputSkillDef.cs" Link="Production/ArcBoltInputSkillDef.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ArcBolt/ArcBoltState.cs" Link="Production/ArcBoltState.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeCastLedger.cs" Link="Production/StoredChargeCastLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeState.cs" Link="Production/StoredChargeState.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeSkillDef.cs" Link="Production/StoredChargeSkillDef.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeTransport.cs" Link="Production/StoredChargeTransport.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/ChargedStormTuning.cs" Link="Production/ChargedStormTuning.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/ChargedStormTargeting.cs" Link="Production/ChargedStormTargeting.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/ChargedStormDamage.cs" Link="Production/ChargedStormDamage.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Thundercloud/ServerThundercloud.cs" Link="Production/ServerThundercloud.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Thundercloud/ThundercloudSchedule.cs" Link="Production/ThundercloudSchedule.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Thundercloud/ThundercloudState.cs" Link="Production/ThundercloudState.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/ServerHollowedOrb.cs" Link="Production/ServerHollowedOrb.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/OrbBouncePolicy.cs" Link="Production/OrbBouncePolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/HollowedOrbState.cs" Link="Production/HollowedOrbState.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Storm/DischargeMeter.cs" Link="Production/DischargeMeter.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Storm/StoredPrayerPolicy.cs" Link="Production/StoredPrayerPolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Storm/StaticPrimePolicy.cs" Link="Production/StaticPrimePolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Storm/ChargeIncomeBucket.cs" Link="Production/ChargeIncomeBucket.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeFuelLedger.cs" Link="Production/GazeFuelLedger.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/KitDamagePolicy.cs" Link="Production/KitDamagePolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearFeedbackPolicy.cs" Link="Production/SpearFeedbackPolicy.cs" />
+  </ItemGroup>
+</Project>

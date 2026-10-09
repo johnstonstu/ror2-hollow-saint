@@ -58,6 +58,13 @@ namespace HollowSaint.FoundationKit.Gaze
                     }.Fire();
                 }
                 finally { StormServer.EndStormDamage(); }
+                if (result.hitPoints != null)
+                    for (int i = 0; i < result.hitCount && i < result.hitPoints.Length; i++)
+                    {
+                        var hb = result.hitPoints[i].hurtBox;
+                        if (hb && hb.healthComponent && hb.healthComponent.alive)
+                            StormServer.PrimeStatic(hb.healthComponent, body, StaticPrimePolicy.Amount(ChargedStorm.ChargedStormTuning.GazeStaticPrime, 1f));
+                    }
                 // A bolt from the crown onto the target, then the splash on the ground beneath it.
                 KitFx.Server(Beat.SpearSpread, hit, crown, 1f, sound: true, owner: body);
                 KitFx.Server(Beat.SpearBurst, ground, normal, radius, owner: body);
