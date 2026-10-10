@@ -23,9 +23,9 @@ static partial class Program
     static void OrbLatch()
     {
         Check(ChargedStormTuning.HitBudget(0)==3 && ChargedStormTuning.HitBudget(1)==4 && ChargedStormTuning.HitBudget(5)==8,"hit budget: free 3, plus one per extra charge");
-        Near(ChargedStormTuning.OrbCoefficient(0),3.3f,"free Orb raw coefficient");
-        Near(ChargedStormTuning.OrbCoefficient(1),4.1f,"one-charge raw coefficient");
-        Near(ChargedStormTuning.OrbCoefficient(5),7.3f,"five-charge raw coefficient");
+        Near(ChargedStormTuning.OrbCoefficient(0),4.2f,"free Orb raw coefficient");
+        Near(ChargedStormTuning.OrbCoefficient(1),5f,"one-charge raw coefficient");
+        Near(ChargedStormTuning.OrbCoefficient(5),8.2f,"five-charge raw coefficient");
         Near((float)OrbBouncePolicy<object>.RepeatRetain,.75f,"repeat hits retain three quarters");
         Near(ChargedStormTuning.BurstRadius(0),3,"free burst radius");Near(ChargedStormTuning.BurstRadius(1),3.8f,"one-charge burst radius");
         Near(ChargedStormTuning.BurstRadius(5),7,"five-charge burst radius");
@@ -40,11 +40,11 @@ static partial class Program
         Check(orb.Tick(.1f) && OrbHits(a)==2,"latched zap cadence holds");
         Check(!orb.Tick(.15f) && OrbHits(a)==3,"third zap spends the free budget and ends the orb");
         var zaps=OrbDamage(a);float free=Launch(0);float[] scales={1f,.75f,.5625f};
-        Near(free,29.7f,"free Orb effective damage at body damage 10");
+        Near(free,37.8f,"free Orb effective damage at body damage 10");
         for(int i=0;i<3;i++)
         {
             Near(zaps[i].damage,free*scales[i],"latched repeat scale "+i);
-            Near(zaps[i].procCoefficient,i==0?.5f:.1f,"latched repeat proc "+i);
+            Near(zaps[i].procCoefficient,i==0?.8f:.25f,"latched repeat proc "+i);
         }
         Check(BurstHits(a)==1 && ChargedStormEffects.bursts.Count==1,"spent latch bursts exactly once");
         Near(a.healthComponent.received.Last().damage,free*ChargedStormTuning.OrbBurstFraction,"burst deals its fraction of launch damage");
@@ -63,11 +63,19 @@ static partial class Program
             for(int i=0;i<budget;i++)
             {
                 Near(hits[i].damage,Launch(tier)*MathF.Pow(.75f,i),"latched attenuation "+tier);
-                Near(hits[i].procCoefficient,i==0?.5f:.1f,"latched proc "+tier);
+                Near(hits[i].procCoefficient,i==0?.8f:.25f,"latched proc "+tier);
             }
             Check(BurstHits(boss)==1 && ChargedStormEffects.bursts.Count==1,"lone latch ends in one burst "+tier);
             Near(ChargedStormEffects.bursts[0].radius,ChargedStormTuning.BurstRadius(tier),"burst radius follows charges "+tier);
             Check(owner.healthComponent.received.Count==0,"owner never damaged "+tier);
+        }
+        // 1.3.1: Backup Magazine adds hits (also on a lone, latched target), never extra casts.
+        Check(ChargedStormTuning.HitBudget(0,1)==ChargedStormTuning.HitBudget(0)+1 && ChargedStormTuning.HitBudget(5,2)==ChargedStormTuning.HitBudget(5)+2,"each magazine adds one hit");
+        Check(ChargedStormTuning.HitBudget(5,40)==24 && ChargedStormTuning.HitBudget(1,-3)==ChargedStormTuning.HitBudget(1),"magazine hits are bounded and never negative");
+        {
+            Reset();var magOwner=Body();var lone=Body(5,TeamIndex.Monster);BullseyeSearch.candidates.Add(lone.mainHurtBox);
+            var magOrb=new ServerHollowedOrb(magOwner,1,Vector3.forward,2);magOrb.Begin();Drain(magOrb);
+            Check(OrbHits(lone)==ChargedStormTuning.HitBudget(1)+2,"two magazines add two latched zaps on a lone target");
         }
 
         // Two enemies still alternate A-B-A-B through all eight five-charge hits.
@@ -97,7 +105,7 @@ static partial class Program
         Check(orb.Tick(.25f) && ChargedStormEffects.lastOrbTarget==c.healthComponent && OrbHits(a)==2,"fresh enemy in reach breaks the latch without zapping");
         Check(orb.Tick(.25f) && OrbHits(c)==1,"orb flies on to the fresh enemy");
         Near(c.healthComponent.received[0].damage,Launch(5),"fresh victim takes a full-strength hit");
-        Near(c.healthComponent.received[0].procCoefficient,.5f,"fresh victim takes the fresh proc");
+        Near(c.healthComponent.received[0].procCoefficient,.8f,"fresh victim takes the fresh proc");
         Drain(orb);
         Check(OrbHits(a)+OrbHits(c)==8 && ChargedStormEffects.bursts.Count==1,"broken latch keeps the finite budget and one burst");
 

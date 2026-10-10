@@ -65,6 +65,7 @@ static partial class Program
         StoredChargeState s=kind==0?new ThundercloudState():kind==1?new HollowedOrbState():new HollowSaint.FoundationKit.OpenCircuit.OpenCircuitState();
         s.characterBody=b; s.isAuthority=authority; s.outer=machine;
         s.activatorSkillSlot=kind==1?b.skillLocator.secondary:b.skillLocator.special; machine.state=s;
+        s.activatorSkillSlot.stateMachine=machine;
         if(!authority)
         { var w=new NetworkWriter(); w.Write(token);w.Write((byte)5);w.Write(false);w.Write(0f); s.OnDeserialize(new(w.Stream.ToArray())); }
         s.OnEnter(); return s;
@@ -191,9 +192,9 @@ static partial class Program
         int total=3;while(orb.Tick(.5f)) { total++;Check(total<=8,"finite five-charge flight"); }
         Check(ChargedStormTuning.HitBudget(5)==8 && new[]{a,b,c}.Sum(x=>OrbHits(x))==8,"five charges yield eight total orb hits");
         Check(ChargedStormEffects.bursts.Count==1 && new[]{a,b,c}.All(x=>BurstHits(x)<=1),"spent flight bursts once, at most once per enemy");
-        Near(a.healthComponent.received[0].damage,65.7f,"damage scaled once at launch");
-        Near(b.healthComponent.received[1].damage,65.7f*.75f,"revisit attenuation per victim");
-        Near(b.healthComponent.received[1].procCoefficient,.1f,"revisit proc bounded");
+        Near(a.healthComponent.received[0].damage,73.8f,"damage scaled once at launch");
+        Near(b.healthComponent.received[1].damage,73.8f*.75f,"revisit attenuation per victim");
+        Near(b.healthComponent.received[1].procCoefficient,.25f,"revisit proc bounded");
         Reset();owner=Body();a=Body(5,TeamIndex.Monster);b=Body(10,TeamIndex.Monster);
         BullseyeSearch.candidates.AddRange(new[]{a.mainHurtBox,b.mainHurtBox});orb=new(owner,1,(a.corePosition-KitUtil.EyePosition(owner)).normalized);
         Check(orb.Tick(.5f) && orb.Tick(.5f) && orb.Tick(.5f) && !orb.Tick(.5f),"one-charge flight ends at its fourth hit");
@@ -229,8 +230,8 @@ static partial class Program
         RunCloud(cloud);int groupPulses=ThundercloudSchedule.Pulses(1);
         Check(a.healthComponent.received.Count==groupPulses && b.healthComponent.received.Count==groupPulses,"one cloud hit per entity per pulse, duplicates excluded");
         Near(a.healthComponent.received[0].damage,10*ChargedStormTuning.CloudCoefficient(1)*.9f,"cloud effective coefficient once per strike");
-        Near(a.healthComponent.received[groupPulses-1].damage,9.72f,"later pulses keep the full per-strike damage");
-        Near(a.healthComponent.received[0].procCoefficient,.4f,"cloud strike proc");
+        Near(a.healthComponent.received[groupPulses-1].damage,10*ChargedStormTuning.CloudCoefficient(1)*.9f,"later pulses keep the full per-strike damage");
+        Near(a.healthComponent.received[0].procCoefficient,.5f,"cloud strike proc");
         Check(ChargedStormEffects.strikes.Count==2*groupPulses,"visual strikes correspond to committed damage");
         Reset();owner=Body();a=Body(38,TeamIndex.Monster);Physics.AimHit=new(0,0,15);BullseyeSearch.candidates.Add(a.mainHurtBox);
         cloud=ServerThundercloud.Prepare(owner,1,Vector3.forward);Check(cloud!=null,"lingering cloud forms over an empty area (no refusal)");
@@ -247,7 +248,7 @@ static partial class Program
         cloud=ServerThundercloud.Prepare(owner,5,Vector3.forward);a.healthComponent.alive=false;cloud.Tick(2);
         Check(a.healthComponent.received.Count==0,"dead scheduled enemy receives no cloud damage");
         Near(ChargedStormTuning.Radius(0),12,"free cloud radius is three quarters of one charge");Near(ChargedStormTuning.Radius(1),16,"large baseline radius");Near(ChargedStormTuning.Radius(5),30,"full-cloud radius");
-        Near(ChargedStormTuning.Diameter(1),.6f,"base orb size");Near(ChargedStormTuning.Diameter(5),1,"full orb size");
+        Near(ChargedStormTuning.Diameter(1),.9f,"base orb size");Near(ChargedStormTuning.Diameter(5),1.5f,"full orb size");
         KitTuning.StormChargeMax=2;Check(ChargedStormTuning.DescriptionChargeLimit==2,"descriptions respect smaller configured charge bank");KitTuning.StormChargeMax=5;
         for(int i=0;i<64;i++)Check(ChargedStormTuning.Radius(i)<=40 && ChargedStormTuning.HitBudget(i)<=16 && ThundercloudSchedule.Pulses(i)<=21 &&
             ThundercloudSchedule.CompleteAt(i)<=20 && ChargedStormTuning.BurstRadius(i)<=12,"configured capacities remain bounded");
@@ -275,7 +276,7 @@ static partial class Program
         Near(OrbFlightMotion.Advance(Vector3.zero,Vector3.forward*.1f,32,1).z,.1f,"visual cannot overshoot nearby target");
     }
     public static void Main()
-    { DischargeMeter.RegisterBuff(); HollowSaint.FoundationKit.OpenCircuit.OpenCircuitBuff.Register(); Ledger();Transport();Runtime();Flights();Clouds();Motion();OrbRefinement();CircuitRefinement();OrbLatch();CloudStorm();PendingPrimary();StormReach();StormFlow();ClosedCircuit();Console.WriteLine($"PASS {checks} charge accounting, native release and server flight/area assertions"); }
+    { DischargeMeter.RegisterBuff(); HollowSaint.FoundationKit.OpenCircuit.OpenCircuitBuff.Register(); Ledger();Transport();Runtime();Flights();Clouds();Motion();OrbRefinement();CircuitRefinement();OrbLatch();CloudStorm();PendingPrimary();StormReach();StormFlow();ClosedCircuit();CloudAudit();Console.WriteLine($"PASS {checks} charge accounting, native release and server flight/area assertions"); }
     static void Invoke(object obj,string method) => obj.GetType().GetMethod(method,System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(obj,null);
 }
 static class MeterFixture

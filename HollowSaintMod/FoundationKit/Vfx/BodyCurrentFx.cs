@@ -133,6 +133,10 @@ namespace HollowSaint.FoundationKit.Vfx
             Vector3 flank = shoulder + side * feedSide * 0.18f * unit;
             Vector3 spine = bones[9].position + back * 0.17f * unit + up * 0.06f * unit;
             Vector3 dock = ring.Shape.Nearest(spine);
+            // 1.3.1 (Stu): while the crown has flown up into a Thundercloud (or is otherwise far from the
+            // body) the spine feed would stretch to the sky and read as lightning striking the Saint.
+            if (Thundercloud.ThundercloudCrownPose.OwnsPresentation(body) || Vector3.Distance(spine, dock) > 2.5f * unit)
+            { feedReady = false; HideUnused(); return; }
             float feed = Vector3.Distance(core.position, flank) + Vector3.Distance(flank, spine) + Vector3.Distance(spine, dock);
             Place(0, core.position, flank, 0.24f * source * armBoost * LightningRhythm.Gain(now), 1, dt);
             Place(1, flank, spine, 0.28f * source * armBoost * LightningRhythm.Gain(now, feed * 0.5f), 1, dt);

@@ -9,5 +9,6 @@
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearTuning.cs" Link="Production/StormspearTuning.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Runtime/GazeTuning.cs" Link="Production/GazeTuning.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeReleasePolicy.cs" Link="Production/GazeReleasePolicy.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Gaze/Rules/GazeFocusPolicy.cs" Link="Production/GazeFocusPolicy.cs" />
   </ItemGroup>
 </Project>

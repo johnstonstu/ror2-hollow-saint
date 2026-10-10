@@ -84,6 +84,55 @@ namespace HollowSaint.FoundationKit.Vfx
             var light = ghost.GetComponent<Light>();
             if (light) light.color = palette.Arc;
         }
+
+        /// <summary>
+        /// Points a cloned projectile at our ghost. The October 2026 game patch added
+        /// ProjectileController.ghostPrefabAddress (replacing ghostPrefabReference), and Awake
+        /// now prefers a valid address over ghostPrefab. A clone keeps its template's address
+        /// (Artificer's bolt), so the address is cleared here by reflection; this works on
+        /// either field name and compiles against the older reference assemblies.
+        /// </summary>
+        internal static void Assign(ProjectileController controller, GameObject ghost, string owner)
+        {
+            if (controller == null) return;
+            if (ghost == null)
+            {
+                Plugin.Log.LogWarning(owner + ": custom ghost unavailable; the projectile keeps its template ghost.");
+                return;
+            }
+            controller.ghostPrefab = ghost;
+            var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic;
+            int cleared = 0;
+            foreach (var name in new[] { "ghostPrefabAddress", "ghostPrefabReference" })
+            {
+                var field = typeof(ProjectileController).GetField(name, flags);
+                if (field == null || field.GetValue(controller) == null) continue;
+                try
+                {
+                    // An empty key is an invalid address, so Awake falls back to ghostPrefab. Never write
+                    // null into a reference type the game may dereference unguarded.
+                    object empty = null;
+                    if (field.FieldType == typeof(string)) empty = "";
+                    else
+                    {
+                        try { empty = System.Activator.CreateInstance(field.FieldType, ""); } catch { }
+                        if (empty == null) { try { empty = System.Activator.CreateInstance(field.FieldType); } catch { } }
+                    }
+                    if (empty == null)
+                    {
+                        Plugin.Log.LogWarning(owner + ": could not build an empty " + field.FieldType.Name + " for " + name + "; inherited ghost address left in place.");
+                        continue;
+                    }
+                    field.SetValue(controller, empty);
+                    cleared++;
+                }
+                catch (System.Exception error)
+                {
+                    Plugin.Log.LogError(owner + ": could not clear inherited ghost address " + name + ": " + error);
+                }
+            }
+            Plugin.Log.LogInfo("HOLLOW_SAINT_GHOST_ASSIGNED owner=" + owner + " ghost=" + ghost.name + " clearedAddresses=" + cleared);
+        }
     }
 
     /// <summary>A crackling ball: a bright core and three short arcs that re-jag every
@@ -97,8 +146,11 @@ namespace HollowSaint.FoundationKit.Vfx
         private LineRenderer[] contours;
         private SkinFxPalette palette;
 
+        private static bool loggedLive;
+
         private void OnEnable()
         {
+            if (!loggedLive) { loggedLive = true; Plugin.Log.LogInfo("HOLLOW_SAINT_GHOST_LIVE Arc Bolt ghost spawned"); }
             palette = null;
             if (arcs == null)
             {
@@ -263,8 +315,11 @@ namespace HollowSaint.FoundationKit.Vfx
             wakeStarted = false;
         }
 
+        private static bool loggedLive;
+
         private void OnEnable()
         {
+            if (!loggedLive) { loggedLive = true; Plugin.Log.LogInfo("HOLLOW_SAINT_GHOST_LIVE Stormspear ghost spawned"); }
             if (!live.Contains(this)) live.Add(this);
             palette = null;
             scale = 1f;

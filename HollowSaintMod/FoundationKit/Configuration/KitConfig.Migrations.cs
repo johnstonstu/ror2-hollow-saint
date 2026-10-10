@@ -105,11 +105,56 @@ namespace HollowSaint.FoundationKit
                 // 1.3 itemless boss pass: migrate only the exact prior default.
                 Migrate(bolt, "Damage", 1.2f, 1.6f, v => KitTuning.ArcBoltDamageCoefficient = v, matchExactly: true);
             }
+            if (defaultsVersion.Value < 16)
+            {
+                // 1.3.1 early-game income: primed enemies (35% Static) that die now discharge.
+                Migrate(storm, "Death discharge", 0.5f, 0.3f, v => KitTuning.DeathDischargeStatic = v, matchExactly: true);
+                // 1.3.1 balance pass (vanilla benchmarks): primary procs like other primaries, Circuit
+                // pulses carry more weight, full Stormspear trimmed (it outpaced Nano-Spear plus AoE).
+                Migrate(bolt, "Proc coefficient", 0.8f, 1f, v => KitTuning.ArcBoltProcCoefficient = v, matchExactly: true);
+                Migrate(bolt, "Damage", 1.6f, 1.9f, v => KitTuning.ArcBoltDamageCoefficient = v, matchExactly: true);
+                Migrate(circuit, "Pulse damage", 0.6f, 0.8f, v => KitTuning.OpenCircuitPulseDamageCoefficient = v, matchExactly: true);
+                Migrate(spear, "Full damage", 14f, 12.5f, v => Stormspear.StormspearTuning.FullDamage = v, matchExactly: true);
+            }
+            if (defaultsVersion.Value < 17)
+            {
+                // 1.3.1 playtest (Stu): Gaze should reach further.
+                Migrate(gaze, "Range", 60f, 90f, v => Gaze.GazeTuning.Range = v, matchExactly: true);
+            }
             if (defaultsVersion.Value < CurrentDefaultsVersion) defaultsVersion.Value = CurrentDefaultsVersion;
             KitDescriptions.Refresh();
         }
 
-        private const int CurrentDefaultsVersion = 15;
+        private const int CurrentDefaultsVersion = 17;
+
+        /// <summary>Thundercloud and Hollowed Orb bind after ApplyMigrations, so their default
+        /// changes use a separate counter. Same rule: only an untouched old default is rewritten.</summary>
+        private static void ApplyChargedStormMigrations(ConfigFile c)
+        {
+            const string cloud = "8. Thundercloud", orb = "9. Hollowed Orb";
+            var version = c.Bind(misc, "Charged defaults version", 1, "Internal: tracks Thundercloud/Hollowed Orb default migrations. Do not edit.");
+            if (version.Value < 2)
+            {
+                // 1.3.1 early-game pass.
+                Migrate(cloud, "Strike damage", 0.9f, 1.65f, v => ChargedStorm.ChargedStormTuning.CloudStrikeDamage = v, matchExactly: true);
+                Migrate(cloud, "Strike damage per charge", 0.18f, 0.25f, v => ChargedStorm.ChargedStormTuning.CloudStrikeDamagePerCharge = v, matchExactly: true);
+                Migrate(cloud, "Storm duration", 3f, 4f, v => ChargedStorm.ChargedStormTuning.CloudBaseDuration = v, matchExactly: true);
+                Migrate(cloud, "Strike proc coefficient", 0.4f, 0.5f, v => ChargedStorm.ChargedStormTuning.CloudProc = v, matchExactly: true);
+                Migrate(orb, "Hit damage", 4.1f, 5f, v => ChargedStorm.ChargedStormTuning.OrbDamage = v, matchExactly: true);
+                Migrate(cloud, "Cooldown", 12f, 10f, v => ChargedStorm.ChargedStormTuning.CloudCooldown = v, matchExactly: true);
+                Migrate(orb, "Cooldown", 7f, 6f, v => ChargedStorm.ChargedStormTuning.OrbCooldown = v, matchExactly: true);
+            }
+            if (version.Value < 3)
+            {
+                // 1.3.1 playtest (Stu): a bigger Orb.
+                Migrate(orb, "Starting diameter", 0.6f, 0.9f, v => ChargedStorm.ChargedStormTuning.OrbDiameter = v, matchExactly: true);
+                Migrate(orb, "Diameter per extra charge", 0.1f, 0.15f, v => ChargedStorm.ChargedStormTuning.OrbDiameterPerCharge = v, matchExactly: true);
+            }
+            if (version.Value < CurrentChargedDefaultsVersion) version.Value = CurrentChargedDefaultsVersion;
+            KitDescriptions.Refresh();
+        }
+
+        private const int CurrentChargedDefaultsVersion = 3;
 
         private static void MigrateBool(string section, string key, bool oldDefault, bool newDefault, Action<bool> set)
         {

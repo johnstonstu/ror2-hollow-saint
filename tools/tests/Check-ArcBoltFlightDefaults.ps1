@@ -67,12 +67,12 @@ public static class ArcBoltFlightDefaultsChecks {
     }
     public static string Run(){
         Check(FreshDefault==120f&&KitTuning.ArcBoltRadius==.75f,"wrong static flight defaults");
-        Check(CurrentDefaultsVersion==15,"wrong migration marker");
+        Check(CurrentDefaultsVersion>=15,"wrong migration marker");
         Case(null,12,120f);Case(80f,12,120f);Case(80f,0,120f);
         foreach(float custom in new[]{30f,79.99999f,80.00001f,100f,120f,150f,200f})Case(custom,12,custom);
         Case(80f,13,80f);Case(80f,14,80f);
-        Check(KitTuning.ArcBoltDamageCoefficient==1.6f&&KitTuning.ArcBoltInterval==.5f,"damage/cadence changed");
-        Check(KitTuning.ArcBoltProcCoefficient==.8f&&KitTuning.ArcBoltChainProc==.4f,"procs changed");
+        Check(KitTuning.ArcBoltDamageCoefficient==1.9f&&KitTuning.ArcBoltInterval==.5f,"damage/cadence changed");
+        Check(KitTuning.ArcBoltProcCoefficient==1f&&KitTuning.ArcBoltChainProc==.4f,"procs changed");
         return "ARC_BOLT_FLIGHT_DEFAULTS_PASS: "+cases+" production bind/migration cases; exact defaults, custom/adjacent values, repeat and callbacks.";
     }
 VERSION

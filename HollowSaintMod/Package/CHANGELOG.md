@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.3.1
+**Game patch fix**
+- Arc Bolt and Stormspear showed Artificer's blue lightning bolt after the October 2026 patch (a new projectile ghost address overrode our visuals). Fixed; both show their own projectiles again.
+
+**Balance pass** (benchmarked against vanilla survivors at level 1, no items)
+- **Early game:** Arc Bolt 144% to 171% per hit (about 42 DPS on a Titan, between Huntress and Commando), proc coefficient 0.8 to 1.0 like other primaries.
+- **Storm income:** an enemy that dies holding 30% Static (was 50%) discharges and banks a charge, so enemies primed by Orb, Thundercloud and Gaze pay out when they die.
+- **Hollowed Orb:** free tap 297% to 378% per hit (738% at five charges), cooldown 7 s to 6 s, first-hit proc 0.5 to 0.8 and repeat hits 0.1 to 0.25 so items trigger.
+- **Thundercloud:** strikes 81% to 149% free (261% at five charges), lasts 4 s free (was 3 s, 9 s at five charges), cooldown 12 s to 10 s, proc 0.4 to 0.5, and strikes faster with attack speed (up to twice as often).
+- **Open Circuit:** pulse damage 54% to 72%.
+- **Stormspear:** full charge 1400% to 1250% (it outpaced Artificer's Nano-Spear while also bursting for full damage in an area).
+- **Level scaling:** damage per level is now 20% of base damage (3.0, was 2.4), the rule every vanilla survivor uses.
+- Settings you changed are kept; only untouched defaults update.
+
+**Playtest round (Oct 9)**
+- **Gaze of the Hollow:** charges now all go into one big opening boom (6 m + 2 m per charge, up to 20 m) with a shockwave, arcs and sky bolts at every charge level. Primary no longer fires surges or lock-on bolts during the beam. Instead the core beam builds **focus** on whatever it holds: up to +100% damage over 3 seconds, kept through a half-second slip, fading over a second after that. Range 60 m to 90 m. No knockback while charging or channeling.
+- **Thundercloud:** sits higher (18 to 28 m) and strikes a column under the cloud, so flyers and ledges are hit. Press Special again to end the storm early and get part of the cooldown back (half, scaled by the unused storm time). Bolts now leave the cloud's underside, each strike cracks with thunder and lights the cloud from inside.
+- **Fix:** Thundercloud's free cast now works with an empty bank (it needed a charge to start before).
+- **Hollowed Orb:** Backup Magazine adds one hit per magazine (also on a lone, latched target) instead of extra casts.
+- **Thunderbolt:** the strike sound is now a thunder crack with a deep boom (was a fizzle).
+- **Static Charges:** a newly banked charge pops on the halo with a rising chime.
+- **Thundercloud:** the current no longer stretches from your body up to the cloud while it rains (it read as the storm hitting you). Bolts only go to the ground and enemies.
+- **Gaze focus** is now heard: the beam's hum steps up in five notes as the damage climbs, with a crack at full focus.
+- **Stormspear charge:** a soft hum rises in the hand while charging, with a chime at each step and an electric crackle at full; the spear's glow breathes and the tip sparks once fully charged.
+- **Hollowed Orb:** a charge-up sound as it gathers, a flash and an electric crackle when it holds every charge it can, and a bigger ball overall (0.9 m free, +0.15 m per charge; was 0.6 / 0.1).
+- Console output: normal sessions print one line from Hollow Saint; diagnostics only with the Event log option.
+
+**Audit fixes**
+- Ending Thundercloud early preserves spare Special stocks, including Lysate Cell and stock resets.
+- Gaze focus history is owned by each body and clears on death, disable and stage changes; idle target history expires independently for each player.
+- Thundercloud's attack-speed bonus stays capped at 2x with custom strike intervals too.
+- Corrected Chinese Backup Magazine naming and Portuguese Thundercloud naming in both README copies; in-game Orb and Thundercloud text now explains magazine hits, faster strikes and early dismissal in all four languages.
+
 ## 1.3.0
 **Updated for the October 2026 Risk of Rain 2 patch.** Update your mod manager's core dependencies (BepInExPack, R2API, HookGenPatcher) along with this release.
 

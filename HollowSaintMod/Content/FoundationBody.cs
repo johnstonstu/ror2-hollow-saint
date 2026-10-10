@@ -85,7 +85,7 @@ namespace HollowSaint
             prefab = bodyObject;
             ApplyTo(body); // levelMoveSpeed / levelJumpPower stay at Commando's values
             body.baseDamage = BaseDamage;
-            body.levelDamage = 2.4f;
+            body.levelDamage = BaseDamage * 0.2f; // 1.3.1: vanilla rule (20% of base per level); was a flat 2.4
             body.baseArmor = BaseArmor;
             body.levelArmor = 0f;
             body.subtitleNameToken = "HS_SUBTITLE";

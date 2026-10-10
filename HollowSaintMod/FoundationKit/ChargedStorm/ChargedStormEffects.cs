@@ -41,6 +41,11 @@ namespace HollowSaint.FoundationKit.ChargedStorm
                 genericFloat = duration, color = SkinFxPalette.ForBody(owner).NetworkColor };
             data.SetNetworkedObjectReference(owner.gameObject); Send(cloud, data);
         }
+        internal static void CloudDismiss(CharacterBody owner, Vector3 sky)
+        {
+            var data = new EffectData { origin = sky, start = sky, scale = 1f, genericFloat = -1f, color = SkinFxPalette.ForBody(owner).NetworkColor };
+            data.SetNetworkedObjectReference(owner.gameObject); Send(cloud, data);
+        }
         internal static void Strike(CharacterBody owner, Vector3 sky, Vector3 point, float radius, HealthComponent victim, Vector3 center, int strokes = Thundercloud.ThundercloudSchedule.ReturnStrokeCount)
         {
             // Existing EffectData fields carry presentation bounds; root scaling
@@ -83,6 +88,9 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         private int nextStroke, strokeCount = Thundercloud.ThundercloudSchedule.ReturnStrokeCount;
         private Light flash;
         private float flashAge = 1f;
+        // 1.3.1 (Stu): a thunder crack per strike (rate-limited) and a deep boom once per strike wave.
+        private static float lastCrack = -10f, lastBoom = -10f;
+        private Vector3 root;
         private void Start()
         {
             try
@@ -94,15 +102,24 @@ namespace HollowSaint.FoundationKit.ChargedStorm
                 var obj = data.ResolveNetworkedObjectReference();
                 var body = obj ? obj.GetComponent<CharacterBody>() : null;
                 victim = body ? body.healthComponent : null; following = victim;
+                // Bolts leave the cloud's underside above their target, not its centre point.
+                Vector3 target = victim && victim.body ? victim.body.corePosition : data.origin;
+                Vector2 jitter = Random.insideUnitCircle * data.scale * .12f;
+                root = new Vector3(Mathf.Lerp(data.start.x, target.x, .75f) + jitter.x, data.start.y - Mathf.Clamp(data.scale * .08f, .5f, 2.5f),
+                    Mathf.Lerp(data.start.z, target.z, .75f) + jitter.y);
                 Stroke();
-                KitSfx.Play(Beat.ThunderStrike, gameObject);
+                float now = Time.unscaledTime;
+                if (now - lastCrack > .12f) { lastCrack = now; Util.PlaySound("Play_item_use_lighningArm", gameObject); }
+                if (now - lastBoom > .5f) { lastBoom = now; Util.PlaySound(Storm.ThunderLayerSound.Boom, gameObject); }
                 try
                 {
                     // Each committed strike lights the cloud from inside; presentation only.
+                    VfxParticles.Burst(root + Vector3.up * .8f, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .2f,
+                        Vector2.zero, Vector2.one * Mathf.Clamp(data.scale * .55f, 4f, 14f), palette.Arc * .55f);
                     var glow = new GameObject("HS_CloudStrikeFlash"); glow.transform.SetParent(transform, false);
-                    glow.transform.position = data.start - Vector3.up * .5f;
+                    glow.transform.position = root;
                     flash = glow.AddComponent<Light>(); flash.color = palette.Arc; flash.shadows = LightShadows.None;
-                    flash.range = Mathf.Clamp(data.scale * 1.3f, 12f, 50f); flashAge = 0f;
+                    flash.range = Mathf.Clamp(data.scale * 1.6f, 14f, 60f); flashAge = 0f;
                 }
                 catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_CLOUD_STRIKE_FLASH " + error); }
             }
@@ -112,7 +129,7 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         {
             if (data == null) return;
             age += Time.deltaTime;
-            if (flash) { flashAge += Time.deltaTime; flash.intensity = Mathf.Max(0f, 4f * (1f - flashAge / .22f)); flash.enabled = flashAge < .22f; }
+            if (flash) { flashAge += Time.deltaTime; flash.intensity = Mathf.Max(0f, 6f * (1f - flashAge / .26f)); flash.enabled = flashAge < .26f; }
             if (following && (!victim || !victim.alive)) { Destroy(gameObject); return; }
             try
             {
@@ -132,7 +149,7 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             { nextStroke = strokeCount; Destroy(gameObject); return; }
             // Return strokes are local presentation only: one networked impact
             // corresponds to one server damage hit, with no repeated procs.
-            var bolt = LightningLine.Spawn(data.start, point, Thundercloud.ThundercloudSchedule.BoltLifetime,
+            var bolt = LightningLine.Spawn(root == Vector3.zero ? data.start : root, point, Thundercloud.ThundercloudSchedule.BoltLifetime,
                 nextStroke == 0 ? 4.2f : 3.5f, 3, .11f, .035f, palette);
             bolt.drawTime = .025f;
             if (victim && victim.body) bolt.endAnchor = victim.body.coreTransform;

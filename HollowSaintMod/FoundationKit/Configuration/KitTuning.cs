@@ -25,12 +25,12 @@ namespace HollowSaint.FoundationKit
     {
         // Arc Bolt: approved. One shot every 0.5 s at 1x attack speed.
         public static float ArcBoltInterval = 0.5f;
-        public static float ArcBoltDamageCoefficient = 1.6f;
+        public static float ArcBoltDamageCoefficient = 1.9f; // 1.3.1: 171% effective (Titan bench 35 -> ~42 DPS; Commando ~67, Huntress ~30)
         public static int ArcBoltMaxChainTargets = 4;
         public static float ArcBoltChainRange = 12f;
         public static float ArcBoltChainFalloff = 0.75f;
         // v0.9.13 (Stu: primary procs felt high): direct hit 0.8 (was 1.0); chain hops 0.4, 0.2, 0.1 (were 0.5 each).
-        public static float ArcBoltProcCoefficient = 0.8f;
+        public static float ArcBoltProcCoefficient = 1f;
         public static float ArcBoltChainProc = 0.4f;
         public static float ArcBoltProjectileSpeed = 120f;
         public static float ArcBoltRadius = 0.75f;
@@ -56,7 +56,7 @@ namespace HollowSaint.FoundationKit
         public static float OpenCircuitCooldown = 8f;
         public static float OpenCircuitBuffSeconds = 10f;
         public static float OpenCircuitPulseInterval = 0.5f;
-        public static float OpenCircuitPulseDamageCoefficient = 0.6f;
+        public static float OpenCircuitPulseDamageCoefficient = 0.8f;
         public static float OpenCircuitRadius = 8f;
         // Storm passive ("Answered Prayer"): Static -> Electrocute -> Thunderbolt.
         // See docs/storm-passive.md. All live-tunable (section "5. Storm").
@@ -75,7 +75,7 @@ namespace HollowSaint.FoundationKit
         public static float ElectrocutePopProc = 0.3f;         // was 0.5
         public static float ElectrocutePopStatic = 0.15f;      // was 0.4 (cascade)
         public static float ElectrocuteImmuneSeconds = 4f;
-        public static float DeathDischargeStatic = 0.5f;       // v0.9.16: dying with this much Static Electrocutes (0 = off)
+        public static float DeathDischargeStatic = 0.3f;        // v0.9.16: dying with this much Static Electrocutes (0 = off)
         public static int ElectrocutesPerSecondCap = 4;
         public static int StormChargeMax = 5;                  // Electrocutes per Thunderbolt (v0.9.16 Stu: was 6)
         public static float ThunderboltDamageCoefficient = 10f;

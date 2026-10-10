@@ -11,9 +11,9 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
     /// EffectData: origin = target, start = where the lightning leaves, genericUInt = Kind,
     /// genericBool = sound, networkedObjectReference = channel owner. Hits render immediately.
     /// </summary>
-    public sealed class GazeEffect : MonoBehaviour
+    public sealed partial class GazeEffect : MonoBehaviour
     {
-        public enum Kind : uint { Fork = 1, Chain = 2, Contact = 3 }
+        public enum Kind : uint { Fork = 1, Chain = 2, Contact = 3, Focus = 4 }
         private static bool reportedSendFailure;
 
         public static GameObject Prefab { get; private set; }
@@ -68,6 +68,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             try
             {
                 var owner = data.ResolveNetworkedObjectReference();
+                if ((Kind)data.genericUInt == Kind.Focus) { FocusCue(data, owner); return; }
                 var tendrils = owner ? owner.GetComponent<GazeTendrils>() : null;
                 // An ended/destroyed channel never resurrects from a late hit packet.
                 if (!tendrils) return;
@@ -81,6 +82,30 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             }
         }
 
+    }
+
+    public sealed partial class GazeEffect
+    {
+        /// <summary>1.3.1: focus step reached on a target (1-5): a small flare and a chime one step higher;
+        /// full focus adds a heavier strike so the ramp is heard as it builds.</summary>
+        private void FocusCue(EffectData data, GameObject owner)
+        {
+            if (!owner) return;
+            int step = Mathf.Clamp(Mathf.RoundToInt(data.genericFloat * GazeFocusPolicy.Tiers), 1, GazeFocusPolicy.Tiers);
+            int tier = Mathf.Clamp(Mathf.CeilToInt(step * 3f / GazeFocusPolicy.Tiers), 1, 3); // visual size 1-3
+            var palette = SkinFxPalette.FromNetwork(data.color);
+            VfxParticles.Burst(data.origin, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .14f + .04f * tier,
+                Vector2.zero, Vector2.one * (1.2f + .8f * tier), palette.Core);
+            VfxParticles.Burst(data.origin, Quaternion.identity, palette.Material(VfxAssets.Spark), 6 + 6 * tier,
+                .22f + .05f * tier, new Vector2(3f, 6f + 2f * tier), new Vector2(.04f, .1f), palette.Arc, stretch: .06f);
+            VfxParticles.Ring(data.origin, (data.start - data.origin).normalized, .2f, .8f + .6f * tier, .25f, .08f + .03f * tier,
+                palette.Material(VfxAssets.Trail), palette);
+            if (data.genericBool)
+            {
+                Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + step : "Play_HS_ChargeTick", gameObject);
+                if (step >= GazeFocusPolicy.Tiers) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit3" : "Play_HS_SpearBurst", gameObject);
+            }
+        }
     }
 
     /// <summary>Gaze sounds: vanilla events from banks the kit already loads (KitSfx.Banks).</summary>

@@ -83,6 +83,7 @@ namespace UnityEngine
         public static int Clamp(int x,int a,int b) => Math.Clamp(x,a,b);
         public static float Clamp(float x,float a,float b) => Math.Clamp(x,a,b);
         public static float Clamp01(float x) => Math.Clamp(x,0,1);
+        public static float Sqrt(float x) => (float)Math.Sqrt(x);
     }
     public struct Color { public Color(float r,float g,float b) {} }
 }

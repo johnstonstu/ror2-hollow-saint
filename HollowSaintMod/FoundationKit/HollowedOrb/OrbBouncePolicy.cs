@@ -28,7 +28,7 @@ namespace HollowSaint.FoundationKit.HollowedOrb
             damageScale = proc = 0f;
             if (Remaining < 1 || target == null) return false;
             int prior = PriorHits(target);
-            damageScale = (float)Math.Pow(RepeatRetain, prior); proc = prior == 0 ? .5f : .1f;
+            damageScale = (float)Math.Pow(RepeatRetain, prior); proc = prior == 0 ? .8f : .25f; // 1.3.1: was .5/.1 (items barely triggered); .3 is the burst
             hits[target] = prior + 1; Remaining--; return true;
         }
     }

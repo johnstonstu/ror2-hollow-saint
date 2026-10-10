@@ -13,7 +13,7 @@ namespace HollowSaint.FoundationKit.Stormspear
         private CharacterBody body;
         private StormspearCharge charge;
         private Stage stage;
-        private uint startId, loopId, tierId, releaseId;
+        private uint startId, loopId, tierId, releaseId, riseId, readyId;
         private bool subscribed, active, loopStarted, warned;
         private float loopAt, releaseAt = -1f;
         private int pendingTier;
@@ -35,6 +35,8 @@ namespace HollowSaint.FoundationKit.Stormspear
             if (charge.Charging) Begun(charge);
         }
 
+        // Full-charge cue (Spear and Orb): a crackling pylon zap with a taser snap, no beep.
+        internal const string FullChargeZap = "Play_loader_R_shock", FullChargeSnap = "Play_captain_m2_tazer_impact";
         private uint Play(string custom, string fallback)
         {
             string name = CustomSoundBank.Ready ? custom : fallback;
@@ -62,7 +64,7 @@ namespace HollowSaint.FoundationKit.Stormspear
         {
             active = loopStarted = false; pendingTier = 0;
             releaseAt = -1f; releaseEvent = null;
-            Stop(ref startId); Stop(ref loopId); Stop(ref tierId); Stop(ref releaseId);
+            Stop(ref startId); Stop(ref loopId); Stop(ref tierId); Stop(ref releaseId); Stop(ref riseId); Stop(ref readyId);
         }
 
         private void Begun(StormspearCharge state)
@@ -73,6 +75,8 @@ namespace HollowSaint.FoundationKit.Stormspear
             if (!Audible) return;
             stage = Stage.instance; active = true;
             startId = Play("Play_HS_SpearChargeStart", "Play_mage_m1_cast_lightning");
+            // 1.3.1 (Stu): a rising charge layer under the hand loop so the build-up reads by ear.
+            riseId = Play("Play_mage_m2_charge", "Play_mage_m2_charge");
             loopAt = Time.time + .20f;
         }
 
@@ -111,8 +115,14 @@ namespace HollowSaint.FoundationKit.Stormspear
                 int tier = pendingTier; pendingTier = 0;
                 Stop(ref tierId);
                 // Attack-speed jumps crossing several thresholds make only the highest cue.
-                if (tier == 3) tierId = Play("Play_HS_MeterFull", "Play_railgunner_R_gun_ready");
-                else tierId = Play("Play_HS_ChargeTick", "Play_mage_m1_cast_lightning");
+                // 1.3.1 (Stu): clearer steps: rising chimes at 1/3 and 2/3, an electric crackle at full (Stu: no beep).
+                if (tier == 3)
+                {
+                    Stop(ref riseId);
+                    tierId = Play(FullChargeZap, FullChargeZap);
+                    readyId = Play(FullChargeSnap, FullChargeSnap);
+                }
+                else tierId = Play(tier == 1 ? "Play_HS_GazeLoad2" : "Play_HS_GazeLoad4", "Play_HS_ChargeTick");
             }
             if (releaseAt >= 0f && Time.time >= releaseAt)
             {

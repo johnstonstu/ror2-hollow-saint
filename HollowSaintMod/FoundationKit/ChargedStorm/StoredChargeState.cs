@@ -14,6 +14,9 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         private int available, loaded, requested;
         private bool ending, awaiting, cancelRequested, refunded, rejected;
         private float nextRequest, releaseEnd, requestAt;
+        // 1.3.1: recasting Special during a Thundercloud ends it early with a partial cooldown refund.
+        private bool dismissRequested, specialWasDown = true;
+        private float releaseSpan, refundSeconds, nextDismiss;
         private Vector3 releaseDirection;
         private DischargeMeter meter;
         private StoredChargeDriver driver;
@@ -89,6 +92,12 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             if (!characterBody || !characterBody.healthComponent || !characterBody.healthComponent.alive) return;
             if (Released)
             {
+                WatchDismiss();
+                if (isAuthority && dismissRequested && fixedAge >= nextDismiss && fixedAge < releaseEnd)
+                {
+                    nextDismiss = fixedAge + .1f;
+                    StoredChargeTransport.Request(characterBody, new StoredChargeTransport.Packet { cast = cast, kind = Kind, cancel = true, direction = Vector3.forward });
+                }
                 if (isAuthority && fixedAge >= releaseEnd) outer.SetNextStateToMain();
                 return;
             }
@@ -119,6 +128,7 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         public override void Update()
         {
             base.Update();
+            WatchDismiss();
             if (!isAuthority || !inputBank || Released || ending) return;
             if (Kind != 1 || !Stormspear.StormspearCharge.InCrown(characterBody)) inputBank.skill1.hasPressBeenClaimed = true;
             if (Kind != 1) inputBank.skill2.hasPressBeenClaimed = true;
@@ -129,6 +139,28 @@ namespace HollowSaint.FoundationKit.ChargedStorm
                 BeginRequest(true);
                 StoredChargeUtilityExit.Queue(characterBody);
             }
+        }
+        /// <summary>A fresh Special press during a released storm (rising edge of the held state, so a
+        /// button still held from the cast never counts and no frame-ordering can drop the press).</summary>
+        private void WatchDismiss()
+        {
+            if (!isAuthority || !inputBank) return;
+            bool down = inputBank.skill4.down;
+            if (Released && !ending && Kind == 0 && !dismissRequested && down && !specialWasDown) RequestDismiss();
+            specialWasDown = down;
+        }
+        private void RequestDismiss()
+        {
+            inputBank.skill4.hasPressBeenClaimed = true;
+            dismissRequested = true;
+            float remaining = Mathf.Max(0f, releaseEnd - fixedAge);
+            var slot = admittedSlot;
+            if (slot && releaseSpan > .01f)
+                refundSeconds = slot.CalculateFinalRechargeInterval() * Mathf.Clamp01(ChargedStormTuning.CloudEarlyEndRefund) * Mathf.Clamp01(remaining / releaseSpan);
+            // Keep the state briefly so the server hears the dismiss before the state change.
+            nextDismiss = fixedAge;
+            releaseEnd = Mathf.Min(releaseEnd, fixedAge + .2f);
+            KitLog.Event("THUNDERCLOUD_DISMISS_REQUEST", "remaining=" + remaining.ToString("0.00") + " refund=" + refundSeconds.ToString("0.00"));
         }
         private void BeginRequest(bool cancel)
         {
@@ -141,18 +173,27 @@ namespace HollowSaint.FoundationKit.ChargedStorm
                 ? HollowedOrb.OrbCastFlow.RequestAt(fixedAge) : fixedAge + .26f;
         }
 
-        internal void ServerRequest(StoredChargeTransport.Packet p, NetworkConnection connection, bool host)
+        private bool Authenticated(NetworkConnection connection, bool host)
         {
-            if (!NetworkServer.active || Released || ending || p.reply || p.cast != cast || p.kind != Kind ||
-                !characterBody || !characterBody.healthComponent || !characterBody.healthComponent.alive || !driver) return;
             bool authenticated = host && isAuthority;
-            if (!host && connection != null && connection.isReady && characterBody.master)
+            if (!host && connection != null && connection.isReady && characterBody && characterBody.master)
             {
                 var controller = characterBody.master.playerCharacterMasterController;
                 var user = controller ? controller.networkUser : null;
                 authenticated = user && user.connectionToClient == connection;
             }
-            if (!authenticated) return;
+            return authenticated;
+        }
+        internal void ServerRequest(StoredChargeTransport.Packet p, NetworkConnection connection, bool host)
+        {
+            if (NetworkServer.active && Released && Kind == 0 && p.cancel && !p.reply && p.cast == cast && p.kind == Kind && driver)
+            {
+                if (Authenticated(connection, host)) driver.DismissClouds();
+                return;
+            }
+            if (!NetworkServer.active || Released || ending || p.reply || p.cast != cast || p.kind != Kind ||
+                !characterBody || !characterBody.healthComponent || !characterBody.healthComponent.alive || !driver) return;
+            if (!Authenticated(connection, host)) return;
             if (p.cancel) { Reject(); return; }
             if (!StoredChargeDriver.Finite(p.direction) || p.direction.sqrMagnitude < .1f || p.direction.sqrMagnitude > 4f) { Reject(); return; }
             if (Kind == 1 && fixedAge < HollowedOrb.OrbCastFlow.MinimumWindup) return;
@@ -190,13 +231,19 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             if (p.cast != cast || p.kind != Kind || Released) return;
             if (p.cancel) { ending = true; rejected = true; return; }
             loaded = Mathf.Clamp(p.count, 0, ChargedStormTuning.CastLimit);
-            Released = true; releaseEnd = fixedAge + Mathf.Clamp(p.duration, .3f, Kind == 0 ? 20f : 5f);
+            Released = true; releaseEnd = fixedAge + Mathf.Clamp(p.duration, .3f, Kind == 0 ? 20f : 5f); releaseSpan = releaseEnd - fixedAge;
             if (visual) { visual.Confirm(loaded); visual.End(true); }
             if (hover != null) { hover.End(characterBody); hover = null; }
             OnReleased(loaded);
         }
         public override void OnExit()
         {
+            if (refundSeconds > 0f && isAuthority && admittedSlot && admittedSlot.skillDef == admittedDefinition && admittedSlot.stock < admittedSlot.maxStock)
+            {
+                // Recharge is paused while this state runs and resumes on exit; advancing it is the refund.
+                admittedSlot.rechargeStopwatch = Mathf.Min(admittedSlot.rechargeStopwatch + refundSeconds, Mathf.Max(0f, admittedSlot.CalculateFinalRechargeInterval() - .05f));
+                refundSeconds = 0f;
+            }
             if (meter) meter.CancelStoredCast(cast);
             if (visual) visual.End(false);
             if (hover != null) hover.End(characterBody);

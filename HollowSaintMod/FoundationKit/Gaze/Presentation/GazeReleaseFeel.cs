@@ -84,7 +84,7 @@ namespace HollowSaint.FoundationKit.Gaze
             int tier = Mathf.Clamp(group, 1, 5);
             Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_HS_SpearBurst", Emitter(body.gameObject));
             // 4-5 charge opening blasts add the Thunderbolt's clap on top.
-            if (tier >= 4) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_ThunderStrike" : "Play_captain_shift_impact", Emitter(body.gameObject));
+            if (tier >= 2) { Util.PlaySound("Play_item_use_lighningArm", Emitter(body.gameObject)); Util.PlaySound(Storm.ThunderLayerSound.Boom, Emitter(body.gameObject)); }
             Kick(body, tier);
             return true;
         }
@@ -95,7 +95,7 @@ namespace HollowSaint.FoundationKit.Gaze
             int tier = Mathf.Clamp(count, 1, 5);
             KitLog.Event("GAZE_OPENING_BOOM", "charges=" + count);
             Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_HS_SpearBurst", Emitter(body.gameObject));
-            if (tier >= 4) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_ThunderStrike" : "Play_captain_shift_impact", Emitter(body.gameObject));
+            if (tier >= 2) { Util.PlaySound("Play_item_use_lighningArm", Emitter(body.gameObject)); Util.PlaySound(Storm.ThunderLayerSound.Boom, Emitter(body.gameObject)); }
             Kick(body, tier);
         }
 

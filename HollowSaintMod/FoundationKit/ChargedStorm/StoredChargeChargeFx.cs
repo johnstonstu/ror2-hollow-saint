@@ -8,7 +8,8 @@ namespace HollowSaint.FoundationKit.ChargedStorm
     {
         private CharacterBody body;
         private byte kind;
-        private int gathered;
+        private int gathered, available;
+        private bool fullCued;
         private GameObject ball;
         private LineRenderer preview;
         private Gaze.Fx.GazeChargeUpFx crown;
@@ -23,7 +24,9 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             if (!body) return null;
             var root = new GameObject("HS_StoredChargeGather"); root.transform.SetParent(body.gameObject.transform, false);
             var fx = root.AddComponent<StoredChargeChargeFx>(); fx.body = body; fx.kind = kind;
-            fx.startedAt = Time.time;
+            fx.startedAt = Time.time; fx.available = available;
+            // 1.3.1 (Stu): an audible charge-up as the Orb starts to form in the hands.
+            if (kind == 1) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_SpearChargeStart" : "Play_mage_m1_cast_lightning", root);
             try
             {
                 fx.palette = SkinFxPalette.ForBody(body);
@@ -62,6 +65,17 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             {
                 Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + Mathf.Clamp(count, 1, 5) : "Play_HS_ChargeTick", gameObject);
                 LightningLine.Spawn(HaloRing.CenterOf(body), BallPoint, .28f, 1.7f, 1, palette: palette).drawTime = .025f;
+                int max = Mathf.Min(available, ChargedStormTuning.CastLimit);
+                if (!fullCued && count > 0 && count >= max)
+                {
+                    // Full: nothing more to gather. An electric crackle, a ring and a flash on the ball.
+                    fullCued = true;
+                    Util.PlaySound("Play_loader_R_shock", gameObject); // same electric full cue as the Spear
+                    Util.PlaySound("Play_captain_m2_tazer_impact", gameObject);
+                    var at = BallPoint; float d = ChargedStormTuning.Diameter(count);
+                    VfxParticles.Burst(at, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .18f, Vector2.zero, Vector2.one * d * 1.6f, palette.Core);
+                    VfxParticles.Ring(at, body.inputBank ? body.inputBank.aimDirection : Vector3.up, d * .4f, d * 1.5f, .3f, .06f, palette.Material(VfxAssets.Trail), palette);
+                }
             }
         }
         private Vector3 BallPoint => HollowedOrb.OrbCastGeometry.Point(body,

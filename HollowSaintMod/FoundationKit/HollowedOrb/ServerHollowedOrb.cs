@@ -24,13 +24,13 @@ namespace HollowSaint.FoundationKit.HollowedOrb
         private static uint nextFlight;
         internal static Action<string> DiagnosticTrace;
         private uint flight;
-        internal ServerHollowedOrb(CharacterBody owner, int charges, Vector3 aim)
+        internal ServerHollowedOrb(CharacterBody owner, int charges, Vector3 aim, int bonusStock = 0)
         {
             this.owner = owner; stage = Stage.instance; direction = aim; this.charges = charges;
             diameter = ChargedStormTuning.Diameter(charges); speed = ChargedStormTuning.Bound(ChargedStormTuning.OrbSpeed, 10f, 80f);
             range = ChargedStormTuning.BounceRange(charges);
             damage = owner.damage * KitDamagePolicy.Effective(ChargedStormTuning.OrbCoefficient(charges)); crit = owner.RollCrit();
-            policy = new OrbBouncePolicy<HealthComponent>(ChargedStormTuning.HitBudget(charges));
+            policy = new OrbBouncePolicy<HealthComponent>(ChargedStormTuning.HitBudget(charges, bonusStock));
             point = OrbCastGeometry.Point(owner, aim, charges);
             direction = OrbCastGeometry.Direction(owner, point, aim);
             remaining = ChargedStormTuning.Bound(ChargedStormTuning.OrbRange, 10f, 100f);

@@ -16,7 +16,9 @@ namespace HollowSaint.FoundationKit.Gaze
         internal void ObserveReleaseInput(bool down, bool canBegin, bool active)
         {
             if (!GazeReleaseTuning.Enabled || !body || !body.hasEffectiveAuthority) return;
-            var edge = releaseInput.Observe(down, canBegin && PulseRequestReady && AvailableEntry > 0, active);
+            bool openingPending = primedOpening > 0 || localPrimed > 0;
+            var edge = releaseInput.Observe(down, canBegin && PulseRequestReady && AvailableEntry > 0 &&
+                (GazeReleaseTuning.MidBeamSurges || openingPending), active);
             if (edge == GazeReleaseEdge.None) return;
             uint id = NetworkServer.active ? cast : clientCast;
             if (id == 0) return;
@@ -52,7 +54,7 @@ namespace HollowSaint.FoundationKit.Gaze
             // 1.2: the first press after a charge-up fires the primed opening instead of loading.
             if (edge == GazeReleaseEdge.Begin && active && primedOpening > 0 && age >= GazeTuning.WindupSeconds)
                 ServerFireOpening(age, GazeTuning.WindupSeconds + beamDuration);
-            else if (edge == GazeReleaseEdge.Begin && fits) releaseHold.Begin(age, AvailableEntry);
+            else if (edge == GazeReleaseEdge.Begin && fits && GazeReleaseTuning.MidBeamSurges) releaseHold.Begin(age, AvailableEntry);
             else if (edge == GazeReleaseEdge.Release)
             {
                 int count = releaseHold.Release(age, AvailableEntry, fits);

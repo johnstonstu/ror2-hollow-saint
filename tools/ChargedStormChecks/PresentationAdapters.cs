@@ -67,6 +67,7 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         public void RememberToken(uint token) { if(token>next)next=token; }
         public static bool Finite(Vector3 v) => float.IsFinite(v.x) && float.IsFinite(v.y) && float.IsFinite(v.z);
         public bool Prepare(byte kind,int count,Vector3 direction) => canPrepare;
+        public int dismissals; public int DismissClouds() { dismissals++; return 1; }
         public float Launch(byte kind,uint cast,int count,Vector3 direction) { launches++; spent=count; if(failLaunch) throw new Exception("Synthetic launch failure"); return kind==2 ? 1.208333f : kind==1 ? .3f : .45f; }
     }
     public class StoredChargeChargeFx : UnityEngine.Object
@@ -77,6 +78,7 @@ namespace HollowSaint.FoundationKit.ChargedStorm
     {
         public static System.Collections.Generic.List<(Vector3 point,Vector3 sky)> strikes = new();
         public static void Cloud(CharacterBody owner,Vector3 sky,float radius,float duration) {}
+        public static int cloudDismissals; public static void CloudDismiss(CharacterBody owner,Vector3 sky) { cloudDismissals++; }
         public static System.Collections.Generic.List<int> strikeStrokes = new();
         public static void Strike(CharacterBody owner,Vector3 sky,Vector3 point,float radius,HealthComponent victim,Vector3 center,int strokes=4) { strikes.Add((point,sky)); strikeStrokes.Add(strokes); }
         public static System.Collections.Generic.List<(Vector3 point,float radius)> bursts = new();

@@ -17,6 +17,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public static float ReachEnd = 1.6f;
         // v0.9.15 (Stu): small armor bonus while channeling (wind-up and beam).
         public static float Armor = 30f;
+        public static bool KnockbackImmune = true;     // 1.3.1: no knockback while charging or channeling
         public const float EndSeconds = 0.4f;               // crown returns to the head
 
         // Movement.
@@ -31,7 +32,7 @@ namespace HollowSaint.FoundationKit.Gaze
         public static float DamagePerSecond = 5f;           // coefficient per second at 1x attack speed
         public static float TickSeconds = 0.2f;             // attack speed shortens it (more ticks)
         public static float ProcCoefficient = 0.3f;         // 1.2: was 0.5 (7 s beam = 75% more ticks)
-        public static float Range = 60f;
+        public static float Range = 90f;                  // 1.3.1 (Stu: reach further): was 60
         public static float Radius = 1.5f;                  // half the beam's hit width
 
         // Impact splash (enemies near the impact the core did not hit this tick).

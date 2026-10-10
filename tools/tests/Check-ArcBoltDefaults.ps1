@@ -24,7 +24,9 @@ function Get-Block([string]$source, [string]$start) {
 $tuning = Get-Block $shared 'public static partial class KitTuning'
 $migrate = Get-Block $config 'private static void Migrate('
 $bind = Get-Block $config 'private static void F('
-$step = (Get-Block $config 'if (defaultsVersion.Value < 11)') + "`n" + (Get-Block $config 'if (defaultsVersion.Value < 15)')
+$step16 = [regex]::Match((Get-Block $config 'if (defaultsVersion.Value < 16)'), 'Migrate\(bolt, "Damage",[^\r\n]+').Value
+if (!$step16) { throw 'Missing 1.3.1 Arc Bolt damage migration.' }
+$step = (Get-Block $config 'if (defaultsVersion.Value < 11)') + "`n" + (Get-Block $config 'if (defaultsVersion.Value < 15)') + "`nif (defaultsVersion.Value < 16) { " + $step16 + " }"
 $version = [regex]::Match($config, 'private const int CurrentDefaultsVersion = \d+;').Value
 $damageBind = [regex]::Match($config, 'F\(c, bolt, "Damage",[^\r\n]+').Value
 $stamp = [regex]::Match($config, 'if \(defaultsVersion.Value < CurrentDefaultsVersion\) defaultsVersion.Value = CurrentDefaultsVersion;').Value
@@ -61,7 +63,7 @@ public static class ArcBoltDefaultsChecks {
         BIND
         MIGRATION
         STAMP
-        Check(c.Entry.DefaultValue == 1.6f, "Binding default differs from static default");
+        Check(c.Entry.DefaultValue == 1.9f, "Binding default differs from static default");
         Check(c.Entry.Value == expected, "Saved coefficient changed incorrectly: " + saved);
         Check(KitTuning.ArcBoltDamageCoefficient == expected, "Live coefficient differs from saved value");
         Check(defaultsVersion.Value == expectedVersion, "Wrong defaults marker");
@@ -74,18 +76,20 @@ public static class ArcBoltDefaultsChecks {
     }
     private static readonly float FreshDefault = KitTuning.ArcBoltDamageCoefficient;
     public static string Run() {
-        Check(FreshDefault == 1.6f && CurrentDefaultsVersion == 15, "Incorrect new defaults");
-        Case(null, 1, 1.6f, CurrentDefaultsVersion);
-        Case(1f, 1, 1.6f, CurrentDefaultsVersion);
-        Case(1f, 10, 1.6f, CurrentDefaultsVersion);
+        Check(FreshDefault == 1.9f && CurrentDefaultsVersion >= 16, "Incorrect new defaults");
+        Case(null, 1, 1.9f, CurrentDefaultsVersion);
+        Case(1f, 1, 1.9f, CurrentDefaultsVersion);
+        Case(1f, 10, 1.9f, CurrentDefaultsVersion);
         foreach (float custom in new[] { 0.75f, 0.9995f, 0.99999994f, 1.00000012f, 1.0005f, 1.1999999f, 1.2000002f, 1.5f }) Case(custom, 10, custom, CurrentDefaultsVersion);
-        Case(1.2f, 14, 1.6f, CurrentDefaultsVersion);
+        Case(1.2f, 14, 1.9f, CurrentDefaultsVersion);
+        Case(1.6f, 15, 1.9f, CurrentDefaultsVersion);
+        Case(1.6f, 16, 1.6f, CurrentDefaultsVersion);
         Case(1.2f, 15, 1.2f, CurrentDefaultsVersion);
         Case(1.2f, 99, 1.2f, 99);
         Case(1f, 11, 1f, CurrentDefaultsVersion);
         Case(1f, 12, 1f, CurrentDefaultsVersion);
         Check(KitTuning.ArcBoltInterval == 0.5f, "Cadence changed");
-        Check(KitTuning.ArcBoltProcCoefficient == 0.8f && KitTuning.ArcBoltChainProc == 0.4f, "Proc coefficients changed");
+        Check(KitTuning.ArcBoltProcCoefficient == 1f && KitTuning.ArcBoltChainProc == 0.4f, "Proc coefficients changed");
         Check(KitTuning.ArcBoltMaxChainTargets == 4 && KitTuning.ArcBoltChainRange == 12f && KitTuning.ArcBoltChainFalloff == 0.75f, "Chain tuning changed");
         return "ARC_BOLT_DEFAULTS_PASS: 16 config cases; fresh/binding defaults, exact old-default migration, nearby custom values, repeat/version guards and live callbacks. Cadence/procs/chain tuning unchanged. Offline adapter only.";
     }

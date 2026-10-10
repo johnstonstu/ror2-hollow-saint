@@ -65,7 +65,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             {
                 controller.procCoefficient = StormspearTuning.ProcCoefficient;
                 controller.allowPrediction = false; // avoid a straight client-predicted ghost
-                if (HollowSaint.FoundationKit.Vfx.Ghosts.Spear) controller.ghostPrefab = HollowSaint.FoundationKit.Vfx.Ghosts.Spear;
+                HollowSaint.FoundationKit.Vfx.Ghosts.Assign(controller, HollowSaint.FoundationKit.Vfx.Ghosts.Spear, "Stormspear");
             }
 
             clone.AddComponent<ProjectileAimForgiveness>().isSpear = true;

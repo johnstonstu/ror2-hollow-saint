@@ -10,6 +10,12 @@ namespace HollowSaint.FoundationKit
         private static void BindGaze(ConfigFile c)
         {
             F(c, gaze, "Armor while channeling", Gaze.GazeTuning.Armor, v => Gaze.GazeTuning.Armor = v, 0f, 100f, 5f, "Bonus armor from the wind-up to the end of the beam (100 armor = half damage taken).");
+            B(c, gaze, "Knockback immunity", Gaze.GazeTuning.KnockbackImmune, v => Gaze.GazeTuning.KnockbackImmune = v, "No knockback from the wind-up to the end of the beam, so pushes never break your aim.");
+            F(c, gaze, "Focus bonus", Gaze.GazeFocusPolicy.MaxBonus, v => Gaze.GazeFocusPolicy.MaxBonus = v, 0f, 3f, .1f, "Extra core beam damage at full focus on one target (1 = +100%).");
+            F(c, gaze, "Focus ramp seconds", Gaze.GazeFocusPolicy.RampSeconds, v => Gaze.GazeFocusPolicy.RampSeconds = v, .5f, 8f, .25f, "Seconds of beam on one target to reach full focus.");
+            F(c, gaze, "Focus grace seconds", Gaze.GazeFocusPolicy.GraceSeconds, v => Gaze.GazeFocusPolicy.GraceSeconds = v, 0f, 2f, .1f, "Seconds off target before focus starts to fade.");
+            F(c, gaze, "Focus fade seconds", Gaze.GazeFocusPolicy.DecaySeconds, v => Gaze.GazeFocusPolicy.DecaySeconds = v, .1f, 4f, .1f, "Seconds for full focus to fade to nothing once the grace runs out.");
+            B(c, gaze, "Mid-beam surges", Gaze.GazeReleaseTuning.MidBeamSurges, v => Gaze.GazeReleaseTuning.MidBeamSurges = v, "Legacy: Primary during the beam loads extra charges into surges. Off by default (charges go into the opening boom).");
             F(c, gaze, "Beam seconds", Gaze.GazeTuning.BeamSeconds, v => Gaze.GazeTuning.BeamSeconds = v, 1f, 6f, 0.5f,
                 "Legacy tap-pulse mode only: base duration gains 0.1 seconds per level above 1, capped at 6 seconds at entry. Default hold/release Gaze lasts a fixed 7 seconds.");
             F(c, gaze, "Damage per second", Gaze.GazeTuning.DamagePerSecond, v => Gaze.GazeTuning.DamagePerSecond = v, 1f, 20f, 0.5f, "Damage coefficient per second of the beam core at base attack speed. Attack speed adds ticks.");

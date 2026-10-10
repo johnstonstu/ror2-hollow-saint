@@ -12,17 +12,21 @@ namespace HollowSaint.FoundationKit.Thundercloud
         private readonly CharacterBody owner;
         private readonly Stage stage;
         private readonly Vector3 center, sky;
-        private readonly float radius, damage;
-        private readonly int charges, pulses;
+        private readonly float radius, damage, interval;
+        private readonly int charges;
+        private int pulses;
+        private bool dismissed;
+        internal bool Dismissed => dismissed;
         private readonly bool crit;
         private float age;
         private int pulsed;
-        internal float Duration => ThundercloudSchedule.CompleteAt(charges);
+        internal float Duration => ThundercloudSchedule.CompleteAt(charges, interval);
         internal int Charges => charges;
         private ServerThundercloud(CharacterBody body, int charges, Vector3 center, Vector3 sky, float radius)
         {
             owner = body; stage = Stage.instance; this.center = center; this.sky = sky; this.radius = radius; this.charges = charges;
-            pulses = ThundercloudSchedule.Pulses(charges);
+            interval = ThundercloudSchedule.IntervalFor(body.attackSpeed);
+            pulses = ThundercloudSchedule.Pulses(charges, interval);
             damage = body.damage * KitDamagePolicy.Effective(ChargedStormTuning.CloudCoefficient(charges)); crit = body.RollCrit();
         }
         internal static ServerThundercloud Prepare(CharacterBody owner, int charges, Vector3 direction)
@@ -37,19 +41,28 @@ namespace HollowSaint.FoundationKit.Thundercloud
         internal void Begin()
         {
             ChargedStormEffects.Cloud(owner, sky, radius, Duration);
-            KitLog.Event("THUNDERCLOUD_BEGIN", "charges=" + charges + " pulses=" + pulses + " radius=" + radius);
+            KitLog.Event("THUNDERCLOUD_BEGIN", "charges=" + charges + " pulses=" + pulses + " interval=" + interval + " radius=" + radius);
+        }
+        /// <summary>1.3.1 (Stu): recasting Special ends the storm early. No further strikes; every client fades it.</summary>
+        internal void Dismiss()
+        {
+            if (dismissed) return;
+            dismissed = true; pulses = pulsed;
+            KitLog.Event("THUNDERCLOUD_DISMISSED", "pulsed=" + pulsed);
+            if (owner) ChargedStormEffects.CloudDismiss(owner, sky);
         }
         internal bool Tick(float dt)
         {
+            if (dismissed) return false;
             if (!owner || !owner.isActiveAndEnabled || !owner.healthComponent || !owner.healthComponent.alive || stage != Stage.instance) return false;
             if (owner.master && owner.master.GetBody() != owner) return false;
             age += dt;
-            while (pulsed < pulses && age >= ThundercloudSchedule.PulseAt(pulsed)) { pulsed++; Pulse(); }
+            while (pulsed < pulses && age >= ThundercloudSchedule.PulseAt(pulsed, interval)) { pulsed++; Pulse(); }
             return age < Duration;
         }
         private void Pulse()
         {
-            var found = ChargedStormTargeting.Find(owner, center, radius, Vector3.forward, 180f, false);
+            var found = ChargedStormTargeting.Find(owner, center, ChargedStormTargeting.ColumnSearchRange(sky, center, radius), Vector3.forward, 180f, false);
             found.RemoveAll(h => !ChargedStormTargeting.CloudVisible(sky, center, ChargedStormTargeting.Point(h), radius));
             found.Sort((a, b) => (ChargedStormTargeting.Point(a) - center).sqrMagnitude.CompareTo((ChargedStormTargeting.Point(b) - center).sqrMagnitude));
             int limit = Mathf.Clamp(ChargedStormTuning.CloudTargetLimit, 1, 64);

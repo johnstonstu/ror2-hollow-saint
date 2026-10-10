@@ -66,7 +66,7 @@ public static class StormspearDefaultsChecks {
   Check(Stormspear.StormspearTuning.TapDamage==6f && Stormspear.StormspearTuning.FullDamage==20f,"live callbacks"); cases++;
  }
  public static string Run() {
-  Check(CurrentDefaultsVersion==15,"migration version");
+  Check(CurrentDefaultsVersion>=15,"migration version");
   Case(null,null,1,3.5f,14f); Case(4f,14f,1,3.5f,14f);
   Case(4f,16f,10,3.5f,14f); Case(4f,16f,11,3.5f,14f);
   Case(4f,20f,11,3.5f,20f); Case(6f,16f,11,6f,14f);

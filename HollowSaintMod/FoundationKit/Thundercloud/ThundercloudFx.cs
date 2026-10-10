@@ -14,6 +14,15 @@ namespace HollowSaint.FoundationKit.Thundercloud
         private ParticleSystem cloud;
         private LineRenderer crown;
         private Light glow;
+        private static readonly System.Collections.Generic.List<ThundercloudFx> live = new System.Collections.Generic.List<ThundercloudFx>();
+        private void OnDestroy() { live.Remove(this); }
+        /// <summary>1.3.1: a dismissed storm fades now instead of at its scheduled end.</summary>
+        private void Dismiss()
+        {
+            float end = Mathf.Max(age, ThundercloudSchedule.Ascent) + ThundercloudSchedule.Fade;
+            if (end < duration) duration = end;
+            nextFlash = float.MaxValue;
+        }
         private void Start()
         {
             try
@@ -21,6 +30,15 @@ namespace HollowSaint.FoundationKit.Thundercloud
                 var data = GetComponent<EffectComponent>().effectData;
                 if (data == null) { Destroy(gameObject); return; }
                 var obj = data.ResolveNetworkedObjectReference(); owner = obj ? obj.GetComponent<CharacterBody>() : null;
+                if (data.genericFloat < 0f)
+                {
+                    // Dismiss signal (same effect, negative duration): fade this owner's storm at that sky point.
+                    foreach (var other in live.ToArray())
+                        if (other && other.owner == owner && (other.sky - data.origin).sqrMagnitude < 4f) other.Dismiss();
+                    ThundercloudCrownPose.Recall(owner);
+                    Destroy(gameObject); return;
+                }
+                live.Add(this);
                 from = data.start; sky = data.origin; radius = data.scale; duration = data.genericFloat;
                 palette = SkinFxPalette.FromNetwork(data.color);
                 ThundercloudCrownPose.Begin(owner, from, sky, duration);

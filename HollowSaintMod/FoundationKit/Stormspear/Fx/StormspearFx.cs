@@ -148,7 +148,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                     // This throw will spend the full Static bank on a Thunderbolt: say so.
                     VfxParticles.Burst(at, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.22f, Vector2.zero, new Vector2(1.3f, 1.6f), pal.Core);
                     VfxParticles.Ring(at, Vector3.up, 0.2f, 1.4f, 0.3f, 0.06f, pal.Material(VfxAssets.Trail), palette: pal);
-                    try { KitFx.Local(Beat.MeterFull, body, at); }
+                    try { BodyCurrentFx.PulseCore(body, 0.18f); BeatVisuals.Play(Beat.MeterFull, at, Vector3.zero, 1f, body); } // visual only: the full cue is already the electric crackle
                     catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_SPEAR_BANK_CUE " + error); }
                 }
                 // v0.9.1: a short sharp flash plus a ring along the shaft, instead of a 1.4 m white bloom.
@@ -305,7 +305,9 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             {
                 float sw = (0.45f + 0.75f * c01) * gain;
                 PlaceLine(Shaft, tail, tip, sw, 0, 0.03f, pal);
-                PlaceLine(Sheath, tail, tip, sw * (1.0f + 0.25f * readyFlash), 1, 0.08f, pal, 0.2f);
+                // 1.3.1 (Stu): a held full charge breathes slowly, so "full" reads without a bloom.
+                float breathe = full ? 0.5f + 0.5f * Mathf.Sin(now * 7f) : 0f;
+                PlaceLine(Sheath, tail, tip, sw * (1.0f + 0.25f * readyFlash + 0.22f * breathe), 1, 0.08f, pal, 0.2f);
                 Vector3 lateral = Vector3.Cross(dir, Vector3.up);
                 if (lateral.sqrMagnitude < 1e-3f) lateral = Vector3.right;
                 lateral.Normalize();
@@ -322,6 +324,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                     bool armed = BankArmed();
                     nextTipSpark = now + (armed ? 0.07f : 0.14f);
                     VfxParticles.Burst(tip, Quaternion.identity, pal.Material(VfxAssets.Spark), armed ? 6 : 3, 0.18f, new Vector2(2f, 5f), new Vector2(0.04f, 0.08f), pal.Core, stretch: 0.06f);
+                    VfxParticles.Burst(tip, Quaternion.identity, pal.Material(VfxAssets.Flash), 1, 0.12f, Vector2.zero, new Vector2(0.22f, 0.3f), pal.Core);
                 }
             }
 

@@ -271,6 +271,7 @@ namespace HollowSaint.FoundationKit
             a["orbs"] = "5"; a["thunder"] = "900%"; a["fundedThunder"] = "765%"; a["dwellSeconds"] = "3"; a["dwellZap"] = "270%";
             a["cloudMinRadius"] = "16"; a["cloudMaxRadius"] = "30"; a["cloudMinDamage"] = "270%"; a["cloudMaxDamage"] = "720%";
             a["orbMinDamage"] = "157.5%"; a["orbMaxDamage"] = "495%"; a["orbMinHits"] = "2"; a["orbMaxHits"] = "7";
+            a["orbMagazineHits"] = "1"; a["cloudRefund"] = "50%";
             a["circuitMaxInterval"] = a["interval"];
             int circuitLimit = Math.Min(5, Math.Max(2, int.Parse(a["orbs"], CultureInfo.InvariantCulture)));
             a["circuitMinInterval"] = (double.Parse(a["interval"], CultureInfo.InvariantCulture) / (1 + .25 * (circuitLimit - 1))).ToString("0.##", CultureInfo.InvariantCulture);
@@ -278,7 +279,7 @@ namespace HollowSaint.FoundationKit
             a["ordinaryThunder"] = "382.5%"; a["thunderRadius"] = "3"; a["gazeRecoveryBank"] = "5%"; a["gazeRecoveryEach"] = "1%";
             a["decay"] = "2"; a["death"] = "partial"; a["deathPct"] = "50%"; a["jolt"] = "on"; a["stun"] = "0.5";
             a["bonus"] = "15%"; a["shocked"] = "3"; a["targets"] = "2"; a["pop"] = "150%"; a["immune"] = "4"; a["range"] = "30";
-            a["releaseSeconds"] = "7"; a["surgeDamage"] = "400%"; a["openingDamage"] = "600%"; a["underDamage"] = "200%"; a["surgeMax"] = "3"; a["chargeStep"] = "0.28";
+            a["releaseSeconds"] = "7"; a["surgeDamage"] = "400%"; a["openingDamage"] = "600%"; a["underDamage"] = "200%"; a["surgeMax"] = "3"; a["focusBonus"] = "100%"; a["chargeStep"] = "0.28";
             return a;
         }
 

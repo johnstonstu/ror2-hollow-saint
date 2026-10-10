@@ -33,7 +33,10 @@ namespace HollowSaint.FoundationKit.Gaze
             TravelBase + TravelPerRange * Math.Max(0f, Math.Min(1f, distance / 60f));
         // 1.2 charge-up opening blast: up to the full bank, wider with every charge.
         internal const int MaximumOpening = 20;
-        internal static float OpeningRadius(int group) => 3f + 1.2f * Math.Max(1, group);
+        // 1.3.1 (Stu): a big, obvious opening splash; was 3 + 1.2 per charge.
+        internal static float OpeningRadius(int group) => Math.Min(20f, 6f + 2f * Math.Max(1, group));
+        /// <summary>1.3.1 (Stu): charges go only into the opening boom; RT no longer loads mid-beam surges.</summary>
+        internal static bool MidBeamSurges = false;
         internal static float Proc(int group) => Math.Min(1f, ProcPerCharge * Math.Max(1, group));
         internal static bool ArrivalFits(float age, float end) =>
             !float.IsNaN(age) && !float.IsInfinity(age) &&

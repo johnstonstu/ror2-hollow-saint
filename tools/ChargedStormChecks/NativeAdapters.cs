@@ -49,6 +49,7 @@ namespace RoR2
         public TeamComponent teamComponent = new();
         public HurtBox mainHurtBox;
         public float damage = 10;
+        public float attackSpeed = 1;
         public bool hasEffectiveAuthority = true;
         public Vector3 corePosition => transform.position;
         public Vector3 footOffset;
@@ -91,7 +92,9 @@ namespace RoR2
         public Skills.SkillDef skillDef;
         public EntityStateMachine stateMachine;
         public int stock, maxStock = 1;
-        public float rechargeStopwatch = 2;
+        public float rechargeStopwatch = 2, finalRechargeInterval = 10;
+        public int bonusStockFromBody;
+        public float CalculateFinalRechargeInterval() => finalRechargeInterval;
         public void AddOneStock() { stock++; rechargeStopwatch = 0; }
         public bool CanExecute() => skillDef != null && skillDef.CanExecute(this);
         public int executions;

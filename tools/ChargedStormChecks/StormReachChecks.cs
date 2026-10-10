@@ -57,9 +57,9 @@ static partial class Program
         for(int i=0;i<15 && edge.Tick(.8f);i++){}
         Check(beyond.healthComponent.received.Count==0,"36m boundary holds through the latch and burst");
 
-        Near(ThundercloudSchedule.CompleteAt(0),4.692f,"free storm ends after its fifth pulse, last bolt and fade");
-        Near(ThundercloudSchedule.CompleteAt(1),5.442f,"one-charge storm ends after its sixth pulse");
-        Near(ThundercloudSchedule.CompleteAt(5),9.192f,"five-charge storm ends after its eleventh pulse");
+        Near(ThundercloudSchedule.CompleteAt(0),5.442f,"free storm ends after its sixth pulse, last bolt and fade");
+        Near(ThundercloudSchedule.CompleteAt(1),6.192f,"one-charge storm ends after its seventh pulse");
+        Near(ThundercloudSchedule.CompleteAt(5),10.692f,"five-charge storm ends after its thirteenth pulse");
         foreach(int n in new[]{0,1,2,5,20,64})
         {
             int pulses=ThundercloudSchedule.Pulses(n);float last=ThundercloudSchedule.PulseAt(pulses-1);
@@ -84,15 +84,44 @@ static partial class Program
         Vector3 sky=new(0,10,15), center=new(0,0,15);
         Check(ChargedStormTargeting.CloudVisible(sky,center,new(0,0,31),16),"return flashes include exact area boundary");
         Check(!ChargedStormTargeting.CloudVisible(sky,center,new(0,0,31.01f),16),"return flashes stop when victim leaves area");
-        Check(!ChargedStormTargeting.CloudVisible(sky,center,new(0,17,15),16),"return flashes retain vertical radius bound");
+        Check(!ChargedStormTargeting.CloudVisible(sky,center,new(0,17,15),16),"column stops a little above the cloud");
+        Check(ChargedStormTargeting.CloudVisible(sky,center,new(0,15,22),16),"flyers up near the cloud are inside the column");
+        Check(ChargedStormTargeting.CloudVisible(sky,center,new(0,-7,15),16) && !ChargedStormTargeting.CloudVisible(sky,center,new(0,-9,15),16),"column reaches 8 m below the aim point");
+        Check(ChargedStormTargeting.ColumnSearchRange(sky,center,16)>=Mathf.Sqrt(16*16+16*16)-.01f,"search covers the column corners");
         Physics.Obstructed=(from,to)=>true;
         Check(!ChargedStormTargeting.CloudVisible(sky,center,new(0,0,15),16),"later flashes stop behind cover");
         Reset();var caster=Body();caster.GetComponent<DischargeMeter>().RegisterForTest(5);
         var state=State(caster,0,true);var writer=new NetworkWriter();state.OnSerialize(writer);
         uint token=new NetworkReader(writer.Stream.ToArray()).ReadUInt32();
         state.ReceiveReply(new StoredChargeTransport.Packet { cast=token,kind=0,count=5,duration=ThundercloudSchedule.CompleteAt(5) });
-        state.Age(9.1f);state.FixedUpdate();
+        state.Age(10.6f);state.FixedUpdate();
         Check(!state.outer.ended && !StoredChargeState.BlocksPrimary(caster),"cloud recovery covers the full storm without blocking Primary");
-        state.Age(9.3f);state.FixedUpdate();Check(state.outer.ended,"cloud recovery ends after final fade");state.OnExit();
+        state.Age(10.8f);state.FixedUpdate();Check(state.outer.ended,"cloud recovery ends after final fade");state.OnExit();
+        // 1.3.1: pressing Special again ends the storm early with a partial cooldown refund.
+        {
+            Reset();var dc=Body();dc.GetComponent<DischargeMeter>().RegisterForTest(5);
+            var ds=State(dc,0,true);var dw=new NetworkWriter();ds.OnSerialize(dw);
+            uint dt=new NetworkReader(dw.Stream.ToArray()).ReadUInt32();
+            dc.inputBank.skill4.down=true; // still held from the cast
+            ds.ReceiveReply(new StoredChargeTransport.Packet { cast=dt,kind=0,count=3,duration=8f });
+            var slot=dc.skillLocator.special;slot.stock=0;slot.maxStock=1;slot.rechargeStopwatch=0;slot.finalRechargeInterval=10;
+            ds.Age(2f);ds.FixedUpdate();Check(!ds.outer.ended,"storm still running before the dismiss");
+            ds.Update();Check(!dc.inputBank.skill4.hasPressBeenClaimed && !ds.outer.ended,"a button still held from the cast does not dismiss");
+            dc.inputBank.skill4.down=false;ds.Update();dc.inputBank.skill4.down=true;ds.Update();
+            Check(dc.inputBank.skill4.hasPressBeenClaimed,"dismiss press is claimed");
+            ds.FixedUpdate();Check(dc.GetComponent<StoredChargeDriver>().dismissals>=1,"server dismisses the storm");
+            ds.Age(2.25f);ds.FixedUpdate();Check(ds.outer.ended,"storm cast ends right after the dismiss");
+            ds.OnExit();Near(slot.rechargeStopwatch,3.75f,"refund: half the 10 s cooldown x 6 of 8 s unused");
+        }
+        {
+            Reset();var co=Body();var cv=Body(10,TeamIndex.Monster);Physics.AimHit=new(0,0,10);BullseyeSearch.candidates.Add(cv.mainHurtBox);
+            ChargedStormEffects.cloudDismissals=0;
+            var dcloud=ServerThundercloud.Prepare(co,3,Vector3.forward);dcloud.Begin();
+            dcloud.Tick(ThundercloudSchedule.FirstStrike+.01f);int struck=cv.healthComponent.received.Count;
+            Check(struck==1,"first strike lands before dismissal");
+            dcloud.Dismiss();dcloud.Dismiss();
+            Check(!dcloud.Tick(5f) && cv.healthComponent.received.Count==struck,"dismissed storm stops striking");
+            Check(ChargedStormEffects.cloudDismissals==1,"one dismiss effect for every client");
+        }
     }
 }

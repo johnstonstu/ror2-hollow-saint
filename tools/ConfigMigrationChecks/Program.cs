@@ -31,37 +31,57 @@ static class Program
     static void Seed(ConfigFile c, string section, string key, object value) => c.Saved[new(section, key)] = value;
     static void CheckValues(ConfigFile c)
     {
-        Check(c.Read<float>("1. Arc Bolt", "Damage") == 1.6f && KitTuning.ArcBoltDamageCoefficient == 1.6f, "damage migration/live value");
+        Check(c.Read<float>("1. Arc Bolt", "Damage") == 1.9f && KitTuning.ArcBoltDamageCoefficient == 1.9f, "damage migration/live value");
         Check(c.Read<float>("1. Arc Bolt", "Projectile speed") == 120f, "speed migration");
-        Check(c.Read<float>("2. Stormspear", "Full damage") == 14f, "ordered historical full-damage migrations");
+        Check(c.Read<float>("2. Stormspear", "Full damage") == 12.5f, "ordered historical full-damage migrations");
         Check(c.Read<float>("7. Gaze of the Hollow", "Proc coefficient") == .3f, "Gaze proc migration");
         Check(c.Read<float>("7. Gaze of the Hollow", "Fork damage") == .7f, "Gaze fork migration");
     }
     static void FreshAndOld()
     {
         var fresh = Config(1); KitConfig.Bind(fresh); CheckValues(fresh);
-        Check(fresh.Read<int>("6. Misc", "Defaults version") == 15, "fresh revision stamp");
+        Check(fresh.Read<int>("6. Misc", "Defaults version") == 17, "fresh revision stamp");
         Check(!fresh.Read<bool>("6. Misc", "Event log"), "fresh event log");
         int count = fresh.Entries.Count;
-        Check(count > 80 && count == KitConfig.Floats.Count + KitConfig.Ints.Count + KitConfig.Bools.Count + 4,
-            "all options registered once, plus hand, legacy mode and two revision markers");
-        for (int revision = 1; revision <= 15; revision++)
+        Check(count > 80 && count == KitConfig.Floats.Count + KitConfig.Ints.Count + KitConfig.Bools.Count + 5,
+            "all options registered once, plus hand, legacy mode and three revision markers");
+        for (int revision = 1; revision <= 17; revision++)
         {
             var c = Config(revision);
-            Seed(c, "1. Arc Bolt", "Damage", revision < 11 ? 1f : revision < 15 ? 1.2f : 1.6f);
+            Seed(c, "1. Arc Bolt", "Damage", revision < 11 ? 1f : revision < 15 ? 1.2f : revision < 16 ? 1.6f : 1.9f);
             Seed(c, "1. Arc Bolt", "Projectile speed", revision < 13 ? 80f : 120f);
-            Seed(c, "2. Stormspear", "Full damage", revision < 4 ? 14f : revision < 12 ? 16f : 14f);
+            Seed(c, "2. Stormspear", "Full damage", revision < 4 ? 14f : revision < 12 ? 16f : revision < 16 ? 14f : 12.5f);
             Seed(c, "7. Gaze of the Hollow", "Proc coefficient", revision < 14 ? .5f : .3f);
             Seed(c, "7. Gaze of the Hollow", "Fork damage", revision < 14 ? 1f : .7f);
             Seed(c, "2. Stormspear", "Spear in left hand", false);
             KitConfig.Bind(c); CheckValues(c);
-            Check(c.Read<int>("6. Misc", "Defaults version") == 15, "old revision stamped");
+            Check(c.Read<int>("6. Misc", "Defaults version") == 17, "old revision stamped");
             Check(c.Read<SpearHand>("2. Stormspear", "Spear hand") == (revision < 10 ? SpearHand.Right : SpearHand.Auto), "legacy hand conversion");
             Check(c.Saves == (revision < 10 ? 1 : 0), "legacy hand save happens only before revision 10");
             KitConfig.Floats.Clear(); KitConfig.Ints.Clear(); KitConfig.Bools.Clear();
             KitConfig.Bind(c); CheckValues(c);
             Check(c.Entries.Count == count, "repeat bind does not create additional config keys");
         }
+    }
+    static void ChargedDefaults()
+    {
+        // 1.3.1: Thundercloud/Orb bind after ApplyMigrations and use their own counter.
+        var c = Config(16);
+        Seed(c, "8. Thundercloud", "Strike damage", .9f); Seed(c, "8. Thundercloud", "Cooldown", 15f);
+        Seed(c, "9. Hollowed Orb", "Hit damage", 4.1f); Seed(c, "5. Storm", "Death discharge", .5f);
+        KitConfig.Bind(c);
+        Check(c.Read<float>("8. Thundercloud", "Strike damage") == 1.65f, "cloud strike default migrates");
+        Check(c.Read<float>("8. Thundercloud", "Cooldown") == 15f, "custom cloud cooldown kept");
+        Check(c.Read<float>("9. Hollowed Orb", "Hit damage") == 5f && HollowSaint.FoundationKit.ChargedStorm.ChargedStormTuning.OrbDamage == 5f, "orb damage default migrates live");
+        Check(c.Read<float>("5. Storm", "Death discharge") == .5f, "revision-16 config is not re-migrated by the storm step");
+        Check(c.Read<int>("6. Misc", "Charged defaults version") == 3, "charged revision stamp");
+        var gazeOld = Config(16); Seed(gazeOld, "7. Gaze of the Hollow", "Range", 60f); KitConfig.Bind(gazeOld);
+        Check(gazeOld.Read<float>("7. Gaze of the Hollow", "Range") == 90f, "Gaze range migrates 60 -> 90 at revision 17");
+        var gazeCustom = Config(16); Seed(gazeCustom, "7. Gaze of the Hollow", "Range", 75f); KitConfig.Bind(gazeCustom);
+        Check(gazeCustom.Read<float>("7. Gaze of the Hollow", "Range") == 75f, "custom Gaze range kept");
+        var old = Config(15); Seed(old, "5. Storm", "Death discharge", .5f); KitConfig.Bind(old);
+        Check(old.Read<float>("5. Storm", "Death discharge") == .3f, "death discharge migrates from revision 15");
+        KitConfig.Floats.Clear(); KitConfig.Ints.Clear(); KitConfig.Bools.Clear();
     }
     static void CustomAndCallbacks()
     {
@@ -120,7 +140,8 @@ static class Program
     }
     static void Main()
     {
-        FreshAndOld(); CustomAndCallbacks(); HistoricalDefaults();
+        FreshAndOld();
+        ChargedDefaults(); CustomAndCallbacks(); HistoricalDefaults();
         Console.WriteLine($"PASS {checks} complete binding/migration assertions");
     }
 }

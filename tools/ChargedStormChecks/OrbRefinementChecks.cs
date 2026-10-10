@@ -79,10 +79,10 @@ static partial class Program
         var flight=new ServerHollowedOrb(owner,0,(near.corePosition-KitUtil.EyePosition(owner)).normalized);
         Check(flight.Tick(.5f) && flight.Tick(.5f) && !flight.Tick(.5f),"free Orb has three finite native impacts");
         Check(OrbHits(near)==2 && OrbHits(centered)==1,"free Orb bounces to the fresh victim, then revisits");
-        Near(near.healthComponent.received[0].damage,29.7f,"free Orb base damage scaled once");
-        Near(near.healthComponent.received[1].damage,29.7f*.75f,"free Orb revisit keeps three quarters");
-        Near(ChargedStormTuning.Diameter(0),.6f,"free Orb remains substantial");
-        Near(ChargedStormTuning.OrbCoefficient(1)*.9f,3.69f,"one-charge effective coefficient");
+        Near(near.healthComponent.received[0].damage,37.8f,"free Orb base damage scaled once");
+        Near(near.healthComponent.received[1].damage,37.8f*.75f,"free Orb revisit keeps three quarters");
+        Near(ChargedStormTuning.Diameter(0),.9f,"free Orb is bigger (1.3.1)");
+        Near(ChargedStormTuning.OrbCoefficient(1)*.9f,4.5f,"one-charge effective coefficient");
         Check(ChargedStormTuning.HitBudget(0)==3 && ChargedStormTuning.HitBudget(1)==4 && ChargedStormTuning.HitBudget(5)==8,"budgets: free 3, plus one per extra charge");
     }
 }

@@ -34,6 +34,7 @@ namespace HollowSaint.FoundationKit
             ApplyMigrations(c);
             BindLogging(c);
             BindChargedStorm(c);
+            ApplyChargedStormMigrations(c);
         }
 
         private static void F(ConfigFile c, string section, string key, float def, Action<float> set,

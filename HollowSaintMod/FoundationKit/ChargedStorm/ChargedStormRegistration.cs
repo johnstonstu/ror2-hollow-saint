@@ -16,6 +16,8 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             Orb = Make("HollowSaintHollowedOrb", "HS_SKILL_HOLLOWED_ORB", typeof(HollowedOrb.HollowedOrbState),
                 Stormspear.StormspearRegistration.MachineName, ChargedStormTuning.OrbCooldown, "skill_hollowed_orb");
             ((StoredChargeSkillDef)Orb).allowsUnchargedCast = true;
+            ((StoredChargeSkillDef)Cloud).followsCloudFreeCast = true;
+            Orb.dontAllowPastMaxStocks = true; // 1.3.1: Backup Magazine adds Orb hits, not casts (StoredChargeDriver)
             // Keywords explain the storm interaction: both prime Static, the cloud also Shocks.
             Orb.keywordTokens = new[] { KitTokens.KeywordStatic };
             Cloud.keywordTokens = new[] { KitTokens.KeywordShocked, KitTokens.KeywordStatic };

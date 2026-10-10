@@ -31,7 +31,10 @@ namespace HollowSaint.FoundationKit.Storm
                 if (effect == null) throw new InvalidOperationException("LightningStrikeImpact has no EffectComponent.");
                 // Clone only our presentation: equipment/item sounds remain untouched.
                 customImpact = PrefabAPI.InstantiateClone(impact, "HollowSaintThunderImpact", false);
-                customImpact.GetComponent<EffectComponent>().soundName = "Play_HS_ThunderStrike";
+                // 1.3.1 (Stu: the custom strike was a fizzle): keep the Capacitor's own thunder crack
+                // and layer a low thunder boom under it.
+                customImpact.GetComponent<EffectComponent>().soundName = effect.soundName;
+                customImpact.AddComponent<ThunderLayerSound>();
                 TrimFlash(customImpact);
                 KitContent.AddEffect(customImpact);
                 // v0.9.1: skins 0/1 also get an owned house-palette copy (the raw Capacitor strike is
@@ -45,7 +48,8 @@ namespace HollowSaint.FoundationKit.Storm
                     TrimFlash(tintedImpact[i]);
                     KitContent.AddEffect(tintedImpact[i]);
                     tintedCustomImpact[i] = PrefabAPI.InstantiateClone(tintedImpact[i], "HS_ThunderCustomTheme" + i, false);
-                    tintedCustomImpact[i].GetComponent<EffectComponent>().soundName = "Play_HS_ThunderStrike";
+                    tintedCustomImpact[i].GetComponent<EffectComponent>().soundName = effect.soundName;
+                    tintedCustomImpact[i].AddComponent<ThunderLayerSound>();
                     KitContent.AddEffect(tintedCustomImpact[i]);
                     splashImpact[i] = MakeSplash(tintedImpact[i], "HS_SpearSplashTheme" + i);
                 }
@@ -187,4 +191,15 @@ namespace HollowSaint.FoundationKit.Storm
             else KitFx.Server(Beat.ThunderStrike, position, default(Vector3), 1f, sound: true, owner: owner);
         }
     }
+    /// <summary>1.3.1: the deep thunder boom layered under every Thunderbolt's crack (plays on each client).</summary>
+    public sealed class ThunderLayerSound : MonoBehaviour
+    {
+        internal const string Boom = "Play_mage_R_lightningBlast";
+        private void Start()
+        {
+            try { Util.PlaySound(Boom, gameObject); }
+            catch (Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_THUNDER_LAYER " + error.Message); }
+        }
+    }
+
 }

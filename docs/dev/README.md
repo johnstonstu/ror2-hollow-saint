@@ -1,12 +1,12 @@
 # Development map after 1.2.0
 
-For the current uncommitted 1.3 candidate, start with the
-[independent audit handoff](audit-handoff-1.3.md). It supersedes older audit briefs
+For the current uncommitted 1.3.1 candidate, start with the
+[independent audit handoff](audit-handoff-1.3.1.md). It supersedes older audit briefs
 as the current design contract and indexes final versus historical evidence.
 
-Start with [architecture](../kit-architecture.md), the root [agent guide](../../AGENTS.md), and the [refactor record](refactor-120-results.md). The baseline is tag `v1.2.0`, commit `e44d582964bf7e69fb6e410e9eeaf2748b443197`. The historical refactor preserved that release version; the new charge abilities advance the local candidate to 1.3.0.
+Start with [architecture](../kit-architecture.md), the root [agent guide](../../AGENTS.md), and the [refactor record](refactor-120-results.md). The refactor baseline is tag `v1.2.0`, commit `e44d582964bf7e69fb6e410e9eeaf2748b443197`. The historical refactor preserved that release version; the new charge abilities shipped in the subsequent 1.3.0 source commit.
 
-The active local candidate is deliberately versioned **1.3.0**. Stuart authorized private staging and gameplay on October 6, 2026. The first-playtest [refinement plan](orb-refinement-1.3-plan.md) and [result](orb-refinement-1.3-results.md) cover optional Orb fuel, easier aiming, body energy feeds, free hands during overhead gathering, and charge-powered Open Circuit. The earlier [acceptance record](charge-build-1.3-acceptance.md) and [Astra high audit](charge-build-1.3-astra-audit.md) retain their candidate identities and evidence limits. The [balance and implementation plan](charge-build-1.3-plan.md) records the initial prototype, whose metadata was still 1.2.0. Public publishing remains a separate approval.
+The active local candidate is **1.3.1**, following committed 1.3.0. The current handoff records the audit fixes, package identity and outstanding native acceptance. Earlier staging and gameplay evidence applies only to the builds identified in those records. The first-playtest [refinement plan](orb-refinement-1.3-plan.md) and [result](orb-refinement-1.3-results.md) cover optional Orb fuel, easier aiming, body energy feeds, free hands during overhead gathering, and charge-powered Open Circuit. The earlier [acceptance record](charge-build-1.3-acceptance.md) and [Astra high audit](charge-build-1.3-astra-audit.md) retain their candidate identities and evidence limits. The [balance and implementation plan](charge-build-1.3-plan.md) records the initial prototype, whose metadata was still 1.2.0. Public publishing remains a separate approval.
 
 ## Normal edit loop
 

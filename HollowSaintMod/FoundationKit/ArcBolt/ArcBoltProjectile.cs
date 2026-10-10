@@ -90,7 +90,7 @@ namespace HollowSaint.FoundationKit.ArcBolt
                     (body != null ? "nonkinematic, gravity off, ContinuousDynamic" : "missing"));
                 controller.procCoefficient = KitTuning.ArcBoltProcCoefficient; // v0.9.13: 0.8 (was 1.0); config, restart
                 controller.allowPrediction = false; // server homing must also drive the visible flight
-                if (HollowSaint.FoundationKit.Vfx.Ghosts.ArcBolt) controller.ghostPrefab = HollowSaint.FoundationKit.Vfx.Ghosts.ArcBolt;
+                HollowSaint.FoundationKit.Vfx.Ghosts.Assign(controller, HollowSaint.FoundationKit.Vfx.Ghosts.ArcBolt, "Arc Bolt");
             }
 
             // ProjectileSimple drives Rigidbody velocity. Preserve the previous nominal

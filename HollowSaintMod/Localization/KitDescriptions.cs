@@ -74,6 +74,7 @@ namespace HollowSaint.FoundationKit
             args["openingDamage"] = Pct(GazeReleaseTuning.DamagePerCharge * GazeReleaseTuning.OpeningDamageScale);
             args["underDamage"] = Pct(GazeReleaseTuning.DamagePerCharge * GazeReleaseTuning.UnderStrikeDamageScale);
             args["surgeMax"] = GazeReleaseTuning.MaximumLoaded.ToString(CultureInfo.InvariantCulture);
+            args["focusBonus"] = Pct(GazeFocusPolicy.MaxBonus);
             args["chargeStep"] = GazeReleaseTuning.SecondsPerExtraCharge.ToString("0.##", CultureInfo.InvariantCulture);
             args["armorOn"] = GazeTuning.Armor > 0.5f ? "yes" : "no";
             args["armor"] = Num(GazeTuning.Armor);
@@ -104,11 +105,13 @@ namespace HollowSaint.FoundationKit
             args["cloudMinSeconds"] = Num(ChargedStorm.ChargedStormTuning.CloudDuration(cloudMin));
             args["cloudMaxSeconds"] = Num(ChargedStorm.ChargedStormTuning.CloudDuration(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit));
             args["cloudInterval"] = Thundercloud.ThundercloudSchedule.Interval.ToString("0.##", CultureInfo.InvariantCulture);
+            args["cloudRefund"] = Pct(ChargedStorm.ChargedStormTuning.Bound(ChargedStorm.ChargedStormTuning.CloudEarlyEndRefund, 0f, 1f));
             args["cloudMaxDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.CloudCoefficient(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit)));
             args["orbMinDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.OrbCoefficient(0)));
             args["orbMaxDamage"] = Pct(KitDamagePolicy.Effective(ChargedStorm.ChargedStormTuning.OrbCoefficient(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit)));
             args["orbMinHits"] = ChargedStorm.ChargedStormTuning.HitBudget(0).ToString(CultureInfo.InvariantCulture);
             args["orbMaxHits"] = ChargedStorm.ChargedStormTuning.HitBudget(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit).ToString(CultureInfo.InvariantCulture);
+            args["orbMagazineHits"] = Math.Max(0, ChargedStorm.ChargedStormTuning.OrbHitsPerMagazine).ToString(CultureInfo.InvariantCulture);
             args["orbRange"] = Num(ChargedStorm.ChargedStormTuning.Bound(ChargedStorm.ChargedStormTuning.OrbRange, 10f, 100f));
             args["orbBounceRange"] = Num(ChargedStorm.ChargedStormTuning.BounceRange(0)) + "-" +
                 Num(ChargedStorm.ChargedStormTuning.BounceRange(ChargedStorm.ChargedStormTuning.DescriptionChargeLimit));

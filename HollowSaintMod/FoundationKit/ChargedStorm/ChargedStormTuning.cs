@@ -6,13 +6,14 @@ namespace HollowSaint.FoundationKit.ChargedStorm
     public static class ChargedStormTuning
     {
         public static float CloudRadius = 16f, CloudRadiusPerCharge = 3.5f, CloudRange = 80f;
-        public static float CloudCooldown = 12f;
+        public static float CloudCooldown = 10f;
         // Lingering storm: per-strike damage, strike cadence and duration all grow with charges.
-        public static float CloudStrikeDamage = .9f, CloudStrikeDamagePerCharge = .18f, CloudStrikeInterval = .75f, CloudProc = .4f;
-        public static float CloudBaseDuration = 3f, CloudDurationPerCharge = 1f;
+        public static float CloudStrikeDamage = 1.65f, CloudStrikeDamagePerCharge = .25f, CloudStrikeInterval = .75f, CloudProc = .5f;
+        public static float CloudBaseDuration = 4f, CloudDurationPerCharge = 1f;
         public static bool CloudFreeCast = true;
-        public static float OrbDiameter = .6f, OrbDiameterPerCharge = .1f;
-        public static float OrbDamage = 4.1f, OrbDamagePerCharge = .8f, OrbCooldown = 7f;
+        public static float CloudEarlyEndRefund = .5f; // 1.3.1: share of the cooldown refunded for the unused storm time
+        public static float OrbDiameter = .9f, OrbDiameterPerCharge = .15f; // 1.3.1 (Stu: bigger): was .6/.1
+        public static float OrbDamage = 5f, OrbDamagePerCharge = .8f, OrbCooldown = 6f;
         public static float OrbSpeed = 32f, OrbRange = 70f, OrbBounceRange = 18f;
         public static float OrbBounceRangePerCharge = 4.5f;
         public static int OrbBaseHits = 4, CloudTargetLimit = 48;
@@ -39,12 +40,15 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         internal static float Extra(int charges) => Math.Max(0, Math.Min(20, charges) - 1);
         internal static float Radius(int charges) => Bound((CloudRadius + CloudRadiusPerCharge * Extra(charges)) * (charges <= 0 ? .75f : 1f), 6f, 40f);
         internal static float CloudDuration(int charges) => Bound(CloudBaseDuration + CloudDurationPerCharge * Math.Max(0, Math.Min(20, charges)), 1f, 15f);
-        internal static float Diameter(int charges) => Bound(OrbDiameter + OrbDiameterPerCharge * Extra(charges), .3f, 1.5f);
+        internal static float Diameter(int charges) => Bound(OrbDiameter + OrbDiameterPerCharge * Extra(charges), .3f, 2.5f);
         internal static float BounceRange(int charges) => Bound(Bound(OrbBounceRange, 4f, 30f) +
             Bound(OrbBounceRangePerCharge, 0f, 10f) * Extra(charges), 4f, 60f);
         internal static float CloudCoefficient(int charges) => Bound(CloudStrikeDamage + CloudStrikeDamagePerCharge * Math.Max(0, Math.Min(20, charges)), .05f, 20f);
         internal static float OrbCoefficient(int charges) => Bound(OrbDamage + OrbDamagePerCharge * OrbExtra(charges), .1f, 20f);
         internal static int HitBudget(int charges) => Math.Max(1, Math.Min(16, OrbBaseHits + OrbExtra(charges)));
+        // 1.3.1 (Stu playtest): Backup Magazine adds hits to the one Orb instead of extra casts.
+        public static int OrbHitsPerMagazine = 1;
+        internal static int HitBudget(int charges, int bonusStock) => Math.Min(24, HitBudget(charges) + Math.Max(0, bonusStock) * Math.Max(0, OrbHitsPerMagazine));
         private static int OrbExtra(int charges) => Math.Max(0, Math.Min(20, charges)) - 1;
         internal static float Bound(float value, float min, float max) =>
             float.IsNaN(value) || float.IsInfinity(value) ? min : Math.Max(min, Math.Min(max, value));

@@ -9,7 +9,7 @@ static class Program
     static void Check(bool pass, string name) { checks++; if (!pass) throw new Exception(name); }
     static int Main()
     {
-        try { Input(); Holds(); Groups(); Console.WriteLine($"PASS {checks} release policy/resource assertions"); return 0; }
+        try { Input(); Holds(); Groups(); Focus(); Opening(); FocusLifecycleChecks.Run(Check); Console.WriteLine($"PASS {checks} release policy/resource assertions"); return 0; }
         catch (Exception error) { Console.Error.WriteLine(error); return 1; }
     }
     static void Input()
@@ -78,5 +78,31 @@ static class Program
         }
         var pending = new GazeFuelSchedule(); pending.Begin(5); pending.QueueIntake(1f, 3, .06f, out _); pending.Cancel();
         Check(!pending.TakeLaunch(2f, out _), "cancelled intake cannot launch");
+    }
+    static bool Near(float a, float b) => Math.Abs(a - b) < 1e-3f;
+    // 1.3.1 focus ramp: builds with time on target, grace then fade off target, capped.
+    static void Focus()
+    {
+        float f = GazeFocusPolicy.Next(0f, -1f, 0f);
+        Check(f == 0f && Near(GazeFocusPolicy.Multiplier(f), 1f), "fresh target starts unfocused");
+        float t = 0f;
+        for (int i = 0; i < 15; i++) { t += .2f; f = GazeFocusPolicy.Next(f, t - .2f, t); }
+        Check(Near(f, 1f), "3 s of steady 0.2 s ticks reaches full focus");
+        Check(Near(GazeFocusPolicy.Multiplier(f), 1f + GazeFocusPolicy.MaxBonus), "full focus applies the bonus");
+        Check(GazeFocusPolicy.Tier(f) == 5 && GazeFocusPolicy.Tier(.21f) == 1 && GazeFocusPolicy.Tier(.19f) == 0 && GazeFocusPolicy.Tier(.61f) == 3, "five audible focus steps");
+        float half = 0f; for (int i = 0; i < 7; i++) half = GazeFocusPolicy.Next(half, i * .2f, (i + 1) * .2f);
+        Check(half > .4f && half < .5f, "1.4 s on target is under half focus");
+        Check(GazeFocusPolicy.Next(1f, 0f, .45f) >= .99f, "a miss inside the grace keeps full focus");
+        float back = GazeFocusPolicy.Next(1f, 0f, 1f);
+        Check(back > .45f && back < .7f, "1 s away loses about half, then the hit re-credits a step");
+        Check(GazeFocusPolicy.Next(1f, 0f, 3f) < .15f, "long gaps fade focus to (almost) nothing");
+        Check(GazeFocusPolicy.Next(.5f, 0f, 30f) <= GazeFocusPolicy.MaxStep / GazeFocusPolicy.RampSeconds + 1e-4f, "a single late hit credits at most one step");
+        Check(GazeFocusPolicy.Next(float.NaN, 0f, .2f) == 0f && GazeFocusPolicy.Next(.5f, 1f, .5f) >= .5f, "NaN and clock skew are safe");
+    }
+    static void Opening()
+    {
+        Check(Near(GazeReleaseTuning.OpeningRadius(1), 8f) && Near(GazeReleaseTuning.OpeningRadius(5), 16f), "opening radius 6 m + 2 m per charge");
+        Check(Near(GazeReleaseTuning.OpeningRadius(20), 20f), "opening radius capped at 20 m");
+        Check(!GazeReleaseTuning.MidBeamSurges, "mid-beam surges are off by default");
     }
 }

@@ -39,9 +39,19 @@ namespace HollowSaint.FoundationKit.ChargedStorm
                 clouds.Add(cloud); cloud.Begin();
                 return cloud.Duration;
             }
-            var orb = new HollowedOrb.ServerHollowedOrb(body, charges, direction);
+            var slot = body.skillLocator ? body.skillLocator.secondary : null;
+            int magazines = slot && slot.skillDef == ChargedStormRegistration.Orb ? slot.bonusStockFromBody : 0;
+            var orb = new HollowedOrb.ServerHollowedOrb(body, charges, direction, magazines);
             orbs.Add(orb); orb.Begin();
             return HollowedOrb.OrbCastFlow.Recovery;
+        }
+        internal int DismissClouds()
+        {
+            if (!NetworkServer.active) return 0;
+            int n = 0;
+            foreach (var cloud in clouds) if (!cloud.Dismissed) { cloud.Dismiss(); n++; }
+            clouds.Clear();
+            return n;
         }
         private void FixedUpdate()
         {

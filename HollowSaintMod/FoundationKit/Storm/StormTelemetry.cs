@@ -94,10 +94,10 @@ namespace HollowSaint.FoundationKit.Storm
             if (fightMonsters == 0 && alive > 0)
             {
                 fightStart = Time.time; fightCharges = chargesAdded;
-                Plugin.Log.LogAlways("HOLLOW_SAINT_FIGHT_START t=" + Time.time.ToString("0.0", CultureInfo.InvariantCulture) + " monsters=" + alive);
+                Plugin.Log.LogInfo("HOLLOW_SAINT_FIGHT_START t=" + Time.time.ToString("0.0", CultureInfo.InvariantCulture) + " monsters=" + alive);
             }
             else if (fightMonsters > 0 && alive == 0)
-                Plugin.Log.LogAlways("HOLLOW_SAINT_FIGHT_CLEAR t=" + Time.time.ToString("0.0", CultureInfo.InvariantCulture) +
+                Plugin.Log.LogInfo("HOLLOW_SAINT_FIGHT_CLEAR t=" + Time.time.ToString("0.0", CultureInfo.InvariantCulture) +
                     " seconds=" + (Time.time - fightStart).ToString("0.0", CultureInfo.InvariantCulture) +
                     " chargesEarned=" + (chargesAdded - fightCharges));
             fightMonsters = alive;
@@ -125,7 +125,7 @@ namespace HollowSaint.FoundationKit.Storm
             if (qualifyingHits == 0 && chargeElectrocutes == 0 && thunderbolts == 0) return;
             float minutes = Mathf.Max(1f / 60f, (Time.time - startedAt) / 60f);
             // Storm loop health is always logged (one bounded line per 30 s): starved, healthy or flooding?
-            Plugin.Log.LogAlways("HOLLOW_SAINT_STORM_INCOME reason=" + reason +
+            Plugin.Log.LogInfo("HOLLOW_SAINT_STORM_INCOME reason=" + reason +
                 " chargesPerMinute=" + (chargesAdded / minutes).ToString("0.0", CultureInfo.InvariantCulture) +
                 " primes=" + primes + " circuitRefunds=" + refunds + " closingStrikes=" + closingStrikes +
                 " incomeLimited=" + incomeLimited + " wastedBankFull=" + bankFull);

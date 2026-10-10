@@ -28,6 +28,13 @@ namespace HollowSaint.FoundationKit.Thundercloud
             if (!pose) pose = model.gameObject.AddComponent<ThundercloudCrownPose>();
             pose.body = body; pose.origin = from; pose.sky = sky; pose.duration = duration; pose.age = 0; pose.flying = true;
         }
+        /// <summary>1.3.1: a dismissed storm recalls the crown now.</summary>
+        internal static void Recall(CharacterBody body)
+        {
+            var model = body && body.modelLocator ? body.modelLocator.modelTransform : null;
+            var pose = model ? model.GetComponent<ThundercloudCrownPose>() : null;
+            if (pose && pose.flying) pose.duration = Mathf.Min(pose.duration, Mathf.Max(pose.age, ThundercloudSchedule.Ascent) + .4f);
+        }
         private void Awake()
         {
             foreach (var t in GetComponentsInChildren<Transform>(true))

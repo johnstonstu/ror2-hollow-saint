@@ -24,6 +24,19 @@ namespace HollowSaint.FoundationKit.Gaze
 
         private static readonly HashSet<HealthComponent> struck = new HashSet<HealthComponent>();
 
+        /// <summary>Dev autopilot only: (victim, multiplier) for each core hit.</summary>
+        internal static System.Action<HealthComponent, float> FocusTrace;
+
+        /// <summary>Advances focus for a core hit and returns the damage multiplier; reports a tier crossing.</summary>
+        private static float Focus(HealthComponent attacker, HealthComponent victim, float now, out int newTier)
+        {
+            newTier = 0;
+            if (!attacker || !victim) return 1f;
+            var tracker = attacker.GetComponent<GazeFocusTracker>();
+            if (!tracker) tracker = attacker.gameObject.AddComponent<GazeFocusTracker>();
+            return tracker.Hit(victim, now, out newTier);
+        }
+
         /// <summary>v0.9.12+: splash, fork and chain reach multiplier, set by GazeState each tick. It grows
         /// over the channel (GazeTuning.ReachStart to ReachEnd), so a held beam forks further.</summary>
         public static float Reach = 1f;
@@ -61,7 +74,14 @@ namespace HollowSaint.FoundationKit.Gaze
                 if (!FriendlyFireManager.ShouldDirectHitProceed(health, team)) continue;
                 struck.Add(health);
                 Vector3 contactPoint = Center(box);
-                Hit(attacker, box, damage, crit, GazeTuning.ProcCoefficient);
+                float focused = Focus(self, health, Time.time, out int focusTier);
+                FocusTrace?.Invoke(health, focused);
+                Hit(attacker, box, damage * focused, crit, GazeTuning.ProcCoefficient);
+                if (focusTier > 0)
+                {
+                    GazeEffect.Server(GazeEffect.Kind.Focus, contactPoint, origin, attacker, true, focusTier / (float)GazeFocusPolicy.Tiers);
+                    KitLog.Event("GAZE_FOCUS", "tier=" + focusTier + " victim=" + (health.body ? health.body.name : "?"));
+                }
                 if (showContacts && shownHits++ < 4) GazeEffect.Server(GazeEffect.Kind.Contact, contactPoint,
                     origin + direction * Mathf.Clamp(Vector3.Dot(contactPoint - origin, direction) - 2f, 0f, length), attacker, false, 0f);
             }

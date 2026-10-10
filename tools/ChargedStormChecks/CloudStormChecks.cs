@@ -52,9 +52,9 @@ static partial class Program
         finally { ChargedStormTuning.CloudFreeCast=true; }
 
         // Pulse count and timing: FirstStrike, then every Interval through the charge-scaled window.
-        Near(ChargedStormTuning.CloudDuration(0),3,"free storm window");Near(ChargedStormTuning.CloudDuration(1),4,"one-charge window");
-        Near(ChargedStormTuning.CloudDuration(5),8,"five-charge window");Near(ThundercloudSchedule.Interval,.75f,"pulse interval");
-        Check(ThundercloudSchedule.Pulses(0)==5 && ThundercloudSchedule.Pulses(1)==6 && ThundercloudSchedule.Pulses(5)==11,"pulse counts for 0/1/5 charges");
+        Near(ChargedStormTuning.CloudDuration(0),4,"free storm window");Near(ChargedStormTuning.CloudDuration(1),5,"one-charge window");
+        Near(ChargedStormTuning.CloudDuration(5),9,"five-charge window");Near(ThundercloudSchedule.Interval,.75f,"pulse interval");
+        Check(ThundercloudSchedule.Pulses(0)==6 && ThundercloudSchedule.Pulses(1)==7 && ThundercloudSchedule.Pulses(5)==13,"pulse counts for 0/1/5 charges");
         foreach(int charges in new[]{0,1,5})
         {
             Reset();var owner=Body();var a=Body(10,TeamIndex.Monster);
@@ -108,15 +108,28 @@ static partial class Program
             if(live) { RunCloud(cloud);Check(a.healthComponent.received.Count==1,"dead enemy receives no further pulses"); }
         }
 
-        // Per-strike damage at body damage 15: effective (.9 + .18 x charges) x .9.
-        Near(ChargedStormTuning.CloudCoefficient(0),.9f,"free cloud raw coefficient");Near(ChargedStormTuning.CloudCoefficient(5),1.8f,"five-charge raw coefficient");
-        foreach(var (charges,expected) in new[]{(0,12.15f),(5,24.3f)})
+        // 1.3.1 attack-speed scaling: more strikes inside the same window, capped at 2x rate.
+        Near(ThundercloudSchedule.IntervalFor(1f),.75f,"1x attack speed keeps the base cadence");
+        Near(ThundercloudSchedule.IntervalFor(.5f),.75f,"slowed attack speed never stretches the storm");
+        Near(ThundercloudSchedule.IntervalFor(1.5f),.5f,"1.5x attack speed strikes every 0.5 s");
+        Near(ThundercloudSchedule.IntervalFor(3f),.375f,"strike rate capped at double");
+        Check(ThundercloudSchedule.Pulses(0,.5f)==9 && ThundercloudSchedule.Pulses(0,.75f)==ThundercloudSchedule.Pulses(0),"faster storm packs more pulses into the free window");
+        {
+            Reset();var fast=Body();fast.attackSpeed=2f;var victim=Body(10,TeamIndex.Monster);
+            Physics.AimHit=new(0,0,10);BullseyeSearch.candidates.Add(victim.mainHurtBox);
+            var storm=ServerThundercloud.Prepare(fast,0,Vector3.forward);storm.Begin();RunCloud(storm);
+            Check(victim.healthComponent.received.Count==ThundercloudSchedule.Pulses(0,.375f),"2x attack speed storm strikes at the capped rate");
+            Near(storm.Duration,ThundercloudSchedule.CompleteAt(0,.375f),"recovery/visual duration follows the faster schedule");
+        }
+        // Per-strike damage at body damage 15: effective (1.65 + .25 x charges) x .9 (1.3.1).
+        Near(ChargedStormTuning.CloudCoefficient(0),1.65f,"free cloud raw coefficient");Near(ChargedStormTuning.CloudCoefficient(5),2.9f,"five-charge raw coefficient");
+        foreach(var (charges,expected) in new[]{(0,22.275f),(5,39.15f)})
         {
             Reset();var owner=Body();owner.damage=15;var a=Body(10,TeamIndex.Monster);
             Physics.AimHit=new(0,0,10);BullseyeSearch.candidates.Add(a.mainHurtBox);
             var cloud=ServerThundercloud.Prepare(owner,charges,Vector3.forward);cloud.Begin();RunCloud(cloud);
             Check(a.healthComponent.received.Count==ThundercloudSchedule.Pulses(charges),"damage storm completes: "+charges);
-            Check(a.healthComponent.received.All(d=>Math.Abs(d.damage-expected)<.001f && Math.Abs(d.procCoefficient-.4f)<.001f),"per-strike damage at body damage 15: "+charges);
+            Check(a.healthComponent.received.All(d=>Math.Abs(d.damage-expected)<.001f && Math.Abs(d.procCoefficient-.5f)<.001f),"per-strike damage at body damage 15: "+charges);
         }
     }
 }

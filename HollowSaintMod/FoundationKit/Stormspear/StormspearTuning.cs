@@ -20,7 +20,7 @@ namespace HollowSaint.FoundationKit.Stormspear
 
         // Throw
         public static float TapDamage = 3.5f;                // 350% at zero charge; 12.5% reduction across the throw curve
-        public static float FullDamage = 14f;                // 1400% at full charge; burst inherits the reduction, crown Thunderbolt stays independent
+        public static float FullDamage = 12.5f;                // 1250% at full charge (1.3.1: was 1400%); burst inherits the reduction
         public static float ProcCoefficient = 1f;
         public static float ProjectileSpeed = 150f;
         public static float AssistConeDegrees = 3f;

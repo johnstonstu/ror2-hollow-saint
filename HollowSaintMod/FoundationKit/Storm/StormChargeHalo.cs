@@ -38,6 +38,10 @@ namespace HollowSaint.FoundationKit.Storm
         private Quaternion planeRotation = Quaternion.identity;
         private float radiusScale = 1f;
         private bool hasPlane;
+        // 1.3.1 (Stu): a newly banked charge pops (big, white-hot, a short arc from the body), then settles.
+        private const float PopSeconds = .35f;
+        private float[] popAt = new float[0];
+        private int lastLit = -1;
 
         private void Start()
         {
@@ -95,6 +99,14 @@ namespace HollowSaint.FoundationKit.Storm
             if (orbitRoot.gameObject.activeSelf != visible) orbitRoot.gameObject.SetActive(visible);
             int charge = alive ? Mathf.Clamp(meter.Charge, 0, max) : 0;
             bool full = alive && charge >= max;
+            if (popAt.Length != renderers.Length) { popAt = new float[renderers.Length]; for (int i = 0; i < popAt.Length; i++) popAt[i] = -10f; }
+            if (lastLit >= 0 && charge > lastLit && visible)
+            {
+                for (int i = lastLit; i < charge && i < popAt.Length; i++) { popAt[i] = Time.time; Pop(i); }
+                // An audible gain cue: a chime that rises with the bank (the full bank has its own cue).
+                if (charge < max && CustomSoundBank.Ready) Util.PlaySound("Play_HS_GazeLoad" + Mathf.Clamp(charge, 1, 5), gameObject);
+            }
+            lastLit = charge;
             sequence.Tick(Time.time, Time.deltaTime, alive);
             bool released = sequence.Released(Time.time);
 
@@ -108,11 +120,26 @@ namespace HollowSaint.FoundationKit.Storm
                 var direction = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
                 renderers[i].transform.localPosition = direction * (OrbitRadius * radiusScale) * (1f - sequence.GatherAmount);
                 Color color = i < charge ? active * pulse : new Color(0.025f, 0.06f, 0.08f, 1f);
+                float pop = i < popAt.Length ? 1f - Mathf.Clamp01((Time.time - popAt[i]) / PopSeconds) : 0f;
+                if (pop > 0f && i < charge) color = Color.Lerp(color, palette.Core * 2.2f, pop);
                 color.a = 1f;
                 SetTint(renderers[i], color);
-                renderers[i].transform.localScale = Vector3.one * (i < charge ? (full ? 0.105f : 0.085f) : 0.055f);
+                renderers[i].transform.localScale = Vector3.one * (i < charge ? (full ? 0.105f : 0.085f) : 0.055f) * (1f + 2.2f * pop * pop);
             }
             if (visible && charge > 0 && !released) Crackle(charge);
+        }
+
+        private void Pop(int index)
+        {
+            try
+            {
+                if (index < 0 || index >= renderers.Length || !renderers[index]) return;
+                Vector3 at = renderers[index].transform.position;
+                VfxParticles.Burst(at, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .16f, Vector2.zero, new Vector2(.45f, .6f), palette.Core);
+                VfxParticles.Burst(at, Quaternion.identity, palette.Material(VfxAssets.Spark), 8, .25f, new Vector2(2f, 5f), new Vector2(.04f, .08f), palette.Arc, stretch: .06f);
+                if (body) LightningLine.Spawn(body.corePosition, at, .14f, .1f, 1, .2f, palette: palette);
+            }
+            catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_CHARGE_POP " + error.Message); }
         }
 
         /// <summary>Explicit server beats, never inferred from a charge reset or death.</summary>
