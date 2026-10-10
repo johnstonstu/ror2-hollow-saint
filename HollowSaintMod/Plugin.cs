@@ -23,9 +23,9 @@ namespace HollowSaint
     {
         public const string Guid = "com.johnstonstu.hollowsaint";
         // Bump on every staged build; keep in sync with Package/manifest.json. 1.0.0 = first public release.
-        public const string Version = "1.3.1";
+        public const string Version = "1.3.2";
         // Two keywords describing what this build changed; shown in the top-left build tag (0.x builds only).
-        public const string BuildKeywords = "patch fix balance";
+        public const string BuildKeywords = "fluid polish";
         private GUIStyle tagStyle;
 
         /// <summary>Set by the dev showcase recording.</summary>

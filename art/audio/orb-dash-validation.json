@@ -1,0 +1,17 @@
+{
+  "result": "ORB_DASH_AUDIO_PASS",
+  "baseline_sha256": "06F01337E219EBFE0781B71AB544312888C23324918ACC9F47B598E0AEC88117",
+  "bank_sha256": "6281E59F1FC6CB0A40E31A71A3FAF649DA8EDE1F8156477F8EF3E34407DC1F56",
+  "unchanged_media": 50,
+  "unchanged_routing_objects": 161,
+  "restored_media": 0,
+  "added_media": 4,
+  "added_loop": 1,
+  "peaks": {
+    "OrbChargeStart": 11626,
+    "OrbChargeLoop": 4628,
+    "OrbThrow": 11626,
+    "ArcStepCrackle": 2320
+  },
+  "limits": "Offline source/bank validation and dry preview; native mix requires playtest."
+}

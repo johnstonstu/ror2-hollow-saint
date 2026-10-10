@@ -9,6 +9,7 @@ namespace HollowSaint.FoundationKit.ChargedStorm
     {
         private static Material smoke;
         private static Material cloudMass;
+        private static Vector3[] ringBuffer = new Vector3[64];
         private static readonly Dictionary<int, Material> orbMaterials = new Dictionary<int, Material>();
         internal static GameObject Orb(SkinFxPalette palette, float diameter)
         {
@@ -39,11 +40,15 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         }
         internal static void SetRing(LineRenderer line, Vector3 center, float radius)
         {
-            for (int i = 0; i < line.positionCount; i++)
+            // One SetPositions call from a reused buffer (this runs every frame for the cloud and the preview ring).
+            int count = line.positionCount;
+            if (ringBuffer.Length != count) ringBuffer = new Vector3[count];
+            for (int i = 0; i < count; i++)
             {
-                float a = i * Mathf.PI * 2f / line.positionCount;
-                line.SetPosition(i, center + new Vector3(Mathf.Cos(a), 0f, Mathf.Sin(a)) * radius);
+                float a = i * Mathf.PI * 2f / count;
+                ringBuffer[i] = center + new Vector3(Mathf.Cos(a), 0f, Mathf.Sin(a)) * radius;
             }
+            line.SetPositions(ringBuffer);
         }
         internal static Material Smoke()
         {

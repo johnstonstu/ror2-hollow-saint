@@ -99,7 +99,10 @@ namespace HollowSaint.FoundationKit.Gaze
                 float eventAge = GazeFuelTransport.EventAge(packet);
                 switch (packet.kind)
                 {
-                    case GazeFuelTransport.Kind.Begin: presentation.BeginCast(packet.cast, packet.count, packet.capacity, packet.full, eventAge, GazeReleaseTuning.Enabled); break;
+                    case GazeFuelTransport.Kind.Begin:
+                        presentation.BeginCast(packet.cast, packet.count, packet.capacity, packet.full, eventAge, GazeReleaseTuning.Enabled);
+                        presentation.SetReserve(packet.cast, packet.reserve);
+                        break;
                     case GazeFuelTransport.Kind.Swallow:
                         for (int i = 0; i < packet.count; i++) presentation.Swallow(packet.cast, (int)packet.sequence * 20 + i, packet.orbIndex + i, eventAge, packet.travel);
                         break;

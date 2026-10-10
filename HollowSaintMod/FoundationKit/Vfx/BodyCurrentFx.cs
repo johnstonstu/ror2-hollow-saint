@@ -18,6 +18,9 @@ namespace HollowSaint.FoundationKit.Vfx
         private readonly AbilityCurrentWindow left = new AbilityCurrentWindow(), right = new AbilityCurrentWindow();
         private readonly LightningLine[] lines = new LightningLine[LineCount];
         private readonly bool[] used = new bool[LineCount];
+        // 1.3.2: a line that stops being drawn shrinks out over a short tail instead of snapping off.
+        private const float TailSeconds = 0.09f;
+        private readonly float[] lastWidth = new float[LineCount], tail = new float[LineCount];
         private readonly Vector3[] route = new Vector3[ArmCurrentPath.PointCount];
         private readonly Vector3[] surfaceLocal = new Vector3[6];
         private readonly Transform[] bones = new Transform[10];
@@ -79,9 +82,9 @@ namespace HollowSaint.FoundationKit.Vfx
             Intensity = 0f;
             if (!body || !body.healthComponent || !body.healthComponent.alive)
             { Reset(); return; }
-            if (!Resolve() || !ring || !ring.Valid) { feedReady = false; HideUnused(); return; }
+            if (!Resolve() || !ring || !ring.Valid) { feedReady = false; HideUnused(true); return; }
             var characterModel = model.GetComponent<CharacterModel>();
-            if (characterModel && characterModel.invisibilityCount > 0) { feedReady = false; HideUnused(); return; }
+            if (characterModel && characterModel.invisibilityCount > 0) { feedReady = false; HideUnused(true); return; }
             float lw, lt, lp, rw, rt, rp;
             left.Sample(now, out lw, out lt, out lp);
             right.Sample(now, out rw, out rt, out rp);
@@ -136,7 +139,7 @@ namespace HollowSaint.FoundationKit.Vfx
             // 1.3.1 (Stu): while the crown has flown up into a Thundercloud (or is otherwise far from the
             // body) the spine feed would stretch to the sky and read as lightning striking the Saint.
             if (Thundercloud.ThundercloudCrownPose.OwnsPresentation(body) || Vector3.Distance(spine, dock) > 2.5f * unit)
-            { feedReady = false; HideUnused(); return; }
+            { feedReady = false; HideUnused(true); return; }
             float feed = Vector3.Distance(core.position, flank) + Vector3.Distance(flank, spine) + Vector3.Distance(spine, dock);
             Place(0, core.position, flank, 0.24f * source * armBoost * LightningRhythm.Gain(now), 1, dt);
             Place(1, flank, spine, 0.28f * source * armBoost * LightningRhythm.Gain(now, feed * 0.5f), 1, dt);
@@ -212,6 +215,7 @@ namespace HollowSaint.FoundationKit.Vfx
             var fx = lines[index];
             fx.gameObject.SetActive(true);
             fx.start = from; fx.end = to; fx.width = width;
+            lastWidth[index] = width; tail[index] = TailSeconds;
             fx.Tick(dt);
         }
 
@@ -270,12 +274,23 @@ namespace HollowSaint.FoundationKit.Vfx
             if (!complete) Plugin.Log.LogWarning("HOLLOW_SAINT_BODY_CURRENT missing skin bind pose; arm surface directions use current pose on " + model.name);
         }
 
-        private void HideUnused()
-        { for (int i = 0; i < lines.Length; i++) if (lines[i] && !used[i]) lines[i].gameObject.SetActive(false); }
+        private void HideUnused(bool immediate = false)
+        {
+            float dt = Time.deltaTime;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var line = lines[i];
+                if (!line || used[i] || !line.gameObject.activeSelf) continue;
+                tail[i] -= dt;
+                if (immediate || tail[i] <= 0f) { tail[i] = 0f; line.gameObject.SetActive(false); continue; }
+                line.width = lastWidth[i] * (tail[i] / TailSeconds); // same endpoints, thinning out
+                line.Tick(dt);
+            }
+        }
         private void DestroyLines()
         { for (int i = 0; i < lines.Length; i++) { if (lines[i]) Destroy(lines[i].gameObject); lines[i] = null; } }
         private void Reset()
-        { left.Clear(); right.Clear(); coreUntil = thunderUntil = 0f; feedReady = false; IsActive = false; Intensity = 0f; Array.Clear(used, 0, used.Length); HideUnused(); }
+        { left.Clear(); right.Clear(); coreUntil = thunderUntil = 0f; feedReady = false; IsActive = false; Intensity = 0f; Array.Clear(used, 0, used.Length); HideUnused(true); }
         private void OnDisable() { Reset(); DestroyLines(); }
         private void OnDestroy() { DestroyLines(); }
     }

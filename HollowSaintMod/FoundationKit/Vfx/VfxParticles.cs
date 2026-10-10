@@ -172,7 +172,7 @@ namespace HollowSaint.FoundationKit.Vfx
         }
 
         /// <summary>A flat circle of LineRenderer points that expands and fades.</summary>
-        public static void Ring(Vector3 center, Vector3 normal, float startRadius, float endRadius, float duration, float width, Material material, SkinFxPalette palette = null)
+        public static GameObject Ring(Vector3 center, Vector3 normal, float startRadius, float endRadius, float duration, float width, Material material, SkinFxPalette palette = null)
         {
             var go = new GameObject("HS_Ring");
             go.transform.position = center;
@@ -183,12 +183,33 @@ namespace HollowSaint.FoundationKit.Vfx
             // hairlines across the screen.
             bool conform = Vector3.Dot(normal.normalized, Vector3.up) > .95f && Mathf.Max(startRadius, endRadius) > 1.8f;
             go.AddComponent<ExpandingRing>().Init(startRadius, endRadius, duration, width, palette.Material(material), palette.Arc, conform);
+            return go;
+        }
+
+        /// <summary>1.3.2: fades a ring returned by <see cref="Ring"/> out over <paramref name="seconds"/> and
+        /// destroys it (no-op for a ring that already finished).</summary>
+        public static void FadeRing(GameObject ring, float seconds)
+        {
+            if (!ring) return;
+            var expanding = ring.GetComponent<ExpandingRing>();
+            if (expanding) expanding.BeginFade(seconds);
+        }
+
+        /// <summary>1.3.2: the ring fades out by itself when <paramref name="owner"/> dies or despawns.</summary>
+        public static void WatchOwner(GameObject ring, RoR2.CharacterBody owner)
+        {
+            if (!ring || !owner) return;
+            var expanding = ring.GetComponent<ExpandingRing>();
+            if (expanding) expanding.Watch(owner);
         }
 
         private sealed class ExpandingRing : MonoBehaviour
         {
             private LineRenderer line;
             private float r0, r1, duration, width, age;
+            private float fadeLeft = -1f, fadeTotal = 1f;
+            private bool watching;
+            private RoR2.CharacterBody watched;
             private const int Points = 48;
             private Color color;
 
@@ -210,15 +231,33 @@ namespace HollowSaint.FoundationKit.Vfx
                 Apply(0f);
             }
 
+            public void BeginFade(float seconds)
+            {
+                if (fadeLeft >= 0f) return;
+                fadeTotal = Mathf.Max(0.02f, seconds);
+                fadeLeft = fadeTotal;
+            }
+
+            public void Watch(RoR2.CharacterBody owner) { watched = owner; watching = true; }
+
             private void Update()
             {
                 age += Time.deltaTime;
                 float t = age / duration;
                 if (t >= 1f) { Destroy(gameObject); return; }
-                Apply(t);
+                if (watching && fadeLeft < 0f &&
+                    (!watched || !watched.healthComponent || !watched.healthComponent.alive)) BeginFade(0.15f);
+                float fade = 1f;
+                if (fadeLeft >= 0f)
+                {
+                    fadeLeft -= Time.deltaTime;
+                    if (fadeLeft <= 0f) { Destroy(gameObject); return; }
+                    fade = fadeLeft / fadeTotal;
+                }
+                Apply(t, fade);
             }
 
-            private void Apply(float t)
+            private void Apply(float t, float fade = 1f)
             {
                 float eased = 1f - (1f - t) * (1f - t);
                 float r = Mathf.Lerp(r0, r1, eased);
@@ -237,10 +276,10 @@ namespace HollowSaint.FoundationKit.Vfx
                     p.y = heights[i];
                     line.SetPosition(i, p);
                 }
-                float w = width * (1f - t);
+                float w = width * (1f - t) * fade;
                 line.startWidth = w;
                 line.endWidth = w;
-                var c = new Color(color.r, color.g, color.b, 1f - t * t);
+                var c = new Color(color.r, color.g, color.b, (1f - t * t) * fade);
                 line.startColor = c;
                 line.endColor = c;
             }

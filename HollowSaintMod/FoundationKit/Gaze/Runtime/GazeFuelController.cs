@@ -116,6 +116,7 @@ namespace HollowSaint.FoundationKit.Gaze
             requests.Begin(cast);
             var packet = Packet(GazeFuelTransport.Kind.Begin);
             packet.count = (byte)ledger.Entry; packet.capacity = (byte)ledger.Capacity;
+            packet.reserve = (byte)ledger.Reserve;
             packet.full = ledger.Entry == ledger.Capacity;
             packet.beamDuration = beamDuration;
             Send(packet);

@@ -26,6 +26,7 @@ namespace HollowSaint.FoundationKit
         private CharacterBody owner;
         private int lastSeen;
         private Gaze.GazeFuelLedger gazeFuel;
+        private int gazeGatherEntry = -1;
         private readonly ChargedStorm.StoredChargeCastLedger chargeCast = new ChargedStorm.StoredChargeCastLedger();
         private readonly Storm.ChargeIncomeBucket income = new Storm.ChargeIncomeBucket();
         /// <summary>True when one more charge would bank now (not full, income guard ready).</summary>
@@ -105,16 +106,26 @@ namespace HollowSaint.FoundationKit
             for (int i = 0; i < count && !IsFull; i++) owner.AddBuff(ChargeBuff);
         }
 
+        // Called on every fresh Gaze entry, including empty/disabled gathers. The
+        // beam handoff consumes this server snapshot; a later cast replaces it.
+        internal void SnapshotGazeGather()
+        {
+            if (NetworkServer.active) gazeGatherEntry = Charge;
+        }
+
         internal void ClaimGazeFuel(Gaze.GazeFuelLedger ledger)
         {
             if (!NetworkServer.active || !owner || !ChargeBuff) return;
             // A forced Gaze transition supersedes an uncommitted new-skill gather.
             // The bank is untouched until launch, so Gaze can safely claim it here.
             chargeCast.Cancel();
-            ledger.Begin(Charge, KitTuning.StormChargeMax);
+            int bank = Charge;
+            int entry = gazeGatherEntry < 0 ? bank : Mathf.Min(bank, gazeGatherEntry);
+            gazeGatherEntry = -1;
+            ledger.Begin(entry, KitTuning.StormChargeMax, bank - entry);
             gazeFuel = ledger;
             AutoHeldFromMerge = false;
-            owner.SetBuffCount(ChargeBuff.buffIndex, 0);
+            owner.SetBuffCount(ChargeBuff.buffIndex, ledger.Reserve);
         }
 
         internal int ReleaseGazeFuel(bool alive)
@@ -171,6 +182,9 @@ namespace HollowSaint.FoundationKit
             }
             lastSeen = now;
         }
-        private void OnDisable() { if (NetworkServer.active) chargeCast.Cancel(); }
+        private void OnDisable()
+        {
+            if (NetworkServer.active) { chargeCast.Cancel(); gazeGatherEntry = -1; }
+        }
     }
 }

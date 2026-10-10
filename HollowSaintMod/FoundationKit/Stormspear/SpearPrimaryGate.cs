@@ -37,10 +37,18 @@ namespace HollowSaint.FoundationKit.Stormspear
             // GenericSkill.CanExecute does not include the native input claim check.
             // A refunded mustKeyPress spear cannot restart from its claimed held press.
             var secondary = body.skillLocator ? body.skillLocator.secondary : null;
-            if (!action && bank && bank.skill2.down && secondary &&
+            // 1.3.2: Gaze's charge-up claims Secondary itself, so a tap there starts no spear and
+            // must not cancel a bolt that is now allowed to fire through the charge.
+            if (!action && bank && bank.skill2.down && secondary && !GazeOwnsCrown() &&
                 secondary.skillDef is StormspearSkillDef &&
                 (!secondary.skillDef.mustKeyPress || !bank.skill2.hasPressBeenClaimed) && secondary.CanExecute()) action = true;
             return input.Observe(action, StormspearCharge.InCrown(body), bank && bank.skill1.down);
+        }
+        private EntityStateMachine crown;
+        private bool GazeOwnsCrown()
+        {
+            if (!crown) crown = EntityStateMachine.FindByCustomName(gameObject, KitRegistration.CrownMachineName);
+            return crown && crown.state is Gaze.GazeState;
         }
         private void FixedUpdate() { Observe(); }
         private void OnDisable() { input.Reset(); }

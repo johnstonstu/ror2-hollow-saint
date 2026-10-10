@@ -178,4 +178,27 @@ interrupted.inputBank.skill1.down=false;interrupted.inputBank.skill2.hasPressBee
 Check(recoveredPrimary.skillDef.IsReady(recoveredPrimary),"claimed hold does not relatch after a second primary release");
 refunded.skillDef.mustKeyPress=false;interrupted.inputBank.skill1.down=true;
 Check(!recoveredPrimary.ExecuteIfReady(),"native hold-eligible secondary still anticipated when mustKeyPress is disabled");
+// Success: while Gaze owns Crown, an unclaimed Secondary press cannot interrupt
+// allowed bolts merely because the native spear slot is ready. Actual spear
+// actions still pause Primary, and the pending-input guard returns after Gaze.
+foreach(bool claimed in new[]{false,true}) foreach(bool mustPress in new[]{false,true})
+{
+    var gaze=Body();gaze.inputBank.skill1.down=true;gaze.inputBank.skill2.down=true;
+    gaze.inputBank.skill2.hasPressBeenClaimed=claimed;
+    var readySpear=new GenericSkill{characterBody=gaze,skillDef=new StormspearSkillDef{mustKeyPress=mustPress},stock=1,rechargeStopwatch=2};
+    gaze.skillLocator.secondary=readySpear;
+    var crown=gaze.gameObject.AddComponent<EntityStateMachine>();crown.customName="Crown";
+    crown.state=new HollowSaint.FoundationKit.Gaze.GazeState();
+    var primaryDuringGaze=new GenericSkill{characterBody=gaze,skillDef=new ArcBoltInputSkillDef()};
+    Check(primaryDuringGaze.ExecuteIfReady(),"Gaze-owned Secondary cannot falsely block Primary before or after native claim");
+    Check(readySpear.stock==1 && readySpear.rechargeStopwatch==2 && gaze.inputBank.skill2.hasPressBeenClaimed==claimed,
+        "Gaze exception preserves native secondary stock, recharge and claim");
+    primaryDuringGaze.stock=1;
+    var actualSpear=gaze.gameObject.AddComponent<EntityStateMachine>();actualSpear.customName="Spear";
+    actualSpear.state=new StormspearChargeState();
+    Check(!primaryDuringGaze.ExecuteIfReady(),"Gaze exception never bypasses an actual spear action");
+    actualSpear.state=new EntityStates.EntityState();crown.state=new EntityStates.EntityState();
+    Check(primaryDuringGaze.skillDef.IsReady(primaryDuringGaze)==(mustPress && claimed),
+        "exiting Gaze restores the native pending-spear guard using current claim semantics");
+}
 Console.WriteLine($"Terrain/spear/source-input checks: {checks} assertions passed (synthetic world/native input adapters; no runtime claim).");

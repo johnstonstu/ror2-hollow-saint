@@ -4,6 +4,38 @@ Mostly original deterministic synthesis, mono PCM16 at 48 kHz. Soft filtered
 footfalls, airy glide, restrained electrical Circuit and attack accents are
 starting levels for gameplay mixing.
 
+## 1.3.2 Orb and dash follow-up
+
+The current bank adds four isolated original cues: `OrbChargeStart` (0.55 s
+electrical rise), `OrbChargeLoop` (2 s repeating low buzz/sparse crackle),
+`OrbThrow` (0.48 s discharge and short low tail), and `ArcStepCrackle` (0.22 s
+quiet dash accent). The recipe combines original ChainHop, ThunderRelease and
+SpearThrow sources with deterministic synthesis. No new third-party audio.
+
+The Orb start/throw peak at -9 dBFS, hold at -17 dBFS and dash accent at
+-23 dBFS before the existing SFX bus/positional attenuation. These are source
+levels, not perceived loudness claims. The original dash sound is retained.
+The held loop starts once after 0.20 s and stops by exact playing ID over 70 ms
+on release or 180 ms on cancel. A separate, stationary two-second throw emitter
+preserves its finite tail when the first flight effect immediately hits.
+
+`tools/audio/orb_dash_audio.py` records the additive recipe and checks against
+the pinned pre-change bank (`06F01337...C88117`). Its `prepare` operation is for
+adding the four objects to that baseline once. The checked-in project/sources
+can be rebuilt directly with WwiseConsole; pass an **absolute project path**.
+Then run `python tools/audio/check_bank.py`. The delta `check` accepts the
+saved baseline bank and the preview output directory as its final arguments.
+
+`orb-dash-validation.json` proves all 50 previous media entries and all 161
+previous routing objects are byte-identical, with four media entries and five
+events added. The general checker now covers all 54 sources/60 events,
+including the earlier Gaze cues, and reads loop properties alongside mix trims.
+No Init bank is shipped. The dry preview and preservation baseline for this
+session are under `artifacts/audio/orb-dash-132-20261010T175026Z/`.
+Native listening in combat remains required to set the final mix.
+
+## Earlier audio work
+
 **v0.9.1: three cues come from recorded samples** (Pixabay Content License, see
 `samples/CREDITS.md`): `ThunderStrike` (replaces the synthesized thunderclap),
 and the new `SpearBurst` (charged Stormspear impact, burst radius 5 m and up; taps

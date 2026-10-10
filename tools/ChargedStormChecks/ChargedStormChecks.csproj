@@ -13,6 +13,8 @@
     <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeCompatibleSkillDef.cs" Link="Production/StoredChargeCompatibleSkillDef.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/ChargedStorm/StoredChargeUtilityExit.cs" Link="Production/StoredChargeUtilityExit.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearSkillDef.cs" Link="Production/StormspearSkillDef.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearPrimaryGate.cs" Link="Production/SpearPrimaryGate.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/SpearPrimaryInputPolicy.cs" Link="Production/SpearPrimaryInputPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearCooldownPolicy.cs" Link="Production/StormspearCooldownPolicy.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/ArcBolt/ArcBoltInputSkillDef.cs" Link="Production/ArcBoltInputSkillDef.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/ArcBolt/ArcBoltState.cs" Link="Production/ArcBoltState.cs" />

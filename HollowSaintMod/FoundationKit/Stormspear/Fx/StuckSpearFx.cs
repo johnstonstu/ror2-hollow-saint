@@ -26,7 +26,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
         private float nextCrackle;
         private HealthComponent host;
         private CharacterBody owner;
-        private bool conductor, hadStage;
+        private bool conductor, hadStage, hadAnchor;
         private Stage stage;
         private SpearConductorVisual holder;
 
@@ -71,6 +71,7 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
             Ghosts.TintRoot(fx.model, palette);
 
             fx.anchor = NearestHurtBox(victim, point);
+            fx.hadAnchor = fx.anchor;
             if (fx.anchor)
             {
                 fx.localPos = fx.anchor.InverseTransformPoint(root.transform.position);
@@ -106,6 +107,8 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
                 !owner.healthComponent.alive || !anchor || stage != Stage.instance || (hadStage && !stage)))
             { Destroy(gameObject); return; }
             if (anchor) transform.SetPositionAndRotation(anchor.TransformPoint(localPos), anchor.rotation * localRot);
+            // 1.3.2: the host was despawned (corpse cleanup). Burn out now instead of hanging in mid-air until the timer.
+            else if (hadAnchor && age < life) life = age;
             if (age < life)
             {
                 // Charging up to the burst: the sheath arcs swell.

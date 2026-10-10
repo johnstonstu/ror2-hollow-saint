@@ -21,33 +21,46 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private readonly Transform[] orbs = new Transform[20];
         private readonly Vector3[] orbFrom = new Vector3[20];
         private readonly float[] orbAt = new float[20];
+        private readonly System.Collections.Generic.List<uint> soundIds = new System.Collections.Generic.List<uint>();
 
         public static GazeChargeUpFx Begin(CharacterBody body, int available)
         {
             if (!body) return null;
             var go = new GameObject("HS_GazeChargeUp");
             var fx = go.AddComponent<GazeChargeUpFx>();
-            fx.body = body; fx.available = Mathf.Clamp(available, 1, 20); fx.born = Time.time;
-            fx.palette = SkinFxPalette.ForBody(body);
-            fx.emitter = new GameObject("HS_GazeChargeEmitter");
-            fx.emitter.transform.SetParent(body.gameObject.transform, false);
-            fx.glowBall = Ball(fx.palette, 0.18f);
-            fx.glow = fx.glowBall.AddComponent<Light>();
-            fx.glow.type = LightType.Point; fx.glow.color = fx.palette.Arc; fx.glow.range = 4f; fx.glow.intensity = 0.6f;
-            fx.glow.shadows = LightShadows.None;
-            return fx;
+            try
+            {
+                fx.body = body; fx.available = Mathf.Clamp(available, 1, 20); fx.born = Time.time;
+                fx.palette = SkinFxPalette.ForBody(body);
+                fx.emitter = new GameObject("HS_GazeChargeEmitter");
+                fx.emitter.transform.SetParent(body.gameObject.transform, false);
+                fx.glowBall = Ball(fx.palette, 0.18f);
+                fx.glow = fx.glowBall.AddComponent<Light>();
+                fx.glow.type = LightType.Point; fx.glow.color = fx.palette.Arc; fx.glow.range = 4f; fx.glow.intensity = 0.6f;
+                fx.glow.shadows = LightShadows.None;
+                return fx;
+            }
+            catch
+            {
+                // The caller logs this optional effect failure; release partial ownership first.
+                Destroy(go); throw;
+            }
         }
 
         private static GameObject Ball(SkinFxPalette palette, float size)
         {
             var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            go.name = "HS_GazeChargeOrb";
-            var collider = go.GetComponent<Collider>(); if (collider) { collider.enabled = false; Destroy(collider); }
-            var r = go.GetComponent<MeshRenderer>();
-            r.sharedMaterial = palette.Material(VfxAssets.ArcCore);
-            r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; r.receiveShadows = false;
-            go.transform.localScale = Vector3.one * size;
-            return go;
+            try
+            {
+                go.name = "HS_GazeChargeOrb";
+                var collider = go.GetComponent<Collider>(); if (collider) { collider.enabled = false; Destroy(collider); }
+                var r = go.GetComponent<MeshRenderer>();
+                r.sharedMaterial = palette.Material(VfxAssets.ArcCore);
+                r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; r.receiveShadows = false;
+                go.transform.localScale = Vector3.one * size;
+                return go;
+            }
+            catch { Destroy(go); throw; }
         }
 
         private Vector3 Crown => body ? HaloRing.CenterOf(body) + Vector3.up * 0.25f : transform.position;
@@ -55,7 +68,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         /// <summary>Charge n (1-based) starts its flight into the crown.</summary>
         public void Absorb(int n)
         {
-            if (!body || n < 1 || n > orbs.Length) return;
+            if (!body || endAt >= 0f || n <= absorbed || n > orbs.Length) return;
             absorbed = Mathf.Max(absorbed, n);
             float angle = (n - 1) * Mathf.PI * 2f / Mathf.Max(3, available) + born;
             Vector3 from = body.corePosition + new Vector3(Mathf.Cos(angle), -0.2f, Mathf.Sin(angle)) * RingRadius;
@@ -64,7 +77,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             orbs[n - 1] = orb; orbFrom[n - 1] = from; orbAt[n - 1] = Time.time;
             VfxParticles.Burst(from, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .15f, Vector2.zero, new Vector2(.6f, .8f), palette.Arc);
             int tier = Mathf.Clamp(n, 1, 5);
-            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + tier : "Play_HS_ChargeTick", emitter);
+            uint id = Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + tier : "Play_mage_m1_cast_lightning", emitter);
+            if (id != 0) soundIds.Add(id);
         }
 
         private void Arrive(int n)
@@ -80,23 +94,53 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         {
             if (endAt >= 0f) return;
             endAt = Time.time;
-            if (fired && body && count > 0)
+            try
             {
-                Vector3 c = Crown;
-                VfxParticles.Burst(c, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .3f, Vector2.zero, Vector2.one * (1.6f + .4f * count), palette.Core);
-                VfxParticles.Burst(c, Quaternion.identity, palette.Material(VfxAssets.Spark), 14 + 5 * count, .4f, new Vector2(4f, 10f), new Vector2(.06f, .12f), palette.Arc, stretch: .07f);
-                VfxParticles.FlashLight(c, palette.Arc, 3f + count, 8f + count, .3f);
+                if (fired && body && count > 0)
+                {
+                    Vector3 c = Crown;
+                    VfxParticles.Burst(c, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .3f, Vector2.zero, Vector2.one * (1.6f + .4f * count), palette.Core);
+                    VfxParticles.Burst(c, Quaternion.identity, palette.Material(VfxAssets.Spark), 14 + 5 * count, .4f, new Vector2(4f, 10f), new Vector2(.06f, .12f), palette.Arc, stretch: .07f);
+                    VfxParticles.FlashLight(c, palette.Arc, 3f + count, 8f + count, .3f);
+                }
             }
+            finally { Finish(fired); }
+        }
+
+        private void Finish(bool fired)
+        {
             for (int i = 0; i < orbs.Length; i++) if (orbs[i]) Destroy(orbs[i].gameObject);
-            if (glowBall) Destroy(glowBall);
-            if (emitter) Destroy(emitter, 1.5f);
-            Destroy(gameObject, 0.05f);
+            // 1.3.2: the crown glow shrinks and dims over a short tail (FadeOut) instead of cutting.
+            // OnDestroy removes the ball when this object goes.
+            if (glow) fadeIntensity = glow.intensity;
+            if (glowBall) fadeScale = glowBall.transform.localScale;
+            if (!fired) FadeSounds();
+            if (emitter)
+            {
+                emitter.transform.SetParent(null, true);
+                Destroy(emitter, fired ? 1.5f : 0.35f);
+                emitter = null; // the scheduled tail now owns its lifetime
+            }
+            soundIds.Clear();
+            Destroy(gameObject, FadeSeconds + 0.02f);
+        }
+
+        private const float FadeSeconds = 0.14f;
+        private float fadeIntensity;
+        private Vector3 fadeScale;
+
+        private void FadeOut()
+        {
+            if (!glowBall) return;
+            float k = 1f - Mathf.Clamp01((Time.time - endAt) / FadeSeconds);
+            if (glow) glow.intensity = fadeIntensity * k * k;
+            glowBall.transform.localScale = fadeScale * k;
         }
 
         private void Update()
         {
+            if (endAt >= 0f) { FadeOut(); return; }
             if (!body || !body.healthComponent || !body.healthComponent.alive) { End(absorbed, false); return; }
-            if (endAt >= 0f) return;
             Vector3 c = Crown;
             float t = Time.time;
             // Orbs spiral up into the crown on a tether.
@@ -111,7 +155,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 Vector3 side = Vector3.Cross(axis.normalized, Vector3.up);
                 Vector3 p = Vector3.Lerp(orbFrom[i], c, e) + side * Mathf.Sin(u * Mathf.PI) * 0.6f + Vector3.up * Mathf.Sin(u * Mathf.PI) * 0.5f;
                 orb.position = p;
-                if (Random.value < 0.6f) LightningLine.Spawn(p, c, 0.05f, 0.06f, 0, 0.18f, palette: palette);
+                // 0.6 per frame at 60 fps (about 36 tethers per second), now independent of the frame rate.
+                if (Random.value < Mathf.Min(1f, 36f * Time.deltaTime)) LightningLine.Spawn(p, c, 0.05f, 0.06f, 0, 0.18f, palette: palette);
             }
             // Crown glow and light grow with every absorbed charge.
             float k = absorbed / (float)Mathf.Max(1, available);
@@ -132,8 +177,20 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
 
         private void OnDestroy()
         {
+            FadeSounds();
+            if (emitter) Destroy(emitter);
             for (int i = 0; i < orbs.Length; i++) if (orbs[i]) Destroy(orbs[i].gameObject);
             if (glowBall) Destroy(glowBall);
+        }
+
+        private void FadeSounds()
+        {
+            foreach (uint id in soundIds)
+            {
+                try { AkSoundEngine.StopPlayingID(id, 300); }
+                catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_GAZE_GATHER_TAIL " + error.Message); }
+            }
+            soundIds.Clear();
         }
     }
 }

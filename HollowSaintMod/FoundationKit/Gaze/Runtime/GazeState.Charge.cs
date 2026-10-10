@@ -24,7 +24,7 @@ namespace HollowSaint.FoundationKit.Gaze
         private bool charging;
         private int chargeAvailable, chargeAbsorbed;
         private float chargeFullAt = -1f;
-        private bool chargeGravityHeld, chargeHandedOff;
+        private bool chargeGravityHeld, chargeHandedOff, chargeReleasedToBeam;
         private Fx.GazeChargeUpFx chargeFx;
 
         internal int ChargeAbsorbed => chargeAbsorbed;
@@ -32,8 +32,10 @@ namespace HollowSaint.FoundationKit.Gaze
         /// <summary>True when this instance is the charge phase (handled entirely here).</summary>
         private bool BeginChargePhase()
         {
-            if (beamPhase || !GazeReleaseTuning.Enabled) return false;
+            if (beamPhase) return false;
             var meter = characterBody ? characterBody.GetComponent<DischargeMeter>() : null;
+            if (meter) meter.SnapshotGazeGather();
+            if (!GazeReleaseTuning.Enabled) return false;
             chargeAvailable = Mathf.Clamp(meter ? meter.Charge : 0, 0, Mathf.Max(1, KitTuning.StormChargeMax));
             if (chargeAvailable <= 0) { beamPhase = true; return false; } // nothing to absorb: straight to the beam
             charging = true;
@@ -81,7 +83,8 @@ namespace HollowSaint.FoundationKit.Gaze
         private void ChargeUpdate()
         {
             if (!isAuthority || !inputBank) return;
-            inputBank.skill1.hasPressBeenClaimed = true;
+            // 1.3.2 (Stu): Arc Bolt keeps firing while charges feed the crown. The opening
+            // count is frozen at entry, so bolts here bank charges for later.
             inputBank.skill2.hasPressBeenClaimed = true;
             // Utility backs out of the charge-up without casting the beam.
             if (inputBank.skill3.justPressed && !chargeHandedOff)
@@ -95,6 +98,7 @@ namespace HollowSaint.FoundationKit.Gaze
         {
             if (chargeHandedOff) return;
             chargeHandedOff = true;
+            chargeReleasedToBeam = true;
             KitLog.Event("GAZE_CHARGE_RELEASE", "absorbed=" + chargeAbsorbed + " of " + chargeAvailable);
             outer.SetNextState(new GazeState { beamPhase = true, OpeningCharges = chargeAbsorbed });
         }
@@ -108,7 +112,9 @@ namespace HollowSaint.FoundationKit.Gaze
                 characterMotor.gravityParameters = gravity;
                 chargeGravityHeld = false;
             }
-            if (chargeFx) chargeFx.End(chargeAbsorbed, chargeHandedOff);
+            // The transition guard also covers Utility cancellation; only an
+            // actual beam handoff gets the release burst and firing audio tail.
+            if (chargeFx) chargeFx.End(chargeAbsorbed, chargeReleasedToBeam);
             if (armored && NetworkServer.active && characterBody && GazeArmor.Def) characterBody.RemoveBuff(GazeArmor.Def);
             armored = false;
             // The beam phase re-holds the fall guard; a Utility back-out releases it here.

@@ -61,6 +61,10 @@ namespace HollowSaint
             public readonly ArmChain chain = new ArmChain();
             public float cast = 1f;
             public float fingersWeight = 1f;
+            // 1.3.2: remembered crown-hold pose (animator output) and how much of it is pinned.
+            public Transform[] pinBones;
+            public Quaternion[] pinPose;
+            public float pin;
         }
 
         private FoundationPresentation presentation;
@@ -123,6 +127,11 @@ namespace HollowSaint
             var list = new List<Transform>();
             if (chest) list.Add(chest);
             Collect(left, list); Collect(right, list);
+            var pinList = new List<Transform>();
+            Collect(left, pinList); left.pinBones = pinList.ToArray(); pinList.Clear();
+            Collect(right, pinList); right.pinBones = pinList.ToArray();
+            left.pinPose = new Quaternion[left.pinBones.Length];
+            right.pinPose = new Quaternion[right.pinBones.Length];
             saved = list.ToArray();
             savedRotations = new Quaternion[saved.Length];
             if (animator)
@@ -180,6 +189,7 @@ namespace HollowSaint
                 ClearFingerLife(left); ClearFingerLife(right);
                 for (int i = 0; i < saved.Length; i++) savedRotations[i] = saved[i].localRotation;
                 hasSaved = true;
+                PinHeldArm(dt);
                 SpearCarry.ApplyAim(body, time, rawDt);
                 RecordApplied();
                 return;
@@ -203,6 +213,9 @@ namespace HollowSaint
 
             for (int i = 0; i < saved.Length; i++) savedRotations[i] = saved[i].localRotation;
             hasSaved = true;
+            // After the save (so Restore returns the bones to the Animator pose) and before the
+            // life layer (so breathing and follow-through still ride on the pinned arm).
+            PinHeldArm(dt);
 
             breathPhase += dt * BreathHz * Mathf.PI * 2f;
             float breath = Mathf.Sin(breathPhase); // -1..1, inhale positive
@@ -308,12 +321,144 @@ namespace HollowSaint
             a.fallbackSide = armSide;
         }
 
+        // ---- 1.3.2: Arc Bolt over a held crown pose (see FoundationLayerWeights) ----
+        private const float PinInFallback = 0.1f, PinOut = 0.12f;
+        private FoundationLayerWeights layerWeights;
+        private bool weightsResolved, pinCaptured;
+        // The crown clips, sampled for the off arm at the time the hold has reached, and the model
+        // hierarchy saved around each sample (the clip writes every bone it animates).
+        private AnimationClip castClip, holdClip;
+        private bool clipsResolved;
+        private Transform[] sampleBones;
+        private Vector3[] samplePos, sampleScale;
+        private Quaternion[] sampleRot;
+
+        /// <summary>The bolt replaces the crown hold on its layer, so the Animator no longer
+        /// produces the hold for the non-throwing arm, and the bolt clip's own off-arm pose hangs at
+        /// the side. While a bolt stands in for the hold (and while the arms blend back into it)
+        /// this puts the other arm on the hold clip's pose at the time the hold has reached (it
+        /// keeps rising through a Gaze charge). A remembered steady pose is the fallback when the
+        /// clip cannot be sampled. After the save (so Restore returns the Animator pose) and before
+        /// the life layer, so breathing and follow-through still ride on the held arm.</summary>
+        private void PinHeldArm(float dt)
+        {
+            DebugPinArm = 0; DebugPinSampled = false; DebugSampleError = -1f;
+            if (!weightsResolved) { layerWeights = GetComponent<FoundationLayerWeights>(); weightsResolved = true; }
+            if (!layerWeights) return;
+            int holdHash; float holdTime;
+            int bolt = layerWeights.PinTarget(out holdHash, out holdTime);
+            DebugPinArm = bolt;
+            if (bolt == 0)
+            {
+                if (layerWeights.HoldSteady(out holdHash, out holdTime))
+                {
+                    if (DebugCompare) DebugSampleError = SampleError(holdHash, holdTime);
+                    Capture(left); Capture(right); pinCaptured = true;
+                }
+                else if (!layerWeights.HoldPresent()) pinCaptured = false;
+                if (left.pin > 0f) Pin(left, false, false, dt);
+                if (right.pin > 0f) Pin(right, false, false, dt);
+                return;
+            }
+            Arm held = bolt > 0 ? left : right, throwing = bolt > 0 ? right : left;
+            bool sampled = SampleHold(holdHash, holdTime, held);
+            DebugPinSampled = sampled;
+            // The sample is the pose the Animator showed just before the cut, so it applies at
+            // once; easing it in let the arm dip toward the bolt clip's off-arm pose for a few frames.
+            Pin(held, sampled || pinCaptured, sampled, dt);
+            if (throwing.pin > 0f) Pin(throwing, false, false, dt);
+        }
+
+        private static void Capture(Arm a)
+        {
+            for (int i = 0; i < a.pinBones.Length; i++) a.pinPose[i] = a.pinBones[i].localRotation;
+        }
+
+        private void ResolveClips()
+        {
+            clipsResolved = true;
+            var controller = animator ? animator.runtimeAnimatorController : null;
+            if (!controller || animator.isHuman) return;
+            foreach (var clip in controller.animationClips)
+            {
+                if (!clip) continue;
+                string n = clip.name.Replace('_', ' ');
+                if (n == FoundationKit.OpenCircuit.OpenCircuitTuning.CastArmsState) castClip = clip;
+                else if (n == FoundationKit.OpenCircuit.OpenCircuitTuning.HoldArmsState) holdClip = clip;
+            }
+            sampleBones = GetComponentsInChildren<Transform>(true);
+            samplePos = new Vector3[sampleBones.Length];
+            sampleScale = new Vector3[sampleBones.Length];
+            sampleRot = new Quaternion[sampleBones.Length];
+        }
+
+        /// <summary>Writes the crown clip's pose at holdTime (normalized) for one arm into its pinPose.</summary>
+        private bool SampleHold(int holdHash, float holdTime, Arm a)
+        {
+            if (!clipsResolved) ResolveClips();
+            var clip = holdHash == HoldArmsHash ? holdClip : holdHash == CastArmsHash ? castClip : null;
+            if (!clip) return false;
+            for (int i = 0; i < sampleBones.Length; i++)
+            {
+                var t = sampleBones[i];
+                if (!t) continue;
+                samplePos[i] = t.localPosition; sampleRot[i] = t.localRotation; sampleScale[i] = t.localScale;
+            }
+            clip.SampleAnimation(gameObject, Mathf.Clamp01(holdTime) * clip.length);
+            for (int i = 0; i < a.pinBones.Length; i++) a.pinPose[i] = a.pinBones[i].localRotation;
+            for (int i = 0; i < sampleBones.Length; i++)
+            {
+                var t = sampleBones[i];
+                if (!t) continue;
+                t.localPosition = samplePos[i]; t.localRotation = sampleRot[i]; t.localScale = sampleScale[i];
+            }
+            return true;
+        }
+
+        private static readonly int CastArmsHash = Animator.StringToHash(FoundationKit.OpenCircuit.OpenCircuitTuning.CastArmsState);
+        private static readonly int HoldArmsHash = Animator.StringToHash(FoundationKit.OpenCircuit.OpenCircuitTuning.HoldArmsState);
+
+        // ---- dev diagnostics (DevAutopilot) ----
+        internal static bool DebugCompare;
+        internal float DebugSampleError = -1f;
+        internal int DebugPinArm;
+        internal bool DebugPinSampled;
+        internal float DebugPinLeft { get { return left.pin; } }
+        internal float DebugPinRight { get { return right.pin; } }
+
+        /// <summary>Dev: largest angle (degrees) between the Animator's left-arm pose on a steady
+        /// hold and the sampled clip at the same time. Near zero when sampling matches the Animator.</summary>
+        private float SampleError(int holdHash, float holdTime)
+        {
+            if (!SampleHold(holdHash, holdTime, left)) return -1f;
+            float worst = 0f;
+            for (int i = 0; i < left.pinBones.Length; i++)
+                worst = Mathf.Max(worst, Quaternion.Angle(left.pinBones[i].localRotation, left.pinPose[i]));
+            return worst;
+        }
+
+        private static void Pin(Arm a, bool held, bool instant, float dt)
+        {
+            a.pin = held && instant ? 1f : Mathf.MoveTowards(a.pin, held ? 1f : 0f, dt / (held ? PinInFallback : PinOut));
+            if (a.pin <= 0f) return;
+            float w = Mathf.SmoothStep(0f, 1f, a.pin);
+            for (int i = 0; i < a.pinBones.Length; i++)
+                a.pinBones[i].localRotation = Quaternion.Slerp(a.pinBones[i].localRotation, a.pinPose[i], w);
+        }
+
+        private SpearCarry carryCache;
+        private SpearCarry Carry()
+        {
+            if (!carryCache && body) carryCache = body.GetComponent<SpearCarry>();
+            return carryCache;
+        }
+
         /// <summary>Bit 1: left arm casting, bit 2: right arm. Known one-handed gestures
         /// (Arc Bolt left/right, Conduit Spear) mark only their arm; anything else both.</summary>
         private int CastingMask()
         {
             if (!animator) return 0;
-            var carry = body ? body.GetComponent<SpearCarry>() : null;
+            var carry = Carry();
             return LayerMask(upperBodyLayer) | LayerMask(upperArmsLayer) | LayerMask(overlayLayer) | (carry && carry.Casting ? (carry.Left ? 1 : 2) : 0);
         }
 
@@ -390,7 +535,7 @@ namespace HollowSaint
             a.hand.rotation = Quaternion.AngleAxis(swayA * noise, across) *
                 Quaternion.AngleAxis(swayB * noise, Vector3.Cross(handDir, across)) * a.hand.rotation;
             Bend(a.hand, handDir, c.LocalSwing(2, ft) * react, c.LocalSpread(2, ft) * react, forward, outwardUp);
-            var carry = body ? body.GetComponent<SpearCarry>() : null;
+            var carry = Carry();
             if (carry && carry.Gripping && a == (carry.Left ? left : right)) { a.fingersWeight = 0f; ClearFingerLife(a); return; }
             // Preserve the exact molded grasp while held. When it opens, introduce
             // finger life gradually instead of switching noise/follow-through on at release.
@@ -459,6 +604,8 @@ namespace HollowSaint
             left.chain.Reset(); right.chain.Reset();
             ClearFingerLife(left); ClearFingerLife(right);
             left.cast = right.cast = 1f;
+            left.pin = right.pin = 0f;
+            pinCaptured = false;
             accel = Vector3.zero;
             yawRate = airTime = fallSpeed = 0f;
         }

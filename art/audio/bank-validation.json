@@ -1,11 +1,11 @@
 {
   "bank_version": 150,
-  "bytes": 2156718,
-  "sha256": "efa769269a0a1a1546d872256b163a0c46172bc1e6d533dafe831929efe58f59",
-  "events": 47,
-  "local_stop_actions": 5,
-  "infinite_loops": 4,
-  "embedded_pcm_sources": 42,
+  "bytes": 2842176,
+  "sha256": "6281e59f1fc6cb0a40e31a71a3faf649da8ede1f8156477f8ef3e34407dc1f56",
+  "events": 60,
+  "local_stop_actions": 6,
+  "infinite_loops": 5,
+  "embedded_pcm_sources": 54,
   "bus_reference": 213475909,
   "owned_busses": 0,
   "source_clipping": [
@@ -17,6 +17,11 @@
     {
       "name": "ArcBoltCast",
       "peak_pcm16": 6226,
+      "clipped_samples": 0
+    },
+    {
+      "name": "ArcStepCrackle",
+      "peak_pcm16": 2320,
       "clipped_samples": 0
     },
     {
@@ -100,28 +105,68 @@
       "clipped_samples": 0
     },
     {
+      "name": "GazeLoad1",
+      "peak_pcm16": 13045,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeLoad2",
+      "peak_pcm16": 14221,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeLoad3",
+      "peak_pcm16": 15504,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeLoad4",
+      "peak_pcm16": 16902,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeLoad5",
+      "peak_pcm16": 18426,
+      "clipped_samples": 0
+    },
+    {
       "name": "GazeSurge1",
       "peak_pcm16": 6553,
       "clipped_samples": 0
     },
     {
       "name": "GazeSurge2",
-      "peak_pcm16": 7536,
+      "peak_pcm16": 7488,
       "clipped_samples": 0
     },
     {
       "name": "GazeSurge3",
-      "peak_pcm16": 8519,
+      "peak_pcm16": 8423,
       "clipped_samples": 0
     },
     {
       "name": "GazeSurge4",
-      "peak_pcm16": 9502,
+      "peak_pcm16": 9861,
       "clipped_samples": 0
     },
     {
       "name": "GazeSurge5",
-      "peak_pcm16": 10485,
+      "peak_pcm16": 11527,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurgeHit1",
+      "peak_pcm16": 13818,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurgeHit2",
+      "peak_pcm16": 13818,
+      "clipped_samples": 0
+    },
+    {
+      "name": "GazeSurgeHit3",
+      "peak_pcm16": 13045,
       "clipped_samples": 0
     },
     {
@@ -150,8 +195,23 @@
       "clipped_samples": 0
     },
     {
+      "name": "OrbChargeLoop",
+      "peak_pcm16": 4628,
+      "clipped_samples": 0
+    },
+    {
+      "name": "OrbChargeStart",
+      "peak_pcm16": 11626,
+      "clipped_samples": 0
+    },
+    {
+      "name": "OrbThrow",
+      "peak_pcm16": 11626,
+      "clipped_samples": 0
+    },
+    {
       "name": "SpearBurst",
-      "peak_pcm16": 19517,
+      "peak_pcm16": 19518,
       "clipped_samples": 0
     },
     {

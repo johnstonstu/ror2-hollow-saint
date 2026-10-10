@@ -50,7 +50,8 @@ namespace HollowSaint.FoundationKit.Vfx
             };
             // Crown tendrils carry their owner so each client starts them from its own
             // live halo ring (start stays the server's ring point as the fallback).
-            if ((beat == Beat.CircuitArc || beat == Beat.SpearRecall || beat == Beat.CircuitDwellZap) && owner) data.SetNetworkedObjectReference(owner.gameObject);
+            // 1.3.2: the Thunderbolt telegraph carries its owner so the rings can be cancelled with it.
+            if ((beat == Beat.CircuitArc || beat == Beat.SpearRecall || beat == Beat.CircuitDwellZap || beat == Beat.ThunderTelegraph) && owner) data.SetNetworkedObjectReference(owner.gameObject);
             EffectManager.SpawnEffect(NetworkedPrefab, data, true);
         }
 

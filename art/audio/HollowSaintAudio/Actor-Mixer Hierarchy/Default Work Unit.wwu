@@ -1625,6 +1625,136 @@
 						<ActiveSource Name="GazeLoad5" ID="{4467863A-B998-5A90-B140-1E143DB29DBB}" Platform="Linked" />
 					</ActiveSourceList>
 				</Sound>
+				<Sound Name="HS_OrbChargeStart" ID="{37ACC42E-D1C0-59D6-911D-22B72C0FBFB1}" ShortID="739229617">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="OrbChargeStart" ID="{9D826C28-F84C-5699-9C91-8BE60A2318D6}">
+							<Language>SFX</Language>
+							<AudioFile>OrbChargeStart.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="80321332" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="OrbChargeStart" ID="{9D826C28-F84C-5699-9C91-8BE60A2318D6}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_OrbChargeLoop" ID="{23B0DD2A-BF6B-53C8-8EA1-B0FE25B5BD21}" ShortID="632667425">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True" />
+						<Property Name="IsLoopingInfinite" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="70" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="OrbChargeLoop" ID="{4F221C54-388A-501E-8933-A85EA0F2E5AF}">
+							<Language>SFX</Language>
+							<AudioFile>OrbChargeLoop.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="120077724" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="OrbChargeLoop" ID="{4F221C54-388A-501E-8933-A85EA0F2E5AF}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_OrbThrow" ID="{58405EFE-FC7E-5174-8C95-BD30F81AE484}" ShortID="941286532">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="OrbThrow" ID="{BA952D4B-9E5C-509C-A7FB-A80C2713BE07}">
+							<Language>SFX</Language>
+							<AudioFile>OrbThrow.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="331073510" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="OrbThrow" ID="{BA952D4B-9E5C-509C-A7FB-A80C2713BE07}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="HS_ArcStepCrackle" ID="{EDFD138E-44E6-5536-A7B3-636BCA8AC342}" ShortID="176866114">
+					<PropertyList>
+						<Property Name="OverridePositioning" Type="bool" Value="True" />
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True" />
+						<Property Name="3DSpatialization" Type="int16" Value="1" />
+						<Property Name="EnableAttenuation" Type="bool" Value="True" />
+						<Property Name="Priority" Type="int16" Value="85" />
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A335D2D6-8BDE-41CE-8A37-330394C781C9}" />
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX_BUS" ID="{238451CA-7226-4DFA-BEB5-3AB191D75E11}" WorkUnitID="{87EC3D84-4047-42A2-951D-9F25ADCA763C}" />
+						</Reference>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="HS_Spatial" ID="{E0AE37D8-526C-589F-AEC5-4BBC70C0C152}" WorkUnitID="{51C53725-BB21-47AB-A065-E4D90AFEF87D}" />
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ArcStepCrackle" ID="{B921DBAA-AF7A-5F91-ABC2-CD443DE915E7}">
+							<Language>SFX</Language>
+							<AudioFile>ArcStepCrackle.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1056104112" />
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ArcStepCrackle" ID="{B921DBAA-AF7A-5F91-ABC2-CD443DE915E7}" Platform="Linked" />
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

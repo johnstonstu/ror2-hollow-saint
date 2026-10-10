@@ -277,7 +277,10 @@ namespace HollowSaint.FoundationKit.Vfx
             float pulse = charge >= 1f || active > 0f ? LightningRhythm.Gain(Time.time) : 1f;
             c = Color.Lerp(c, palette.Core, active * LightningRhythm.Pulse(Time.time) * 0.55f);
             coreLight.color = c;
-            coreLight.intensity = visible ? (Mathf.Lerp(0.4f, 4f, charge) + active * 1.3f) * pulse : 0f;
+            // 1.3.2: eased (frame-rate independent) so the chest light fades out on death or cloak instead of cutting.
+            float lightTarget = visible ? (Mathf.Lerp(0.4f, 4f, charge) + active * 1.3f) * pulse : 0f;
+            coreLight.intensity = Mathf.Lerp(coreLight.intensity, lightTarget, 1f - Mathf.Exp(-30f * Time.deltaTime));
+            if (!visible && coreLight.intensity < 0.02f) coreLight.intensity = 0f;
             if (coreGlow)
             {
                 var main = coreGlow.main;

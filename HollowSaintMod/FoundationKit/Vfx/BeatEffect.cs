@@ -50,7 +50,7 @@ namespace HollowSaint.FoundationKit.Vfx
                 return;
             }
             float delay = data.genericFloat;
-            GameObject arcOwner = beat == Beat.CircuitArc || beat == Beat.SpearRecall ? data.ResolveNetworkedObjectReference() : null;
+            GameObject arcOwner = beat == Beat.CircuitArc || beat == Beat.SpearRecall || beat == Beat.ThunderTelegraph ? data.ResolveNetworkedObjectReference() : null;
             if (delay > 0.001f)
             {
                 // Staggered chain: the prefab's DestroyOnTimer (2 s) outlives delay + play.

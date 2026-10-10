@@ -251,7 +251,12 @@ namespace HollowSaint.FoundationKit.Stormspear.Fx
 
             if (!hand && !crown && !crownRelease)
             {
-                if (glowLight && glowLight.enabled) glowLight.enabled = false;
+                if (glowLight && glowLight.enabled)
+                {
+                    // 1.3.2: fade the point light out (about 0.1 s) instead of cutting it on cancel or release.
+                    glowLight.intensity *= Mathf.Exp(-22f * dt);
+                    if (glowLight.intensity < 0.03f) glowLight.enabled = false;
+                }
                 if (anyShown) HideAll();
                 ShowCrownModel(false);
                 haloShown = haloBrightness + 0.45f * haloKick;

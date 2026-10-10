@@ -27,10 +27,10 @@ namespace HollowSaint.FoundationKit.HollowedOrb
                 to = data.start; speed = ChargedStormTuning.Bound(data.genericFloat, 10f, 80f); diameter = data.scale;
                 var obj = data.ResolveNetworkedObjectReference();
                 target = obj ? obj.GetComponent<CharacterBody>() : null;
+                OrbThrowAudio.Play(data.genericBool, data.origin);
                 palette = SkinFxPalette.FromNetwork(data.color);
                 ball = StormVisualPrimitives.Orb(palette, diameter); ball.transform.SetParent(transform, false);
                 transform.position = data.origin;
-                if (data.genericBool) Util.PlaySound(KitSfx.For(Beat.SpearThrow), gameObject);
             }
             catch (System.Exception error) { Plugin.Log.LogWarning("HOLLOW_SAINT_HOLLOWED_ORB_FLIGHT_FX " + error); Destroy(gameObject); }
         }

@@ -16,6 +16,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
         private const float SegmentLength = 1.1f;
         private const float SegmentDelay = 0.022f;
         private const float GroundLift = 0.15f;
+        // 1.3.2: one shared yield for the per-segment wait (a crawl used to allocate up to 12).
+        private static readonly WaitForSeconds SegmentWait = new WaitForSeconds(SegmentDelay);
 
         /// <summary>Ambient fork in a random direction along the surface. Visual only.</summary>
         public static void Ambient(MonoBehaviour host, Vector3 from, Vector3 normal, SkinFxPalette palette)
@@ -71,7 +73,7 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 float taper = Mathf.Lerp(1f, 0.6f, u);
                 LightningLine.Spawn(previous, p, 0.42f, width * taper, i % 3 == 1 ? 1 : 0, 0.22f, 0.03f, palette);
                 previous = p;
-                yield return new WaitForSeconds(SegmentDelay);
+                yield return SegmentWait;
             }
             VfxParticles.Burst(previous, Quaternion.identity, palette.Material(VfxAssets.Spark), 6, 0.25f,
                 new Vector2(2f, 6f), new Vector2(0.06f, 0.12f), palette.Core, stretch: 0.07f);

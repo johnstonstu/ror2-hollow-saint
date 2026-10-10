@@ -66,7 +66,7 @@ namespace HollowSaint.FoundationKit.Gaze
             Duck(source, count > 0);
             if (!source || count <= previous || count < 1) return;
             int tier = Mathf.Clamp(count, 1, 3);
-            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + tier : "Play_HS_ChargeTick", Emitter(source));
+            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + tier : "Play_mage_m1_cast_lightning", Emitter(source));
         }
 
         private float suppressHitUntil = -1f;
@@ -82,7 +82,7 @@ namespace HollowSaint.FoundationKit.Gaze
             hitCast = cast; hitPhase = phase;
             KitLog.Event("GAZE_SURGE_HIT", "tier=" + group + " phase=" + phase);
             int tier = Mathf.Clamp(group, 1, 5);
-            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_HS_SpearBurst", Emitter(body.gameObject));
+            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_captain_m2_tazer_impact", Emitter(body.gameObject));
             // 4-5 charge opening blasts add the Thunderbolt's clap on top.
             if (tier >= 2) { Util.PlaySound("Play_item_use_lighningArm", Emitter(body.gameObject)); Util.PlaySound(Storm.ThunderLayerSound.Boom, Emitter(body.gameObject)); }
             Kick(body, tier);
@@ -94,7 +94,7 @@ namespace HollowSaint.FoundationKit.Gaze
             if (!body) return;
             int tier = Mathf.Clamp(count, 1, 5);
             KitLog.Event("GAZE_OPENING_BOOM", "charges=" + count);
-            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_HS_SpearBurst", Emitter(body.gameObject));
+            Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit" + Mathf.Min(tier, 3) : "Play_captain_m2_tazer_impact", Emitter(body.gameObject));
             if (tier >= 2) { Util.PlaySound("Play_item_use_lighningArm", Emitter(body.gameObject)); Util.PlaySound(Storm.ThunderLayerSound.Boom, Emitter(body.gameObject)); }
             Kick(body, tier);
         }

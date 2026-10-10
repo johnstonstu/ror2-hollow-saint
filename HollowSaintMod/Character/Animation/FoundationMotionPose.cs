@@ -191,9 +191,15 @@ namespace HollowSaint
                 }
                 lastHealth = now;
             }
-            float accel = -KickStiffness * kick - KickDamping * kickVelocity;
-            kickVelocity += accel * dt;
-            kick = Mathf.Clamp(kick + kickVelocity * dt, -12f, 12f);
+            // 1.3.2: sub-stepped at 120 Hz. One explicit step at a low frame rate (damping x dt
+            // above 1 near 20 fps) overshot and buzzed instead of settling.
+            for (float left = dt; left > 0f; left -= 1f / 120f)
+            {
+                float h = Mathf.Min(left, 1f / 120f);
+                float accel = -KickStiffness * kick - KickDamping * kickVelocity;
+                kickVelocity += accel * h;
+                kick = Mathf.Clamp(kick + kickVelocity * h, -12f, 12f);
+            }
             if (Mathf.Abs(kick) < 0.01f && Mathf.Abs(kickVelocity) < 0.1f) { kick = kickVelocity = 0f; return; }
             Vector3 axis = Vector3.Cross(Vector3.up, forward);
             Save(spine); Save(head);

@@ -153,6 +153,10 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
             SetBeamVisible(false);
             SetLoopsVisible(false);
             if (tether) tether.gameObject.SetActive(false);
+            // 1.3.2: a wind-up cancelled before ignition never toggled the beam off, which left the muzzle
+            // light on at its last charge level (SetBeamVisible(false) is a no-op when already hidden).
+            if (muzzleLight) muzzleLight.enabled = false;
+            if (impactLight) impactLight.enabled = false;
         }
 
         public void Dispose()

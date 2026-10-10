@@ -340,5 +340,41 @@
     "peak_pcm16": 5898,
     "gain": 2.0,
     "source": "Audited existing FanLoop waveform"
+  },
+  {
+    "name": "OrbChargeStart",
+    "event": "Play_HS_OrbChargeStart",
+    "seconds": 0.55,
+    "loop": false,
+    "peak_dbfs": -9.0,
+    "rms_dbfs": -19.14,
+    "source": "Original synthesis plus original ChainHop/ThunderRelease/SpearThrow"
+  },
+  {
+    "name": "OrbChargeLoop",
+    "event": "Play_HS_OrbChargeLoop",
+    "seconds": 2.0,
+    "loop": true,
+    "peak_dbfs": -17.0,
+    "rms_dbfs": -28.89,
+    "source": "Original synthesis plus original ChainHop/ThunderRelease/SpearThrow"
+  },
+  {
+    "name": "OrbThrow",
+    "event": "Play_HS_OrbThrow",
+    "seconds": 0.48,
+    "loop": false,
+    "peak_dbfs": -9.0,
+    "rms_dbfs": -24.52,
+    "source": "Original synthesis plus original ChainHop/ThunderRelease/SpearThrow"
+  },
+  {
+    "name": "ArcStepCrackle",
+    "event": "Play_HS_ArcStepCrackle",
+    "seconds": 0.22,
+    "loop": false,
+    "peak_dbfs": -23.0,
+    "rms_dbfs": -43.81,
+    "source": "Original synthesis plus original ChainHop/ThunderRelease/SpearThrow"
   }
 ]

@@ -145,6 +145,7 @@ namespace RoR2.Skills
 {
     public class SkillDef : UnityEngine.Object
     {
+        public bool mustKeyPress;
         public virtual bool IsReady(RoR2.GenericSkill slot) => slot.stock > 0;
         public virtual bool CanExecute(RoR2.GenericSkill slot) => IsReady(slot);
         public virtual void OnFixedUpdate(RoR2.GenericSkill slot,float dt) {}

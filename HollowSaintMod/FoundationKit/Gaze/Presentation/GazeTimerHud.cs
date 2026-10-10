@@ -29,10 +29,15 @@ namespace HollowSaint.FoundationKit.Gaze
 
         private HUD LocalHud()
         {
-            foreach (var hud in HUD.readOnlyInstanceList)
+            // Indexed loop: foreach over the read-only collection boxes an enumerator every repaint.
+            var huds = HUD.readOnlyInstanceList;
+            for (int i = 0; i < huds.Count; i++)
+            {
+                var hud = huds[i];
                 if (hud && hud.localUserViewer != null && hud.localUserViewer.cachedBody == body &&
                     hud.mainContainer && hud.mainContainer.activeInHierarchy && hud.mainContainerCanvas)
                     return hud;
+            }
             return null;
         }
 

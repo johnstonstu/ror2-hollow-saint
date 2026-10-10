@@ -3,5 +3,6 @@
   <ItemGroup>
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearAudio.cs" Link="StormspearAudio.cs" />
     <Compile Include="../../HollowSaintMod/FoundationKit/Stormspear/StormspearCharge.cs" Link="StormspearCharge.cs" />
+    <Compile Include="../../HollowSaintMod/FoundationKit/HollowedOrb/OrbChargeAudio.cs" Link="OrbChargeAudio.cs" />
   </ItemGroup>
 </Project>

@@ -21,6 +21,42 @@ namespace HollowSaint.FoundationKit.Vfx
             return p;
         }
 
+        private sealed class Telegraph
+        {
+            internal CharacterBody owner;
+            internal GameObject outer, inner;
+            internal int frame;
+        }
+        private static readonly List<Telegraph> telegraphs = new List<Telegraph>();
+
+        private static void TrackTelegraph(CharacterBody owner, GameObject outer, GameObject inner)
+        {
+            // Drop pairs whose rings already ran out so the list never grows past the live rings.
+            for (int i = telegraphs.Count - 1; i >= 0; i--)
+                if (!telegraphs[i].outer && !telegraphs[i].inner) telegraphs.RemoveAt(i);
+            if (!owner) return; // an unowned telegraph has nothing to be cancelled by
+            VfxParticles.WatchOwner(outer, owner);
+            VfxParticles.WatchOwner(inner, owner);
+            telegraphs.Add(new Telegraph { owner = owner, outer = outer, inner = inner, frame = Time.frameCount });
+        }
+
+        /// <summary>Fades out the Thunderbolt telegraph rings of <paramref name="owner"/> (ThunderCancel, a
+        /// re-picked ThunderGather). <paramref name="sparePending"/> keeps a pair raised this very frame, so a
+        /// gather that arrives right after its own telegraph does not cancel it.</summary>
+        internal static void CancelTelegraph(CharacterBody owner, bool sparePending)
+        {
+            if (!owner) return;
+            for (int i = telegraphs.Count - 1; i >= 0; i--)
+            {
+                var pair = telegraphs[i];
+                if (!pair.outer && !pair.inner) { telegraphs.RemoveAt(i); continue; }
+                if (pair.owner != owner || (sparePending && pair.frame == Time.frameCount)) continue;
+                VfxParticles.FadeRing(pair.outer, 0.12f);
+                VfxParticles.FadeRing(pair.inner, 0.12f);
+                telegraphs.RemoveAt(i);
+            }
+        }
+
         private static void ImpactFeel(Beat beat, Vector3 origin, CharacterBody body)
         {
             if (!ImpactFeelSettings.Enabled) return;
@@ -243,8 +279,11 @@ namespace HollowSaint.FoundationKit.Vfx
                     // inward on the ground until the bolt lands, flicker overhead.
                     Vector3 ground = GroundUnder(origin);
                     float until = scale > 0.05f && scale < 5f ? scale : KitTuning.ThunderboltTelegraphSeconds;
-                    VfxParticles.Ring(ground, Vector3.up, 2.6f, 0.4f, until, 0.07f, palette.Material(VfxAssets.Trail), palette: palette);
-                    VfxParticles.Ring(ground, Vector3.up, 1.6f, 0.2f, until, 0.04f, palette.Material(VfxAssets.Trail), palette: palette);
+                    // 1.3.2: the pair is tracked per owner so a cancel, a re-pick or the owner's death can fade
+                    // it out. The timing is unchanged: without a cancel the rings run their full course.
+                    TrackTelegraph(body,
+                        VfxParticles.Ring(ground, Vector3.up, 2.6f, 0.4f, until, 0.07f, palette.Material(VfxAssets.Trail), palette: palette),
+                        VfxParticles.Ring(ground, Vector3.up, 1.6f, 0.2f, until, 0.04f, palette.Material(VfxAssets.Trail), palette: palette));
                     Vector3 sky = origin + Vector3.up * 25f;
                     LightningLine.Spawn(sky + UnityEngine.Random.insideUnitSphere * 3f, sky + Vector3.down * 8f + UnityEngine.Random.insideUnitSphere * 2f, 0.18f, 0.5f, 1, 0.15f, palette: palette);
                     VfxParticles.FlashLight(origin + Vector3.up * 12f, palette.Arc, 1.5f, 12f, 0.25f);

@@ -126,6 +126,43 @@ namespace HollowSaint.FoundationKit
             return layer;
         }
 
+        /// <summary>1.3.2: Arc Bolt gesture that layers cleanly over a held two-arm crown pose
+        /// (Gaze of the Hollow charge or beam, Thundercloud / Open Circuit gather). With such a
+        /// hold on an arm layer, the bolt cuts it on that same layer (never the other one, which
+        /// would fade the hold out), FoundationArmPose keeps the other hand on the crown, and the
+        /// arms cross-fade back into the hold near the end of the throw. Without a hold this is
+        /// exactly PlayGesture, so it is a drop-in replacement for the Arc Bolt call.</summary>
+        public static string PlayBoltGesture(CharacterBody body, Animator animator, string state, float duration)
+        {
+            if (animator == null) return null;
+            var weights = animator.GetComponent<FoundationLayerWeights>();
+            string layer;
+            if (weights == null || !weights.TryPlayBoltOverHold(body, state, duration, out layer))
+                layer = PlayGesture(body, animator, state, duration);
+            if (weights != null) weights.NoteBolt(body, layer, duration);
+            return layer;
+        }
+
+        /// <summary>True while an Arc Bolt played by PlayBoltGesture stands in for a crown hold on
+        /// an arm layer. Crown owners that check "is my hold still on the layer" before playing
+        /// their end gesture (CrownGestureFlow.Recover) should treat this as their own hold.</summary>
+        public static bool BoltOverHold(CharacterBody body, string layer)
+        {
+            var animator = AnimatorOf(body);
+            var weights = animator ? animator.GetComponent<FoundationLayerWeights>() : null;
+            return weights != null && weights.BoltOverHoldActive(layer);
+        }
+
+        /// <summary>Returns an arm layer from a bolt to the held crown pose at the given normalized
+        /// time, over fadeSeconds of real time. The caller restores the hold's playback rate once
+        /// the bolt has faded out (both share the rate parameter).</summary>
+        internal static void ResumeHold(Animator animator, int layer, int stateHash, float normalizedTime, float clipSeconds, float fadeSeconds)
+        {
+            if (animator == null || layer < 0 || layer >= animator.layerCount || !animator.HasState(layer, stateHash)) return;
+            animator.CrossFadeInFixedTime(stateHash, fadeSeconds, layer, normalizedTime * Mathf.Max(0f, clipSeconds));
+            MarkPending(animator, layer, stateHash);
+        }
+
         /// <summary>True when the state exists on the named layer of this animator.</summary>
         public static bool HasState(Animator animator, string layer, string state)
         {

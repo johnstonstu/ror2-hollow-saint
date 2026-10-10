@@ -27,7 +27,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit
             var animator = KitAnim.AnimatorOf(body);
             if (!animator) return;
             foreach (string layer in Layers)
-                if (Owned(RequestedState(animator, animator.GetLayerIndex(layer))))
+                if (Owned(RequestedState(animator, animator.GetLayerIndex(layer))) || KitAnim.BoltOverHold(body, layer))
                     KitAnim.Stop(body, layer);
         }
 
@@ -42,7 +42,7 @@ namespace HollowSaint.FoundationKit.OpenCircuit
             foreach (string layer in Layers)
             {
                 int state = RequestedState(animator, animator.GetLayerIndex(layer));
-                if (state != Empty && !Owned(state)) return;
+                if (state != Empty && !Owned(state) && !KitAnim.BoltOverHold(body, layer)) return;
             }
             // Death and an Arc Step cancel release the arms into the body pose,
             // without adding a crown-close gesture on top of the new movement.

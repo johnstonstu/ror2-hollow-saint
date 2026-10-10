@@ -35,6 +35,7 @@ static partial class Program
         ChargedStormEffects.strikes.Clear(); ChargedStormEffects.strikeStrokes.Clear(); ChargedStormEffects.bursts.Clear();
         ChargedStormEffects.lastOrbTarget=null; HollowSaint.FoundationKit.Storm.StormServer.primes.Clear(); Stage.instance=new();
         Physics.SphereObstruction=null; HollowSaint.FoundationKit.Stormspear.StormspearCharge.crown=false;
+        HollowSaint.FoundationKit.SpearDischarge.SpearCarry.left=true;
     }
     static void Ledger()
     {
@@ -109,7 +110,8 @@ static partial class Program
             Check(!primary.CanExecute(primarySlot),"same-tick pending Special blocks Primary before native activation");
             // Thundercloud's first charge waits for the free-cast grace (.3 s); .6 s gathers two.
             var s=State(b,kind,false);s.Age(kind==1 ? .8f : kind==0 ? .6f : .42f);
-            Check(!primary.IsReady(primarySlot),"gathering blocks Primary native readiness");
+            // 1.3.2: Thundercloud's gather (kind 0) leaves Arc Bolt firing; Orb and Circuit still hold the hands.
+            Check(primary.IsReady(primarySlot)==(kind==0),"gathering blocks Primary native readiness except Thundercloud");
             var compatible=new StoredChargeCompatibleSkillDef();var otherSlot=new GenericSkill(){characterBody=b,stock=1,skillDef=compatible};
             Check(!compatible.CanExecute(otherSlot) && !new HollowSaint.FoundationKit.Stormspear.StormspearSkillDef().IsReady(otherSlot),"gather blocks native Utility, other Special and Spear before stock use");
             Check(!def.CanExecute(slot) && m.Charge==5,"gather blocks competing activation without spending");
@@ -276,7 +278,7 @@ static partial class Program
         Near(OrbFlightMotion.Advance(Vector3.zero,Vector3.forward*.1f,32,1).z,.1f,"visual cannot overshoot nearby target");
     }
     public static void Main()
-    { DischargeMeter.RegisterBuff(); HollowSaint.FoundationKit.OpenCircuit.OpenCircuitBuff.Register(); Ledger();Transport();Runtime();Flights();Clouds();Motion();OrbRefinement();CircuitRefinement();OrbLatch();CloudStorm();PendingPrimary();StormReach();StormFlow();ClosedCircuit();CloudAudit();Console.WriteLine($"PASS {checks} charge accounting, native release and server flight/area assertions"); }
+    { DischargeMeter.RegisterBuff(); HollowSaint.FoundationKit.OpenCircuit.OpenCircuitBuff.Register(); Ledger();Transport();Runtime();Flights();Clouds();Motion();OrbRefinement();CircuitRefinement();OrbLatch();CloudStorm();PendingPrimary();GatherIncome();StormReach();StormFlow();ClosedCircuit();CloudAudit();Console.WriteLine($"PASS {checks} charge accounting, native release and server flight/area assertions"); }
     static void Invoke(object obj,string method) => obj.GetType().GetMethod(method,System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(obj,null);
 }
 static class MeterFixture

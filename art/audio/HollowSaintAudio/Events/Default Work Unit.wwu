@@ -787,6 +787,79 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_HS_OrbChargeStart" ID="{6187BE13-5476-5D9F-B51D-CEB380975893}">
+					<ChildrenList>
+						<Action Name="" ID="{DFCCFF4A-46D9-521B-9711-AEA42641DA48}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_OrbChargeStart" ID="{37ACC42E-D1C0-59D6-911D-22B72C0FBFB1}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_OrbChargeLoop" ID="{A24783C7-9299-5C41-8932-801EDE393537}">
+					<ChildrenList>
+						<Action Name="" ID="{0481BFB2-39D9-5D95-B47B-03C7D015C87A}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_OrbChargeLoop" ID="{23B0DD2A-BF6B-53C8-8EA1-B0FE25B5BD21}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_HS_OrbChargeLoop" ID="{3457F8F6-131F-562A-A7CA-8578C8A31318}">
+					<ChildrenList>
+						<Action Name="" ID="{F952B36A-7BF9-5B29-A69E-EEE3248B6D90}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2" />
+								<Property Name="FadeTime" Type="Real64" Value="0.12" />
+								<Property Name="Scope" Type="int16" Value="0" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_OrbChargeLoop" ID="{23B0DD2A-BF6B-53C8-8EA1-B0FE25B5BD21}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_OrbThrow" ID="{E5342A9B-2AB5-587D-B523-E3F29A0C7FA3}">
+					<ChildrenList>
+						<Action Name="" ID="{F5DC4B8C-312B-5469-A655-A6B43690C942}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_OrbThrow" ID="{58405EFE-FC7E-5174-8C95-BD30F81AE484}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_HS_ArcStepCrackle" ID="{3E1EA08E-5FB9-5CF9-8181-BBFFBA47517B}">
+					<ChildrenList>
+						<Action Name="" ID="{DB5D99F8-F792-57CD-9D6A-CEF360F70BAA}">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1" />
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HS_ArcStepCrackle" ID="{EDFD138E-44E6-5536-A7B3-636BCA8AC342}" WorkUnitID="{0198650E-C446-4E51-B7D1-78C4CEE172C2}" />
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -72,10 +72,15 @@ namespace HollowSaint.FoundationKit.Thundercloud
         {
             var beam = body.GetComponent<Gaze.GazeBeam>();
             if (beam && beam.Current != Gaze.GazeBeam.Phase.Idle) return true;
-            foreach (var machine in body.GetComponents<EntityStateMachine>())
-                if (machine.state is Gaze.GazeState) return true;
+            // 1.3.2: GetComponents allocated a fresh array every frame of the storm; the body's
+            // machines are fixed after spawn, so look them up once per body.
+            if (machinesOf != body) { machines = body.GetComponents<EntityStateMachine>(); machinesOf = body; }
+            foreach (var machine in machines)
+                if (machine && machine.state is Gaze.GazeState) return true;
             return false;
         }
+        private EntityStateMachine[] machines;
+        private CharacterBody machinesOf;
         private void OnDestroy() { Restore(); }
     }
 }

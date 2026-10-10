@@ -8,6 +8,7 @@ namespace HollowSaint.FoundationKit.Thundercloud
     public sealed class ThundercloudFx : MonoBehaviour
     {
         private CharacterBody owner;
+        private bool hadOwner;
         private SkinFxPalette palette;
         private Vector3 from, sky;
         private float age, duration, radius, nextFlash;
@@ -30,6 +31,7 @@ namespace HollowSaint.FoundationKit.Thundercloud
                 var data = GetComponent<EffectComponent>().effectData;
                 if (data == null) { Destroy(gameObject); return; }
                 var obj = data.ResolveNetworkedObjectReference(); owner = obj ? obj.GetComponent<CharacterBody>() : null;
+                hadOwner = owner;
                 if (data.genericFloat < 0f)
                 {
                     // Dismiss signal (same effect, negative duration): fade this owner's storm at that sky point.
@@ -72,15 +74,21 @@ namespace HollowSaint.FoundationKit.Thundercloud
         private void Update()
         {
             if (!cloud) return;
-            if (owner && (!owner.healthComponent || !owner.healthComponent.alive)) { Destroy(gameObject); return; }
+            // 1.3.2: an owner who dies mid-storm lets the cloud fade out (as a dismissed storm does) instead of popping.
+            if (hadOwner && (!owner || !owner.healthComponent || !owner.healthComponent.alive)) Dismiss();
             age += Time.deltaTime;
             float ascent = Mathf.SmoothStep(0f, 1f, age / ThundercloudSchedule.Ascent);
             transform.position = Vector3.Lerp(from, sky, ascent);
             float fade = Mathf.Clamp01((age - (duration - ThundercloudSchedule.Fade)) / ThundercloudSchedule.Fade);
             cloud.transform.localScale = Vector3.one * Mathf.Lerp(.08f, 1f, ascent) * (1f - Mathf.SmoothStep(0f, 1f, fade));
-            crown.enabled = age < ThundercloudSchedule.Ascent;
-            if (crown) StormVisualPrimitives.SetRing(crown, transform.position, Mathf.Lerp(.8f, radius * .6f, ascent));
-            glow.intensity = age < ThundercloudSchedule.Ascent ? ascent * 1.5f : .3f;
+            bool ringUp = age < ThundercloudSchedule.Ascent;
+            if (crown)
+            {
+                if (crown.enabled != ringUp) crown.enabled = ringUp;
+                if (ringUp) StormVisualPrimitives.SetRing(crown, transform.position, Mathf.Lerp(.8f, radius * .6f, ascent));
+            }
+            // The light follows the cloud's fade so it never switches off at the end.
+            glow.intensity = (ringUp ? ascent * 1.5f : .3f) * (1f - Mathf.SmoothStep(0f, 1f, fade));
             if (age >= nextFlash && ascent > .6f && age < duration - ThundercloudSchedule.Fade)
             {
                 nextFlash = age + .18f;

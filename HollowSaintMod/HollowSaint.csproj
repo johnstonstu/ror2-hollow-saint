@@ -4,7 +4,7 @@
     <LangVersion>latest</LangVersion>
     <AssemblyName>HollowSaint</AssemblyName>
     <RootNamespace>HollowSaint</RootNamespace>
-    <Version>1.3.1</Version>
+    <Version>1.3.2</Version>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <!-- Release DLLs ship on Thunderstore: map the local build path out of the embedded PDB path. -->
     <PathMap Condition="'$(Configuration)' == 'Release'">$(MSBuildProjectDirectory)=/_/HollowSaintMod</PathMap>

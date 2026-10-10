@@ -39,16 +39,21 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         internal static bool BlocksPrimary(CharacterBody body)
         {
             if (!body) return false;
+            // 1.3.2 (Stu): Arc Bolt keeps firing through the Thundercloud gather (Kind 0).
             foreach (var machine in body.GetComponents<EntityStateMachine>())
-                if (machine.state is StoredChargeState s && !s.Released &&
-                    !(s.Kind == 1 && Stormspear.StormspearCharge.InCrown(body))) return true;
+                if (machine.state is StoredChargeState s && !s.Released && ClaimsPrimary(s.Kind, body)) return true;
             var bank = body ? body.inputBank : null;
             var slots = body ? body.skillLocator : null;
             if (!bank || !slots) return false;
             // Native input can inspect Primary before Secondary/Special in the same tick.
             return Pending(slots.secondary, bank.skill2.down, bank.skill2.hasPressBeenClaimed) ||
-                Pending(slots.special, bank.skill4.down, bank.skill4.hasPressBeenClaimed);
+                // Thundercloud (the only def with followsCloudFreeCast) never holds Primary.
+                (!(slots.special && slots.special.skillDef is StoredChargeSkillDef cloud && cloud.followsCloudFreeCast) &&
+                 Pending(slots.special, bank.skill4.down, bank.skill4.hasPressBeenClaimed));
         }
+        /// <summary>Orb (hand form) and Open Circuit gathers own the hands; Thundercloud does not.</summary>
+        internal static bool ClaimsPrimary(byte kind, CharacterBody body)
+            => kind == 2 || (kind == 1 && !Stormspear.StormspearCharge.InCrown(body));
         private static bool Pending(GenericSkill slot, bool down, bool claimed)
             => down && !claimed && slot && slot.skillDef is StoredChargeSkillDef def &&
                 !(def.allowsUnchargedCast && Stormspear.StormspearCharge.InCrown(slot.characterBody)) && slot.CanExecute();
@@ -130,7 +135,8 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             base.Update();
             WatchDismiss();
             if (!isAuthority || !inputBank || Released || ending) return;
-            if (Kind != 1 || !Stormspear.StormspearCharge.InCrown(characterBody)) inputBank.skill1.hasPressBeenClaimed = true;
+            // Thundercloud leaves Primary free (bolts bank charges for later; the cast entry is frozen).
+            if (ClaimsPrimary(Kind, characterBody)) inputBank.skill1.hasPressBeenClaimed = true;
             if (Kind != 1) inputBank.skill2.hasPressBeenClaimed = true;
             else inputBank.skill4.hasPressBeenClaimed = true;
             if (inputBank.skill3.justPressed && !awaiting)

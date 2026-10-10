@@ -30,6 +30,7 @@ static class Program
             if(cast%2==0)
             {
                 charge.Release();Check(AkSoundEngine.Stops.Contains(held),"release stops exact loop playing ID");
+                Check(AkSoundEngine.Fades[held]==30,"release keeps the short stop so its throw remains crisp");
                 Call(audio,"Update");Check(Util.Sounds.Count==5,"hand release respects apex delay");
                 Time.time+=.13f;Call(audio,"Update");Check(Util.Sounds.Count==6 && Util.Sounds[^1].name=="Play_HS_SpearThrowHeavy","one heavy release instead of layered throw");
                 Call(audio,"Update");Check(Util.Sounds.Count==6,"release is idempotent");
@@ -37,6 +38,8 @@ static class Program
             else
             {
                 charge.Cancel();Check(AkSoundEngine.Stops.Contains(held),"cancellation stops exact loop ID");
+                Check(AkSoundEngine.Fades[held]==180,"cancel gives the held loop a bounded release tail");
+                Check(Util.Sounds.Where(sound=>sound.id!=rise).All(sound=>AkSoundEngine.Fades[sound.id]==180),"cancel fades every remaining owned cue; the rise already stopped at full");
                 Time.time+=1;Call(audio,"Update");Check(Util.Sounds.Count==5,"cancel creates no release sound");
             }
         }
@@ -53,6 +56,7 @@ static class Program
         NetworkClient.active=false;Begin();Check(Util.Sounds.Count==0,"dedicated server stays silent");NetworkClient.active=true;
         Util.Throw=true;Begin();Call(audio,"Update");charge.Cancel();Check(HollowSaint.Plugin.Log.Warnings==1,"cosmetic post failures are isolated and warned once");Util.Throw=false;
         Begin();Call(audio,"OnDestroy");Check(AkSoundEngine.Stops.Count==3,"destroy stops owned IDs");
+        OrbAudioCases.Run(Check);
     }
-    static int Main(){try{Run();Console.WriteLine($"PASS {checks} production spear audio lifecycle assertions over 1000 casts; native mix pending");return 0;}catch(Exception error){Console.Error.WriteLine(error);return 1;}}
+    static int Main(){try{Run();Console.WriteLine($"PASS {checks} production spear/orb audio lifecycle assertions over 1000 casts each; native mix pending");return 0;}catch(Exception error){Console.Error.WriteLine(error);return 1;}}
 }

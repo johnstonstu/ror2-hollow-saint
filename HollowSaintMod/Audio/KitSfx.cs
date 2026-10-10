@@ -16,6 +16,9 @@ namespace HollowSaint.FoundationKit.Vfx
         {
             // The Ukulele prefab may supply its own audio. Avoid layering another hit.
             if (beat == Beat.ChainHop && ChainLightningFx.HasSound) return null;
+            // 1.3.2: the Static bank-full cue matches the Spear and Orb full cues (electric crackle plus
+            // a taser snap from ExtraFor) instead of the old gun-ready chime, with or without the bank.
+            if (beat == Beat.MeterFull) return FullCueZap;
             if (CustomSoundBank.Ready)
             {
                 // Dedicated impact media reuses ChainHop's crackle at 0.82 source gain.
@@ -64,14 +67,18 @@ namespace HollowSaint.FoundationKit.Vfx
             }
         }
 
+        private const string FullCueZap = "Play_loader_R_shock", FullCueSnap = "Play_captain_m2_tazer_impact";
+
         /// <summary>Short existing-bank layers; fallback beats already use these sounds.</summary>
         private static string ExtraFor(Beat beat)
         {
+            if (beat == Beat.MeterFull) return FullCueSnap;
             if (CustomSoundBank.Ready)
             {
                 switch (beat)
                 {
                     case Beat.ArcBoltCast: return "Play_mage_m1_cast_lightning";
+                    case Beat.ArcStepStart: return "Play_HS_ArcStepCrackle";
                     case Beat.SpearStuck: return "Play_captain_m2_tazer_impact";
                 }
             }
@@ -157,6 +164,7 @@ namespace HollowSaint.FoundationKit.Vfx
                 case Beat.ChainHop: return 0.05f;
                 case Beat.CircuitPulse: return 0.9f;
                 case Beat.StaticTier: return 0.25f;
+                case Beat.MeterFull: return 0.5f; // a full bank re-triggering at the threshold must not double up
                 case Beat.ChargeTick: return 0.12f;
                 case Beat.Electrocute: return 0.08f;
                 // Accepted gather revisions already deduplicate; a quick re-pick must

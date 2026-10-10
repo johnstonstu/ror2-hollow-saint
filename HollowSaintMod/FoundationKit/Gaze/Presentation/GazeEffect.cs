@@ -102,8 +102,8 @@ namespace HollowSaint.FoundationKit.Gaze.Fx
                 palette.Material(VfxAssets.Trail), palette);
             if (data.genericBool)
             {
-                Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + step : "Play_HS_ChargeTick", gameObject);
-                if (step >= GazeFocusPolicy.Tiers) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit3" : "Play_HS_SpearBurst", gameObject);
+                Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + step : "Play_mage_m1_cast_lightning", gameObject);
+                if (step >= GazeFocusPolicy.Tiers) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeSurgeHit3" : "Play_captain_m2_tazer_impact", gameObject);
             }
         }
     }

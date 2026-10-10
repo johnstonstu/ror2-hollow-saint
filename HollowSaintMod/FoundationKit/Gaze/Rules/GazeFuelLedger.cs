@@ -19,13 +19,15 @@ namespace HollowSaint.FoundationKit.Gaze
         public bool Active { get; private set; }
         public static int ClampCapacity(int configured) => Math.Max(2, Math.Min(20, configured));
 
-        public void Begin(int entry, int capacity)
+        public void Begin(int entry, int capacity, int reserve = 0)
         {
             // A legitimately retained bank survives a live config reduction. The lower
             // configured cap takes full effect once this bank has decreased.
-            Capacity = Math.Max(ClampCapacity(capacity), Math.Max(0, Math.Min(20, entry)));
+            int bank = Math.Max(0, Math.Min(20, entry)) + Math.Max(0, Math.Min(20, reserve));
+            Capacity = Math.Max(ClampCapacity(capacity), Math.Min(20, bank));
             Entry = Unspent = Math.Max(0, Math.Min(Capacity, entry));
-            Reserve = Spent = AcceptedGains = RejectedGains = 0;
+            Reserve = Math.Max(0, Math.Min(Capacity - Entry, reserve));
+            Spent = AcceptedGains = RejectedGains = 0;
             HoldAfterMerge = false;
             Active = true;
         }

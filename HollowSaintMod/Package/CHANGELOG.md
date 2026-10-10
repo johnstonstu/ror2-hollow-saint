@@ -1,5 +1,35 @@
 # Changelog
 
+## 1.3.2
+**Fluid controls**
+- **Keep shooting while you charge:** hold Primary through the Gaze of the Hollow charge-up and the Thundercloud gather, and Arc Bolt keeps firing. The cast still uses the charges you had when you started; charges your bolts earn meanwhile stay in the bank for the next one.
+- Bolts fired over a raised crown pose throw from one arm while the other stays up, then the arms settle back into the pose.
+- Charges earned during Gaze's wind-up stay visible in the reserve bank throughout the beam, rather than disappearing until it ends.
+- **Stormspear and Arc Bolt held together:** pressing Secondary mid-bolt only cancels a bolt that was winding up in the spear hand; a bolt already leaving the other hand still fires. Bolts pause while the spear charges and pick up again right after the throw.
+
+**Animation and movement**
+- Jump-cancelling out of Arc Step now plays the jump push-off instead of snapping into the rising pose.
+- The hit flinch no longer overshoots at low frame rates.
+- Sustained Arc Bolt fire keeps the arm layer raised between shots. Crown recovery respects incoming gestures on either arm layer and resumes correctly after movement changes or a long frame.
+
+**VFX and sound**
+- Hollowed Orb has a dedicated electrical rise, sustained crackling hold and fuller throw discharge. The throw's tail survives close-range hits, and its held loop fades on release or cancellation.
+- Arc Step has a small static crackle at dash start.
+- The Static bank "full" cue is now the electric crackle and snap used by the full Stormspear and Hollowed Orb (was the old chime).
+- Body currents (arms, core, ring, legs, dash heels) fade out instead of switching off; the chest core light, the Stormspear glow and the Thundercloud light fade out too.
+- Thundercloud fades away if you die mid-storm instead of vanishing.
+- A Stormspear lodged in an enemy burns out when the corpse disappears instead of hanging in the air.
+- Cancelling Gaze during its wind-up no longer leaves a light on at the crown.
+- Cancelled Stormspear, Orb and Gaze charge sounds have short fade-out tails, including overlapping intake cues.
+- Cloud cleanup also handles owner despawn, and lodged spears handle a target disappearing before their first visual update.
+- The halo's new-charge chime no longer stacks when several charges arrive at once.
+- Crimson skin: Shocked enemies now show the crimson overlay (they used the default cyan).
+- Small per-frame cleanups in the cloud and halo effects.
+
+**Docs**
+- Shorter Thunderstore README: patch highlights, one skill table, the charge loop and install notes. Detailed numbers and builds remain in the GitHub player guide; developer notes live in docs/DEVELOPING.md.
+- All four README languages explain held-button overlap and gathered-charge spending. The developer guide separates offline verification, staging and gameplay acceptance.
+
 ## 1.3.1
 **Game patch fix**
 - Arc Bolt and Stormspear showed Artificer's blue lightning bolt after the October 2026 patch (a new projectile ghost address overrode our visuals). Fixed; both show their own projectiles again.

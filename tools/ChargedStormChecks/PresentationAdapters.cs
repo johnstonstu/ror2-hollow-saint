@@ -15,7 +15,7 @@ namespace HollowSaint.FoundationKit
     public static class KitContent
     { static int nextBuff; public static BuffDef MakeBuff(string name,Color color,bool canStack,bool isDebuff,bool hidden,string icon=null) => new() { buffIndex=++nextBuff,canStack=canStack }; }
     public static class KitAnim
-    { public const string OverlayLayer = "Overlay"; public static bool UpperBodyIdle(CharacterBody b) => true; public static void PlayOnBody(CharacterBody b,string layer,string state,float time) {} public static void PlayGesture(CharacterBody b,object animator,string state,float duration) {} }
+    { public const string OverlayLayer = "Overlay"; public static bool UpperBodyIdle(CharacterBody b) => true; public static void PlayOnBody(CharacterBody b,string layer,string state,float time) {} public static void PlayGesture(CharacterBody b,object animator,string state,float duration) {} public static void PlayBoltGesture(CharacterBody b,object animator,string state,float duration) {} }
     public static class KitLog { public static void Event(string name,string detail="") {} }
     public static class KitUtil { public static void ReportHit(DamageInfo info,GameObject victim) {} public static Vector3 EyePosition(CharacterBody body) => body.corePosition + Vector3.up; }
 }
@@ -54,10 +54,10 @@ namespace HollowSaint.FoundationKit.Stormspear
     public static class StormspearTuning { public static float CrownSpearHeight = .55f; }
     public class StormspearChargeState : EntityStates.EntityState { }
     public class StormspearThrowState : EntityStates.EntityState { public bool CooldownReleased; }
-    public static class SpearPrimaryGate { public static bool Allows(CharacterBody body) => true; }
     public static class StormspearRegistration { public const string MachineName = "Spear"; }
 }
 namespace HollowSaint.FoundationKit.ArcStep { public class ArcStepState : EntityStates.EntityState {} }
+namespace HollowSaint.FoundationKit.SpearDischarge { public static class SpearCarry { public static bool left=true; public static bool NetworkHandOf(CharacterBody owner) => left; } }
 namespace HollowSaint.FoundationKit.ChargedStorm
 {
     public class StoredChargeDriver : MonoBehaviour

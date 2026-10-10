@@ -97,6 +97,7 @@ namespace HollowSaint
         private float landAirTime;
         private int lastJumpCount;
         private bool airJumped;
+        private bool jumpedThisFrame;   // any jump (ground or air) counted since last frame
         private bool inputMoving;
         private Vector2 lastWorldVel;
         private bool latchedStopR;
@@ -133,7 +134,12 @@ namespace HollowSaint
             if (body && !GetComponent<FoundationMotionPose>()) gameObject.AddComponent<FoundationMotionPose>();
             if (body && !GetComponent<FoundationArmPose>()) gameObject.AddComponent<FoundationArmPose>();
             if (body && !GetComponent<FoundationAimPose>()) gameObject.AddComponent<FoundationAimPose>();
-            if (layered && !GetComponent<FoundationLayerWeights>()) gameObject.AddComponent<FoundationLayerWeights>();
+            if (layered)
+            {
+                var weights = GetComponent<FoundationLayerWeights>();
+                if (!weights) weights = gameObject.AddComponent<FoundationLayerWeights>();
+                weights.Bind(body); // 1.3.2: the model may be detached from the body later
+            }
             CacheStateFlags();
             SetDashDir("left");
             CacheLengths();
@@ -286,7 +292,8 @@ namespace HollowSaint
             bool dashing = ArcStepState.IsBodyDashing(body);
             // Air jump (double jump) replays the jump clip.
             int jumps = motor.jumpCount;
-            airJumped = !groundedRaw && jumps > lastJumpCount && jumps >= 2;
+            jumpedThisFrame = !groundedRaw && jumps > lastJumpCount;
+            airJumped = jumpedThisFrame && jumps >= 2;
             lastJumpCount = groundedRaw ? 0 : jumps;
             bool casting = weapon != null && weapon.state is ArcBoltState;
             if (dashing)
@@ -480,7 +487,11 @@ namespace HollowSaint
                 if (phase == Phase.DashStart && !Done()) return phase;
                 return Phase.DashLoop;
             }
+            // 1.3.2: Arc Step's jump cancel leaves the dash already airborne, so the ground ->
+            // air Jump trigger below never sees it and the body went straight to Ascend with no
+            // push-off. Play the Jump clip when the dash ends on a fresh jump.
             if (wasDashing) return grounded ? Phase.DashEnd :
+                jumpedThisFrame && upSpeed > 1f ? Phase.Jump :
                 FoundationAnimRules.IsAscending(upSpeed) ? Phase.Ascend : Phase.Descend;
             if (phase == Phase.DashEnd && !Done(0.87f) && !inputMoving && grounded) return phase;
 
@@ -604,6 +615,11 @@ namespace HollowSaint
             {
                 destinationOffset = Frames(3f); // run -> Jump f4 (one-based)
                 return Frames(6f);
+            }
+            if ((from == Phase.DashLoop || from == Phase.DashStart) && to == Phase.Jump)
+            {
+                destinationOffset = Frames(3f); // the dash already carries the crouch; start at the push
+                return 0.1f;
             }
             if (from == Phase.Land && to == Phase.Moving) return Frames(6f);
             if (from == Phase.Idle && to == Phase.Moving) return Frames(8f);

@@ -30,6 +30,12 @@ for _step in range(1, 6):
     ROLES[f'GazeSurge{_step}'] = (.24,)
 ROLES['SpearChargeStart'] = (.2,)
 ROLES['SpearChargeLoop'] = (2.,)
+# Authored 1.3 Gaze release cues were added after the original bank checker.
+for _step, _seconds in enumerate((.34, .36, .39, .42, .6), 1):
+    ROLES[f'GazeLoad{_step}'] = (_seconds,)
+for _step, _seconds in enumerate((.35, .5, .9), 1):
+    ROLES[f'GazeSurgeHit{_step}'] = (_seconds,)
+ROLES.update(OrbChargeStart=(.55,), OrbChargeLoop=(2.,), OrbThrow=(.48,), ArcStepCrackle=(.22,))
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "art/audio/HollowSaintAudio"
@@ -91,8 +97,13 @@ def check():
         kind, sound = records[int(node.get("ShortID"))]
         assert kind == 2 and struct.unpack_from("<I", sound, 22)[0] == 213475909
         if name.endswith("Loop"):
-            # Property bundle: LoopCount(0x54)=0 means infinite; 0x55 attenuation ID.
-            assert sound[31:38] == b"\x02\x54\x55\x00\x00\x00\x00"
+            # Version150 property bundle: IDs followed by 4-byte values. Volume
+            # and priority trims can precede LoopCount; validate the actual entry.
+            count = sound[31]
+            ids = sound[32:32 + count]
+            assert 0x54 in ids and 0x55 in ids
+            loop_at = 32 + count + 4 * ids.index(0x54)
+            assert struct.unpack_from('<I', sound, loop_at)[0] == 0
             for prop in ("IsLoopingEnabled", "IsLoopingInfinite"):
                 assert node.find(f"PropertyList/Property[@Name='{prop}']").get("Value").lower() == "true"
     metrics = []

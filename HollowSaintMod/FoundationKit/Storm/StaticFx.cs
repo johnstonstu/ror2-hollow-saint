@@ -71,7 +71,7 @@ namespace HollowSaint.FoundationKit.Storm
         // v0.9.1: the vanilla matIsShocked is a heavy violet-blue that read like spawn ghosts and
         // ignored the skin palette. Each palette gets an owned remap of it, toned down.
         private const float ShockOverlayStrength = 0.6f;
-        private static readonly Material[] themedShock = new Material[5];
+        private static readonly Material[] themedShock = new Material[6]; // one per palette, including Crimson (index 5)
         private static bool shockDescribed;
 
         private static Material ShockMaterialFor(SkinFxPalette palette)

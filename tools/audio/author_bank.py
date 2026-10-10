@@ -63,7 +63,8 @@ def add_missing_sounds(actor):
         children.append(sound)
 
 
-LOW_PRIORITY = {"HS_Footstep": 55, "HS_FootstepRun": 55, "HS_GlideLoop": 60, "HS_FanLoop": 60}
+LOW_PRIORITY = {"HS_Footstep": 55, "HS_FootstepRun": 55, "HS_GlideLoop": 60, "HS_FanLoop": 60,
+                "HS_OrbChargeLoop": 70}
 
 MIX_TRIM_DB = {
     "HS_CircuitPulse": 4.0,   # rose ~1 dB over the Circuit loop: the 0.5 s damage rhythm was inaudible

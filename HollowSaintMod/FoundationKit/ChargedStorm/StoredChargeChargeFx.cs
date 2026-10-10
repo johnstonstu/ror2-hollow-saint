@@ -19,16 +19,21 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         private float nextArc;
         private float startedAt;
         private readonly Transform[] feeds = new Transform[2];
+        private HollowedOrb.OrbChargeAudio orbAudio;
+        private const float SoundTail = 0.3f;
         internal static StoredChargeChargeFx Begin(CharacterBody body, byte kind, int available)
         {
             if (!body) return null;
             var root = new GameObject("HS_StoredChargeGather"); root.transform.SetParent(body.gameObject.transform, false);
             var fx = root.AddComponent<StoredChargeChargeFx>(); fx.body = body; fx.kind = kind;
             fx.startedAt = Time.time; fx.available = available;
-            // 1.3.1 (Stu): an audible charge-up as the Orb starts to form in the hands.
-            if (kind == 1) Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_SpearChargeStart" : "Play_mage_m1_cast_lightning", root);
             try
             {
+                if (kind == 1)
+                {
+                    fx.orbAudio = new HollowedOrb.OrbChargeAudio(root);
+                    fx.orbAudio.Begin(Time.time);
+                }
                 fx.palette = SkinFxPalette.ForBody(body);
                 if (kind != 1)
                 {
@@ -53,25 +58,27 @@ namespace HollowSaint.FoundationKit.ChargedStorm
             {
                 // OnDestroy unwinds any crown/hand owner acquired before an
                 // optional material or renderer failed; the state logs context.
+                fx.orbAudio?.Dispose();
                 Destroy(root); throw;
             }
         }
         internal void Gather(int count)
         {
+            if (ended || !body || count <= gathered) return;
             gathered = count;
             if (crown) crown.Absorb(count);
             if (hands && !Stormspear.StormspearCharge.InCrown(body)) hands.Gather(count);
             if (kind == 1)
             {
-                Util.PlaySound(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + Mathf.Clamp(count, 1, 5) : "Play_HS_ChargeTick", gameObject);
+                PlayCue(CustomSoundBank.Ready ? "Play_HS_GazeLoad" + Mathf.Clamp(count, 1, 5) : "Play_mage_m1_cast_lightning");
                 LightningLine.Spawn(HaloRing.CenterOf(body), BallPoint, .28f, 1.7f, 1, palette: palette).drawTime = .025f;
                 int max = Mathf.Min(available, ChargedStormTuning.CastLimit);
                 if (!fullCued && count > 0 && count >= max)
                 {
                     // Full: nothing more to gather. An electric crackle, a ring and a flash on the ball.
                     fullCued = true;
-                    Util.PlaySound("Play_loader_R_shock", gameObject); // same electric full cue as the Spear
-                    Util.PlaySound("Play_captain_m2_tazer_impact", gameObject);
+                    PlayCue("Play_loader_R_shock"); // same electric full cue as the Spear
+                    PlayCue("Play_captain_m2_tazer_impact");
                     var at = BallPoint; float d = ChargedStormTuning.Diameter(count);
                     VfxParticles.Burst(at, Quaternion.identity, palette.Material(VfxAssets.Flash), 1, .18f, Vector2.zero, Vector2.one * d * 1.6f, palette.Core);
                     VfxParticles.Ring(at, body.inputBank ? body.inputBank.aimDirection : Vector3.up, d * .4f, d * 1.5f, .3f, .06f, palette.Material(VfxAssets.Trail), palette);
@@ -84,6 +91,7 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         {
             if (ended) return;
             if (!body || !body.healthComponent || !body.healthComponent.alive) { End(false); return; }
+            orbAudio?.Tick(Time.time, true);
             if (ball)
             {
                 ball.transform.position = BallPoint;
@@ -123,16 +131,32 @@ namespace HollowSaint.FoundationKit.ChargedStorm
         internal void End(bool fired)
         {
             if (ended) return; ended = true;
+            // Stop the held voice before optional pose/renderer teardown can fail.
+            orbAudio?.End(fired);
             if (crown) crown.End(gathered, fired);
             if (hands) hands.Release(fired && !Stormspear.StormspearCharge.InCrown(body));
             if (kind != 1) OpenCircuit.CrownGestureFlow.Recover(body);
-            Destroy(gameObject);
+            // 1.3.2: the gather cues are posted on this object, and destroying it cut them dead on
+            // cancel or fire. Visuals go now; the object lingers for a short tail while the cues fade.
+            // The component itself is removed at once (FoundationLayerWeights treats its presence
+            // as "a gather is live"), so only the sound anchor outlives the gather.
+            if (ball) { Destroy(ball); ball = null; }
+            if (preview) preview.enabled = false;
+            transform.SetParent(null, true); // keep the sound tail alive if the body is removed
+            Destroy(gameObject, SoundTail + 0.05f);
+            Destroy(this);
+        }
+        private void PlayCue(string name)
+        {
+            orbAudio?.PlayCue(name);
         }
         private void OnDestroy()
         {
+            orbAudio?.Dispose();
             if (ball) Destroy(ball);
             if (crown && !ended) crown.End(gathered, false);
             if (hands && !ended) hands.Release(false);
         }
+        private void OnDisable() { orbAudio?.Dispose(); }
     }
 }

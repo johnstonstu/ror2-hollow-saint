@@ -479,6 +479,18 @@ namespace HollowSaint
                 scripting = false;
                 yield break;
             }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "accept-132")
+            {
+                yield return Accept132Segments();
+                scripting = false;
+                yield break;
+            }
+            if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "accept-132-pose")
+            {
+                yield return Accept132PoseSegments();
+                scripting = false;
+                yield break;
+            }
             if (Environment.GetEnvironmentVariable("HS_SEGMENTS") == "early-balance")
             {
                 yield return EarlyBalanceSegments();

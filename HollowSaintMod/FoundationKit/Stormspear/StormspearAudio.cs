@@ -52,19 +52,21 @@ namespace HollowSaint.FoundationKit.Stormspear
             Plugin.Log.LogWarning("HOLLOW_SAINT_SPEAR_AUDIO " + error.Message);
         }
 
-        private void Stop(ref uint id)
+        private void Stop(ref uint id, int fadeMilliseconds = 30)
         {
             uint playing = id; id = 0;
             if (playing == 0) return;
-            try { AkSoundEngine.StopPlayingID(playing, 30); }
+            try { AkSoundEngine.StopPlayingID(playing, fadeMilliseconds); }
             catch (System.Exception error) { Warn(error); }
         }
 
-        private void Clear()
+        private void Clear(int fadeMilliseconds = 30)
         {
             active = loopStarted = false; pendingTier = 0;
             releaseAt = -1f; releaseEvent = null;
-            Stop(ref startId); Stop(ref loopId); Stop(ref tierId); Stop(ref releaseId); Stop(ref riseId); Stop(ref readyId);
+            Stop(ref startId, fadeMilliseconds); Stop(ref loopId, fadeMilliseconds);
+            Stop(ref tierId, fadeMilliseconds); Stop(ref releaseId, fadeMilliseconds);
+            Stop(ref riseId, fadeMilliseconds); Stop(ref readyId, fadeMilliseconds);
         }
 
         private void Begun(StormspearCharge state)
@@ -96,7 +98,7 @@ namespace HollowSaint.FoundationKit.Stormspear
             releaseAt = Time.time + (crown ? 0f : Mathf.Max(0f, StormspearTuning.HandReleaseDelay));
         }
 
-        private void Cancelled(StormspearCharge state) { Clear(); }
+        private void Cancelled(StormspearCharge state) { Clear(180); }
 
         private void Update()
         {
@@ -122,7 +124,7 @@ namespace HollowSaint.FoundationKit.Stormspear
                     tierId = Play(FullChargeZap, FullChargeZap);
                     readyId = Play(FullChargeSnap, FullChargeSnap);
                 }
-                else tierId = Play(tier == 1 ? "Play_HS_GazeLoad2" : "Play_HS_GazeLoad4", "Play_HS_ChargeTick");
+                else tierId = Play(tier == 1 ? "Play_HS_GazeLoad2" : "Play_HS_GazeLoad4", "Play_mage_m1_cast_lightning");
             }
             if (releaseAt >= 0f && Time.time >= releaseAt)
             {

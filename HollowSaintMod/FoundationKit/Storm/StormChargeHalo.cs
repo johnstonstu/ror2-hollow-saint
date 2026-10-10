@@ -42,6 +42,9 @@ namespace HollowSaint.FoundationKit.Storm
         private const float PopSeconds = .35f;
         private float[] popAt = new float[0];
         private int lastLit = -1;
+        private float lastGainChime = -10f;
+        private const float ReturnFadeSeconds = 0.15f;
+        private float returnFade = 1f; // 0 while another presentation owns the halo, eases back to 1
 
         private void Start()
         {
@@ -77,8 +80,16 @@ namespace HollowSaint.FoundationKit.Storm
             {
                 StopGatherSound();
                 if (orbitRoot && orbitRoot.gameObject.activeSelf) orbitRoot.gameObject.SetActive(false);
+                // 1.3.2: charges banked while Gaze, a gather or Thundercloud owns the presentation (Arc Bolt keeps
+                // firing through them) are folded in silently here, so the halo comes back showing the right count
+                // without a burst of pops and chimes. It also eases back in instead of appearing at full strength.
+                int maxHidden = Mathf.Clamp(KitTuning.StormChargeMax, 2, MaxOrbs);
+                bool aliveHidden = body.healthComponent && body.healthComponent.alive;
+                lastLit = aliveHidden ? Mathf.Clamp(meter.Charge, 0, maxHidden) : 0;
+                returnFade = 0f;
                 return;
             }
+            returnFade = Mathf.Min(1f, returnFade + Time.deltaTime / ReturnFadeSeconds);
             var currentPalette = SkinFxPalette.ForBody(body);
             if (currentPalette != palette)
             {
@@ -104,7 +115,12 @@ namespace HollowSaint.FoundationKit.Storm
             {
                 for (int i = lastLit; i < charge && i < popAt.Length; i++) { popAt[i] = Time.time; Pop(i); }
                 // An audible gain cue: a chime that rises with the bank (the full bank has its own cue).
-                if (charge < max && CustomSoundBank.Ready) Util.PlaySound("Play_HS_GazeLoad" + Mathf.Clamp(charge, 1, 5), gameObject);
+                // Throttled: two charges banked in the same instant (or a chain of procs) stay one chime.
+                if (charge < max && CustomSoundBank.Ready && Time.unscaledTime - lastGainChime >= 0.12f)
+                {
+                    lastGainChime = Time.unscaledTime;
+                    Util.PlaySound("Play_HS_GazeLoad" + Mathf.Clamp(charge, 1, 5), gameObject);
+                }
             }
             lastLit = charge;
             sequence.Tick(Time.time, Time.deltaTime, alive);
@@ -112,7 +128,7 @@ namespace HollowSaint.FoundationKit.Storm
 
             Color active = full ? palette.Core : palette.Arc;
             // v0.9: the orbs dim with the halo while a Stormspear charges in the hand, flash back on release.
-            float pulse = (full ? 0.72f + 0.28f * Mathf.Sin(Time.time * 10f) : 1f) * Stormspear.Fx.StormspearFx.HaloOf(body);
+            float pulse = (full ? 0.72f + 0.28f * Mathf.Sin(Time.time * 10f) : 1f) * Stormspear.Fx.StormspearFx.HaloOf(body) * returnFade;
             for (int i = 0; i < renderers.Length; i++)
             {
                 renderers[i].enabled = !released && i < charge;
@@ -148,6 +164,8 @@ namespace HollowSaint.FoundationKit.Storm
             if (revision <= sequence.LastRevision) return;
             bool release = sequence.Receive(beat, duration, revision, Time.time);
             StopGatherSound(); // cancellation, re-pick and launch all finish the old charge sound
+            // 1.3.2: and they end the old telegraph rings (a gather's own same-frame telegraph is spared).
+            if (beat == Beat.ThunderCancel || beat == Beat.ThunderGather) BeatVisuals.CancelTelegraph(body, beat == Beat.ThunderGather);
             if (!body || !body.healthComponent || !body.healthComponent.alive) return;
             if (beat == Beat.ThunderGather)
             {

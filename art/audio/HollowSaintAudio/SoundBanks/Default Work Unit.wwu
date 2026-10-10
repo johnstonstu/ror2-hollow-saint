@@ -60,6 +60,11 @@
 						<ObjectRef Name="Play_HS_ThunderStrike" ID="{51C46C9A-012C-5E08-A64D-46AE80FD8661}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Play_HS_ThunderTelegraph" ID="{1A60468A-88B1-583E-AF43-E03F09B57C5F}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 						<ObjectRef Name="Stop_HS_ThunderTelegraph" ID="{C46CD47B-EBF8-51D8-9B36-56CF43D0958C}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_OrbChargeStart" ID="{6187BE13-5476-5D9F-B51D-CEB380975893}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_OrbChargeLoop" ID="{A24783C7-9299-5C41-8932-801EDE393537}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Stop_HS_OrbChargeLoop" ID="{3457F8F6-131F-562A-A7CA-8578C8A31318}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_OrbThrow" ID="{E5342A9B-2AB5-587D-B523-E3F29A0C7FA3}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
+						<ObjectRef Name="Play_HS_ArcStepCrackle" ID="{3E1EA08E-5FB9-5CF9-8181-BBFFBA47517B}" WorkUnitID="{35F29809-8466-4069-AAD8-7D6B659627A3}" Origin="Manual" Filter="7" />
 					</ObjectInclusionList>
 					<ObjectExclusionList />
 					<GameSyncExclusionList />

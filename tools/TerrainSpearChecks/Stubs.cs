@@ -3,6 +3,9 @@ using System.Reflection;
 // spear adapter has no charged-storm cast and preserves that baseline condition.
 namespace HollowSaint.FoundationKit.ChargedStorm
 { internal static class StoredChargeState { internal static bool BlocksPrimary(RoR2.CharacterBody body) => false; } }
+namespace HollowSaint { internal static class KitRegistration { internal const string CrownMachineName = "Crown"; } }
+// Only state identity is needed by the real spear gate; Gaze execution is tested separately.
+namespace HollowSaint.FoundationKit.Gaze { public class GazeState : EntityStates.EntityState { } }
 namespace UnityEngine
 {
     [AttributeUsage(AttributeTargets.Class)] public class DisallowMultipleComponent : Attribute { }
@@ -105,7 +108,12 @@ namespace RoR2
         public TeamComponent teamComponent; public bool circuit;
     }
     public class SkillLocator : Object { public GenericSkill secondary; }
-    public class EntityStateMachine : Component { public string customName; public EntityStates.EntityState state; }
+    public class EntityStateMachine : Component
+    {
+        public string customName; public EntityStates.EntityState state;
+        public static EntityStateMachine FindByCustomName(GameObject obj,string name)
+            => obj.GetComponents<EntityStateMachine>().FirstOrDefault(machine=>machine.customName==name);
+    }
     public class GenericSkill : Object
     {
         public CharacterBody characterBody; public Skills.SkillDef skillDef; public int stock=1,executions; public float rechargeStopwatch;

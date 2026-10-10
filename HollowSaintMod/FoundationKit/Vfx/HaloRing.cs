@@ -97,7 +97,7 @@ namespace HollowSaint.FoundationKit.Vfx
             {
                 // A floating/pulsing Gaze crown must not redefine the rig's rest radius.
                 // Track the rest radius while upright, so RadiusScale follows the unfold.
-                restRadius = restRadius <= 0f ? Shape.Radius : Mathf.Lerp(restRadius, Shape.Radius, 0.05f);
+                restRadius = restRadius <= 0f ? Shape.Radius : Mathf.Lerp(restRadius, Shape.Radius, 1f - Mathf.Exp(-3.1f * Time.deltaTime)); // 0.05 per frame at 60 fps, now frame-rate independent
             }
             if (chest && haloRoot)
                 Unit = Mathf.Clamp(Vector3.Distance(chest.position, haloRoot.position) / 0.61f, 0.3f, 4f);

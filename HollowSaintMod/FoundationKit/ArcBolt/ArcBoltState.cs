@@ -52,7 +52,9 @@ namespace HollowSaint.FoundationKit.ArcBolt
             currentToken = Vfx.BodyCurrentFx.BeginArm(characterBody, handCounter != 0,
                 duration, KitTuning.ArcBoltReleaseNormalizedTime);
             // bundle06: arms-only layer while moving/airborne, UpperBody when standing.
-            KitAnim.PlayGesture(characterBody, GetModelAnimator(),
+            // 1.3.2: bolts can fire over a held crown pose (Gaze / Thundercloud charge-up);
+            // PlayBoltGesture resumes that hold afterwards and keeps the other arm raised.
+            KitAnim.PlayBoltGesture(characterBody, GetModelAnimator(),
                 handCounter == 0 ? StateRight : StateLeft, Mathf.Max(duration, KitTuning.ArcBoltMinGestureSeconds));
         }
 
@@ -62,7 +64,11 @@ namespace HollowSaint.FoundationKit.ArcBolt
             // A pending shot can overlap a secondary press, or Circuit can close
             // during a charge. Cancel its presentation before any discharge.
             if (!hasFired && (ChargedStorm.StoredChargeState.BlocksPrimary(characterBody) ||
-                !Stormspear.SpearPrimaryGate.Allows(characterBody)))
+                // 1.3.2: a spear press only cuts a bolt winding up in the spear hand; a bolt
+                // leaving the other hand finishes, so the hand-off has no dead beat.
+                // The gate also closes on death; a dying Saint cancels every pending bolt.
+                (!Stormspear.SpearPrimaryGate.Allows(characterBody) &&
+                 (!Alive() || (handCounter != 0) == SpearDischarge.SpearCarry.NetworkHandOf(characterBody)))))
             {
                 if (isAuthority) outer.SetNextStateToMain();
                 return;
@@ -79,6 +85,8 @@ namespace HollowSaint.FoundationKit.ArcBolt
                 outer.SetNextStateToMain();
             }
         }
+
+        private bool Alive() => characterBody && characterBody.healthComponent && characterBody.healthComponent.alive;
 
         public override void OnExit()
         {
